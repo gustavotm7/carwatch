@@ -1,0 +1,527 @@
+{
+ "at": {
+  "http": 200,
+  "final": "https://www.autotrader.ca/offers/bmw-m3-cabriolet-gasoline-white-cat_ma13gr202607va361-0c6eb378-89f4-4ff4-81c4-91e3c7bad91d",
+  "history": [],
+  "title_tag": "2008 BMW M3 | $ 51,888 | 69,122 km | Gasoline Convertible for sale by Porsche Approved &amp; Service Centre Nanaimo | Nanaimo, BC",
+  "og_image": [
+   "<meta property=\"og:image\" content=\"https://prod.pictures.autoscout24.net/listing-images/0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_48ae7343-a609-4ad2-8cd9-dac1c2fadada.jpg/1920x1080.jpg\"/>"
+  ],
+  "ldjson": [
+   "{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://www.autotrader.ca/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Search\",\"item\":\"https://www.autotrader.ca/cars\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"BMW\",\"item\":\"https://www.autotrader.ca/cars/bmw\"},{\"@type\":\"ListItem\",\"position\":4,\"name\":\"M3\",\"item\":\"https://www.autotrader.ca/cars/bmw/m3\"},{\"@type\":\"ListItem\",\"position\":5,\"name\":\"British Columbia\",\"item\":\"https://www.autotrader.ca/cars/bmw/m3/reg_bc\"},{\"@type\":\"ListItem\",\"position\":6,\"name\":\"Nanaimo\",\"item\":\"https://www.autotrader.ca/cars/bmw/m3/reg_bc/cit_nanaimo\"},{\"@type\":\"ListItem\",\"position\":7,\"name\":\"BMW M3 Cabriolet\"}]}",
+   "{\"@context\":\"https:\\u002F\\u002Fschema.org\",\"@type\":\"Product\",\"brand\":{\"@type\":\"Brand\",\"name\":\"BMW\"},\"color\":\"White\",\"image\":\"https:\\u002F\\u002Fprod.pictures.autoscout24.net\\u002Flisting-images\\u002F0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_48ae7343-a609-4ad2-8cd9-dac1c2fadada.jpg\\u002F1280x960.webp\",\"name\":\"BMW for $ 51,888\",\"description\":\"Find your BMW $ 51,888 \u2013 At Autotrader.ca: a Canadian automotive classifieds leader.\",\"offers\":{\"@type\":\"Offer\",\"price\":51888,\"priceCurrency\":\"CAD\",\"itemCondition\":\"UsedCondition\",\"url\":\"https:\\u002F\\u002Fwww.autotrader.ca\\u002Foffers\\u002Fbmw-m3-cabriolet-gasoline-white-cat_ma13gr202607va361-0c6eb378-89f4-4ff4-81c4-91e3c7bad91d\",\"availability\":\"InStock\",\"offeredBy\":{\"@type\":\"AutoDealer\",\"telephone\":\"250-800-9237\",\"@id\":\"\\u002Fdealers\\u002F51082314\",\"name\":\"Porsche Approved & Service Centre Nanaimo\",\"image\":\"https:\\u002F\\u002Fprod.pictures.autoscout24.net\\u002Fdealer-info\\u002F51082314-original-c46dea3e-652a-4fc1-a78e-015ee480dbab.jpg\\u002Fresize\\u002F200x100%3E\\u002Fquality\\u002F90\",\"address\":{\"@type\":\"PostalAddress\",\"streetAddress\":\"4910 Wills Road\",\"addressLocality\":\"Nanaimo\",\"postalCode\":\"V9T 6C6\",\"addressCountry\":\"CA\"}},\"itemOffered\":{\"@type\":\"Car\",\"name\":\"BMW M3\",\"image\":\"https:\\u002F\\u002Fprod.pictures.autoscout24.net\\u002Flisting-images\\u002F0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_48ae7343-a609-4ad2-8cd9-dac1c2fadada.jpg\\u002F1280x960.webp\",\"manufacturer\":\"BMW\",\"model\":\"M3\",\"color\":\"White\",\"bodyType\":\"Convertible\",\"identifier\":\"0c6eb378-89f",
+   "{\"@context\":\"http://schema.org\",\"@type\":\"Organization\",\"@id\":\"https://www.autotrader.ca/#organization\",\"name\":\"AutoTrader\",\"legalName\":\"Trader Corporation\",\"url\":\"https://www.autotrader.ca\",\"sameAs\":[\"https://www.facebook.com/AutoTrader.ca\",\"https://twitter.com/ca_autotrader\",\"https://www.instagram.com/autotrader_ca/\",\"https://www.youtube.com/@autotrader_ca\",\"https://www.tiktok.com/@autotraderca\"]}"
+  ],
+  "next_long_strings": [
+   [
+    ".props.pageProps.listingDetails.description",
+    "We are proud to present this Very RARE 2008 BMW M3 Manual Transmission! Key features include Heated Seats, Manual Transmission, Hardtop Convertible and more..!<"
+   ],
+   [
+    ".props.pageProps.translations.classified.CarFaxleadform.dataDisclaimer",
+    "This email address will be shared with the seller of the vehicle as the seller has paid for the CARFAX History Report. <a href=\"https://www.autotrader.ca/Cms/Pr"
+   ],
+   [
+    ".props.pageProps.translations.classified.CarFaxleadformV1.dataDisclaimer",
+    "This email address will be shared with the seller of the vehicle as the seller has paid for the History Report. <a href=\"https://www.autotrader.ca/Cms/PrivacyPo"
+   ],
+   [
+    ".props.pageProps.translations.classified.SMSleadform.requestText.dataDisclaimer",
+    "I consent to receive text messages and calls from {0} at the number provided. I understand that: Standard message and data rates apply. Communications may be re"
+   ],
+   [
+    ".props.pageProps.translations.classified.SMSleadform.textSeller.dataDisclaimer",
+    "I consent to receive text messages and calls from {0} at the number provided. I understand that: Standard message and data rates apply. Communications may be re"
+   ],
+   [
+    ".props.pageProps.translations.classified.leadform.buyerInsightAgreement",
+    "Um eine individuellere Beratung zu erhalten, willige ich ein, dass AutoScout24 GmbH dem H\u00e4ndler nutzungsbasierte Informationen \u00fcbermittelt, wie z.B. meine Fahrz"
+   ],
+   [
+    ".props.pageProps.translations.classified.leadform.dataDisclaimer",
+    "By clicking \"Send\" I agree to receive communications (electronic and otherwise) and sharing my personal information with TRADER Corporation, its dealers, and se"
+   ],
+   [
+    ".props.pageProps.translations.classified.leadform.responseMeasurementDisclaimer",
+    "If you send this form you agree that we(<a href=\"https://www.autoscout24.de/unternehmen/impressum/\">AutoScout24 GmbH</a>) store your data to be able to measure "
+   ],
+   [
+    ".props.pageProps.translations.classified.leasingmarkt.leadform.dataDisclaimer",
+    "Mit dem Klick auf \u201eE-Mail senden\u201c willige ich ein, dass die LeasingMarkt.de GmbH meine Nachricht vor\u00fcbergehend speichert, an den H\u00e4ndler und ggf. dessen Koopera"
+   ],
+   [
+    ".props.pageProps.translations.classified.leasingmarkt.leadform.termsDisclaimer",
+    "I agree to the <a href=\\\"https://www.leasingmarkt.de/allgemeine-geschaeftsbedingungen/\\\" target=\\\"_blank\\\" rel=\\\"noreferrer\\\">Terms and Conditions</a> and the <"
+   ],
+   [
+    ".props.pageProps.translations.detailpage.automatch.tooltip",
+    "Within the next 24 hours, {0} will contact up to 3 dealers who offer cars similar to this one (make, model, price, mileage, etc.). The dealers can then offer yo"
+   ],
+   [
+    ".props.pageProps.translations.detailpage.buywithconfidence.carpasscopy",
+    "Instantly receive the complete documentation about this vehicle: mileage, emission values, condition of the vehicle... Everything at a glance! More information "
+   ]
+  ],
+  "next_images": [
+   [
+    ".props.pageProps.listingDetails.images[0]",
+    "https://prod.pictures.autoscout24.net/listing-images/0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_48ae7343-a609-4ad2-8cd9-dac1c2fadada.jpg/1280x960.webp"
+   ],
+   [
+    ".props.pageProps.listingDetails.images[1]",
+    "https://prod.pictures.autoscout24.net/listing-images/0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_b3819798-09b5-4103-9763-5db510cdb39e.jpg/1280x960.webp"
+   ],
+   [
+    ".props.pageProps.listingDetails.images[2]",
+    "https://prod.pictures.autoscout24.net/listing-images/0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_7bdfac47-4697-45e4-8648-20b6ee3fd151.jpg/1280x960.webp"
+   ],
+   [
+    ".props.pageProps.listingDetails.images[3]",
+    "https://prod.pictures.autoscout24.net/listing-images/0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_01f771bf-8011-4d45-bb49-a0b557b3ce74.jpg/1280x960.webp"
+   ],
+   [
+    ".props.pageProps.listingDetails.images[4]",
+    "https://prod.pictures.autoscout24.net/listing-images/0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_20483f61-61bc-4dde-881c-488b3f21c7d2.jpg/1280x960.webp"
+   ],
+   [
+    ".props.pageProps.listingDetails.images[5]",
+    "https://prod.pictures.autoscout24.net/listing-images/0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_51c22718-6bd7-485a-b6ad-1d69870b94f7.jpg/1280x960.webp"
+   ],
+   [
+    ".props.pageProps.listingDetails.images[6]",
+    "https://prod.pictures.autoscout24.net/listing-images/0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_f0e3781a-d741-47e8-87ca-f2ea9ef02114.jpg/1280x960.webp"
+   ],
+   [
+    ".props.pageProps.listingDetails.images[7]",
+    "https://prod.pictures.autoscout24.net/listing-images/0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_25435d2c-a2f0-4735-af00-2a2f89d5158d.jpg/1280x960.webp"
+   ]
+  ],
+  "next_years": [
+   [
+    ".props.pageProps.listingDetails.vehicle.modelYear",
+    2008
+   ],
+   [
+    ".props.pageProps.listingDetails.vehicle.productionYear",
+    null
+   ],
+   [
+    ".props.pageProps.listingDetails.vehicle.rawData.classification.modelYear",
+    2008
+   ],
+   [
+    ".props.pageProps.translations.detailpage.stageTradeIn.year",
+    "First registration"
+   ],
+   [
+    ".props.pageProps.translations.detailpage.tradeIn.year",
+    "Year"
+   ]
+  ],
+  "next_trans": [
+   [
+    ".props.pageProps.listingDetails.vehicle.transmissionType",
+    "Manual"
+   ],
+   [
+    ".props.pageProps.listingDetails.vehicle.transmissionTypeId",
+    "M"
+   ],
+   [
+    ".props.pageProps.listingDetails.vehicle.rawData.engine.transmissionType.raw",
+    "Manual"
+   ],
+   [
+    ".props.pageProps.listingDetails.vehicle.rawData.engine.transmissionType.formatted",
+    "Manual"
+   ],
+   [
+    ".props.pageProps.listingDetails.trackingParams.classified_transmission",
+    "m"
+   ],
+   [
+    ".props.pageProps.translations.detailpage.shared.transmissionType",
+    "Transmission"
+   ]
+  ],
+  "next_body": [
+   [
+    ".props.pageProps.listingDetails.vehicle.bodyType",
+    "Convertible"
+   ],
+   [
+    ".props.pageProps.listingDetails.vehicle.bodyColor",
+    "White"
+   ],
+   [
+    ".props.pageProps.listingDetails.vehicle.bodyColorRaw",
+    "White"
+   ],
+   [
+    ".props.pageProps.listingDetails.vehicle.bodyColorOriginal",
+    "Alpine White"
+   ],
+   [
+    ".props.pageProps.listingDetails.vehicle.rawData.bodyType.formatted",
+    "Convertible"
+   ],
+   [
+    ".props.pageProps.listingDetails.vehicle.rawData.bodyType.raw",
+    "Roadster"
+   ]
+  ]
+ },
+ "at_redirect": {
+  "http": 200,
+  "final": "https://www.autotrader.ca/cars/bmw/m3/va_convertible",
+  "history": [
+   301
+  ],
+  "title_tag": "BMW M3 Convertible for Sale | AutoTrader.ca",
+  "og_image": [
+   "<meta property=\"og:image\" content=\"https://www.autoscout24.de/assets/as24-search-funnel/images/og_image_canada.jpg\"/>"
+  ],
+  "ldjson": [
+   "{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://www.autotrader.ca/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Search\",\"item\":\"https://www.autotrader.ca/cars\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"BMW\",\"item\":\"https://www.autotrader.ca/cars/bmw\"},{\"@type\":\"ListItem\",\"position\":4,\"name\":\"M3\",\"item\":\"https://www.autotrader.ca/cars/bmw/m3\"},{\"@type\":\"ListItem\",\"position\":5,\"name\":\"Convertible\"}]}",
+   "{\"@context\":\"https:\\u002F\\u002Fschema.org\",\"@graph\":[{\"@type\":\"SearchResultsPage\",\"@id\":\"https:\\u002F\\u002Fwww.autotrader.ca\\u002Fcars\\u002Fbmw\\u002Fm3\\u002Fva_convertible\",\"name\":\"BMW M3 Convertible for Sale | AutoTrader.ca\",\"url\":\"https:\\u002F\\u002Fwww.autotrader.ca\\u002Fcars\\u002Fbmw\\u002Fm3\\u002Fva_convertible\",\"inLanguage\":\"en-CA\",\"mainEntity\":{\"@type\":\"ItemList\",\"@id\":\"https:\\u002F\\u002Fwww.autotrader.ca\\u002Fcars\\u002Fbmw\\u002Fm3\\u002Fva_convertible#results\",\"numberOfItems\":20,\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"url\":\"https:\\u002F\\u002Fwww.autotrader.ca\\u002Foffers\\u002Fbmw-m3-low-km-gasoline-blue-cat_ma13gr202607va361-6b528edf-56d7-448a-90e1-2796c79f52ed\",\"item\":{\"@type\":[\"Car\",\"Product\"],\"@id\":\"https:\\u002F\\u002Fwww.autotrader.ca\\u002Foffers\\u002Fbmw-m3-low-km-gasoline-blue-cat_ma13gr202607va361-6b528edf-56d7-448a-90e1-2796c79f52ed#vehicle\",\"name\":\"BMW M3 Low KM\",\"brand\":{\"@type\":\"Brand\",\"name\":\"BMW\"},\"model\":\"M3\",\"vehicleConfiguration\":\"Low KM\",\"mileageFromOdometer\":{\"@type\":\"QuantitativeValue\",\"value\":73550,\"unitCode\":\"KMT\"},\"fuelType\":\"Gasoline\",\"vehicleTransmission\":\"Automatic\",\"itemCondition\":\"https:\\u002F\\u002Fschema.org\\u002FUsedCondition\",\"image\":[\"https:\\u002F\\u002Fprod.pictures.autoscout24.net\\u002Flisting-images\\u002F6b528edf-56d7-448a-90e1-2796c79f52ed_a951b6b7-7640-4489-85b4-2822c877aa69.jpg\\u002F250x188.webp\",\"https:\\u002F\\u002Fprod.pictures.autoscout24.net\\u002Flisting-images\\u002F6b528edf-56d7-448a-90e1-2796c79f52ed_3ec7a215-4eda-487c",
+   "{\"@context\":\"http://schema.org\",\"@type\":\"Organization\",\"@id\":\"https://www.autotrader.ca/#organization\",\"name\":\"AutoTrader\",\"legalName\":\"Trader Corporation\",\"url\":\"https://www.autotrader.ca\",\"sameAs\":[\"https://www.facebook.com/AutoTrader.ca\",\"https://twitter.com/ca_autotrader\",\"https://www.instagram.com/autotrader_ca/\",\"https://www.youtube.com/@autotrader_ca\",\"https://www.tiktok.com/@autotraderca\"]}"
+  ],
+  "next_long_strings": [
+   [
+    ".props.pageProps.listings[0].description",
+    "*$695 Doc. Fee*<br />*Dealer Number:41734*<br />*Carfax Report available by inquiries*<br /><br />\uf697 Yoyo Auto Centre: Your Destination for Automotive Excellence"
+   ],
+   [
+    ".props.pageProps.listings[1].description",
+    "2012 BMW M3 Cabriolet:<br /><ul><li>BMW Individual Ruby Black Metallic</li><li>One of only 7 Canadian E93 M3s in this color</li></ul><br />Int. Colour: NDSW - B"
+   ],
+   [
+    ".props.pageProps.listings[2].description",
+    "We at Clarkson Fine Cars are proud to be offering this hardly used 2011 BMW M3 Convertible for sale. This is an exciting car with a lively powertrain and the lu"
+   ],
+   [
+    ".props.pageProps.listings[3].description",
+    "EXTENDED WARRANTY PACKAGES AVAILABLE UP TO 4 YEARS UNLIMITED KMS. ACCIDENT FREE VEHICLE WITH FULL SERVICE RECORDS - CARFAX REPORT IS AVAILABLE UPON REQUEST.<br "
+   ],
+   [
+    ".props.pageProps.listings[4].description",
+    "Iconic E46 M3 Convertible finished in Carbon Black Metallic over Grey Nappa leather interior. Equipped with the highly desirable 6-speed manual transmission and"
+   ],
+   [
+    ".props.pageProps.listings[5].description",
+    "Convertible | Leather Interior | 6 Speed Manual | One Owner | Clean CARFAX<br /><br />Turn every drive into an unforgettable experience with this iconic 2004 BM"
+   ],
+   [
+    ".props.pageProps.listings[6].description",
+    "This accident free BMW M3 Cabriolet comes well equipped with an individual diamond metallic exterior, black leather interior, heated 10-way power adjustable fro"
+   ],
+   [
+    ".props.pageProps.listings[7].description",
+    "Experience one of BMW&#x27;s most iconic and legendary cars with this BMW E46 M3 Cabriolet! Combining timeless styling, and exhilarating performance, the E46 M3"
+   ],
+   [
+    ".props.pageProps.listings[8].description",
+    "This EX-USA BMW M3 Cabriolet comes well equipped with a titanium silver metallic exterior, black leather interior, heated 8-way power adjustable front seats, cl"
+   ],
+   [
+    ".props.pageProps.listings[9].description",
+    "<strong>* ATTENTION COLLECTORS</strong>*, A TRULY DISTINCT AND RARE 2005 BMW M3 (E46) CABRIOLET 6 SPEED MANUAL WITH ONLY 73,000 KM, ACCIDENT FREE VEHICLE, TWO P"
+   ],
+   [
+    ".props.pageProps.listings[10].description",
+    "For sale is an exceptional <strong>2006 BMW M3 Convertible (E46)</strong> finished in rare <strong>BMW Individual Onyx Blue Metallic</strong> over <strong>Cinna"
+   ],
+   [
+    ".props.pageProps.listings[11].description",
+    "NO ACCIDENT | VERY LOW KM | INDIVIDUAL JEREZ BLACK METALLIC PAINT | BAMBOO BEIGE NOVILLO LEATHER INTERIOR | 6-SPEED MANUAL | HARD-TOP CONVERTIBLE | AND MUCH MOR"
+   ]
+  ],
+  "next_images": [
+   [
+    ".props.pageProps.listings[0].images[0]",
+    "https://prod.pictures.autoscout24.net/listing-images/6b528edf-56d7-448a-90e1-2796c79f52ed_a951b6b7-7640-4489-85b4-2822c877aa69.jpg/250x188.webp"
+   ],
+   [
+    ".props.pageProps.listings[0].images[1]",
+    "https://prod.pictures.autoscout24.net/listing-images/6b528edf-56d7-448a-90e1-2796c79f52ed_3ec7a215-4eda-487c-9033-830d6d93abec.jpg/250x188.webp"
+   ],
+   [
+    ".props.pageProps.listings[0].images[2]",
+    "https://prod.pictures.autoscout24.net/listing-images/6b528edf-56d7-448a-90e1-2796c79f52ed_819c8260-1215-4892-87e6-732d6268378c.jpg/250x188.webp"
+   ],
+   [
+    ".props.pageProps.listings[0].images[3]",
+    "https://prod.pictures.autoscout24.net/listing-images/6b528edf-56d7-448a-90e1-2796c79f52ed_87ca7096-80e2-489a-9dce-6270e66e65b5.jpg/250x188.webp"
+   ],
+   [
+    ".props.pageProps.listings[0].images[4]",
+    "https://prod.pictures.autoscout24.net/listing-images/6b528edf-56d7-448a-90e1-2796c79f52ed_f074aad5-3711-4230-a037-c04c50ee64ee.jpg/250x188.webp"
+   ],
+   [
+    ".props.pageProps.listings[0].images[5]",
+    "https://prod.pictures.autoscout24.net/listing-images/6b528edf-56d7-448a-90e1-2796c79f52ed_96763c6e-b246-478c-af00-3f9c6483114d.jpg/250x188.webp"
+   ],
+   [
+    ".props.pageProps.listings[0].images[6]",
+    "https://prod.pictures.autoscout24.net/listing-images/6b528edf-56d7-448a-90e1-2796c79f52ed_90d59110-2b1a-44dd-a6fe-fbed68034aef.jpg/250x188.webp"
+   ],
+   [
+    ".props.pageProps.listings[0].images[7]",
+    "https://prod.pictures.autoscout24.net/listing-images/6b528edf-56d7-448a-90e1-2796c79f52ed_10c2cf36-362c-4a17-8b8e-1ca9315ed1a0.jpg/250x188.webp"
+   ]
+  ],
+  "next_years": [
+   [
+    ".props.pageProps.listings[0].vehicle.modelYear",
+    2011
+   ],
+   [
+    ".props.pageProps.listings[1].vehicle.modelYear",
+    2012
+   ],
+   [
+    ".props.pageProps.listings[2].vehicle.modelYear",
+    2011
+   ],
+   [
+    ".props.pageProps.listings[3].vehicle.modelYear",
+    2004
+   ],
+   [
+    ".props.pageProps.listings[4].vehicle.modelYear",
+    2002
+   ],
+   [
+    ".props.pageProps.listings[5].vehicle.modelYear",
+    2004
+   ],
+   [
+    ".props.pageProps.listings[6].vehicle.modelYear",
+    2003
+   ],
+   [
+    ".props.pageProps.listings[7].vehicle.modelYear",
+    2005
+   ]
+  ],
+  "next_trans": [
+   [
+    ".props.pageProps.listings[0].vehicle.transmission",
+    "Automatic"
+   ],
+   [
+    ".props.pageProps.listings[1].vehicle.transmission",
+    "Automatic"
+   ],
+   [
+    ".props.pageProps.listings[2].vehicle.transmission",
+    "Automatic"
+   ],
+   [
+    ".props.pageProps.listings[3].vehicle.transmission",
+    "Automatic"
+   ],
+   [
+    ".props.pageProps.listings[4].vehicle.transmission",
+    "Manual"
+   ],
+   [
+    ".props.pageProps.listings[5].vehicle.transmission",
+    "Manual"
+   ]
+  ],
+  "next_body": [
+   [
+    ".props.pageProps.taxonomy.bodyType[0].label",
+    "Hatchback"
+   ],
+   [
+    ".props.pageProps.taxonomy.bodyType[1].label",
+    "Convertible"
+   ],
+   [
+    ".props.pageProps.taxonomy.bodyType[2].label",
+    "Coupe"
+   ],
+   [
+    ".props.pageProps.taxonomy.bodyType[3].label",
+    "Wagon"
+   ],
+   [
+    ".props.pageProps.taxonomy.bodyType[4].label",
+    "Sedan"
+   ],
+   [
+    ".props.pageProps.taxonomy.bodyType[5].label",
+    "Minivan"
+   ]
+  ]
+ },
+ "kj": {
+  "http": 200,
+  "final": "https://www.kijiji.ca/v-cars-trucks/laval-rive-nord/2017-nissan-370z-touring/1743340345",
+  "history": [],
+  "title_tag": "2017 Nissan 370Z Touring | Cars &amp; Trucks | Laval / North Shore | Free local classifieds - Kijiji ",
+  "og_image": [
+   "<meta property=\"og:image\" content=\"https://media.kijiji.ca/api/v1/ca-prod-dealer-ads/images/ca/ca523c09-b648-44c0-b906-de71dc6de486?rule=kijijica-960-jpg\"/>"
+  ],
+  "ldjson": [
+   "{\"@context\":\"https://schema.org\",\"@type\":\"Car\",\"name\":\"2017 Nissan 370Z Touring\",\"description\":\"===== 2017 Nissan 370Z Touring ========== Pourquoi acheter chez nous ? =====Depuis plus de 50 ans, BMW MINI Laval est une r\u00e9f\u00e9rence dans l'industrie automobile canadienne.Notre concession, l'une des plus vastes au pays, s'\u00e9tend sur *pr\u00e8s de 460 000 pi(2) de terrain*, incluant *un b\u00e2timent de plus de 110 000 pi(2)* enti\u00e8rement consacr\u00e9 ? l'automobile. Ce vaste espace nous permet d'accueillir *l'un des plus grands inventaires de v\u00e9hicules d'occasion BMW et MINI au Canada.**Une r\u00e9putation b\u00e2tie sur la confiance*Depuis plus de 50 ans, nous servons les automobilistes canadiens avec int\u00e9grit\u00e9, qualit\u00e9 et passion.*Leaders canadiens des ventes*Depuis plusieurs ann\u00e9es, nous occupons la premi\u00e8re place au Canada pour les ventes de BMW d'occasion, ainsi que pour les MINI d'occasion.*Un inventaire s\u00e9lectionn\u00e9 avec soin*95 % de nos v\u00e9hicules sont issus d'\u00e9changes de nos propres clients, assurant une transparence et une tra\u00e7abilit\u00e9 in\u00e9gal\u00e9es.*Reconditionnement sup\u00e9rieur*Chaque v\u00e9hicule est pr\u00e9par\u00e9 selon des normes rigoureuses qui d\u00e9passent les standards de l'industrie.*Expertise de haut niveau*Nos conseillers sp\u00e9cialis\u00e9s en BMW et MINI vous accompagnent avec professionnalisme pour trouver le v\u00e9hicule qui correspond parfaitement ? vos besoins.*Une transaction simple, s\u00e9curitaire et nationale*Gr\u00e2ce ? des processus efficaces, nous desservons l'ensemble du Canada. Achetez votre v\u00e9hicule ? distance en",
+   "{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"name\":\"Breadcrumbs\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"item\":{\"@id\":\"/\",\"name\":\"Home\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@id\":\"/b-cars-vehicles/laval-rive-nord/c27l1700278\",\"name\":\"Cars and Vehicles\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@id\":\"/b-cars-trucks/laval-rive-nord/c174l1700278\",\"name\":\"Cars and Trucks for Laval / North Shore\"}},{\"@type\":\"ListItem\",\"position\":4,\"item\":{\"@id\":\"\",\"name\":\"Ad ID 1743340345\"}}]}"
+  ],
+  "next_long_strings": [
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.common.cookies.consent.description",
+    "We and our third-party service providers use cookies and similar technologies to optimize your experience. Some cookies are essential to the proper functioning "
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.common.cookies.consent.manage_preferences.analytics.description",
+    "These cookies provide us with information about how you use our website (for example, which pages are most visited and how users interact with the website). Thi"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.common.cookies.consent.manage_preferences.description",
+    "We use cookies that are essential for the proper functioning and security of our website; they cannot be deactivated. We and our third-party service providers a"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.common.cookies.consent.manage_preferences.necessary.description",
+    "These cookies perform a variety of core functions that are necessary to operate and navigate our website, including keeping our website safe and secure. These c"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.common.cookies.consent.manage_preferences.targeting.description",
+    "These cookies are set by us and our third-party advertising partners. These cookies provide information that may be used to build a profile based on your intere"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.common.legacy_messages.my_password_reset_mailsent_message",
+    "An email has been sent to the address you provided. Please follow the instructions in the email to change your password. Note, that if your account is not regis"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.common.psa_banner.site_maintenance.subtitle",
+    "Heads up: on Tuesday, May 27th, 2025 at 4 AM EDT, we\u2019ll be going through scheduled maintenance so you won\u2019t be able to use Kijiji for a few minutes, whether it\u2019"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.common.seo.meta.description",
+    "Visit Kijiji Classifieds to buy, sell, or trade almost anything! New and used items, cars, real estate, jobs, services, vacation rentals and more virtually anyw"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.common.system_messages.paid_edited_ad.success.description",
+    "We received your payment and your Ad is now reposted on Kijiji. A copy of your order confirmation has been sent to your email address. Let us know why you\u2019ve re"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.global_footer.links.info.ad_choices.tooltip_content",
+    "Kijiji has replaced the AdChoice program with Digital Advertising Alliance of Canada's AdChoices. You may have previously opted-out of advertising personalizati"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.global_header.links.get_verified.modal.authorization_checkbox",
+    "I authorize Interac and the provider I select to share my identity attributes with Kijiji to verify my identity, enhance trust and safety, and display a \u201cVerifi"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.global_header.links.get_verified.modal.consent_body",
+    "Kijiji works with Interac to allow Kijiji Users to verify their identity using the Verification Feature. By applying for \u201cVerified\u201d status, you agree to submit "
+   ]
+  ],
+  "next_images": [
+   [
+    ".props.pageProps.__APOLLO_STATE__.AutosListing:1743340345.imageUrls[0]",
+    "https://media.kijiji.ca/api/v1/ca-prod-dealer-ads/images/ca/ca523c09-b648-44c0-b906-de71dc6de486?rule=kijijica-640-webp"
+   ],
+   [
+    ".props.pageProps.__APOLLO_STATE__.AutosListing:1743340345.imageUrls[1]",
+    "https://media.kijiji.ca/api/v1/ca-prod-dealer-ads/images/19/198ce958-66c7-4972-8ca8-d6b02bb62941?rule=kijijica-640-webp"
+   ],
+   [
+    ".props.pageProps.__APOLLO_STATE__.AutosListing:1743340345.imageUrls[2]",
+    "https://media.kijiji.ca/api/v1/ca-prod-dealer-ads/images/11/11c7df70-1e98-4f8a-8899-2ff14c414c0d?rule=kijijica-640-webp"
+   ],
+   [
+    ".props.pageProps.__APOLLO_STATE__.AutosListing:1743340345.imageUrls[3]",
+    "https://media.kijiji.ca/api/v1/ca-prod-dealer-ads/images/75/7536c22e-2751-4e32-a155-73630bf40b08?rule=kijijica-640-webp"
+   ],
+   [
+    ".props.pageProps.__APOLLO_STATE__.AutosListing:1743340345.imageUrls[4]",
+    "https://media.kijiji.ca/api/v1/ca-prod-dealer-ads/images/a1/a164fda5-24fa-4585-a073-308fd19269ca?rule=kijijica-640-webp"
+   ],
+   [
+    ".props.pageProps.__APOLLO_STATE__.AutosListing:1743340345.imageUrls[5]",
+    "https://media.kijiji.ca/api/v1/ca-prod-dealer-ads/images/78/786db093-825f-4322-b079-a4c2dfde985e?rule=kijijica-640-webp"
+   ],
+   [
+    ".props.pageProps.__APOLLO_STATE__.AutosListing:1743340345.imageUrls[6]",
+    "https://media.kijiji.ca/api/v1/ca-prod-dealer-ads/images/d0/d0714445-20d1-4e67-9073-adefb9998db9?rule=kijijica-640-webp"
+   ],
+   [
+    ".props.pageProps.__APOLLO_STATE__.AutosListing:1743340345.imageUrls[7]",
+    "https://media.kijiji.ca/api/v1/ca-prod-dealer-ads/images/af/afb359a5-da04-43a3-be5f-7b603d36295b?rule=kijijica-640-webp"
+   ]
+  ],
+  "next_years": [
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.attributes.pets.year_old",
+    "(1 year old)"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.attributes.pets.years_old_other",
+    "({{value}} years old)"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.mileage_analysis.modal.km_per_year_bullet1",
+    "the number of kilometers as reported by the seller at the time of publishing the listing;"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.mileage_analysis.modal.km_per_year_bullet2a",
+    "divided by"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.mileage_analysis.modal.km_per_year_bullet2b",
+    "the assumed age of the vehicle (estimated from January 1 of the model year release \u2013 e.g. the age of a 2018 model would be calculated from January 1, 2018)."
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.mileage_analysis.modal.km_per_year_description",
+    "The number of kilometers per year is estimated based on:"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.mileage_analysis.modal.km_per_year_header",
+    "Number of kilometres per year"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.profile.profile.metrics.member_since.year_one",
+    "yr"
+   ]
+  ],
+  "next_trans": [
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.attribute.group_label.transmission",
+    "Transmission"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.attributes.car_transmission.automatic",
+    "Automatic"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.attributes.car_transmission.manual",
+    "Manual"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.attributes.car_transmission.other",
+    "Other"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.attributes.car_transmission.semi_automatic",
+    "Semi-Automatic"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.attributes.heavy_truck_transmission.amt",
+    "Automated manual transmission (AMT)"
+   ]
+  ],
+  "next_body": [
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.courier_on_uber.modal.offer.body",
+    "Get 40% off your first trip (up to $7)"
+   ],
+   [
+    ".props.pageProps._nextI18Next.initialI18nStore.en.listing.attribute.group_label.body_style",
+    "Body Style"
+   ]
+  ]
+ }
+}
