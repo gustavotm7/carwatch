@@ -248,7 +248,12 @@ def classify_trans(family: str, field: str, desc: str) -> str:
 
 
 def body_of(raw: str, slug: str = "") -> str:
-    t = (raw + " " + slug).lower()
+    first = _body_words(slug)                           # title / address words are more reliable than the field
+    return first if first != "unk" else _body_words(raw)
+
+
+def _body_words(t: str) -> str:
+    t = (t or "").lower()
     if re.search(r"convertible|cabrio|roadster|cabriolet", t):
         return "conv"
     if re.search(r"wagon|touring wgn|estate|wgn|sports? wagon", t) or (re.search(r"touring", t) and "bmw" in t):
@@ -347,7 +352,10 @@ def load_rows(path):
     if not path:
         return []
     with open(path, newline="", encoding="utf-8") as f:
-        return [{c: r.get(c, "") or "" for c in COLS} for r in csv.DictReader(f)]
+        rows = [{c: r.get(c, "") or "" for c in COLS} for r in csv.DictReader(f)]
+    # v2 could not read the year on Autotrader ad pages and wrongly rejected their ads: give those a second look
+    return [r for r in rows if not (r["status"] == "skip" and r["source"] == "autotrader"
+                                    and not r["note"].endswith("[v3]"))]
 
 
 class Snapshot:
@@ -471,6 +479,36 @@ def parse_listing(html):
     except Exception:
         pass
 
+    try:                                                # Autotrader: full ad data in the Next.js data block
+        m = re.search(r'(?is)<script[^>]+id=["\']__NEXT_DATA__["\'][^>]*>(.*?)</script>', html)
+        ld = json.loads(m.group(1))["props"]["pageProps"].get("listingDetails") if m else None
+        if isinstance(ld, dict):
+            veh = ld.get("vehicle") or {}
+            raw = veh.get("rawData") or {}
+            if ld.get("description"):
+                d0 = re.sub(r"(?i)<br\s*/?>|</li>|</p>", "\n", str(ld["description"]))
+                info["desc"] = unescape(re.sub(r"<[^>]+>", " ", d0)).strip()
+            if veh.get("modelYear"):
+                info["year"] = to_int(veh["modelYear"])
+            if veh.get("transmissionType"):
+                info["trans_field"] = str(veh["transmissionType"])
+            bt = ((raw.get("bodyType") or {}).get("raw") if isinstance(raw.get("bodyType"), dict) else None) or veh.get("bodyType")
+            if bt:
+                info["body_raw"] = str(bt)
+            imgs = ld.get("images") or []
+            if imgs and isinstance(imgs[0], str):
+                info["image"] = imgs[0]
+    except Exception:
+        pass
+    page_title = re.search(r"(?is)<title[^>]*>(.*?)</title>", html)
+    page_title = unescape(re.sub(r"\s+", " ", page_title.group(1))).strip() if page_title else ""
+    if page_title and not re.search(r"\b(19[89]\d|20[0-3]\d)\b", info.get("title") or ""):
+        info["title"] = page_title.split("|")[0].strip() or info.get("title")   # Autotrader: "2008 BMW M3 | $ ..."
+    og = re.search(r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)', html, re.I) or \
+        re.search(r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image', html, re.I)
+    if og and re.search(r"\.(jpe?g|png|webp)|/images/", og.group(1), re.I):
+        info["image"] = unescape(og.group(1))         # Kijiji: JSON-LD 'image' can be the ad's own address
+
     text = html_text(html)
     info["text"] = text
     if info.get("price") is None:
@@ -551,9 +589,8 @@ def check_listing(sess, row):
         return "fail", f"HTTP {r.status_code}"
     final = r.url.split("?")[0]
     if row["source"] == "autotrader":
-        m = UUID_RE.search(final)
-        if m and m.group(0) != row["listing_id"]:
-            return "gone", "redirected to a different listing"
+        if row["listing_id"] not in final:
+            return "gone", "redirected to a search page (ad removed)"
     elif row["source"] in ("kijiji", "carpages") and id_key(row) not in final:
         return "gone", "redirected away from the ad"
     info = parse_listing(r.text)
@@ -679,7 +716,9 @@ def discover_new(sess, rows, today, stats, max_new):
         elif info.get("price") is None or info.get("km") is None:
             reason = "price or km not readable"
         if not reason:
-            body = body_of(info.get("body_raw", ""), slug)
+            body = body_of(info.get("body_raw", ""), slug + " " + info.get("title", ""))
+            if key in ("Z350", "Z370") and body in ("sedan", "wagon", "unk"):
+                body = "conv" if re.search(r"roadster|convertible|cabrio", (slug + info.get("title", "")).lower()) else "coupe"
             fam, gen, name = classify(key, info["year"], body)
             trans = classify_trans(fam, info.get("trans_field", ""), info.get("desc", ""))
             if trans == "a":
@@ -687,7 +726,7 @@ def discover_new(sess, rows, today, stats, max_new):
         if reason:
             if reason != "price or km not readable":      # remember, so it is not opened again tomorrow
                 skipped.append({**{c: "" for c in COLS}, "listing_id": lid, "source": source, "url": url,
-                                "note": reason, "first_seen": today, "last_seen": today, "status": "skip"})
+                                "note": reason + " [v3]", "first_seen": today, "last_seen": today, "status": "skip"})
             continue
         row = {**{c: "" for c in COLS},
                "listing_id": lid, "source": source, "family": fam, "gen": gen, "name": name,

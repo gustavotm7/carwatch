@@ -15,10 +15,10 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install requests openpyxl pillow
-      - run: python carwatch_test/inspect_pages.py
+      - run: python carwatch_test/verify.py
       - name: Save results to the branch
         run: |
           git config user.name "carwatch-bot"
           git config user.email "carwatch-bot@users.noreply.github.com"
-          git add carwatch_test/inspect.json
+          git add carwatch_test/verify.json
           git commit -m "Test results" && git push
