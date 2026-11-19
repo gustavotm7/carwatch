@@ -35,7 +35,8 @@ jobs:
           # a push that only changes the web page rebuilds the data without visiting the sites
           if [ "${{ github.event_name }}" = "push" ] && ! git diff --name-only HEAD~1 HEAD | grep -qE '^(collector/|cars_config.json|.github/)'; then ARGS="--no-network"; fi
           python -u collector/car_collector.py --config cars_config.json --data-dir data \
-            --export-json site/data/cars.json --no-xlsx --no-photos --keep-snapshots 14 $ARGS
+            --export-json site/data/cars.json --no-xlsx --no-photos --keep-snapshots 14 \
+            --max-new 250 --skip-sources carpages $ARGS
       - name: Save data
         run: |
           git config user.name "carwatch-bot"

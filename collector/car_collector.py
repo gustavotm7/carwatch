@@ -603,9 +603,14 @@ def apply_page_details(row, info, today):
 # --------------------------------------------------------------------------------------------
 # Daily steps
 # --------------------------------------------------------------------------------------------
+SKIP_SOURCES = set()
+
+
 def refresh_existing(sess, rows, today, stats):
     cand_gone = []
     for row in rows:
+        if row["source"] in SKIP_SOURCES:
+            continue
         st = row["status"]
         if st == "gone":
             last = d(row["last_seen"])
@@ -1548,6 +1553,7 @@ def main(argv=None):
     ap.add_argument("--export-json", help="also write the web app's data file here (e.g. site/data/cars.json)")
     ap.add_argument("--no-xlsx", action="store_true", help="do not build the Excel workbook")
     ap.add_argument("--no-photos", action="store_true", help="do not download photo thumbnails")
+    ap.add_argument("--skip-sources", default="", help="comma list of sites not to visit, e.g. carpages")
     ap.add_argument("--keep-snapshots", type=int, default=0, help="delete snapshots older than the newest N (0 = keep all)")
     ap.add_argument("--done-file", help="write 'ok ...' or 'error: ...' here when the run ends (used by CarWatch.xlsm)")
     args = ap.parse_args(argv)
@@ -1582,6 +1588,10 @@ def run(args):
         PHOTO_DIR = os.path.join(DATA_DIR, "photos")
         os.makedirs(DATA_DIR, exist_ok=True)
     print("config:", load_config(args.config), flush=True)
+    skip = {x.strip() for x in (args.skip_sources or "").split(",") if x.strip()}
+    if skip:
+        SEARCHES[:] = [x for x in SEARCHES if x[0] not in skip]
+        SKIP_SOURCES.update(skip)
     today = dt.date.today()
     prev_path = latest_snapshot()
     rows = load_rows(prev_path)
