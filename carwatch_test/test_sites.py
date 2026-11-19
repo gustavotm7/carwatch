@@ -23,6 +23,11 @@ try:
     out["runner_ip"] = requests.get("https://api.ipify.org", timeout=10).text
 except Exception as e:
     out["runner_ip"] = str(e)
+r = s.get("https://www.kijiji.ca/b-cars-trucks/canada/nissan-370z/k0c174l0", timeout=30)
+ks = [cc.HOSTS["kijiji"] + m.group(1) for m in cc.LINK_RE["kijiji"].finditer(r.text)]
+r = s.get("https://www.autotrader.ca/cars/nissan/370z/", timeout=30)
+ats = [cc.HOSTS["autotrader"] + m.group(1) for m in cc.LINK_RE["autotrader"].finditer(r.text)]
+TESTS = [("kijiji", "listing", u) for u in list(dict.fromkeys(ks))[:3]] + [("autotrader", "listing", u) for u in list(dict.fromkeys(ats))[:2]]
 for site, kind, url in TESTS:
     r0 = {"site": site, "kind": kind, "url": url}
     try:
@@ -40,6 +45,10 @@ for site, kind, url in TESTS:
                 info = cc.parse_listing(t)
                 r0["parsed"] = {k: info.get(k) for k in ("title", "price", "km", "year", "trans_field", "body_raw", "place")}
                 r0["parsed"]["desc_chars"] = len(info.get("desc") or "")
+                r0["parsed"]["desc_start"] = (info.get("desc") or "")[:160]
+                r0["parsed"]["og_image"] = (info.get("image") or "")[:100]
+                r0["has_ldjson"] = "application/ld+json" in t
+                r0["has_next_data"] = "__NEXT_DATA__" in t
                 r0["parsed"]["photo"] = cc.photo_of({"source": site, "listing_id": "0c6eb378-89f4-4ff4-81c4-91e3c7bad91d"}, t, info)[:120]
     except Exception as e:
         r0["error"] = f"{type(e).__name__}: {e}"
