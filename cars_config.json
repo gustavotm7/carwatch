@@ -1,0 +1,119 @@
+{
+  "_how_to_add_a_car": [
+    "Copy one block under 'models', change it, set enabled to true, push. The next run searches for it.",
+    "match: every regex must appear in the ad title or address (lower case, hyphens read as spaces).",
+    "none: none of these may appear. make: must appear too.",
+    "generations: one per chassis/year range. 'name' is what the app shows (E46 M3, AP1 S2000...).",
+    "name_by_body: optional, picks the name from the body (E90/E92/E93 M3).",
+    "smg_risk: true when an automated gearbox existed, so the ad text must also say manual.",
+    "bodies: the bodies this car came in; the first one is used when the ad does not say.",
+    "trims: [regex, label] pairs, first match wins.",
+    "searches: search pages to read every day, per site."
+  ],
+  "models": [
+    {
+      "enabled": true, "model": "M3", "make": "bmw", "match": ["\\bm3\\b"], "bodies": ["coupe", "conv", "sedan"],
+      "generations": [
+        {"family": "E46M3", "years": [2001, 2006], "name": "E46 M3", "color": "#8B84E8", "smg_risk": true,
+         "desc": "BMW E46 M3 2001-2006",
+         "trims": [["\\bcsl\\b", "CSL"], ["\\bzcp\\b|competition", "Competition (ZCP)"]]},
+        {"family": "E9XM3", "years": [2007, 2013], "name": "E9X M3", "color": "#3B8FE0", "smg_risk": true,
+         "name_by_body": {"sedan": "E90 M3", "coupe": "E92 M3", "conv": "E93 M3"},
+         "desc": "BMW E90 / E92 / E93 M3 2007-2013",
+         "trims": [["\\bgts\\b", "GTS"], ["\\bcrt\\b", "CRT"], ["lime ?rock", "Lime Rock"], ["frozen", "Frozen"],
+                   ["\\bzcp\\b|competition", "Competition (ZCP)"]]}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/bmw/m3/"],
+                   "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/bmw-m3/k0c174l0"],
+                   "carpages": ["https://www.carpages.ca/used-cars/bmw/m3/"]}
+    },
+    {
+      "enabled": true, "model": "M5", "make": "bmw", "match": ["\\bm5\\b"], "bodies": ["sedan"],
+      "generations": [
+        {"family": "E39M5", "years": [1999, 2003], "name": "E39 M5", "color": "#DB5C8A", "smg_risk": false,
+         "desc": "BMW E39 M5 1999-2003"},
+        {"family": "E60M5", "years": [2005, 2010], "name": "E60 M5", "color": "#E0703E", "smg_risk": true,
+         "desc": "BMW E60 M5 2005-2010"}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/bmw/m5/"],
+                   "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/bmw-m5/k0c174l0"],
+                   "carpages": ["https://www.carpages.ca/used-cars/bmw/m5/"]}
+    },
+    {
+      "enabled": true, "model": "330Ci", "make": "bmw", "match": ["\\b330 ?c ?i\\b"], "none": ["touring|wagon|wgn"],
+      "bodies": ["coupe", "conv"],
+      "generations": [
+        {"family": "E46_330", "years": [2001, 2006], "name": "E46 330Ci", "color": "#E5534B", "smg_risk": false,
+         "desc": "BMW E46 330i / 330Ci (M Sport / ZHP)",
+         "trims": [["\\bzhp\\b|performance package", "ZHP"], ["m ?sport|m ?tech", "M Sport"]]}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/kw_bmw-330ci"],
+                   "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/bmw-330ci/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "330i M Sport", "make": "bmw",
+      "match": ["\\b330 ?i\\b", "m ?sport|m ?tech|zhp|performance"], "none": ["touring|wagon|wgn"],
+      "bodies": ["sedan"],
+      "generations": [
+        {"family": "E46_330", "years": [2001, 2005], "name": "E46 330i", "color": "#E5534B", "smg_risk": false,
+         "desc": "BMW E46 330i / 330Ci (M Sport / ZHP)",
+         "trims": [["\\bzhp\\b|performance package", "ZHP"], ["m ?sport|m ?tech", "M Sport"]]}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/kw_bmw-330i-m-sport"]}
+    },
+    {
+      "enabled": true, "model": "3 Series wagon", "make": "bmw",
+      "match": ["touring|wagon|wgn", "\\b3[23]\\d ?x?i\\b|\\b3[23]\\d ?i ?xdrive|\\b32[58]\\b|\\b335\\b"],
+      "bodies": ["wagon"],
+      "generations": [
+        {"family": "E91", "years": [2006, 2012], "name": "E91 wagon", "color": "#C98A2A", "smg_risk": false,
+         "desc": "BMW E91 3 Series wagon 2006-2012", "trim_multi": true,
+         "trims": [["335", "335i"], ["328 ?x ?i|328i ?xdrive|328 ?xdrive", "328xi"], ["325 ?x ?i", "325xi"],
+                   ["m ?sport|m ?tech", "M Sport"]]}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/kw_bmw-325xi-touring",
+                                  "https://www.autotrader.ca/cars/kw_bmw-328xi-touring",
+                                  "https://www.autotrader.ca/cars/kw_bmw-328i-xdrive-touring"],
+                   "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/bmw-3-series-wagon/k0c174l0",
+                              "https://www.kijiji.ca/b-cars-trucks/canada/bmw-328xi-wagon/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "350Z", "make": "nissan", "match": ["\\b350 ?z\\b"], "bodies": ["coupe", "conv"],
+      "generations": [
+        {"family": "Z350", "years": [2003, 2009], "name": "Z33 350Z", "color": "#6FA032", "smg_risk": false,
+         "desc": "Nissan 350Z (Z33) 2003-2009",
+         "trims": [["nismo", "NISMO"], ["35th", "35th Anniversary"], ["track", "Track"],
+                   ["grand ?touring|\\bgt\\b", "Grand Touring"], ["enthusiast", "Enthusiast"],
+                   ["performance", "Performance"], ["touring", "Touring"]]}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/nissan/350z/"],
+                   "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/nissan-350z/k0c174l0"],
+                   "carpages": ["https://www.carpages.ca/used-cars/nissan/350z/"]}
+    },
+    {
+      "enabled": true, "model": "370Z", "make": "nissan", "match": ["\\b370 ?z\\b"], "bodies": ["coupe", "conv"],
+      "generations": [
+        {"family": "Z370", "years": [2009, 2020], "name": "Z34 370Z", "color": "#2BA3C9", "smg_risk": false,
+         "desc": "Nissan 370Z (Z34) 2009-2020",
+         "trims": [["nismo", "NISMO"], ["sport ?touring|touring ?sport|tourisme sport|sport tech", "Sport Touring"],
+                   ["\\bsport\\b", "Sport"], ["40th", "40th Anniversary"], ["50th", "50th Anniversary"],
+                   ["heritage", "Heritage Edition"], ["touring", "Touring"]]}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/nissan/370z/"],
+                   "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/nissan-370z/k0c174l0"],
+                   "carpages": ["https://www.carpages.ca/used-cars/nissan/370z/"]}
+    },
+    {
+      "enabled": false, "model": "S2000 (example: set enabled to true to track it)", "make": "honda",
+      "match": ["\\bs ?2000\\b"], "bodies": ["conv"],
+      "generations": [
+        {"family": "S2K_AP1", "years": [2000, 2003], "name": "AP1 S2000", "color": "#D9B53B", "smg_risk": false,
+         "desc": "Honda S2000 AP1 2000-2003 (F20C)"},
+        {"family": "S2K_AP2", "years": [2004, 2009], "name": "AP2 S2000", "color": "#B9C94A", "smg_risk": false,
+         "desc": "Honda S2000 AP2 2004-2009 (F22C1)", "trims": [["\\bcr\\b|club racer", "CR"]]}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/honda/s2000/"],
+                   "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/honda-s2000/k0c174l0"]}
+    }
+  ]
+}

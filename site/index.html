@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f1318">
+<title>CarWatch</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1318; --surface:#171c23; --raised:#1e242d; --line:#29313c;
+  --text:#eef1f4; --muted:#8d97a5; --dim:#5f6876;
+  --good:#3ccf8e; --warn:#f0b23e; --bad:#f2675c;
+  --radius:14px;
+  --cond:"Barlow Condensed","Roboto Condensed","Arial Narrow",sans-serif;
+  --sans:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 15px/1.45 var(--sans);
+  padding-bottom:env(safe-area-inset-bottom)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid #9fb4ff;outline-offset:2px;border-radius:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- top bar ---------- */
+.top{position:sticky;top:0;z-index:20;background:rgba(15,19,24,.92);backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.top-inner{max-width:1100px;margin:0 auto;padding:10px 14px 0}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand h1{margin:0;font:700 24px/1 var(--cond);letter-spacing:.01em}
+.brand .meta{color:var(--muted);font-size:13px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.icon-btn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--muted)}
+.icon-btn:hover{background:var(--raised);color:var(--text)}
+
+.controls{display:flex;gap:8px;align-items:center;margin-top:10px}
+.seg{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{padding:7px 16px;border-radius:999px;font:600 15px/1 var(--cond);color:var(--muted);letter-spacing:.02em}
+.seg button[aria-pressed=true]{background:var(--text);color:var(--bg)}
+.dir{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);
+  color:var(--text);font-size:13px;background:var(--surface)}
+.dir svg{transition:transform .2s}
+.dir[data-dir=asc] svg{transform:rotate(180deg)}
+.filters-btn{margin-left:auto;display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;
+  border:1px solid var(--line);background:var(--surface);font-size:13px}
+.badge{min-width:18px;height:18px;border-radius:9px;background:var(--text);color:var(--bg);font:600 11px/18px var(--sans);
+  text-align:center;padding:0 5px}
+
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 14px 12px;margin:0 -14px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:flex;align-items:center;gap:7px;padding:7px 12px 7px 10px;border-radius:999px;
+  border:1px solid var(--line);background:var(--surface);color:var(--muted);font:600 15px/1 var(--cond);letter-spacing:.02em}
+.chip .dot{width:10px;height:10px;border-radius:50%;background:var(--c,#888)}
+.chip .n{font:500 12px/1 var(--sans);color:var(--dim)}
+.chip[aria-pressed=true]{color:var(--text);border-color:var(--c,#cfd6df);background:color-mix(in srgb,var(--c,#cfd6df) 18%,var(--surface))}
+.chip[aria-pressed=true] .n{color:var(--muted)}
+
+/* ---------- list ---------- */
+main{max-width:1100px;margin:0 auto;padding:12px 10px 40px;display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:760px){main{grid-template-columns:1fr 1fr;padding:16px 14px 48px}}
+@media(min-width:1080px){main{grid-template-columns:1fr 1fr 1fr}}
+.count{grid-column:1/-1;color:var(--muted);font-size:13px;padding:0 4px}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;cursor:pointer;
+  display:flex;flex-direction:column}
+.card:hover{border-color:#3a4452}
+.photo{position:relative;aspect-ratio:16/10;background:#0b0e12}
+.photo img.pic{width:100%;height:100%;object-fit:cover;display:block}
+.photo .nophoto{position:absolute;inset:0;display:grid;place-items:center;color:var(--dim);font-size:13px}
+.photo .nophoto[hidden]{display:none}
+.photo::after{content:"";position:absolute;inset:auto 0 0 0;height:42%;
+  background:linear-gradient(to top,rgba(10,13,17,.78),rgba(10,13,17,0));pointer-events:none}
+.name{position:absolute;left:10px;top:10px;z-index:2;background:var(--c);color:#fff;border-radius:8px;
+  padding:5px 10px 4px;font:700 20px/1 var(--cond);letter-spacing:.02em;box-shadow:0 2px 10px rgba(0,0,0,.35)}
+.gauge{position:absolute;right:8px;top:8px;z-index:2;width:66px;height:66px;border-radius:50%;
+  background:rgba(12,15,20,.82);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.gauge svg{position:absolute;inset:0}
+.gauge b{position:absolute;inset:0;display:grid;place-items:center;font:700 25px/1 var(--cond);padding-bottom:2px}
+.gauge small{position:absolute;left:0;right:0;bottom:7px;text-align:center;font:500 10px/1 var(--sans);color:var(--muted)}
+.src{position:absolute;left:10px;bottom:10px;z-index:2;display:flex;align-items:center;gap:6px;
+  background:rgba(12,15,20,.78);border-radius:999px;padding:4px 10px 4px 5px;font-size:12px;color:#d8dde4}
+.src img{width:16px;height:16px;border-radius:4px;background:#fff}
+.tags{position:absolute;right:10px;bottom:10px;z-index:2;display:flex;gap:6px}
+.tag{border-radius:999px;padding:3px 9px;font:600 12px/1.4 var(--sans)}
+.tag.new{background:#e9eef5;color:#10151c}
+.tag.drop{background:rgba(60,207,142,.18);color:#7ff0bb;border:1px solid rgba(60,207,142,.4)}
+.tag.rise{background:rgba(242,103,92,.18);color:#ffb0a8;border:1px solid rgba(242,103,92,.4)}
+
+.body{padding:11px 14px 13px;display:flex;flex-direction:column;gap:9px}
+.row1{display:flex;align-items:center;gap:10px}
+.price{font:700 28px/1 var(--cond);letter-spacing:.01em}
+.deal{font-size:13px;font-weight:600;color:var(--muted);border-radius:7px;padding:4px 8px;border:1px solid var(--line)}
+.deal.under{color:#8ef0c0;background:rgba(60,207,142,.12);border-color:rgba(60,207,142,.3)}
+.deal.over{color:#ffaaa2;background:rgba(242,103,92,.12);border-color:rgba(242,103,92,.32)}
+.info{margin-left:auto;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;
+  color:var(--muted);flex:none}
+.info:hover{color:var(--text);border-color:#4a5563}
+.facts{display:flex;flex-wrap:wrap;gap:6px}
+.fact{display:inline-flex;align-items:center;gap:6px;border-radius:7px;padding:4px 8px;font:500 13px/1.25 var(--sans);
+  background:var(--raised);color:#d3d9e1;border:1px solid transparent}
+.fact.year{font:700 15px/1.1 var(--cond);letter-spacing:.03em}
+.fact.km{position:relative;overflow:hidden;padding-bottom:6px}
+.fact.km i{position:absolute;left:0;bottom:0;height:3px;background:#e0a34a;border-radius:0 2px 2px 0}
+.fact.gb-m{background:rgba(60,207,142,.13);color:#8ef0c0;border-color:rgba(60,207,142,.3)}
+.fact.gb-c{background:rgba(240,178,62,.14);color:#ffd27e;border-color:rgba(240,178,62,.35)}
+.fact.gb-u{background:var(--raised);color:var(--muted);border-color:var(--line)}
+.fact.body-coupe{box-shadow:inset 3px 0 0 #8b84e8}
+.fact.body-conv{box-shadow:inset 3px 0 0 #e0a34a}
+.fact.body-sedan{box-shadow:inset 3px 0 0 #8fa3b8}
+.fact.body-wagon{box-shadow:inset 3px 0 0 #b9875a}
+.fact.trim{background:none;border-color:var(--line);color:var(--text)}
+.flags{display:flex;flex-wrap:wrap;gap:6px}
+.flag{border-radius:7px;padding:4px 8px;font:600 13px/1.25 var(--sans);background:rgba(242,103,92,.14);color:#ffaaa2;
+  border:1px solid rgba(242,103,92,.35)}
+.flag.hard{background:#d9483d;color:#fff;border-color:#d9483d}
+.place{color:var(--muted);font-size:13px;display:flex;align-items:center;gap:5px}
+
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:48px 16px}
+.empty button{margin-top:12px;padding:9px 16px;border-radius:999px;border:1px solid var(--line);color:var(--text)}
+
+/* ---------- sheets ---------- */
+.scrim{position:fixed;inset:0;background:rgba(5,7,10,.6);z-index:40;opacity:0;transition:opacity .2s}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:41;max-height:88vh;overflow:auto;background:var(--surface);
+  border-top:1px solid var(--line);border-radius:18px 18px 0 0;padding:8px 18px calc(22px + env(safe-area-inset-bottom));
+  transform:translateY(100%);transition:transform .24s cubic-bezier(.2,.8,.2,1)}
+@media(min-width:760px){.sheet{left:50%;right:auto;width:560px;bottom:auto;top:50%;border-radius:18px;border:1px solid var(--line);
+  transform:translate(-50%,-46%);opacity:0;transition:opacity .18s,transform .18s}}
+.open .scrim{opacity:1}
+.open .sheet{transform:translateY(0)}
+@media(min-width:760px){.open .sheet{transform:translate(-50%,-50%);opacity:1}}
+.grab{width:40px;height:4px;border-radius:2px;background:var(--line);margin:4px auto 10px}
+@media(min-width:760px){.grab{display:none}}
+.sheet h2{font:700 26px/1.05 var(--cond);margin:4px 0 2px;display:flex;align-items:center;gap:10px}
+.sheet h2 .pill{background:var(--c);color:#fff;border-radius:7px;padding:4px 9px 3px;font-size:20px}
+.sheet .sub{color:var(--muted);margin:0 0 6px}
+.sheet h3{font:600 17px/1.2 var(--cond);letter-spacing:.02em;color:var(--muted);margin:18px 0 8px}
+.sheet p{margin:0 0 8px;max-width:68ch}
+.desc{color:#cfd5dd;font-size:14px;max-height:9.5em;overflow:auto;border-left:2px solid var(--line);padding-left:10px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:14px}
+.kv dt{color:var(--muted)} .kv dd{margin:0}
+.good-list{display:flex;flex-wrap:wrap;gap:6px}
+.plus{border-radius:7px;padding:4px 8px;font:600 13px/1.25 var(--sans);background:rgba(60,207,142,.12);color:#8ef0c0;
+  border:1px solid rgba(60,207,142,.3)}
+.none{color:var(--dim);font-size:14px}
+.primary{display:block;width:100%;margin-top:20px;padding:13px;border-radius:12px;background:var(--text);color:var(--bg);
+  font:700 18px/1 var(--cond);letter-spacing:.03em;text-align:center;text-decoration:none}
+.close{position:absolute;right:10px;top:10px}
+
+.opt-group{display:flex;flex-wrap:wrap;gap:8px}
+.opt{padding:8px 13px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:14px}
+.opt[aria-pressed=true]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.range{display:flex;align-items:center;gap:12px}
+.range input{flex:1;accent-color:#cfd6df}
+select.opt{background:var(--raised);color:var(--text);padding:8px 12px;font-size:15px}
+.range output{min-width:92px;text-align:right;font:600 17px/1 var(--cond)}
+.sheet-actions{display:flex;gap:10px;margin-top:22px}
+.sheet-actions button{flex:1;padding:12px;border-radius:12px;border:1px solid var(--line);font-weight:600}
+.sheet-actions .go{background:var(--text);color:var(--bg);border-color:var(--text)}
+.menu a,.menu button{display:flex;align-items:center;gap:12px;width:100%;padding:13px 4px;border-bottom:1px solid var(--line);
+  color:var(--text);text-decoration:none;font-size:16px;text-align:left}
+.menu small{display:block;color:var(--muted);font-size:13px}
+.gone a{color:var(--text)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <h1>CarWatch</h1>
+      <span class="meta" id="meta">Loading…</span>
+      <button class="icon-btn" id="menuBtn" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><circle cx="4" cy="10" r="1.8"/><circle cx="10" cy="10" r="1.8"/><circle cx="16" cy="10" r="1.8"/></svg>
+      </button>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Sort by">
+        <button id="sortScore" aria-pressed="true">Score</button>
+        <button id="sortPrice" aria-pressed="false">Price</button>
+      </div>
+      <button class="dir" id="dirBtn" data-dir="desc" aria-label="Sort direction">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 2v10M3 8l4 4 4-4"/></svg>
+        <span id="dirLabel">High first</span>
+      </button>
+      <button class="filters-btn" id="filtersBtn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M4.5 8h7M7 12h2"/></svg>
+        Filters <span class="badge" id="fCount" hidden>0</span>
+      </button>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Car"></div>
+  </div>
+</header>
+
+<main id="list" aria-live="polite"></main>
+
+<div id="layer" hidden>
+  <div class="scrim" id="scrim"></div>
+  <section class="sheet" id="sheet" role="dialog" aria-modal="true"></section>
+</div>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money = n => n == null ? "" : "$" + Math.round(n).toLocaleString("en-CA");
+const kmFmt = n => n == null ? "km n/a" : (n >= 1000 ? Math.round(n / 1000) + "k km" : n + " km");
+const SITES = {
+  autotrader: {label: "Autotrader", domain: "autotrader.ca"},
+  kijiji: {label: "Kijiji", domain: "kijiji.ca"},
+  carpages: {label: "CarPages", domain: "carpages.ca"},
+};
+const GEARBOX = {
+  m: {cls: "gb-m", label: "Manual", long: "Manual: the ad's data and the seller's text both say manual."},
+  c: {cls: "gb-c", label: "Check gearbox", long: "The ad's data and the seller's text disagree (manual vs automatic/SMG). Ask the seller."},
+  u: {cls: "gb-u", label: "Manual?", long: "The data says manual but the text never confirms it. These cars also came with SMG/DCT, so ask."},
+};
+const BODY = {coupe: "Coupe", conv: "Convertible", sedan: "Sedan", wagon: "Wagon", unk: "Body n/a"};
+const HARD = ["Rebuilt title", "Salvage title"];
+const DEFAULT_STATE = {sort: "score", dir: "desc", names: [], gear: ["m", "c", "u"], bodies: [], maxPrice: 0,
+                       maxKm: 0, yearFrom: 0, yearTo: 0, hideHard: false, hideRed: false};
+let DATA = null, state = load();
+
+function load() {
+  try { return Object.assign({}, DEFAULT_STATE, JSON.parse(localStorage.getItem("cw-state") || "{}")); }
+  catch (e) { return Object.assign({}, DEFAULT_STATE); }
+}
+function save() { try { localStorage.setItem("cw-state", JSON.stringify(state)); } catch (e) {} }
+
+function scoreColor(s) {                       // red 0 -> amber 5 -> green 10
+  const t = Math.max(0, Math.min(1, (s ?? 0) / 10));
+  return `hsl(${Math.round(4 + t * 138)} 72% ${t > .4 && t < .7 ? 52 : 50}%)`;
+}
+function gauge(s) {                            // 270 degree tach arc
+  const r = 27, c = 2 * Math.PI * r, arc = c * .75, val = arc * Math.max(0, Math.min(1, (s ?? 0) / 10));
+  const col = scoreColor(s);
+  return `<div class="gauge" aria-label="Score ${s ?? "n/a"} out of 10">
+    <svg viewBox="0 0 66 66"><g transform="rotate(135 33 33)" fill="none" stroke-width="5" stroke-linecap="round">
+      <circle cx="33" cy="33" r="${r}" stroke="#2b333e" stroke-dasharray="${arc} ${c}"/>
+      <circle cx="33" cy="33" r="${r}" stroke="${col}" stroke-dasharray="${val} ${c}"/></g></svg>
+    <b style="color:${col}">${s == null ? "–" : s.toFixed(1)}</b><small>score</small></div>`;
+}
+function nameColor(name) {
+  const n = DATA.names.find(x => x.name === name);
+  return n ? n.color : "#59626e";
+}
+function yearShade(y) {
+  const ys = DATA.cars.map(c => c.year).filter(Boolean);
+  const lo = Math.min(...ys), hi = Math.max(...ys), t = hi > lo ? (y - lo) / (hi - lo) : .5;
+  return `background:hsl(215 12% ${20 + t * 26}%);color:${t > .55 ? "#0f1318" : "#e9edf2"}`;
+}
+function isNew(c) {
+  if (!c.first_seen || c.first_seen <= DATA.baseline) return false;
+  return (Date.now() - new Date(c.first_seen + "T12:00:00")) / 864e5 <= 3;
+}
+function ago(iso) {
+  const h = (Date.now() - new Date(iso)) / 36e5;
+  if (h < 1) return "updated just now";
+  if (h < 36) return `updated ${Math.round(h)} h ago`;
+  return `updated ${Math.round(h / 24)} days ago`;
+}
+
+// ---------- filtering + sorting ----------
+function filtered() {
+  let cars = DATA.cars.filter(c =>
+    (!state.names.length || state.names.includes(c.name)) &&
+    state.gear.includes(c.trans) &&
+    (!state.bodies.length || state.bodies.includes(c.body)) &&
+    (!state.maxPrice || c.price <= state.maxPrice) &&
+    (!state.maxKm || (c.km ?? 0) <= state.maxKm) &&
+    (!state.yearFrom || (c.year ?? 0) >= state.yearFrom) &&
+    (!state.yearTo || (c.year ?? 9999) <= state.yearTo) &&
+    !(state.hideHard && c.red.some(f => HARD.includes(f))) &&
+    !(state.hideRed && c.red.length));
+  const key = {score: c => c.score ?? -1, price: c => c.price, km: c => c.km ?? 1e9, year: c => c.year ?? 0,
+               deal: c => c.vs_fair ?? -9, new: c => c.first_seen || ""}[state.sort];
+  const sgn = state.dir === "asc" ? 1 : -1;
+  return cars.sort((a, b) => { const x = key(a), y = key(b); return (x > y ? 1 : x < y ? -1 : a.price - b.price) * sgn; });
+}
+function activeFilterCount() {
+  let n = 0;
+  if (state.gear.length < 3) n++;
+  if (state.bodies.length) n++;
+  if (state.maxPrice) n++;
+  if (state.maxKm) n++;
+  if (state.yearFrom || state.yearTo) n++;
+  if (state.hideHard || state.hideRed) n++;
+  if (!["score", "price"].includes(state.sort)) n++;
+  return n;
+}
+
+// ---------- rendering ----------
+function card(c) {
+  const col = nameColor(c.name), site = SITES[c.source] || {label: c.source, domain: ""};
+  const g = GEARBOX[c.trans] || GEARBOX.u;
+  const vs = c.vs_fair;
+  const deal = vs == null ? "" : vs > .02 ? `<span class="deal under">${Math.round(vs * 100)}% under fair</span>`
+             : vs < -.02 ? `<span class="deal over">${Math.round(-vs * 100)}% over fair</span>` : `<span class="deal">about fair</span>`;
+  const change = c.prev_price && c.prev_price !== c.price
+      ? `<span class="tag ${c.price < c.prev_price ? "drop" : "rise"}">${c.price < c.prev_price ? "▼" : "▲"} ${money(Math.abs(c.price - c.prev_price))}</span>` : "";
+  const km = c.km ?? 0, kmW = Math.min(100, km / 250000 * 100);
+  const flags = c.red.map(f => `<span class="flag${HARD.includes(f) ? " hard" : ""}">${esc(f)}</span>`).join("");
+  return `<article class="card" tabindex="0" data-id="${esc(c.id)}" aria-label="${esc(c.year + " " + c.name + ", " + money(c.price))}">
+    <div class="photo">
+      ${c.photos.length ? `<img class="pic" src="${esc(c.photos[0])}" alt="" loading="lazy" decoding="async" data-alt="${esc(c.photos[1] || "")}">` : ""}
+      <span class="nophoto"${c.photos.length ? " hidden" : ""}>No photo</span>
+      <span class="name" style="--c:${col}">${esc(c.name)}</span>
+      ${gauge(c.score)}
+      <span class="src">${site.domain ? `<img src="https://www.google.com/s2/favicons?domain=${site.domain}&sz=64" alt="" loading="lazy">` : ""}${esc(site.label)}</span>
+      <span class="tags">${isNew(c) ? '<span class="tag new">New</span>' : ""}${change}</span>
+    </div>
+    <div class="body">
+      <div class="row1"><span class="price">${money(c.price)}</span>${deal}
+        <button class="info" data-info="${esc(c.id)}" aria-label="Details">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="9" r="7.2"/><path d="M9 8v5"/><circle cx="9" cy="5.3" r=".6" fill="currentColor"/></svg>
+        </button></div>
+      ${flags ? `<div class="flags">${flags}</div>` : ""}
+      <div class="facts">
+        <span class="fact year" style="${yearShade(c.year)}">${c.year ?? ""}</span>
+        <span class="fact km">${kmFmt(c.km)}<i style="width:${kmW}%"></i></span>
+        <span class="fact ${g.cls}">${g.label}</span>
+        <span class="fact body-${esc(c.body)}">${BODY[c.body] || "Body n/a"}</span>
+        ${c.trim ? `<span class="fact trim">${esc(c.trim)}</span>` : ""}
+      </div>
+      ${c.place ? `<div class="place"><svg width="12" height="14" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 13s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C1.5 8.8 6 13 6 13Z"/><circle cx="6" cy="5.5" r="1.6"/></svg>${esc(c.place)}</div>` : ""}
+    </div></article>`;
+}
+function renderChips() {
+  const counts = {};
+  DATA.cars.forEach(c => counts[c.name] = (counts[c.name] || 0) + 1);
+  const all = `<button class="chip" data-name="" aria-pressed="${!state.names.length}">All <span class="n">${DATA.cars.length}</span></button>`;
+  $("#chips").innerHTML = all + DATA.names.map(n =>
+    `<button class="chip" style="--c:${n.color}" data-name="${esc(n.name)}" aria-pressed="${state.names.includes(n.name)}">
+      <span class="dot"></span>${esc(n.name)} <span class="n">${counts[n.name] || 0}</span></button>`).join("");
+}
+function render() {
+  const cars = filtered();
+  $("#sortScore").setAttribute("aria-pressed", state.sort === "score");
+  $("#sortPrice").setAttribute("aria-pressed", state.sort === "price");
+  $("#dirBtn").dataset.dir = state.dir;
+  $("#dirLabel").textContent = state.sort === "price" || state.sort === "km"
+      ? (state.dir === "asc" ? "Low first" : "High first")
+      : state.sort === "year" || state.sort === "new" ? (state.dir === "asc" ? "Oldest first" : "Newest first")
+      : (state.dir === "asc" ? "Low first" : "High first");
+  const n = activeFilterCount();
+  $("#fCount").hidden = !n; $("#fCount").textContent = n;
+  renderChips();
+  $("#list").innerHTML = cars.length
+    ? `<div class="count">${cars.length === DATA.cars.length ? `${cars.length} cars` : `${cars.length} of ${DATA.cars.length} cars`}</div>` + cars.map(card).join("")
+    : `<div class="empty">No cars match these filters.<br><button id="clearAll">Clear filters</button></div>`;
+  save();
+}
+
+// ---------- sheets ----------
+function openSheet(html, label) {
+  $("#sheet").innerHTML = `<div class="grab"></div><button class="icon-btn close" data-close aria-label="Close">
+    <svg width="18" height="18" viewBox="0 0 18 18" stroke="currentColor" stroke-width="1.8"><path d="M4 4l10 10M14 4 4 14"/></svg></button>` + html;
+  $("#sheet").setAttribute("aria-label", label);
+  $("#layer").hidden = false;
+  requestAnimationFrame(() => requestAnimationFrame(() => $("#layer").classList.add("open")));
+  $("#sheet").querySelector("[data-close]").focus({preventScroll: true});
+}
+function closeSheet() {
+  $("#layer").classList.remove("open");
+  setTimeout(() => { $("#layer").hidden = true; }, 220);
+}
+function detailSheet(c) {
+  const g = GEARBOX[c.trans] || GEARBOX.u, site = SITES[c.source] || {label: c.source};
+  const sc = DATA.score, gearPts = sc.gearbox[{m: "✔ Manual", c: "⚠ Conflict", u: "? Unconfirmed"}[c.trans]] ?? 0;
+  const redPts = c.red.reduce((a, f) => a + (sc.red[f] || 0), 0);
+  const greenPts = Math.min(sc.green_cap, c.green.reduce((a, f) => a + (sc.green[f] || 0), 0));
+  const valuePts = c.score == null ? 0 : c.score - sc.base - gearPts - redPts - greenPts;
+  const pts = v => (v > 0 ? "+" : "") + v.toFixed(1);
+  openSheet(`
+    <h2><span class="pill" style="--c:${nameColor(c.name)}">${esc(c.name)}</span>${c.year ?? ""}</h2>
+    <p class="sub">${esc([c.trim, BODY[c.body], money(c.price)].filter(Boolean).join(", "))}</p>
+    <h3>Ad details</h3>
+    <p>${esc(c.note)}</p>
+    ${c.desc ? `<div class="desc">${esc(c.desc)}${c.desc.length >= 690 ? "…" : ""}</div>` : ""}
+    <h3>Red flags</h3>
+    ${c.red.length ? `<div class="flags">${c.red.map(f => `<span class="flag${HARD.includes(f) ? " hard" : ""}">${esc(f)}</span>`).join("")}</div>`
+                   : `<p class="none">${c.flags_read ? "None found in the ad text." : "Ad text not read yet."}</p>`}
+    <h3>Good signs</h3>
+    ${c.green.length ? `<div class="good-list">${c.green.map(f => `<span class="plus">${esc(f)}</span>`).join("")}</div>`
+                     : `<p class="none">${c.flags_read ? "None mentioned." : "Ad text not read yet."}</p>`}
+    <h3>Price and score</h3>
+    <dl class="kv">
+      <dt>Listed</dt><dd>${money(c.price)}${c.prev_price && c.prev_price !== c.price ? ` (was ${money(c.prev_price)})` : ""}</dd>
+      <dt>Fair price</dt><dd>${c.fair ? money(c.fair) + ` for this car, km and year` : "Not enough cars to estimate"}</dd>
+      <dt>Score</dt><dd><b style="color:${scoreColor(c.score)}">${c.score?.toFixed(1) ?? "–"}</b> of 10:
+        price ${pts(valuePts)}, gearbox ${pts(gearPts)}, flags ${pts(redPts + greenPts)}</dd>
+      <dt>Confidence</dt><dd>${c.conf != null ? Math.round(c.conf * 100) + "% (fewer cars of this model = less weight on price)" : "n/a"}</dd>
+    </dl>
+    <h3>The car</h3>
+    <dl class="kv">
+      <dt>Gearbox</dt><dd>${esc(g.long)}</dd>
+      <dt>Km</dt><dd>${c.km != null ? c.km.toLocaleString("en-CA") + " km" : "n/a"}</dd>
+      <dt>Body</dt><dd>${BODY[c.body] || "n/a"}</dd>
+      <dt>Location</dt><dd>${esc(c.place || "n/a")}</dd>
+      <dt>Listed on</dt><dd>${esc(site.label)}</dd>
+      <dt>First seen</dt><dd>${esc(c.first_seen)}</dd>
+      <dt>Last checked</dt><dd>${esc(c.verified || c.last_seen)}</dd>
+    </dl>
+    <a class="primary" href="${esc(c.url)}" target="_blank" rel="noopener">Open ad on ${esc(site.label)}</a>`, "Car details");
+}
+function filterSheet() {
+  const prices = DATA.cars.map(c => c.price), kms = DATA.cars.map(c => c.km || 0), years = DATA.cars.map(c => c.year).filter(Boolean);
+  const pMax = Math.ceil(Math.max(...prices) / 5000) * 5000, kMax = Math.ceil(Math.max(...kms) / 10000) * 10000;
+  const yLo = Math.min(...years), yHi = Math.max(...years);
+  const yOpts = sel => { let o = `<option value="0">Any</option>`; for (let y = yLo; y <= yHi; y++) o += `<option ${sel === y ? "selected" : ""}>${y}</option>`; return o; };
+  const t = JSON.parse(JSON.stringify(state));
+  const opt = (group, val, label, on) => `<button class="opt" data-g="${group}" data-v="${val}" aria-pressed="${on}">${label}</button>`;
+  openSheet(`
+    <h2>Filters</h2>
+    <h3>Gearbox</h3><div class="opt-group">
+      ${opt("gear", "m", "Manual", t.gear.includes("m"))}${opt("gear", "c", "Check gearbox", t.gear.includes("c"))}${opt("gear", "u", "Manual?", t.gear.includes("u"))}</div>
+    <h3>Body</h3><div class="opt-group">
+      ${["coupe", "conv", "sedan", "wagon"].map(b => opt("body", b, BODY[b], t.bodies.includes(b))).join("")}</div>
+    <h3>Highest price</h3><div class="range"><input type="range" id="fPrice" min="5000" max="${pMax}" step="1000" value="${t.maxPrice || pMax}"><output id="oPrice"></output></div>
+    <h3>Most km</h3><div class="range"><input type="range" id="fKm" min="10000" max="${kMax}" step="5000" value="${t.maxKm || kMax}"><output id="oKm"></output></div>
+    <h3>Year</h3><div class="range"><select id="fY1" class="opt">${yOpts(t.yearFrom)}</select><span>to</span><select id="fY2" class="opt">${yOpts(t.yearTo)}</select></div>
+    <h3>Hide</h3><div class="opt-group">
+      ${opt("hide", "hard", "Rebuilt or salvage titles", t.hideHard)}${opt("hide", "red", "Any red flag", t.hideRed)}</div>
+    <h3>More ways to sort</h3><div class="opt-group">
+      ${[["score", "Score"], ["price", "Price"], ["deal", "% under fair"], ["km", "Km"], ["year", "Year"], ["new", "Newest ads"]]
+        .map(([v, l]) => opt("sort", v, l, t.sort === v)).join("")}</div>
+    <div class="sheet-actions"><button id="fReset">Reset</button><button class="go" id="fApply">Show cars</button></div>`, "Filters");
+  const sh = $("#sheet");
+  const upd = () => {
+    const p = +$("#fPrice").value, k = +$("#fKm").value;
+    $("#oPrice").textContent = p >= pMax ? "Any" : money(p);
+    $("#oKm").textContent = k >= kMax ? "Any" : k.toLocaleString("en-CA") + " km";
+  };
+  upd();
+  $("#fPrice").oninput = $("#fKm").oninput = upd;
+  sh.querySelectorAll(".opt[data-g]").forEach(b => b.onclick = () => {
+    const g = b.dataset.g, v = b.dataset.v;
+    if (g === "sort") { sh.querySelectorAll('[data-g=sort]').forEach(x => x.setAttribute("aria-pressed", x === b)); return; }
+    b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true");
+  });
+  $("#fReset").onclick = () => { Object.assign(state, DEFAULT_STATE, {names: state.names}); closeSheet(); render(); };
+  $("#fApply").onclick = () => {
+    const on = g => [...sh.querySelectorAll(`[data-g=${g}][aria-pressed=true]`)].map(b => b.dataset.v);
+    const gear = on("gear");
+    state.gear = gear.length ? gear : ["m", "c", "u"];
+    state.bodies = on("body");
+    state.maxPrice = +$("#fPrice").value >= pMax ? 0 : +$("#fPrice").value;
+    state.maxKm = +$("#fKm").value >= kMax ? 0 : +$("#fKm").value;
+    state.yearFrom = +$("#fY1").value; state.yearTo = +$("#fY2").value;
+    const hide = on("hide"); state.hideHard = hide.includes("hard"); state.hideRed = hide.includes("red");
+    const srt = on("sort")[0] || "score";
+    if (srt !== state.sort) { state.sort = srt; state.dir = ["price", "km"].includes(srt) ? "asc" : "desc"; }
+    closeSheet(); render(); window.scrollTo({top: 0});
+  };
+}
+function menuSheet() {
+  const repo = DATA.repo;
+  const gone = DATA.gone.slice(0, 15).map(g => `<li><a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.year + " " + g.name)}</a>, ${money(+g.price)}, gone after ${esc(g.last_seen)}</li>`).join("");
+  openSheet(`
+    <h2>CarWatch</h2>
+    <p class="sub">${DATA.cars.length} cars, ${ago(DATA.updated)}. The list refreshes every morning.</p>
+    <nav class="menu">
+      ${repo ? `<a href="https://github.com/${esc(repo)}/actions/workflows/update.yml" target="_blank" rel="noopener">
+        <span>Update now<small>Opens GitHub: press "Run workflow". New data shows here in about 10 minutes.</small></span></a>` : ""}
+      <button id="howScore"><span>How the score works<small>Price against similar cars, gearbox certainty and flags</small></span></button>
+    </nav>
+    ${gone ? `<h3>Recently sold or removed</h3><ul class="gone">${gone}</ul>` : ""}`, "Menu");
+  $("#howScore").onclick = () => openSheet(`
+    <h2>How the score works</h2>
+    <p>Every car starts at ${DATA.score.base} of 10. The fair price is estimated from the other cars of the same model,
+      adjusted for km, year and convertible or not. Each ${Math.round(DATA.score.pct_per_point * 100)}% under that fair price adds about a point,
+      and each ${Math.round(DATA.score.pct_per_point * 100)}% over it removes one. For models with only a few cars listed, the price counts less.</p>
+    <p>Gearbox: a doubtful manual costs up to a point. Red flags from the ad text take points off (a rebuilt title costs 3);
+      good signs such as rod bearings done add up to ${DATA.score.green_cap}.</p>
+    <p class="none">Flags only catch what the seller wrote. Get a history report and an inspection before you buy.</p>`, "How the score works");
+}
+
+// ---------- events ----------
+document.addEventListener("click", e => {
+  const t = e.target;
+  if (t.closest("[data-close]") || t.id === "scrim") return closeSheet();
+  const info = t.closest("[data-info]");
+  if (info) { e.stopPropagation(); return detailSheet(DATA.cars.find(c => c.id === info.dataset.info)); }
+  const chip = t.closest(".chip");
+  if (chip) {
+    const n = chip.dataset.name;
+    state.names = !n ? [] : state.names.includes(n) ? state.names.filter(x => x !== n) : [...state.names, n];
+    return render();
+  }
+  if (t.id === "clearAll") { Object.assign(state, DEFAULT_STATE); return render(); }
+  const cardEl = t.closest(".card");
+  if (cardEl) { const c = DATA.cars.find(x => x.id === cardEl.dataset.id); if (c) window.open(c.url, "_blank", "noopener"); }
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && !$("#layer").hidden) closeSheet();
+  if (e.key === "Enter" && e.target.classList?.contains("card")) e.target.click();
+});
+document.addEventListener("error", e => {          // photo fallback: second address, then "No photo"
+  const img = e.target;
+  if (!(img instanceof HTMLImageElement) || !img.classList.contains("pic")) return;
+  if (img.dataset.alt) { const a = img.dataset.alt; img.dataset.alt = ""; img.src = a; return; }
+  img.remove(); const ph = document.querySelector(`[data-id="${CSS.escape(img.closest?.(".card")?.dataset.id || "")}"] .nophoto`);
+  if (ph) ph.hidden = false;
+}, true);
+$("#sortScore").onclick = () => { if (state.sort !== "score") { state.sort = "score"; state.dir = "desc"; } render(); };
+$("#sortPrice").onclick = () => { if (state.sort !== "price") { state.sort = "price"; state.dir = "asc"; } render(); };
+$("#dirBtn").onclick = () => { state.dir = state.dir === "asc" ? "desc" : "asc"; render(); };
+$("#filtersBtn").onclick = () => filterSheet();
+$("#menuBtn").onclick = () => menuSheet();
+
+fetch("data/cars.json?" + Date.now(), {cache: "no-store"})
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(d => {
+    DATA = d;
+    state.names = state.names.filter(n => d.names.some(x => x.name === n));
+    $("#meta").textContent = `${d.cars.length} cars, ${ago(d.updated)}`;
+    render();
+  })
+  .catch(err => {
+    $("#meta").textContent = "";
+    $("#list").innerHTML = `<div class="empty">The car list could not be loaded (${esc(err.message)}). Check your connection and pull down to refresh.</div>`;
+  });
+</script>
+</body>
+</html>

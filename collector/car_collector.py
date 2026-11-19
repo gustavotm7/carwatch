@@ -83,40 +83,19 @@ from openpyxl.worksheet.properties import PageSetupProperties
 # Settings
 # --------------------------------------------------------------------------------------------
 HERE = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = HERE                                    # snapshots, workbook, log (set with --data-dir)
 SNAPSHOT_FMT = "car_listings_{:%Y%m%d}.csv"      # one snapshot per day, written from the start of the run
 XLSX_NAME = "cars_data.xlsx"                      # CarWatch.xlsm loads this file (Update now button / on open)
-PHOTO_DIR = os.path.join(HERE, "photos")
+PHOTO_DIR = os.path.join(HERE, "photos")         # moved under --data-dir when given
 DELAY_S = 2.0                                      # pause between page requests
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) personal-car-watch/2.0"
 MAX_NEW_PER_RUN = 80                               # unseen ads opened per run
 PAGES_PER_SEARCH = 3                               # result pages read per search
 GONE_RECHECK_DAYS = 7                              # keep re-checking 'gone' ads this long (they sometimes return)
 
-# (source, url) - paste your own filtered searches too (e.g. Transmission = Manual, newest first).
-# Kijiji and CarPages search addresses and the paging of all three sites are unverified: --selftest
-# prints how many ads each search returned, and every run logs it (Summary tab, "Last run").
-SEARCHES = [
-    ("autotrader", "https://www.autotrader.ca/cars/bmw/m3/"),
-    ("autotrader", "https://www.autotrader.ca/cars/bmw/m5/"),
-    ("autotrader", "https://www.autotrader.ca/cars/kw_bmw-330ci"),
-    ("autotrader", "https://www.autotrader.ca/cars/kw_bmw-330i-m-sport"),
-    ("autotrader", "https://www.autotrader.ca/cars/kw_bmw-325xi-touring"),
-    ("autotrader", "https://www.autotrader.ca/cars/kw_bmw-328xi-touring"),
-    ("autotrader", "https://www.autotrader.ca/cars/kw_bmw-328i-xdrive-touring"),
-    ("autotrader", "https://www.autotrader.ca/cars/nissan/350z/"),
-    ("autotrader", "https://www.autotrader.ca/cars/nissan/370z/"),
-    ("kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/bmw-m3/k0c174l0"),
-    ("kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/bmw-m5/k0c174l0"),
-    ("kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/bmw-330ci/k0c174l0"),
-    ("kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/bmw-wagon-manual/k0c174l0"),
-    ("kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/nissan-350z/k0c174l0"),
-    ("kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/nissan-370z/k0c174l0"),
-    ("carpages", "https://www.carpages.ca/used-cars/bmw/m3/"),
-    ("carpages", "https://www.carpages.ca/used-cars/bmw/m5/"),
-    ("carpages", "https://www.carpages.ca/used-cars/bmw/3-series/"),
-    ("carpages", "https://www.carpages.ca/used-cars/nissan/350z/"),
-    ("carpages", "https://www.carpages.ca/used-cars/nissan/370z/"),
-]
+# Searches come from cars_config.json (per car, per site). Extra searches can be added here as (source, url).
+EXTRA_SEARCHES = []
+SEARCHES = []                                       # filled by load_config()
 
 # Score settings: written to the Summary tab every day. Change them HERE to make a change stick.
 SCORE = {
@@ -132,7 +111,7 @@ SCORE = {
 
 COLS = ["listing_id", "source", "family", "gen", "name", "year", "body", "price", "km", "trans",
         "place", "url", "photo_id", "note", "first_seen", "last_seen", "prev_price", "status", "verified",
-        "trim", "red_flags", "green_flags", "flags_read", "photo_alt"]
+        "trim", "red_flags", "green_flags", "flags_read", "photo_alt", "desc"]
 
 UUID = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
 UUID_RE = re.compile(UUID)
@@ -171,61 +150,78 @@ def id_key(row):
 # --------------------------------------------------------------------------------------------
 # Car rules
 # --------------------------------------------------------------------------------------------
-RULES = {   # key -> (regex on title + URL slug, first year, last year)
-    "M3": (r"\bm3\b", 2001, 2013),
-    "M5": (r"\bm5\b", 1999, 2010),
-    "C330": (r"\b330\s?-?c?i\b", 2001, 2006),
-    "Z350": (r"\b350\s?-?z\b", 2003, 2009),
-    "Z370": (r"\b370\s?-?z\b", 2009, 2020),
-    "E91": (r"(touring|wagon|wgn)", 2006, 2012),
-}
-CHASSIS = {"sedan": "E90", "coupe": "E92", "conv": "E93"}
-NEEDS_TEXT_CONFIRM = {"E46M3", "E9XM3", "E60M5"}   # also sold with SMG/DCT: data field alone is not enough
+MODELS = []            # enabled models from cars_config.json
+FAMILY_STYLE = {}      # family -> (fill, text, short name, description)
+TRIMS = {}             # family -> ([(regex, label)], multi)
+NEEDS_TEXT_CONFIRM = set()   # families that also came with SMG/DCT: the data field alone is not enough
+
+
+def load_config(path=None):
+    """Read cars_config.json (next to the script, or one folder up) and fill the car rules."""
+    global MODELS, SEARCHES
+    cands = [path] if path else [os.path.join(HERE, "cars_config.json"), os.path.join(HERE, "..", "cars_config.json")]
+    cfg_path = next((c for c in cands if c and os.path.exists(c)), None)
+    if not cfg_path:
+        raise FileNotFoundError("cars_config.json not found (put it next to car_collector.py)")
+    with open(cfg_path, encoding="utf-8") as f:
+        cfg = json.load(f)
+    MODELS = [m for m in cfg["models"] if m.get("enabled", True)]
+    FAMILY_STYLE.clear(); TRIMS.clear(); NEEDS_TEXT_CONFIRM.clear()
+    searches = []
+    for m in MODELS:
+        for g in m["generations"]:
+            FAMILY_STYLE.setdefault(g["family"], (g.get("color", "#888888").lstrip("#").upper(), "FFFFFF",
+                                                  g.get("short", g["name"]), g.get("desc", g["name"])))
+            if g.get("trims"):
+                TRIMS.setdefault(g["family"], ([(rx, lab) for rx, lab in g["trims"]], bool(g.get("trim_multi"))))
+            if g.get("smg_risk"):
+                NEEDS_TEXT_CONFIRM.add(g["family"])
+        for src, urls in (m.get("searches") or {}).items():
+            for u in urls:
+                if (src, u) not in searches:
+                    searches.append((src, u))
+    SEARCHES = searches + [s for s in EXTRA_SEARCHES if s not in searches]
+    return cfg_path
+
+
+def _norm(text):
+    return (text or "").lower().replace("-", " ").replace("_", " ")
 
 
 def detect_key(title: str, slug: str, year):
-    t = (title + " " + slug).lower().replace("-", " ")
+    """-> the matching model (dict) from cars_config.json, or None."""
     if year is None:
         return None
-    if "bmw" in t or re.search(r"\bm[35]\b", t):
-        for key in ("M3", "M5"):
-            rx, y0, y1 = RULES[key]
-            if re.search(rx, t) and y0 <= year <= y1:
-                return key
-        rx, y0, y1 = RULES["C330"]
-        if re.search(rx, t) and y0 <= year <= y1 and not re.search(r"touring|wagon|wgn", t):
-            if "330i" in t.replace(" ", "") and (year > 2005 or not re.search(r"m ?sport|m ?tech|zhp|performance", t)):
-                return None                               # plain 330i, or an E90 330i (2006+): not on the list
-            return "C330"
-        rx, y0, y1 = RULES["E91"]
-        if re.search(rx, t) and re.search(r"\b3[23]\d ?x?i\b|\b3[23]\d ?i ?xdrive|\b328|\b325|\b335", t) and y0 <= year <= y1:
-            return "E91"
-    if "nissan" in t or re.search(r"\b3[57]0 ?z\b", t):
-        for key in ("Z350", "Z370"):
-            rx, y0, y1 = RULES[key]
-            if re.search(rx, t) and y0 <= year <= y1:
-                return key
+    t = _norm(title + " " + slug)
+    for m in MODELS:
+        if m.get("make") and m["make"].lower() not in t:
+            continue
+        if not all(re.search(rx, t) for rx in m.get("match", [])):
+            continue
+        if any(re.search(rx, t) for rx in m.get("none", [])):
+            continue
+        if any(g["years"][0] <= year <= g["years"][1] for g in m["generations"]):
+            return m
     return None
 
 
-def classify(key, year, body):
-    """-> (family, generation, display name)"""
-    if key == "M3":
-        if year <= 2006:
-            return "E46M3", "E46", "E46 M3"
-        g = CHASSIS.get(body, "E9X")
-        return "E9XM3", g, f"{g} M3"
-    if key == "M5":
-        return ("E39M5", "E39", "E39 M5") if year <= 2003 else ("E60M5", "E60", "E60 M5")
-    if key == "C330":
-        return "E46_330", "E46", "E46 330Ci" if body in ("coupe", "conv") else "E46 330i"
-    if key == "E91":
-        return "E91", "E91", "E91 wagon"
-    if key == "Z350":
-        return "Z350", "Z33", "Z33 350Z"
-    if key == "Z370":
-        return "Z370", "Z34", "Z34 370Z"
-    raise ValueError(key)
+def fix_body(model, body, text=""):
+    """Bodies the car never came in (a 'Sedan' 370Z) fall back to the model's own list."""
+    allowed = model.get("bodies") or []
+    if not allowed or body in allowed:
+        return body
+    if "conv" in allowed and re.search(r"roadster|convertible|cabrio", _norm(text)):
+        return "conv"
+    return allowed[0] if len(allowed) == 1 or body in ("unk", "sedan", "wagon") else body
+
+
+def classify(model, year, body):
+    """-> (family, generation/chassis, display name)"""
+    for g in model["generations"]:
+        if g["years"][0] <= year <= g["years"][1]:
+            name = (g.get("name_by_body") or {}).get(body, g["name"])
+            return g["family"], name.split(" ")[0], name
+    raise ValueError(f"{model['model']} {year}")
 
 
 def classify_trans(family: str, field: str, desc: str) -> str:
@@ -265,29 +261,14 @@ def _body_words(t: str) -> str:
     return "unk"
 
 
-TRIM_RULES = {
-    "Z370": [(r"nismo", "NISMO"), (r"sport ?touring|touring ?sport|tourisme sport|sport tech", "Sport Touring"),
-             (r"\bsport\b", "Sport"), (r"40th", "40th Anniversary"), (r"50th", "50th Anniversary"),
-             (r"heritage", "Heritage Edition"), (r"touring", "Touring")],
-    "Z350": [(r"nismo", "NISMO"), (r"35th", "35th Anniversary"), (r"track", "Track"),
-             (r"grand ?touring|\bgt\b", "Grand Touring"), (r"enthusiast", "Enthusiast"),
-             (r"performance", "Performance"), (r"touring", "Touring")],
-    "E46M3": [(r"\bcsl\b", "CSL"), (r"\bzcp\b|competition", "Competition (ZCP)")],
-    "E9XM3": [(r"\bgts\b", "GTS"), (r"\bcrt\b", "CRT"), (r"lime ?rock", "Lime Rock"), (r"frozen", "Frozen"),
-              (r"\bzcp\b|competition", "Competition (ZCP)")],
-    "E46_330": [(r"\bzhp\b|performance package", "ZHP"), (r"m ?sport|m ?tech", "M Sport")],
-    "E91": [(r"335", "335i"), (r"328 ?x ?i|328i ?xdrive|328 ?xdrive", "328xi"), (r"325 ?x ?i", "325xi"),
-            (r"m ?sport|m ?tech", "M Sport")],
-}
-
-
 def trim_of(family, text):
-    t = (text or "").lower().replace("-", " ")
+    t = _norm(text)
+    rules, multi = TRIMS.get(family, ([], False))
     found = []
-    for rx, label in TRIM_RULES.get(family, []):
+    for rx, label in rules:
         if re.search(rx, t) and label not in found:
             found.append(label)
-            if family != "E91":
+            if not multi:
                 break
     return " ".join(found[:2])
 
@@ -335,7 +316,7 @@ def marker_of(path):
 
 
 def latest_snapshot():
-    files = sorted(glob.glob(os.path.join(HERE, "car_listings_*.csv")))
+    files = sorted(glob.glob(os.path.join(DATA_DIR, "car_listings_*.csv")))
     if not files:
         return None
     done = [f for f in files if os.path.exists(marker_of(f))]
@@ -610,6 +591,7 @@ def apply_page_details(row, info, today):
     if len(desc) >= 40:
         red, green = flags_of((info.get("title") or "") + "\n" + desc)
         row["red_flags"], row["green_flags"], row["flags_read"] = red, green, today
+        row["desc"] = re.sub(r"\s+", " ", desc).strip()[:700]
     t = trim_of(row["family"], (info.get("title") or "") + " " + row["url"].rsplit("/", 1)[-1])
     if t:
         row["trim"] = t
@@ -716,9 +698,8 @@ def discover_new(sess, rows, today, stats, max_new):
         elif info.get("price") is None or info.get("km") is None:
             reason = "price or km not readable"
         if not reason:
-            body = body_of(info.get("body_raw", ""), slug + " " + info.get("title", ""))
-            if key in ("Z350", "Z370") and body in ("sedan", "wagon", "unk"):
-                body = "conv" if re.search(r"roadster|convertible|cabrio", (slug + info.get("title", "")).lower()) else "coupe"
+            body = fix_body(key, body_of(info.get("body_raw", ""), slug + " " + info.get("title", "")),
+                            slug + " " + info.get("title", ""))
             fam, gen, name = classify(key, info["year"], body)
             trans = classify_trans(fam, info.get("trans_field", ""), info.get("desc", ""))
             if trans == "a":
@@ -879,20 +860,112 @@ def fit_fair_price(active):
     return model, b_conv, sd
 
 
+GEARBOX_LABEL = {"m": "\u2714 Manual", "c": "\u26A0 Conflict", "u": "? Unconfirmed"}
+
+
+def score_rows(active):
+    """Same maths as the workbook: fair price, % under fair, confidence and the 0-10 score, per listing id."""
+    model, b_conv, sd = fit_fair_price(active)
+    ppp = max(0.03, round(2 * sd / 5, 2))
+    out = {}
+    for r in active:
+        o = {"fair": None, "vs_fair": None, "conf": None, "score": None}
+        m = model.get(r["family"])
+        try:
+            price, km, year = float(r["price"]), float(r["km"] or 0), float(r["year"])
+        except ValueError:
+            out[r["listing_id"]] = o
+            continue
+        value_pts = 0.0
+        if m:
+            a, bk, by, n = m
+            fair = round(math.exp(a + bk * km / 1e4 + by * (year - 2000) + b_conv * (r["body"] == "conv")), -2)
+            conf = n / (n + 5)
+            vs = 1 - price / fair if fair else None
+            o.update(fair=int(fair), vs_fair=round(vs, 4) if vs is not None else None, conf=round(conf, 2))
+            if vs is not None:
+                value_pts = vs / ppp * conf
+        red = [f for f in (r.get("red_flags") or "").split("; ") if f]
+        green = [f for f in (r.get("green_flags") or "").split("; ") if f]
+        pts = (SCORE["base"] + value_pts + SCORE["gearbox"].get(GEARBOX_LABEL.get(r["trans"], ""), 0.0)
+               + sum(SCORE["red"].get(f, 0.0) for f in red)
+               + min(SCORE["green_cap"], sum(SCORE["green"].get(f, 0.0) for f in green)))
+        o["score"] = round(max(0.0, min(10.0, pts)), 1)
+        out[r["listing_id"]] = o
+    return out, {"sd": round(sd, 3), "pct_per_point": ppp,
+                 "families": {f: {"n": v[3]} for f, v in model.items()}}
+
+
+def photo_big(row):
+    """Large photo address for the web app (first = main, second = fallback)."""
+    out = []
+    for p in (row.get("photo_id"), row.get("photo_alt")):
+        if not p:
+            continue
+        if p.startswith("http"):
+            out.append(p)
+        else:
+            stem, ext = (p.rsplit(".", 1) if "." in p else (p, "jpg"))
+            out.append(f"{PHOTO_BASE}{stem}.{ext}/1280x960.webp")
+    return out
+
+
+def export_json(rows, path, run_info=None, stats=None):
+    """cars.json for the web app: every active car with its cues, score and flags."""
+    active = [r for r in rows if r["status"] == "active" and r["price"]]
+    scores, model_info = score_rows(active)
+    names, fams = {}, {}
+    for m in MODELS:
+        for g in m["generations"]:
+            fams.setdefault(g["family"], {"family": g["family"], "label": g.get("short", g["name"]),
+                                          "color": g.get("color", "#888888"), "desc": g.get("desc", ""),
+                                          "model": m["model"]})
+            for nm in list((g.get("name_by_body") or {}).values()) or [g["name"]]:
+                names.setdefault(nm, {"name": nm, "family": g["family"], "color": g.get("color", "#888888"),
+                                      "years": g["years"]})
+    cars = []
+    for r in active:
+        sc = scores.get(r["listing_id"], {})
+        cars.append({
+            "id": r["listing_id"], "url": r["url"], "source": r["source"], "name": r["name"], "family": r["family"],
+            "year": int(r["year"]) if r["year"] else None, "body": r["body"], "trans": r["trans"],
+            "price": int(r["price"]), "prev_price": int(r["prev_price"]) if r["prev_price"] else None,
+            "km": int(r["km"]) if r["km"] else None, "place": r["place"], "trim": r.get("trim", ""),
+            "red": [f for f in (r.get("red_flags") or "").split("; ") if f],
+            "green": [f for f in (r.get("green_flags") or "").split("; ") if f],
+            "flags_read": bool(r.get("flags_read")), "note": r["note"], "desc": r.get("desc", ""),
+            "photos": photo_big(r),
+            "first_seen": r["first_seen"], "last_seen": r["last_seen"], "verified": r["verified"], **sc})
+    firsts = sorted(r["first_seen"] for r in rows if r["first_seen"] and r["status"] != "skip")
+    data = {
+        "updated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),
+        "baseline": firsts[0] if firsts else "",
+        "repo": os.environ.get("GITHUB_REPOSITORY", ""),
+        "families": [fams[f] for f in fams if any(c["family"] == f for c in cars)],
+        "names": [n for n in names.values() if any(c["name"] == n["name"] for c in cars)],
+        "score": {**SCORE, **model_info}, "run": run_info or [],
+        "searches": [{"source": s, "url": u, "ads": n} for s, u, n in (stats or {}).get("searches", [])],
+        "cars": cars,
+        "gone": [{"name": r["name"], "year": r["year"], "price": r["price"], "url": r["url"], "last_seen": r["last_seen"]}
+                 for r in sorted((r for r in rows if r["status"] == "gone"), key=lambda r: r["last_seen"], reverse=True)[:40]],
+    }
+    os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
+
+
+def prune_snapshots(keep):
+    files = sorted(glob.glob(os.path.join(DATA_DIR, "car_listings_*.csv")))
+    for f in files[:-keep]:
+        for p in (f, marker_of(f), f + ".bak"):
+            if os.path.exists(p):
+                os.remove(p)
+
+
 # --------------------------------------------------------------------------------------------
 # Excel
 # --------------------------------------------------------------------------------------------
 FONT = "Arial"
-FAMILY_STYLE = {   # family -> (fill, text, short name, description)
-    "E46M3": ("7F77DD", "FFFFFF", "E46 M3", "BMW E46 M3 2001-2006"),
-    "E9XM3": ("378ADD", "FFFFFF", "E9X M3", "BMW E90 / E92 / E93 M3 2007-2013"),
-    "E39M5": ("D4537E", "FFFFFF", "E39 M5", "BMW E39 M5 1999-2003"),
-    "E60M5": ("D85A30", "FFFFFF", "E60 M5", "BMW E60 M5 2005-2010"),
-    "E46_330": ("E24B4A", "FFFFFF", "E46 330", "BMW E46 330i/330Ci (M Sport / ZHP)"),
-    "E91": ("BA7517", "FFFFFF", "E91 wagon", "BMW E91 3 Series wagon 2006-2012"),
-    "Z350": ("5E8A1E", "FFFFFF", "Z33 350Z", "Nissan 350Z (Z33) 2003-2009"),
-    "Z370": ("1E88A8", "FFFFFF", "Z34 370Z", "Nissan 370Z (Z34) 2009-2020"),
-}
 BODY_STYLE = {   # body -> (label, fill, text)
     "sedan": ("\u25AC Sedan", "E1E5EA", "2B3440"), "coupe": ("\u25D7 Coupe", "DDD8F2", "2F2A5C"),
     "conv": ("\u2600 Convertible", "FCE9C8", "6B4A00"), "wagon": ("\u25AD Wagon", "E8DCC8", "5A4326"),
@@ -1429,11 +1502,11 @@ def build_xlsx(rows, path, today, run_info=None):
 
 
 def write_workbook(rows, today, run_info=None):
-    path = os.path.join(HERE, XLSX_NAME)
+    path = os.path.join(DATA_DIR, XLSX_NAME)
     try:
         return path, build_xlsx(rows, path, today, run_info)
     except PermissionError:
-        alt = os.path.join(HERE, f"cars_data_{today:%Y%m%d}.xlsx")
+        alt = os.path.join(DATA_DIR, f"cars_data_{today:%Y%m%d}.xlsx")
         print(f"!! {XLSX_NAME} is open in Excel - wrote {os.path.basename(alt)} instead")
         return alt, build_xlsx(rows, alt, today, run_info)
 
@@ -1470,6 +1543,12 @@ def main(argv=None):
     ap.add_argument("--no-network", action="store_true", help="rebuild the workbook from the latest snapshot only")
     ap.add_argument("--selftest", action="store_true", help="read stored listings + search pages and print what was parsed")
     ap.add_argument("--max-new", type=int, default=MAX_NEW_PER_RUN)
+    ap.add_argument("--config", help="path of cars_config.json (default: next to the script, or one folder up)")
+    ap.add_argument("--data-dir", help="folder for snapshots, workbook and log (default: the script's folder)")
+    ap.add_argument("--export-json", help="also write the web app's data file here (e.g. site/data/cars.json)")
+    ap.add_argument("--no-xlsx", action="store_true", help="do not build the Excel workbook")
+    ap.add_argument("--no-photos", action="store_true", help="do not download photo thumbnails")
+    ap.add_argument("--keep-snapshots", type=int, default=0, help="delete snapshots older than the newest N (0 = keep all)")
     ap.add_argument("--done-file", help="write 'ok ...' or 'error: ...' here when the run ends (used by CarWatch.xlsm)")
     args = ap.parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
@@ -1497,7 +1576,12 @@ def main(argv=None):
 
 
 def run(args):
-
+    global DATA_DIR, PHOTO_DIR
+    if args.data_dir:
+        DATA_DIR = os.path.abspath(args.data_dir)
+        PHOTO_DIR = os.path.join(DATA_DIR, "photos")
+        os.makedirs(DATA_DIR, exist_ok=True)
+    print("config:", load_config(args.config), flush=True)
     today = dt.date.today()
     prev_path = latest_snapshot()
     rows = load_rows(prev_path)
@@ -1513,14 +1597,15 @@ def run(args):
         selftest(sess, rows)
         return "ok selftest"
 
-    snap = Snapshot(os.path.join(HERE, SNAPSHOT_FMT.format(today)))       # created before any network call
+    snap = Snapshot(os.path.join(DATA_DIR, SNAPSHOT_FMT.format(today)))       # created before any network call
     stats = dict(checked=0, failed=0, gone=0, back=0, price_changes=0, candidates=0, new=0, skipped=0,
                  photos_new=0, searches=[])
     new_rows = []
     if sess is not None:
         refresh_existing(sess, rows, today.isoformat(), stats)
         new_rows = discover_new(sess, rows, today.isoformat(), stats, args.max_new)
-        download_photos(sess, rows + new_rows, stats)
+        if not args.no_photos:
+            download_photos(sess, rows + new_rows, stats)
     for r in rows + new_rows:
         snap.add(r)
     snap.finish()
@@ -1537,12 +1622,20 @@ def run(args):
             run_info.append(f"   {n!s:>8} ads  {base}{flag}")
     else:
         run_info.append("Rebuilt from the saved snapshot (no web access this run)")
-    path, (n_active, n_gone, n_emb, n_form) = write_workbook(all_rows, today, run_info)
-    print(f"snapshot: {os.path.basename(snap.path)} | workbook: {os.path.basename(path)}")
-    print(f"active {n_active}, gone {n_gone}, photos embedded {n_emb} / formula {n_form}")
+    n_active = sum(1 for r in all_rows if r["status"] == "active")
+    n_gone = sum(1 for r in all_rows if r["status"] == "gone")
+    if not args.no_xlsx:
+        path, (n_active, n_gone, n_emb, n_form) = write_workbook(all_rows, today, run_info)
+        print(f"workbook: {os.path.basename(path)} | photos embedded {n_emb} / formula {n_form}")
+    if args.export_json:
+        export_json(all_rows, args.export_json, run_info, stats if sess is not None else None)
+        print("web data:", args.export_json)
+    if args.keep_snapshots:
+        prune_snapshots(args.keep_snapshots)
+    print(f"snapshot: {os.path.basename(snap.path)} | active {n_active}, gone {n_gone}")
     for line in run_info:
         print(line)
-    with open(os.path.join(HERE, "collector_log.txt"), "a", encoding="utf-8") as f:
+    with open(os.path.join(DATA_DIR, "collector_log.txt"), "a", encoding="utf-8") as f:
         f.write(f"{dt.datetime.now():%Y-%m-%d %H:%M} active={n_active} gone={n_gone} "
                 f"{ {k: v for k, v in stats.items() if k != 'searches'} } searches={stats['searches']}\n")
     if sess is None:
@@ -1550,6 +1643,11 @@ def run(args):
     return (f"ok {n_active} cars: {stats['new']} new, {stats['gone']} sold/removed, "
             f"{stats['price_changes']} price changes")
 
+
+try:
+    load_config()
+except FileNotFoundError:
+    pass
 
 if __name__ == "__main__":
     main()
