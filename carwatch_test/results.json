@@ -1,0 +1,123 @@
+{
+ "runner_ip": "132.196.95.182",
+ "results": [
+  {
+   "site": "autotrader",
+   "kind": "search",
+   "url": "https://www.autotrader.ca/cars/nissan/370z/",
+   "status": 200,
+   "final_url": "https://www.autotrader.ca/cars/nissan/370z",
+   "bytes": 729724,
+   "content_type": "text/html; charset=utf-8",
+   "server": "nginx/1.30.6",
+   "block_marker": "",
+   "title": "Nissan 370Z for Sale | AutoTrader.ca",
+   "ad_links_found": 20
+  },
+  {
+   "site": "autotrader",
+   "kind": "listing",
+   "url": "https://www.autotrader.ca/offers/bmw-m3-cabriolet-gasoline-white-cat_ma13gr202607va361-0c6eb378-89f4-4ff4-81c4-91e3c7bad91d",
+   "status": 200,
+   "final_url": "https://www.autotrader.ca/offers/bmw-m3-cabriolet-gasoline-white-cat_ma13gr202607va361-0c6eb378-89f4-4ff4-81c4-91e3c7bad91d",
+   "bytes": 390193,
+   "content_type": "text/html; charset=utf-8",
+   "server": "nginx/1.30.6",
+   "block_marker": "",
+   "title": "2008 BMW M3 | $ 51,888 | 69,122 km | Gasoline Convertible for sale by Porsche Approved &amp; Service Centre Nanaimo | Na",
+   "parsed": {
+    "title": "BMW for $ 51,888",
+    "price": 51888,
+    "km": 69122,
+    "year": null,
+    "trans_field": "Manual",
+    "body_raw": "Convertible",
+    "place": "Nanaimo",
+    "desc_chars": 84,
+    "photo": "0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_48ae7343-a609-4ad2-8cd9-dac1c2fadada"
+   }
+  },
+  {
+   "site": "autotrader",
+   "kind": "photo",
+   "url": "https://prod.pictures.autoscout24.net/listing-images/0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_48ae7343-a609-4ad2-8cd9-dac1c2fadada.jpg/250x188.jpg",
+   "status": 200,
+   "final_url": "https://prod.pictures.autoscout24.net/listing-images/0c6eb378-89f4-4ff4-81c4-91e3c7bad91d_48ae7343-a609-4ad2-8cd9-dac1c2fadada.jpg/250x188.jpg",
+   "bytes": 5457,
+   "content_type": "image/jpeg",
+   "server": ""
+  },
+  {
+   "site": "kijiji",
+   "kind": "search",
+   "url": "https://www.kijiji.ca/b-cars-trucks/canada/nissan-370z/k0c174l0",
+   "status": 200,
+   "final_url": "https://www.kijiji.ca/b-cars-trucks/canada/nissan-370z/k0c174l0",
+   "bytes": 1013668,
+   "content_type": "text/html; charset=utf-8",
+   "server": "Google Frontend",
+   "block_marker": "",
+   "title": "35 ads for nissan 370z in Cars &amp; Trucks in Canada | Kijiji Marketplaces",
+   "ad_links_found": 35
+  },
+  {
+   "site": "kijiji",
+   "kind": "listing",
+   "url": "https://www.kijiji.ca/v-cars-trucks/markham-york-region/2012-bmw-3-series-4dr-touring-wgn-328i-xdrive-awd/m8422021",
+   "status": 404,
+   "final_url": "https://www.kijiji.ca/404",
+   "bytes": 73351,
+   "content_type": "text/html; charset=utf-8",
+   "server": "Google Frontend",
+   "block_marker": "",
+   "title": "Page not found | Free local classifieds - Kijiji",
+   "parsed": {
+    "title": "Page not found | Free local classifieds - Kijiji",
+    "price": null,
+    "km": null,
+    "year": null,
+    "trans_field": null,
+    "body_raw": null,
+    "place": null,
+    "desc_chars": 0,
+    "photo": ""
+   }
+  },
+  {
+   "site": "carpages",
+   "kind": "search",
+   "url": "https://www.carpages.ca/used-cars/nissan/370z/",
+   "status": 403,
+   "final_url": "https://www.carpages.ca/used-cars/nissan/370z/",
+   "bytes": 2183,
+   "content_type": "text/html",
+   "server": "BunnyCDN-MSP1-1084",
+   "block_marker": "",
+   "title": "Establishing a secure connection ...",
+   "ad_links_found": 0
+  },
+  {
+   "site": "carpages",
+   "kind": "listing",
+   "url": "https://www.carpages.ca/used-cars/british-columbia/surrey/2009-bmw-3-series-12823162",
+   "status": 403,
+   "final_url": "https://www.carpages.ca/used-cars/british-columbia/surrey/2009-bmw-3-series-12823162",
+   "bytes": 2183,
+   "content_type": "text/html",
+   "server": "BunnyCDN-MSP1-1084",
+   "block_marker": "",
+   "title": "Establishing a secure connection ...",
+   "parsed": {
+    "title": "Establishing a secure connection ...",
+    "price": null,
+    "km": null,
+    "year": null,
+    "trans_field": null,
+    "body_raw": null,
+    "place": null,
+    "desc_chars": 0,
+    "photo": ""
+   }
+  }
+ ]
+}
