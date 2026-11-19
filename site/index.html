@@ -33,7 +33,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   -webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
 .top-inner{max-width:1100px;margin:0 auto;padding:10px 14px 0}
 .brand{display:flex;align-items:baseline;gap:10px}
-.brand h1{margin:0;font:700 24px/1 var(--cond);letter-spacing:.01em}
+.brand h1{margin:0;font:700 24px/1 var(--cond);letter-spacing:.01em;display:flex;align-items:center;gap:8px}
+.flag-ca{height:.72em;width:auto;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.12);display:block}
 .brand .meta{color:var(--muted);font-size:13px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .icon-btn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--muted)}
 .icon-btn:hover{background:var(--raised);color:var(--text)}
@@ -172,7 +173,7 @@ select.opt{background:var(--raised);color:var(--text);padding:8px 12px;font-size
 <header class="top">
   <div class="top-inner">
     <div class="brand">
-      <h1>CarWatch</h1>
+      <h1>CarWatch<svg class="flag-ca" viewBox="0 0 9600 4800" role="img" aria-label="Canada"><path fill="#d52b1e" d="M0 0h9600v4800H0z"/><path fill="#fff" d="M2400 0h4800v4800H2400z"/><path fill="#d52b1e" d="M4890 4430l-45-863a95 95 0 0 1 111-98l859 151-116-320a65 65 0 0 1 20-73l941-762-212-99a65 65 0 0 1-34-79l186-572-542 115a65 65 0 0 1-73-38l-105-247-423 454a65 65 0 0 1-111-57l204-1052-327 189a65 65 0 0 1-91-27l-332-652-332 652a65 65 0 0 1-91 27l-327-189 204 1052a65 65 0 0 1-111 57l-423-454-105 247a65 65 0 0 1-73 38l-542-115 186 572a65 65 0 0 1-34 79l-212 99 941 762a65 65 0 0 1 20 73l-116 320 859-151a95 95 0 0 1 111 98l-45 863z"/></svg></h1>
       <span class="meta" id="meta">Loading…</span>
       <button class="icon-btn" id="menuBtn" aria-label="Menu">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><circle cx="4" cy="10" r="1.8"/><circle cx="10" cy="10" r="1.8"/><circle cx="16" cy="10" r="1.8"/></svg>
