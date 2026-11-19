@@ -2,7 +2,7 @@
 
 Used manual BMW M / E46 / E91 and Nissan Z cars in Canada, checked every morning, shown in a phone-friendly web page.
 
-- **Web app:** `https://gustavotm7.github.io/s2000/` (add it to your phone's home screen).
+- **Web app:** `https://gustavotm7.github.io/carwatch/` (add it to your phone's home screen).
 - **Update now:** Actions tab > **update** > **Run workflow** (or the menu in the app). Takes about 10 minutes.
 - **Daily run:** automatic, early every morning. Nothing runs on your PC.
 
