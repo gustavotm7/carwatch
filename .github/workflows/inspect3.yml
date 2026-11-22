@@ -1,0 +1,20 @@
+name: inspect3
+on:
+  push:
+    branches: [carwatch-test]
+    paths: ["tests/inspect3.py"]
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install requests
+      - run: python tests/inspect3.py
+      - run: |
+          git config user.name "carwatch-bot"; git config user.email "carwatch-bot@users.noreply.github.com"
+          git add tests/inspect3.json && git commit -qm "Inspection results" && git pull -q --rebase && git push -q
