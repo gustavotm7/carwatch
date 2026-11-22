@@ -1096,7 +1096,9 @@ COMP_COLS = ["id", "family", "title", "year", "body", "km", "trans", "price", "c
 COMP_SKIP = re.compile(r"\b(race|track|rally|drift|project|parts|shell|widebody|wide-body|replica|tribute|"
                        r"conversion|supercharged|turbocharged|twin-turbo|rebuilt|salvage|engine|wheels|seats)\b|"
                        r"-(powered|swapped)\b|\bswap", re.I)
-COMP_AUTO = re.compile(r"\bSMG\b|dual-clutch|\bDCT\b|automatic|steptronic|sequential|paddle", re.I)
+COMP_AUTO = re.compile(r"\bSMG\b|dual-clutch|\bDCT\b|\b(?:four|five|six|seven|4|5|6|7)-speed (?:automatic|auto\b|steptronic)|"
+                       r"automatic (?:transmission|transaxle|gearbox)|steptronic|sequential manual|paddle-shift", re.I)
+COMPS_VERSION = 2                     # bump when the reading rules change: the stored results are read again
 COMP_MANUAL = re.compile(r"\b(four|five|six|4|5|6)-speed manual|manual (transmission|gearbox)", re.I)
 
 
@@ -1190,7 +1192,7 @@ def comp_from_item(it, family, cfg, fx):
     rate = 1.0 if cur == "CAD" else fx_on(fx, sold)
     if rate is None:
         return None
-    if re.search(r"\b[456]-Speed\b", title):
+    if re.search(r"\b[456]-Speed\b", title) or cfg.get("all_manual"):
         trans = "m"
     elif COMP_AUTO.search(title + " " + text[:400]):
         trans = "a"
@@ -1218,6 +1220,9 @@ def update_comps(sess, stats):
             state = json.load(f)
     except (OSError, ValueError):
         state = {}
+    if state.get("_version") != COMPS_VERSION:          # new reading rules: read every result again
+        state, comps = {"_version": COMPS_VERSION}, {}
+    km_samples = []
     cutoff = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=365 * COMPS_KEEP_YEARS)
     fx = update_fx(sess, (cutoff.date() - dt.timedelta(days=10)).isoformat())
     stats.setdefault("comps_new", 0)
@@ -1253,6 +1258,8 @@ def update_comps(sess, stats):
                         if ts < stop_ts:
                             continue
                         row = comp_from_item(it, family, cfg, fx)
+                        if row and not row["km"] and len(km_samples) < 15:
+                            km_samples.append(f'{row["title"][:60]} | {unescape(str(it.get("excerpt") or ""))[:260]}')
                         if row:
                             if row["id"] not in comps:
                                 stats["comps_new"] += 1
@@ -1262,6 +1269,8 @@ def update_comps(sess, stats):
                 state[key] = top
         with open(state_path, "w", encoding="utf-8") as f:
             json.dump(state, f, indent=1)
+        for s in km_samples:
+            print("   km not found:", s)
     keep_from = cutoff.date().isoformat()
     rows = sorted((r for r in comps.values() if r["sold"] >= keep_from and r["family"] in COMPS),
                   key=lambda r: (r["family"], r["sold"]), reverse=True)
