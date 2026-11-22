@@ -310,8 +310,8 @@ FLAG_RULES = {
 
 def flags_of(text):
     t = (text or "").lower()
-    red = [k for k in SCORE["red"] if re.search(FLAG_RULES[k], t)]
-    green = [k for k in SCORE["green"] if re.search(FLAG_RULES[k], t)]
+    red = [k for k in SCORE["red"] if k in FLAG_RULES and re.search(FLAG_RULES[k], t)]       # 'Price hidden' has no
+    green = [k for k in SCORE["green"] if k in FLAG_RULES and re.search(FLAG_RULES[k], t)]   # text rule: set elsewhere
     return "; ".join(red), "; ".join(green)
 
 
