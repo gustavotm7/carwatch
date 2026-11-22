@@ -102,16 +102,19 @@ SCORE = {
     "base": 5.0,                       # score of a car priced exactly at its fair price
     "gearbox": {"\u2714 Manual": 0.0, "? Unconfirmed": -0.5, "\u26A0 Conflict": -1.0},
     "red": {"Rebuilt title": -3.0, "Salvage title": -4.0, "Accident mentioned": -1.0, "Sold as-is": -1.0,
-            "Needs work": -1.5, "Modified": -0.5},
+            "Needs work": -1.5, "Modified": -0.5, "Price hidden": -1.0},
     "green": {"Rod bearings done": 1.0, "Subframe reinforced": 0.5, "VANOS/timing done": 0.5,
               "Clutch done": 0.5, "Service records": 0.5, "No accidents stated": 0.5, "One owner": 0.5,
               "Winter stored": 0.5},
     "green_cap": 2.0,
 }
 
+MIN_PRICE = 1500                     # below this the ad is not showing a real price ($1 = "call us" / sale pending)
 COLS = ["listing_id", "source", "family", "gen", "name", "year", "body", "price", "km", "trans",
         "place", "url", "photo_id", "note", "first_seen", "last_seen", "prev_price", "status", "verified",
-        "trim", "red_flags", "green_flags", "flags_read", "photo_alt", "desc"]
+        "trim", "red_flags", "green_flags", "flags_read", "photo_alt", "desc", "listed", "price_hist"]
+# listed: date the ad went up, as the site states it (Autotrader / Kijiji). price_hist: "date:price;date:price"
+# with one entry per price change, starting with the first price CarWatch saw.
 
 UUID = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
 UUID_RE = re.compile(UUID)
@@ -154,6 +157,7 @@ MODELS = []            # enabled models from cars_config.json
 FAMILY_STYLE = {}      # family -> (fill, text, short name, description)
 TRIMS = {}             # family -> ([(regex, label)], multi)
 NEEDS_TEXT_CONFIRM = set()   # families that also came with SMG/DCT: the data field alone is not enough
+COMPS = {}             # family -> sold-price settings (Bring a Trailer page ids, title regex, years, default body)
 
 
 def load_config(path=None):
@@ -166,7 +170,7 @@ def load_config(path=None):
     with open(cfg_path, encoding="utf-8") as f:
         cfg = json.load(f)
     MODELS = [m for m in cfg["models"] if m.get("enabled", True)]
-    FAMILY_STYLE.clear(); TRIMS.clear(); NEEDS_TEXT_CONFIRM.clear()
+    FAMILY_STYLE.clear(); TRIMS.clear(); NEEDS_TEXT_CONFIRM.clear(); COMPS.clear()
     searches = []
     for m in MODELS:
         for g in m["generations"]:
@@ -176,6 +180,9 @@ def load_config(path=None):
                 TRIMS.setdefault(g["family"], ([(rx, lab) for rx, lab in g["trims"]], bool(g.get("trim_multi"))))
             if g.get("smg_risk"):
                 NEEDS_TEXT_CONFIRM.add(g["family"])
+            if g.get("comps"):
+                c = COMPS.setdefault(g["family"], {**g["comps"], "years": list(g["years"])})
+                c["years"] = [min(c["years"][0], g["years"][0]), max(c["years"][1], g["years"][1])]
         for src, urls in (m.get("searches") or {}).items():
             for u in urls:
                 if (src, u) not in searches:
@@ -479,8 +486,14 @@ def parse_listing(html):
             imgs = ld.get("images") or []
             if imgs and isinstance(imgs[0], str):
                 info["image"] = imgs[0]
+            if re.match(r"\d{4}-\d{2}-\d{2}", str(ld.get("createdTimestampWithOffset") or "")):
+                info["listed"] = str(ld["createdTimestampWithOffset"])[:10]
     except Exception:
         pass
+    if "listed" not in info:                            # Kijiji: date the ad was posted (sortingDate moves on bumps)
+        m = re.search(r'"activationDate"\s*:\s*"(\d{4}-\d{2}-\d{2})', html)
+        if m:
+            info["listed"] = m.group(1)
     page_title = re.search(r"(?is)<title[^>]*>(.*?)</title>", html)
     page_title = unescape(re.sub(r"\s+", " ", page_title.group(1))).strip() if page_title else ""
     if page_title and not re.search(r"\b(19[89]\d|20[0-3]\d)\b", info.get("title") or ""):
@@ -598,6 +611,61 @@ def apply_page_details(row, info, today):
     pid = photo_of(row, info.get("_html", ""), info)
     if pid and pid != row["photo_id"]:
         row["photo_id"], row["photo_alt"] = pid, ""
+    ls = info.get("listed")
+    if ls and "2000-01-01" <= ls <= today:
+        row["listed"] = min(ls, row["listed"]) if row.get("listed") else ls
+
+
+def hist_points(text):
+    pts = []
+    for part in (text or "").split(";"):
+        dd, _, pp = part.partition(":")
+        if dd and pp.strip().isdigit():
+            pts.append((dd.strip(), int(pp)))
+    return pts
+
+
+def hist_add(row, day, price):
+    """Add a price to the row's history when it differs from the last one (keeps the latest 40 changes)."""
+    if price in (None, "") or int(price) < MIN_PRICE:
+        return
+    pts = hist_points(row.get("price_hist"))
+    if not pts or pts[-1][1] != int(price):
+        pts.append((day, int(price)))
+    row["price_hist"] = ";".join(f"{dd}:{pp}" for dd, pp in pts[-40:])
+
+
+def backfill_hist(rows):
+    """One-off: rebuild price histories from the saved daily snapshots for rows that have none yet."""
+    todo = {r["listing_id"]: r for r in rows if not r.get("price_hist") and r["price"] and r["status"] != "skip"}
+    if not todo:
+        return 0
+    seen = {}
+    for f in sorted(glob.glob(os.path.join(DATA_DIR, "car_listings_*.csv"))):
+        m = re.search(r"(\d{4})(\d{2})(\d{2})\.csv$", f)
+        if not m:
+            continue
+        day = "-".join(m.groups())
+        with open(f, newline="", encoding="utf-8") as fh:
+            for r in csv.DictReader(fh):
+                lid, pr = r.get("listing_id"), (r.get("price") or "").strip()
+                if lid in todo and pr.isdigit() and int(pr) >= MIN_PRICE and r.get("status") in ("active", "unverified", "gone", ""):
+                    seen.setdefault(lid, []).append((day, int(pr)))
+    for lid, row in todo.items():
+        pts = []
+        for day, pr in sorted(seen.get(lid, [])):
+            if not pts or pts[-1][1] != pr:
+                pts.append((day, pr))
+        if not pts:
+            if int(row["price"]) < MIN_PRICE:
+                continue
+            pts = [(row["first_seen"] or "", int(row["price"]))]
+        elif row["first_seen"] and row["first_seen"] < pts[0][0]:
+            pts[0] = (row["first_seen"], pts[0][1])
+        if pts[-1][1] != int(row["price"]) and int(row["price"]) >= MIN_PRICE:
+            pts.append((row["last_seen"] or pts[-1][0], int(row["price"])))
+        row["price_hist"] = ";".join(f"{dd}:{pp}" for dd, pp in pts if dd)
+    return len(todo)
 
 
 # --------------------------------------------------------------------------------------------
@@ -621,15 +689,26 @@ def refresh_existing(sess, rows, today, stats):
         outcome, res = check_listing(sess, row)
         stats["checked"] += 1
         if outcome == "ok":
+            hidden = res["price"] < MIN_PRICE
+            if hidden:                                  # keep the last real price; flag it below
+                real = [p for _, p in hist_points(row.get("price_hist")) if p >= MIN_PRICE]
+                res["price"] = next((int(v) for v in (row["price"], row["prev_price"]) if v and int(v) >= MIN_PRICE),
+                                    real[-1] if real else res["price"])
             if row["price"] and str(res["price"]) != str(row["price"]) and st == "active":
                 row["prev_price"] = row["price"]
                 stats["price_changes"] += 1
+            if not row.get("price_hist") and row["price"]:
+                hist_add(row, row["first_seen"] or today, row["price"])
             row["price"] = str(res["price"])
+            hist_add(row, today, row["price"])
             if res.get("km"):
                 row["km"] = str(res["km"])
             row["status"] = "active"
             row["last_seen"] = row["verified"] = today
             apply_page_details(row, res, today)
+            if hidden:
+                red = [f for f in (row.get("red_flags") or "").split("; ") if f and f != "Price hidden"]
+                row["red_flags"] = "; ".join(red + ["Price hidden"])
             if st == "gone":
                 stats["back"] += 1
         elif outcome == "gone":
@@ -700,7 +779,7 @@ def discover_new(sess, rows, today, stats, max_new):
         reason = ""
         if not key:
             reason = "not one of the cars on the list"
-        elif info.get("price") is None or info.get("km") is None:
+        elif info.get("price") is None or info.get("km") is None or info["price"] < MIN_PRICE:
             reason = "price or km not readable"
         if not reason:
             body = fix_body(key, body_of(info.get("body_raw", ""), slug + " " + info.get("title", "")),
@@ -722,6 +801,7 @@ def discover_new(sess, rows, today, stats, max_new):
                "status": "active", "verified": today}
         info["_html"] = r.text
         apply_page_details(row, info, today)
+        hist_add(row, today, row["price"])
         added.append(row)
     stats["new"] = len(added)
     stats["skipped"] = len(skipped)
@@ -915,10 +995,30 @@ def photo_big(row):
     return out
 
 
-def export_json(rows, path, run_info=None, stats=None):
-    """cars.json for the web app: every active car with its cues, score and flags."""
+def listing_days(r, until):
+    """(days on the market, 'site' or 'tracked'): from the site's own listing date when known."""
+    start = d(r.get("listed")) or d(r["first_seen"])
+    if not start or not until:
+        return None, None
+    return max(0, (until - start).days), ("site" if r.get("listed") else "tracked")
+
+
+def export_json(rows, path, run_info=None, stats=None, comps=None):
+    """cars.json for the web app: every active car with its cues, score, flags, price history and sold comps."""
+    today = dt.date.today()
     active = [r for r in rows if r["status"] == "active" and r["price"]]
     scores, model_info = score_rows(active)
+    model, b_conv, _ = fit_fair_price(active)
+    comps = comps or []
+    comp_idx, comp_list = {}, []
+
+    def comp_ref(c):
+        if c["id"] not in comp_idx:
+            comp_idx[c["id"]] = len(comp_list)
+            comp_list.append({"t": c["title"], "sold": c["sold"], "km": _i(c["km"]) if c["km"] else None,
+                              "cad": _i(c["cad"]), "usd": _i(c["price"]) if c["cur"] == "USD" else None,
+                              "url": c["url"], "year": _i(c["year"]), "body": c["body"]})
+        return comp_idx[c["id"]]
     names, fams = {}, {}
     for m in MODELS:
         for g in m["generations"]:
@@ -931,6 +1031,11 @@ def export_json(rows, path, run_info=None, stats=None):
     cars = []
     for r in active:
         sc = scores.get(r["listing_id"], {})
+        days, days_src = listing_days(r, today)
+        hist = hist_points(r.get("price_hist"))
+        est, near = match_comps(r, comps, model, b_conv, today) if comps else (None, [])
+        sold = {"est": est, "vs": round(1 - int(r["price"]) / est, 4) if est else None,
+                "refs": [[comp_ref(c), adj] for c, adj in near[:5]]} if near else None
         cars.append({
             "id": r["listing_id"], "url": r["url"], "source": r["source"], "name": r["name"], "family": r["family"],
             "year": int(r["year"]) if r["year"] else None, "body": r["body"], "trans": r["trans"],
@@ -940,7 +1045,9 @@ def export_json(rows, path, run_info=None, stats=None):
             "green": [f for f in (r.get("green_flags") or "").split("; ") if f],
             "flags_read": bool(r.get("flags_read")), "note": r["note"], "desc": r.get("desc", ""),
             "photos": photo_big(r),
-            "first_seen": r["first_seen"], "last_seen": r["last_seen"], "verified": r["verified"], **sc})
+            "first_seen": r["first_seen"], "last_seen": r["last_seen"], "verified": r["verified"],
+            "listed": r.get("listed") or None, "days": days, "days_src": days_src,
+            "hist": [[dd, pp] for dd, pp in hist] if len(hist) > 1 else None, "sold": sold, **sc})
     firsts = sorted(r["first_seen"] for r in rows if r["first_seen"] and r["status"] != "skip")
     data = {
         "updated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),
@@ -951,8 +1058,14 @@ def export_json(rows, path, run_info=None, stats=None):
         "score": {**SCORE, **model_info}, "run": run_info or [],
         "searches": [{"source": s, "url": u, "ads": n} for s, u, n in (stats or {}).get("searches", [])],
         "cars": cars,
-        "gone": [{"name": r["name"], "year": r["year"], "price": r["price"], "url": r["url"], "last_seen": r["last_seen"]}
-                 for r in sorted((r for r in rows if r["status"] == "gone"), key=lambda r: r["last_seen"], reverse=True)[:40]],
+        "comps": comp_list,
+        "sold_bands": sold_bands(comps, today) if comps else {},
+        "gone": [{"id": r["listing_id"], "name": r["name"], "family": r["family"], "year": r["year"], "km": r["km"],
+                  "body": r["body"], "trans": r["trans"], "price": r["price"], "url": r["url"],
+                  "last_seen": r["last_seen"], "days": listing_days(r, d(r["last_seen"]))[0]}
+                 for r in sorted((r for r in rows if r["status"] == "gone" and d(r["last_seen"])
+                                  and (today - d(r["last_seen"])).days <= 90),
+                                 key=lambda r: r["last_seen"], reverse=True)[:150]],
     }
     os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
@@ -965,6 +1078,259 @@ def prune_snapshots(keep):
         for p in (f, marker_of(f), f + ".bak"):
             if os.path.exists(p):
                 os.remove(p)
+
+
+# --------------------------------------------------------------------------------------------
+# Sold prices: Bring a Trailer auction results (US), in CAD at the Bank of Canada rate of the sale day
+# --------------------------------------------------------------------------------------------
+BAT_API = ("https://bringatrailer.com/wp-json/bringatrailer/1.0/data/listings-filter"
+           "?page={page}&per_page=60&get_items=1&get_stats=0&sort=td&state=sold&base_filter[keyword_pages][]={pid}")
+FX_API = "https://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?start_date={start}"
+BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
+COMPS_FILE = "comps_bat.csv"          # in --data-dir; kept between runs, newest results added every day
+COMPS_STATE = "comps_state.json"      # newest result already read, per results page
+FX_FILE = "fx_usdcad.csv"
+COMPS_KEEP_YEARS = 3                  # results older than this are dropped
+COMPS_MAX_PAGES = 25                  # per results page and run (60 results each)
+COMP_COLS = ["id", "family", "title", "year", "body", "km", "trans", "price", "cur", "cad", "sold", "url"]
+COMP_SKIP = re.compile(r"\b(race|track|rally|drift|project|parts|shell|widebody|wide-body|replica|tribute|"
+                       r"conversion|supercharged|turbocharged|twin-turbo|rebuilt|salvage|engine|wheels|seats)\b|"
+                       r"-(powered|swapped)\b|\bswap", re.I)
+COMP_AUTO = re.compile(r"\bSMG\b|dual-clutch|\bDCT\b|automatic|steptronic|sequential|paddle", re.I)
+COMP_MANUAL = re.compile(r"\b(four|five|six|4|5|6)-speed manual|manual (transmission|gearbox)", re.I)
+
+
+def load_csv_rows(path, cols):
+    if not os.path.exists(path):
+        return []
+    with open(path, newline="", encoding="utf-8") as f:
+        return [{c: r.get(c, "") or "" for c in cols} for r in csv.DictReader(f)]
+
+
+def save_csv_rows(path, cols, rows):
+    tmp = path + ".tmp"
+    with open(tmp, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
+        w.writeheader()
+        w.writerows(rows)
+    os.replace(tmp, path)
+
+
+def update_fx(sess, start):
+    """USD->CAD daily rates since `start` (Bank of Canada), cached in fx_usdcad.csv. Returns [(date, rate)]."""
+    path = os.path.join(DATA_DIR, FX_FILE)
+    have = {r["date"]: float(r["rate"]) for r in load_csv_rows(path, ["date", "rate"]) if r["rate"]}
+    since = max(have) if have else start
+    if sess is not None and since < (dt.date.today() - dt.timedelta(days=1)).isoformat():
+        r = fetch(sess, FX_API.format(start=since), delay=0.5)
+        try:
+            for o in r.json()["observations"]:
+                if o.get("FXUSDCAD", {}).get("v"):
+                    have[o["d"]] = float(o["FXUSDCAD"]["v"])
+        except Exception as e:
+            print("   exchange rate not updated:", getattr(r, "status_code", "no response"), str(e)[:80])
+        save_csv_rows(path, ["date", "rate"], [{"date": k, "rate": v} for k, v in sorted(have.items())])
+    return sorted(have.items())
+
+
+def fx_on(series, day):
+    """Rate of the last business day on or before `day` (or the nearest one)."""
+    if not series:
+        return None
+    lo, hi = 0, len(series) - 1
+    if day < series[0][0]:
+        return series[0][1]
+    while lo < hi:
+        mid = (lo + hi + 1) // 2
+        if series[mid][0] <= day:
+            lo = mid
+        else:
+            hi = mid - 1
+    return series[lo][1]
+
+
+def comp_km(title, text):
+    """Odometer in km from a Bring a Trailer title ('40k-Mile ...') or summary ('... now shows 62k miles')."""
+    if re.search(r"\bTMU\b|true mileage (is )?unknown", title + " " + text, re.I):
+        return None
+    m = re.search(r"\b(\d{1,3}(?:,\d{3})*|\d+(?:\.\d)?)(k)?-(Mile|Kilometer|km)\b", title, re.I)
+    if not m:
+        m = re.search(r"\b(?:shows|showing|indicates|reads|displays|registers|reflects|has|with)\s+(?:just\s+|only\s+|"
+                      r"approximately\s+|roughly\s+|about\s+|under\s+|fewer than\s+|less than\s+|over\s+|nearly\s+)?"
+                      r"(\d{1,3}(?:,\d{3})+|\d+(?:\.\d)?)(k)?\s*(miles|kilometers|km)\b", text, re.I)
+    if not m:
+        return None
+    v = float(m.group(1).replace(",", "")) * (1000 if m.group(2) else 1)
+    if m.group(3).lower().startswith("mile"):
+        v *= 1.609
+    return int(round(v, -2)) if 100 <= v <= 900000 else None
+
+
+def comp_from_item(it, family, cfg, fx):
+    """One auction result -> comps row, or None when it is not a comparable car."""
+    title = unescape(re.sub(r"<[^>]+>", " ", str(it.get("title") or ""))).strip()
+    text = unescape(re.sub(r"<[^>]+>", " ", str(it.get("excerpt") or "")))
+    ym = re.search(r"\b(19[5-9]\d|20[0-3]\d)\b", title)
+    if not ym or not re.search(cfg["match"], title, re.I):
+        return None
+    year = int(ym.group(1))
+    y0, y1 = cfg["years"]
+    if not (y0 <= year <= y1) or COMP_SKIP.search(title):
+        return None
+    sold_text = str(it.get("sold_text") or "")
+    if not sold_text.lower().startswith("sold for"):
+        return None                                     # "Bid to": reserve not met, no sale
+    price = to_int(it.get("current_bid"))
+    cur = str(it.get("currency") or "").upper() or \
+        (re.search(r"\b(USD|CAD|EUR|GBP|AUD|CHF|JPY)\b", sold_text) or [None, "USD"])[1]
+    ts = it.get("sold_text_timestamp") or it.get("timestamp_end")
+    if not price or not ts or cur not in ("USD", "CAD"):
+        return None
+    sold = dt.datetime.fromtimestamp(int(ts), dt.timezone.utc).date().isoformat()
+    rate = 1.0 if cur == "CAD" else fx_on(fx, sold)
+    if rate is None:
+        return None
+    if re.search(r"\b[456]-Speed\b", title):
+        trans = "m"
+    elif COMP_AUTO.search(title + " " + text[:400]):
+        trans = "a"
+    elif COMP_MANUAL.search(text[:400]) or cfg.get("all_manual"):
+        trans = "m"
+    else:
+        trans = "u"
+    tl = title.lower()
+    body = ("conv" if re.search(r"convertible|cabrio|roadster", tl) else "wagon" if re.search(r"wagon|touring", tl)
+            else "sedan" if "sedan" in tl else "coupe" if "coupe" in tl else "")
+    if not body:
+        body = next((b for rx, b in cfg.get("body_by_title", []) if re.search(rx, title, re.I)), cfg.get("body", ""))
+    return {"id": str(it.get("id") or it.get("url")), "family": family, "title": title[:110], "year": year, "body": body,
+            "km": comp_km(title, text) or "", "trans": trans, "price": price, "cur": cur,
+            "cad": int(round(price * rate, -2)), "sold": sold, "url": str(it.get("url") or "")}
+
+
+def update_comps(sess, stats):
+    """Read new Bring a Trailer results for every car with 'comps' in the config. Returns all stored comps."""
+    path = os.path.join(DATA_DIR, COMPS_FILE)
+    comps = {r["id"]: r for r in load_csv_rows(path, COMP_COLS)}
+    state_path = os.path.join(DATA_DIR, COMPS_STATE)
+    try:
+        with open(state_path, encoding="utf-8") as f:
+            state = json.load(f)
+    except (OSError, ValueError):
+        state = {}
+    cutoff = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=365 * COMPS_KEEP_YEARS)
+    fx = update_fx(sess, (cutoff.date() - dt.timedelta(days=10)).isoformat())
+    stats.setdefault("comps_new", 0)
+    stats.setdefault("comps_pages", 0)
+    if sess is not None and COMPS:
+        hdr = {"User-Agent": BROWSER_UA, "Accept": "application/json"}
+        for family, cfg in COMPS.items():
+            for pid in cfg.get("bat", []):
+                key = f"{family}:{pid}"
+                newest = float(state.get(key, 0))
+                stop_ts = max(cutoff.timestamp(), newest - 3 * 86400)   # small overlap: late results get updated
+                top = newest
+                for page in range(1, COMPS_MAX_PAGES + 1):
+                    url = BAT_API.format(page=page, pid=pid)
+                    wait = 1.5 - (time.time() - _last_request[0])
+                    if wait > 0:
+                        time.sleep(wait)
+                    try:
+                        r = sess.get(url, headers=hdr, timeout=30)
+                        _last_request[0] = time.time()
+                        items = r.json().get("items") or []
+                    except Exception as e:
+                        print(f"   sold prices: {family} page {page} not read ({str(e)[:60]})")
+                        break
+                    stats["comps_pages"] += 1
+                    if not items:
+                        break
+                    oldest = None
+                    for it in items:
+                        ts = float(it.get("timestamp_end") or 0)
+                        oldest = ts if oldest is None else min(oldest, ts)
+                        top = max(top, ts)
+                        if ts < stop_ts:
+                            continue
+                        row = comp_from_item(it, family, cfg, fx)
+                        if row:
+                            if row["id"] not in comps:
+                                stats["comps_new"] += 1
+                            comps[row["id"]] = row
+                    if oldest is not None and oldest < stop_ts:
+                        break
+                state[key] = top
+        with open(state_path, "w", encoding="utf-8") as f:
+            json.dump(state, f, indent=1)
+    keep_from = cutoff.date().isoformat()
+    rows = sorted((r for r in comps.values() if r["sold"] >= keep_from and r["family"] in COMPS),
+                  key=lambda r: (r["family"], r["sold"]), reverse=True)
+    save_csv_rows(path, COMP_COLS, rows)
+    stats["comps_total"] = len(rows)
+    return rows
+
+
+def _i(v):
+    return int(float(v))
+
+
+def _median(v):
+    v = sorted(v)
+    n = len(v)
+    return None if not n else v[n // 2] if n % 2 else (v[n // 2 - 1] + v[n // 2]) / 2
+
+
+def _quantile(v, q):
+    v = sorted(v)
+    if not v:
+        return None
+    i = (len(v) - 1) * q
+    lo = int(i)
+    return v[lo] + (v[min(lo + 1, len(v) - 1)] - v[lo]) * (i - lo)
+
+
+def match_comps(car, comps, model, b_conv, today):
+    """Closest manual sales of the same car; each one moved to this car's km and year with the fair-price slopes.
+    -> (estimate or None, [(comp, adjusted CAD)])"""
+    fam_m = model.get(car["family"])
+    bk, by = (fam_m[1], fam_m[2]) if fam_m else (0.0, 0.0)
+    try:
+        year, km = int(car["year"]), int(car["km"] or 0)
+    except ValueError:
+        return None, []
+    conv = car["body"] == "conv"
+    pool = [c for c in comps if c["family"] == car["family"] and c["trans"] == "m" and (c["body"] == "conv") == conv
+            and abs(_i(c["year"]) - year) <= 3]
+    if not conv and sum(1 for c in pool if c["body"] == car["body"]) >= 3:
+        pool = [c for c in pool if c["body"] == car["body"]]
+    recent = [c for c in pool if (today - d(c["sold"])).days <= 730]
+    if len(recent) >= 4:
+        pool = recent
+
+    def dist(c):
+        months = (today - d(c["sold"])).days / 30.4
+        dk = abs(_i(c["km"]) - km) / 40000 if c["km"] and km else 1.5
+        return abs(_i(c["year"]) - year) + dk + months / 24
+
+    best = sorted(pool, key=dist)[:6]
+    out = []
+    for c in best:
+        shift = (by * (year - _i(c["year"])) + (bk * (km - _i(c["km"])) / 1e4 if c["km"] and km else 0.0)
+                 + b_conv * (conv - (c["body"] == "conv")))
+        adj = _i(c["cad"]) * math.exp(max(-0.4, min(0.4, shift)))      # at most -33% / +50%: no wild extrapolation
+        out.append((c, int(round(adj, -2))))
+    est = _median([a for _, a in out]) if len(out) >= 3 else None
+    return (int(round(est, -2)) if est else None), out
+
+
+def sold_bands(comps, today):
+    """Middle half of manual sales in the last 2 years, per family and convertible / not."""
+    groups = {}
+    for c in comps:
+        if c["trans"] == "m" and (today - d(c["sold"])).days <= 730:
+            groups.setdefault(f'{c["family"]}|{"conv" if c["body"] == "conv" else "fixed"}', []).append(_i(c["cad"]))
+    return {k: {"n": len(v), "p25": int(round(_quantile(v, .25), -2)), "med": int(round(_median(v), -2)),
+                "p75": int(round(_quantile(v, .75), -2))} for k, v in groups.items() if len(v) >= 3}
 
 
 # --------------------------------------------------------------------------------------------
@@ -1555,6 +1921,7 @@ def main(argv=None):
     ap.add_argument("--no-photos", action="store_true", help="do not download photo thumbnails")
     ap.add_argument("--skip-sources", default="", help="comma list of sites not to visit, e.g. carpages")
     ap.add_argument("--keep-snapshots", type=int, default=0, help="delete snapshots older than the newest N (0 = keep all)")
+    ap.add_argument("--no-comps", action="store_true", help="do not read sold prices (Bring a Trailer)")
     ap.add_argument("--done-file", help="write 'ok ...' or 'error: ...' here when the run ends (used by CarWatch.xlsm)")
     args = ap.parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
@@ -1596,6 +1963,17 @@ def run(args):
     prev_path = latest_snapshot()
     rows = load_rows(prev_path)
     print(f"previous snapshot: {os.path.basename(prev_path) if prev_path else 'none'} ({len(rows)} rows)")
+    for r in rows:
+        if r["status"] == "active" and r["price"].isdigit() and int(r["price"]) < MIN_PRICE:
+            if r["prev_price"].isdigit() and int(r["prev_price"]) >= MIN_PRICE:
+                r["price"], r["prev_price"] = r["prev_price"], ""
+                red = [f for f in (r.get("red_flags") or "").split("; ") if f and f != "Price hidden"]
+                r["red_flags"] = "; ".join(red + ["Price hidden"])
+            else:
+                r["status"] = "unverified"            # no real price known: keep it out of the list until read again
+    n_hist = backfill_hist(rows)
+    if n_hist:
+        print(f"price history rebuilt from saved snapshots for {n_hist} listings")
 
     sess = None
     if not args.no_network:
@@ -1620,6 +1998,12 @@ def run(args):
         snap.add(r)
     snap.finish()
     all_rows = rows + new_rows
+    comps = []
+    if args.export_json and not args.no_comps:
+        try:
+            comps = update_comps(sess, stats)
+        except Exception as e:                           # sold prices are extra: never stop the run for them
+            print("!! sold prices not updated:", type(e).__name__, e)
 
     run_info = []
     if sess is not None:
@@ -1627,6 +2011,9 @@ def run(args):
                         f"changes, {stats['gone']} newly gone, {stats['back']} back")
         run_info.append(f"Search: {stats['candidates']} unseen ads, {stats['new']} added, {stats['skipped']} rejected "
                         f"(remembered), {stats['photos_new']} new photos")
+        if "comps_total" in stats:
+            run_info.append(f"Sold prices: {stats['comps_new']} new Bring a Trailer results "
+                            f"({stats['comps_pages']} pages read), {stats['comps_total']} stored")
         for source, base, n in stats["searches"]:
             flag = "  <-- check this search" if (n == 0 or isinstance(n, str)) else ""
             run_info.append(f"   {n!s:>8} ads  {base}{flag}")
@@ -1638,7 +2025,7 @@ def run(args):
         path, (n_active, n_gone, n_emb, n_form) = write_workbook(all_rows, today, run_info)
         print(f"workbook: {os.path.basename(path)} | photos embedded {n_emb} / formula {n_form}")
     if args.export_json:
-        export_json(all_rows, args.export_json, run_info, stats if sess is not None else None)
+        export_json(all_rows, args.export_json, run_info, stats if sess is not None else None, comps)
         print("web data:", args.export_json)
     if args.keep_snapshots:
         prune_snapshots(args.keep_snapshots)

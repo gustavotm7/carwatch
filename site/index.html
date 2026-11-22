@@ -91,6 +91,8 @@ main{max-width:1100px;margin:0 auto;padding:12px 10px 40px;display:grid;gap:14px
 .tag.new{background:#e9eef5;color:#10151c}
 .tag.drop{background:rgba(60,207,142,.18);color:#7ff0bb;border:1px solid rgba(60,207,142,.4)}
 .tag.rise{background:rgba(242,103,92,.18);color:#ffb0a8;border:1px solid rgba(242,103,92,.4)}
+.tag.age{background:rgba(12,15,20,.78);color:#d8dde4;font-weight:500}
+.tag.age.long{color:#ffd27e;box-shadow:inset 0 0 0 1px rgba(240,178,62,.45)}
 
 .body{padding:11px 14px 13px;display:flex;flex-direction:column;gap:9px}
 .row1{display:flex;align-items:center;gap:10px}
@@ -166,6 +168,24 @@ select.opt{background:var(--raised);color:var(--text);padding:8px 12px;font-size
   color:var(--text);text-decoration:none;font-size:16px;text-align:left}
 .menu small{display:block;color:var(--muted);font-size:13px}
 .gone a{color:var(--text)}
+.chart{display:block;width:100%;height:auto;margin:2px 0 6px}
+.chart text{font:500 11px var(--sans);fill:var(--muted)}
+.chart .lab{font:700 13px var(--cond);fill:var(--text)}
+.steps{list-style:none;margin:0;padding:0;font-size:14px;display:grid;gap:3px}
+.steps li{display:flex;gap:10px}
+.steps span:first-child{color:var(--muted);min-width:7.5em}
+.dn{color:#8ef0c0} .up{color:#ffaaa2}
+.est{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 4px}
+.est b{font:700 26px/1 var(--cond)}
+.comps{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.comps a{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:9px 10px;border-radius:10px;
+  color:var(--text);text-decoration:none;background:var(--raised)}
+.comps a:hover{background:#252c36}
+.comps .t{font-size:14px;line-height:1.3}
+.comps .m{grid-column:1;color:var(--muted);font-size:13px}
+.comps .p{grid-row:1;grid-column:2;text-align:right;font:700 17px/1.2 var(--cond)}
+.comps .a{grid-row:2;grid-column:2;text-align:right;color:var(--muted);font-size:12px}
+.fine{color:var(--dim);font-size:13px;margin-top:8px!important}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -258,6 +278,22 @@ function isNew(c) {
   if (!c.first_seen || c.first_seen <= DATA.baseline) return false;
   return (Date.now() - new Date(c.first_seen + "T12:00:00")) / 864e5 <= 3;
 }
+const DAY = 864e5;
+const asDate = iso => new Date(String(iso).slice(0, 10) + "T12:00:00");
+const fmtDate = (iso, yr = true) => asDate(iso).toLocaleDateString("en-CA", yr ? {month: "short", day: "numeric", year: "numeric"}
+                                                                       : {month: "short", day: "numeric"});
+const kShort = n => n >= 1000 ? "$" + (n / 1000).toFixed(n >= 1e5 ? 0 : 1).replace(/\.0$/, "") + "k" : money(n);
+function daysTag(c) {
+  if (c.days == null) return "";
+  const long = c.days >= 60;
+  return `<span class="tag age${long ? " long" : ""}" title="${c.days_src === "site" ? "Days since the ad went up" : "Days since CarWatch first saw it"}">${c.days}${c.days_src === "site" ? "" : "+"} days</span>`;
+}
+function totalChange(c) {                     // first price CarWatch saw -> now
+  const h = c.hist;
+  if (h && h.length > 1) return {from: h[0][1], since: h[0][0], diff: c.price - h[0][1]};
+  if (c.prev_price && c.prev_price !== c.price) return {from: c.prev_price, since: null, diff: c.price - c.prev_price};
+  return null;
+}
 function ago(iso) {
   const h = (Date.now() - new Date(iso)) / 36e5;
   if (h < 1) return "updated just now";
@@ -278,7 +314,8 @@ function filtered() {
     !(state.hideHard && c.red.some(f => HARD.includes(f))) &&
     !(state.hideRed && c.red.length));
   const key = {score: c => c.score ?? -1, price: c => c.price, km: c => c.km ?? 1e9, year: c => c.year ?? 0,
-               deal: c => c.vs_fair ?? -9, new: c => c.first_seen || ""}[state.sort];
+               deal: c => c.vs_fair ?? -9, new: c => c.first_seen || "", days: c => c.days ?? -1,
+               sold: c => c.sold?.vs ?? -9}[state.sort] || (c => c.score ?? -1);
   const sgn = state.dir === "asc" ? 1 : -1;
   return cars.sort((a, b) => { const x = key(a), y = key(b); return (x > y ? 1 : x < y ? -1 : a.price - b.price) * sgn; });
 }
@@ -301,8 +338,9 @@ function card(c) {
   const vs = c.vs_fair;
   const deal = vs == null ? "" : vs > .02 ? `<span class="deal under">${Math.round(vs * 100)}% under fair</span>`
              : vs < -.02 ? `<span class="deal over">${Math.round(-vs * 100)}% over fair</span>` : `<span class="deal">about fair</span>`;
-  const change = c.prev_price && c.prev_price !== c.price
-      ? `<span class="tag ${c.price < c.prev_price ? "drop" : "rise"}">${c.price < c.prev_price ? "▼" : "▲"} ${money(Math.abs(c.price - c.prev_price))}</span>` : "";
+  const tc = totalChange(c);
+  const change = tc && tc.diff
+      ? `<span class="tag ${tc.diff < 0 ? "drop" : "rise"}">${tc.diff < 0 ? "▼" : "▲"} ${money(Math.abs(tc.diff))}</span>` : "";
   const km = c.km ?? 0, kmW = Math.min(100, km / 250000 * 100);
   const flags = c.red.map(f => `<span class="flag${HARD.includes(f) ? " hard" : ""}">${esc(f)}</span>`).join("");
   return `<article class="card" tabindex="0" data-id="${esc(c.id)}" aria-label="${esc(c.year + " " + c.name + ", " + money(c.price))}">
@@ -312,7 +350,7 @@ function card(c) {
       <span class="name" style="--c:${col}">${esc(c.name)}</span>
       ${gauge(c.score)}
       <span class="src">${site.domain ? `<img src="https://www.google.com/s2/favicons?domain=${site.domain}&sz=64" alt="" loading="lazy">` : ""}${esc(site.label)}</span>
-      <span class="tags">${isNew(c) ? '<span class="tag new">New</span>' : ""}${change}</span>
+      <span class="tags">${isNew(c) ? '<span class="tag new">New</span>' : ""}${change}${daysTag(c)}</span>
     </div>
     <div class="body">
       <div class="row1"><span class="price">${money(c.price)}</span>${deal}
@@ -343,9 +381,8 @@ function render() {
   $("#sortScore").setAttribute("aria-pressed", state.sort === "score");
   $("#sortPrice").setAttribute("aria-pressed", state.sort === "price");
   $("#dirBtn").dataset.dir = state.dir;
-  $("#dirLabel").textContent = state.sort === "price" || state.sort === "km"
-      ? (state.dir === "asc" ? "Low first" : "High first")
-      : state.sort === "year" || state.sort === "new" ? (state.dir === "asc" ? "Oldest first" : "Newest first")
+  $("#dirLabel").textContent = state.sort === "year" || state.sort === "new" ? (state.dir === "asc" ? "Oldest first" : "Newest first")
+      : state.sort === "days" ? (state.dir === "asc" ? "Shortest first" : "Longest first")
       : (state.dir === "asc" ? "Low first" : "High first");
   const n = activeFilterCount();
   $("#fCount").hidden = !n; $("#fCount").textContent = n;
@@ -369,6 +406,88 @@ function closeSheet() {
   $("#layer").classList.remove("open");
   setTimeout(() => { $("#layer").hidden = true; }, 220);
 }
+function priceChart(c) {                      // step chart of asking price since CarWatch first saw the ad
+  const pts = (c.hist || []).map(([d, p]) => [asDate(d).getTime(), p]);
+  if (pts.length < 2) return "";
+  const x0 = pts[0][0], x1 = Math.max(Date.now(), x0 + 7 * DAY);
+  const ps = pts.map(p => p[1]);
+  let lo = Math.min(...ps), hi = Math.max(...ps);
+  const pad = Math.max((hi - lo) * .2, hi * .02); lo -= pad; hi += pad;
+  const W = 320, H = 118, L = 6, R = 6, T = 22, B = 20;
+  const X = v => L + (v - x0) / (x1 - x0) * (W - L - R), Y = p => T + (hi - p) / (hi - lo) * (H - T - B);
+  let path = `M${X(pts[0][0]).toFixed(1)},${Y(pts[0][1]).toFixed(1)}`;
+  for (let i = 1; i < pts.length; i++) path += `H${X(pts[i][0]).toFixed(1)}V${Y(pts[i][1]).toFixed(1)}`;
+  path += `H${X(x1).toFixed(1)}`;
+  const dots = pts.map(([x, p], i) => {
+    const col = i === 0 ? "#8d97a5" : p < pts[i - 1][1] ? "#3ccf8e" : "#f2675c";
+    return `<circle cx="${X(x).toFixed(1)}" cy="${Y(p).toFixed(1)}" r="3.6" fill="${col}" stroke="#171c23" stroke-width="1.5"/>`;
+  }).join("");
+  const first = pts[0], last = pts[pts.length - 1];
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Price went from ${money(first[1])} to ${money(last[1])}">
+    <line x1="${L}" x2="${W - R}" y1="${H - B + 4}" y2="${H - B + 4}" stroke="#29313c"/>
+    <path d="${path}" fill="none" stroke="#cfd6df" stroke-width="2" stroke-linejoin="round"/>${dots}
+    <text class="lab" x="${X(first[0])}" y="${Y(first[1]) - 9}">${kShort(first[1])}</text>
+    <text class="lab" x="${W - R}" y="${Y(last[1]) - 9}" text-anchor="end">${kShort(last[1])}</text>
+    <text x="${L}" y="${H - 3}">${fmtDate(c.hist[0][0], false)}</text>
+    <text x="${W - R}" y="${H - 3}" text-anchor="end">Today</text></svg>`;
+}
+function historySection(c) {
+  const site = SITES[c.source] || {label: c.source};
+  const others = DATA.cars.filter(x => x.days != null).map(x => x.days);
+  const longer = c.days != null && others.length > 4 ? Math.round(others.filter(v => v < c.days).length / others.length * 100) : null;
+  const when = c.days_src === "site"
+    ? `<p>Listed on ${esc(site.label)} ${fmtDate(c.listed)}: <b>${c.days} days</b> on the market${longer != null && longer >= 50 ? `, longer than ${longer}% of the cars here` : ""}.</p>`
+    : `<p>On CarWatch since ${fmtDate(c.first_seen)}${c.days != null ? ` (${c.days} days)` : ""}. ${esc(site.label)} doesn't show when the ad went up.</p>`;
+  const tc = totalChange(c);
+  let body = "";
+  if (c.hist && c.hist.length > 1) {
+    const rows = c.hist.map(([d, p], i) => {
+      const diff = i ? p - c.hist[i - 1][1] : 0;
+      return `<li><span>${fmtDate(d)}</span><span>${money(p)}${diff ? ` <span class="${diff < 0 ? "dn" : "up"}">(${diff < 0 ? "−" : "+"}${money(Math.abs(diff))})</span>` : ""}</span></li>`;
+    }).join("");
+    const pct = Math.round(Math.abs(tc.diff) / tc.from * 100);
+    body = `${priceChart(c)}<p>${tc.diff < 0 ? `Down ${money(-tc.diff)} (${pct}%)` : tc.diff > 0 ? `Up ${money(tc.diff)} (${pct}%)` : "Back to the first price"}
+      since ${fmtDate(tc.since)}, in ${c.hist.length - 1} change${c.hist.length > 2 ? "s" : ""}.</p><ul class="steps">${rows}</ul>`;
+  } else {
+    body = `<p class="none">No price change since ${fmtDate(c.hist?.[0]?.[0] || c.first_seen)}.</p>`;
+  }
+  return `<h3>Price history</h3>${when}${body}`;
+}
+function soldSection(c) {
+  const s = c.sold;
+  const conv = c.body === "conv";
+  const band = DATA.sold_bands?.[`${c.family}|${conv ? "conv" : "fixed"}`];
+  const fam = (DATA.families.find(f => f.family === c.family) || {}).label || c.name;
+  const gone = (DATA.gone || []).filter(g => g.family === c.family && g.id !== c.id && g.trans !== "a" &&
+      (g.body === "conv") === conv && Math.abs(+g.year - (c.year || 0)) <= 2).slice(0, 4);
+  if (!s && !band && !gone.length) return "";
+  let html = `<h3>Sold prices</h3>`;
+  if (s && s.est) {
+    const vs = s.vs;
+    const pill = vs > .02 ? `<span class="deal under">ask ${Math.round(vs * 100)}% under</span>`
+               : vs < -.02 ? `<span class="deal over">ask ${Math.round(-vs * 100)}% over</span>` : `<span class="deal">ask about the same</span>`;
+    html += `<div class="est"><b>${money(s.est)}</b>${pill}</div>
+      <p class="none">Median of ${s.refs.length} similar manual cars sold on Bring a Trailer (US), each adjusted to this car's km and year.</p>`;
+  } else if (s && s.refs.length) {
+    html += `<p class="none">Only ${s.refs.length} close sale${s.refs.length > 1 ? "s" : ""} on Bring a Trailer: too few for an estimate.</p>`;
+  }
+  if (s && s.refs.length) {
+    html += `<ul class="comps">${s.refs.map(([i, adj]) => {
+      const x = DATA.comps[i];
+      return `<li><a href="${esc(x.url)}" target="_blank" rel="noopener">
+        <span class="t">${esc(x.t)}</span><span class="p">${money(x.cad)}</span>
+        <span class="m">${fmtDate(x.sold)}, ${x.km != null ? x.km.toLocaleString("en-CA") + " km" : "km not stated"}</span>
+        <span class="a">${money(adj)} for this car</span></a></li>`;
+    }).join("")}</ul>`;
+  }
+  if (band) html += `<p style="margin-top:10px">All manual ${esc(fam)} sales there in the last 2 years (${conv ? "convertibles only" : "no convertibles"}):
+      half went for ${money(band.p25)} to ${money(band.p75)}, median ${money(band.med)}, ${band.n} sales.</p>`;
+  if (gone.length) html += `<p style="margin:12px 0 4px">Similar ads that left CarWatch (often sold):</p><ul class="steps">${gone.map(g =>
+      `<li><span>${esc(g.year)}, ${g.km ? Math.round(g.km / 1000) + "k km" : "km n/a"}</span><span><a href="${esc(g.url)}" target="_blank" rel="noopener" style="color:var(--text)">asked ${money(+g.price)}</a>,
+        gone ${fmtDate(g.last_seen, false)}${g.days != null ? ` after ${g.days} days` : ""}</span></li>`).join("")}</ul>`;
+  html += `<p class="fine">US auction prices in Canadian dollars at the Bank of Canada rate of the sale day. They are hammer prices: the buyer also pays a 5% fee, and importing adds duty, tax and fees.</p>`;
+  return html;
+}
 function detailSheet(c) {
   const g = GEARBOX[c.trans] || GEARBOX.u, site = SITES[c.source] || {label: c.source};
   const sc = DATA.score, gearPts = sc.gearbox[{m: "✔ Manual", c: "⚠ Conflict", u: "? Unconfirmed"}[c.trans]] ?? 0;
@@ -390,19 +509,22 @@ function detailSheet(c) {
                      : `<p class="none">${c.flags_read ? "None mentioned." : "Ad text not read yet."}</p>`}
     <h3>Price and score</h3>
     <dl class="kv">
-      <dt>Listed</dt><dd>${money(c.price)}${c.prev_price && c.prev_price !== c.price ? ` (was ${money(c.prev_price)})` : ""}</dd>
+      <dt>Listed</dt><dd>${money(c.price)}${c.prev_price && c.prev_price !== c.price ? ` (was ${money(c.prev_price)})` : ""}${c.red.includes("Price hidden")
+        ? `<br><span class="none">The ad now shows no real price (often $1): this is the last price it showed. Often means a sale is pending.</span>` : ""}</dd>
       <dt>Fair price</dt><dd>${c.fair ? money(c.fair) + ` for this car, km and year` : "Not enough cars to estimate"}</dd>
       <dt>Score</dt><dd><b style="color:${scoreColor(c.score)}">${c.score?.toFixed(1) ?? "–"}</b> of 10:
         price ${pts(valuePts)}, gearbox ${pts(gearPts)}, flags ${pts(redPts + greenPts)}</dd>
       <dt>Confidence</dt><dd>${c.conf != null ? Math.round(c.conf * 100) + "% (fewer cars of this model = less weight on price)" : "n/a"}</dd>
     </dl>
+    ${historySection(c)}
+    ${soldSection(c)}
     <h3>The car</h3>
     <dl class="kv">
       <dt>Gearbox</dt><dd>${esc(g.long)}</dd>
       <dt>Km</dt><dd>${c.km != null ? c.km.toLocaleString("en-CA") + " km" : "n/a"}</dd>
       <dt>Body</dt><dd>${BODY[c.body] || "n/a"}</dd>
       <dt>Location</dt><dd>${esc(c.place || "n/a")}</dd>
-      <dt>Listed on</dt><dd>${esc(site.label)}</dd>
+      <dt>Listed on</dt><dd>${esc(site.label)}${c.listed ? `, ${fmtDate(c.listed)}` : ""}</dd>
       <dt>First seen</dt><dd>${esc(c.first_seen)}</dd>
       <dt>Last checked</dt><dd>${esc(c.verified || c.last_seen)}</dd>
     </dl>
@@ -427,7 +549,8 @@ function filterSheet() {
     <h3>Hide</h3><div class="opt-group">
       ${opt("hide", "hard", "Rebuilt or salvage titles", t.hideHard)}${opt("hide", "red", "Any red flag", t.hideRed)}</div>
     <h3>More ways to sort</h3><div class="opt-group">
-      ${[["score", "Score"], ["price", "Price"], ["deal", "% under fair"], ["km", "Km"], ["year", "Year"], ["new", "Newest ads"]]
+      ${[["score", "Score"], ["price", "Price"], ["deal", "% under fair"], ["sold", "% under sold"], ["days", "Longest listed"],
+         ["km", "Km"], ["year", "Year"], ["new", "Newest ads"]]
         .map(([v, l]) => opt("sort", v, l, t.sort === v)).join("")}</div>
     <div class="sheet-actions"><button id="fReset">Reset</button><button class="go" id="fApply">Show cars</button></div>`, "Filters");
   const sh = $("#sheet");
@@ -460,7 +583,7 @@ function filterSheet() {
 }
 function menuSheet() {
   const repo = DATA.repo;
-  const gone = DATA.gone.slice(0, 15).map(g => `<li><a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.year + " " + g.name)}</a>, ${money(+g.price)}, gone after ${esc(g.last_seen)}</li>`).join("");
+  const gone = DATA.gone.slice(0, 15).map(g => `<li><a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.year + " " + g.name)}</a>, ${money(+g.price)}, gone ${fmtDate(g.last_seen, false)}${g.days != null ? ` after ${g.days} days` : ""}</li>`).join("");
   openSheet(`
     <h2>CarWatch</h2>
     <p class="sub">${DATA.cars.length} cars, ${ago(DATA.updated)}. The list refreshes every morning.</p>
@@ -477,6 +600,8 @@ function menuSheet() {
       and each ${Math.round(DATA.score.pct_per_point * 100)}% over it removes one. For models with only a few cars listed, the price counts less.</p>
     <p>Gearbox: a doubtful manual costs up to a point. Red flags from the ad text take points off (a rebuilt title costs 3);
       good signs such as rod bearings done add up to ${DATA.score.green_cap}.</p>
+    <p>Sold prices from Bring a Trailer show in each car's details but don't change the score: they are US auction results,
+      a different market from Canadian asking prices. Use them as a check on the fair price.</p>
     <p class="none">Flags only catch what the seller wrote. Get a history report and an inspection before you buy.</p>`, "How the score works");
 }
 

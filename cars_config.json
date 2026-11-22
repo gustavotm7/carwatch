@@ -8,6 +8,7 @@
     "smg_risk: true when an automated gearbox existed, so the ad text must also say manual.",
     "bodies: the bodies this car came in; the first one is used when the ad does not say.",
     "trims: [regex, label] pairs, first match wins.",
+    "comps: optional, sold prices from Bring a Trailer. bat = id(s) of the model's results page (open e.g. bringatrailer.com/bmw/e46-m3/ and find keyword_pages in the page source); match = regex the auction title must contain; body = body when the title does not say.",
     "searches: search pages to read every day, per site."
   ],
   "models": [
@@ -15,9 +16,11 @@
       "enabled": true, "model": "M3", "make": "bmw", "match": ["\\bm3\\b"], "bodies": ["coupe", "conv", "sedan"],
       "generations": [
         {"family": "E46M3", "years": [2001, 2006], "name": "E46 M3", "color": "#8B84E8", "smg_risk": true,
+         "comps": {"bat": [1833234], "match": "\\bM3\\b", "body": "coupe"},
          "desc": "BMW E46 M3 2001-2006",
          "trims": [["\\bcsl\\b", "CSL"], ["\\bzcp\\b|competition", "Competition (ZCP)"]]},
         {"family": "E9XM3", "years": [2007, 2013], "name": "E9X M3", "color": "#3B8FE0", "smg_risk": true,
+         "comps": {"bat": [2904138], "match": "\\bM3\\b", "body": "coupe"},
          "name_by_body": {"sedan": "E90 M3", "coupe": "E92 M3", "conv": "E93 M3"},
          "desc": "BMW E90 / E92 / E93 M3 2007-2013",
          "trims": [["\\bgts\\b", "GTS"], ["\\bcrt\\b", "CRT"], ["lime ?rock", "Lime Rock"], ["frozen", "Frozen"],
@@ -31,8 +34,10 @@
       "enabled": true, "model": "M5", "make": "bmw", "match": ["\\bm5\\b"], "bodies": ["sedan"],
       "generations": [
         {"family": "E39M5", "years": [1999, 2003], "name": "E39 M5", "color": "#DB5C8A", "smg_risk": false,
+         "comps": {"bat": [1833021], "match": "\\bM5\\b", "body": "sedan", "all_manual": true},
          "desc": "BMW E39 M5 1999-2003"},
         {"family": "E60M5", "years": [2005, 2010], "name": "E60 M5", "color": "#E0703E", "smg_risk": true,
+         "comps": {"bat": [2423302], "match": "\\bM5\\b", "body": "sedan"},
          "desc": "BMW E60 M5 2005-2010"}
       ],
       "searches": {"autotrader": ["https://www.autotrader.ca/cars/bmw/m5/"],
@@ -44,6 +49,8 @@
       "bodies": ["coupe", "conv"],
       "generations": [
         {"family": "E46_330", "years": [2001, 2006], "name": "E46 330Ci", "color": "#E5534B", "smg_risk": false,
+         "comps": {"bat": [25078037, 25078204, 25033702, 12870552], "match": "\\b330C?i\\b", "body": "coupe",
+                   "body_by_title": [["\\b330i\\b", "sedan"]]},
          "desc": "BMW E46 330i / 330Ci (M Sport / ZHP)",
          "trims": [["\\bzhp\\b|performance package", "ZHP"], ["m ?sport|m ?tech", "M Sport"]]}
       ],
@@ -56,6 +63,8 @@
       "bodies": ["sedan"],
       "generations": [
         {"family": "E46_330", "years": [2001, 2005], "name": "E46 330i", "color": "#E5534B", "smg_risk": false,
+         "comps": {"bat": [25078037, 25078204, 25033702, 12870552], "match": "\\b330C?i\\b", "body": "coupe",
+                   "body_by_title": [["\\b330i\\b", "sedan"]]},
          "desc": "BMW E46 330i / 330Ci (M Sport / ZHP)",
          "trims": [["\\bzhp\\b|performance package", "ZHP"], ["m ?sport|m ?tech", "M Sport"]]}
       ],
@@ -67,6 +76,7 @@
       "bodies": ["wagon"],
       "generations": [
         {"family": "E91", "years": [2006, 2012], "name": "E91 wagon", "color": "#C98A2A", "smg_risk": false,
+         "comps": {"bat": [1833028], "match": "Wagon|Touring", "body": "wagon"},
          "desc": "BMW E91 3 Series wagon 2006-2012", "trim_multi": true,
          "trims": [["335", "335i"], ["328 ?x ?i|328i ?xdrive|328 ?xdrive", "328xi"], ["325 ?x ?i", "325xi"],
                    ["m ?sport|m ?tech", "M Sport"]]}
@@ -81,6 +91,7 @@
       "enabled": true, "model": "350Z", "make": "nissan", "match": ["\\b350 ?z\\b"], "bodies": ["coupe", "conv"],
       "generations": [
         {"family": "Z350", "years": [2003, 2009], "name": "Z33 350Z", "color": "#6FA032", "smg_risk": false,
+         "comps": {"bat": [17412355], "match": "\\b350Z\\b", "body": "coupe"},
          "desc": "Nissan 350Z (Z33) 2003-2009",
          "trims": [["nismo", "NISMO"], ["35th", "35th Anniversary"], ["track", "Track"],
                    ["grand ?touring|\\bgt\\b", "Grand Touring"], ["enthusiast", "Enthusiast"],
@@ -94,6 +105,7 @@
       "enabled": true, "model": "370Z", "make": "nissan", "match": ["\\b370 ?z\\b"], "bodies": ["coupe", "conv"],
       "generations": [
         {"family": "Z370", "years": [2009, 2020], "name": "Z34 370Z", "color": "#2BA3C9", "smg_risk": false,
+         "comps": {"bat": [48082286], "match": "\\b370Z\\b", "body": "coupe"},
          "desc": "Nissan 370Z (Z34) 2009-2020",
          "trims": [["nismo", "NISMO"], ["sport ?touring|touring ?sport|tourisme sport|sport tech", "Sport Touring"],
                    ["\\bsport\\b", "Sport"], ["40th", "40th Anniversary"], ["50th", "50th Anniversary"],

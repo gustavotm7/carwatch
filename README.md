@@ -20,13 +20,18 @@ AP1 and AP2 S2000s.
 | `smg_risk` | `true` if an automated gearbox existed, so the ad text must also say manual |
 | `bodies` | Bodies the car came in (first one is the default) |
 | `trims` | `[regex, label]` pairs, first match wins |
+| `comps` | Optional sold prices from Bring a Trailer: `bat` = results page id(s) of the model, `match` = regex the auction title must contain, `body` = body when the title doesn't say |
 | `searches` | Search pages read every day, per site |
 
 ## Files
 
 - `collector/car_collector.py` – checks ads, finds new ones, scores them (also runs on Windows; see the Excel version).
-- `data/` – daily snapshots (last 14 kept).
+- `data/` – daily snapshots (last 14 kept). Each listing carries its price history (`price_hist`) and the date the
+  ad went up on the site (`listed`). `comps_bat.csv` holds Bring a Trailer sales (last 3 years, in CAD at the
+  Bank of Canada rate of the sale day, `fx_usdcad.csv`).
 - `site/` – the web app; `site/data/cars.json` is rebuilt every run.
 
 Scores, fair prices and flags are guides, not appraisals: flags only catch what the seller wrote.
+Sold prices are US auction results (hammer price, before the 5% buyer's fee and import costs); they are shown
+next to each car but do not change the score.
 CarPages blocks GitHub's servers, so the cloud run reads Autotrader and Kijiji only.
