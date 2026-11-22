@@ -43,7 +43,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .seg{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px}
 .seg button{padding:7px 16px;border-radius:999px;font:600 15px/1 var(--cond);color:var(--muted);letter-spacing:.02em}
 .seg button[aria-pressed=true]{background:var(--text);color:var(--bg)}
-.dir{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);
+.dir{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);white-space:nowrap;
   color:var(--text);font-size:13px;background:var(--surface)}
 .dir svg{transition:transform .2s}
 .dir[data-dir=asc] svg{transform:rotate(180deg)}
@@ -382,7 +382,7 @@ function render() {
   $("#sortPrice").setAttribute("aria-pressed", state.sort === "price");
   $("#dirBtn").dataset.dir = state.dir;
   $("#dirLabel").textContent = state.sort === "year" || state.sort === "new" ? (state.dir === "asc" ? "Oldest first" : "Newest first")
-      : state.sort === "days" ? (state.dir === "asc" ? "Shortest first" : "Longest first")
+      : state.sort === "days" ? (state.dir === "asc" ? "Shortest" : "Longest")
       : (state.dir === "asc" ? "Low first" : "High first");
   const n = activeFilterCount();
   $("#fCount").hidden = !n; $("#fCount").textContent = n;
@@ -449,7 +449,7 @@ function historySection(c) {
     body = `${priceChart(c)}<p>${tc.diff < 0 ? `Down ${money(-tc.diff)} (${pct}%)` : tc.diff > 0 ? `Up ${money(tc.diff)} (${pct}%)` : "Back to the first price"}
       since ${fmtDate(tc.since)}, in ${c.hist.length - 1} change${c.hist.length > 2 ? "s" : ""}.</p><ul class="steps">${rows}</ul>`;
   } else {
-    body = `<p class="none">No price change since ${fmtDate(c.hist?.[0]?.[0] || c.first_seen)}.</p>`;
+    body = `<p class="none">Same price since CarWatch first saw it on ${fmtDate(c.hist?.[0]?.[0] || c.first_seen)}.</p>`;
   }
   return `<h3>Price history</h3>${when}${body}`;
 }
