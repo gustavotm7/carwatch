@@ -1,0 +1,50 @@
+{
+ "dbg": [
+  {
+   "per": 36,
+   "n": 36,
+   "total": 385
+  },
+  {
+   "per": 60,
+   "n": 60,
+   "total": 385
+  },
+  {
+   "u": "https://bringatrailer.com/wp-json/bringatrailer/1.0/data/listings-filter?page=1&per_page=100&get_items=1&get_stats=0&sort=td&state=sold&base_filter[keyword_pages][]=1833018",
+   "http": 400,
+   "start": "{\"code\":\"rest_invalid_param\",\"message\":\"Invalid parameter(s): per_page\",\"data\":{\"status\":400,\"params\":{\"per_page\":\"Invalid parameter.\"},\"details\":[]}}"
+  },
+  {
+   "per": 100,
+   "n": 0,
+   "total": null
+  },
+  {
+   "u": "https://bringatrailer.com/wp-json/bringatrailer/1.0/data/listings-filter?page=4&per_page=60&get_items=1&get_stats=0&sort=td&state=sold&base_filter[keyword_pages][]=20556842",
+   "http": 200,
+   "start": "{\"items_per_page\":60,\"items_total\":174,\"page_current\":4,\"pages_total\":3,\"items\":[],\"is_default_keyword_filter\":false}"
+  },
+  {
+   "u": "https://bringatrailer.com/wp-json/bringatrailer/1.0/data/listings-filter?page=5&per_page=60&get_items=1&get_stats=0&sort=td&state=sold&base_filter[keyword_pages][]=20556842",
+   "http": 200,
+   "start": "{\"items_per_page\":60,\"items_total\":174,\"page_current\":5,\"pages_total\":3,\"items\":[],\"is_default_keyword_filter\":false}"
+  },
+  {
+   "u": "https://bringatrailer.com/wp-json/bringatrailer/1.0/data/listings-filter?page=4&per_page=60&get_items=1&get_stats=0&sort=td&state=sold&base_filter[keyword_pages][]=20556842",
+   "http": 200,
+   "start": "{\"items_per_page\":60,\"items_total\":174,\"page_current\":4,\"pages_total\":3,\"items\":[],\"is_default_keyword_filter\":false}"
+  },
+  {
+   "u": "https://bringatrailer.com/wp-json/bringatrailer/1.0/data/listings-filter?page=5&per_page=60&get_items=1&get_stats=0&sort=td&state=sold&base_filter[keyword_pages][]=20556842",
+   "http": 200,
+   "start": "{\"items_per_page\":60,\"items_total\":174,\"page_current\":5,\"pages_total\":3,\"items\":[],\"is_default_keyword_filter\":false}"
+  }
+ ],
+ "kw": {
+  "E9X": [],
+  "330": [],
+  "E91": []
+ },
+ "samples": []
+}
