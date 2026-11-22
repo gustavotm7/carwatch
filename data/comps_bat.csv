@@ -1093,7 +1093,7 @@ id,family,title,year,body,km,trans,price,cur,cad,sold,url
 98236425,E46M3,2001 BMW M3 Coupe 6-Speed,2001,coupe,,m,27999,USD,38700,2025-09-04,https://bringatrailer.com/listing/2001-bmw-m3-167/
 91409863,E46M3,2002 BMW M3 Convertible 6-Speed,2002,conv,,m,20100,USD,27800,2025-09-04,https://bringatrailer.com/listing/2002-bmw-m3-convertible-153/
 98606734,E46M3,47k-Mile 2003 BMW M3 Coupe 6-Speed,2003,coupe,75600,m,40000,USD,55000,2025-08-29,https://bringatrailer.com/listing/2003-bmw-m3-coupe-293/
-99181157,E46M3,2005 BMW M3 Convertible,2005,conv,,a,30000,USD,41300,2025-08-28,https://bringatrailer.com/listing/2005-bmw-m3-convertible-108/
+99181157,E46M3,2005 BMW M3 Convertible,2005,conv,,u,30000,USD,41300,2025-08-28,https://bringatrailer.com/listing/2005-bmw-m3-convertible-108/
 97742856,E46M3,29k-Mile 2003 BMW M3 Coupe,2003,coupe,46700,a,32250,USD,44600,2025-08-27,https://bringatrailer.com/listing/2003-bmw-m3-coupe-289/
 98639432,E46M3,2005 BMW M3 Convertible,2005,conv,,a,14750,USD,20400,2025-08-25,https://bringatrailer.com/listing/2005-bmw-m3-convertible-106/
 98504570,E46M3,2002 BMW M3 Coupe 6-Speed,2002,coupe,,m,38000,USD,52600,2025-08-24,https://bringatrailer.com/listing/2002-bmw-m3-coupe-109/
@@ -1341,14 +1341,14 @@ id,family,title,year,body,km,trans,price,cur,cad,sold,url
 123547192,E39M5,43k-Mile 2000 BMW M5,2000,sedan,69200,m,57500,USD,81600,2026-10-15,https://bringatrailer.com/listing/2000-bmw-m5-386/
 123275742,E39M5,30k-Mile 2001 BMW M5,2001,sedan,48300,m,65039,USD,92800,2026-10-14,https://bringatrailer.com/listing/2001-bmw-m5-296/
 123476341,E39M5,2002 BMW M5,2002,sedan,,m,36500,USD,51900,2026-10-13,https://bringatrailer.com/listing/2002-bmw-m5-306/
-122691110,E39M5,2003 BMW M5,2003,sedan,,a,41250,USD,58700,2026-10-08,https://bringatrailer.com/listing/2003-bmw-m5-256/
+122691110,E39M5,2003 BMW M5,2003,sedan,,m,41250,USD,58700,2026-10-08,https://bringatrailer.com/listing/2003-bmw-m5-256/
 122222778,E39M5,2002 BMW M5,2002,sedan,,m,26000,USD,37000,2026-10-06,https://bringatrailer.com/listing/2002-bmw-m5-303/
 115577706,E39M5,2002 BMW M5,2002,sedan,,m,36500,USD,52000,2026-10-05,https://bringatrailer.com/listing/2002-bmw-m5-293/
 121254846,E39M5,31k-Mile 2001 BMW M5,2001,sedan,49900,m,91500,USD,129300,2026-09-24,https://bringatrailer.com/listing/2001-bmw-m5-293/
 122253403,E39M5,47k-Mile 2003 BMW M5,2003,sedan,75600,m,83539,USD,117500,2026-09-22,https://bringatrailer.com/listing/2003-bmw-m5-255/
 120801111,E39M5,2002 BMW M5,2002,sedan,,m,41000,USD,57500,2026-09-21,https://bringatrailer.com/listing/2002-bmw-m5-302/
 118950267,E39M5,2000 BMW M5,2000,sedan,,m,22000,USD,30500,2026-09-12,https://bringatrailer.com/listing/2000-bmw-m5-360-2/
-121670962,E39M5,11k-Mile 2001 BMW M5,2001,sedan,17700,a,175000,USD,241900,2026-09-10,https://bringatrailer.com/listing/2001-bmw-m5-294/
+121670962,E39M5,11k-Mile 2001 BMW M5,2001,sedan,17700,m,175000,USD,241900,2026-09-10,https://bringatrailer.com/listing/2001-bmw-m5-294/
 121204853,E39M5,2000 BMW M5,2000,sedan,,m,18539,USD,25600,2026-09-09,https://bringatrailer.com/listing/2000-bmw-m5-384/
 120789213,E39M5,2001 BMW M5,2001,sedan,,m,27250,USD,37800,2026-09-02,https://bringatrailer.com/listing/2001-bmw-m5-292/
 121196886,E39M5,2000 BMW M5,2000,sedan,115800,m,43500,USD,60400,2026-09-01,https://bringatrailer.com/listing/2000-bmw-m5-383/
@@ -1370,7 +1370,7 @@ id,family,title,year,body,km,trans,price,cur,cad,sold,url
 112702509,E39M5,32k-Mile 2002 BMW M5,2002,sedan,51500,m,77000,USD,105300,2026-04-28,https://bringatrailer.com/listing/2002-bmw-m5-288/
 111142363,E39M5,2002 BMW M5,2002,sedan,,m,33111,USD,45700,2026-04-13,https://bringatrailer.com/listing/2002-bmw-m5-287/
 109753583,E39M5,2002 BMW M5,2002,sedan,,m,28289,USD,38800,2026-03-19,https://bringatrailer.com/listing/2002-bmw-m5-286/
-109592960,E39M5,47k-Mile 2000 BMW M5,2000,sedan,75600,a,60000,USD,82100,2026-03-05,https://bringatrailer.com/listing/2000-bmw-m5-366/
+109592960,E39M5,47k-Mile 2000 BMW M5,2000,sedan,75600,m,60000,USD,82100,2026-03-05,https://bringatrailer.com/listing/2000-bmw-m5-366/
 109618270,E39M5,2000 BMW M5,2000,sedan,101400,m,41500,USD,56700,2026-03-04,https://bringatrailer.com/listing/2000-bmw-m5-367/
 109471935,E39M5,2001 BMW M5,2001,sedan,,m,31000,USD,42300,2026-03-01,https://bringatrailer.com/listing/2001-bmw-m5-283/
 108133544,E39M5,2002 BMW M5,2002,sedan,91700,m,43500,USD,59200,2026-02-16,https://bringatrailer.com/listing/2002-bmw-m5-284/
@@ -1399,34 +1399,34 @@ id,family,title,year,body,km,trans,price,cur,cad,sold,url
 98103829,E39M5,42k-Mile 2000 BMW M5,2000,sedan,67600,m,42000,USD,58800,2025-10-10,https://bringatrailer.com/listing/2000-bmw-m5-346/
 101726537,E39M5,2002 BMW M5,2002,sedan,119100,m,46500,USD,64900,2025-10-07,https://bringatrailer.com/listing/2002-bmw-m5-267-2/
 99714784,E39M5,27k-Mile 2003 BMW M5,2003,sedan,43400,m,62500,USD,87000,2025-09-29,https://bringatrailer.com/listing/2003-bmw-m5-239/
-101525503,E39M5,2000 BMW M5,2000,sedan,,a,40250,USD,56100,2025-09-26,https://bringatrailer.com/listing/2000-bmw-m5-353/
+101525503,E39M5,2000 BMW M5,2000,sedan,,m,40250,USD,56100,2025-09-26,https://bringatrailer.com/listing/2000-bmw-m5-353/
 100538033,E39M5,2002 BMW M5,2002,sedan,125500,m,46500,USD,64300,2025-09-23,https://bringatrailer.com/listing/2002-bmw-m5-272/
 100880418,E39M5,22-Years-Owned 2000 BMW M5,2000,sedan,,m,13104,USD,18100,2025-09-21,https://bringatrailer.com/listing/2000-bmw-m5-350/
 100751413,E39M5,2001 BMW M5,2001,sedan,,m,17500,USD,24100,2025-09-17,https://bringatrailer.com/listing/2001-bmw-m5-273/
-100065437,E39M5,2000 BMW M5,2000,sedan,,a,33250,USD,45700,2025-09-16,https://bringatrailer.com/listing/2000-bmw-m5-280-2/
+100065437,E39M5,2000 BMW M5,2000,sedan,,m,33250,USD,45700,2025-09-16,https://bringatrailer.com/listing/2000-bmw-m5-280-2/
 98647330,E39M5,2002 BMW M5,2002,sedan,,m,41350,USD,57200,2025-09-09,https://bringatrailer.com/listing/2002-bmw-m5-270/
 100388583,E39M5,2001 BMW M5,2001,sedan,91700,m,67500,USD,93300,2025-09-05,https://bringatrailer.com/listing/2001-bmw-m5-272/
 99447652,E39M5,2003 BMW M5,2003,sedan,141600,m,41500,USD,57000,2025-09-01,https://bringatrailer.com/listing/2003-bmw-m5-238/
 98686360,E39M5,2003 BMW M5,2003,sedan,233300,m,19250,USD,26600,2025-08-27,https://bringatrailer.com/listing/2003-bmw-m5-237/
 98794185,E39M5,Modified 2000 BMW M5,2000,sedan,,m,26750,USD,37000,2025-08-26,https://bringatrailer.com/listing/2000-bmw-m5-349/
 98987257,E39M5,2000 BMW M5,2000,sedan,,m,23750,USD,32900,2025-08-24,https://bringatrailer.com/listing/2000-bmw-m5-162-2/
-96759723,E39M5,2000 BMW M5,2000,sedan,,a,14396,USD,19900,2025-08-19,https://bringatrailer.com/listing/2000-bmw-m5-342/
+96759723,E39M5,2000 BMW M5,2000,sedan,,m,14396,USD,19900,2025-08-19,https://bringatrailer.com/listing/2000-bmw-m5-342/
 99482775,E39M5,2000 BMW M5,2000,sedan,,m,17750,USD,24500,2025-08-18,https://bringatrailer.com/listing/2000-bmw-m5-340-2/
 98367088,E39M5,32k-Mile 2001 BMW M5,2001,sedan,51500,m,65000,USD,89500,2025-08-13,https://bringatrailer.com/listing/2001-bmw-m5-270/
 98127934,E39M5,2001 BMW M5,2001,sedan,,m,26250,USD,36200,2025-08-12,https://bringatrailer.com/listing/2001-bmw-m5-269/
 96597284,E39M5,2001 BMW M5,2001,sedan,151200,m,19289,USD,26500,2025-08-10,https://bringatrailer.com/listing/2001-bmw-m5-266/
 96196735,E39M5,2001 BMW M5,2001,sedan,,m,41500,USD,57300,2025-08-02,https://bringatrailer.com/listing/2001-bmw-m5-264/
 95343324,E39M5,2003 BMW M5,2003,sedan,109400,m,46250,USD,63400,2025-07-26,https://bringatrailer.com/listing/2003-bmw-m5-234/
-95678940,E39M5,2002 BMW M5,2002,sedan,,a,18750,USD,25500,2025-07-23,https://bringatrailer.com/listing/2002-bmw-m5-266/
+95678940,E39M5,2002 BMW M5,2002,sedan,,m,18750,USD,25500,2025-07-23,https://bringatrailer.com/listing/2002-bmw-m5-266/
 97096366,E39M5,2001 BMW M5,2001,sedan,,m,55000,USD,75500,2025-07-19,https://bringatrailer.com/listing/2001-bmw-m5-267/
 96264683,E39M5,2000 BMW M5,2000,sedan,,m,18500,USD,25400,2025-07-18,https://bringatrailer.com/listing/2000-bmw-m5-340/
 97263214,E39M5,2000 BMW M5 Dinan S3,2000,sedan,,m,62555,USD,86000,2025-07-17,https://bringatrailer.com/listing/2000-bmw-m5-282-2/
 94970734,E39M5,2002 BMW M5,2002,sedan,,m,21000,USD,28500,2025-06-16,https://bringatrailer.com/listing/2003-bmw-m5-233/
-95115155,E39M5,2002 BMW M5,2002,sedan,,a,21000,USD,28600,2025-06-12,https://bringatrailer.com/listing/2002-bmw-m5-264/
+95115155,E39M5,2002 BMW M5,2002,sedan,,m,21000,USD,28600,2025-06-12,https://bringatrailer.com/listing/2002-bmw-m5-264/
 94270935,E39M5,2002 BMW M5,2002,sedan,119100,m,36750,USD,50200,2025-06-05,https://bringatrailer.com/listing/2002-bmw-m5-262/
 94286259,E39M5,2002 BMW M5,2002,sedan,,m,26750,USD,36600,2025-06-04,https://bringatrailer.com/listing/2002-bmw-m5-263/
 85865562,E39M5,2002 BMW M5,2002,sedan,,m,62500,USD,86700,2025-05-22,https://bringatrailer.com/listing/2002-bmw-m5-248/
-92644595,E39M5,2002 BMW M5,2002,sedan,,a,37250,USD,51900,2025-05-20,https://bringatrailer.com/listing/2002-bmw-m5-260/
+92644595,E39M5,2002 BMW M5,2002,sedan,,m,37250,USD,51900,2025-05-20,https://bringatrailer.com/listing/2002-bmw-m5-260/
 93328746,E39M5,28k-Mile 2000 BMW M5,2000,sedan,45100,m,38000,USD,53100,2025-05-15,https://bringatrailer.com/listing/2000-bmw-m5-337/
 92533797,E39M5,2002 BMW M5,2002,sedan,,m,31000,USD,43200,2025-05-11,https://bringatrailer.com/listing/2002-bmw-m5-259/
 93475353,E39M5,2003 BMW M5,2003,sedan,,m,43500,USD,60600,2025-05-09,https://bringatrailer.com/listing/2003-bmw-m5-230/
@@ -1445,13 +1445,13 @@ id,family,title,year,body,km,trans,price,cur,cad,sold,url
 88646927,E39M5,2002 BMW M5,2002,sedan,,m,21500,USD,30800,2025-03-20,https://bringatrailer.com/listing/2002-bmw-m5-252/
 89192516,E39M5,2002 BMW M5,2002,sedan,,m,41250,USD,59400,2025-03-16,https://bringatrailer.com/listing/2002-bmw-m5-253/
 90234807,E39M5,22k-Mile 2000 BMW M5,2000,sedan,35400,m,84500,USD,121600,2025-03-12,https://bringatrailer.com/listing/2000-bmw-m5-334/
-89293282,E39M5,2000 BMW M5,2000,sedan,,a,27000,USD,38800,2025-03-09,https://bringatrailer.com/listing/2000-bmw-m5-332/
+89293282,E39M5,2000 BMW M5,2000,sedan,,m,27000,USD,38800,2025-03-09,https://bringatrailer.com/listing/2000-bmw-m5-332/
 87798920,E39M5,2003 BMW M5,2003,sedan,,m,45250,USD,65000,2025-03-08,https://bringatrailer.com/listing/2003-bmw-m5-226/
 89550897,E39M5,Modified 2000 BMW M5,2000,sedan,,m,34500,USD,49800,2025-03-02,https://bringatrailer.com/listing/2000-bmw-m5-333/
 89284727,E39M5,2000 BMW M5,2000,sedan,,m,26000,USD,37500,2025-03-02,https://bringatrailer.com/listing/2000-bmw-m5-331/
 88094355,E39M5,2001 BMW M5,2001,sedan,,m,38000,USD,54500,2025-02-26,https://bringatrailer.com/listing/2001-bmw-m5-255/
 88559245,E39M5,12k-Mile 2002 BMW M5,2002,sedan,19300,m,110000,USD,156500,2025-02-24,https://bringatrailer.com/listing/2002-bmw-m5-251/
-88800291,E39M5,2001 BMW M5,2001,sedan,,a,22420,USD,31900,2025-02-19,https://bringatrailer.com/listing/2001-bmw-m5-256/
+88800291,E39M5,2001 BMW M5,2001,sedan,,m,22420,USD,31900,2025-02-19,https://bringatrailer.com/listing/2001-bmw-m5-256/
 63191215,E39M5,One-Owner 12k-Mile 2002 BMW M5,2002,sedan,19300,m,87000,USD,123200,2025-02-15,https://bringatrailer.com/listing/2002-bmw-m5-212/
 88410031,E39M5,2003 BMW M5,2003,sedan,141600,m,34500,USD,49300,2025-02-12,https://bringatrailer.com/listing/2003-bmw-m5-227/
 82228613,E39M5,2002 BMW M5,2002,sedan,,m,33000,USD,48200,2025-02-03,https://bringatrailer.com/listing/2002-bmw-m5-244/
@@ -1487,7 +1487,7 @@ id,family,title,year,body,km,trans,price,cur,cad,sold,url
 76826283,E39M5,2003 BMW M5,2003,sedan,94900,m,44000,USD,61000,2024-08-05,https://bringatrailer.com/listing/2003-bmw-m5-212/
 79020817,E39M5,2001 BMW M5,2001,sedan,,m,11250,USD,15600,2024-08-03,https://bringatrailer.com/listing/2001-bmw-m5-240/
 76256058,E39M5,Scarab Pearlescent Green Metallic 2003 BMW M5,2003,sedan,,m,37000,USD,51200,2024-07-30,https://bringatrailer.com/listing/2003-bmw-m5-207/
-78574097,E39M5,2003 BMW M5,2003,sedan,,a,33000,USD,45500,2024-07-24,https://bringatrailer.com/listing/2003-bmw-m5-216/
+78574097,E39M5,2003 BMW M5,2003,sedan,,m,33000,USD,45500,2024-07-24,https://bringatrailer.com/listing/2003-bmw-m5-216/
 76864598,E39M5,2003 BMW M5,2003,sedan,94900,m,46000,USD,63300,2024-07-23,https://bringatrailer.com/listing/2003-bmw-m5-213/
 77461777,E39M5,2002 BMW M5,2002,sedan,,m,46250,USD,63600,2024-07-22,https://bringatrailer.com/listing/2002-bmw-m5-238/
 77792780,E39M5,2000 BMW M5,2000,sedan,160900,m,20000,USD,27400,2024-07-17,https://bringatrailer.com/listing/2000-bmw-m5-303/
@@ -1496,7 +1496,7 @@ id,family,title,year,body,km,trans,price,cur,cad,sold,url
 76218359,E39M5,2003 BMW M5,2003,sedan,,m,27500,USD,37600,2024-07-01,https://bringatrailer.com/listing/2003-bmw-m5-206/
 76877214,E39M5,2003 BMW M5,2003,sedan,,m,50000,USD,68400,2024-06-30,https://bringatrailer.com/listing/2003-bmw-m5-214/
 74992272,E39M5,26k-Mile 2002 BMW M5,2002,sedan,41800,m,101000,USD,138200,2024-06-28,https://bringatrailer.com/listing/2002-bmw-m5-233/
-77366041,E39M5,2002 BMW M5,2002,sedan,,a,19750,USD,27000,2024-06-27,https://bringatrailer.com/listing/2002-bmw-m5-237/
+77366041,E39M5,2002 BMW M5,2002,sedan,,m,19750,USD,27000,2024-06-27,https://bringatrailer.com/listing/2002-bmw-m5-237/
 76238269,E39M5,2000 BMW M5,2000,sedan,209200,m,16500,USD,22500,2024-06-24,https://bringatrailer.com/listing/2000-bmw-m5-294-2/
 77140747,E39M5,2000 BMW M5,2000,sedan,114200,m,30000,USD,41100,2024-06-22,https://bringatrailer.com/listing/2000-bmw-m5-302/
 64633016,E39M5,2003 BMW M5,2003,sedan,,m,29000,USD,39700,2024-06-20,https://bringatrailer.com/listing/2003-bmw-m5-189/
@@ -1513,17 +1513,17 @@ id,family,title,year,body,km,trans,price,cur,cad,sold,url
 73811195,E39M5,Original-Owner 2003 BMW M5,2003,sedan,,m,16750,USD,22900,2024-05-03,https://bringatrailer.com/listing/2003-bmw-m5-202/
 73947066,E39M5,43k-Mile 2000 BMW M5,2000,sedan,69200,m,39000,USD,53600,2024-04-30,https://bringatrailer.com/listing/2000-bmw-m5-293/
 72985269,E39M5,2001 BMW M5,2001,sedan,,m,38000,USD,51900,2024-04-29,https://bringatrailer.com/listing/2001-bmw-m5-226/
-73365433,E39M5,2001 BMW M5,2001,sedan,,a,24000,USD,32800,2024-04-28,https://bringatrailer.com/listing/2001-bmw-m5-223-2/
-55403924,E39M5,2002 BMW M5,2002,sedan,,a,33750,USD,46100,2024-04-26,https://bringatrailer.com/listing/2002-bmw-m5-195/
+73365433,E39M5,2001 BMW M5,2001,sedan,,m,24000,USD,32800,2024-04-28,https://bringatrailer.com/listing/2001-bmw-m5-223-2/
+55403924,E39M5,2002 BMW M5,2002,sedan,,m,33750,USD,46100,2024-04-26,https://bringatrailer.com/listing/2002-bmw-m5-195/
 73847069,E39M5,19k-Mile 2001 BMW M5,2001,sedan,30600,m,75000,USD,102500,2024-04-23,https://bringatrailer.com/listing/2001-bmw-m5-229/
-72774618,E39M5,2001 BMW M5,2001,sedan,,a,29500,USD,40600,2024-04-20,https://bringatrailer.com/listing/2001-bmw-m5-225/
+72774618,E39M5,2001 BMW M5,2001,sedan,,m,29500,USD,40600,2024-04-20,https://bringatrailer.com/listing/2001-bmw-m5-225/
 73547300,E39M5,Original-Owner 2001 BMW M5,2001,sedan,165700,m,28255,USD,38900,2024-04-13,https://bringatrailer.com/listing/2001-bmw-m5-228/
 71454328,E39M5,2003 BMW M5,2003,sedan,,m,18000,USD,24500,2024-04-06,https://bringatrailer.com/listing/2003-bmw-m5-198/
 72543668,E39M5,Single-Family-Owned 2002 BMW M5,2002,sedan,,m,23000,USD,31200,2024-03-30,https://bringatrailer.com/listing/2002-bmw-m5-230/
 72698460,E39M5,2000 BMW M5,2000,sedan,119100,m,34250,USD,46400,2024-03-29,https://bringatrailer.com/listing/2000-bmw-m5-290/
 72497939,E39M5,2002 BMW M5,2002,sedan,,m,31250,USD,42500,2024-03-23,https://bringatrailer.com/listing/2002-bmw-m5-229/
 72067138,E39M5,2002 BMW M5,2002,sedan,,m,38000,USD,51400,2024-03-16,https://bringatrailer.com/listing/2002-bmw-m5-228/
-71589520,E39M5,2003 BMW M5,2003,sedan,,a,18800,USD,25400,2024-03-11,https://bringatrailer.com/listing/2003-bmw-m5-199/
+71589520,E39M5,2003 BMW M5,2003,sedan,,m,18800,USD,25400,2024-03-11,https://bringatrailer.com/listing/2003-bmw-m5-199/
 69227493,E39M5,2002 BMW M5,2002,sedan,140000,m,36500,USD,49400,2024-02-27,https://bringatrailer.com/listing/2002-bmw-m5-222/
 70163119,E39M5,2000 BMW M5,2000,sedan,,m,22500,USD,30400,2024-02-26,https://bringatrailer.com/listing/2000-bmw-m5-285/
 70739043,E39M5,2000 BMW M5,2000,sedan,,m,35000,USD,47200,2024-02-19,https://bringatrailer.com/listing/2000-bmw-m5-286/
