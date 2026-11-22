@@ -1,0 +1,136 @@
+{
+ "kw": {
+  "E9X": [],
+  "330": [],
+  "E91": []
+ },
+ "samples": [],
+ "per_page": {
+  "100": 0,
+  "200": 0
+ },
+ "vin": [
+  {
+   "VIN": "WBSBR93482PK00421",
+   "ModelYear": "2002",
+   "Make": "BMW",
+   "Model": "M3Ci",
+   "Series": "3-Series",
+   "Trim": "",
+   "BodyClass": "Convertible/Cabriolet",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "DisplacementL": "3.2",
+   "PlantCountry": "GERMANY",
+   "ErrorCode": "0",
+   "ErrorText": "0 - VIN decoded clean. Check Digit (9th position) is correct"
+  },
+  {
+   "VIN": "WBSKG9C54BE367661",
+   "ModelYear": "2011",
+   "Make": "BMW",
+   "Model": "M3",
+   "Series": "3-Series",
+   "Trim": "",
+   "BodyClass": "Coupe",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "DisplacementL": "4.0",
+   "PlantCountry": "GERMANY",
+   "ErrorCode": "0",
+   "ErrorText": "0 - VIN decoded clean. Check Digit (9th position) is correct"
+  },
+  {
+   "VIN": "WBSVA93508E041783",
+   "ModelYear": "2008",
+   "Make": "BMW",
+   "Model": "M3",
+   "Series": "3-Series",
+   "Trim": "",
+   "BodyClass": "Sedan/Saloon",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "DisplacementL": "4.0",
+   "PlantCountry": "GERMANY",
+   "ErrorCode": "0",
+   "ErrorText": "0 - VIN decoded clean. Check Digit (9th position) is correct"
+  },
+  {
+   "VIN": "JN1AZ34D54M100000",
+   "ModelYear": "2004",
+   "Make": "NISSAN",
+   "Model": "350Z",
+   "Series": "",
+   "Trim": "",
+   "BodyClass": "Coupe",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "DisplacementL": "3.50",
+   "PlantCountry": "JAPAN",
+   "ErrorCode": "1",
+   "ErrorText": "1 - Check Digit (9th position) does not calculate properly"
+  }
+ ],
+ "carfax": [
+  {
+   "url": "https://vhr.carfax.ca/?id=x+V4SM289x14PxSiHmF05yBBr8cTVq3l",
+   "http": 200,
+   "final": "https://vhr.carfax.ca/?id=x+V4SM289x14PxSiHmF05yBBr8cTVq3l",
+   "bytes": 23457,
+   "title": "CARFAX Canada Vehicle History Report",
+   "accident_words": [],
+   "json_keys": [],
+   "text": " CARFAX Canada Vehicle History Report Looks like your internet browser isn&#x27;t supported Upgrade to one of these browsers to view your report Google Chrome Install for free Firefox Install for free Edge Install for free Safari We&#x2019;re on it! Collecting data from thousands of sources to prepare your report... "
+  },
+  {
+   "url": "https://vhr.carfax.ca/?id=G8nnyI+6hxzH/ywWsH8EscsuN0KB/bua",
+   "http": 200,
+   "final": "https://vhr.carfax.ca/?id=G8nnyI+6hxzH/ywWsH8EscsuN0KB/bua",
+   "bytes": 23457,
+   "title": "CARFAX Canada Vehicle History Report",
+   "accident_words": [],
+   "json_keys": [],
+   "text": " CARFAX Canada Vehicle History Report Looks like your internet browser isn&#x27;t supported Upgrade to one of these browsers to view your report Google Chrome Install for free Firefox Install for free Edge Install for free Safari We&#x2019;re on it! Collecting data from thousands of sources to prepare your report... "
+  }
+ ],
+ "decoders": [
+  {
+   "url": "https://www.mdecoder.com/decode/WBSBR93482PK00421",
+   "http": 200,
+   "final": "https://www.mdecoder.com/decode/WBSBR93482PK00421",
+   "bytes": 6739,
+   "has_smg": false,
+   "has_6mt": false,
+   "title": "BMW VIN Decoder - BMDecoder",
+   "snip": " BMW VIN Decoder - BMDecoder (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https:"
+  },
+  {
+   "url": "https://bimmer.work/vin/WBSBR93482PK00421",
+   "http": 404,
+   "final": "https://bimmer.work/vin/WBSBR93482PK00421",
+   "bytes": 13,
+   "has_smg": false,
+   "has_6mt": false,
+   "title": "",
+   "snip": "404 Not Found"
+  },
+  {
+   "url": "https://www.bmwvin.com/decode/WBSBR93482PK00421",
+   "error": "HTTPSConnectionPool(host='www.bmwvin.com', port=443): Max retries exceeded with url: /decode/WBSBR93"
+  },
+  {
+   "url": "https://vin.bimmerprofs.com/WBSBR93482PK00421",
+   "error": "HTTPSConnectionPool(host='vin.bimmerprofs.com', port=443): Max retries exceeded with url: /WBSBR9348"
+  },
+  {
+   "url": "https://www.elcats.ru/bmw/default.aspx?vin=PK00421",
+   "http": 200,
+   "final": "https://www.elcats.ru/bmw/default.aspx?vin=PK00421",
+   "bytes": 1665473,
+   "has_smg": false,
+   "has_6mt": false,
+   "title": "\r\n\t\u0410\u0432\u0442\u043e\u0437\u0430\u043f\u0447\u0430\u0441\u0442\u0438 BMW - \u044d\u043b\u0435\u043a\u0442\u0440\u043e\u043d\u043d\u044b\u0439 \u043a\u0430\u0442\u0430\u043b\u043e\u0433 \u0437\u0430\u043f\u0447\u0430\u0441\u0442\u0435\u0439\r\n",
+   "snip": " \u0410\u0432\u0442\u043e\u0437\u0430\u043f\u0447\u0430\u0441\u0442\u0438 BMW - \u044d\u043b\u0435\u043a\u0442\u0440\u043e\u043d\u043d\u044b\u0439 \u043a\u0430\u0442\u0430\u043b\u043e\u0433 \u0437\u0430\u043f\u0447\u0430\u0441\u0442\u0435\u0439 $.urlParam = function (name) { var results = new RegExp('[\\\\?&]' + name + '=([^&#]*)').exec(window.location.href); if (results != null) return results[1] || 0; else return results; } .ctl00_cphMasterPage_trvBMW1_0 { text-decoration:none; } .ctl00_cph"
+  }
+ ]
+}
