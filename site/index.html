@@ -76,6 +76,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .gmode svg{opacity:.75}
 .gmode.is-man{background:rgba(60,207,142,.16);color:#8ef0c0;border:1px solid rgba(60,207,142,.5)}
 .gmode.is-auto{background:#f0b23e;color:#1d1505;border:1px solid #f0b23e}
+.gmode.inline{position:static;box-shadow:none;margin:4px 0 2px}
 .top.auto-on{border-bottom:2px solid #f0b23e}
 .auto-note{grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:14px;font-size:14px;
   background:rgba(240,178,62,.12);border:1px solid rgba(240,178,62,.45);color:#ffd27e}
@@ -439,7 +440,7 @@ function render() {
   $("#fCount").hidden = !n; $("#fCount").textContent = n;
   renderChips();
   const others = (DATA.links || []).length
-    ? `<div class="others"><span><b>OLX and Webmotors</b> aren't read automatically.</span><button id="othersBtn" type="button">Search them</button></div>` : "";
+    ? `<div class="others"><span><b>OLX, Webmotors and Mercado Livre</b> aren't read automatically.</span><button id="othersBtn" type="button">Search them</button></div>` : "";
   const autoNote = AUTO
     ? `<div class="auto-note" role="status"><span><b>Automatic cars only.</b> ${esc(DATA.names.map(n => n.name).join(" and "))}.</span><button data-gm="m" type="button">Back to manual</button></div>` : "";
   const word = AUTO ? "automatic cars" : "cars";
@@ -662,7 +663,7 @@ function menuSheet() {
       ${repo ? `<a href="https://github.com/${esc(repo)}/actions/workflows/update.yml" target="_blank" rel="noopener">
         <span>Update now<small>Opens GitHub: press "Run workflow". New data shows here in about 10 minutes.</small></span></a>` : ""}
       <button id="howScore"><span>How the score works<small>Price against similar cars, gearbox certainty and flags</small></span></button>
-      ${(DATA.links || []).length ? `<button id="menuLinks"><span>Search OLX and Webmotors<small>Sites CarWatch can't read: one-tap searches per car</small></span></button>` : ""}
+      ${(DATA.links || []).length ? `<button id="menuLinks"><span>Search OLX, Webmotors, Mercado Livre<small>Sites CarWatch can't read: one-tap searches per car, manual or automatic</small></span></button>` : ""}
       <button id="menuCountry"><span>Switch to ${COUNTRIES[CUR().next].name}<small>Or tap the flag next to the name</small></span></button>
     </nav>
     ${gone ? `<h3>Recently sold or removed</h3><ul class="gone">${gone}</ul>` : ""}`, "Menu");
@@ -677,21 +678,33 @@ function menuSheet() {
       good signs such as rod bearings done add up to ${DATA.score.green_cap}.</p>
     ${COUNTRY === "CA" ? `<p>Sold prices from Bring a Trailer show in each car's details but don't change the score: they are US auction results,
       a different market from Canadian asking prices. Use them as a check on the fair price.</p>` :
-      `<p>In Brazil the list comes from NaPista and Mobiauto. OLX and Webmotors block automated reading, so check them with the
-      search buttons at the top of the list.</p>`}
+      `<p>In Brazil the list comes from NaPista and Mobiauto. OLX, Webmotors and Mercado Livre block automated reading, so check
+      them with the search buttons at the top of the list.</p>`}
     <p class="none">Flags only catch what the seller wrote. Get a history report and an inspection before you buy.</p>`, "How the score works");
 }
 
-function linksSheet() {
-  const sel = new Set(state.names);
-  const famOf = n => (DATA.names.find(x => x.name === n) || {}).family;
+let LINK_AUTO = false;                         // gearbox of the searches in the "Search other sites" sheet
+function linksSheet(auto = AUTO) {
+  LINK_AUTO = auto;
+  const sel = new Set(effNames());
+  const famOf = n => ((MAN_DATA || DATA).names.find(x => x.name === n) || {}).family;
   const selFams = new Set([...sel].map(famOf));
-  const groups = [...DATA.links].sort((a, b) => (b.families.some(f => selFams.has(f)) ? 1 : 0) - (a.families.some(f => selFams.has(f)) ? 1 : 0));
+  const all = (MAN_DATA || DATA).links || [];
+  const hasAuto = all.some(g => (g.links_auto || []).length);
+  const groups = all.filter(g => (auto ? g.links_auto : g.links || []).length)
+    .sort((a, b) => (b.families.some(f => selFams.has(f)) ? 1 : 0) - (a.families.some(f => selFams.has(f)) ? 1 : 0));
+  const toggle = hasAuto
+    ? `<button class="gmode inline ${auto ? "is-auto" : "is-man"}" id="linkGear" type="button"
+        aria-label="Searching ${auto ? "automatic" : "manual"} cars. Tap for ${auto ? "manual" : "automatic"}.">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 4.5h9M8.5 2l2.5 2.5L8.5 7M12 9.5H3M5.5 7 3 9.5 5.5 12"/></svg>${auto ? "Automatic" : "Manual"}</button>` : "";
   openSheet(`
     <h2>Search other sites</h2>
-    <p class="sub">OLX and Webmotors block automated reading, so their ads aren't scored here. These open each site's search for the car.</p>
-    <div class="linkset">${groups.map(g => `<div><h3>${esc(g.model)}</h3><div class="btns">${g.links.map(l =>
+    <p class="sub">OLX, Webmotors and Mercado Livre block automated reading, so their ads aren't scored here. These open each site's
+      search for the car${hasAuto ? `, filtered to ${auto ? "automatic" : "manual"} gearboxes` : ""}.${auto ? " Automatics: FB Civic and Yaris Sedan only." : ""}</p>
+    ${toggle}
+    <div class="linkset">${groups.map(g => `<div><h3>${esc(g.model)}</h3><div class="btns">${(auto ? g.links_auto : g.links).map(l =>
       `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.site)}</a>`).join("")}</div></div>`).join("")}</div>`, "Search other sites");
+  if ($("#linkGear")) $("#linkGear").onclick = () => linksSheet(!LINK_AUTO);
 }
 function setAuto(on) {
   if (on === AUTO || !MAN_DATA) return;

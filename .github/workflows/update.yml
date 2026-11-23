@@ -34,6 +34,8 @@ jobs:
           ARGS=""
           # a push that only changes the web page (or this workflow) rebuilds the data without visiting the sites
           if [ "${{ github.event_name }}" = "push" ] && ! git diff --name-only HEAD~1 HEAD | grep -qE '^(collector/|cars_config)'; then ARGS="--no-network"; fi
+          # a commit marked [site-only] (links, wording) never visits the sites either
+          if [ "${{ github.event_name }}" = "push" ] && git log -1 --format=%B | grep -qF '[site-only]'; then ARGS="--no-network"; fi
           echo "ARGS=$ARGS" >> "$GITHUB_ENV"
           # a run that waited behind another one must not rebuild from older data than the branch now has
           git fetch -q --depth=1 origin "${GITHUB_REF_NAME}" && git reset -q --hard FETCH_HEAD

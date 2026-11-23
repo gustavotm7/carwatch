@@ -1,5 +1,5 @@
 {
-  "_about": "Brazil car list for CarWatch (same format as cars_config.json). NaPista and Mobiauto are read every day; OLX and Webmotors block automated reading, so 'links' gives one-tap searches to check by hand.",
+  "_about": "Brazil car list for CarWatch (same format as cars_config.json). NaPista and Mobiauto are read every day; OLX, Webmotors and Mercado Livre block automated reading, so 'links' (manual) and 'links_auto' (automatic, FB Civic and Yaris sedan) give one-tap searches to check by hand.",
   "country": "BR",
   "currency": "BRL",
   "_automatics": "Only generations with allow_auto keep automatic cars (FB Civic, Yaris sedan); every other car is manual only.",
@@ -18,8 +18,9 @@
      ],
      "searches": {"napista": ["https://napista.com.br/busca/bmw/series-3-m3"],
                   "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/m3"]},
-     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/bmw/m3"],
-               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/bmw/m3"]]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/bmw/m3?gb=1"],
+               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/bmw/m3/cambio.manual"],
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/bmw-m3-manual"]]},
 
     {"enabled": true, "model": "M5", "make": "bmw", "match": ["\\bm5\\b"], "bodies": ["sedan"],
      "generations": [
@@ -28,8 +29,9 @@
      ],
      "searches": {"napista": ["https://napista.com.br/busca/bmw/series-5-m5"],
                   "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/m5"]},
-     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=bmw%20m5"],
-               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/bmw/m5"]]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=bmw%20m5&gb=1"],
+               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/bmw/m5/cambio.manual"],
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/bmw-m5-manual"]]},
 
     {"enabled": true, "model": "330i", "make": "bmw", "match": ["\\b330 ?c? ?i\\b"], "none": ["touring|wagon|wgn|\\bxi\\b|xdrive"],
      "bodies": ["sedan", "coupe", "conv"],
@@ -40,8 +42,9 @@
      ],
      "searches": {"napista": ["https://napista.com.br/busca/bmw/series-3/manual"],
                   "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/330i"]},
-     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=bmw%20330i"],
-               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/bmw/330i"]]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=bmw%20330i&gb=1"],
+               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/bmw/330i/cambio.manual"],
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/bmw-330i-manual"]]},
 
     {"enabled": true, "model": "3 Series wagon", "make": "bmw",
      "match": ["touring|wagon|wgn|perua", "\\b3[23]\\d ?x?i\\b|\\b3[23]\\d ?i ?xdrive|\\b32[058]\\b|\\b335\\b"], "bodies": ["wagon"],
@@ -57,8 +60,9 @@
      ],
      "searches": {"mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/nissan/370z",
                                "https://www.mobiauto.com.br/comprar/carros-usados/brasil/nissan/350z"]},
-     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=nissan%20350z"],
-               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/nissan/350z"]]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=nissan%20350z&gb=1"],
+               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/nissan/350z/cambio.manual"],
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/nissan-350z-manual"]]},
 
     {"enabled": true, "model": "370Z", "make": "nissan", "match": ["\\b370 ?z\\b"], "none": ["\\b350 ?z\\b"], "bodies": ["coupe", "conv"],
      "generations": [
@@ -66,8 +70,9 @@
         "trims": [["nismo", "NISMO"], ["roadster", "Roadster"]]}
      ],
      "searches": {"mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/nissan/370z"]},
-     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=nissan%20370z"],
-               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/nissan/370z"]]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=nissan%20370z&gb=1"],
+               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/nissan/370z/cambio.manual"],
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/nissan-370z-manual"]]},
 
     {"enabled": true, "model": "Civic", "make": "honda", "match": ["\\bcivic\\b"], "none": ["cup[eê]|coupe|\\bhatch|type ?r"],
      "bodies": ["sedan"],
@@ -100,8 +105,12 @@
                                "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2014/s/cambio-automatico",
                                "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2015/s/cambio-automatico",
                                "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2016/s/cambio-automatico"]},
-     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=honda%20civic%20manual"],
-               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/honda/civic/de.2007"]]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/honda/civic?gb=1"],
+               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/honda/civic/de.2007/cambio.manual"],
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/honda-civic-manual"]],
+     "links_auto": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/honda/civic?gb=2"],
+               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/honda/civic/de.2012/cambio.automatico"],
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/honda-civic-automatico"]]},
 
     {"enabled": true, "model": "Yaris sedan", "make": "toyota", "match": ["\\byaris\\b", "sedan|sed[aã]\\b|\\bsed\\b"], "none": ["hatch|cross"],
      "bodies": ["sedan"],
@@ -125,7 +134,11 @@
                                "https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/yaris/ano-2022/s/cambio-automatico",
                                "https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/yaris/ano-2023/s/cambio-automatico",
                                "https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/yaris/ano-2024/s/cambio-automatico"]},
-     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=yaris%20sedan%20manual"],
-               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/toyota/yaris/de.2018"]]}
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=yaris%20sedan&gb=1"],
+               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/toyota/yaris/de.2018/cambio.manual"],
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/toyota-yaris-sedan-manual"]],
+     "links_auto": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=yaris%20sedan&gb=2"],
+               ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/toyota/yaris/de.2018/cambio.automatico"],
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/toyota-yaris-sedan-automatico"]]}
   ]
 }

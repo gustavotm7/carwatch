@@ -184,8 +184,9 @@ def load_config(path=None):
     COUNTRY.update(country=cfg.get("country", "CA"), currency=cfg.get("currency", "CAD"),
                    links=[{"model": m["model"], "families": [g["family"] for g in m["generations"]] +
                                                         [sp["family"] for g in m["generations"] for sp in g.get("split", [])],
-                           "links": [{"site": s, "url": u} for s, u in m.get("links", [])]}
-                          for m in MODELS if m.get("links")])
+                           "links": [{"site": s, "url": u} for s, u in m.get("links", [])],
+                           "links_auto": [{"site": s, "url": u} for s, u in m.get("links_auto", [])]}
+                          for m in MODELS if m.get("links") or m.get("links_auto")])
     FAMILY_STYLE.clear(); TRIMS.clear(); NEEDS_TEXT_CONFIRM.clear(); COMPS.clear(); ALLOW_AUTO.clear(); SPLITS.clear()
     searches = []
     for m in MODELS:
