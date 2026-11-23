@@ -233,6 +233,7 @@ select.opt{background:var(--raised);color:var(--text);padding:8px 12px;font-size
 .comps .p{grid-row:1;grid-column:2;text-align:right;font:700 17px/1.2 var(--cond)}
 .comps .a{grid-row:2;grid-column:2;text-align:right;color:var(--muted);font-size:12px}
 .fine{color:var(--dim);font-size:13px;margin-top:8px!important}
+@media (max-width:380px){.controls{gap:6px}.seg button{padding:7px 11px}.dir,.filters-btn{padding:8px 10px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -257,7 +258,7 @@ select.opt{background:var(--raised);color:var(--text);padding:8px 12px;font-size
       </button>
       <button class="filters-btn" id="filtersBtn">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M4.5 8h7M7 12h2"/></svg>
-        Filters <span class="badge" id="fCount" hidden>0</span>
+        <span id="fLabel">Filters</span> <span class="badge" id="fCount" hidden>0</span>
       </button>
     </div>
     <div class="chips" id="chips" role="group" aria-label="Car"></div>
@@ -285,6 +286,17 @@ const COUNTRIES = {
 };
 let COUNTRY = (() => { try { return COUNTRIES[localStorage.getItem("cw-country")] ? localStorage.getItem("cw-country") : "CA"; } catch (e) { return "CA"; } })();
 const CUR = () => COUNTRIES[COUNTRY];
+const PT = () => COUNTRY === "BR";                    // the Brazil store is in Brazilian Portuguese
+const L = (en, pt) => PT() ? pt : en;
+const dec = (v, n = 1) => v.toLocaleString(CUR().locale, {minimumFractionDigits: n, maximumFractionDigits: n});
+const FLAG_PT = {
+  "Rebuilt title": "Recuperado de sinistro", "Salvage title": "Perda total", "Accident mentioned": "Leilão ou sinistro",
+  "Sold as-is": "Vendido no estado", "Needs work": "Precisa de reparo", "Modified": "Modificado", "Price hidden": "Preço oculto",
+  "Rod bearings done": "Bronzinas trocadas", "Subframe reinforced": "Subchassi reforçado", "VANOS/timing done": "VANOS/corrente feitos",
+  "Clutch done": "Embreagem trocada", "Service records": "Revisões comprovadas", "No accidents stated": "Sem batida ou leilão",
+  "One owner": "Único dono", "Winter stored": "Guardado no inverno",
+};
+const flagTxt = f => esc(PT() ? FLAG_PT[f] || f : f);
 let AUTO = false, MAN_DATA = null, AUTO_DATA = null;     // gearbox mode: always starts on manual, never saved
 const LOC_DEFAULTS = {
   BR: [{name: "São Paulo, SP", geo: [-23.533, -46.639]}, {name: "Teresina, PI", geo: [-5.092, -42.803]}],
@@ -305,9 +317,13 @@ function kmBetween(a, b) {                     // great-circle distance in km
   const h = Math.sin(dLa / 2) ** 2 + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin(dLo / 2) ** 2;
   return 2 * R * Math.asin(Math.sqrt(h));
 }
-const locLabel = () => LOC.active ? (LOC.radius ? `within ${LOC.radius} km of ${LOC.active.name}` : `in ${LOC.active.name}`) : "";
+const locLabel = () => !LOC.active ? "" : LOC.radius
+  ? L(`within ${LOC.radius} km of ${LOC.active.name}`, `a até ${LOC.radius} km de ${LOC.active.name}`)
+  : L(`in ${LOC.active.name}`, `em ${LOC.active.name}`);
+const radiusTxt = r => r ? r + " km" : L("town only", "só a cidade");
 const money = n => n == null ? "" : CUR().sym + Math.round(n).toLocaleString(CUR().locale);
-const kmFmt = n => n == null ? "km n/a" : (n >= 1000 ? Math.round(n / 1000) + "k km" : n + " km");
+const kmFmt = n => n == null ? L("km n/a", "km n/d") : (n >= 1000 ? Math.round(n / 1000) + L("k km", " mil km") : n + " km");
+const kmFull = n => n.toLocaleString(CUR().locale) + " km";
 const SITES = {
   autotrader: {label: "Autotrader", domain: "autotrader.ca"},
   kijiji: {label: "Kijiji", domain: "kijiji.ca"},
@@ -315,14 +331,23 @@ const SITES = {
   napista: {label: "NaPista", domain: "napista.com.br"},
   mobiauto: {label: "Mobiauto", domain: "mobiauto.com.br"},
 };
+const GEARBOX_PT = {
+  m: {cls: "gb-m", label: "Manual", long: "Manual: os dados do anúncio e o texto do vendedor dizem manual."},
+  c: {cls: "gb-c", label: "Confirmar câmbio", long: "Os dados do anúncio e o texto do vendedor não batem (manual x automático). Pergunte ao vendedor."},
+  u: {cls: "gb-u", label: "Manual?", long: "Os dados dizem manual, mas o texto do vendedor não confirma. Pergunte antes."},
+  a: {cls: "gb-a", label: "Automático", long: "Câmbio automático (aparece só com o botão Automático ligado)."},
+};
+const GB = () => PT() ? GEARBOX_PT : GEARBOX;
 const GEARBOX = {
   m: {cls: "gb-m", label: "Manual", long: "Manual: the ad's data and the seller's text both say manual."},
   c: {cls: "gb-c", label: "Check gearbox", long: "The ad's data and the seller's text disagree (manual vs automatic/SMG). Ask the seller."},
   u: {cls: "gb-u", label: "Manual?", long: "The data says manual but the text never confirms it. These cars also came with SMG/DCT, so ask."},
   a: {cls: "gb-a", label: "Automatic", long: "Automatic gearbox (shown only with the Automatic button on)."},
 };
-const BODY = {coupe: "Coupe", conv: "Convertible", sedan: "Sedan", wagon: "Wagon", unk: "Body n/a"};
-const HARD = ["Rebuilt title", "Salvage title"];
+const BODY_EN = {coupe: "Coupe", conv: "Convertible", sedan: "Sedan", wagon: "Wagon", unk: "Body n/a"};
+const BODY_PT = {coupe: "Cupê", conv: "Conversível", sedan: "Sedã", wagon: "Perua", unk: "Carroceria n/d"};
+const BD = () => PT() ? BODY_PT : BODY_EN;
+const HARD = () => PT() ? ["Accident mentioned"] : ["Rebuilt title", "Salvage title"];   // the serious flags in each market
 const DEFAULT_STATE = {sort: "score", dir: "desc", names: [], gear: ["m", "c", "u"], bodies: [], maxPrice: 0,
                        maxKm: 0, yearFrom: 0, yearTo: 0, hideHard: false, hideRed: false};
 let DATA = null, state = load();
@@ -341,11 +366,11 @@ function scoreColor(s) {                       // red 0 -> amber 5 -> green 10
 function gauge(s) {                            // 270 degree tach arc
   const r = 27, c = 2 * Math.PI * r, arc = c * .75, val = arc * Math.max(0, Math.min(1, (s ?? 0) / 10));
   const col = scoreColor(s);
-  return `<div class="gauge" aria-label="Score ${s ?? "n/a"} out of 10">
+  return `<div class="gauge" aria-label="${L("Score", "Nota")} ${s == null ? "n/a" : dec(s)} ${L("out of", "de")} 10">
     <svg viewBox="0 0 66 66"><g transform="rotate(135 33 33)" fill="none" stroke-width="5" stroke-linecap="round">
       <circle cx="33" cy="33" r="${r}" stroke="#2b333e" stroke-dasharray="${arc} ${c}"/>
       <circle cx="33" cy="33" r="${r}" stroke="${col}" stroke-dasharray="${val} ${c}"/></g></svg>
-    <b style="color:${col}">${s == null ? "–" : s.toFixed(1)}</b><small>score</small></div>`;
+    <b style="color:${col}">${scoreTxt(s)}</b><small>${L("score", "nota")}</small></div>`;
 }
 function nameColor(name) {
   const n = DATA.names.find(x => x.name === name);
@@ -362,13 +387,22 @@ function isNew(c) {
 }
 const DAY = 864e5;
 const asDate = iso => new Date(String(iso).slice(0, 10) + "T12:00:00");
-const fmtDate = (iso, yr = true) => asDate(iso).toLocaleDateString("en-CA", yr ? {month: "short", day: "numeric", year: "numeric"}
+const fmtDate = (iso, yr = true) => asDate(iso).toLocaleDateString(CUR().locale, yr ? {month: "short", day: "numeric", year: "numeric"}
                                                                        : {month: "short", day: "numeric"});
-const kShort = n => n >= 1000 ? CUR().sym.trim() + (n / 1000).toFixed(n >= 1e5 ? 0 : 1).replace(/\.0$/, "") + "k" : money(n);
+const kShort = n => {                        // $59.5k / R$ 59,5 mil
+  if (n < 1000) return money(n);
+  const v = Math.round(n / 100) / 10;
+  return CUR().sym.trim() + L("", " ") + dec(v, n >= 1e5 || v % 1 === 0 ? 0 : 1) + L("k", " mil");
+};
+const num = v => dec(v, v % 1 ? 1 : 0);        // 5 / 1,5
+const nf = n => n.toLocaleString(CUR().locale);  // 2,798 / 2.798
+const scoreTxt = s => s == null ? "–" : s >= 9.95 ? "10" : dec(s);
 function daysTag(c) {
   if (c.days == null || (c.days_src !== "site" && c.days < 1)) return "";
   const long = c.days >= 60;
-  return `<span class="tag age${long ? " long" : ""}" title="${c.days_src === "site" ? "Days since the ad went up" : "Days since CarWatch first saw it"}">${c.days}${c.days_src === "site" ? "" : "+"} days</span>`;
+  const tip = c.days_src === "site" ? L("Days since the ad went up", "Dias desde que o anúncio foi publicado")
+                                    : L("Days since CarWatch first saw it", "Dias desde que o CarWatch o viu pela primeira vez");
+  return `<span class="tag age${long ? " long" : ""}" title="${tip}">${c.days}${c.days_src === "site" ? "" : "+"} ${L("days", c.days === 1 ? "dia" : "dias")}</span>`;
 }
 function totalChange(c) {                     // first price CarWatch saw -> now
   const h = c.hist;
@@ -378,9 +412,9 @@ function totalChange(c) {                     // first price CarWatch saw -> now
 }
 function ago(iso) {
   const h = (Date.now() - new Date(iso)) / 36e5;
-  if (h < 1) return "updated just now";
-  if (h < 36) return `updated ${Math.round(h)} h ago`;
-  return `updated ${Math.round(h / 24)} days ago`;
+  if (h < 1) return L("updated just now", "atualizado agora");
+  if (h < 36) return L(`updated ${Math.round(h)} h ago`, `atualizado há ${Math.round(h)} h`);
+  return L(`updated ${Math.round(h / 24)} days ago`, `atualizado há ${Math.round(h / 24)} dias`);
 }
 
 // ---------- filtering + sorting ----------
@@ -395,7 +429,7 @@ function filtered() {
     (!state.maxKm || (c.km ?? 0) <= state.maxKm) &&
     (!state.yearFrom || (c.year ?? 0) >= state.yearFrom) &&
     (!state.yearTo || (c.year ?? 9999) <= state.yearTo) &&
-    !(state.hideHard && c.red.some(f => HARD.includes(f))) &&
+    !(state.hideHard && c.red.some(f => HARD().includes(f))) &&
     !(state.hideRed && c.red.length));
   if (LOC.active) {
     for (const c of cars) c._dist = c.geo ? kmBetween(LOC.active.geo, c.geo) : null;
@@ -422,27 +456,28 @@ function activeFilterCount() {
 // ---------- rendering ----------
 function card(c) {
   const col = nameColor(c.name), site = SITES[c.source] || {label: c.source, domain: ""};
-  const g = GEARBOX[c.trans] || GEARBOX.u;
+  const g = GB()[c.trans] || GB().u;
   const vs = c.vs_fair;
-  const deal = vs == null ? "" : vs > .02 ? `<span class="deal under">${Math.round(vs * 100)}% under fair</span>`
-             : vs < -.02 ? `<span class="deal over">${Math.round(-vs * 100)}% over fair</span>` : `<span class="deal">about fair</span>`;
+  const deal = vs == null ? "" : vs > .02 ? `<span class="deal under">${Math.round(vs * 100)}% ${L("under fair", "abaixo do justo")}</span>`
+             : vs < -.02 ? `<span class="deal over">${Math.round(-vs * 100)}% ${L("over fair", "acima do justo")}</span>`
+             : `<span class="deal">${L("about fair", "preço justo")}</span>`;
   const tc = totalChange(c);
   const change = tc && tc.diff
       ? `<span class="tag ${tc.diff < 0 ? "drop" : "rise"}">${tc.diff < 0 ? "▼" : "▲"} ${money(Math.abs(tc.diff))}</span>` : "";
   const km = c.km ?? 0, kmW = Math.min(100, km / 250000 * 100);
-  const flags = c.red.map(f => `<span class="flag${HARD.includes(f) ? " hard" : ""}">${esc(f)}</span>`).join("");
+  const flags = c.red.map(f => `<span class="flag${HARD().includes(f) ? " hard" : ""}">${flagTxt(f)}</span>`).join("");
   return `<article class="card" tabindex="0" data-id="${esc(c.id)}" aria-label="${esc(c.year + " " + c.name + ", " + money(c.price))}">
     <div class="photo">
       ${c.photos.length ? `<img class="pic" src="${esc(c.photos[0])}" alt="" loading="lazy" decoding="async" data-alt="${esc(c.photos[1] || "")}">` : ""}
-      <span class="nophoto"${c.photos.length ? " hidden" : ""}>No photo</span>
+      <span class="nophoto"${c.photos.length ? " hidden" : ""}>${L("No photo", "Sem foto")}</span>
       <span class="name" style="--c:${col}">${esc(c.name)}</span>
       ${gauge(c.score)}
       <span class="src">${site.domain ? `<img src="https://www.google.com/s2/favicons?domain=${site.domain}&sz=64" alt="" loading="lazy">` : ""}${esc(site.label)}</span>
-      <span class="tags">${isNew(c) ? '<span class="tag new">New</span>' : ""}${change}${daysTag(c)}</span>
+      <span class="tags">${isNew(c) ? `<span class="tag new">${L("New", "Novo")}</span>` : ""}${change}${daysTag(c)}</span>
     </div>
     <div class="body">
       <div class="row1"><span class="price">${money(c.price)}</span>${deal}
-        <button class="info" data-info="${esc(c.id)}" aria-label="Details">
+        <button class="info" data-info="${esc(c.id)}" aria-label="${L("Details", "Detalhes")}">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="9" r="7.2"/><path d="M9 8v5"/><circle cx="9" cy="5.3" r=".6" fill="currentColor"/></svg>
         </button></div>
       ${flags ? `<div class="flags">${flags}</div>` : ""}
@@ -450,10 +485,10 @@ function card(c) {
         <span class="fact year" style="${yearShade(c.year)}">${c.year ?? ""}</span>
         <span class="fact km">${kmFmt(c.km)}<i style="width:${kmW}%"></i></span>
         <span class="fact ${g.cls}">${g.label}</span>
-        <span class="fact body-${esc(c.body)}">${BODY[c.body] || "Body n/a"}</span>
+        <span class="fact body-${esc(c.body)}">${BD()[c.body] || BD().unk}</span>
         ${c.trim ? `<span class="fact trim">${esc(c.trim)}</span>` : ""}
       </div>
-      ${c.place ? `<div class="place"><svg width="12" height="14" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 13s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C1.5 8.8 6 13 6 13Z"/><circle cx="6" cy="5.5" r="1.6"/></svg>${esc(c.place)}${LOC.active && c._dist != null ? `<span class="dist">${c._dist < 1 ? "in town" : Math.round(c._dist) + " km"}</span>` : ""}</div>` : ""}
+      ${c.place ? `<div class="place"><svg width="12" height="14" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 13s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C1.5 8.8 6 13 6 13Z"/><circle cx="6" cy="5.5" r="1.6"/></svg>${esc(c.place)}${LOC.active && c._dist != null ? `<span class="dist">${c._dist < 1 ? L("in town", "na cidade") : Math.round(c._dist) + " km"}</span>` : ""}</div>` : ""}
     </div></article>`;
 }
 function renderChips() {
@@ -462,44 +497,47 @@ function renderChips() {
   const names = effNames();
   const gm = MAN_DATA && MAN_DATA.auto_file          // one button showing the current gearbox; a tap switches
     ? `<button class="gmode ${AUTO ? "is-auto" : "is-man"}" data-gm="${AUTO ? "m" : "a"}" type="button"
-        aria-label="Showing ${AUTO ? "automatic" : "manual"} cars. Tap for ${AUTO ? "manual" : "automatic"}.">
-        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 4.5h9M8.5 2l2.5 2.5L8.5 7M12 9.5H3M5.5 7 3 9.5 5.5 12"/></svg>${AUTO ? "Automatic" : "Manual"}</button>` : "";
-  const all = `<button class="chip" data-name="" aria-pressed="${!names.length}">All <span class="n">${DATA.cars.length}</span></button>`;
+        aria-label="${AUTO ? L("Showing automatic cars. Tap for manual.", "Mostrando carros automáticos. Toque para manual.")
+                           : L("Showing manual cars. Tap for automatic.", "Mostrando carros manuais. Toque para automático.")}">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 4.5h9M8.5 2l2.5 2.5L8.5 7M12 9.5H3M5.5 7 3 9.5 5.5 12"/></svg>${AUTO ? L("Automatic", "Automático") : "Manual"}</button>` : "";
+  const all = `<button class="chip" data-name="" aria-pressed="${!names.length}">${L("All", "Todos")} <span class="n">${nf(DATA.cars.length)}</span></button>`;
   $("#chips").innerHTML = gm + all + DATA.names.map(n =>
     `<button class="chip" style="--c:${n.color}" data-name="${esc(n.name)}" aria-pressed="${names.includes(n.name)}">
-      <span class="dot"></span>${esc(n.name)} <span class="n">${counts[n.name] || 0}</span></button>`).join("");
+      <span class="dot"></span>${esc(n.name)} <span class="n">${nf(counts[n.name] || 0)}</span></button>`).join("");
 }
 function render() {
   const cars = filtered();
   $("#sortScore").setAttribute("aria-pressed", state.sort === "score");
   $("#sortPrice").setAttribute("aria-pressed", state.sort === "price");
   $("#dirBtn").dataset.dir = state.dir;
-  $("#dirLabel").textContent = state.sort === "year" || state.sort === "new" ? (state.dir === "asc" ? "Oldest first" : "Newest first")
-      : state.sort === "days" ? (state.dir === "asc" ? "Shortest" : "Longest")
-      : state.sort === "near" ? (state.dir === "asc" ? "Nearest" : "Farthest")
-      : (state.dir === "asc" ? "Low first" : "High first");
+  const asc = state.dir === "asc";
+  $("#dirLabel").textContent = state.sort === "year" || state.sort === "new" ? (asc ? L("Oldest first", "Mais antigos") : L("Newest first", "Mais novos"))
+      : state.sort === "days" ? (asc ? L("Shortest", "Menos tempo") : L("Longest", "Mais tempo"))
+      : state.sort === "near" ? (asc ? L("Nearest", "Mais perto") : L("Farthest", "Mais longe"))
+      : (asc ? L("Low first", "Do menor") : L("High first", "Do maior"));
   const n = activeFilterCount();
   $("#fCount").hidden = !n; $("#fCount").textContent = n;
   renderChips();
   const others = (DATA.links || []).length
-    ? `<div class="others"><span><b>OLX, Webmotors and Mercado Livre</b> aren't read automatically.</span><button id="othersBtn" type="button">Search them</button></div>` : "";
+    ? L(`<div class="others"><span><b>OLX, Webmotors and Mercado Livre</b> aren't read automatically.</span><button id="othersBtn" type="button">Search them</button></div>`,
+        `<div class="others"><span><b>OLX, Webmotors e Mercado Livre</b> não são lidos automaticamente.</span><button id="othersBtn" type="button">Pesquisar</button></div>`) : "";
   const autoNote = AUTO
-    ? `<div class="auto-note" role="status"><span><b>Automatic cars only.</b> ${esc(DATA.names.map(n => n.name).join(" and "))}.</span><button data-gm="m" type="button">Back to manual</button></div>` : "";
-  const word = AUTO ? "automatic cars" : "cars";
+    ? `<div class="auto-note" role="status"><span><b>${L("Automatic cars only.", "Só carros automáticos.")}</b> ${esc(DATA.names.map(n => n.name).join(L(" and ", " e ")))}.</span><button data-gm="m" type="button">${L("Back to manual", "Voltar ao manual")}</button></div>` : "";
+  const word = AUTO ? L("automatic cars", "carros automáticos") : L("cars", "carros");
   const geoOn = (MAN_DATA || DATA).cars.some(c => c.geo);
   const pin = `<svg width="14" height="16" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 13s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C1.5 8.8 6 13 6 13Z"/><circle cx="6" cy="5.5" r="1.6"/></svg>`;
   const isFav = LOC.active && LOC.favs.some(f => f.name === LOC.active.name);
-  const locRow = geoOn ? `<div class="locrow" role="group" aria-label="Location"><button class="locpin" id="locPin" type="button" aria-label="Location settings">${pin}</button>
-      <button class="loc" data-loc="" type="button" aria-pressed="${!LOC.active}">Anywhere</button>
-      ${LOC.favs.map(f => `<button class="loc" data-loc="${esc(f.name)}" type="button" aria-pressed="${LOC.active?.name === f.name}">${esc(f.name)}${LOC.active?.name === f.name ? `<span class="r">${LOC.radius ? LOC.radius + " km" : "town only"}</span>` : ""}</button>`).join("")}
-      ${LOC.active && !isFav ? `<button class="loc" data-loc="${esc(LOC.active.name)}" type="button" aria-pressed="true">${esc(LOC.active.name)}<span class="r">${LOC.radius ? LOC.radius + " km" : "town only"}</span></button>` : ""}
-      <button class="loc edit" id="locEdit" type="button">Edit</button></div>` : "";
+  const locRow = geoOn ? `<div class="locrow" role="group" aria-label="${L("Location", "Localização")}"><button class="locpin" id="locPin" type="button" aria-label="${L("Location settings", "Ajustes de localização")}">${pin}</button>
+      <button class="loc" data-loc="" type="button" aria-pressed="${!LOC.active}">${L("Anywhere", "Qualquer lugar")}</button>
+      ${LOC.favs.map(f => `<button class="loc" data-loc="${esc(f.name)}" type="button" aria-pressed="${LOC.active?.name === f.name}">${esc(f.name)}${LOC.active?.name === f.name ? `<span class="r">${radiusTxt(LOC.radius)}</span>` : ""}</button>`).join("")}
+      ${LOC.active && !isFav ? `<button class="loc" data-loc="${esc(LOC.active.name)}" type="button" aria-pressed="true">${esc(LOC.active.name)}<span class="r">${radiusTxt(LOC.radius)}</span></button>` : ""}
+      <button class="loc edit" id="locEdit" type="button">${L("Edit", "Editar")}</button></div>` : "";
   const where = LOC.active ? " " + esc(locLabel()) : "";
   $("#list").innerHTML = autoNote + locRow + others + (cars.length
-    ? `<div class="count">${cars.length === DATA.cars.length ? `${cars.length} ${word}` : `${cars.length} of ${DATA.cars.length} ${word}`}${where}</div><div id="more"></div>`
+    ? `<div class="count">${cars.length === DATA.cars.length ? `${nf(cars.length)} ${word}` : `${nf(cars.length)} ${L("of", "de")} ${nf(DATA.cars.length)} ${word}`}${where}</div><div id="more"></div>`
     : LOC.active
-      ? `<div class="empty">No ${word}${where} with these filters.<br><button id="locEdit2">Change distance or town</button></div>`
-      : `<div class="empty">No cars match these filters.<br><button id="clearAll">Clear filters</button></div>`);
+      ? `<div class="empty">${L(`No ${word}${where} with these filters.`, `Nenhum carro${AUTO ? " automático" : ""}${where} com estes filtros.`)}<br><button id="locEdit2">${L("Change distance or town", "Mudar distância ou cidade")}</button></div>`
+      : `<div class="empty">${L("No cars match these filters.", "Nenhum carro com estes filtros.")}<br><button id="clearAll">${L("Clear filters", "Limpar filtros")}</button></div>`);
   LIST = cars; SHOWN = 0;
   moreCards();
   watchMore();
@@ -520,7 +558,7 @@ function watchMore() { if (!moreObs) { while (SHOWN < LIST.length) moreCards(); 
 
 // ---------- sheets ----------
 function openSheet(html, label) {
-  $("#sheet").innerHTML = `<div class="grab"></div><button class="icon-btn close" data-close aria-label="Close">
+  $("#sheet").innerHTML = `<div class="grab"></div><button class="icon-btn close" data-close aria-label="${L("Close", "Fechar")}">
     <svg width="18" height="18" viewBox="0 0 18 18" stroke="currentColor" stroke-width="1.8"><path d="M4 4l10 10M14 4 4 14"/></svg></button>` + html;
   $("#sheet").setAttribute("aria-label", label);
   $("#layer").hidden = false;
@@ -538,8 +576,8 @@ function priceChart(c) {                      // step chart of asking price sinc
   const ps = pts.map(p => p[1]);
   let lo = Math.min(...ps), hi = Math.max(...ps);
   const pad = Math.max((hi - lo) * .2, hi * .02); lo -= pad; hi += pad;
-  const W = 320, H = 118, L = 6, R = 6, T = 22, B = 20;
-  const X = v => L + (v - x0) / (x1 - x0) * (W - L - R), Y = p => T + (hi - p) / (hi - lo) * (H - T - B);
+  const W = 320, H = 118, PL = 6, R = 6, T = 22, B = 20;
+  const X = v => PL + (v - x0) / (x1 - x0) * (W - PL - R), Y = p => T + (hi - p) / (hi - lo) * (H - T - B);
   let path = `M${X(pts[0][0]).toFixed(1)},${Y(pts[0][1]).toFixed(1)}`;
   for (let i = 1; i < pts.length; i++) path += `H${X(pts[i][0]).toFixed(1)}V${Y(pts[i][1]).toFixed(1)}`;
   path += `H${X(x1).toFixed(1)}`;
@@ -548,21 +586,24 @@ function priceChart(c) {                      // step chart of asking price sinc
     return `<circle cx="${X(x).toFixed(1)}" cy="${Y(p).toFixed(1)}" r="3.6" fill="${col}" stroke="#171c23" stroke-width="1.5"/>`;
   }).join("");
   const first = pts[0], last = pts[pts.length - 1];
-  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Price went from ${money(first[1])} to ${money(last[1])}">
-    <line x1="${L}" x2="${W - R}" y1="${H - B + 4}" y2="${H - B + 4}" stroke="#29313c"/>
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L(`Price went from ${money(first[1])} to ${money(last[1])}`, `O preço foi de ${money(first[1])} para ${money(last[1])}`)}">
+    <line x1="${PL}" x2="${W - R}" y1="${H - B + 4}" y2="${H - B + 4}" stroke="#29313c"/>
     <path d="${path}" fill="none" stroke="#cfd6df" stroke-width="2" stroke-linejoin="round"/>${dots}
     <text class="lab" x="${X(first[0])}" y="${Y(first[1]) - 9}">${kShort(first[1])}</text>
     <text class="lab" x="${W - R}" y="${Y(last[1]) - 9}" text-anchor="end">${kShort(last[1])}</text>
-    <text x="${L}" y="${H - 3}">${fmtDate(c.hist[0][0], false)}</text>
-    <text x="${W - R}" y="${H - 3}" text-anchor="end">Today</text></svg>`;
+    <text x="${PL}" y="${H - 3}">${fmtDate(c.hist[0][0], false)}</text>
+    <text x="${W - R}" y="${H - 3}" text-anchor="end">${L("Today", "Hoje")}</text></svg>`;
 }
 function historySection(c) {
   const site = SITES[c.source] || {label: c.source};
   const others = DATA.cars.filter(x => x.days != null).map(x => x.days);
   const longer = c.days != null && others.length > 4 ? Math.round(others.filter(v => v < c.days).length / others.length * 100) : null;
+  const more = longer != null && longer >= 50;
   const when = c.days_src === "site"
-    ? `<p>Listed on ${esc(site.label)} ${fmtDate(c.listed)}: <b>${c.days} days</b> on the market${longer != null && longer >= 50 ? `, longer than ${longer}% of the cars here` : ""}.</p>`
-    : `<p>On CarWatch since ${fmtDate(c.first_seen)}${c.days != null ? ` (${c.days} days)` : ""}. ${esc(site.label)} doesn't show when the ad went up.</p>`;
+    ? L(`<p>Listed on ${esc(site.label)} ${fmtDate(c.listed)}: <b>${c.days} days</b> on the market${more ? `, longer than ${longer}% of the cars here` : ""}.</p>`,
+        `<p>Anunciado em ${fmtDate(c.listed)} (${esc(site.label)}): <b>${c.days} ${c.days === 1 ? "dia" : "dias"}</b> à venda${more ? `, mais que ${longer}% dos carros aqui` : ""}.</p>`)
+    : L(`<p>On CarWatch since ${fmtDate(c.first_seen)}${c.days != null ? ` (${c.days} days)` : ""}. ${esc(site.label)} doesn't show when the ad went up.</p>`,
+        `<p>No CarWatch desde ${fmtDate(c.first_seen)}${c.days != null ? ` (${c.days} ${c.days === 1 ? "dia" : "dias"})` : ""}. ${esc(site.label)}: o site não mostra quando o anúncio foi publicado.</p>`);
   const tc = totalChange(c);
   let body = "";
   if (c.hist && c.hist.length > 1) {
@@ -571,12 +612,16 @@ function historySection(c) {
       return `<li><span>${fmtDate(d)}</span><span>${money(p)}${diff ? ` <span class="${diff < 0 ? "dn" : "up"}">(${diff < 0 ? "−" : "+"}${money(Math.abs(diff))})</span>` : ""}</span></li>`;
     }).join("");
     const pct = Math.round(Math.abs(tc.diff) / tc.from * 100);
-    body = `${priceChart(c)}<p>${tc.diff < 0 ? `Down ${money(-tc.diff)} (${pct}%)` : tc.diff > 0 ? `Up ${money(tc.diff)} (${pct}%)` : "Back to the first price"}
-      since ${fmtDate(tc.since)}, in ${c.hist.length - 1} change${c.hist.length > 2 ? "s" : ""}.</p><ul class="steps">${rows}</ul>`;
+    const n = c.hist.length - 1;
+    body = `${priceChart(c)}<p>${L(`${tc.diff < 0 ? `Down ${money(-tc.diff)} (${pct}%)` : tc.diff > 0 ? `Up ${money(tc.diff)} (${pct}%)` : "Back to the first price"}
+      since ${fmtDate(tc.since)}, in ${n} change${n > 1 ? "s" : ""}.`,
+      `${tc.diff < 0 ? `Caiu ${money(-tc.diff)} (${pct}%)` : tc.diff > 0 ? `Subiu ${money(tc.diff)} (${pct}%)` : "Voltou ao primeiro preço"}
+      desde ${fmtDate(tc.since)}, em ${n} ${n > 1 ? "mudanças" : "mudança"}.`)}</p><ul class="steps">${rows}</ul>`;
   } else {
-    body = `<p class="none">Same price since CarWatch first saw it on ${fmtDate(c.hist?.[0]?.[0] || c.first_seen)}.</p>`;
+    const since = fmtDate(c.hist?.[0]?.[0] || c.first_seen);
+    body = `<p class="none">${L(`Same price since CarWatch first saw it on ${since}.`, `Mesmo preço desde que o CarWatch o viu pela primeira vez, em ${since}.`)}</p>`;
   }
-  return `<h3>Price history</h3>${when}${body}`;
+  return `<h3>${L("Price history", "Histórico de preço")}</h3>${when}${body}`;
 }
 function soldSection(c) {
   const s = c.sold;
@@ -586,7 +631,7 @@ function soldSection(c) {
   const gone = (DATA.gone || []).filter(g => g.family === c.family && g.id !== c.id && g.trans !== "a" &&
       (g.body === "conv") === conv && Math.abs(+g.year - (c.year || 0)) <= 2).slice(0, 4);
   if (!s && !band && !gone.length) return "";
-  let html = `<h3>${s || band ? "Sold prices" : "Similar ads that left"}</h3>`;
+  let html = `<h3>${s || band ? "Sold prices" : L("Similar ads that left", "Anúncios parecidos que saíram")}</h3>`;
   if (s && s.est) {
     const vs = s.vs;
     const pill = vs > .02 ? `<span class="deal under">ask ${Math.round(vs * 100)}% under</span>`
@@ -607,82 +652,88 @@ function soldSection(c) {
   }
   if (band) html += `<p style="margin-top:10px">All manual ${esc(fam)} sales there in the last 2 years (${conv ? "convertibles only" : "no convertibles"}):
       half went for ${money(band.p25)} to ${money(band.p75)}, median ${money(band.med)}, ${band.n} sales.</p>`;
-  if (gone.length) html += `<p style="margin:12px 0 4px">Similar ads that left CarWatch (often sold):</p><ul class="steps">${gone.map(g =>
-      `<li><span>${esc(g.year)}, ${g.km ? Math.round(g.km / 1000) + "k km" : "km n/a"}</span><span><a href="${esc(g.url)}" target="_blank" rel="noopener" style="color:var(--text)">asked ${money(+g.price)}</a>,
-        gone ${fmtDate(g.last_seen, false)}${g.days != null ? ` after ${g.days} days` : ""}</span></li>`).join("")}</ul>`;
+  if (gone.length) html += `<p style="margin:12px 0 4px">${L("Similar ads that left CarWatch (often sold):", "Anúncios parecidos que saíram do CarWatch (muitas vezes vendidos):")}</p><ul class="steps">${gone.map(g =>
+      `<li><span>${esc(g.year)}, ${kmFmt(g.km ? +g.km : null)}</span><span><a href="${esc(g.url)}" target="_blank" rel="noopener" style="color:var(--text)">${L("asked", "pedia")} ${money(+g.price)}</a>,
+        ${goneTxt(g)}</span></li>`).join("")}</ul>`;
   if (s || band) html += `<p class="fine">US auction prices in Canadian dollars at the Bank of Canada rate of the sale day. They are hammer prices: the buyer also pays a 5% fee, and importing adds duty, tax and fees.</p>`;
   return html;
 }
+function goneTxt(g) {                         // "gone Nov 3 after 20 days"
+  const d = fmtDate(g.last_seen, false);
+  return g.days != null ? L(`gone ${d} after ${g.days} days`, `saiu em ${d}, após ${g.days} ${g.days === 1 ? "dia" : "dias"}`) : L(`gone ${d}`, `saiu em ${d}`);
+}
 function detailSheet(c) {
-  const g = GEARBOX[c.trans] || GEARBOX.u, site = SITES[c.source] || {label: c.source};
+  const g = GB()[c.trans] || GB().u, site = SITES[c.source] || {label: c.source};
   const sc = DATA.score, gearPts = sc.gearbox[{m: "✔ Manual", c: "⚠ Conflict", u: "? Unconfirmed"}[c.trans]] ?? 0;
   const redPts = c.red.reduce((a, f) => a + (sc.red[f] || 0), 0);
   const greenPts = Math.min(sc.green_cap, c.green.reduce((a, f) => a + (sc.green[f] || 0), 0));
   const valuePts = c.score == null ? 0 : c.score - sc.base - gearPts - redPts - greenPts;
-  const pts = v => (v > 0 ? "+" : "") + v.toFixed(1);
+  const pts = v => (v > 0 ? "+" : "") + dec(v);
   openSheet(`
     <h2><span class="pill" style="--c:${nameColor(c.name)}">${esc(c.name)}</span>${c.year ?? ""}</h2>
-    <p class="sub">${esc([c.trim, BODY[c.body], money(c.price)].filter(Boolean).join(", "))}</p>
-    <h3>Ad details</h3>
+    <p class="sub">${esc([c.trim, BD()[c.body], money(c.price)].filter(Boolean).join(", "))}</p>
+    <h3>${L("Ad details", "Detalhes do anúncio")}</h3>
     <p>${esc(c.note)}</p>
     ${c.desc ? `<div class="desc">${esc(c.desc)}${c.desc.length >= 690 ? "…" : ""}</div>` : ""}
-    <h3>Red flags</h3>
-    ${c.red.length ? `<div class="flags">${c.red.map(f => `<span class="flag${HARD.includes(f) ? " hard" : ""}">${esc(f)}</span>`).join("")}</div>`
-                   : `<p class="none">${c.flags_read ? "None found in the ad text." : "Ad text not read yet."}</p>`}
-    <h3>Good signs</h3>
-    ${c.green.length ? `<div class="good-list">${c.green.map(f => `<span class="plus">${esc(f)}</span>`).join("")}</div>`
-                     : `<p class="none">${c.flags_read ? "None mentioned." : "Ad text not read yet."}</p>`}
-    <h3>Price and score</h3>
+    <h3>${L("Red flags", "Alertas")}</h3>
+    ${c.red.length ? `<div class="flags">${c.red.map(f => `<span class="flag${HARD().includes(f) ? " hard" : ""}">${flagTxt(f)}</span>`).join("")}</div>`
+                   : `<p class="none">${c.flags_read ? L("None found in the ad text.", "Nenhum no texto do anúncio.") : L("Ad text not read yet.", "Texto do anúncio ainda não lido.")}</p>`}
+    <h3>${L("Good signs", "Pontos positivos")}</h3>
+    ${c.green.length ? `<div class="good-list">${c.green.map(f => `<span class="plus">${flagTxt(f)}</span>`).join("")}</div>`
+                     : `<p class="none">${c.flags_read ? L("None mentioned.", "Nenhum mencionado.") : L("Ad text not read yet.", "Texto do anúncio ainda não lido.")}</p>`}
+    <h3>${L("Price and score", "Preço e nota")}</h3>
     <dl class="kv">
-      <dt>Listed</dt><dd>${money(c.price)}${c.prev_price && c.prev_price !== c.price ? ` (was ${money(c.prev_price)})` : ""}${c.red.includes("Price hidden")
-        ? `<br><span class="none">The ad now shows no real price (often $1): this is the last price it showed. Often means a sale is pending.</span>` : ""}</dd>
-      <dt>Fair price</dt><dd>${c.fair ? money(c.fair) + ` for this car, km and year` : "Not enough cars to estimate"}</dd>
-      <dt>Score</dt><dd><b style="color:${scoreColor(c.score)}">${c.score?.toFixed(1) ?? "–"}</b> of 10:
-        price ${pts(valuePts)}, gearbox ${pts(gearPts)}, flags ${pts(redPts + greenPts)}</dd>
-      <dt>Confidence</dt><dd>${c.conf != null ? Math.round(c.conf * 100) + "% (fewer cars of this model = less weight on price)" : "n/a"}</dd>
+      <dt>${L("Listed", "Pedido")}</dt><dd>${money(c.price)}${c.prev_price && c.prev_price !== c.price ? ` (${L("was", "era")} ${money(c.prev_price)})` : ""}${c.red.includes("Price hidden")
+        ? `<br><span class="none">${L("The ad now shows no real price (often $1): this is the last price it showed. Often means a sale is pending.",
+            "O anúncio não mostra mais um preço real (muitas vezes R$ 1): este é o último preço que mostrou. Costuma indicar venda em andamento.")}</span>` : ""}</dd>
+      <dt>${L("Fair price", "Preço justo")}</dt><dd>${c.fair ? money(c.fair) + L(" for this car, km and year", " para este carro, km e ano") : L("Not enough cars to estimate", "Poucos carros para estimar")}</dd>
+      <dt>${L("Score", "Nota")}</dt><dd><b style="color:${scoreColor(c.score)}">${scoreTxt(c.score)}</b> ${L("of", "de")} 10:
+        ${L("price", "preço")} ${pts(valuePts)}, ${L("gearbox", "câmbio")} ${pts(gearPts)}, ${L("flags", "alertas e pontos positivos")} ${pts(redPts + greenPts)}</dd>
+      <dt>${L("Confidence", "Confiança")}</dt><dd>${c.conf != null ? Math.round(c.conf * 100) + L("% (fewer cars of this model = less weight on price)", "% (menos carros deste modelo = menos peso no preço)") : L("n/a", "n/d")}</dd>
     </dl>
     ${historySection(c)}
     ${soldSection(c)}
-    <h3>The car</h3>
+    <h3>${L("The car", "O carro")}</h3>
     <dl class="kv">
-      <dt>Gearbox</dt><dd>${esc(g.long)}</dd>
-      <dt>Km</dt><dd>${c.km != null ? c.km.toLocaleString("en-CA") + " km" : "n/a"}</dd>
-      <dt>Body</dt><dd>${BODY[c.body] || "n/a"}</dd>
-      <dt>Location</dt><dd>${esc(c.place || "n/a")}</dd>
-      <dt>Listed on</dt><dd>${esc(site.label)}${c.listed ? `, ${fmtDate(c.listed)}` : ""}</dd>
-      <dt>First seen</dt><dd>${esc(c.first_seen)}</dd>
-      <dt>Last checked</dt><dd>${esc(c.verified || c.last_seen)}</dd>
+      <dt>${L("Gearbox", "Câmbio")}</dt><dd>${esc(g.long)}</dd>
+      <dt>Km</dt><dd>${c.km != null ? kmFull(c.km) : L("n/a", "n/d")}</dd>
+      <dt>${L("Body", "Carroceria")}</dt><dd>${BD()[c.body] || L("n/a", "n/d")}</dd>
+      <dt>${L("Location", "Localização")}</dt><dd>${esc(c.place || L("n/a", "n/d"))}</dd>
+      <dt>${L("Listed on", "Site")}</dt><dd>${esc(site.label)}${c.listed ? `, ${fmtDate(c.listed)}` : ""}</dd>
+      <dt>${L("First seen", "Visto pela 1ª vez")}</dt><dd>${PT() ? fmtDate(c.first_seen) : esc(c.first_seen)}</dd>
+      <dt>${L("Last checked", "Última verificação")}</dt><dd>${PT() ? fmtDate(c.verified || c.last_seen) : esc(c.verified || c.last_seen)}</dd>
     </dl>
-    <a class="primary" href="${esc(c.url)}" target="_blank" rel="noopener">Open ad on ${esc(site.label)}</a>`, "Car details");
+    <a class="primary" href="${esc(c.url)}" target="_blank" rel="noopener">${L(`Open ad on ${esc(site.label)}`, `Abrir anúncio (${esc(site.label)})`)}</a>`, L("Car details", "Detalhes do carro"));
 }
 function filterSheet() {
   const prices = DATA.cars.map(c => c.price), kms = DATA.cars.map(c => c.km || 0), years = DATA.cars.map(c => c.year).filter(Boolean);
   const pMax = Math.ceil(Math.max(...prices) / 5000) * 5000, kMax = Math.ceil(Math.max(...kms) / 10000) * 10000;
   const yLo = Math.min(...years), yHi = Math.max(...years);
-  const yOpts = sel => { let o = `<option value="0">Any</option>`; for (let y = yLo; y <= yHi; y++) o += `<option ${sel === y ? "selected" : ""}>${y}</option>`; return o; };
+  const yOpts = sel => { let o = `<option value="0">${L("Any", "Qualquer")}</option>`; for (let y = yLo; y <= yHi; y++) o += `<option ${sel === y ? "selected" : ""}>${y}</option>`; return o; };
   const t = JSON.parse(JSON.stringify(state));
   const opt = (group, val, label, on) => `<button class="opt" data-g="${group}" data-v="${val}" aria-pressed="${on}">${label}</button>`;
   openSheet(`
-    <h2>Filters</h2>
-    ${AUTO ? "" : `<h3>Gearbox</h3><div class="opt-group">
-      ${opt("gear", "m", "Manual", t.gear.includes("m"))}${opt("gear", "c", "Check gearbox", t.gear.includes("c"))}${opt("gear", "u", "Manual?", t.gear.includes("u"))}</div>`}
-    <h3>Body</h3><div class="opt-group">
-      ${["coupe", "conv", "sedan", "wagon"].map(b => opt("body", b, BODY[b], t.bodies.includes(b))).join("")}</div>
-    <h3>Highest price</h3><div class="range"><input type="range" id="fPrice" min="5000" max="${pMax}" step="1000" value="${t.maxPrice || pMax}"><output id="oPrice"></output></div>
-    <h3>Most km</h3><div class="range"><input type="range" id="fKm" min="10000" max="${kMax}" step="5000" value="${t.maxKm || kMax}"><output id="oKm"></output></div>
-    <h3>Year</h3><div class="range"><select id="fY1" class="opt">${yOpts(t.yearFrom)}</select><span>to</span><select id="fY2" class="opt">${yOpts(t.yearTo)}</select></div>
-    <h3>Hide</h3><div class="opt-group">
-      ${opt("hide", "hard", "Rebuilt or salvage titles", t.hideHard)}${opt("hide", "red", "Any red flag", t.hideRed)}</div>
-    <h3>More ways to sort</h3><div class="opt-group">
-      ${[["score", "Score"], ["price", "Price"], ["deal", "% under fair"], ["sold", "% under sold"], ["days", "Longest listed"],
-         ["km", "Km"], ["year", "Year"], ["new", "Newest ads"], ...(LOC.active ? [["near", "Distance"]] : [])]
+    <h2>${L("Filters", "Filtros")}</h2>
+    ${AUTO ? "" : `<h3>${L("Gearbox", "Câmbio")}</h3><div class="opt-group">
+      ${["m", "c", "u"].map(k => opt("gear", k, GB()[k].label, t.gear.includes(k))).join("")}</div>`}
+    <h3>${L("Body", "Carroceria")}</h3><div class="opt-group">
+      ${["coupe", "conv", "sedan", "wagon"].map(b => opt("body", b, BD()[b], t.bodies.includes(b))).join("")}</div>
+    <h3>${L("Highest price", "Preço máximo")}</h3><div class="range"><input type="range" id="fPrice" min="5000" max="${pMax}" step="1000" value="${t.maxPrice || pMax}"><output id="oPrice"></output></div>
+    <h3>${L("Most km", "Km máximo")}</h3><div class="range"><input type="range" id="fKm" min="10000" max="${kMax}" step="5000" value="${t.maxKm || kMax}"><output id="oKm"></output></div>
+    <h3>${L("Year", "Ano")}</h3><div class="range"><select id="fY1" class="opt">${yOpts(t.yearFrom)}</select><span>${L("to", "até")}</span><select id="fY2" class="opt">${yOpts(t.yearTo)}</select></div>
+    <h3>${L("Hide", "Ocultar")}</h3><div class="opt-group">
+      ${opt("hide", "hard", L("Rebuilt or salvage titles", "Leilão ou sinistro"), t.hideHard)}${opt("hide", "red", L("Any red flag", "Qualquer alerta"), t.hideRed)}</div>
+    <h3>${L("More ways to sort", "Mais formas de ordenar")}</h3><div class="opt-group">
+      ${[["score", L("Score", "Nota")], ["price", L("Price", "Preço")], ["deal", L("% under fair", "% abaixo do justo")],
+         ...((DATA.comps || []).length ? [["sold", "% under sold"]] : []), ["days", L("Longest listed", "Mais tempo anunciado")],
+         ["km", "Km"], ["year", L("Year", "Ano")], ["new", L("Newest ads", "Anúncios mais novos")], ...(LOC.active ? [["near", L("Distance", "Distância")]] : [])]
         .map(([v, l]) => opt("sort", v, l, t.sort === v)).join("")}</div>
-    <div class="sheet-actions"><button id="fReset">Reset</button><button class="go" id="fApply">Show cars</button></div>`, "Filters");
+    <div class="sheet-actions"><button id="fReset">${L("Reset", "Limpar")}</button><button class="go" id="fApply">${L("Show cars", "Mostrar carros")}</button></div>`, L("Filters", "Filtros"));
   const sh = $("#sheet");
   const upd = () => {
     const p = +$("#fPrice").value, k = +$("#fKm").value;
-    $("#oPrice").textContent = p >= pMax ? "Any" : money(p);
-    $("#oKm").textContent = k >= kMax ? "Any" : k.toLocaleString("en-CA") + " km";
+    $("#oPrice").textContent = p >= pMax ? L("Any", "Qualquer") : money(p);
+    $("#oKm").textContent = k >= kMax ? L("Any", "Qualquer") : kmFull(k);
   };
   upd();
   $("#fPrice").oninput = $("#fKm").oninput = upd;
@@ -708,21 +759,34 @@ function filterSheet() {
 }
 function menuSheet() {
   const repo = DATA.repo;
-  const gone = DATA.gone.slice(0, 15).map(g => `<li><a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.year + " " + g.name)}</a>, ${money(+g.price)}, gone ${fmtDate(g.last_seen, false)}${g.days != null ? ` after ${g.days} days` : ""}</li>`).join("");
+  const gone = DATA.gone.slice(0, 15).map(g => `<li><a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.year + " " + g.name)}</a>, ${money(+g.price)}, ${goneTxt(g)}</li>`).join("");
   openSheet(`
     <h2>CarWatch</h2>
-    <p class="sub">${DATA.cars.length} cars, ${ago(DATA.updated)}. The list refreshes every morning.</p>
+    <p class="sub">${nf(DATA.cars.length)} ${AUTO ? L("automatic cars", "carros automáticos") : L("cars", "carros")}, ${ago(DATA.updated)}. ${L("The list refreshes every morning.", "A lista é atualizada toda manhã.")}</p>
     <nav class="menu">
       ${repo ? `<a href="https://github.com/${esc(repo)}/actions/workflows/update.yml" target="_blank" rel="noopener">
-        <span>Update now<small>Opens GitHub: press "Run workflow". New data shows here in about 10 minutes.</small></span></a>` : ""}
-      <button id="howScore"><span>How the score works<small>Price against similar cars, gearbox certainty and flags</small></span></button>
-      ${(DATA.links || []).length ? `<button id="menuLinks"><span>Search OLX, Webmotors, Mercado Livre<small>Sites CarWatch can't read: one-tap searches per car, manual or automatic</small></span></button>` : ""}
-      <button id="menuCountry"><span>Switch to ${COUNTRIES[CUR().next].name}<small>Or tap the flag next to the name</small></span></button>
+        <span>${L(`Update now<small>Opens GitHub: press "Run workflow". New data shows here in about an hour.</small>`,
+                  `Atualizar agora<small>Abre o GitHub: toque em "Run workflow". Os dados novos aparecem aqui em cerca de 1 hora.</small>`)}</span></a>` : ""}
+      <button id="howScore"><span>${L("How the score works<small>Price against similar cars, gearbox certainty and flags</small>",
+                                      "Como a nota funciona<small>Preço comparado a carros parecidos, certeza do câmbio, alertas e pontos positivos</small>")}</span></button>
+      ${(DATA.links || []).length ? `<button id="menuLinks"><span>${L("Search OLX, Webmotors, Mercado Livre<small>Sites CarWatch can't read: one-tap searches per car, manual or automatic</small>",
+                                      "Pesquisar na OLX, Webmotors e Mercado Livre<small>Sites que o CarWatch não consegue ler: buscas com um toque por carro, manual ou automático</small>")}</span></button>` : ""}
+      <button id="menuCountry"><span>${L(`Switch to ${COUNTRIES[CUR().next].name}<small>Or tap the flag next to the name</small>`,
+                                          `Mudar para o Canadá<small>Ou toque na bandeira ao lado do nome</small>`)}</span></button>
     </nav>
-    ${gone ? `<h3>Recently sold or removed</h3><ul class="gone">${gone}</ul>` : ""}`, "Menu");
+    ${gone ? `<h3>${L("Recently sold or removed", "Vendidos ou removidos recentemente")}</h3><ul class="gone">${gone}</ul>` : ""}`, "Menu");
   if ($("#menuLinks")) $("#menuLinks").onclick = () => linksSheet();
   $("#menuCountry").onclick = () => confirmCountry();
-  $("#howScore").onclick = () => openSheet(`
+  $("#howScore").onclick = () => openSheet(PT() ? `
+    <h2>Como a nota funciona</h2>
+    <p>Todo carro começa com nota ${num(DATA.score.base)} de 10. O preço justo é estimado a partir dos outros carros do mesmo modelo,
+      ajustado por km, ano e carroceria conversível ou não. Cada ${Math.round(DATA.score.pct_per_point * 100)}% abaixo desse preço justo soma cerca de um ponto,
+      e cada ${Math.round(DATA.score.pct_per_point * 100)}% acima tira um. Em modelos com poucos carros anunciados, o preço pesa menos.</p>
+    <p>Câmbio: um manual duvidoso perde até um ponto. Alertas no texto do anúncio tiram pontos (leilão ou sinistro tira ${num(Math.abs(DATA.score.red["Accident mentioned"] ?? 1))} ${Math.abs(DATA.score.red["Accident mentioned"] ?? 1) > 1 ? "pontos" : "ponto"});
+      pontos positivos, como revisões comprovadas, somam até ${num(DATA.score.green_cap)} pontos.</p>
+    <p>A lista vem do NaPista e do Mobiauto. OLX, Webmotors e Mercado Livre bloqueiam a leitura automática: pesquise neles
+      pelo botão "Pesquisar" no topo da lista.</p>
+    <p class="none">Os alertas só pegam o que o vendedor escreveu. Peça um laudo cautelar e uma vistoria antes de comprar.</p>` : `
     <h2>How the score works</h2>
     <p>Every car starts at ${DATA.score.base} of 10. The fair price is estimated from the other cars of the same model,
       adjusted for km, year and convertible or not. Each ${Math.round(DATA.score.pct_per_point * 100)}% under that fair price adds about a point,
@@ -733,7 +797,7 @@ function menuSheet() {
       a different market from Canadian asking prices. Use them as a check on the fair price.</p>` :
       `<p>In Brazil the list comes from NaPista and Mobiauto. OLX, Webmotors and Mercado Livre block automated reading, so check
       them with the search buttons at the top of the list.</p>`}
-    <p class="none">Flags only catch what the seller wrote. Get a history report and an inspection before you buy.</p>`, "How the score works");
+    <p class="none">Flags only catch what the seller wrote. Get a history report and an inspection before you buy.</p>`, L("How the score works", "Como a nota funciona"));
 }
 
 let LINK_AUTO = false;                         // gearbox of the searches in the "Search other sites" sheet
@@ -748,15 +812,18 @@ function linksSheet(auto = AUTO) {
     .sort((a, b) => (b.families.some(f => selFams.has(f)) ? 1 : 0) - (a.families.some(f => selFams.has(f)) ? 1 : 0));
   const toggle = hasAuto
     ? `<button class="gmode inline ${auto ? "is-auto" : "is-man"}" id="linkGear" type="button"
-        aria-label="Searching ${auto ? "automatic" : "manual"} cars. Tap for ${auto ? "manual" : "automatic"}.">
-        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 4.5h9M8.5 2l2.5 2.5L8.5 7M12 9.5H3M5.5 7 3 9.5 5.5 12"/></svg>${auto ? "Automatic" : "Manual"}</button>` : "";
+        aria-label="${auto ? L("Searching automatic cars. Tap for manual.", "Buscando carros automáticos. Toque para manual.")
+                           : L("Searching manual cars. Tap for automatic.", "Buscando carros manuais. Toque para automático.")}">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 4.5h9M8.5 2l2.5 2.5L8.5 7M12 9.5H3M5.5 7 3 9.5 5.5 12"/></svg>${auto ? L("Automatic", "Automático") : "Manual"}</button>` : "";
   openSheet(`
-    <h2>Search other sites</h2>
-    <p class="sub">OLX, Webmotors and Mercado Livre block automated reading, so their ads aren't scored here. These open each site's
-      search for the car${hasAuto ? `, filtered to ${auto ? "automatic" : "manual"} gearboxes` : ""}.${auto ? " Automatics: FB Civic and Yaris Sedan only." : ""}</p>
+    <h2>${L("Search other sites", "Pesquisar em outros sites")}</h2>
+    <p class="sub">${L(`OLX, Webmotors and Mercado Livre block automated reading, so their ads aren't scored here. These open each site's
+      search for the car${hasAuto ? `, filtered to ${auto ? "automatic" : "manual"} gearboxes` : ""}.${auto ? " Automatics: FB Civic and Yaris Sedan only." : ""}`,
+      `OLX, Webmotors e Mercado Livre bloqueiam a leitura automática, então os anúncios deles não recebem nota aqui. Estes botões abrem a
+      busca de cada site para o carro${hasAuto ? `, filtrada para câmbio ${auto ? "automático" : "manual"}` : ""}.${auto ? " Automáticos: só FB Civic e Yaris Sedan." : ""}`)}</p>
     ${toggle}
     <div class="linkset">${groups.map(g => `<div><h3>${esc(g.model)}</h3><div class="btns">${(auto ? g.links_auto : g.links).map(l =>
-      `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.site)}</a>`).join("")}</div></div>`).join("")}</div>`, "Search other sites");
+      `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.site)}</a>`).join("")}</div></div>`).join("")}</div>`, L("Search other sites", "Pesquisar em outros sites"));
   if ($("#linkGear")) $("#linkGear").onclick = () => linksSheet(!LINK_AUTO);
 }
 function setAuto(on) {
@@ -764,44 +831,49 @@ function setAuto(on) {
   if (!on) { AUTO = false; DATA = MAN_DATA; return paintMode(); }
   if (AUTO_DATA) { AUTO = true; DATA = AUTO_DATA; return paintMode(); }
   const want = COUNTRY;
-  $("#meta").textContent = "Loading automatics…";
+  $("#meta").textContent = L("Loading automatics…", "Carregando automáticos…");
   fetch("data/" + MAN_DATA.auto_file + "?" + Date.now(), {cache: "no-store"})
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(d => { if (want !== COUNTRY) return; AUTO_DATA = d; AUTO = true; DATA = d; paintMode(); })
-    .catch(err => { $("#meta").textContent = `Automatics could not be loaded (${err.message})`; });
+    .catch(err => { $("#meta").textContent = L(`Automatics could not be loaded (${err.message})`, `Não foi possível carregar os automáticos (${err.message})`); });
 }
 function paintMode() {
   document.querySelector(".top").classList.toggle("auto-on", AUTO);
-  $("#meta").textContent = `${DATA.cars.length} ${AUTO ? "automatic " : ""}cars, ${ago(DATA.updated)}`;
+  $("#meta").textContent = `${nf(DATA.cars.length)} ${AUTO ? L("automatic cars", "carros automáticos") : L("cars", "carros")}, ${ago(DATA.updated)}`;
   window.scrollTo({top: 0});
   render();
 }
 function confirmCountry() {
   const to = COUNTRIES[CUR().next];
-  openSheet(`
+  openSheet(PT() ? `
+    <h2>Mudar de loja?</h2>
+    <p class="sub">Tem certeza que quer mudar para a loja canadense? Ela está em inglês.</p>
+    <div class="confirm"><button class="primary" id="doSwitch" type="button">Mudar para o Canadá</button>
+      <button data-close type="button">Ficar no Brasil</button></div>` : `
     <h2>Change store?</h2>
-    <p class="sub">Are you sure you want to change to the ${to.adj} store?</p>
+    <p class="sub">Are you sure you want to change to the ${to.adj} store? It's in Brazilian Portuguese.</p>
     <div class="confirm"><button class="primary" id="doSwitch" type="button">Change to ${to.name}</button>
-      <button data-close type="button">Stay in ${esc(CUR().name)}</button></div>`, "Change store");
+      <button data-close type="button">Stay in ${esc(CUR().name)}</button></div>`, L("Change store", "Mudar de loja"));
   $("#doSwitch").onclick = () => { closeSheet(); switchCountry(); };
 }
 let TOWNS = null;                               // [[town, UF, lat, lon]] loaded when the location sheet opens
 function locSheet(msg = "") {
   openSheet(`
-    <h2>Location</h2>
-    <p class="sub">Show cars near a town. Your favourites sit at the top of the list for one tap.</p>
-    <h3>Distance</h3><div class="opt-group">${RADII.map(r =>
-      `<button class="opt" data-radius="${r}" type="button" aria-pressed="${LOC.radius === r}">${r ? r + " km" : "Town only"}</button>`).join("")}</div>
-    <h3>Favourites</h3>
+    <h2>${L("Location", "Localização")}</h2>
+    <p class="sub">${L("Show cars near a town. Your favourites sit at the top of the list for one tap.",
+                       "Mostre carros perto de uma cidade. Suas favoritas ficam no topo da lista, a um toque.")}</p>
+    <h3>${L("Distance", "Distância")}</h3><div class="opt-group">${RADII.map(r =>
+      `<button class="opt" data-radius="${r}" type="button" aria-pressed="${LOC.radius === r}">${r ? r + " km" : L("Town only", "Só a cidade")}</button>`).join("")}</div>
+    <h3>${L("Favourites", "Favoritas")}</h3>
     ${LOC.favs.length ? `<ul class="favs">${LOC.favs.map((f, i) => `<li><span>${esc(f.name)}</span>
-      <button data-usefav="${i}" type="button">${LOC.active?.name === f.name ? "In use" : "Use"}</button>
-      <button data-delfav="${i}" type="button" aria-label="Remove ${esc(f.name)}">Remove</button></li>`).join("")}</ul>`
-      : `<p class="none">No favourites yet.</p>`}
-    <h3>Add a town</h3>
-    <div class="addtown"><input id="townIn" list="townList" placeholder="Type a town, e.g. Campinas" autocomplete="off">
-      <button id="townAdd" type="button">Add</button></div>
+      <button data-usefav="${i}" type="button">${LOC.active?.name === f.name ? L("In use", "Em uso") : L("Use", "Usar")}</button>
+      <button data-delfav="${i}" type="button" aria-label="${L("Remove", "Remover")} ${esc(f.name)}">${L("Remove", "Remover")}</button></li>`).join("")}</ul>`
+      : `<p class="none">${L("No favourites yet.", "Nenhuma favorita ainda.")}</p>`}
+    <h3>${L("Add a town", "Adicionar cidade")}</h3>
+    <div class="addtown"><input id="townIn" list="townList" placeholder="${L("Type a town, e.g. Campinas", "Digite uma cidade, ex.: Campinas")}" autocomplete="off">
+      <button id="townAdd" type="button">${L("Add", "Adicionar")}</button></div>
     <datalist id="townList"></datalist>
-    <p class="addmsg" id="townMsg">${esc(msg)}</p>`, "Location");
+    <p class="addmsg" id="townMsg">${esc(msg)}</p>`, L("Location", "Localização"));
   const fill = () => { $("#townList").innerHTML = TOWNS.map(x => `<option value="${esc(x[0] + ", " + x[1])}">`).join(""); };
   if (TOWNS) fill();
   else if (COUNTRY === "BR") fetch("data/geo_br.json").then(r => r.json()).then(d => { TOWNS = d; if ($("#townList")) fill(); }).catch(() => {});
@@ -816,18 +888,31 @@ function locSheet(msg = "") {
     const v = $("#townIn").value.trim();
     const norm = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
     const hit = (TOWNS || []).find(x => norm(x[0] + ", " + x[1]) === norm(v));
-    if (!hit) return locSheet(v ? `"${v}" isn't in the town list. Pick one from the suggestions (town, state).` : "Type a town first.");
+    if (!hit) return locSheet(v ? L(`"${v}" isn't in the town list. Pick one from the suggestions (town, state).`,
+                                    `"${v}" não está na lista de cidades. Escolha uma das sugestões (cidade, UF).`)
+                                : L("Type a town first.", "Digite uma cidade primeiro."));
     const name = hit[0] + ", " + hit[1];
     if (!LOC.favs.some(f => f.name === name)) LOC.favs.push({name, geo: [hit[2], hit[3]]});
     LOC.active = LOC.favs.find(f => f.name === name);
-    saveLoc(); render(); locSheet(`Added ${name}.`);
+    saveLoc(); render(); locSheet(L(`Added ${name}.`, `Cidade adicionada: ${name}.`));
   };
 }
 function paintFlag() {
   const b = $("#flagBtn");
   b.innerHTML = FLAGS[COUNTRY];
-  b.setAttribute("aria-label", `Showing ${CUR().name}. Switch to ${COUNTRIES[CUR().next].name}`);
-  b.title = `Switch to ${COUNTRIES[CUR().next].name}`;
+  b.setAttribute("aria-label", L(`Showing ${CUR().name}. Switch to ${COUNTRIES[CUR().next].name}`, "Mostrando o Brasil. Mudar para o Canadá"));
+  b.title = L(`Switch to ${COUNTRIES[CUR().next].name}`, "Mudar para o Canadá");
+  paintStatic();
+}
+function paintStatic() {                       // fixed page text, in the store's language
+  document.documentElement.lang = L("en", "pt-BR");
+  $("#sortScore").textContent = L("Score", "Nota");
+  $("#sortPrice").textContent = L("Price", "Preço");
+  $("#fLabel").textContent = L("Filters", "Filtros");
+  $("#menuBtn").setAttribute("aria-label", "Menu");
+  $("#dirBtn").setAttribute("aria-label", L("Sort direction", "Direção da ordem"));
+  document.querySelector(".seg").setAttribute("aria-label", L("Sort by", "Ordenar por"));
+  $("#chips").setAttribute("aria-label", L("Car", "Carro"));
 }
 function switchCountry() {
   save();
@@ -891,7 +976,7 @@ function boot() {
   DATA = MAN_DATA = AUTO_DATA = null;
   AUTO = false;
   document.querySelector(".top").classList.remove("auto-on");
-  $("#meta").textContent = "Loading…";
+  $("#meta").textContent = L("Loading…", "Carregando…");
   $("#chips").innerHTML = "";
   $("#list").innerHTML = "";
   fetch(CUR().file + "?" + Date.now(), {cache: "no-store"})
@@ -900,15 +985,17 @@ function boot() {
       if (want !== COUNTRY) return;                  // switched again while loading
       DATA = MAN_DATA = d;
       state.names = state.names.filter(n => d.names.some(x => x.name === n));
-      $("#meta").textContent = `${d.cars.length} cars, ${ago(d.updated)}`;
+      $("#meta").textContent = `${nf(d.cars.length)} ${L("cars", "carros")}, ${ago(d.updated)}`;
       render();
     })
     .catch(err => {
       if (want !== COUNTRY) return;
       $("#meta").textContent = "";
       $("#list").innerHTML = err.message === "not built yet"
-        ? `<div class="empty">The ${esc(CUR().name)} list appears after the next daily update. Tap the flag to go back.</div>`
-        : `<div class="empty">The car list could not be loaded (${esc(err.message)}). Check your connection and pull down to refresh.</div>`;
+        ? `<div class="empty">${L(`The ${esc(CUR().name)} list appears after the next daily update. Tap the flag to go back.`,
+                                   "A lista do Brasil aparece depois da próxima atualização diária. Toque na bandeira para voltar.")}</div>`
+        : `<div class="empty">${L(`The car list could not be loaded (${esc(err.message)}). Check your connection and pull down to refresh.`,
+                                  `Não foi possível carregar a lista de carros (${esc(err.message)}). Confira sua conexão e puxe para baixo para recarregar.`)}</div>`;
     });
 }
 paintFlag();

@@ -26,7 +26,9 @@ AP1 and AP2 S2000s.
 ## Brazil
 
 Tap the flag next to the name to switch between Canada and Brazil (the app remembers the choice and keeps
-filters per country). The Brazil list comes from `cars_config_br.json`, same format as `cars_config.json`:
+filters per country). The Brazil store is in Brazilian Portuguese, numbers and dates included; the Canada store is in
+English. The data stays in English inside (flag names, gearbox codes), and the app translates it on screen
+(`L(en, pt)` and `FLAG_PT` in `site/index.html`). In Brazil the serious flag is "Leilão ou sinistro". The Brazil list comes from `cars_config_br.json`, same format as `cars_config.json`:
 
 - Read every day: **NaPista** and **Mobiauto** (data in `data_br/`, app data in `site/data/cars_br.json`).
 - **OLX and Webmotors** block automated reading, so each car has one-tap search links (`links` in the config),
