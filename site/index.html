@@ -273,6 +273,8 @@ ul.facts-list{margin:2px 0 0;padding-left:18px;display:grid;gap:7px;font-size:14
 .otab td{padding:10px 4px;border-top:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .otab th:first-child,.otab td:first-child{text-align:left;padding-left:0}
 .otab tr[data-ana]{cursor:pointer}
+.otab td.m{color:var(--muted);font-size:13px}
+.loc-card{border-color:rgba(59,143,224,.45)}
 .otab .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:7px}
 @media (max-width:380px){.controls{gap:6px}.seg button{padding:7px 11px}.dir,.filters-btn{padding:8px 10px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -486,6 +488,33 @@ function ago(iso) {
 
 // ---------- filtering + sorting ----------
 function effNames() { return state.names.filter(n => DATA.names.some(x => x.name === n)); }
+function applyLoc(cars) {                     // cars within the selected town's radius, with local fair price, % and score
+  LOCAL = LOC.active ? areaLevel(LOC.active, LOC.radius) : null;
+  if (!LOC.active) return cars;
+  for (const c of cars) c._dist = c.geo ? kmBetween(LOC.active.geo, c.geo) : null;
+  const near = cars.filter(c => c._dist != null && c._dist <= (LOC.radius || 1));
+  if (LOCAL) {
+    const ppp = DATA.score.pct_per_point;
+    for (const c of near) {
+      c._lf = c.fair ? Math.round(c.fair * Math.exp(LOCAL.lv) / 100) * 100 : null;
+      c._lvs = c._lf ? 1 - c.price / c._lf : null;
+      c._ls = c._lvs != null && c.sr != null && c.vs_fair != null
+        ? Math.round(Math.max(0, Math.min(10, c.sr + (c._lvs - c.vs_fair) / ppp * (c.conf ?? 1))) * 10) / 10 : c.score;
+    }
+  }
+  return near;
+}
+function locRowHTML() {                         // Anywhere / favourite towns / Edit (Brazil only: needs town coordinates)
+  if (!(MAN_DATA || DATA).cars.some(c => c.geo)) return "";
+  const pin = `<svg width="14" height="16" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 13s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C1.5 8.8 6 13 6 13Z"/><circle cx="6" cy="5.5" r="1.6"/></svg>`;
+  const isFav = LOC.active && LOC.favs.some(f => f.name === LOC.active.name);
+  return `<div class="locrow" role="group" aria-label="${L("Location", "Localização")}"><button class="locpin" id="locPin" type="button" aria-label="${L("Location settings", "Ajustes de localização")}">${pin}</button>
+      <button class="loc" data-loc="" type="button" aria-pressed="${!LOC.active}">${L("Anywhere", "Qualquer lugar")}</button>
+      ${LOC.favs.map(f => `<button class="loc" data-loc="${esc(f.name)}" type="button" aria-pressed="${LOC.active?.name === f.name}">${esc(f.name)}${LOC.active?.name === f.name ? `<span class="r">${radiusTxt(LOC.radius)}</span>` : ""}</button>`).join("")}
+      ${LOC.active && !isFav ? `<button class="loc" data-loc="${esc(LOC.active.name)}" type="button" aria-pressed="true">${esc(LOC.active.name)}<span class="r">${radiusTxt(LOC.radius)}</span></button>` : ""}
+      <button class="loc edit" id="locEdit" type="button">${L("Edit", "Editar")}</button></div>`;
+}
+const basisTxt = () => `${L("based on", "base")}: ${nf(LOCAL.n)} ${L(LOCAL.n === 1 ? "car" : "cars", LOCAL.n === 1 ? "carro" : "carros")}${LOCAL.few ? L(` + the ${LOCAL.uf} average`, ` + média de ${LOCAL.uf}`) : ""}`;
 function filtered() {
   const names = effNames();
   let cars = DATA.cars.filter(c =>
@@ -498,20 +527,7 @@ function filtered() {
     (!state.yearTo || (c.year ?? 9999) <= state.yearTo) &&
     !(state.hideHard && c.red.some(f => HARD().includes(f))) &&
     !(state.hideRed && c.red.length));
-  LOCAL = LOC.active ? areaLevel(LOC.active, LOC.radius) : null;
-  if (LOC.active) {
-    for (const c of cars) c._dist = c.geo ? kmBetween(LOC.active.geo, c.geo) : null;
-    cars = cars.filter(c => c._dist != null && c._dist <= (LOC.radius || 1));
-  }
-  if (LOCAL) {                                 // local fair price, % and score for the cars shown
-    const ppp = DATA.score.pct_per_point;
-    for (const c of cars) {
-      c._lf = c.fair ? Math.round(c.fair * Math.exp(LOCAL.lv) / 100) * 100 : null;
-      c._lvs = c._lf ? 1 - c.price / c._lf : null;
-      c._ls = c._lvs != null && c.sr != null && c.vs_fair != null
-        ? Math.round(Math.max(0, Math.min(10, c.sr + (c._lvs - c.vs_fair) / ppp * (c.conf ?? 1))) * 10) / 10 : c.score;
-    }
-  }
+  cars = applyLoc(cars);
   const key = {score: c => scoreOf(c) ?? -1, price: c => c.price, km: c => c.km ?? 1e9, year: c => c.year ?? 0,
                deal: c => vsOf(c) ?? -9, new: c => c.first_seen || "", days: c => c.days ?? -1,
                sold: c => c.sold?.vs ?? -9, near: c => c._dist ?? 1e9}[state.sort] || (c => c.score ?? -1);
@@ -585,9 +601,9 @@ function renderChips() {
 function render() {
   paintTabs();
   if (state.tab === "prices") {                // market analysis of the chosen model (or all models)
-    LOCAL = null; LIST = []; SHOWN = 0;
+    LIST = []; SHOWN = 0;
     renderChips();
-    $("#list").innerHTML = pricesView();
+    $("#list").innerHTML = locRowHTML() + pricesView();
     save();
     return;
   }
@@ -609,16 +625,9 @@ function render() {
   const autoNote = AUTO
     ? `<div class="auto-note" role="status"><span><b>${L("Automatic cars only.", "Só carros automáticos.")}</b> ${esc(DATA.names.map(n => n.name).join(L(" and ", " e ")))}.</span><button data-gm="m" type="button">${L("Back to manual", "Voltar ao manual")}</button></div>` : "";
   const word = AUTO ? L("automatic cars", "carros automáticos") : L("cars", "carros");
-  const geoOn = (MAN_DATA || DATA).cars.some(c => c.geo);
-  const pin = `<svg width="14" height="16" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 13s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C1.5 8.8 6 13 6 13Z"/><circle cx="6" cy="5.5" r="1.6"/></svg>`;
-  const isFav = LOC.active && LOC.favs.some(f => f.name === LOC.active.name);
-  const locRow = geoOn ? `<div class="locrow" role="group" aria-label="${L("Location", "Localização")}"><button class="locpin" id="locPin" type="button" aria-label="${L("Location settings", "Ajustes de localização")}">${pin}</button>
-      <button class="loc" data-loc="" type="button" aria-pressed="${!LOC.active}">${L("Anywhere", "Qualquer lugar")}</button>
-      ${LOC.favs.map(f => `<button class="loc" data-loc="${esc(f.name)}" type="button" aria-pressed="${LOC.active?.name === f.name}">${esc(f.name)}${LOC.active?.name === f.name ? `<span class="r">${radiusTxt(LOC.radius)}</span>` : ""}</button>`).join("")}
-      ${LOC.active && !isFav ? `<button class="loc" data-loc="${esc(LOC.active.name)}" type="button" aria-pressed="true">${esc(LOC.active.name)}<span class="r">${radiusTxt(LOC.radius)}</span></button>` : ""}
-      <button class="loc edit" id="locEdit" type="button">${L("Edit", "Editar")}</button></div>` : "";
+  const locRow = locRowHTML();
   const where = LOC.active ? " " + esc(locLabel()) : "";
-  const lvl = LOCAL ? `<span class="lvl">${L("Prices here", "Preços aqui")}: ${levelTxt(LOCAL.lv)} (${L("based on", "base")}: ${nf(LOCAL.n)} ${L(LOCAL.n === 1 ? "car" : "cars", LOCAL.n === 1 ? "carro" : "carros")}${LOCAL.few ? L(` + the ${LOCAL.uf} average`, ` + média de ${LOCAL.uf}`) : ""}). ${L("Scores and % use the local price.", "Notas e % usam o preço local.")}</span>` : "";
+  const lvl = LOCAL ? `<span class="lvl">${L("Prices here", "Preços aqui")}: ${levelTxt(LOCAL.lv)} (${basisTxt()}). ${L("Scores and % use the local price.", "Notas e % usam o preço local.")}</span>` : "";
   $("#list").innerHTML = autoNote + locRow + others + (cars.length
     ? `<div class="count">${cars.length === DATA.cars.length ? `${nf(cars.length)} ${word}` : `${nf(cars.length)} ${L("of", "de")} ${nf(DATA.cars.length)} ${word}`}${where}${lvl}</div><div id="more"></div>`
     : LOC.active
@@ -1072,13 +1081,33 @@ function dealTxt(vs) {
 }
 
 // KPI tiles
-function kpis(cars) {
+function locCard(here, total, what) {             // what the location filter is doing, and a wider radius when it's thin
+  const next = RADII.find(r => r > (LOC.radius || 0));
+  const thinTxt = here < 5 && next ? `<button class="linkbtn" type="button" data-radius="${next}">${L(`Widen to ${next} km`, `Ampliar para ${next} km`)}</button>` : "";
+  return `<section class="ana loc-card"><h2>${L("Near", "Perto de")} ${esc(LOC.active.name)}</h2>
+    <p class="sub">${LOC.radius ? L(`Within ${LOC.radius} km`, `Até ${LOC.radius} km`) : L("That town only", "Só a cidade")}: ${nf(here)} ${L("of", "de")} ${nf(total)} ${what}.
+      ${here < 5 ? L(" Few ads here: the charts show the rest of Brazil in grey for comparison.", " Poucos anúncios aqui: os gráficos mostram o resto do Brasil em cinza para comparar.") : ""}</p>
+    ${LOCAL ? `<p><b>${L("Prices here", "Preços aqui")}: ${levelTxt(LOCAL.lv)}</b> (${basisTxt()}, ${L("same model, km and year", "mesmo modelo, km e ano")}).
+      ${L("Fair prices, % and scores below use the local level.", "Preço justo, % e notas abaixo usam o nível local.")}</p>` : ""}${thinTxt}</section>`;
+}
+function kpis(cars, nat) {                       // nat: every car of the model in Brazil, when cars are the local ones
   const prices = cars.map(c => c.price), kms = cars.map(c => c.km), days = siteDays(cars);
   const weekAgo = new Date(Date.now() - 7 * DAY).toISOString().slice(0, 10);
   const fresh = cars.filter(c => c.first_seen > (DATA.baseline || "") && c.first_seen >= weekAgo).length;
   const tracked7 = DATA.baseline && DATA.baseline <= weekAgo;
   const old60 = days.length ? days.filter(v => v > 60).length / days.length : null;
   const tile = (label, value, note) => `<div class="kpi"><small>${label}</small><b>${value}</b><span>${note}</span></div>`;
+  const br = L("Brazil", "Brasil");
+  if (nat) {
+    const nd = siteDays(nat);
+    return `<div class="kpis">
+      ${tile(L("On sale here", "À venda aqui"), nf(cars.length), `${br}: ${nf(nat.length)}`)}
+      ${tile(L("Median price", "Preço mediano"), cars.length ? money(medv(prices)) : "–", `${br}: ${money(medv(nat.map(c => c.price)))}`)}
+      ${tile(L("Median km", "Km mediano"), cars.length ? kmFmt(Math.round(medv(kms) ?? 0)) : "–", `${br}: ${kmFmt(Math.round(medv(nat.map(c => c.km)) ?? 0))}`)}
+      ${tile(L("Median time listed", "Tempo anunciado (mediana)"), days.length ? `${Math.round(medv(days))} ${L("days", "dias")}` : "–",
+             nd.length ? `${br}: ${Math.round(medv(nd))} ${L("days", "dias")}` : "")}
+    </div>`;
+  }
   return `<div class="kpis">
     ${tile(L("On sale", "À venda"), nf(cars.length), tracked7 ? L(`${fresh} new in 7 days`, `${fresh} ${fresh === 1 ? "novo" : "novos"} em 7 dias`) : L(`tracked since ${sinceTxt()}`, `acompanhando desde ${sinceTxt()}`))}
     ${tile(L("Median price", "Preço mediano"), money(medv(prices)), `${L("middle half", "metade central")}: ${kShort(qtl(prices, .25))} – ${kShort(qtl(prices, .75))}`)}
@@ -1088,9 +1117,8 @@ function kpis(cars) {
                          : L("no listing dates on these sites", "os sites não mostram a data"))}
   </div>`;
 }
-
 // Price against km, coloured by year, with the fair-price line for the typical year
-function scatter(cars, mk) {
+function scatter(cars, mk, here) {               // here: the local cars (coloured); the rest of Brazil in grey behind them
   const pts = cars.filter(c => c.km != null && c.price);
   if (pts.length < 4) return "";
   const W = 340, H = 236, PL = 54, PR = 10, PT = 10, PB = 26;
@@ -1098,32 +1126,35 @@ function scatter(cars, mk) {
   const [y0, y1, ty] = niceDomain(...fence(pts.map(c => c.price)), 4);
   const X = v => PL + (v - x0) / (x1 - x0) * (W - PL - PR), Y = v => PT + (y1 - v) / (y1 - y0) * (H - PT - PB);
   const years = pts.map(c => c.year).filter(Boolean), ylo = Math.min(...years), yhi = Math.max(...years);
-  const shown = pts.filter(c => c.km >= x0 && c.km <= x1 && c.price >= y0 && c.price <= y1).sort((a, b) => (a.year || 0) - (b.year || 0));
-  const r = shown.length > 500 ? 3 : 4;
-  ANA.scatter = shown.map(c => ({id: c.id, x: X(c.km), y: Y(c.price)}));
+  const inside = c => c.km >= x0 && c.km <= x1 && c.price >= y0 && c.price <= y1;
+  const hereIds = here ? new Set(here.map(c => c.id)) : null;
+  const front = pts.filter(c => inside(c) && (!hereIds || hereIds.has(c.id))).sort((a, b) => (a.year || 0) - (b.year || 0));
+  const back = hereIds ? pts.filter(c => inside(c) && !hereIds.has(c.id)) : [];
+  const r = front.length > 500 ? 3 : here ? 5 : 4;
+  ANA.scatter = [...back, ...front].map(c => ({id: c.id, x: X(c.km), y: Y(c.price), front: !hereIds || hereIds.has(c.id)}));
   const m = DATA.market?.[mk]?.model, yr = Math.round(medv(years));
   const convShare = pts.filter(c => c.body === "conv").length / pts.length;
+  const lv = here && LOCAL ? LOCAL.lv : 0;
   let fair = "";
   if (m) {
-    const f = km => Math.exp(m[0] + m[1] * km / 1e4 + m[2] * (yr - 2000) + (convShare > .5 ? DATA.b_conv || 0 : 0));
+    const f = km => Math.exp(m[0] + m[1] * km / 1e4 + m[2] * (yr - 2000) + (convShare > .5 ? DATA.b_conv || 0 : 0) + lv);
     const seg = [];
     for (let i = 0; i <= 24; i++) { const k = x0 + (x1 - x0) * i / 24, p = f(k); if (p >= y0 && p <= y1) seg.push(`${X(k).toFixed(1)},${Y(p).toFixed(1)}`); }
-    if (seg.length > 1) {
-      fair = `<polyline points="${seg.join(" ")}" fill="none" stroke="${VIZ.fair}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
-    }
+    if (seg.length > 1) fair = `<polyline points="${seg.join(" ")}" fill="none" stroke="${VIZ.fair}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
   }
   const grid = ty.map(v => `<line x1="${PL}" x2="${W - PR}" y1="${Y(v)}" y2="${Y(v)}" stroke="${VIZ.grid}"/><text x="${PL - 6}" y="${Y(v) + 4}" text-anchor="end">${kShort(v)}</text>`).join("")
     + tx.map(v => `<text x="${X(v)}" y="${H - 8}" text-anchor="middle">${kmTick(v)}</text>`).join("");
-  const dots = shown.map((c, i) => `<circle cx="${X(c.km).toFixed(1)}" cy="${Y(c.price).toFixed(1)}" r="${r}" fill="${yearColor(c.year, ylo, yhi)}" stroke="var(--surface)" stroke-width="${r > 3 ? 2 : 1}"/>`).join("");
-  const hidden = pts.length - shown.length;
+  const bg = back.map(c => `<circle cx="${X(c.km).toFixed(1)}" cy="${Y(c.price).toFixed(1)}" r="${back.length > 500 ? 2.5 : 3}" fill="#3a4350"/>`).join("");
+  const dots = front.map(c => `<circle cx="${X(c.km).toFixed(1)}" cy="${Y(c.price).toFixed(1)}" r="${r}" fill="${yearColor(c.year, ylo, yhi)}" stroke="var(--surface)" stroke-width="${r > 3 ? 2 : 1}"/>`).join("");
+  const hidden = (here || pts).filter(c => !inside(c)).length;
   const ys = []; for (let y = ylo; y <= yhi; y++) ys.push(y);
-  const legend = `<div class="legend">${L("Year", "Ano")}: ${(ys.length > 6 ? [ylo, Math.round((ylo + yhi) / 2), yhi] : ys).map(y => `<i style="background:${yearColor(y, ylo, yhi)}"></i>${y}`).join(" ")}
-    ${fair ? `<span class="ln"></span>${L(`fair price for a ${yr}`, `preço justo de um ${yr}`)}` : ""}</div>`;
+  const legend = `<div class="legend">${here ? L("Here, by year", "Aqui, por ano") : L("Year", "Ano")}: ${(ys.length > 6 ? [ylo, Math.round((ylo + yhi) / 2), yhi] : ys).map(y => `<i style="background:${yearColor(y, ylo, yhi)}"></i>${y}`).join(" ")}
+    ${here ? `<i style="background:#3a4350;margin-left:10px"></i>${L("rest of Brazil", "resto do Brasil")}` : ""}
+    ${fair ? `<span class="ln"></span>${here && LOCAL ? L(`local fair price, ${yr}`, `preço justo local, ${yr}`) : L(`fair price for a ${yr}`, `preço justo de um ${yr}`)}` : ""}</div>`;
   return `${legend}<svg class="viz" id="scat" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Asking price against km", "Preço pedido por km")}">
-    ${grid}${dots}${fair}<circle id="scatSel" r="7" fill="none" stroke="var(--text)" stroke-width="2" visibility="hidden"/></svg>
+    ${grid}${bg}${dots}${fair}<circle id="scatSel" r="7" fill="none" stroke="var(--text)" stroke-width="2" visibility="hidden"/></svg>
     <div class="readout" id="scatOut">${L("Tap a dot to see that car.", "Toque num ponto para ver o carro.")}${hidden ? ` <span class="m">(${hidden} ${L("outside the scale", "fora da escala")})</span>` : ""}</div>`;
 }
-
 // What moves the price: km, year, convertible (from the fair-price fit)
 function movers(cars, mk) {
   const m = DATA.market?.[mk]?.model;
@@ -1137,6 +1168,9 @@ function movers(cars, mk) {
         `<b>Cada 10 mil km a mais: ${pctTxt(km, 1)}</b> (cerca de ${money(Math.abs(km * p))})`));
   lines.push(L(`<b>Each year newer: ${pctTxt(yr, 1)}</b> (about ${money(Math.abs(yr * p))})`,
                `<b>Cada ano mais novo: ${pctTxt(yr, 1)}</b> (cerca de ${money(Math.abs(yr * p))})`));
+  if (LOC.active && LOCAL)
+    lines.push(L(`<b>Near ${esc(LOC.active.name)}:</b> ${levelTxt(LOCAL.lv)} for the same car`,
+                 `<b>Perto de ${esc(LOC.active.name)}:</b> ${levelTxt(LOCAL.lv)} para o mesmo carro`));
   if (DATA.b_conv && cars.some(c => c.body === "conv") && cars.some(c => c.body !== "conv"))
     lines.push(L(`<b>Convertible: ${pctTxt(Math.exp(DATA.b_conv) - 1, 1)}</b> against a fixed roof`,
                  `<b>Conversível: ${pctTxt(Math.exp(DATA.b_conv) - 1, 1)}</b> em relação ao teto fixo`));
@@ -1144,30 +1178,33 @@ function movers(cars, mk) {
 }
 
 // Price by model year: middle half (bar) and median (dot)
-function byYear(cars) {
-  const g = {};
-  cars.forEach(c => { if (c.year) (g[c.year] = g[c.year] || []).push(c.price); });
+function byYear(cars, here) {                     // here: local cars; Brazil's median then shows as a grey tick
+  const group = cs => { const g = {}; cs.forEach(c => { if (c.year) (g[c.year] = g[c.year] || []).push(c.price); }); return g; };
+  const g = group(cars), h = here ? group(here) : null, main = h || g;
   const ys = Object.keys(g).map(Number).sort((a, b) => b - a);
   if (ys.length < 2) return "";
   const W = 340, RH = 28, PL = 44, PR = 104, PT = 4;
-  const all = ys.flatMap(y => [qtl(g[y], .25), qtl(g[y], .75)]);
+  const all = ys.flatMap(y => [qtl(g[y], .25), qtl(g[y], .75), ...(h && h[y] ? [qtl(h[y], .25), qtl(h[y], .75)] : [])]);
   const [x0, x1, tx0] = niceDomain(Math.min(...all), Math.max(...all), 3);
   const tx = thin(tx0, 3);
   const X = v => PL + (v - x0) / (x1 - x0) * (W - PL - PR);
   const H = PT + ys.length * RH + 20;
   const rows = ys.map((y, i) => {
-    const v = g[y], cy = PT + i * RH + RH / 2, a = qtl(v, .25), b = qtl(v, .75), m = medv(v);
+    const v = main[y] || [], cy = PT + i * RH + RH / 2;
+    const tick = h ? `<rect x="${(X(medv(g[y])) - 1).toFixed(1)}" y="${cy - 7}" width="2" height="14" rx="1" fill="${VIZ.fair}"/>` : "";
+    if (!v.length) return `<text x="0" y="${cy + 4}" class="vl">${y}</text>${tick}<text x="${W}" y="${cy + 4}" text-anchor="end">${L("none here", "nenhum aqui")}</text>`;
+    const a = qtl(v, .25), b = qtl(v, .75), m = medv(v);
     return `<text x="0" y="${cy + 4}" class="vl">${y}</text>
       ${v.length >= 3 ? `<rect x="${X(a).toFixed(1)}" y="${cy - 3}" width="${Math.max(6, X(b) - X(a)).toFixed(1)}" height="6" rx="3" fill="#1c5cab"/>` : ""}
-      <circle cx="${X(m).toFixed(1)}" cy="${cy}" r="5" fill="#b7d3f6" stroke="var(--surface)" stroke-width="2"/>
+      ${tick}<circle cx="${X(m).toFixed(1)}" cy="${cy}" r="5" fill="#b7d3f6" stroke="var(--surface)" stroke-width="2"/>
       <text x="${W}" y="${cy + 4}" text-anchor="end"><tspan class="vl">${kShort(m)}</tspan> (${v.length})</text>`;
   }).join("");
   const axis = tx.map(v => `<line x1="${X(v)}" x2="${X(v)}" y1="${PT}" y2="${H - 18}" stroke="${VIZ.grid}"/><text x="${X(v)}" y="${H - 4}" text-anchor="middle">${kShort(v)}</text>`).join("");
-  return `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Price by model year", "Preço por ano-modelo")}">${axis}${rows}</svg>`;
+  return `${h ? `<div class="legend"><i style="background:#b7d3f6"></i>${L("median here", "mediana aqui")}<span class="ln" style="width:2px;height:12px"></span>${L("median in Brazil", "mediana no Brasil")}</div>` : ""}
+    <svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Price by model year", "Preço por ano-modelo")}">${axis}${rows}</svg>`;
 }
-
 // Time on the market: ads by days listed, and what old ads ask against new ones
-function timeListed(cars) {
+function timeListed(cars, nat) {
   const B = [[0, 15, "0–15"], [16, 30, "16–30"], [31, 60, "31–60"], [61, 90, "61–90"], [91, 180, "91–180"], [181, 1e9, "180+"]];
   const withDays = cars.filter(c => c.days_src === "site" && c.days != null);
   if (withDays.length < 5) return `<p class="none">${L("Too few ads show their listing date.", "Poucos anúncios mostram a data de publicação.")}</p>`;
@@ -1190,6 +1227,11 @@ function timeListed(cars) {
       ${s - f > .02 ? L(" Older ads usually have more room to negotiate.", " Os mais antigos costumam ter mais margem para negociar.") : ""}</p>`;
   }
   const without = cars.length - withDays.length;
+  if (nat) {
+    const nd = siteDays(nat);
+    if (nd.length) note += `<p>${L(`Median here: ${Math.round(medv(withDays.map(c => c.days)))} days; Brazil: ${Math.round(medv(nd))} days.`,
+                                    `Mediana aqui: ${Math.round(medv(withDays.map(c => c.days)))} dias; Brasil: ${Math.round(medv(nd))} dias.`)}</p>`;
+  }
   return `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Ads by days listed", "Anúncios por dias à venda")}">
     <line x1="0" x2="${W}" y1="${H - PB}" y2="${H - PB}" stroke="${VIZ.grid}"/>${cols}</svg>${note}
     ${without ? `<p class="fine">${L(`${without} ads have no listing date on their site and are left out.`,
@@ -1259,14 +1301,14 @@ function leftMarket(cars, mk) {
 }
 
 // Price level by state for this model (Brazil): diverging bars around the national fair price
-function divBars(rows, label) {                  // rows: [name, value (fraction), n]
+function divBars(rows, label, mark) {            // rows: [name, value (fraction), n]; mark: a row name to point out
   if (!rows.length) return "";
   const W = 340, RH = 26, PL = 78, PR = 48, H = rows.length * RH + 6;
   const lim = Math.max(.05, ...rows.map(r => Math.abs(r[1])));
   const mid = PL + (W - PL - PR) / 2, half = (W - PL - PR) / 2;
   const bars = rows.map(([nm, v, n], i) => {
     const cy = 3 + i * RH + RH / 2, w = Math.abs(v) / lim * half, x = v < 0 ? mid - w : mid;
-    return `<text x="0" y="${cy + 4}" class="vl">${esc(nm)}</text><text x="${PL - 8}" y="${cy + 4}" text-anchor="end">${nf(n)}</text>
+    return `${nm === mark ? `<rect x="-6" y="${cy - RH / 2 + 1}" width="${W + 12}" height="${RH - 2}" rx="6" fill="var(--raised)"/>` : ""}<text x="0" y="${cy + 4}" class="vl">${esc(nm)}${nm === mark ? " ◂" : ""}</text><text x="${PL - 8}" y="${cy + 4}" text-anchor="end">${nf(n)}</text>
       ${w >= 1 ? `<rect x="${x.toFixed(1)}" y="${cy - 6}" width="${w.toFixed(1)}" height="12" rx="3" fill="${v < 0 ? VIZ.blue : VIZ.red}"/>` : ""}
       <text x="${W}" y="${cy + 4}" text-anchor="end" class="vl">${pctTxt(v)}</text>`;
   }).join("");
@@ -1282,60 +1324,71 @@ function byState(cars) {
   if (rows.length < 2) return "";
   return anaSection(L("By state", "Por estado"), L("Median asking price against the national fair price, same year and km. States with 5+ ads; the number is how many.",
       "Preço pedido mediano em relação ao preço justo do Brasil, mesmo ano e km. Estados com 5+ anúncios; o número é quantos."),
-    divBars(rows, L("Price by state", "Preço por estado")));
+    divBars(rows, L("Price by state", "Preço por estado"), LOCAL?.uf));
 }
 
-function bestDeals(cars, name) {
-  const top = cars.filter(c => c.vs_fair != null).sort((a, b) => (b.score ?? 0) - (a.score ?? 0) || b.vs_fair - a.vs_fair).slice(0, 3);
+function bestDeals(cars, name) {                  // uses the local score and % while a town is selected
+  const top = cars.filter(c => vsOf(c) != null).sort((a, b) => (scoreOf(b) ?? 0) - (scoreOf(a) ?? 0) || vsOf(b) - vsOf(a)).slice(0, 3);
   if (!top.length) return "";
-  return anaSection(L("Best deals now", "Melhores negócios agora"), L("Highest scores, national fair price.", "Maiores notas, preço justo do Brasil."),
-    `<ul class="rows">${top.map(c => carRow(c, `${L("score", "nota")} ${scoreTxt(c.score)}, ${dealTxt(c.vs_fair)}`)).join("")}</ul>
+  return anaSection(L("Best deals now", "Melhores negócios agora"),
+    LOCAL ? L("Highest scores with the local fair price.", "Maiores notas com o preço justo local.") : L("Highest scores, national fair price.", "Maiores notas, preço justo do Brasil."),
+    `<ul class="rows">${top.map(c => carRow(c, `${L("score", "nota")} ${scoreTxt(scoreOf(c))}, ${dealTxt(vsOf(c))}`)).join("")}</ul>
      <button class="linkbtn" type="button" data-golist="${esc(name)}">${L("See all in the list, best deals first", "Ver todos na lista, melhores negócios primeiro")}</button>`);
 }
-
 // "All": one row per model, and the price level by state for every model together
-function overview() {
+function overview(near) {                         // near: cars within the selected town's radius
   const rows = DATA.names.map(n => {
-    const cs = DATA.cars.filter(c => c.name === n.name);
+    const nat = DATA.cars.filter(c => c.name === n.name), cs = near ? near.filter(c => c.name === n.name) : nat;
     const days = siteDays(cs);
     const cut = cs.filter(c => c.hist && c.hist.some(([, p], i) => i && p < c.hist[i - 1][1])).length;
     return `<tr data-ana="${esc(n.name)}"><td><span class="dot" style="--c:${n.color}"></span>${esc(n.name)}</td><td>${nf(cs.length)}</td>
-      <td>${kShort(medv(cs.map(c => c.price)))}</td><td>${days.length ? Math.round(medv(days)) : "–"}</td><td>${cs.length ? Math.round(cut / cs.length * 100) + "%" : "–"}</td></tr>`;
+      ${near ? `<td class="m">${nf(nat.length)}</td>` : ""}
+      <td>${cs.length ? kShort(medv(cs.map(c => c.price))) : "–"}</td><td>${days.length ? Math.round(medv(days)) : "–"}</td>
+      ${near ? "" : `<td>${cs.length ? Math.round(cut / cs.length * 100) + "%" : "–"}</td>`}</tr>`;
   }).join("");
-  let html = anaSection(L("All models", "Todos os modelos"), L("Tap a model for its full analysis.", "Toque num modelo para ver a análise completa."),
-    `<table class="otab"><thead><tr><th>${L("Model", "Modelo")}</th><th>${L("Ads", "Anúncios")}</th><th>${L("Median", "Mediana")}</th>
-      <th>${L("Days", "Dias")}</th><th>${L("Cut price", "Baixaram")}</th></tr></thead><tbody>${rows}</tbody></table>
-     <p class="fine">${L("Median asking price and median days listed (ads with a site date only). Cut price: share of ads that lowered their price since", "Preço pedido mediano e dias anunciado (mediana, só anúncios com data no site). Baixaram: parte dos anúncios que reduziram o preço desde")} ${sinceTxt()}.</p>`);
+  let html = near ? locCard(near.length, DATA.cars.length, AUTO ? L("automatic cars", "carros automáticos") : L("cars", "carros")) : "";
+  html += anaSection(L("All models", "Todos os modelos"), L("Tap a model for its full analysis.", "Toque num modelo para ver a análise completa."),
+    `<table class="otab"><thead><tr><th>${L("Model", "Modelo")}</th><th>${near ? L("Here", "Aqui") : L("Ads", "Anúncios")}</th>
+      ${near ? `<th>${L("Brazil", "Brasil")}</th>` : ""}<th>${L("Median", "Mediana")}</th><th>${L("Days", "Dias")}</th>
+      ${near ? "" : `<th>${L("Cut price", "Baixaram")}</th>`}</tr></thead><tbody>${rows}</tbody></table>
+     <p class="fine">${near ? L("Median asking price and days listed of the ads here (days: ads with a site date only).",
+                                "Preço pedido mediano e dias anunciado dos anúncios daqui (dias: só anúncios com data no site).")
+       : `${L("Median asking price and median days listed (ads with a site date only). Cut price: share of ads that lowered their price since",
+              "Preço pedido mediano e dias anunciado (mediana, só anúncios com data no site). Baixaram: parte dos anúncios que reduziram o preço desde")} ${sinceTxt()}.`}</p>`);
   const A = DATA.areas;
   if (A) {
     const st = Object.entries(A.uf).filter(([, [, n]]) => n >= 10).map(([uf, [lv, n]]) => [uf, Math.exp(lv) - 1, n]).sort((a, b) => a[1] - b[1]);
     html += anaSection(L("Price level by state", "Nível de preço por estado"),
       L("All models, manual and automatic, against the national fair price for the same model, km and year. States with 10+ ads; the number is how many.",
         "Todos os modelos, manuais e automáticos, em relação ao preço justo do Brasil para o mesmo modelo, km e ano. Estados com 10+ anúncios; o número é quantos."),
-      divBars(st, L("Price level by state", "Nível de preço por estado")));
+      divBars(st, L("Price level by state", "Nível de preço por estado"), LOCAL?.uf));
   }
   return html;
 }
-
 function pricesView() {
   ANA = {};
+  const near = LOC.active ? applyLoc(DATA.cars.slice()) : (LOCAL = null);
   const name = DATA.names.some(n => n.name === state.ana) ? state.ana : "";
-  if (!name) return overview();
+  if (!name) return overview(near);
   const cars = DATA.cars.filter(c => c.name === name), mk = mkOf(name);
+  const here = near ? near.filter(c => c.name === name) : null;
+  const use = here || cars;
   const gear = AUTO ? L(" (automatic)", " (automático)") : "";
-  return kpis(cars)
-    + anaSection(L("Price against km", "Preço por km") + gear, L("Each dot is an ad on sale. The line is the fair price the score uses.",
-        "Cada ponto é um anúncio à venda. A linha é o preço justo que a nota usa."), scatter(cars, mk))
+  const brT = here ? L(" (Brazil)", " (Brasil)") : "";
+  return (here ? locCard(here.length, cars.length, name) : "") + kpis(use, here ? cars : null)
+    + anaSection(L("Price against km", "Preço por km") + gear, here ? L("Each dot is an ad: the ones here in colour, the rest of Brazil in grey. The line is the local fair price the score uses.",
+        "Cada ponto é um anúncio: os daqui em cor, o resto do Brasil em cinza. A linha é o preço justo local que a nota usa.")
+        : L("Each dot is an ad on sale. The line is the fair price the score uses.", "Cada ponto é um anúncio à venda. A linha é o preço justo que a nota usa."), scatter(cars, mk, here))
     + anaSection(L("What moves the price", "O que muda o preço"), L("From all ads of this model, comparing like with like.",
         "A partir de todos os anúncios deste modelo, comparando carros equivalentes."), movers(cars, mk))
     + anaSection(L("Price by year", "Preço por ano"), L("Dot: median asking price. Bar: the middle half of the ads. In brackets: how many.",
-        "Ponto: preço pedido mediano. Barra: a metade central dos anúncios. Entre parênteses: quantos."), byYear(cars))
-    + anaSection(L("Time on sale", "Tempo à venda"), L("Ads by days since they went up.", "Anúncios por dias desde a publicação."), timeListed(cars))
-    + anaSection(L("Price changes", "Mudanças de preço"), "", priceCuts(cars))
-    + anaSection(L("Market week by week", "Mercado semana a semana"), "", trend(mk))
-    + anaSection(L("Ads that left", "Anúncios que saíram"), L("Ads that disappeared from the sites, often because they sold.",
+        "Ponto: preço pedido mediano. Barra: a metade central dos anúncios. Entre parênteses: quantos."), byYear(cars, here))
+    + anaSection(L("Time on sale", "Tempo à venda"), L("Ads by days since they went up.", "Anúncios por dias desde a publicação."), timeListed(use, here ? cars : null))
+    + anaSection(L("Price changes", "Mudanças de preço"), "", priceCuts(use))
+    + anaSection(L("Market week by week", "Mercado semana a semana") + brT, "", trend(mk))
+    + anaSection(L("Ads that left", "Anúncios que saíram") + brT, L("Ads that disappeared from the sites, often because they sold.",
         "Anúncios que sumiram dos sites, muitas vezes porque foram vendidos."), leftMarket(cars, mk))
-    + byState(cars) + bestDeals(cars, name);
+    + byState(cars) + bestDeals(use, name);
 }
 function scatTap(e) {
   const svg = $("#scat");
@@ -1348,7 +1401,8 @@ function scatTap(e) {
   if (!best) { sel.setAttribute("visibility", "hidden"); return; }
   const c = DATA.cars.find(x => x.id === best.id);
   sel.setAttribute("cx", best.x); sel.setAttribute("cy", best.y); sel.setAttribute("visibility", "visible");
-  $("#scatOut").innerHTML = `<span><b>${money(c.price)}</b> ${c.year ?? ""}, ${kmFmt(c.km)}<br><span class="m">${esc(dealTxt(c.vs_fair))}${c.place ? ", " + esc(c.place) : ""}</span></span>
+  const loc = LOC.active && c._dist != null ? ` (${c._dist < 1 ? L("in town", "na cidade") : Math.round(c._dist) + " km"})` : "";
+  $("#scatOut").innerHTML = `<span><b>${money(c.price)}</b> ${c.year ?? ""}, ${kmFmt(c.km)}<br><span class="m">${esc(dealTxt(best.front ? vsOf(c) : c.vs_fair))}${c.place ? ", " + esc(c.place) + loc : ""}</span></span>
     <button type="button" data-car="${esc(c.id)}">${L("Details", "Detalhes")}</button>`;
 }
 function paintTabs() {
@@ -1371,6 +1425,8 @@ document.addEventListener("click", e => {
   if (carB) return detailSheet(DATA.cars.find(c => c.id === carB.dataset.car));
   const anaRow = t.closest("[data-ana]");
   if (anaRow) { state.ana = anaRow.dataset.ana; window.scrollTo({top: 0}); return render(); }
+  const widen = t.closest(".ana [data-radius]");
+  if (widen) { LOC.radius = +widen.dataset.radius; saveLoc(); return render(); }
   const goList = t.closest("[data-golist]");
   if (goList) {
     Object.assign(state, {tab: "list", names: [goList.dataset.golist], sort: "score", dir: "desc"});
