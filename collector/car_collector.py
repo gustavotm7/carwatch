@@ -126,9 +126,15 @@ LINK_RE = {
     "autotrader": re.compile(r"(?:https?://www\.autotrader\.ca)?(/offers/[A-Za-z0-9_\-.%+]+-(" + UUID + r"))"),
     "kijiji": re.compile(r"(?:https?://www\.kijiji\.ca)?(/v-cars-trucks/[A-Za-z0-9_\-.%/]+?/(m?\d{6,12}))(?=[\"'?#\s])"),
     "carpages": re.compile(r"(?:https?://www\.carpages\.ca)?(/used-cars/[a-z\-]+/[a-z\-]+/(\d{4}-[a-z0-9\-]+-\d{5,10}))"),
+    "napista": re.compile(r"(?:https?://napista\.com\.br)?(/anuncios/(" + UUID + r"))"),
+    "mobiauto": re.compile(r"(?:https?://www\.mobiauto\.com\.br)?(/comprar/carros/[a-z0-9\-]+/[a-z0-9\-]+/[a-z0-9\-]+/"
+                           r"\d{4}/[a-z0-9\-]+/detalhes/(\d{5,10}))"),
 }
 HOSTS = {"autotrader": "https://www.autotrader.ca", "kijiji": "https://www.kijiji.ca",
-         "carpages": "https://www.carpages.ca"}
+         "carpages": "https://www.carpages.ca", "napista": "https://napista.com.br",
+         "mobiauto": "https://www.mobiauto.com.br"}
+JSON_SEARCH = {"napista", "mobiauto"}     # search pages carry the ads as data: unwanted ones are skipped unopened
+COUNTRY = {"country": "CA", "currency": "CAD", "links": []}   # from the config file (Brazil: BR / BRL / OLX links)
 
 
 def source_of(url):
@@ -170,6 +176,10 @@ def load_config(path=None):
     with open(cfg_path, encoding="utf-8") as f:
         cfg = json.load(f)
     MODELS = [m for m in cfg["models"] if m.get("enabled", True)]
+    COUNTRY.update(country=cfg.get("country", "CA"), currency=cfg.get("currency", "CAD"),
+                   links=[{"model": m["model"], "families": [g["family"] for g in m["generations"]],
+                           "links": [{"site": s, "url": u} for s, u in m.get("links", [])]}
+                          for m in MODELS if m.get("links")])
     FAMILY_STYLE.clear(); TRIMS.clear(); NEEDS_TEXT_CONFIRM.clear(); COMPS.clear()
     searches = []
     for m in MODELS:
@@ -234,11 +244,13 @@ def classify(model, year, body):
 def classify_trans(family: str, field: str, desc: str) -> str:
     """m = manual confirmed, c = field and text disagree, u = unconfirmed, a = automatic/unknown (skipped)."""
     f, d = (field or "").lower(), (desc or "").lower()
-    auto_w = r"auto|smg|dct|dkg|steptronic|sequential|dual|cvt|tiptronic"
+    auto_w = r"auto|smg|dct|dkg|steptronic|sequential|dual|cvt|tiptronic"      # 'Autom\u00e1tico/Automatizado' too
     field_a = bool(re.search(auto_w, f))
     field_m = bool(re.search(r"manual|manuel|stick|6[- ]?spd|6mt", f)) and not field_a
-    text_m = bool(re.search(r"6[- ]?speed manual|\b6[- ]?spd\b|\b6mt\b|\bmanual\b|\bmanuel+e?\b|\bstick\b|three[- ]pedal", d))
-    text_a = bool(re.search(r"\bsmg\b|steptronic|\bautomatic\b|\bautomatique\b|\bdct\b|\bdkg\b|tiptronic|paddle", d))
+    text_m = bool(re.search(r"6[- ]?speed manual|\b6[- ]?spd\b|\b6mt\b|\bmanual\b|\bmanuel+e?\b|\bstick\b|three[- ]pedal"
+                            r"|c\u00e2mbio manual|cambio manual|\bmec\u00e2nico\b|\bmecanico\b", d))
+    text_a = bool(re.search(r"\bsmg\b|steptronic|\bautomatic\b|\bautomatique\b|\bdct\b|\bdkg\b|tiptronic|paddle"
+                            r"|c\u00e2mbio autom|cambio autom|\bautom\u00e1tic[oa]\b|\bautomatizad[oa]\b|\bcvt\b", d))
     if field_m and text_a:
         return "c"
     if field_m:
@@ -257,13 +269,13 @@ def body_of(raw: str, slug: str = "") -> str:
 
 def _body_words(t: str) -> str:
     t = (t or "").lower()
-    if re.search(r"convertible|cabrio|roadster|cabriolet", t):
+    if re.search(r"convertible|cabrio|roadster|cabriolet|convers[i\u00ed]vel", t):
         return "conv"
-    if re.search(r"wagon|touring wgn|estate|wgn|sports? wagon", t) or (re.search(r"touring", t) and "bmw" in t):
+    if re.search(r"wagon|touring wgn|estate|wgn|sports? wagon|perua", t) or (re.search(r"touring", t) and "bmw" in t):
         return "wagon"
-    if re.search(r"coupe|coup\u00e9|\bcpe\b", t):
+    if re.search(r"coupe|coup\u00e9|\bcpe\b|cup\u00ea", t):
         return "coupe"
-    if "sedan" in t or "berline" in t:
+    if "sedan" in t or "berline" in t or re.search(r"\bsed[a\u00e3]\b|\bsed\.", t):
         return "sedan"
     return "unk"
 
@@ -284,12 +296,16 @@ FLAG_RULES = {
     "Rebuilt title": r"rebuilt (title|status|vehicle)|(title|status|brand(ed)?)\s*[:\-]?\s*rebuilt|reconstruit",
     "Salvage title": r"\bsalvage\b|irr[e\u00e9]cup[e\u00e9]rable",
     "Accident mentioned": r"(minor|small|light|previous|prior|front|rear|side)[- ](end )?(accident|collision|damage)"
-                          r"|accident (history|reported|claim|repaired)|carfax shows|claims? (of|totall?ing) \$?\d",
-    "Sold as-is": r"\bas[- ]is\b|tel quel|not (safety )?certified|without (a )?safety|unsafetied",
+                          r"|accident (history|reported|claim|repaired)|carfax shows|claims? (of|totall?ing) \$?\d"
+                          r"|passagem (por|em) leil[a\u00e3]o|sinistrad|recuperad[oa] de sinistro|chassi remarcado"
+                          r"|indenizad[oa] (pela|por) seguradora",
+    "Sold as-is": r"\bas[- ]is\b|tel quel|not (safety )?certified|without (a )?safety|unsafetied|vendo no estado|no estado em que se encontra",
     "Needs work": r"needs (some )?(work|tlc|repair|a clutch|clutch|engine|transmission)|check engine light"
-                  r"|engine (knock|noise)|does not run|not running|project car|mechanic.?s special",
+                  r"|engine (knock|noise)|does not run|not running|project car|mechanic.?s special"
+                  r"|precisa de (reparo|reforma|manuten)|para reforma|n[a\u00e3]o liga|motor (batendo|fundido)|para ret[i\u00ed]fica",
     "Modified": r"\btuned\b|\bmodified\b|\bmods\b|coilovers?|\bheaders\b|supercharg|turbo kit|\bstage ?[123]\b"
-                r"|aftermarket (exhaust|intake|suspension)|\bcat[- ]?back\b",
+                r"|aftermarket (exhaust|intake|suspension)|\bcat[- ]?back\b"
+                r"|rebaixad|\bremap|turbinad|preparad[oa] |escape esportivo|suspens[a\u00e3]o (de )?rosca",
     "Rod bearings done": r"rod bearings? (were |have been |was )?(done|replaced|serviced|upgraded)"
                          r"|(new|replaced|fresh|upgraded) rod bearings|rod bearing (service|job|replacement)"
                          r"|coussinets (de bielle )?(remplac|fait)",
@@ -297,12 +313,14 @@ FLAG_RULES = {
     "VANOS/timing done": r"vanos (rebuilt|done|replaced|serviced|seals)|new (timing chain|chain guides|vanos)"
                          r"|(timing chain|chain guides?) (were |was |have been )?(done|replaced|serviced)",
     "Clutch done": r"new clutch|clutch (was |has been )?(replaced|done|installed)|recent(ly replaced)? clutch"
-                   r"|nouvel embrayage|embrayage (neuf|remplac)",
+                   r"|nouvel embrayage|embrayage (neuf|remplac)|embreagem (nova|trocada|rec[e\u00e9]m trocada)",
     "Service records": r"service (records|history)|maintenance (records|history)|records available|full history"
-                       r"|dealer (maintained|serviced)|carnet d.entretien|historique d.entretien",
+                       r"|dealer (maintained|serviced)|carnet d.entretien|historique d.entretien"
+                       r"|revis(?:[o\u00f5]es|ado) (?:\w+ ){0,3}concession[a\u00e1]ria|todas as revis[o\u00f5]es|manual e chave reserva",
     "No accidents stated": r"no accidents?|accident[- ]free|never been in an accident|sans accident|jamais accident"
-                           r"|aucun accident|clean carfax",
-    "One owner": r"\bone owner\b|\b1 owner\b|single owner|1 propri[e\u00e9]taire|un (seul )?propri[e\u00e9]taire",
+                           r"|aucun accident|clean carfax|nunca batid|sem batida|sem sinistro|sem passagem por leil",
+    "One owner": r"\bone owner\b|\b1 owner\b|single owner|1 propri[e\u00e9]taire|un (seul )?propri[e\u00e9]taire"
+                 r"|[u\u00fa]nico dono|1 dono\b",
     "Winter stored": r"never seen (a )?winter|no winters?|winter stored|stored (for the |in )?winters?"
                      r"|summer (car|only|driven)|jamais (roul[e\u00e9]e? l.)?hiver|remis[e\u00e9]e? l.hiver",
 }
@@ -490,6 +508,12 @@ def parse_listing(html):
                 info["listed"] = str(ld["createdTimestampWithOffset"])[:10]
     except Exception:
         pass
+    try:                                                # NaPista ('offer') / Mobiauto ('deal'): ad data in the page
+        m = re.search(r'(?is)<script[^>]+id=["\']__NEXT_DATA__["\'][^>]*>(.*?)</script>', html)
+        pp = json.loads(m.group(1))["props"]["pageProps"] if m else {}
+        info.update(br_ad(pp))
+    except Exception:
+        pass
     if "listed" not in info:                            # Kijiji: date the ad was posted (sortingDate moves on bumps)
         m = re.search(r'"activationDate"\s*:\s*"(\d{4}-\d{2}-\d{2})', html)
         if m:
@@ -556,6 +580,75 @@ def parse_listing(html):
     return info
 
 
+def _place(city, uf):
+    city = (city or "").strip()
+    if city.isupper():
+        city = city.title()
+    return ", ".join(x for x in (city, (uf or "").strip()) if x)
+
+
+def br_ad(pp):
+    """Ad fields from a NaPista ('offer') or Mobiauto ('deal') page. Prices/km are numbers in the data."""
+    info = {}
+    off, deal = pp.get("offer"), pp.get("deal")
+    if isinstance(off, dict) and isinstance(off.get("offer"), dict):
+        off = off["offer"]                              # some pages nest the ad one level down
+    if isinstance(off, dict) and off.get("id"):
+        loc = off.get("location") or {}
+        info.update(title=f'{off.get("modelYear", "")} {off.get("versionName", "")}'.strip(),
+                    price=to_int(off.get("price")), km=to_int(off.get("mileage")), year=to_int(off.get("modelYear")),
+                    trans_field=str((off.get("transmissionType") or {}).get("name") or ""),
+                    place=_place(loc.get("city"), loc.get("uf")), status=str(off.get("status") or ""))
+        if off.get("description"):
+            info["desc"] = str(off["description"]).replace("\\n", "\n")
+        if re.match(r"\d{4}-\d{2}-\d{2}", str(off.get("createdDate") or "")):
+            info["listed"] = str(off["createdDate"])[:10]
+        ph = sorted(off.get("photos") or [], key=lambda x: x.get("order", 0))
+        if ph and str(ph[0].get("url", "")).startswith("https://"):
+            info["image"] = ph[0]["url"]
+        info["body_raw"] = str(off.get("versionName") or "")
+    elif isinstance(deal, dict) and deal.get("id"):
+        info.update(title=" ".join(str(x) for x in (deal.get("modelYear"), deal.get("makeName"), deal.get("modelName"),
+                                                     deal.get("trimName"), deal.get("bodystyleName")) if x),
+                    price=to_int(deal.get("price")), km=to_int(deal.get("km")), year=to_int(deal.get("modelYear")),
+                    trans_field=str(deal.get("transmissionName") or ""), body_raw=str(deal.get("bodystyleName") or ""),
+                    place=_place(deal.get("dealerCity"), deal.get("dealerState")))
+        if deal.get("comments"):
+            info["desc"] = str(deal["comments"])
+        imgs = pp.get("images") or []
+        if imgs and str(imgs[0].get("imageSrc", "")).startswith("https://"):
+            info["image"] = imgs[0]["imageSrc"]
+    return {k: v for k, v in info.items() if v not in (None, "")}
+
+
+def br_search_items(source, html):
+    """[(ad id key, title, model year, gearbox text)] from a NaPista / Mobiauto search page (main results only)."""
+    m = re.search(r'(?is)<script[^>]+id=["\']__NEXT_DATA__["\'][^>]*>(.*?)</script>', html)
+    if not m:
+        return []
+    try:
+        pp = json.loads(m.group(1))["props"]["pageProps"]
+    except (ValueError, KeyError):
+        return []
+    out = []
+    if source == "napista":
+        for o in (pp.get("searchResult") or {}).get("offers") or []:
+            out.append((str(o.get("id")), f'{o.get("modelYear", "")} {o.get("versionName", "")}', to_int(o.get("modelYear")),
+                        str(o.get("versionName") or "")))
+    else:
+        for o in (pp.get("deals") or {}).get("results") or []:
+            tr = o.get("trim") or {}
+            title = " ".join(str(x) for x in ((tr.get("model") or {}).get("year"), (tr.get("make") or {}).get("name"),
+                                                (tr.get("model") or {}).get("name"), tr.get("name"),
+                                                (tr.get("bodystyle") or {}).get("name")) if x)
+            out.append((str(o.get("id")), title, to_int((tr.get("model") or {}).get("year") or tr.get("productionYear")),
+                        str((tr.get("transmission") or {}).get("name") or "")))
+    return out
+
+
+AUTO_IN_TITLE = re.compile(r"\baut\b|\baut\.|\bauto\b|autom[a\u00e1]tic|automatizad|\bcvt\b|tiptronic|steptronic|\bdct\b|\bsmg\b", re.I)
+
+
 def photo_of(row, html, info):
     """Autotrader: '<listing>_<image>[.ext]' (first photo of THIS listing). Others: full image URL."""
     if row["source"] == "autotrader":
@@ -585,9 +678,13 @@ def check_listing(sess, row):
     if row["source"] == "autotrader":
         if row["listing_id"] not in final:
             return "gone", "redirected to a search page (ad removed)"
-    elif row["source"] in ("kijiji", "carpages") and id_key(row) not in final:
+    elif row["source"] in ("kijiji", "carpages", "napista") and id_key(row) not in final:
+        return "gone", "redirected away from the ad"
+    elif row["source"] == "mobiauto" and f"/detalhes/{id_key(row)}" not in final:
         return "gone", "redirected away from the ad"
     info = parse_listing(r.text)
+    if info.get("status") and info["status"].upper() not in ("PUBLISHED", "ACTIVE", "ONLINE"):
+        return "gone", f"ad status {info['status']}"
     if GONE_TEXT.search(info.get("text", "")[:6000]) and info.get("price") is None:
         return "gone", "page says the listing is no longer available"
     if info.get("price") is None:
@@ -735,6 +832,11 @@ def page_url(source, base, i):
         return base
     if source == "kijiji":
         return re.sub(r"/(k0c\d+l\d+)", rf"/page-{i + 1}/\1", base)
+    if source == "napista":
+        return f"{base}{'&' if '?' in base else '?'}pn={i + 1}"
+    if source == "mobiauto":                             # .../civic/pagina-2  or  .../civic/pagina-2/s/cambio-manual
+        head, sep_s, tail = base.partition("/s/")
+        return f"{head}/pagina-{i + 1}" + (f"/s/{tail}" if sep_s else "")
     sep = "&" if "?" in base else "?"
     return f"{base}{sep}page={i + 1}"
 
@@ -753,6 +855,32 @@ def search_ids(sess, known, stats):
             page_ids = {}
             for m in rx.finditer(r.text):
                 page_ids[make_id(source, m.group(2))] = HOSTS[source] + m.group(1)
+            if source in JSON_SEARCH:
+                items = br_search_items(source, r.text)
+                keep = {}
+                for key, title, year, gear in items:
+                    lid = make_id(source, key)
+                    url = page_ids.get(lid) or (f"{HOSTS[source]}/anuncios/{key}" if source == "napista" else None)
+                    if not url:
+                        continue
+                    if not detect_key(title, "", year) or (AUTO_IN_TITLE.search(gear) and not re.search(r"manual|\bmec", gear, re.I)):
+                        stats.setdefault("prefiltered", 0)
+                        stats["prefiltered"] += 1
+                        keep.setdefault("_seen", set()).add(lid)      # still counts for paging, not opened
+                        continue
+                    keep[lid] = url
+                seen_extra = keep.pop("_seen", set())
+                page_ids = keep
+                if not page_ids and not seen_extra:
+                    break
+                fresh = (set(page_ids) | seen_extra) - seen_here
+                if not fresh:
+                    break
+                seen_here |= fresh
+                for lid in set(page_ids) - set(found):
+                    if lid not in known:
+                        found.setdefault(lid, (source, page_ids[lid]))
+                continue
             fresh = set(page_ids) - seen_here
             if not fresh:
                 break                                    # paging not supported this way / last page
@@ -1051,6 +1179,7 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
     firsts = sorted(r["first_seen"] for r in rows if r["first_seen"] and r["status"] != "skip")
     data = {
         "updated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),
+        "country": COUNTRY["country"], "currency": COUNTRY["currency"], "links": COUNTRY["links"],
         "baseline": firsts[0] if firsts else "",
         "repo": os.environ.get("GITHUB_REPOSITORY", ""),
         "families": [fams[f] for f in fams if any(c["family"] == f for c in cars)],

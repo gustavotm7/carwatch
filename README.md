@@ -23,6 +23,17 @@ AP1 and AP2 S2000s.
 | `comps` | Optional sold prices from Bring a Trailer: `bat` = results page id(s) of the model, `match` = regex the auction title must contain, `body` = body when the title doesn't say |
 | `searches` | Search pages read every day, per site |
 
+## Brazil
+
+Tap the flag next to the name to switch between Canada and Brazil (the app remembers the choice and keeps
+filters per country). The Brazil list comes from `cars_config_br.json`, same format as `cars_config.json`:
+
+- Read every day: **NaPista** and **Mobiauto** (data in `data_br/`, app data in `site/data/cars_br.json`).
+- **OLX and Webmotors** block automated reading, so each car has one-tap search links (`links` in the config),
+  shown at the top of the Brazil list and in the menu.
+- Prices in R$. The score works the same way, against the other Brazilian cars of the same model.
+- Brazilian years are model years (a "2010/2011" car is a 2011).
+
 ## Files
 
 - `collector/car_collector.py` – checks ads, finds new ones, scores them (also runs on Windows; see the Excel version).

@@ -34,7 +34,20 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .top-inner{max-width:1100px;margin:0 auto;padding:10px 14px 0}
 .brand{display:flex;align-items:baseline;gap:10px}
 .brand h1{margin:0;font:700 24px/1 var(--cond);letter-spacing:.01em;display:flex;align-items:center;gap:8px}
-.flag-ca{height:.72em;width:auto;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.12);display:block}
+.flag-btn{display:flex;align-items:center;padding:6px 4px;margin:-6px -4px;border-radius:5px;line-height:0;
+  background:none;border:0;box-shadow:none;cursor:pointer}
+.flag-btn:hover .cflag{box-shadow:0 0 0 1px rgba(255,255,255,.35)}
+.flag-btn:active .cflag{transform:scale(.94)}
+.cflag{height:.72em;width:auto;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.12);display:block;transition:transform .12s}
+.others{display:flex;align-items:center;gap:12px;margin:0 0 14px;padding:12px 14px;border-radius:14px;
+  background:var(--card);border:1px solid var(--line);font-size:14px;color:var(--muted)}
+.others b{color:var(--text);font-weight:600}
+.others button{margin-left:auto;padding:8px 14px;border-radius:999px;background:var(--raised);color:var(--text);font-weight:600;white-space:nowrap}
+.linkset{display:grid;gap:14px;margin-top:6px}
+.linkset h3{margin:0 0 6px!important}
+.linkset .btns{display:flex;gap:8px;flex-wrap:wrap}
+.linkset a{padding:9px 14px;border-radius:999px;background:var(--raised);color:var(--text);text-decoration:none;font-weight:600;font-size:14px}
+.linkset a:hover{background:#252c36}
 .brand .meta{color:var(--muted);font-size:13px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .icon-btn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--muted)}
 .icon-btn:hover{background:var(--raised);color:var(--text)}
@@ -193,7 +206,7 @@ select.opt{background:var(--raised);color:var(--text);padding:8px 12px;font-size
 <header class="top">
   <div class="top-inner">
     <div class="brand">
-      <h1>CarWatch<svg class="flag-ca" viewBox="0 0 9600 4800" role="img" aria-label="Canada"><path fill="#d52b1e" d="M0 0h9600v4800H0z"/><path fill="#fff" d="M2400 0h4800v4800H2400z"/><path fill="#d52b1e" d="M4890 4430l-45-863a95 95 0 0 1 111-98l859 151-116-320a65 65 0 0 1 20-73l941-762-212-99a65 65 0 0 1-34-79l186-572-542 115a65 65 0 0 1-73-38l-105-247-423 454a65 65 0 0 1-111-57l204-1052-327 189a65 65 0 0 1-91-27l-332-652-332 652a65 65 0 0 1-91 27l-327-189 204 1052a65 65 0 0 1-111 57l-423-454-105 247a65 65 0 0 1-73 38l-542-115 186 572a65 65 0 0 1-34 79l-212 99 941 762a65 65 0 0 1 20 73l-116 320 859-151a95 95 0 0 1 111 98l-45 863z"/></svg></h1>
+      <h1>CarWatch<button class="flag-btn" id="flagBtn" type="button"></button></h1>
       <span class="meta" id="meta">Loading…</span>
       <button class="icon-btn" id="menuBtn" aria-label="Menu">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><circle cx="4" cy="10" r="1.8"/><circle cx="10" cy="10" r="1.8"/><circle cx="16" cy="10" r="1.8"/></svg>
@@ -228,12 +241,24 @@ select.opt{background:var(--raised);color:var(--text);padding:8px 12px;font-size
 "use strict";
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const money = n => n == null ? "" : "$" + Math.round(n).toLocaleString("en-CA");
+const FLAGS = {
+  CA: `<svg class="cflag" viewBox="0 0 9600 4800" role="img" aria-label="Canada"><path fill="#d52b1e" d="M0 0h9600v4800H0z"/><path fill="#fff" d="M2400 0h4800v4800H2400z"/><path fill="#d52b1e" d="M4890 4430l-45-863a95 95 0 0 1 111-98l859 151-116-320a65 65 0 0 1 20-73l941-762-212-99a65 65 0 0 1-34-79l186-572-542 115a65 65 0 0 1-73-38l-105-247-423 454a65 65 0 0 1-111-57l204-1052-327 189a65 65 0 0 1-91-27l-332-652-332 652a65 65 0 0 1-91 27l-327-189 204 1052a65 65 0 0 1-111 57l-423-454-105 247a65 65 0 0 1-73 38l-542-115 186 572a65 65 0 0 1-34 79l-212 99 941 762a65 65 0 0 1 20 73l-116 320 859-151a95 95 0 0 1 111 98l-45 863z"/></svg>`,
+  BR: `<svg class="cflag" viewBox="0 0 720 504" role="img" aria-label="Brazil"><path fill="#009c3b" d="M0 0h720v504H0z"/><path fill="#ffdf00" d="M61 252 360 61l299 191-299 191z"/><circle cx="360" cy="252" r="126" fill="#002776"/><clipPath id="brc"><circle cx="360" cy="252" r="126"/></clipPath><path clip-path="url(#brc)" d="M230 222c90-20 180-6 262 44" fill="none" stroke="#fff" stroke-width="20"/></svg>`,
+};
+const COUNTRIES = {
+  CA: {name: "Canada", file: "data/cars.json", sym: "$", locale: "en-CA", next: "BR"},
+  BR: {name: "Brazil", file: "data/cars_br.json", sym: "R$\u00a0", locale: "pt-BR", next: "CA"},
+};
+let COUNTRY = (() => { try { return COUNTRIES[localStorage.getItem("cw-country")] ? localStorage.getItem("cw-country") : "CA"; } catch (e) { return "CA"; } })();
+const CUR = () => COUNTRIES[COUNTRY];
+const money = n => n == null ? "" : CUR().sym + Math.round(n).toLocaleString(CUR().locale);
 const kmFmt = n => n == null ? "km n/a" : (n >= 1000 ? Math.round(n / 1000) + "k km" : n + " km");
 const SITES = {
   autotrader: {label: "Autotrader", domain: "autotrader.ca"},
   kijiji: {label: "Kijiji", domain: "kijiji.ca"},
   carpages: {label: "CarPages", domain: "carpages.ca"},
+  napista: {label: "NaPista", domain: "napista.com.br"},
+  mobiauto: {label: "Mobiauto", domain: "mobiauto.com.br"},
 };
 const GEARBOX = {
   m: {cls: "gb-m", label: "Manual", long: "Manual: the ad's data and the seller's text both say manual."},
@@ -246,11 +271,12 @@ const DEFAULT_STATE = {sort: "score", dir: "desc", names: [], gear: ["m", "c", "
                        maxKm: 0, yearFrom: 0, yearTo: 0, hideHard: false, hideRed: false};
 let DATA = null, state = load();
 
+function stateKey() { return COUNTRY === "CA" ? "cw-state" : "cw-state-" + COUNTRY; }   // filters kept per country
 function load() {
-  try { return Object.assign({}, DEFAULT_STATE, JSON.parse(localStorage.getItem("cw-state") || "{}")); }
+  try { return Object.assign({}, DEFAULT_STATE, JSON.parse(localStorage.getItem(stateKey()) || "{}")); }
   catch (e) { return Object.assign({}, DEFAULT_STATE); }
 }
-function save() { try { localStorage.setItem("cw-state", JSON.stringify(state)); } catch (e) {} }
+function save() { try { localStorage.setItem(stateKey(), JSON.stringify(state)); } catch (e) {} }
 
 function scoreColor(s) {                       // red 0 -> amber 5 -> green 10
   const t = Math.max(0, Math.min(1, (s ?? 0) / 10));
@@ -282,7 +308,7 @@ const DAY = 864e5;
 const asDate = iso => new Date(String(iso).slice(0, 10) + "T12:00:00");
 const fmtDate = (iso, yr = true) => asDate(iso).toLocaleDateString("en-CA", yr ? {month: "short", day: "numeric", year: "numeric"}
                                                                        : {month: "short", day: "numeric"});
-const kShort = n => n >= 1000 ? "$" + (n / 1000).toFixed(n >= 1e5 ? 0 : 1).replace(/\.0$/, "") + "k" : money(n);
+const kShort = n => n >= 1000 ? CUR().sym.trim() + (n / 1000).toFixed(n >= 1e5 ? 0 : 1).replace(/\.0$/, "") + "k" : money(n);
 function daysTag(c) {
   if (c.days == null) return "";
   const long = c.days >= 60;
@@ -387,9 +413,11 @@ function render() {
   const n = activeFilterCount();
   $("#fCount").hidden = !n; $("#fCount").textContent = n;
   renderChips();
-  $("#list").innerHTML = cars.length
+  const others = (DATA.links || []).length
+    ? `<div class="others"><span><b>OLX and Webmotors</b> aren't read automatically.</span><button id="othersBtn" type="button">Search them</button></div>` : "";
+  $("#list").innerHTML = others + (cars.length
     ? `<div class="count">${cars.length === DATA.cars.length ? `${cars.length} cars` : `${cars.length} of ${DATA.cars.length} cars`}</div>` + cars.map(card).join("")
-    : `<div class="empty">No cars match these filters.<br><button id="clearAll">Clear filters</button></div>`;
+    : `<div class="empty">No cars match these filters.<br><button id="clearAll">Clear filters</button></div>`);
   save();
 }
 
@@ -461,7 +489,7 @@ function soldSection(c) {
   const gone = (DATA.gone || []).filter(g => g.family === c.family && g.id !== c.id && g.trans !== "a" &&
       (g.body === "conv") === conv && Math.abs(+g.year - (c.year || 0)) <= 2).slice(0, 4);
   if (!s && !band && !gone.length) return "";
-  let html = `<h3>Sold prices</h3>`;
+  let html = `<h3>${s || band ? "Sold prices" : "Similar ads that left"}</h3>`;
   if (s && s.est) {
     const vs = s.vs;
     const pill = vs > .02 ? `<span class="deal under">ask ${Math.round(vs * 100)}% under</span>`
@@ -485,7 +513,7 @@ function soldSection(c) {
   if (gone.length) html += `<p style="margin:12px 0 4px">Similar ads that left CarWatch (often sold):</p><ul class="steps">${gone.map(g =>
       `<li><span>${esc(g.year)}, ${g.km ? Math.round(g.km / 1000) + "k km" : "km n/a"}</span><span><a href="${esc(g.url)}" target="_blank" rel="noopener" style="color:var(--text)">asked ${money(+g.price)}</a>,
         gone ${fmtDate(g.last_seen, false)}${g.days != null ? ` after ${g.days} days` : ""}</span></li>`).join("")}</ul>`;
-  html += `<p class="fine">US auction prices in Canadian dollars at the Bank of Canada rate of the sale day. They are hammer prices: the buyer also pays a 5% fee, and importing adds duty, tax and fees.</p>`;
+  if (s || band) html += `<p class="fine">US auction prices in Canadian dollars at the Bank of Canada rate of the sale day. They are hammer prices: the buyer also pays a 5% fee, and importing adds duty, tax and fees.</p>`;
   return html;
 }
 function detailSheet(c) {
@@ -591,8 +619,12 @@ function menuSheet() {
       ${repo ? `<a href="https://github.com/${esc(repo)}/actions/workflows/update.yml" target="_blank" rel="noopener">
         <span>Update now<small>Opens GitHub: press "Run workflow". New data shows here in about 10 minutes.</small></span></a>` : ""}
       <button id="howScore"><span>How the score works<small>Price against similar cars, gearbox certainty and flags</small></span></button>
+      ${(DATA.links || []).length ? `<button id="menuLinks"><span>Search OLX and Webmotors<small>Sites CarWatch can't read: one-tap searches per car</small></span></button>` : ""}
+      <button id="menuCountry"><span>Switch to ${COUNTRIES[CUR().next].name}<small>Or tap the flag next to the name</small></span></button>
     </nav>
     ${gone ? `<h3>Recently sold or removed</h3><ul class="gone">${gone}</ul>` : ""}`, "Menu");
+  if ($("#menuLinks")) $("#menuLinks").onclick = () => linksSheet();
+  $("#menuCountry").onclick = () => { closeSheet(); switchCountry(); };
   $("#howScore").onclick = () => openSheet(`
     <h2>How the score works</h2>
     <p>Every car starts at ${DATA.score.base} of 10. The fair price is estimated from the other cars of the same model,
@@ -600,9 +632,38 @@ function menuSheet() {
       and each ${Math.round(DATA.score.pct_per_point * 100)}% over it removes one. For models with only a few cars listed, the price counts less.</p>
     <p>Gearbox: a doubtful manual costs up to a point. Red flags from the ad text take points off (a rebuilt title costs 3);
       good signs such as rod bearings done add up to ${DATA.score.green_cap}.</p>
-    <p>Sold prices from Bring a Trailer show in each car's details but don't change the score: they are US auction results,
-      a different market from Canadian asking prices. Use them as a check on the fair price.</p>
+    ${COUNTRY === "CA" ? `<p>Sold prices from Bring a Trailer show in each car's details but don't change the score: they are US auction results,
+      a different market from Canadian asking prices. Use them as a check on the fair price.</p>` :
+      `<p>In Brazil the list comes from NaPista and Mobiauto. OLX and Webmotors block automated reading, so check them with the
+      search buttons at the top of the list.</p>`}
     <p class="none">Flags only catch what the seller wrote. Get a history report and an inspection before you buy.</p>`, "How the score works");
+}
+
+function linksSheet() {
+  const sel = new Set(state.names);
+  const famOf = n => (DATA.names.find(x => x.name === n) || {}).family;
+  const selFams = new Set([...sel].map(famOf));
+  const groups = [...DATA.links].sort((a, b) => (b.families.some(f => selFams.has(f)) ? 1 : 0) - (a.families.some(f => selFams.has(f)) ? 1 : 0));
+  openSheet(`
+    <h2>Search other sites</h2>
+    <p class="sub">OLX and Webmotors block automated reading, so their ads aren't scored here. These open each site's search for the car.</p>
+    <div class="linkset">${groups.map(g => `<div><h3>${esc(g.model)}</h3><div class="btns">${g.links.map(l =>
+      `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.site)}</a>`).join("")}</div></div>`).join("")}</div>`, "Search other sites");
+}
+function paintFlag() {
+  const b = $("#flagBtn");
+  b.innerHTML = FLAGS[COUNTRY];
+  b.setAttribute("aria-label", `Showing ${CUR().name}. Switch to ${COUNTRIES[CUR().next].name}`);
+  b.title = `Switch to ${COUNTRIES[CUR().next].name}`;
+}
+function switchCountry() {
+  save();
+  COUNTRY = CUR().next;
+  try { localStorage.setItem("cw-country", COUNTRY); } catch (e) {}
+  state = load();
+  paintFlag();
+  window.scrollTo({top: 0});
+  boot();
 }
 
 // ---------- events ----------
@@ -618,6 +679,7 @@ document.addEventListener("click", e => {
     return render();
   }
   if (t.id === "clearAll") { Object.assign(state, DEFAULT_STATE); return render(); }
+  if (t.closest("#othersBtn")) return linksSheet();
   const cardEl = t.closest(".card");
   if (cardEl) { const c = DATA.cars.find(x => x.id === cardEl.dataset.id); if (c) window.open(c.url, "_blank", "noopener"); }
 });
@@ -637,19 +699,33 @@ $("#sortPrice").onclick = () => { if (state.sort !== "price") { state.sort = "pr
 $("#dirBtn").onclick = () => { state.dir = state.dir === "asc" ? "desc" : "asc"; render(); };
 $("#filtersBtn").onclick = () => filterSheet();
 $("#menuBtn").onclick = () => menuSheet();
+$("#flagBtn").onclick = () => switchCountry();
 
-fetch("data/cars.json?" + Date.now(), {cache: "no-store"})
-  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then(d => {
-    DATA = d;
-    state.names = state.names.filter(n => d.names.some(x => x.name === n));
-    $("#meta").textContent = `${d.cars.length} cars, ${ago(d.updated)}`;
-    render();
-  })
-  .catch(err => {
-    $("#meta").textContent = "";
-    $("#list").innerHTML = `<div class="empty">The car list could not be loaded (${esc(err.message)}). Check your connection and pull down to refresh.</div>`;
-  });
+function boot() {
+  const want = COUNTRY;
+  DATA = null;
+  $("#meta").textContent = "Loading…";
+  $("#chips").innerHTML = "";
+  $("#list").innerHTML = "";
+  fetch(CUR().file + "?" + Date.now(), {cache: "no-store"})
+    .then(r => { if (!r.ok) throw new Error(r.status === 404 ? "not built yet" : r.status); return r.json(); })
+    .then(d => {
+      if (want !== COUNTRY) return;                  // switched again while loading
+      DATA = d;
+      state.names = state.names.filter(n => d.names.some(x => x.name === n));
+      $("#meta").textContent = `${d.cars.length} cars, ${ago(d.updated)}`;
+      render();
+    })
+    .catch(err => {
+      if (want !== COUNTRY) return;
+      $("#meta").textContent = "";
+      $("#list").innerHTML = err.message === "not built yet"
+        ? `<div class="empty">The ${esc(CUR().name)} list appears after the next daily update. Tap the flag to go back.</div>`
+        : `<div class="empty">The car list could not be loaded (${esc(err.message)}). Check your connection and pull down to refresh.</div>`;
+    });
+}
+paintFlag();
+boot();
 </script>
 </body>
 </html>

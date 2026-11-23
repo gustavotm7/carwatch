@@ -6,7 +6,7 @@ on:
   workflow_dispatch:               # "Run workflow" button = update now
   push:
     branches: [carwatch-test]
-    paths: ["collector/**", "cars_config.json", "site/**", ".github/workflows/update.yml"]
+    paths: ["collector/**", "cars_config.json", "cars_config_br.json", "site/**", ".github/workflows/update.yml"]
 
 permissions:
   contents: write
@@ -33,15 +33,22 @@ jobs:
         run: |
           ARGS=""
           # a push that only changes the web page rebuilds the data without visiting the sites
-          if [ "${{ github.event_name }}" = "push" ] && ! git diff --name-only HEAD~1 HEAD | grep -qE '^(collector/|cars_config.json|.github/)'; then ARGS="--no-network"; fi
+          if [ "${{ github.event_name }}" = "push" ] && ! git diff --name-only HEAD~1 HEAD | grep -qE '^(collector/|cars_config|.github/)'; then ARGS="--no-network"; fi
+          echo "ARGS=$ARGS" >> "$GITHUB_ENV"
           python -u collector/car_collector.py --config cars_config.json --data-dir data \
             --export-json site/data/cars.json --no-xlsx --no-photos --keep-snapshots 14 \
             --max-new 250 --skip-sources carpages $ARGS
+      - name: Collect Brazil
+        continue-on-error: true          # a problem with the Brazilian sites never stops the Canadian update
+        run: |
+          python -u collector/car_collector.py --config cars_config_br.json --data-dir data_br \
+            --export-json site/data/cars_br.json --no-xlsx --no-photos --keep-snapshots 14 \
+            --max-new 200 --no-comps $ARGS
       - name: Save data
         run: |
           git config user.name "carwatch-bot"
           git config user.email "carwatch-bot@users.noreply.github.com"
-          git add -A data site/data
+          git add -A data data_br site/data
           git commit -qm "Data update $(date -u +%Y-%m-%d)" || echo "no changes"
           git pull -q --rebase origin "${GITHUB_REF_NAME}" && git push -q
       - uses: actions/configure-pages@v5
