@@ -1,89 +1,67 @@
-"""One-off: page structure of NaPista and Mobiauto (search + ad pages), model address slugs, paging and gearbox filters."""
+"""One-off (2): ad records, photo addresses, paging, gearbox/year filters, removed ads, model address names."""
 import json, os, re, time, requests
 D = os.path.dirname(__file__)
 s = requests.Session()
 s.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) personal-car-watch/2.0", "Accept-Language": "pt-BR,pt;q=0.9"})
-out = {"pages": [], "models": {}}
-
-def nd(html):
-    m = re.search(r'(?is)<script[^>]+id="__NEXT_DATA__"[^>]*>(.*?)</script>', html)
-    try:
-        return json.loads(m.group(1)) if m else None
-    except ValueError:
-        return None
-
-def lists_of_ads(o, path="", found=None):
-    found = [] if found is None else found
-    if isinstance(o, list) and len(o) >= 2 and all(isinstance(x, dict) for x in o[:3]):
-        ks = set().union(*[set(x.keys()) for x in o[:3]])
-        if any(re.search(r"price|preco|valor", k, re.I) for k in ks):
-            found.append((path, len(o), sorted(ks)[:60], json.dumps(o[0], ensure_ascii=False)[:2500]))
-    if isinstance(o, dict):
-        for k, v in o.items(): lists_of_ads(v, f"{path}.{k}", found)
-    elif isinstance(o, list):
-        for i, v in enumerate(o[:3]): lists_of_ads(v, f"{path}[{i}]", found)
-    return found
-
-def probe(url, detail_rx=None):
-    o = {"url": url}
-    try:
-        r = s.get(url, timeout=30); h = r.text
-        o.update(status=r.status_code, final=r.url[:150], bytes=len(h),
-                 title=(re.search(r"(?is)<title[^>]*>(.*?)</title>", h) or [0, ""])[1].strip()[:100])
-        d = nd(h)
-        if d:
-            pp = d.get("props", {}).get("pageProps", {})
-            o["pp_keys"] = list(pp.keys())[:30]
-            o["query"] = d.get("query"); o["page"] = d.get("page")
-            o["lists"] = lists_of_ads(pp)[:3]
-        o["ld_types"] = [re.findall(r'"@type"\s*:\s*"(\w+)"', x)[:6] for x in re.findall(r'(?is)<script[^>]+ld\+json[^>]*>(.*?)</script>', h)][:6]
-        if detail_rx:
-            o["detail_links"] = list(dict.fromkeys(re.findall(detail_rx, h)))[:12]
-        o["_h"] = h
-    except Exception as e:
-        o["error"] = str(e)[:150]
+out = {"slugs": [], "napista_ad": None, "mobi_ad": None, "napista_meta": None, "mobi_sop": None, "gone": [], "img": []}
+def nd(h):
+    m = re.search(r'(?is)<script[^>]+id="__NEXT_DATA__"[^>]*>(.*?)</script>', h)
+    try: return json.loads(m.group(1))["props"]["pageProps"] if m else {}
+    except Exception: return {}
+def trim(o, depth=0):
+    if isinstance(o, dict): return {k: trim(v, depth + 1) for k, v in list(o.items())[:60]}
+    if isinstance(o, list): return [trim(v, depth + 1) for v in o[:3]] + (["...%d" % len(o)] if len(o) > 3 else [])
+    if isinstance(o, str): return o[:300]
     return o
-
-# NaPista: make pages -> model slugs; one search; one ad
-for mk in ("bmw", "honda", "toyota", "nissan"):
-    o = probe(f"https://napista.com.br/busca/{mk}")
-    out["models"][f"napista/{mk}"] = sorted(set(re.findall(rf'href="(/busca/{mk}/[a-z0-9\-]+)"', o.pop("_h", ""))))[:120]
-    time.sleep(2)
-for mk in ("bmw", "honda", "toyota", "nissan"):
-    o = probe(f"https://www.mobiauto.com.br/comprar/carros-usados/brasil/{mk}")
-    out["models"][f"mobiauto/{mk}"] = sorted(set(re.findall(rf'href="(?:https://www\.mobiauto\.com\.br)?(/comprar/carros-usados/brasil/{mk}/[a-z0-9\-]+)"', o.get("_h", ""))))[:120]
-    out["models"][f"mobiauto/{mk}_any"] = sorted(set(re.findall(r'href="([^"]*' + mk + r'[^"]*)"', o.pop("_h", ""))))[:40]
-    time.sleep(2)
-for url, rx in [("https://napista.com.br/busca/bmw/series-3-m3", r'href="(/anuncios?/[^"]+|/carro/[^"]+|/oferta/[^"]+|/[a-z0-9\-]+/\d{5,}[^"]*)"'),
-                ("https://napista.com.br/busca/honda/civic", r'href="(/anuncios?/[^"]+|/carro/[^"]+|/oferta/[^"]+|/[a-z0-9\-]+/\d{5,}[^"]*)"'),
-                ("https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/m3", r'href="([^"]*/detalhes/[^"]*|[^"]*/\d{6,}[^"]*)"'),
-                ("https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic", r'href="([^"]*/detalhes/[^"]*|[^"]*/\d{6,}[^"]*)"')]:
-    o = probe(url, rx); h = o.pop("_h", "")
-    o["href_sample"] = list(dict.fromkeys(re.findall(r'href="([^"]{12,160})"', h)))[40:90]
-    out["pages"].append(o); time.sleep(2)
-# paging / gearbox filter guesses
-for u in ["https://napista.com.br/busca/honda/civic?page=2", "https://napista.com.br/busca/honda/civic?pagina=2",
-          "https://napista.com.br/busca/honda/civic?cambio=manual", "https://napista.com.br/busca/honda/civic/manual",
-          "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic?page=2",
-          "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic?pagina=2",
-          "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/cambio-manual",
-          "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic?cambio=manual"]:
-    o = probe(u); h = o.pop("_h", "")
-    o.pop("lists", None)
-    ids = re.findall(r'"(?:id|adId|listingId|dealId)"\s*:\s*"?(\d{5,})', h)
-    o["n_ids"] = len(set(ids)); o["first_ids"] = list(dict.fromkeys(ids))[:6]
-    o["manual_words"] = len(re.findall(r"(?i)\bmanual\b", h)); o["auto_words"] = len(re.findall(r"(?i)autom[aá]tic", h))
-    out["pages"].append(o); time.sleep(2)
-# one ad page per site (first detail link found)
-for pg in out["pages"][:4]:
-    links = pg.get("detail_links") or []
-    if links:
-        u = links[0] if links[0].startswith("http") else ("https://napista.com.br" if "napista" in pg["url"] else "https://www.mobiauto.com.br") + links[0]
-        o = probe(u); h = o.pop("_h", "")
-        o["kind"] = "ad"
-        o["desc_like"] = [m[:300] for m in re.findall(r'"(?:description|descricao|observacoes?|comments?)"\s*:\s*"((?:[^"\\]|\\.){30,1500})"', h)][:3]
-        o["date_like"] = re.findall(r'"(\w*(?:[Dd]ate|[Cc]reated|[Pp]ublish|[Pp]ublicad)\w*)"\s*:\s*"?([^",}]{6,30})', h)[:12]
-        o["gear_like"] = re.findall(r'"(\w*(?:transmission|cambio|gear|transmissao)\w*)"\s*:\s*"?([^",}]{1,30})', h, re.I)[:8]
-        o["img_like"] = list(dict.fromkeys(re.findall(r'https://[^"\s]+?\.(?:jpe?g|webp|png)', h)))[:5]
-        out["pages"].append(o); time.sleep(2)
+def get(u):
+    r = s.get(u, timeout=30); time.sleep(1.5); return r
+def summary(u):
+    r = get(u); pp = nd(r.text)
+    if "searchResult" in pp:
+        offers = pp["searchResult"].get("offers") or []
+        return {"url": u, "status": r.status_code, "final": r.url[:120], "n": len(offers),
+                "first": [(o.get("versionName"), o.get("modelYear"), o.get("price")) for o in offers[:4]],
+                "ids": [o.get("id")[:8] for o in offers[:3]]}
+    deals = (pp.get("deals") or {}).get("results") or []
+    return {"url": u, "status": r.status_code, "final": r.url[:120], "n": len(deals), "params": (pp.get("query") or {}).get("params"),
+            "first": [((d.get("trim") or {}).get("name"), (d.get("trim") or {}).get("productionYear"), d.get("price"),
+                       ((d.get("trim") or {}).get("transmission") or {}).get("name")) for d in deals[:4]],
+            "ids": [d.get("id") for d in deals[:3]], "total": (pp.get("deals") or {}).get("total") or (pp.get("deals") or {}).get("count")}
+NP = "https://napista.com.br/busca/"
+MB = "https://www.mobiauto.com.br/comprar/carros-usados/brasil/"
+for u in [NP + "bmw/series-3-m3", NP + "bmw/m3", NP + "bmw/series-3", NP + "bmw/series-3/manual", NP + "bmw/series-5", NP + "bmw/series-5-m5",
+          NP + "honda/civic/manual", NP + "honda/civic/manual/2010", NP + "honda/civic/2010", NP + "toyota/yaris/manual", NP + "nissan/350z", NP + "nissan/370z",
+          NP + "honda/civic/manual?page=2", NP + "honda/civic/manual?p=2",
+          MB + "bmw/m3", MB + "bmw/m3/pagina-2", MB + "bmw/m5", MB + "bmw/serie-3", MB + "bmw/series-3", MB + "bmw/330i", MB + "honda/civic",
+          MB + "honda/civic/ano-2010", MB + "honda/civic/pagina-2", MB + "toyota/yaris", MB + "nissan/350z", MB + "nissan/370z"]:
+    try: out["slugs"].append(summary(u))
+    except Exception as e: out["slugs"].append({"url": u, "error": str(e)[:120]})
+# NaPista: search meta + full ad record
+r = get(NP + "honda/civic/manual"); pp = nd(r.text)
+sr = pp.get("searchResult", {})
+out["napista_meta"] = {"sr_keys": {k: (v if not isinstance(v, (list, dict)) else type(v).__name__ + str(len(v))) for k, v in sr.items()},
+                       "searchParams": trim(pp.get("searchParams"))}
+ad_id = (sr.get("offers") or [{}])[0].get("id")
+if ad_id:
+    r = get("https://napista.com.br/anuncios/" + ad_id); off = nd(r.text).get("offer", {})
+    out["napista_ad"] = trim({k: v for k, v in off.items() if k not in ("similarOffers", "sellerOffers")})
+# Mobiauto: search params object + full ad record + photo address
+r = get(MB + "honda/civic"); pp = nd(r.text); h = r.text
+out["mobi_sop"] = {"requestSop": trim(pp.get("requestSop")), "sop": trim(pp.get("sop")), "canonical": pp.get("canonicalPath"),
+                   "deals_keys": {k: (v if not isinstance(v, (list, dict)) else type(v).__name__) for k, v in (pp.get("deals") or {}).items()}}
+deal = ((pp.get("deals") or {}).get("results") or [{}])[0]
+img_id = str(((deal.get("images") or [{}])[0]).get("imageId", ""))
+out["img"] = list(dict.fromkeys(re.findall(r'https?://[^"\s\\]*' + img_id + r'[^"\s\\]*', h)))[:5] if img_id else []
+link = re.search(r'href="(https://www\.mobiauto\.com\.br/comprar/carros/[^"]+/detalhes/' + str(deal.get("id")) + r')', h)
+if link:
+    r = get(link.group(1)); pa = nd(r.text)
+    out["mobi_ad"] = {"url": link.group(1), "deal": trim(pa.get("deal")), "images": trim(pa.get("images")),
+                      "img_urls": list(dict.fromkeys(re.findall(r'https?://[^"\s\\]*' + img_id + r'[^"\s\\]*', r.text)))[:5],
+                      "og_image": (re.search(r'og:image"\s+content="([^"]+)', r.text) or [0, ""])[1]}
+# removed ads
+for u in ["https://napista.com.br/anuncios/00000000-0000-4000-8000-000000000000",
+          "https://www.mobiauto.com.br/comprar/carros/sp-sao-paulo/honda/civic/2011/new-lxl-1-8-i-vtec-couro-aut-flex/detalhes/1000001"]:
+    r = s.get(u, timeout=30, allow_redirects=True)
+    out["gone"].append({"url": u, "status": r.status_code, "final": r.url[:140], "hist": [x.status_code for x in r.history],
+                        "title": (re.search(r"(?is)<title[^>]*>(.*?)</title>", r.text) or [0, ""])[1][:90], "pp_keys": list(nd(r.text).keys())[:12]})
 json.dump(out, open(os.path.join(D, "br_probe.json"), "w"), indent=1, ensure_ascii=False)
