@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import unicodedata
 import datetime as dt
 import glob
 import hashlib
@@ -1246,6 +1247,36 @@ def photo_big(row):
     return out
 
 
+GEO = {}                                           # "city|UF" (no accents, lower case) -> (lat, lon); Brazil only
+
+
+def geo_key(city, uf=""):
+    s = unicodedata.normalize("NFKD", city or "").encode("ascii", "ignore").decode().lower()
+    s = re.sub(r"[^a-z0-9]+", " ", s).strip()
+    return f"{s}|{(uf or '').strip().upper()}"
+
+
+def load_geo():
+    """Town coordinates for the location filter (collector/geo_br.csv, IBGE municipalities)."""
+    if GEO or COUNTRY["country"] != "BR":
+        return
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "geo_br.csv")
+    if os.path.exists(path):
+        with open(path, newline="", encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                GEO[geo_key(r["city"], r["uf"])] = (float(r["lat"]), float(r["lon"]))
+
+
+def geo_of(place):
+    """'Sao Jose dos Campos, SP' -> (lat, lon) or None."""
+    if not place or not GEO:
+        return None
+    city, _, uf = place.rpartition(",")
+    if not city:
+        return None
+    return GEO.get(geo_key(city, uf)) or GEO.get(geo_key(re.sub(r"\s+(de|do|da|dos|das)\s+\S+$", "", city.strip()), uf))
+
+
 def listing_days(r, until):
     """(days on the market, 'site' or 'tracked'): from the site's own listing date when known."""
     start = d(r.get("listed")) or d(r["first_seen"])
@@ -1257,6 +1288,7 @@ def listing_days(r, until):
 def export_json(rows, path, run_info=None, stats=None, comps=None):
     """cars.json for the web app: every active car with its cues, score, flags, price history and sold comps."""
     today = dt.date.today()
+    load_geo()
     active = [r for r in rows if r["status"] == "active" and r["price"]]
     scores, model_info = score_rows(active)
     model, b_conv, _ = fit_fair_price(active)
@@ -1304,6 +1336,7 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
             "photos": photo_big(r),
             "first_seen": r["first_seen"], "last_seen": r["last_seen"], "verified": r["verified"],
             "listed": r.get("listed") or None, "days": days, "days_src": days_src,
+            "geo": geo_of(r["place"]),
             "hist": [[dd, pp] for dd, pp in hist] if len(hist) > 1 else None, "sold": sold, **sc})
     firsts = sorted(r["first_seen"] for r in rows if r["first_seen"] and r["status"] != "skip")
     autos = [c for c in cars if c["trans"] == "a"]

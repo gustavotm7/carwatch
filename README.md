@@ -51,3 +51,10 @@ Scores, fair prices and flags are guides, not appraisals: flags only catch what 
 Sold prices are US auction results (hammer price, before the 5% buyer's fee and import costs); they are shown
 next to each car but do not change the score.
 CarPages blocks GitHub's servers, so the cloud run reads Autotrader and Kijiji only.
+
+### Location filter (Brazil)
+
+Each car's town is matched to IBGE municipality coordinates (`collector/geo_br.csv`, 5,570 towns) when the
+JSON is exported. In the app, the row of chips above the list filters by distance from a favourite town
+(São Paulo, SP and Teresina, PI come pre-saved). Tap the pin or **Edit** to change the distance
+(town only to 400 km) or to add and remove favourites. Favourites are saved on the phone.

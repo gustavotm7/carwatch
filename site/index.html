@@ -87,6 +87,23 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .confirm button{padding:14px;border-radius:12px;font:600 16px/1 var(--sans);background:var(--raised);color:var(--text)}
 .confirm .primary{background:var(--text);color:var(--bg)}
 #more{grid-column:1/-1;height:1px}
+.locrow{grid-column:1/-1;display:flex;align-items:center;gap:8px;overflow-x:auto;margin:0 0 12px;padding:2px 0;scrollbar-width:none}
+.locrow::-webkit-scrollbar{display:none}
+.locpin{flex:none;display:grid;place-items:center;width:36px;height:36px;margin-right:-2px;color:var(--muted)}
+.loc{flex:none;padding:8px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--muted);
+  font:600 14px/1 var(--sans);white-space:nowrap}
+.loc[aria-pressed=true]{background:rgba(59,143,224,.18);border-color:rgba(59,143,224,.65);color:#c4e2ff}
+.loc .r{margin-left:6px;font-weight:500;opacity:.75}
+.loc.edit{color:var(--text);background:none}
+.place .dist{color:#9ccaf5;margin-left:4px}
+.favs{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:6px}
+.favs li{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--raised)}
+.favs li span{flex:1}
+.favs button{padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-weight:600}
+.addtown{display:flex;gap:8px;margin-top:6px}
+.addtown input{flex:1;min-width:0;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--raised);color:var(--text);font:16px var(--sans)}
+.addtown button{padding:0 16px;border-radius:12px;background:var(--text);color:var(--bg);font-weight:600}
+.addmsg{color:var(--muted);font-size:13px;min-height:1.2em;margin-top:6px}
 .chip .n{font:500 12px/1 var(--sans);color:var(--dim)}
 .chip[aria-pressed=true]{color:var(--text);border-color:var(--c,#cfd6df);background:color-mix(in srgb,var(--c,#cfd6df) 18%,var(--surface))}
 .chip[aria-pressed=true] .n{color:var(--muted)}
@@ -269,6 +286,26 @@ const COUNTRIES = {
 let COUNTRY = (() => { try { return COUNTRIES[localStorage.getItem("cw-country")] ? localStorage.getItem("cw-country") : "CA"; } catch (e) { return "CA"; } })();
 const CUR = () => COUNTRIES[COUNTRY];
 let AUTO = false, MAN_DATA = null, AUTO_DATA = null;     // gearbox mode: always starts on manual, never saved
+const LOC_DEFAULTS = {
+  BR: [{name: "São Paulo, SP", geo: [-23.533, -46.639]}, {name: "Teresina, PI", geo: [-5.092, -42.803]}],
+  CA: [],
+};
+const RADII = [0, 25, 50, 100, 200, 400];          // km; 0 = that town only
+function loadLoc() {
+  try {
+    const s = JSON.parse(localStorage.getItem("cw-loc-" + COUNTRY) || "null");
+    if (s && Array.isArray(s.favs)) return {favs: s.favs, active: s.active || null, radius: RADII.includes(s.radius) ? s.radius : 100};
+  } catch (e) {}
+  return {favs: (LOC_DEFAULTS[COUNTRY] || []).map(f => ({...f})), active: null, radius: 100};
+}
+function saveLoc() { try { localStorage.setItem("cw-loc-" + COUNTRY, JSON.stringify(LOC)); } catch (e) {} }
+let LOC = loadLoc();
+function kmBetween(a, b) {                     // great-circle distance in km
+  const R = 6371, r = Math.PI / 180, dLa = (b[0] - a[0]) * r, dLo = (b[1] - a[1]) * r;
+  const h = Math.sin(dLa / 2) ** 2 + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin(dLo / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+const locLabel = () => LOC.active ? (LOC.radius ? `within ${LOC.radius} km of ${LOC.active.name}` : `in ${LOC.active.name}`) : "";
 const money = n => n == null ? "" : CUR().sym + Math.round(n).toLocaleString(CUR().locale);
 const kmFmt = n => n == null ? "km n/a" : (n >= 1000 ? Math.round(n / 1000) + "k km" : n + " km");
 const SITES = {
@@ -360,9 +397,13 @@ function filtered() {
     (!state.yearTo || (c.year ?? 9999) <= state.yearTo) &&
     !(state.hideHard && c.red.some(f => HARD.includes(f))) &&
     !(state.hideRed && c.red.length));
+  if (LOC.active) {
+    for (const c of cars) c._dist = c.geo ? kmBetween(LOC.active.geo, c.geo) : null;
+    cars = cars.filter(c => c._dist != null && c._dist <= (LOC.radius || 1));
+  }
   const key = {score: c => c.score ?? -1, price: c => c.price, km: c => c.km ?? 1e9, year: c => c.year ?? 0,
                deal: c => c.vs_fair ?? -9, new: c => c.first_seen || "", days: c => c.days ?? -1,
-               sold: c => c.sold?.vs ?? -9}[state.sort] || (c => c.score ?? -1);
+               sold: c => c.sold?.vs ?? -9, near: c => c._dist ?? 1e9}[state.sort] || (c => c.score ?? -1);
   const sgn = state.dir === "asc" ? 1 : -1;
   return cars.sort((a, b) => { const x = key(a), y = key(b); return (x > y ? 1 : x < y ? -1 : a.price - b.price) * sgn; });
 }
@@ -412,7 +453,7 @@ function card(c) {
         <span class="fact body-${esc(c.body)}">${BODY[c.body] || "Body n/a"}</span>
         ${c.trim ? `<span class="fact trim">${esc(c.trim)}</span>` : ""}
       </div>
-      ${c.place ? `<div class="place"><svg width="12" height="14" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 13s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C1.5 8.8 6 13 6 13Z"/><circle cx="6" cy="5.5" r="1.6"/></svg>${esc(c.place)}</div>` : ""}
+      ${c.place ? `<div class="place"><svg width="12" height="14" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 13s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C1.5 8.8 6 13 6 13Z"/><circle cx="6" cy="5.5" r="1.6"/></svg>${esc(c.place)}${LOC.active && c._dist != null ? `<span class="dist">${c._dist < 1 ? "in town" : Math.round(c._dist) + " km"}</span>` : ""}</div>` : ""}
     </div></article>`;
 }
 function renderChips() {
@@ -435,6 +476,7 @@ function render() {
   $("#dirBtn").dataset.dir = state.dir;
   $("#dirLabel").textContent = state.sort === "year" || state.sort === "new" ? (state.dir === "asc" ? "Oldest first" : "Newest first")
       : state.sort === "days" ? (state.dir === "asc" ? "Shortest" : "Longest")
+      : state.sort === "near" ? (state.dir === "asc" ? "Nearest" : "Farthest")
       : (state.dir === "asc" ? "Low first" : "High first");
   const n = activeFilterCount();
   $("#fCount").hidden = !n; $("#fCount").textContent = n;
@@ -444,9 +486,20 @@ function render() {
   const autoNote = AUTO
     ? `<div class="auto-note" role="status"><span><b>Automatic cars only.</b> ${esc(DATA.names.map(n => n.name).join(" and "))}.</span><button data-gm="m" type="button">Back to manual</button></div>` : "";
   const word = AUTO ? "automatic cars" : "cars";
-  $("#list").innerHTML = autoNote + others + (cars.length
-    ? `<div class="count">${cars.length === DATA.cars.length ? `${cars.length} ${word}` : `${cars.length} of ${DATA.cars.length} ${word}`}</div><div id="more"></div>`
-    : `<div class="empty">No cars match these filters.<br><button id="clearAll">Clear filters</button></div>`);
+  const geoOn = (MAN_DATA || DATA).cars.some(c => c.geo);
+  const pin = `<svg width="14" height="16" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 13s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C1.5 8.8 6 13 6 13Z"/><circle cx="6" cy="5.5" r="1.6"/></svg>`;
+  const isFav = LOC.active && LOC.favs.some(f => f.name === LOC.active.name);
+  const locRow = geoOn ? `<div class="locrow" role="group" aria-label="Location"><button class="locpin" id="locPin" type="button" aria-label="Location settings">${pin}</button>
+      <button class="loc" data-loc="" type="button" aria-pressed="${!LOC.active}">Anywhere</button>
+      ${LOC.favs.map(f => `<button class="loc" data-loc="${esc(f.name)}" type="button" aria-pressed="${LOC.active?.name === f.name}">${esc(f.name)}${LOC.active?.name === f.name ? `<span class="r">${LOC.radius ? LOC.radius + " km" : "town only"}</span>` : ""}</button>`).join("")}
+      ${LOC.active && !isFav ? `<button class="loc" data-loc="${esc(LOC.active.name)}" type="button" aria-pressed="true">${esc(LOC.active.name)}<span class="r">${LOC.radius ? LOC.radius + " km" : "town only"}</span></button>` : ""}
+      <button class="loc edit" id="locEdit" type="button">Edit</button></div>` : "";
+  const where = LOC.active ? " " + esc(locLabel()) : "";
+  $("#list").innerHTML = autoNote + locRow + others + (cars.length
+    ? `<div class="count">${cars.length === DATA.cars.length ? `${cars.length} ${word}` : `${cars.length} of ${DATA.cars.length} ${word}`}${where}</div><div id="more"></div>`
+    : LOC.active
+      ? `<div class="empty">No ${word}${where} with these filters.<br><button id="locEdit2">Change distance or town</button></div>`
+      : `<div class="empty">No cars match these filters.<br><button id="clearAll">Clear filters</button></div>`);
   LIST = cars; SHOWN = 0;
   moreCards();
   watchMore();
@@ -622,7 +675,7 @@ function filterSheet() {
       ${opt("hide", "hard", "Rebuilt or salvage titles", t.hideHard)}${opt("hide", "red", "Any red flag", t.hideRed)}</div>
     <h3>More ways to sort</h3><div class="opt-group">
       ${[["score", "Score"], ["price", "Price"], ["deal", "% under fair"], ["sold", "% under sold"], ["days", "Longest listed"],
-         ["km", "Km"], ["year", "Year"], ["new", "Newest ads"]]
+         ["km", "Km"], ["year", "Year"], ["new", "Newest ads"], ...(LOC.active ? [["near", "Distance"]] : [])]
         .map(([v, l]) => opt("sort", v, l, t.sort === v)).join("")}</div>
     <div class="sheet-actions"><button id="fReset">Reset</button><button class="go" id="fApply">Show cars</button></div>`, "Filters");
   const sh = $("#sheet");
@@ -732,6 +785,44 @@ function confirmCountry() {
       <button data-close type="button">Stay in ${esc(CUR().name)}</button></div>`, "Change store");
   $("#doSwitch").onclick = () => { closeSheet(); switchCountry(); };
 }
+let TOWNS = null;                               // [[town, UF, lat, lon]] loaded when the location sheet opens
+function locSheet(msg = "") {
+  openSheet(`
+    <h2>Location</h2>
+    <p class="sub">Show cars near a town. Your favourites sit at the top of the list for one tap.</p>
+    <h3>Distance</h3><div class="opt-group">${RADII.map(r =>
+      `<button class="opt" data-radius="${r}" type="button" aria-pressed="${LOC.radius === r}">${r ? r + " km" : "Town only"}</button>`).join("")}</div>
+    <h3>Favourites</h3>
+    ${LOC.favs.length ? `<ul class="favs">${LOC.favs.map((f, i) => `<li><span>${esc(f.name)}</span>
+      <button data-usefav="${i}" type="button">${LOC.active?.name === f.name ? "In use" : "Use"}</button>
+      <button data-delfav="${i}" type="button" aria-label="Remove ${esc(f.name)}">Remove</button></li>`).join("")}</ul>`
+      : `<p class="none">No favourites yet.</p>`}
+    <h3>Add a town</h3>
+    <div class="addtown"><input id="townIn" list="townList" placeholder="Type a town, e.g. Campinas" autocomplete="off">
+      <button id="townAdd" type="button">Add</button></div>
+    <datalist id="townList"></datalist>
+    <p class="addmsg" id="townMsg">${esc(msg)}</p>`, "Location");
+  const fill = () => { $("#townList").innerHTML = TOWNS.map(x => `<option value="${esc(x[0] + ", " + x[1])}">`).join(""); };
+  if (TOWNS) fill();
+  else if (COUNTRY === "BR") fetch("data/geo_br.json").then(r => r.json()).then(d => { TOWNS = d; if ($("#townList")) fill(); }).catch(() => {});
+  document.querySelectorAll("[data-radius]").forEach(b => b.onclick = () => { LOC.radius = +b.dataset.radius; saveLoc(); render(); locSheet(); });
+  document.querySelectorAll("[data-usefav]").forEach(b => b.onclick = () => { LOC.active = LOC.favs[+b.dataset.usefav]; saveLoc(); render(); locSheet(); });
+  document.querySelectorAll("[data-delfav]").forEach(b => b.onclick = () => {
+    const [gone] = LOC.favs.splice(+b.dataset.delfav, 1);
+    if (LOC.active && gone && LOC.active.name === gone.name) LOC.active = null;
+    saveLoc(); render(); locSheet();
+  });
+  $("#townAdd").onclick = () => {
+    const v = $("#townIn").value.trim();
+    const norm = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
+    const hit = (TOWNS || []).find(x => norm(x[0] + ", " + x[1]) === norm(v));
+    if (!hit) return locSheet(v ? `"${v}" isn't in the town list. Pick one from the suggestions (town, state).` : "Type a town first.");
+    const name = hit[0] + ", " + hit[1];
+    if (!LOC.favs.some(f => f.name === name)) LOC.favs.push({name, geo: [hit[2], hit[3]]});
+    LOC.active = LOC.favs.find(f => f.name === name);
+    saveLoc(); render(); locSheet(`Added ${name}.`);
+  };
+}
 function paintFlag() {
   const b = $("#flagBtn");
   b.innerHTML = FLAGS[COUNTRY];
@@ -743,6 +834,7 @@ function switchCountry() {
   COUNTRY = CUR().next;
   try { localStorage.setItem("cw-country", COUNTRY); } catch (e) {}
   state = load();
+  LOC = loadLoc();
   paintFlag();
   window.scrollTo({top: 0});
   boot();
@@ -764,6 +856,15 @@ document.addEventListener("click", e => {
   }
   if (t.id === "clearAll") { Object.assign(state, DEFAULT_STATE); return render(); }
   if (t.closest("#othersBtn")) return linksSheet();
+  if (t.closest("#locEdit") || t.closest("#locEdit2") || t.closest("#locPin")) return locSheet();
+  const lb = t.closest("[data-loc]");
+  if (lb) {
+    const name = lb.dataset.loc;
+    const f = LOC.favs.find(x => x.name === name);
+    LOC.active = !name || (LOC.active && LOC.active.name === name && f) ? null : (f || LOC.active);
+    if (!LOC.active && state.sort === "near") state.sort = "score";
+    saveLoc(); window.scrollTo({top: 0}); return render();
+  }
   const cardEl = t.closest(".card");
   if (cardEl) { const c = DATA.cars.find(x => x.id === cardEl.dataset.id); if (c) window.open(c.url, "_blank", "noopener"); }
 });
