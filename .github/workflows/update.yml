@@ -29,12 +29,17 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install requests openpyxl
-      - name: Collect
+      - name: Decide what to run, then start from the latest saved data
         run: |
           ARGS=""
-          # a push that only changes the web page rebuilds the data without visiting the sites
-          if [ "${{ github.event_name }}" = "push" ] && ! git diff --name-only HEAD~1 HEAD | grep -qE '^(collector/|cars_config|.github/)'; then ARGS="--no-network"; fi
+          # a push that only changes the web page (or this workflow) rebuilds the data without visiting the sites
+          if [ "${{ github.event_name }}" = "push" ] && ! git diff --name-only HEAD~1 HEAD | grep -qE '^(collector/|cars_config)'; then ARGS="--no-network"; fi
           echo "ARGS=$ARGS" >> "$GITHUB_ENV"
+          # a run that waited behind another one must not rebuild from older data than the branch now has
+          git fetch -q --depth=1 origin "${GITHUB_REF_NAME}" && git reset -q --hard FETCH_HEAD
+          git log --oneline -1
+      - name: Collect
+        run: |
           python -u collector/car_collector.py --config cars_config.json --data-dir data \
             --export-json site/data/cars.json --no-xlsx --no-photos --keep-snapshots 14 \
             --max-new 250 --skip-sources carpages $ARGS
