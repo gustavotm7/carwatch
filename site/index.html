@@ -1301,30 +1301,47 @@ function leftMarket(cars, mk) {
 }
 
 // Price level by state for this model (Brazil): diverging bars around the national fair price
-function divBars(rows, label, mark) {            // rows: [name, value (fraction), n]; mark: a row name to point out
+const locUf = () => LOC.active ? LOC.active.name.split(",").pop().trim().toUpperCase() : null;   // state of the selected town
+const REGION_NAME = {N: ["the North", "Norte"], NE: ["the Northeast", "Nordeste"], CO: ["the Centre-West", "Centro-Oeste"],
+                     SE: ["the Southeast", "Sudeste"], S: ["the South", "Sul"]};
+function divBars(rows, label, mark) {            // rows: [name, value (fraction) or null, n]; mark: a row name to point out
   if (!rows.length) return "";
   const W = 340, RH = 26, PL = 78, PR = 48, H = rows.length * RH + 6;
-  const lim = Math.max(.05, ...rows.map(r => Math.abs(r[1])));
+  const lim = Math.max(.05, ...rows.filter(r => r[1] != null).map(r => Math.abs(r[1])));
   const mid = PL + (W - PL - PR) / 2, half = (W - PL - PR) / 2;
   const bars = rows.map(([nm, v, n], i) => {
-    const cy = 3 + i * RH + RH / 2, w = Math.abs(v) / lim * half, x = v < 0 ? mid - w : mid;
+    const cy = 3 + i * RH + RH / 2, w = v == null ? 0 : Math.abs(v) / lim * half, x = v < 0 ? mid - w : mid;
     return `${nm === mark ? `<rect x="-6" y="${cy - RH / 2 + 1}" width="${W + 12}" height="${RH - 2}" rx="6" fill="var(--raised)"/>` : ""}<text x="0" y="${cy + 4}" class="vl">${esc(nm)}${nm === mark ? " ◂" : ""}</text><text x="${PL - 8}" y="${cy + 4}" text-anchor="end">${nf(n)}</text>
       ${w >= 1 ? `<rect x="${x.toFixed(1)}" y="${cy - 6}" width="${w.toFixed(1)}" height="12" rx="3" fill="${v < 0 ? VIZ.blue : VIZ.red}"/>` : ""}
-      <text x="${W}" y="${cy + 4}" text-anchor="end" class="vl">${pctTxt(v)}</text>`;
+      <text x="${W}" y="${cy + 4}" text-anchor="end" class="vl">${v == null ? "–" : pctTxt(v)}</text>`;
   }).join("");
   return `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="${label}"><line x1="${mid}" x2="${mid}" y1="0" y2="${H}" stroke="${VIZ.fair}"/>${bars}</svg>
     <div class="legend"><i style="background:${VIZ.blue};border-radius:2px"></i>${L("cheaper than the national level", "mais barato que a média do Brasil")}
       <i style="background:${VIZ.red};border-radius:2px;margin-left:8px"></i>${L("more expensive", "mais caro")}</div>`;
 }
-function byState(cars) {
+function byState(cars, name) {
   if (!DATA.areas) return "";
   const g = {};
-  cars.forEach(c => { const uf = (c.place || "").split(",").pop().trim(); if (uf && c.vs_fair != null) (g[uf] = g[uf] || []).push(1 / (1 - c.vs_fair) - 1); });
+  cars.forEach(c => { const uf = (c.place || "").split(",").pop().trim(); if (uf && c.vs_fair != null) (g[uf] = g[uf] || []).push(-c.vs_fair); });   // price / fair - 1
   const rows = Object.entries(g).filter(([, v]) => v.length >= 5).map(([uf, v]) => [uf, medv(v), v.length]).sort((a, b) => b[2] - a[2]).slice(0, 10);
-  if (rows.length < 2) return "";
+  const uf0 = locUf();
+  let note = "";
+  if (uf0 && !rows.some(r => r[0] === uf0)) {    // the selected town's state is always shown, even with few ads
+    const v = g[uf0] || [];
+    rows.push([uf0, v.length ? medv(v) : null, v.length]);
+    const lvAll = DATA.areas.uf[uf0];
+    note = v.length >= 5 ? "" : v.length
+      ? L(`${uf0}: only ${v.length} ${v.length === 1 ? "ad" : "ads"} of this model, so its figure is rough.`,
+          `${uf0}: só ${v.length} ${v.length === 1 ? "anúncio" : "anúncios"} deste modelo, então o valor é aproximado.`)
+      : L(`No ${esc(name)} on sale in ${uf0} right now.`, `Nenhum ${esc(name)} à venda em ${uf0} agora.`);
+    if (v.length < 5 && lvAll) note += L(` Across all models, ${uf0} prices are ${levelTxt(lvAll[0])}.`,
+                                          ` Considerando todos os modelos, os preços em ${uf0} estão ${levelTxt(lvAll[0])}.`);
+  }
+  if (rows.length < 2 && !uf0) return "";
   return anaSection(L("By state", "Por estado"), L("Median asking price against the national fair price, same year and km. States with 5+ ads; the number is how many.",
-      "Preço pedido mediano em relação ao preço justo do Brasil, mesmo ano e km. Estados com 5+ anúncios; o número é quantos."),
-    divBars(rows, L("Price by state", "Preço por estado"), LOCAL?.uf));
+      "Preço pedido mediano em relação ao preço justo do Brasil, mesmo ano e km. Estados com 5+ anúncios; o número é quantos.")
+      + (uf0 ? L(` ◂ marks ${uf0}, the selected town's state.`, ` ◂ marca ${uf0}, o estado da cidade escolhida.`) : ""),
+    divBars(rows, L("Price by state", "Preço por estado"), uf0) + (note ? `<p>${note}</p>` : ""));
 }
 
 function bestDeals(cars, name) {                  // uses the local score and % while a town is selected
@@ -1357,11 +1374,15 @@ function overview(near) {                         // near: cars within the selec
               "Preço pedido mediano e dias anunciado (mediana, só anúncios com data no site). Baixaram: parte dos anúncios que reduziram o preço desde")} ${sinceTxt()}.`}</p>`);
   const A = DATA.areas;
   if (A) {
-    const st = Object.entries(A.uf).filter(([, [, n]]) => n >= 10).map(([uf, [lv, n]]) => [uf, Math.exp(lv) - 1, n]).sort((a, b) => a[1] - b[1]);
+    const uf0 = locUf();
+    const st = Object.entries(A.uf).filter(([uf, [, n]]) => n >= 10 || uf === uf0).map(([uf, [lv, n]]) => [uf, Math.exp(lv) - 1, n]).sort((a, b) => a[1] - b[1]);
+    const few = uf0 && A.uf[uf0] && A.uf[uf0][1] < 10 ? (r => `<p>${L(`${uf0}: only ${A.uf[uf0][1]} ads, so its level leans on the average of ${r[0]}.`,
+        `${uf0}: só ${A.uf[uf0][1]} anúncios, então o nível também usa a média do ${r[1]}.`)}</p>`)(REGION_NAME[(A.region_of || {})[uf0]] || ["its region", "região"]) : "";
     html += anaSection(L("Price level by state", "Nível de preço por estado"),
       L("All models, manual and automatic, against the national fair price for the same model, km and year. States with 10+ ads; the number is how many.",
-        "Todos os modelos, manuais e automáticos, em relação ao preço justo do Brasil para o mesmo modelo, km e ano. Estados com 10+ anúncios; o número é quantos."),
-      divBars(st, L("Price level by state", "Nível de preço por estado"), LOCAL?.uf));
+        "Todos os modelos, manuais e automáticos, em relação ao preço justo do Brasil para o mesmo modelo, km e ano. Estados com 10+ anúncios; o número é quantos.")
+        + (uf0 ? L(` ◂ marks ${uf0}, the selected town's state.`, ` ◂ marca ${uf0}, o estado da cidade escolhida.`) : ""),
+      divBars(st, L("Price level by state", "Nível de preço por estado"), uf0) + few);
   }
   return html;
 }
@@ -1388,7 +1409,7 @@ function pricesView() {
     + anaSection(L("Market week by week", "Mercado semana a semana") + brT, "", trend(mk))
     + anaSection(L("Ads that left", "Anúncios que saíram") + brT, L("Ads that disappeared from the sites, often because they sold.",
         "Anúncios que sumiram dos sites, muitas vezes porque foram vendidos."), leftMarket(cars, mk))
-    + byState(cars) + bestDeals(use, name);
+    + byState(cars, name) + bestDeals(use, name);
 }
 function scatTap(e) {
   const svg = $("#scat");
