@@ -1,1288 +1,289 @@
 {
- "slugs": [
+ "aggs": {
+  "FUEL": "{\"elements\": [{\"id\": 6, \"name\": \"Flex\", \"numElementsFounded\": 2794}, {\"id\": 2, \"name\": \"Gasolina\", \"numElementsFounded\": 338}, {\"id\": 7, \"name\": \"Híbrido\", \"numElementsFounded\": 81}, {\"id\": 5, \"name\": \"MultiFlex (Etanol, Gasolina, GNV e Benzina)\", \"numElementsFounded\": 18}, {\"id\": 3, \"name\": \"Etanol\", \"numElementsFounded\": 6}, {\"id\": 4, \"name\": \"GNV\", \"numElementsFounded\": 6}, {\"id\": 1, \"name\": \"Diesel\", \"numElementsFounded\": 1}]}",
+  "CONDITIONALS": "{\"elements\": [{\"id\": 12, \"name\": \"Aceita troca\", \"numElementsFounded\": 1219}, {\"id\": 7, \"name\": \"IPVA pago\", \"numElementsFounded\": 1019}, {\"id\": 33, \"name\": \"Pronta entrega\", \"numElementsFounded\": 785}, {\"id\": 5, \"name\": \"Parece novo\", \"numElementsFounded\": 626}, {\"id\": 9, \"name\": \"Veículo de não fumante\", \"numElementsFounded\": 502}, {\"id\": 10, \"name\": \"Licenciado esse ano\", \"numElementsFounded\": 481}, {\"id\": 8, \"name\": \"Pneus novos\", \"numElementsFounded\": 472}, {\"id\": 2, \"name\": \"Nenhuma batida\", \"numElementsFounded\": 427}, {\"id\": 11, \"name\": \"Revisões realizadas\", \"numElementsFounded\": 402}, {\"id\": 1, \"name\": \"Baixa quilometragem\", \"numElementsFounded\": 389}, {\"id\": 37, \"name\": \"Laudo caut",
+  "FEATURES": "{\"elements\": [{\"id\": 5, \"name\": \"Travas elétricas\", \"numElementsFounded\": 2401}, {\"id\": 4, \"name\": \"Controle elétrico do vidros dianteiros\", \"numElementsFounded\": 2385}, {\"id\": 2, \"name\": \"Ar condicionado\", \"numElementsFounded\": 2369}, {\"id\": 15, \"name\": \"Rodas de liga leve\", \"numElementsFounded\": 2339}, {\"id\": 1, \"name\": \"Airbag para motorista\", \"numElementsFounded\": 2192}, {\"id\": 7, \"name\": \"Alarme\", \"numElementsFounded\": 2160}, {\"id\": 8, \"name\": \"Freios ABS\", \"numElementsFounded\": 2156}, {\"id\": 11, \"name\": \"Airbags frontais\", \"numElementsFounded\": 2075}, {\"id\": 13, \"name\": \"Desembaçador do vidro traseiro\", \"numElementsFounded\": 1936}, {\"id\": 29, \"name\": \"Controle elétrico do vidros trasei",
+  "COLOR": "{\"elements\": [{\"id\": 8, \"name\": \"Preto\", \"description\": \"#000000\", \"numElementsFounded\": 821}, {\"id\": 7, \"name\": \"Prata\", \"description\": \"#888888\", \"numElementsFounded\": 799}, {\"id\": 12, \"name\": \"Cinza\", \"description\": \"#444444\", \"numElementsFounded\": 755}, {\"id\": 5, \"name\": \"Branco\", \"description\": \"#FFFFFF\", \"numElementsFounded\": 687}, {\"id\": 11, \"name\": \"Azul\", \"description\": \"#0000FF\", \"numElementsFounded\": 123}, {\"id\": 13, \"name\": \"Dourado\", \"description\": \"#C28B00\", \"numElementsFounded\": 22}, {\"id\": 9, \"name\": \"Verde\", \"description\": \"#39A739\", \"numElementsFounded\": 15}, {\"id\": 28, \"name\": \"Não Informada\", \"numElementsFounded\": 9}, {\"id\": 4, \"name\": \"Bege\", \"description\": \"#A39338\", \"n",
+  "LIFESTYLE": "{\"elements\": [{\"id\": \"carrosparafamiliagrande\", \"name\": \"Carros para família grande\", \"numElementsFounded\": 3244}]}",
+  "MAKE": "{\"elements\": [{\"name\": \"Honda\", \"id\": 0.5950707772263588}]}",
+  "TRANSMISSION": "{\"elements\": [{\"id\": 1, \"name\": \"Automática\", \"numElementsFounded\": 2748}, {\"id\": 5, \"name\": \"Manual\", \"numElementsFounded\": 492}]}",
+  "DOORS": "{\"elements\": [{\"id\": 4, \"name\": \"4\", \"numElementsFounded\": 3224}, {\"id\": 2, \"name\": \"2\", \"numElementsFounded\": 15}, {\"id\": 3, \"name\": \"3\", \"numElementsFounded\": 4}]}",
+  "MODEL": "{\"elements\": [{\"name\": \"Civic\", \"id\": 20411}]}",
+  "YEAR": "{\"elements\": [{\"id\": 2014, \"numElementsFounded\": 563}, {\"id\": 2017, \"numElementsFounded\": 387}, {\"id\": 2020, \"numElementsFounded\": 264}, {\"id\": 2016, \"numElementsFounded\": 251}, {\"id\": 2021, \"numElementsFounded\": 236}, {\"id\": 2018, \"numElementsFounded\": 218}, {\"id\": 2019, \"numElementsFounded\": 218}, {\"id\": 2015, \"numElementsFounded\": 179}, {\"id\": 2011, \"numElementsFounded\": 154}, {\"id\": 2013, \"numElementsFounded\": 145}, {\"id\": 2012, \"numElementsFounded\": 133}, {\"id\": 2008, \"numElementsFounded\": 122}, {\"id\": 2010, \"numElementsFounded\": 93}, {\"id\": 2024, \"numElementsFounded\": 89}, {\"id\": 2007, \"numElementsFounded\": 68}, {\"id\": 2009, \"numElementsFounded\": 47}, {\"id\": 2005, \"numElementsFounded\":",
+  "FINALPLATE": "{\"elements\": [{\"id\": 0, \"name\": \"Final 0\", \"numElementsFounded\": 392}, {\"id\": 5, \"name\": \"Final 5\", \"numElementsFounded\": 335}, {\"id\": 3, \"name\": \"Final 3\", \"numElementsFounded\": 330}, {\"id\": 8, \"name\": \"Final 8\", \"numElementsFounded\": 330}, {\"id\": 6, \"name\": \"Final 6\", \"numElementsFounded\": 326}, {\"id\": 9, \"name\": \"Final 9\", \"numElementsFounded\": 312}, {\"id\": 7, \"name\": \"Final 7\", \"numElementsFounded\": 307}, {\"id\": 1, \"name\": \"Final 1\", \"numElementsFounded\": 296}, {\"id\": 2, \"name\": \"Final 2\", \"numElementsFounded\": 283}, {\"id\": 4, \"name\": \"Final 4\", \"numElementsFounded\": 276}]}",
+  "PRICE": "{\"elements\": [{\"id\": \"min_value\", \"numElementsFounded\": 0, \"value\": 15900}, {\"id\": \"max_value\", \"numElementsFounded\": 0, \"value\": 485000}]}",
+  "BODYSTYLE": "{\"elements\": [{\"id\": 1, \"name\": \"Sedan\", \"numElementsFounded\": 3230}, {\"id\": 3, \"name\": \"Conversível\", \"numElementsFounded\": 10}, {\"id\": 26, \"name\": \"Coupé\", \"numElementsFounded\": 3}, {\"id\": 2, \"name\": \"Hatch\", \"numElementsFounded\": 1}]}",
+  "DEALER_TYPE": "{\"elements\": [{\"id\": 1, \"name\": \"Loja\", \"numElementsFounded\": 3082}, {\"id\": 2, \"name\": \"Concessionária\", \"numElementsFounded\": 145}, {\"id\": 3, \"name\": \"Locadora\", \"numElementsFounded\": 15}, {\"id\": 0, \"name\": \"Pessoa Física\", \"numElementsFounded\": 2}]}",
+  "TRIM": "{\"elements\": [{\"id\": 0.7854890771979322}]}"
+ },
+ "tries": [
   {
-   "url": "https://napista.com.br/busca/bmw/series-3-m3",
-   "status": 200,
-   "final": "https://napista.com.br/busca/bmw/series-3-m3",
-   "n": 22,
-   "first": [
-    [
-     "Bmw M3 Competition M 3.0 Bi-tb 510cv",
-     2024,
-     1150000
-    ],
-    [
-     "Bmw Series 3 3.0 M3 Competition Auto",
-     2021,
-     509900
-    ],
-    [
-     "Bmw Series 3 3.0 M3 Cs Auto 4wd",
-     2024,
-     680000
-    ],
-    [
-     "Bmw Series 3 3.0 M3 Competition Auto",
-     2025,
-     629900
-    ]
-   ],
-   "ids": [
-    "246ecfde",
-    "c35de2d8",
-    "febebf54"
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/bmw/m3",
-   "status": 200,
-   "final": "https://napista.com.br/busca/bmw/m3",
-   "n": 31,
-   "first": [
-    [
-     "Bmw X2 2.0 M35i Xdrive Dct",
-     2025,
-     430000
-    ],
-    [
-     "Bmw M3 Competition M 3.0 Bi-tb 510cv",
-     2024,
-     1150000
-    ],
-    [
-     "Bmw X2 2.0 M35i Auto",
-     2020,
-     214900
-    ],
-    [
-     "Bmw Series 3 3.0 M3 Competition Auto",
-     2021,
-     509900
-    ]
-   ],
-   "ids": [
-    "0b0b8166",
-    "246ecfde",
-    "c346b0af"
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/bmw/series-3",
-   "status": 200,
-   "final": "https://napista.com.br/busca/bmw/series-3",
-   "n": 48,
-   "first": [
-    [
-     "Bmw Series 3 2.0 328i Activeflex Sport Gp Auto",
-     2015,
-     119990
-    ],
-    [
-     "Bmw 320ia 2.0 Turbo/activeflex 16v/gp 4p",
-     2015,
-     99900
-    ],
-    [
-     "Bmw 320ia 2.0 Tb M Sport A.flex/m.sport 4p",
-     2020,
-     179000
-    ],
-    [
-     "Bmw Series 3 2.0 330i M Sport Auto",
-     2021,
-     215700
-    ]
-   ],
-   "ids": [
-    "30870a3a",
-    "68f2616c",
-    "7028cf75"
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/bmw/series-3/manual",
-   "status": 200,
-   "final": "https://napista.com.br/busca/bmw/series-3/manual",
-   "n": 22,
-   "first": [
-    [
-     "Bmw Series 3 2.0 320i Activeflex Sport Auto",
-     2017,
-     109900
-    ],
-    [
-     "Bmw Series 3 2.0 320i Activeflex Sport Auto",
-     2017,
-     113900
-    ],
-    [
-     "Bmw Series 3 2.0 320i Sport Auto",
-     2020,
-     174900
-    ],
-    [
-     "Bmw Series 3 2.0 320i Flex Gp Auto",
-     2024,
-     279990
-    ]
-   ],
-   "ids": [
-    "aa50df80",
-    "3f0edb22",
-    "9e7a936f"
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/bmw/series-5",
-   "status": 200,
-   "final": "https://napista.com.br/busca/bmw/series-5",
-   "n": 48,
-   "first": [
-    [
-     "Bmw 528ia 2.0 Turbo 16v 245cv 4p",
-     2014,
-     109900
-    ],
-    [
-     "Bmw Series 5 2.0 530i M Sport Auto",
-     2018,
-     169900
-    ],
-    [
-     "Bmw M5 Competition M Xdrive 4.4 Bi-tb V8",
-     2020,
-     650000
-    ],
-    [
-     "Bmw Series 5 2.0 530e M Sport Auto",
-     2020,
-     199900
-    ]
-   ],
-   "ids": [
-    "c524c137",
-    "45b25483",
-    "df149ec0"
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/bmw/series-5-m5",
-   "status": 200,
-   "final": "https://napista.com.br/busca/bmw/series-5-m5",
-   "n": 5,
-   "first": [
-    [
-     "Bmw M5 Competition M Xdrive 4.4 Bi-tb V8",
-     2020,
-     650000
-    ],
-    [
-     "Bmw M5 4.4 560cv Bi-turbo Aut.",
-     2019,
-     489900
-    ],
-    [
-     "Bmw Series 5 4.4 M5 Xdrive Auto",
-     2020,
-     532100
-    ],
-    [
-     "Bmw Series 5 4.4 M5 Xdrive Auto",
-     2019,
-     537000
-    ]
-   ],
-   "ids": [
-    "df149ec0",
-    "184358b0",
-    "3ed1a9de"
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/honda/civic/manual",
-   "status": 200,
-   "final": "https://napista.com.br/busca/honda/civic/manual",
-   "n": 48,
-   "first": [
-    [
-     "Honda Civic 1.8 I Vtec Flex Lxl",
-     2010,
-     51900
-    ],
-    [
-     "Honda Civic Sedan Exl 2.0 Flex 16v Aut.4p",
-     2017,
-     102900
-    ],
-    [
-     "Honda Civic Sedan Lxs 1.8/1.8 Flex 16v Mec. 4p",
-     2009,
-     47900
-    ],
-    [
-     "Honda Civic 1.8 I Vtec Flex Lxl Se",
-     2011,
-     59900
-    ]
-   ],
-   "ids": [
-    "89c9ae46",
-    "fefa63f2",
-    "fce6da32"
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/honda/civic/manual/2010",
-   "status": 200,
-   "final": "https://napista.com.br/busca/honda/civic/2010/manual",
-   "n": 48,
-   "first": [
-    [
-     "Honda Civic 1.8 I Vtec Flex Lxl",
-     2010,
-     51900
-    ],
-    [
-     "Honda Civic Sedan Lxs 1.8/1.8 Flex 16v Aut. 4p",
-     2010,
-     53900
-    ],
-    [
-     "Honda Civic Sed. Lxl/lxl Se 1.8 Flex 16v Mec.",
-     2010,
-     56500
-    ],
-    [
-     "Honda Civic Sedan Lxs 1.8/1.8 Flex 16v Mec. 4p",
-     2010,
-     49900
-    ]
-   ],
-   "ids": [
-    "89c9ae46",
-    "033411d2",
-    "e3db7e96"
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/honda/civic/2010",
-   "status": 200,
-   "final": "https://napista.com.br/busca/honda/civic/2010",
-   "n": 48,
-   "first": [
-    [
-     "Honda Civic 1.8 I Vtec Flex Lxl",
-     2010,
-     51900
-    ],
-    [
-     "Honda Civic Sedan Lxs 1.8/1.8 Flex 16v Aut. 4p",
-     2010,
-     53900
-    ],
-    [
-     "Honda Civic 1.8 I Vtec Flex Lxs Auto",
-     2010,
-     57900
-    ],
-    [
-     "Honda Civic Sed. Lxl/lxl Se 1.8 Flex 16v Mec.",
-     2010,
-     56500
-    ]
-   ],
-   "ids": [
-    "89c9ae46",
-    "033411d2",
-    "68a107fc"
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/toyota/yaris/manual",
-   "status": 200,
-   "final": "https://napista.com.br/busca/toyota/yaris/manual",
-   "n": 48,
-   "first": [
-    [
-     "Toyota Yaris 1.3 Xl Live Cvt",
-     2020,
-     85900
-    ],
-    [
-     "Toyota Yaris Xl Sedan 1.5 Flex 16v 4p Mec.",
-     2019,
-     73900
-    ],
-    [
-     "Toyota Yaris 1.3 Xl",
-     2019,
-     72000
-    ],
-    [
-     "Toyota Yaris 1.5 Xl Sedan",
-     2019,
-     71900
-    ]
-   ],
-   "ids": [
-    "237e1634",
-    "1afcd84a",
-    "c223ba7c"
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/nissan/350z",
-   "status": 200,
-   "final": "https://napista.com.br/busca/nissan/350z",
-   "n": 0,
-   "first": [],
-   "ids": []
-  },
-  {
-   "url": "https://napista.com.br/busca/nissan/370z",
-   "status": 200,
-   "final": "https://napista.com.br/busca/nissan/370z",
-   "n": 1,
-   "first": [
-    [
-     "Nissan Kicks Exclusive 1.6 16v Flex Aut.",
-     2022,
-     85900
-    ]
-   ],
-   "ids": [
-    "93b36678"
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/honda/civic/manual?page=2",
-   "status": 200,
-   "final": "https://napista.com.br/busca/honda/civic/manual?page=2",
-   "n": 48,
-   "first": [
-    [
-     "Honda Civic 1.8 I Vtec Flex Lxl",
-     2010,
-     51900
-    ],
-    [
-     "Honda Civic Sedan Exl 2.0 Flex 16v Aut.4p",
-     2017,
-     102900
-    ],
-    [
-     "Honda Civic Sedan Lxs 1.8/1.8 Flex 16v Mec. 4p",
-     2009,
-     47900
-    ],
-    [
-     "Honda Civic 1.8 I Vtec Flex Lxl Se",
-     2011,
-     59900
-    ]
-   ],
-   "ids": [
-    "89c9ae46",
-    "fefa63f2",
-    "fce6da32"
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/honda/civic/manual?p=2",
-   "status": 200,
-   "final": "https://napista.com.br/busca/honda/civic/manual?p=2",
-   "n": 48,
-   "first": [
-    [
-     "Honda Civic 1.8 I Vtec Flex Lxl",
-     2010,
-     51900
-    ],
-    [
-     "Honda Civic Sedan Exl 2.0 Flex 16v Aut.4p",
-     2017,
-     102900
-    ],
-    [
-     "Honda Civic Sedan Lxs 1.8/1.8 Flex 16v Mec. 4p",
-     2009,
-     47900
-    ],
-    [
-     "Honda Civic 1.8 I Vtec Flex Lxl Se",
-     2011,
-     59900
-    ]
-   ],
-   "ids": [
-    "89c9ae46",
-    "fefa63f2",
-    "fce6da32"
-   ]
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/m3",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/m3",
-   "n": 12,
-   "params": [
-    "carros-usados",
-    "brasil",
-    "bmw",
-    "m3"
-   ],
-   "first": [
-    [
-     "Competition M 3.0 Bi-Turbo",
-     2025,
-     629900,
-     "Automática"
-    ],
-    [
-     "Competition 3.0 Turbo (Aut.)",
-     2023,
-     750800,
-     "Automática"
-    ],
-    [
-     "Competition 3.0 Turbo (Aut.)",
-     2023,
-     599900,
-     "Automática"
-    ],
-    [
-     "Competition 3.0 Turbo (Aut.)",
-     2023,
-     589900,
-     "Automática"
-    ]
-   ],
-   "ids": [
-    33803006,
-    31850027,
-    33359501
-   ],
-   "total": null
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/m3/pagina-2",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/m3/pagina-2",
-   "n": 0,
-   "params": [
-    "carros-usados",
-    "brasil",
-    "bmw",
-    "m3",
-    "pagina-2"
-   ],
-   "first": [],
-   "ids": [],
-   "total": null
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/m5",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/m5",
-   "n": 5,
-   "params": [
-    "carros-usados",
-    "brasil",
-    "bmw",
-    "m5"
-   ],
-   "first": [
-    [
-     "4.4 V8",
-     2013,
-     239990,
-     "Automática"
-    ],
-    [
-     "4.4 Performance Pack M xDrive V8",
-     2019,
-     537000,
-     "Automática"
-    ],
-    [
-     "4.4 V8",
-     2014,
-     329000,
-     "Automática"
-    ],
-    [
-     "4.4 Performance Pack M xDrive V8",
-     2018,
-     678000,
-     "Automática"
-    ]
-   ],
-   "ids": [
-    30962307,
-    32461296,
-    10630051
-   ],
-   "total": null
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3",
-   "n": 0,
-   "params": [
-    "carros-usados",
-    "brasil",
-    "bmw",
-    "serie-3"
-   ],
-   "first": [],
-   "ids": [],
-   "total": null
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/series-3",
-   "status": 200,
+   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/manual",
    "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil",
-   "n": 24,
    "params": [
     "carros-usados",
     "brasil"
    ],
-   "first": [
-    [
-     "LTZ 1.0 Turbo (Aut.)",
-     2024,
-     77900,
-     "Automática"
-    ],
-    [
-     "2.0 TDI Freedom Auto 4WD (Diesel)",
-     2019,
-     92900,
-     "Automática"
-    ],
-    [
-     "SRX 2.8 Turbodiesel 4x4 (Aut.) (7 Lugares)",
-     2024,
-     299900,
-     "Automática"
-    ],
-    [
-     "LT 1.0 Turbo",
-     2025,
-     76399,
-     "Manual"
-    ]
+   "n": 24,
+   "num": 304247,
+   "trans": [
+    "Automática",
+    "Automática",
+    "Automática",
+    "Manual",
+    "Automática",
+    "Automática",
+    "CVT",
+    "Manual",
+    "Automática",
+    "Manual"
    ],
    "ids": [
     34029750,
     33552208,
     33443865
-   ],
-   "total": null
+   ]
   },
   {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/330i",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/330i",
-   "n": 20,
+   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/transmissao-manual",
+   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil",
    "params": [
     "carros-usados",
-    "brasil",
-    "bmw",
-    "330i"
+    "brasil"
    ],
-   "first": [
-    [
-     "2.0 M Sport AT",
-     2019,
-     209900,
-     "Automática"
-    ],
-    [
-     "2.0 M Sport AT",
-     2019,
-     191800,
-     "Automática"
-    ],
-    [
-     "2.0 Sport AT",
-     2019,
-     179900,
-     "Automática"
-    ],
-    [
-     "2.0 Sport AT",
-     2019,
-     219990,
-     "Automática"
-    ]
+   "n": 24,
+   "num": 304247,
+   "trans": [
+    "Automática",
+    "Automática",
+    "Automática",
+    "Manual",
+    "Automática",
+    "Automática",
+    "CVT",
+    "Manual",
+    "Automática",
+    "Manual"
    ],
    "ids": [
-    33879457,
-    33778826,
-    33829116
-   ],
-   "total": null
+    34029750,
+    33552208,
+    33443865
+   ]
   },
   {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic",
+   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/cambio-manual",
+   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil",
+   "params": [
+    "carros-usados",
+    "brasil"
+   ],
    "n": 24,
+   "num": 304247,
+   "trans": [
+    "Automática",
+    "Automática",
+    "Automática",
+    "Manual",
+    "Automática",
+    "Automática",
+    "CVT",
+    "Manual",
+    "Automática",
+    "Manual"
+   ],
+   "ids": [
+    34029750,
+    33552208,
+    33443865
+   ]
+  },
+  {
+   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic?trs=manual",
+   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic?trs=manual",
    "params": [
     "carros-usados",
     "brasil",
     "honda",
     "civic"
    ],
-   "first": [
-    [
-     "New  LXL 1.8 i-VTEC (Couro) (Aut) (Flex)",
-     2011,
-     51900.01,
-     "Automática"
-    ],
-    [
-     "New  LXL 1.8 16V i-VTEC (Aut) (Flex)",
-     2012,
-     68899,
-     "Automática"
-    ],
-    [
-     "Touring 1.5 Turbo CVT",
-     2020,
-     137990,
-     "Automática"
-    ],
-    [
-     "EXL 2.0 i-VTEC CVT",
-     2017,
-     109990,
-     "Automática"
-    ]
+   "n": 24,
+   "num": 3244,
+   "trans": [
+    "Automática",
+    "Automática",
+    "Automática",
+    "Automática",
+    "Automática",
+    "Automática",
+    "Automática",
+    "CVT",
+    "CVT",
+    "Automática"
    ],
    "ids": [
-    20987139,
     33721811,
+    20987139,
     33105824
-   ],
-   "total": null
+   ]
   },
   {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2010",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2010",
+   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic?trs=2",
+   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic?trs=2",
+   "params": [
+    "carros-usados",
+    "brasil",
+    "honda",
+    "civic"
+   ],
    "n": 24,
+   "num": 3244,
+   "trans": [
+    "Automática",
+    "Automática",
+    "Automática",
+    "Automática",
+    "Automática",
+    "Automática",
+    "Automática",
+    "CVT",
+    "Automática",
+    "CVT"
+   ],
+   "ids": [
+    33721811,
+    20987139,
+    33597258
+   ]
+  },
+  {
+   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2010/manual",
+   "final": "s://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2010/manual",
    "params": [
     "carros-usados",
     "brasil",
     "honda",
     "civic",
-    "ano-2010"
+    "ano-2010",
+    "manual"
    ],
-   "first": [
-    [
-     "New  LXS 1.8 16V (Aut) (Flex)",
-     2009,
-     53900,
-     "Automática"
-    ],
-    [
-     "New  LXL 1.8 16V (Flex)",
-     2010,
-     59900,
-     "Automática"
-    ],
-    [
-     "New  LXL 1.8 16V (Flex)",
-     2010,
-     41990,
-     "Manual"
-    ],
-    [
-     "New  LXS 1.8 16V (Aut) (Flex)",
-     2010,
-     58900,
-     "Automática"
-    ]
+   "n": 24,
+   "num": 93,
+   "trans": [
+    "Automática",
+    "Automática",
+    "Manual",
+    "Automática",
+    "Automática",
+    "CVT",
+    "Manual",
+    "Automática",
+    "Automática",
+    "Automática"
    ],
    "ids": [
     23739671,
-    31214434,
+    31406683,
     12198613
-   ],
-   "total": null
+   ]
   },
   {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/pagina-2",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/pagina-2",
-   "n": 24,
-   "params": [
-    "carros-usados",
-    "brasil",
-    "honda",
-    "civic",
-    "pagina-2"
-   ],
-   "first": [
-    [
-     "New  EXS 1.8 16V i-VTEC (Aut) (Flex)",
-     2012,
-     79900,
-     "Automática"
-    ],
-    [
-     "EX 2.0 i-VTEC CVT",
-     2016,
-     99990,
-     "Automática"
-    ],
-    [
-     "Touring 1.5 Turbo CVT",
-     2017,
-     118900,
-     "Automática"
-    ],
-    [
-     "New  LXS 1.8 16V i-VTEC (Flex)",
-     2012,
-     61990,
-     "Manual"
-    ]
-   ],
+   "url": "https://napista.com.br/busca/honda/civic/manual",
+   "final": "https://napista.com.br/busca/honda/civic/manual",
+   "n": 48,
    "ids": [
-    33900301,
-    33368582,
-    34014707
+    "89c9ae46",
+    "fefa63f2",
+    "fce6da32",
+    "7b8cc755"
    ],
-   "total": null
+   "total": 423
   },
   {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/yaris",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/yaris",
-   "n": 24,
-   "params": [
-    "carros-usados",
-    "brasil",
-    "toyota",
-    "yaris"
-   ],
-   "first": [
-    [
-     "1.3 XL Live CVT (Flex)",
-     2021,
-     82900,
-     "Automática"
-    ],
-    [
-     "1.3 XL CVT (Flex)",
-     2019,
-     69900,
-     "Manual"
-    ],
-    [
-     "XL 1.5 (Flex) (Aut)",
-     2024,
-     89990,
-     "Automática"
-    ],
-    [
-     "1.3 XL Live CVT (Flex)",
-     2022,
-     81900,
-     "Automática"
-    ]
-   ],
+   "url": "https://napista.com.br/busca/honda/civic/manual?pn=2",
+   "final": "https://napista.com.br/busca/honda/civic/manual?pn=2",
+   "n": 48,
    "ids": [
-    28016634,
-    30783357,
-    33827842
+    "dd73d1c5",
+    "794a6681",
+    "216c9f7b",
+    "2738c4b7"
    ],
-   "total": null
+   "total": 423
   },
   {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/nissan/350z",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/nissan/350z",
-   "n": 0,
-   "params": [
-    "carros-usados",
-    "brasil",
-    "nissan",
-    "350z"
-   ],
-   "first": [],
-   "ids": [],
-   "total": null
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/nissan/370z",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/nissan/370z",
-   "n": 2,
-   "params": [
-    "carros-usados",
-    "brasil",
-    "nissan",
-    "370z"
-   ],
-   "first": [
-    [
-     "350Z 3.5 V6 280cv/ 312cv 2p",
-     2008,
-     280000,
-     "Manual"
-    ],
-    [
-     "350Z 3.5 V6 280cv/ 312cv 2p",
-     2011,
-     319990,
-     "Automática"
-    ]
-   ],
+   "url": "https://napista.com.br/busca/honda/civic/manual?pagina=3",
+   "final": "https://napista.com.br/busca/honda/civic/manual?pagina=3",
+   "n": 48,
    "ids": [
-    29872305,
-    32875193
+    "89c9ae46",
+    "fefa63f2",
+    "fce6da32",
+    "7b8cc755"
    ],
-   "total": null
+   "total": 423
   }
  ],
- "napista_ad": {
-  "seller": {
-   "id": "45b545be-8dce-474a-a583-995ddfb4ba5a",
-   "name": "Chiavegatti Automoveis",
-   "phone": {
-    "phoneType": "LANDLINE",
-    "areaCode": "51",
-    "number": "35240998"
-   },
-   "whatsappPhone": {
-    "phoneType": "LANDLINE",
-    "areaCode": "51",
-    "number": "35240998",
-    "updatedAt": "2026-08-07T12:27:13.202Z",
-    "verified": true
-   },
-   "secondPhone": {
-    "phoneType": "LANDLINE",
-    "areaCode": "51",
-    "number": "35240998",
-    "updatedAt": "2026-08-07T12:27:13.202Z",
-    "verified": true
-   },
-   "location": {
-    "city": "Novo Hamburgo",
-    "state": "Rio Grande do Sul",
-    "neighborhood": "Rincão",
-    "street": "Rua Portugal",
-    "number": "774",
-    "complement": "",
-    "geoLocation": {
-     "latitude": -29.6705602,
-     "longitude": -51.1435686
-    },
-    "uf": "RS",
-    "zipCode": "93348520"
-   },
-   "createdAt": "2023-09-22T21:24:53.555Z",
-   "inventorySize": 33,
-   "attributes": [],
-   "commercialPartnerCode": 13225,
-   "nickName": "chiavegatti-automoveis-1101084",
-   "activeProductTags": [],
-   "operationConstraints": [],
-   "paymentWarnings": [],
-   "buyerTrackingTreatmentOptIn": false,
-   "loyaltyBadge": {
-    "granted": false
-   }
-  },
-  "modelDetails": {
-   "make": "Honda",
-   "model": "Civic",
-   "version": "1.8 I Vtec Flex Lxl",
-   "fuelType": "FLEX",
-   "numberOfDoors": "4",
-   "transmissionType": "MANUAL",
-   "modelYear": "2010",
-   "details": [
-    {
-     "name": "Motorização",
-     "value": "2.0 ou 1.8"
-    },
-    {
-     "name": "Combustível",
-     "value": "Flex ou Gasolina"
-    },
-    {
-     "name": "Potência",
-     "value": "140 até 192 cv"
-    },
-    "...4"
-   ],
-   "versions": [
-    {
-     "title": "HONDA CIVIC 1.8 I VTEC FLEX LXL",
-     "values": [
-      {
-       "name": "Motorização",
-       "value": "1.8"
-      },
-      {
-       "name": "Combustível",
-       "value": "Flex"
-      },
-      {
-       "name": "Potência",
-       "value": "140 cv"
-      },
-      "...4"
-     ]
-    },
-    {
-     "title": "HONDA CIVIC 1.8 I VTEC FLEX LXL AUTO",
-     "values": [
-      {
-       "name": "Motorização",
-       "value": "1.8"
-      },
-      {
-       "name": "Combustível",
-       "value": "Flex"
-      },
-      {
-       "name": "Potência",
-       "value": "140 cv"
-      },
-      "...4"
-     ]
-    },
-    {
-     "title": "HONDA CIVIC 1.8 I VTEC FLEX LXL COURO",
-     "values": [
-      {
-       "name": "Motorização",
-       "value": "1.8"
-      },
-      {
-       "name": "Combustível",
-       "value": "Flex"
-      },
-      {
-       "name": "Potência",
-       "value": "140 cv"
-      },
-      "...4"
-     ]
-    },
-    "...10"
-   ]
-  },
-  "pricingDetails": {
-   "lowestPrice": 48900,
-   "biggestPrice": 89900,
-   "averagePrice": 55426,
-   "fipePrice": 50167,
-   "histogram": [
-    {
-     "price": 40000,
-     "quantity": 4
-    },
-    {
-     "price": 50000,
-     "quantity": 17
-    },
-    {
-     "price": 60000,
-     "quantity": 1
-    },
-    "...4"
-   ]
-  },
-  "offer": {
-   "id": "89c9ae46-cb44-45a9-9060-ad749083cdcd",
-   "versionName": "Honda Civic 1.8 I Vtec Flex Lxl",
-   "description": "",
-   "modelYear": 2010,
-   "manufacturedYear": 2009,
-   "mileage": 188000,
-   "armoured": false,
-   "isNotFinanciable": false,
-   "seller": "Chiavegatti Automoveis",
-   "price": 51900,
-   "photos": [
-    {
-     "id": "099383a4-7199-4d83-86da-d8042e53f440",
-     "url": "https://storage.napista.com.br/static/photos/89c9ae46-cb44-45a9-9060-ad749083cdcd_099383a4-7199-4d83-86da-d8042e53f440",
-     "order": 0,
-     "externalUrl": "https://static2.meucarronovo.com.br/fotos/static/photos/89c9ae46-cb44-45a9-9060-ad749083cdcd_099383a4-7199-4d83-86da-d8042e53f440"
-    },
-    {
-     "id": "e8b66c7c-3c68-4702-946c-ff55c2deb799",
-     "url": "https://storage.napista.com.br/static/photos/89c9ae46-cb44-45a9-9060-ad749083cdcd_e8b66c7c-3c68-4702-946c-ff55c2deb799",
-     "order": 1,
-     "externalUrl": "https://static2.meucarronovo.com.br/fotos/static/photos/89c9ae46-cb44-45a9-9060-ad749083cdcd_e8b66c7c-3c68-4702-946c-ff55c2deb799"
-    },
-    {
-     "id": "5cd01a6f-93e8-494b-96b4-f4ed8a186485",
-     "url": "https://storage.napista.com.br/static/photos/89c9ae46-cb44-45a9-9060-ad749083cdcd_5cd01a6f-93e8-494b-96b4-f4ed8a186485",
-     "order": 2,
-     "externalUrl": "https://static2.meucarronovo.com.br/fotos/static/photos/89c9ae46-cb44-45a9-9060-ad749083cdcd_5cd01a6f-93e8-494b-96b4-f4ed8a186485"
-    },
-    "...12"
-   ],
-   "location": {
-    "city": "Novo Hamburgo",
-    "state": "Rio Grande do Sul",
-    "neighborhood": "Rincão",
-    "street": "Rua Portugal",
-    "number": "774",
-    "complement": "",
-    "geoLocation": {
-     "latitude": -29.6705602,
-     "longitude": -51.1435686
-    },
-    "uf": "RS"
-   },
-   "createdDate": "2026-10-28T18:27:56.012Z",
-   "fuelType": {
-    "code": "Flex",
-    "name": "Flex"
-   },
-   "numberOfDoors": 4,
-   "color": {
-    "name": "Prata"
-   },
-   "category": {
-    "code": "CAR"
-   },
-   "transmissionType": {
-    "name": "Manual"
-   },
-   "endOfPlate": "6",
-   "equipments": [
-    {
-     "name": "Air Bag"
-    },
-    {
-     "name": "Air Bag Duplo"
-    },
-    {
-     "name": "Alarme"
-    },
-    "...16"
-   ],
-   "vehicleImplements": [],
-   "badges": [],
-   "features": [],
-   "status": "PUBLISHED",
-   "sellerId": "45b545be-8dce-474a-a583-995ddfb4ba5a",
-   "makeName": "HONDA",
-   "compMakeModelName": "Honda Civic",
-   "compVersionName": "1.8 I Vtec Flex Lxl",
-   "versionId": "77030822010",
-   "newVehicle": false,
-   "activeProductTags": [
-    "FEIRAO_NOV_2026"
-   ],
-   "campaignGroupId": "honda-civic-de-15-a-17-anos-em-novo-hamburgo-rs"
-  }
- },
- "mobi_ad": {
-  "url": "https://www.mobiauto.com.br/comprar/carros/sp-sao-paulo/honda/civic/2011/new-lxl-1-8-i-vtec-couro-aut-flex/detalhes/20987139",
-  "deal": {
-   "id": 20987139,
-   "vehicleType": "CAR",
-   "lastNumberOfPlate": 4,
-   "dealPlanId": 22,
-   "makeId": 20196,
-   "makeName": "Honda",
-   "makeImageId": 64089248,
-   "modelId": 20411,
-   "modelName": "Civic",
-   "trimId": 1007569,
-   "trimName": "New  LXL 1.8 i-VTEC (Couro) (Aut) (Flex)",
-   "colorId": 12,
-   "colorName": "Cinza",
-   "fuelId": 6,
-   "fuelName": "Flex",
-   "transmissionId": 1,
-   "transmissionName": "Automática",
-   "bodystyleId": 1,
-   "bodystyleName": "Sedan",
-   "modelYear": 2011,
-   "productionYear": 2011,
-   "price": 51900.01,
-   "comments": "Escolher a marca Honda é optar por qualidade, confiabilidade e inovação. Com tecnologia de ponta e design arrojado, os veículos Honda se destacam no mercado automotivo. O Honda Civic New LXL 1.8 i-VTEC (Couro) (Aut) (Flex) é um sedan com 108474 km que oferece um excelente equilíbrio entre desempenho",
-   "doors": 4,
-   "km": 108474,
-   "features": [
-    {
-     "id": 29,
-     "name": "Controle elétrico do vidros traseiros"
-    },
-    {
-     "id": 9,
-     "name": "Bancos revestidos de couro"
-    },
-    {
-     "id": 18,
-     "name": "Cd player"
-    },
-    "...19"
-   ],
-   "conditionals": [
-    {
-     "id": 12,
-     "name": "Aceita troca"
-    }
-   ],
-   "dealerId": 13473,
-   "dealerLogo": 231593932,
-   "dealerName": "MERCES VEÍCULOS",
-   "dealerPhone": "1198187679",
-   "dealerMobile": "11981876795",
-   "dealerLocation": "-23.6213442,-46.607954",
-   "dealerDescription": "há quase 30 anos na mesma avenida trabalhando com transparência e honestidade, veículos com procedência segura, revisados com garantia, temos várias financeiras, optamos para a que oferecer a melhor taxa de juros de acordo com o CPF do cliente, venha conferir.\n Facilitamos sua compra:\n Financiamento",
-   "dealerWebsite": "https://www.icarros.com.br/ache/estoque.jsp?id=225604",
-   "dealerTypeId": 1,
-   "dealerTypeName": "Loja",
-   "dealerWorkScheduleStartWeek": "0900",
-   "dealerWorkScheduleStopWeek": "1800",
-   "dealerWorkScheduleStartSaturday": "0900",
-   "dealerWorkScheduleStopSaturday": "1500",
-   "dealerWorkScheduleStartSunday": "",
-   "dealerWorkScheduleStopSunday": "",
-   "dealerAddress": "Dom Vilares",
-   "dealerAddressNumber": "1227",
-   "dealerNeighborhood": "Vila das Mercês",
-   "dealerCityId": 109685,
-   "dealerCity": "São Paulo",
-   "dealerState": "SP",
-   "dealerZipCode": "04160000",
-   "acceptExchange": true,
-   "deal0km": false,
-   "armored": false,
-   "shieldMyAdActive": false,
-   "mobiPhoneActive": false,
-   "fipePrice": 56005,
-   "plate": "EUL4634",
-   "fipePriceProfit": 4104.9883,
-   "percentualFipePriceProfit": 7,
-   "financialExternalProviderId": 34
-  },
-  "images": [
-   {
-    "id": 614756966,
-    "imageSrc": "https://image1.mobiauto.com.br/images/api/images/v1.0/614756966/transform/fl_progressive,f_webp,q_70,w_800"
-   },
-   {
-    "id": 614756945,
-    "imageSrc": "https://image1.mobiauto.com.br/images/api/images/v1.0/614756945/transform/fl_progressive,f_webp,q_70,w_800"
-   },
-   {
-    "id": 614756942,
-    "imageSrc": "https://image1.mobiauto.com.br/images/api/images/v1.0/614756942/transform/fl_progressive,f_webp,q_70,w_800"
-   },
-   "...12"
-  ],
-  "img_urls": [
-   "https://image1.mobiauto.com.br/images/api/images/v1.0/614756966/transform/fl_progressive,f_webp,q_70,w_600",
-   "https://image1.mobiauto.com.br/images/api/images/v1.0/614756966/transform/fl_progressive,f_webp,q_70,w_800"
-  ],
-  "og_image": "https://image1.mobiauto.com.br/images/api/images/v1.0/614756966/transform/fl_progressive,f_webp,q_70,w_600"
- },
- "napista_meta": {
-  "sr_keys": {
-   "description": "Veja ofertas de Honda Civic usados e seminovos à venda manual",
-   "title": "Honda Civic usados e seminovos à venda manual",
-   "nlTerms": "honda civic manual",
-   "nlTermsArray": "list2",
-   "snippetMarkDown": "Já comparou as versões? Você está buscando uma opção de [entrada](fup:versao%20de%20entrada), [intermediária](fup:versao%20intermediária), [esportiva](fup:versao%20esportiva) ou [completa](fup:versao%20completa)?\n\nVocê prioriza ofertas com [baixa km](fup:pouco%20rodado), com [preço abaixo da FIPE](fup:abaixo%20da%20tabela) ou que seja um [seminovo](fup:seminovo)?",
-   "facets": "list19",
-   "addons": "list0",
-   "pageLinks": "list0",
-   "breadcrumbs": "list3",
-   "offersTotal": 423,
-   "offers": "list48",
-   "offersDiscovery": "list2",
-   "followUps": "list0",
-   "suggestions": "list0",
-   "slug": "honda/civic/manual",
-   "context": "dict1",
-   "activeProductTags": "list0",
-   "canonicalUri": "honda/civic"
-  },
-  "searchParams": {
-   "nlTerms": "honda civic manual",
-   "vehicleType": "CAR",
-   "ps": 48,
-   "pn": 1,
-   "order": "RELEVANCE"
-  }
- },
- "mobi_sop": {
-  "requestSop": "vtp_CAR.1_-dzk_false.1_-page_1.1_-sort_0.1_-mdi_20411.1",
-  "sop": {
-   "vtp": "CAR",
-   "dzk": "false",
-   "makesSop": [
-    {
-     "mks": "honda",
-     "mds": "civic",
-     "id": "1"
-    }
-   ],
-   "page": 1,
-   "sort": "0",
-   "mks": "honda",
-   "mds": "civic",
-   "trs": ""
-  },
-  "canonical": "carros-usados/brasil/honda/civic",
-  "deals_keys": {
-   "numResults": 3244,
-   "sop": "vtp_car.1_-mdi_20411.1_-rds_25.1_-dzk_f.1_-rtp_4.1_-srm_t.1_-inp_f.1_",
-   "title": "Honda Civic usados e seminovos à venda no Brasil",
-   "titleTag": "Honda Civic usados e seminovos à venda no Brasil",
-   "descriptionTag": "3.244 ofertas de Honda Civic usados e seminovos à venda no Brasil. Veja preços e versões na Mobiauto.",
-   "aggregations": "dict",
-   "results": "list"
-  }
- },
- "gone": [
-  {
-   "url": "https://napista.com.br/anuncios/00000000-0000-4000-8000-000000000000",
-   "status": 410,
-   "final": "https://napista.com.br/anuncios/00000000-0000-4000-8000-000000000000",
-   "hist": [],
-   "title": "",
-   "pp_keys": [
-    "notFound",
-    "slug",
-    "params"
-   ]
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros/sp-sao-paulo/honda/civic/2011/new-lxl-1-8-i-vtec-couro-aut-flex/detalhes/1000001",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar//anuncio-nao-existe/1000001",
-   "hist": [
-    307
-   ],
-   "title": "Mobiauto: a plataforma completa para comprar, vender e financiar o seu próximo veículo, ca",
-   "pp_keys": [
-    "mobile",
-    "initialVehicleType"
-   ]
-  }
- ],
- "img": [
-  "https://image1.mobiauto.com.br/images/api/images/v1.0/614756966/transform/fl_progressive,f_webp,q_70,w_250",
-  "https://image1.mobiauto.com.br/images/api/images/v1.0/614756966/transform/fl_progressive,f_webp,q_70,w_256",
-  "https://image1.mobiauto.com.br/images/api/images/v1.0/614756966/transform/fl_progressive,f_webp,q_70,w_640"
+ "hrefs": [
+  "/comprar/carros-usados/brasil/honda/civic/ano-1998",
+  "/comprar/carros-usados/brasil/honda/civic/ano-1999",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2000",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2001",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2002",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2003",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2004",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2005",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2006",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2007",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2008",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2009",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2010",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2011",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2012",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2013",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2014",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2015",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2016",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2017",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2018",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2019",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2020",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2021",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2022",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2023",
+  "/comprar/carros-usados/brasil/honda/civic/ano-2024",
+  "/comprar/carros-usados/brasil/honda/civic/pagina-2",
+  "/comprar/carros-usados/brasil/honda/civic/pagina-3",
+  "/comprar/carros-usados/brasil/honda/civic/pagina-4",
+  "/comprar/carros-usados/brasil/honda/civic/pagina-5",
+  "/comprar/carros-usados/brasil/honda/civic/pagina-6",
+  "/comprar/carros-usados/brasil/honda/civic/pagina-7",
+  "/comprar/carros-usados/brasil/honda/civic/pagina-8",
+  "/comprar/carros-usados/brasil/honda/civic/pagina-9",
+  "/comprar/carros-usados/brasil/honda/civic/preco-ate-100000",
+  "/comprar/carros-usados/brasil/honda/civic/preco-ate-20000",
+  "/comprar/carros-usados/brasil/honda/civic/preco-ate-200000",
+  "/comprar/carros-usados/brasil/honda/civic/preco-ate-30000",
+  "/comprar/carros-usados/brasil/honda/civic/preco-ate-300000",
+  "/comprar/carros-usados/brasil/honda/civic/preco-ate-40000",
+  "/comprar/carros-usados/brasil/honda/civic/preco-ate-400000",
+  "/comprar/carros-usados/brasil/honda/civic/preco-ate-50000",
+  "/comprar/carros-usados/brasil/honda/civic/preco-ate-60000",
+  "/comprar/carros-usados/brasil/honda/civic/preco-ate-70000",
+  "/comprar/carros-usados/brasil/honda/civic/preco-ate-80000",
+  "/comprar/carros-usados/brasil/honda/civic/preco-ate-90000",
+  "/comprar/carros-usados/brasil/honda/civic/s/cambio-automatico",
+  "/comprar/carros-usados/brasil/honda/civic/s/cambio-manual",
+  "/comprar/carros-usados/brasil/honda/civic/s/carroceria-conversivel",
+  "/comprar/carros-usados/brasil/honda/civic/s/carroceria-coupe",
+  "/comprar/carros-usados/brasil/honda/civic/s/carroceria-hatch",
+  "/comprar/carros-usados/brasil/honda/civic/s/carroceria-sedan",
+  "/comprar/carros-usados/brasil/honda/civic/s/combustivel-diesel",
+  "/comprar/carros-usados/brasil/honda/civic/s/combustivel-etanol",
+  "/comprar/carros-usados/brasil/honda/civic/s/combustivel-flex",
+  "/comprar/carros-usados/brasil/honda/civic/s/combustivel-gasolina",
+  "/comprar/carros-usados/brasil/honda/civic/s/combustivel-gnv",
+  "/comprar/carros-usados/brasil/honda/civic/s/combustivel-hibrido",
+  "/comprar/carros-usados/brasil/honda/civic/s/combustivel-multiflex-etanol-gasolina-gnv-e-benzina"
  ]
 }
