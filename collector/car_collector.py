@@ -108,10 +108,11 @@ SCORE = {
     "base": 5.0,                       # score of a car priced exactly at its fair price
     "gearbox": {"\u2714 Manual": 0.0, "? Unconfirmed": -0.5, "\u26A0 Conflict": -1.0, "Automatic": 0.0},
     "red": {"Rebuilt title": -3.0, "Salvage title": -4.0, "Accident mentioned": -1.0, "Sold as-is": -1.0,
-            "Needs work": -1.5, "Modified": -0.5, "Price hidden": -1.0},
+            "Needs work": -1.5, "Modified": -0.5, "Price hidden": -1.0, "Gearbox problem": -1.0,
+            "Clutch slipping": -0.5},
     "green": {"Rod bearings done": 1.0, "Subframe reinforced": 0.5, "VANOS/timing done": 0.5,
-              "Clutch done": 0.5, "Service records": 0.5, "No accidents stated": 0.5, "One owner": 0.5,
-              "Winter stored": 0.5},
+              "Clutch done": 0.5, "Gearbox serviced": 0.5, "Service records": 0.5, "No accidents stated": 0.5,
+              "One owner": 0.5, "Winter stored": 0.5},
     "green_cap": 2.0,
 }
 
@@ -346,7 +347,37 @@ FLAG_RULES = {
                  r"|[u\u00fa]nico dono|1 dono\b",
     "Winter stored": r"never seen (a )?winter|no winters?|winter stored|stored (for the |in )?winters?"
                      r"|summer (car|only|driven)|jamais (roul[e\u00e9]e? l.)?hiver|remis[e\u00e9]e? l.hiver",
+    # gearbox: service and faults (any gearbox), clutch (manuals only, see GEAR_ONLY)
+    "Gearbox serviced": r"(troca|trocad[oa]|substitu\w*) (do |de )?([o\u00f3]leo|fluido) (do |de |da )?(c[a\u00e2]mbio|cvt|transmiss)"
+                        r"|([o\u00f3]leo|fluido) (do |de |da )?(c[a\u00e2]mbio|cvt|transmiss\w*)( cvt| autom\w*)? (trocad|novo|substitu)"
+                        r"|c[a\u00e2]mbio (revisado|retificado|reformado|refeito|novo)"
+                        r"|transmission (fluid|oil|service) (was |has been )?(done|changed|replaced|flushed)"
+                        r"|(new|rebuilt) (transmission|gearbox)|(transmission|gearbox) (was |has been )?(rebuilt|replaced)",
+    "Gearbox problem": r"c[a\u00e2]mbio (dando |com |d[a\u00e1] )?(trancos?|solavancos?)"
+                       r"|c[a\u00e2]mbio (patinando|arranhando|com (defeito|problema|barulho|ru[i\u00ed]do))"
+                       r"|marchas? (escapando|arranhando)|(?<!sem )(?<!nenhum )(defeito|problema) no c[a\u00e2]mbio"
+                       r"|transmission (slipping|slips|problem|issue|needs)|(slipping|harsh) (shifts?|shifting)"
+                       r"|grinds? (into|in) (\w+ )?gear",
+    "Clutch slipping": r"embreagem (patinando|alta|no fim|ruim|batendo)|clutch (is )?slipping|slipping clutch",
 }
+GEAR_ONLY = {"Clutch done": "manual", "Clutch slipping": "manual"}      # no clutch pedal on an automatic
+GEAR_FLAGS = ("Gearbox serviced", "Gearbox problem", "Clutch slipping")  # added later: also read from stored ad text
+
+
+def gear_flags(rows):
+    """Gearbox-aware flags: adds the gearbox flags to ads read before they existed, and drops clutch flags
+    from automatics."""
+    for r in rows:
+        red = [f for f in (r.get("red_flags") or "").split("; ") if f]
+        green = [f for f in (r.get("green_flags") or "").split("; ") if f]
+        if r.get("flags_read") and r.get("desc"):
+            nr, ng = flags_of((r.get("note") or "") + "\n" + r["desc"])
+            red += [f for f in nr.split("; ") if f in GEAR_FLAGS and f not in red]
+            green += [f for f in ng.split("; ") if f in GEAR_FLAGS and f not in green]
+        if r.get("trans") == "a":
+            red = [f for f in red if GEAR_ONLY.get(f) != "manual"]
+            green = [f for f in green if GEAR_ONLY.get(f) != "manual"]
+        r["red_flags"], r["green_flags"] = "; ".join(red), "; ".join(green)
 
 
 def flags_of(text):
@@ -1140,8 +1171,13 @@ def _ols(X, y, ridge=1e-6):
     return _solve(A, b)
 
 
-def fit_fair_price(active):
-    """Returns ({family: (a, b_km, b_year, n)}, b_conv, resid_sd). km in units of 10,000 km, year-2000."""
+def fit_fair_price(active, adj=None):
+    """Returns ({family: (a, b_km, b_year, n)}, b_conv, resid_sd). km in units of 10,000 km, year-2000.
+    adj: {state: log price level}; prices are divided by their state's level before fitting (Brazil)."""
+    adj = adj or {}
+
+    def ly(r):
+        return math.log(float(r["price"])) - adj.get(area_of(r), 0.0)
     data = [r for r in active if r["price"] and r["km"] and r["year"]
             and not re.search(r"Rebuilt|Salvage", r.get("red_flags", ""))]
     if len(data) < 8:
@@ -1154,7 +1190,7 @@ def fit_fair_price(active):
     use = data
     for _ in range(2):                                 # fit, drop strong outliers, refit
         X = [[1.0 if mkey(r) == f else 0.0 for f in fams] + list(feats(r)) for r in use]
-        y = [math.log(float(r["price"])) for r in use]
+        y = [ly(r) for r in use]
         beta = _ols(X, y)
         res = [yy - sum(a * b for a, b in zip(x, beta)) for x, yy in zip(X, y)]
         sd = (sum(e * e for e in res) / max(1, len(res) - len(beta))) ** 0.5
@@ -1171,12 +1207,12 @@ def fit_fair_price(active):
         n_fit = len(fr_fit)
         if n_fit >= 12:
             Xf = [[1.0, feats(r)[0], feats(r)[1]] for r in fr_fit]
-            yf = [math.log(float(r["price"])) - b_conv * feats(r)[2] for r in fr_fit]
+            yf = [ly(r) - b_conv * feats(r)[2] for r in fr_fit]
             _, bk_f, by_f = _ols(Xf, yf, ridge=1e-3)
             bk = (n_fit * bk_f + K * b_km) / (n_fit + K)
             by = (n_fit * by_f + K * b_yr) / (n_fit + K)
         fr = [r for r in data if mkey(r) == f]       # level = MEDIAN over every car of the family (robust)
-        lv = sorted(math.log(float(r["price"])) - bk * feats(r)[0] - by * feats(r)[1] - b_conv * feats(r)[2]
+        lv = sorted(ly(r) - bk * feats(r)[0] - by * feats(r)[1] - b_conv * feats(r)[2]
                     for r in fr)
         m = len(lv)
         a = lv[m // 2] if m % 2 else (lv[m // 2 - 1] + lv[m // 2]) / 2
@@ -1200,9 +1236,97 @@ def mkey(r):
     return r["family"] + ("|auto" if r.get("trans") == "a" else "")
 
 
+# --------------------------------------------------------------------------------------------
+# Regional price levels (Brazil): how far each state's asking prices sit from the national fair price,
+# for the same model, km and year. The app uses them for a local fair price around a chosen town.
+# --------------------------------------------------------------------------------------------
+REGION_OF = {uf: g for g, s in {"N": "AC AM AP PA RO RR TO", "NE": "AL BA CE MA PB PE PI RN SE",
+                                "CO": "DF GO MS MT", "SE": "ES MG RJ SP", "S": "PR RS SC"}.items() for uf in s.split()}
+K_AREA = 10.0          # a place with few cars leans on the wider area as if it had this many cars at its level
+AREA_CLIP = 0.25       # one car moves a price level by at most 25% (typos, odd ads)
+AREAS = {}             # filled by fit_with_areas(): state and region levels, towns table
+
+
+def area_of(r):
+    if COUNTRY["country"] != "BR":
+        return None
+    uf = (r.get("place") or "").rpartition(",")[2].strip().upper()
+    return uf if uf in REGION_OF else None
+
+
+def log_fair(model, b_conv, r):
+    """Log of the national fair price, or None."""
+    m = model.get(mkey(r))
+    try:
+        km, year = float(r["km"]), float(r["year"])
+    except (TypeError, ValueError):
+        return None
+    if not m or not km:
+        return None
+    a, bk, by, _ = m
+    return a + bk * km / 1e4 + by * (year - 2000) + b_conv * (r["body"] == "conv")
+
+
+def area_levels(gaps, normalize=True):
+    """gaps: [(state, log gap)]. Region level = sum / (n + K): few cars -> near 0 (national).
+    State level shrinks the same way toward its region. normalize: the median well-measured state = 0."""
+    st, rg = {}, {}
+    for uf, e in gaps:
+        for d, k in ((st, uf), (rg, REGION_OF[uf])):
+            s = d.setdefault(k, [0.0, 0])
+            s[0] += e
+            s[1] += 1
+    reg = {g: rg.get(g, [0.0, 0])[0] / (rg.get(g, [0.0, 0])[1] + K_AREA) for g in sorted(set(REGION_OF.values()))}
+    lv = {uf: (st.get(uf, [0.0, 0])[0] + K_AREA * reg[REGION_OF[uf]]) / (st.get(uf, [0.0, 0])[1] + K_AREA)
+          for uf in REGION_OF}
+    off = 0.0
+    well = sorted(lv[uf] for uf in lv if st.get(uf, [0, 0])[1] >= 10)
+    if normalize and well:
+        m = len(well)
+        off = well[m // 2] if m % 2 else (well[m // 2 - 1] + well[m // 2]) / 2
+    return ({uf: v - off for uf, v in lv.items()}, {g: v - off for g, v in reg.items()},
+            {uf: st.get(uf, [0, 0])[1] for uf in lv}, {g: rg.get(g, [0, 0])[1] for g in reg})
+
+
+def fit_with_areas(active):
+    """Fair-price model. In Brazil prices are first corrected for their state's price level, so the national
+    fair price is the typical state's, not pulled up by Rio or set by Sao Paulo's many ads."""
+    global AREAS
+    model, b_conv, sd = fit_fair_price(active)
+    if COUNTRY["country"] != "BR":
+        return model, b_conv, sd
+    load_geo()
+    usable = [r for r in active if area_of(r) and r["price"] and r["year"]
+              and not re.search(r"Rebuilt|Salvage", r.get("red_flags", ""))]
+
+    def gaps():
+        out = []
+        for r in usable:
+            lf = log_fair(model, b_conv, r)
+            if lf is not None:
+                out.append((r, max(-AREA_CLIP, min(AREA_CLIP, math.log(float(r["price"])) - lf))))
+        return out
+    for _ in range(3):                                   # levels <-> model, a few rounds settle it
+        lv = area_levels([(area_of(r), e) for r, e in gaps()])[0]
+        model, b_conv, sd = fit_fair_price(active, lv)
+    g = gaps()
+    lv, reg, n_st, n_rg = area_levels([(area_of(r), e) for r, e in g], normalize=False)
+    towns = {}
+    for r, e in g:
+        geo = geo_of(r["place"])
+        if geo:
+            s = towns.setdefault(geo, [0, 0.0])
+            s[0] += 1
+            s[1] += e
+    AREAS = {"k": K_AREA, "uf": {uf: [round(v, 4), n_st[uf]] for uf, v in lv.items()},
+             "reg": {k: [round(v, 4), n_rg[k]] for k, v in reg.items()}, "region_of": REGION_OF,
+             "towns": [[la, lo, n, round(s, 3)] for (la, lo), (n, s) in sorted(towns.items())]}
+    return model, b_conv, sd
+
+
 def score_rows(active):
     """Same maths as the workbook: fair price, % under fair, confidence and the 0-10 score, per listing id."""
-    model, b_conv, sd = fit_fair_price(active)
+    model, b_conv, sd = fit_with_areas(active)
     ppp = max(0.03, round(2 * sd / 5, 2))
     out = {}
     for r in active:
@@ -1228,6 +1352,7 @@ def score_rows(active):
                + sum(SCORE["red"].get(f, 0.0) for f in red)
                + min(SCORE["green_cap"], sum(SCORE["green"].get(f, 0.0) for f in green)))
         o["score"] = round(max(0.0, min(10.0, pts)), 1)
+        o["sr"] = round(pts, 3)                          # before the 0-10 limits: the app moves it for a local price
         out[r["listing_id"]] = o
     return out, {"sd": round(sd, 3), "pct_per_point": ppp,
                  "families": {f: {"n": v[3]} for f, v in model.items()}}
@@ -1291,7 +1416,7 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
     load_geo()
     active = [r for r in rows if r["status"] == "active" and r["price"]]
     scores, model_info = score_rows(active)
-    model, b_conv, _ = fit_fair_price(active)
+    model, b_conv, _ = fit_with_areas(active)
     comps = comps or []
     comp_idx, comp_list = {}, []
 
@@ -1350,6 +1475,7 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
         "families": [fams[f] for f in fams if any(c["family"] == f for c in cars)],
         "names": [n for n in names.values() if any(c["name"] == n["name"] for c in cars)],
         "score": {**SCORE, **model_info}, "run": run_info or [],
+        "areas": AREAS or None,
         "searches": [{"source": s, "url": u, "ads": n} for s, u, n in (stats or {}).get("searches", [])],
         "cars": cars,
         "auto_file": os.path.basename(auto_path) if autos else None, "auto_count": len(autos),
@@ -2313,6 +2439,7 @@ def run(args):
             apply_split(r)
         if not args.no_photos:
             download_photos(sess, rows + new_rows, stats)
+    gear_flags(rows + new_rows)
     for r in rows + new_rows:
         snap.add(r)
     snap.finish()

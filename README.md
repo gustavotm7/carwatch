@@ -60,3 +60,19 @@ Each car's town is matched to IBGE municipality coordinates (`collector/geo_br.c
 JSON is exported. In the app, the row of chips above the list filters by distance from a favourite town
 (São Paulo, SP and Teresina, PI come pre-saved). Tap the pin or **Edit** to change the distance
 (town only to 400 km) or to add and remove favourites. Favourites are saved on the phone.
+
+### Local prices (Brazil)
+
+Asking prices differ by region (Rio de Janeiro sits about 10% below the national level for the same model, km
+and year). The collector first measures each state's price level, shrunk toward its macro-region when a state has
+few cars, and fits the fair-price model on prices corrected for it, so the national fair price is the typical
+state's. It exports a table of towns with each town's gap to the national price (manual and automatic cars).
+When a town is picked in the location filter, the app works out the local level from the cars in the radius
+(leaning on the state level when there are fewer than 10) and uses the local fair price for the % badge, the score
+and sorting. The details show both prices. Settings: `K_AREA` and `AREA_CLIP` in the collector.
+
+### Gearbox-aware flags
+
+Automatics are priced only against automatics and lose no points for the gearbox. Clutch flags ("Clutch done",
+"Clutch slipping") only apply to manuals; "Gearbox serviced" and "Gearbox problem" apply to both. Ads read before
+these flags existed are checked again from their stored text on every run.
