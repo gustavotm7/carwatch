@@ -70,11 +70,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .chip{flex:none;display:flex;align-items:center;gap:7px;padding:7px 12px 7px 10px;border-radius:999px;
   border:1px solid var(--line);background:var(--surface);color:var(--muted);font:600 15px/1 var(--cond);letter-spacing:.02em}
 .chip .dot{width:10px;height:10px;border-radius:50%;background:var(--c,#888)}
-.gmode{flex:none;display:flex;position:sticky;left:0;z-index:2;padding:3px;border-radius:999px;border:1px solid var(--line);
-  background:var(--surface);box-shadow:-14px 0 0 #10141a,10px 0 12px -6px #10141a}
-.gmode button{padding:6px 12px;border-radius:999px;font:600 15px/1 var(--cond);letter-spacing:.02em;color:var(--muted)}
-.gmode button[aria-pressed=true]{background:var(--text);color:var(--bg)}
-.gmode button.auto[aria-pressed=true]{background:#f0b23e;color:#1d1505}
+.gmode{flex:none;display:flex;align-items:center;gap:7px;position:sticky;left:0;z-index:2;padding:7px 12px 7px 11px;
+  border-radius:999px;font:600 15px/1 var(--cond);letter-spacing:.02em;
+  box-shadow:-14px 0 0 #10141a,10px 0 12px -6px #10141a}
+.gmode svg{opacity:.75}
+.gmode.is-man{background:rgba(60,207,142,.16);color:#8ef0c0;border:1px solid rgba(60,207,142,.5)}
+.gmode.is-auto{background:#f0b23e;color:#1d1505;border:1px solid #f0b23e}
 .top.auto-on{border-bottom:2px solid #f0b23e}
 .auto-note{grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:14px;font-size:14px;
   background:rgba(240,178,62,.12);border:1px solid rgba(240,178,62,.45);color:#ffd27e}
@@ -417,8 +418,10 @@ function renderChips() {
   const counts = {};
   DATA.cars.forEach(c => counts[c.name] = (counts[c.name] || 0) + 1);
   const names = effNames();
-  const gm = MAN_DATA && MAN_DATA.auto_file
-    ? `<div class="gmode" role="group" aria-label="Gearbox"><button data-gm="m" type="button" aria-pressed="${!AUTO}">Manual</button><button class="auto" data-gm="a" type="button" aria-pressed="${AUTO}">Automatic</button></div>` : "";
+  const gm = MAN_DATA && MAN_DATA.auto_file          // one button showing the current gearbox; a tap switches
+    ? `<button class="gmode ${AUTO ? "is-auto" : "is-man"}" data-gm="${AUTO ? "m" : "a"}" type="button"
+        aria-label="Showing ${AUTO ? "automatic" : "manual"} cars. Tap for ${AUTO ? "manual" : "automatic"}.">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 4.5h9M8.5 2l2.5 2.5L8.5 7M12 9.5H3M5.5 7 3 9.5 5.5 12"/></svg>${AUTO ? "Automatic" : "Manual"}</button>` : "";
   const all = `<button class="chip" data-name="" aria-pressed="${!names.length}">All <span class="n">${DATA.cars.length}</span></button>`;
   $("#chips").innerHTML = gm + all + DATA.names.map(n =>
     `<button class="chip" style="--c:${n.color}" data-name="${esc(n.name)}" aria-pressed="${names.includes(n.name)}">
