@@ -1,0 +1,2312 @@
+{
+ "pages": [
+  {
+   "url": "https://napista.com.br/busca/bmw/series-3-m3",
+   "status": 200,
+   "final": "https://napista.com.br/busca/bmw/series-3-m3",
+   "bytes": 232082,
+   "title": "Bmw Series 3 M3 usados e seminovos à venda | NaPista",
+   "pp_keys": [
+    "searchResult",
+    "searchParams"
+   ],
+   "query": {
+    "id": [
+     "bmw",
+     "series-3-m3"
+    ]
+   },
+   "page": "/busca/[...id]",
+   "lists": [
+    [
+     ".searchResult.offers",
+     22,
+     [
+      "activeProductTags",
+      "badges",
+      "campaignGroupId",
+      "compMakeModelName",
+      "compVersionName",
+      "createdDate",
+      "equipments",
+      "features",
+      "id",
+      "isNotFinanciable",
+      "location",
+      "makeName",
+      "manufacturedYear",
+      "mileage",
+      "modelName",
+      "modelYear",
+      "newVehicle",
+      "photos",
+      "price",
+      "seller",
+      "sellerCommercialPartnerCode",
+      "sellerId",
+      "vehicleImplements",
+      "versionName"
+     ],
+     "{\"id\": \"246ecfde-c408-438c-b6ad-f366733f271a\", \"versionName\": \"Bmw M3 Competition M 3.0 Bi-tb 510cv\", \"modelYear\": 2024, \"manufacturedYear\": 2023, \"mileage\": 8000, \"isNotFinanciable\": false, \"seller\": \"Apex Motors\", \"price\": 1150000, \"photos\": [{\"id\": \"a04be6c1-dd18-4fe8-a006-ee6ff081c7b7\", \"url\": \"https://storage.napista.com.br/static/photos/246ecfde-c408-438c-b6ad-f366733f271a_a04be6c1-dd18-4fe8-a006-ee6ff081c7b7\", \"order\": 0, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/246ecfde-c408-438c-b6ad-f366733f271a_a04be6c1-dd18-4fe8-a006-ee6ff081c7b7\"}], \"location\": {\"city\": \"RIBEIRAO PRETO\", \"state\": \"São Paulo\", \"neighborhood\": \"City Ribeirão\", \"street\": \"Av Alzira Couto Machado\", \"number\": \"630\", \"complement\": \"\", \"geoLocation\": {\"latitude\": -21.214255, \"longitude\": -47.7802114}, \"uf\": \"SP\"}, \"createdDate\": \"2026-11-09T19:33:32.833Z\", \"equipments\": [], \"vehicleImplements\": [], \"badges\": [], \"features\": [], \"sellerId\": \"4b3589c9-9b9a-460a-a1d9-bf1997834cab\", \"makeName\": \"Bmw\", \"modelName\": \"SERIES 3\", \"compMakeModelName\": \"Bmw M3 Competition M\", \"compVersionName\": \"3.0 Bi-tb 510cv\", \"sellerCommercialPartnerCode\": 465074, \"newVehicle\": false, \"activeProductTags\": [], \"campaignGroupId\": \"bmw-series-3-de-3-a-5-anos-em-ribeirao-preto-sp\"}"
+    ],
+    [
+     ".searchResult.offersDiscovery[0].offers",
+     2,
+     [
+      "activeProductTags",
+      "badges",
+      "campaignGroupId",
+      "compMakeModelName",
+      "compVersionName",
+      "createdDate",
+      "equipments",
+      "features",
+      "id",
+      "isNotFinanciable",
+      "location",
+      "makeName",
+      "manufacturedYear",
+      "mileage",
+      "modelName",
+      "modelYear",
+      "newVehicle",
+      "photos",
+      "price",
+      "seller",
+      "sellerCommercialPartnerCode",
+      "sellerId",
+      "vehicleImplements",
+      "versionName"
+     ],
+     "{\"id\": \"4b86324d-da4e-4c3b-ab4a-9061cd68232e\", \"versionName\": \"Bmw Z4 Roadster Sdrive 30i Msport 2.0 Tb Aut\", \"modelYear\": 2020, \"manufacturedYear\": 2019, \"mileage\": 18000, \"isNotFinanciable\": false, \"seller\": \"Bendo Utilitarios\", \"price\": 399900, \"photos\": [{\"id\": \"2cd5633e-30e8-4ba2-8430-efbbe6c9ba4c\", \"url\": \"https://storage.napista.com.br/static/photos/4b86324d-da4e-4c3b-ab4a-9061cd68232e_2cd5633e-30e8-4ba2-8430-efbbe6c9ba4c\", \"order\": 0, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/4b86324d-da4e-4c3b-ab4a-9061cd68232e_2cd5633e-30e8-4ba2-8430-efbbe6c9ba4c\"}, {\"id\": \"f5f9d30d-e9a0-445b-b2d8-78d7b75060d4\", \"url\": \"https://storage.napista.com.br/static/photos/4b86324d-da4e-4c3b-ab4a-9061cd68232e_f5f9d30d-e9a0-445b-b2d8-78d7b75060d4\", \"order\": 1, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/4b86324d-da4e-4c3b-ab4a-9061cd68232e_f5f9d30d-e9a0-445b-b2d8-78d7b75060d4\"}, {\"id\": \"22e2da3d-467b-4539-bc1c-df23e986a92a\", \"url\": \"https://storage.napista.com.br/static/photos/4b86324d-da4e-4c3b-ab4a-9061cd68232e_22e2da3d-467b-4539-bc1c-df23e986a92a\", \"order\": 2, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/4b86324d-da4e-4c3b-ab4a-9061cd68232e_22e2da3d-467b-4539-bc1c-df23e986a92a\"}, {\"id\": \"e91c75b6-bd55-499e-9474-cc25578b4f67\", \"url\": \"https://storage.napista.com.br/static/photos/4b86324d-da4e-4c3b-ab4a-9061cd68232e_e91c75b6-bd55-499e-9474-cc25578b4f67\", \"order\": 3, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/4b86324d-da4e-4c3b-ab4a-9061cd68232e_e91c75b6-bd55-499e-9474-cc25578b4f67\"}, {\"id\": \"f29e12a8-3f8d-48fb-ab7e-b970b7a1c304\", \"url\": \"https://storage.napista.com.br/static/photos/4b86324d-da4e-4c3b-ab4a-9061cd68232e_f29e12a8-3f8d-48fb-ab7e-b970b7a1c304\", \"order\": 4, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/4b86324d-da4e-4c3b-ab4a-9061cd68232e_f29e12a8-3f8d-48fb-ab7e-b970b7a1c304\"}, {\"id\": \"5968b68a-6783-488e-aaa5-e3174dd5debb\", \"url\": \"https://storage.napista.com.br/static/photos/4b86324d-da4e-4c3b-ab4a-9061cd68232e_5968b68a-6783-488e-aaa5-e3174dd5debb\", \"order\": 5, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/4b86324d-da4e-4c3b-ab4a-9061cd68232e_5968b68a-6783-488e-aaa5-e3174dd5debb\"}, {\"id\": \"ad3a8407-567b-4039-b9a9-230a1a545a84\", \"url\": \"https://storage.napista.com.br/static/photos/4b86324d-da4e-4c3b-ab4a-9061cd68232e_ad3a8407-567b-4039-b9a9-230a1a545a84\", \"order\": 6, \"externalUrl\": \"https://static2"
+    ]
+   ],
+   "ld_types": [
+    [
+     "SearchResultsPage",
+     "ItemList",
+     "Vehicle",
+     "Organization",
+     "Offer",
+     "UnitPriceSpecification"
+    ]
+   ],
+   "detail_links": [
+    "/anuncios/246ecfde-c408-438c-b6ad-f366733f271a",
+    "/anuncios/c35de2d8-9446-405d-b57b-f531ea471868",
+    "/anuncios/febebf54-0453-40c5-9eed-d5159a1d812e",
+    "/anuncios/ba324b33-09a4-41c5-9dcc-e7cb84efafa2",
+    "/anuncios/3d5592fc-f7f0-4c1e-93aa-d96aebfa6d42",
+    "/anuncios/e2107acd-79a3-4a25-9a59-e9fbf687bc50",
+    "/anuncios/4d29f974-0119-404c-b738-72f610aaef5e",
+    "/anuncios/d103bf14-ed0d-4c69-9223-81544321e487",
+    "/anuncios/a2582c7b-2f57-4b85-b9b2-5ccf20fd6287",
+    "/anuncios/1cad5ca1-cfde-4ff0-a20e-b551d08d5b78",
+    "/anuncios/79fdc534-c9b7-4d81-a046-2e2842d7e3b3",
+    "/anuncios/636659df-9571-4469-8661-4f5fb1e0c28a"
+   ],
+   "href_sample": [
+    "/anuncios/deca7677-b949-4960-a0d1-b59f37b46df9",
+    "/anuncios/2d73ff1c-abe9-427c-8cab-70c6351024d4",
+    "/anuncios/351f9891-9ea7-4d91-a2d9-c2123c208db5",
+    "/busca/bmw/series-3-m3/seminovos",
+    "/busca/bmw/series-3/series-3-m3",
+    "/busca/sp/bmw/series-3-m3",
+    "/busca/pr/bmw/series-3-m3",
+    "/busca/sc/bmw/series-3-m3",
+    "/busca/rs/bmw/series-3-m3",
+    "/busca/df/bmw/series-3-m3",
+    "/busca/mg/bmw/series-3-m3",
+    "/busca/ms/bmw/series-3-m3",
+    "/busca/pe/bmw/series-3-m3",
+    "/busca/rj/bmw/series-3-m3",
+    "/busca/motos/moto",
+    "/busca/pesados/pesados",
+    "/financiamento-de-veiculos",
+    "/financiamento-de-veiculos/simule-financiamento-veiculos",
+    "/loja/offer/list",
+    "/compre-estoque",
+    "/termos-de-uso/",
+    "/dicas-de-seguranca/",
+    "/politica-de-privacidade/",
+    "https://www.bv.com.br/financiamento",
+    "https://www.bv.com.br",
+    "/blog/categorias/ibv-auto",
+    "/mapa-do-site",
+    "https://play.google.com/store/apps/details?id=br.com.napista.marketplace&amp;referrer=utm_source%3Dsite%26utm_medium%3Dbanner_download",
+    "https://apps.apple.com/br/app/napista-comprar-carros/id6745230537",
+    "https://www.instagram.com/napista_oficial",
+    "https://www.facebook.com/napistapp",
+    "https://google.com/preferences/source?q=napista.com.br"
+   ]
+  },
+  {
+   "url": "https://napista.com.br/busca/honda/civic",
+   "status": 200,
+   "final": "https://napista.com.br/busca/honda/civic",
+   "bytes": 432109,
+   "title": "Honda Civic usados e seminovos à venda | NaPista",
+   "pp_keys": [
+    "searchResult",
+    "searchParams"
+   ],
+   "query": {
+    "id": [
+     "honda",
+     "civic"
+    ]
+   },
+   "page": "/busca/[...id]",
+   "lists": [
+    [
+     ".searchResult.offers",
+     48,
+     [
+      "activeProductTags",
+      "badges",
+      "campaignGroupId",
+      "compMakeModelName",
+      "compVersionName",
+      "createdDate",
+      "equipments",
+      "features",
+      "id",
+      "isNotFinanciable",
+      "location",
+      "makeName",
+      "manufacturedYear",
+      "mileage",
+      "modelName",
+      "modelYear",
+      "newVehicle",
+      "photos",
+      "price",
+      "seller",
+      "sellerCommercialPartnerCode",
+      "sellerId",
+      "vehicleImplements",
+      "versionName"
+     ],
+     "{\"id\": \"80d54550-54d0-4ccc-b69a-70686ac70fb0\", \"versionName\": \"Honda Civic Sedan Lxs 1.8/1.8 Flex 16v Aut. 4p\", \"modelYear\": 2014, \"manufacturedYear\": 2013, \"mileage\": 85000, \"isNotFinanciable\": false, \"seller\": \"Maiorano Veiculos\", \"price\": 74900, \"photos\": [{\"id\": \"5b343338-de3c-4d64-851c-00e11bb2fe45\", \"url\": \"https://storage.napista.com.br/static/photos/80d54550-54d0-4ccc-b69a-70686ac70fb0_5b343338-de3c-4d64-851c-00e11bb2fe45\", \"order\": 0, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/80d54550-54d0-4ccc-b69a-70686ac70fb0_5b343338-de3c-4d64-851c-00e11bb2fe45\"}], \"location\": {\"city\": \"Rio de Janeiro\", \"state\": \"Rio de Janeiro\", \"neighborhood\": \"Madureira\", \"street\": \"Estrada Intendente Magalhães\", \"number\": \"241\", \"complement\": \"\", \"geoLocation\": {\"latitude\": -22.8828093, \"longitude\": -43.3483143}, \"uf\": \"RJ\"}, \"createdDate\": \"2026-11-15T21:33:34.915Z\", \"equipments\": [], \"vehicleImplements\": [], \"badges\": [], \"features\": [], \"sellerId\": \"152bede5-f53b-4464-9f05-65257507cd4a\", \"makeName\": \"Honda\", \"modelName\": \"CIVIC\", \"compMakeModelName\": \"Honda Civic\", \"compVersionName\": \"Sedan Lxs 1.8/1.8 Flex 16v Aut. 4p\", \"sellerCommercialPartnerCode\": 416420, \"newVehicle\": false, \"activeProductTags\": [], \"campaignGroupId\": \"honda-civic-de-12-a-14-anos-em-rio-de-janeiro-rj\"}"
+    ],
+    [
+     ".searchResult.offersDiscovery[0].offers",
+     6,
+     [
+      "activeProductTags",
+      "badges",
+      "campaignGroupId",
+      "compMakeModelName",
+      "compVersionName",
+      "createdDate",
+      "equipments",
+      "features",
+      "id",
+      "isNotFinanciable",
+      "location",
+      "makeName",
+      "manufacturedYear",
+      "mileage",
+      "modelName",
+      "modelYear",
+      "newVehicle",
+      "photos",
+      "price",
+      "seller",
+      "sellerCommercialPartnerCode",
+      "sellerId",
+      "vehicleImplements",
+      "versionName"
+     ],
+     "{\"id\": \"9ba194d6-c672-48ec-bf44-ff5956b06f99\", \"versionName\": \"Honda Fit 1.5 Lx Cvt\", \"modelYear\": 2018, \"manufacturedYear\": 2018, \"mileage\": 150000, \"isNotFinanciable\": false, \"seller\": \"Vitrini Motors\", \"price\": 69900, \"photos\": [{\"id\": \"d7f6d89d-1a9a-4199-bd58-5fcab6920b98\", \"url\": \"https://storage.napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_d7f6d89d-1a9a-4199-bd58-5fcab6920b98\", \"order\": 0, \"externalUrl\": \"https://napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_d7f6d89d-1a9a-4199-bd58-5fcab6920b98\"}, {\"id\": \"3ad1640d-5281-4ff8-934c-6fa7d4c20189\", \"url\": \"https://storage.napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_3ad1640d-5281-4ff8-934c-6fa7d4c20189\", \"order\": 1, \"externalUrl\": \"https://napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_3ad1640d-5281-4ff8-934c-6fa7d4c20189\"}, {\"id\": \"d36f82da-7254-4999-8722-1879e5c4d418\", \"url\": \"https://storage.napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_d36f82da-7254-4999-8722-1879e5c4d418\", \"order\": 2, \"externalUrl\": \"https://napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_d36f82da-7254-4999-8722-1879e5c4d418\"}, {\"id\": \"d0c194fd-0512-4010-9ac3-34979d52f9e0\", \"url\": \"https://storage.napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_d0c194fd-0512-4010-9ac3-34979d52f9e0\", \"order\": 3, \"externalUrl\": \"https://napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_d0c194fd-0512-4010-9ac3-34979d52f9e0\"}, {\"id\": \"f5c4137e-6f6f-451e-a2b5-38b81d9382c0\", \"url\": \"https://storage.napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_f5c4137e-6f6f-451e-a2b5-38b81d9382c0\", \"order\": 4, \"externalUrl\": \"https://napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_f5c4137e-6f6f-451e-a2b5-38b81d9382c0\"}, {\"id\": \"99c9218d-1de1-41f7-b3f0-8e2669b35a9f\", \"url\": \"https://storage.napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_99c9218d-1de1-41f7-b3f0-8e2669b35a9f\", \"order\": 5, \"externalUrl\": \"https://napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_99c9218d-1de1-41f7-b3f0-8e2669b35a9f\"}, {\"id\": \"a96e3a1b-7609-4e74-bc99-d98a83df6b61\", \"url\": \"https://storage.napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_a96e3a1b-7609-4e74-bc99-d98a83df6b61\", \"order\": 6, \"externalUrl\": \"https://napista.com.br/static/photos/9ba194d6-c672-48ec-bf44-ff5956b06f99_a96e3a1b-7609-4e74-bc99-d98a83df6b61\"}, {\"id\": \"edc5eb7e-c46b-4d14-bb74-b71bbc03e8"
+    ],
+    [
+     ".searchResult.offersDiscovery[1].offers",
+     6,
+     [
+      "activeProductTags",
+      "badges",
+      "campaignGroupId",
+      "compMakeModelName",
+      "compVersionName",
+      "createdDate",
+      "equipments",
+      "features",
+      "id",
+      "isNotFinanciable",
+      "location",
+      "makeName",
+      "manufacturedYear",
+      "mileage",
+      "modelName",
+      "modelYear",
+      "newVehicle",
+      "photos",
+      "price",
+      "seller",
+      "sellerCommercialPartnerCode",
+      "sellerId",
+      "vehicleImplements",
+      "versionName"
+     ],
+     "{\"id\": \"c8678f5a-dda8-489c-875e-985ed8ab4bf3\", \"versionName\": \"Honda City 1.5 Ex Cvt\", \"modelYear\": 2026, \"manufacturedYear\": 2025, \"mileage\": 45462, \"isNotFinanciable\": false, \"seller\": \"Localiza São José do Rio Preto\", \"price\": 124090, \"photos\": [{\"id\": \"bc6a39a3-0ac6-4cca-b8dc-a8b7af76f32d\", \"url\": \"https://storage.napista.com.br/static/photos/c8678f5a-dda8-489c-875e-985ed8ab4bf3_bc6a39a3-0ac6-4cca-b8dc-a8b7af76f32d\", \"order\": 0, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/c8678f5a-dda8-489c-875e-985ed8ab4bf3_bc6a39a3-0ac6-4cca-b8dc-a8b7af76f32d\"}, {\"id\": \"41141370-8da9-4085-a68c-0537c62f0390\", \"url\": \"https://storage.napista.com.br/static/photos/c8678f5a-dda8-489c-875e-985ed8ab4bf3_41141370-8da9-4085-a68c-0537c62f0390\", \"order\": 1, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/c8678f5a-dda8-489c-875e-985ed8ab4bf3_41141370-8da9-4085-a68c-0537c62f0390\"}, {\"id\": \"901308f7-1427-4c99-93f2-b16ab57784f5\", \"url\": \"https://storage.napista.com.br/static/photos/c8678f5a-dda8-489c-875e-985ed8ab4bf3_901308f7-1427-4c99-93f2-b16ab57784f5\", \"order\": 2, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/c8678f5a-dda8-489c-875e-985ed8ab4bf3_901308f7-1427-4c99-93f2-b16ab57784f5\"}, {\"id\": \"7420e0e7-049c-43e8-9f58-2faf353865a9\", \"url\": \"https://storage.napista.com.br/static/photos/c8678f5a-dda8-489c-875e-985ed8ab4bf3_7420e0e7-049c-43e8-9f58-2faf353865a9\", \"order\": 3, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/c8678f5a-dda8-489c-875e-985ed8ab4bf3_7420e0e7-049c-43e8-9f58-2faf353865a9\"}, {\"id\": \"55d68b5b-3faa-4394-af39-375c2030fb77\", \"url\": \"https://storage.napista.com.br/static/photos/c8678f5a-dda8-489c-875e-985ed8ab4bf3_55d68b5b-3faa-4394-af39-375c2030fb77\", \"order\": 4, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/c8678f5a-dda8-489c-875e-985ed8ab4bf3_55d68b5b-3faa-4394-af39-375c2030fb77\"}, {\"id\": \"efaa1049-5b37-45eb-b2d0-eabc509c115c\", \"url\": \"https://storage.napista.com.br/static/photos/c8678f5a-dda8-489c-875e-985ed8ab4bf3_efaa1049-5b37-45eb-b2d0-eabc509c115c\", \"order\": 5, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/c8678f5a-dda8-489c-875e-985ed8ab4bf3_efaa1049-5b37-45eb-b2d0-eabc509c115c\"}, {\"id\": \"3649d2bb-b813-4e1b-a6fc-f9aa52b6b57a\", \"url\": \"https://storage.napista.com.br/static/photos/c8678f5a-dda8-489c-875e-985ed8ab4bf3_3649d2bb-b813-4e1b-a6fc-f9aa52b6b57a\", \"order\": 6, \"externalUrl\": \"https://static2.meucarron"
+    ]
+   ],
+   "ld_types": [
+    [
+     "SearchResultsPage",
+     "ItemList",
+     "Vehicle",
+     "Organization",
+     "Offer",
+     "UnitPriceSpecification"
+    ]
+   ],
+   "detail_links": [
+    "/anuncios/80d54550-54d0-4ccc-b69a-70686ac70fb0",
+    "/anuncios/db47c8b6-4c70-4c6d-a200-90be35437bc9",
+    "/anuncios/9c61ba6d-69eb-461f-b589-f55a32e25fec",
+    "/anuncios/7885a09d-1321-4372-a0a8-2a5807f5c4e3",
+    "/anuncios/eb007ba5-7823-4d7c-b8a7-3ecbcd276284",
+    "/anuncios/89c9ae46-cb44-45a9-9060-ad749083cdcd",
+    "/anuncios/fefa63f2-d184-4491-a427-ab6a1472d766",
+    "/anuncios/dac5aa0c-8fe4-4b2b-afda-c25a92c7d209",
+    "/anuncios/e6775fd2-3920-4afe-ab98-31ea0c35199a",
+    "/anuncios/672aeba0-914f-4139-a5f0-6fcdd685723d",
+    "/anuncios/fce6da32-8ab5-496b-b0f6-0f216126a89f",
+    "/anuncios/c2277882-5cab-4e2b-90c4-d8c00bad9d08"
+   ],
+   "href_sample": [
+    "/busca/honda/civic/honda-civic-1.8-i-vtec-lxs",
+    "/busca/honda/civic/honda-civic-1.8-i-vtec-flex-lxl-couro",
+    "/busca/honda/civic/honda-civic-1.7-lx-auto",
+    "/busca/honda/civic/honda-civic-1.8-lxs-auto",
+    "/busca/honda/civic/honda-civic-1.7-lxl",
+    "/busca/honda/civic/honda-civic-1.7-lxl-auto",
+    "/busca/honda/civic/honda-civic-1.8-i-vtec-lx-auto",
+    "/busca/honda/civic/honda-civic-2.0-e:hev-touring-e-cvt",
+    "/busca/honda/civic/honda-civic-2.4-i-vtec-si",
+    "/busca/honda/civic/honda-civic-1.7-ex",
+    "/busca/honda/civic/honda-civic-lx-auto",
+    "/busca/honda/civic/honda-civic-1.6-lx",
+    "/busca/honda/civic/honda-civic-1.7-ex-auto",
+    "/busca/honda/civic/honda-civic-1.8-i-vtec-exs-auto",
+    "/busca/honda/civic/honda-civic-ex",
+    "/busca/honda/civic/honda-civic-ex-auto",
+    "/busca/honda/civic/honda-civic-lx",
+    "/busca/honda/civic/honda-civic-1.6-ex-auto",
+    "/busca/honda/civic/honda-civic-1.6-lx-auto",
+    "/busca/honda/civic/honda-civic-1.8-i-vtec-flex-lxs-lhr",
+    "/busca/honda/civic/honda-civic-1.8-i-vtec-flex-lxs-lhr-auto",
+    "/busca/honda/civic/2024",
+    "/busca/honda/civic/2023",
+    "/busca/honda/civic/2022",
+    "/busca/honda/civic/2021",
+    "/busca/honda/civic/2020",
+    "/busca/honda/civic/2019",
+    "/busca/honda/civic/2018",
+    "/busca/honda/civic/2017",
+    "/busca/honda/civic/2016",
+    "/busca/honda/civic/2015",
+    "/anuncios/80d54550-54d0-4ccc-b69a-70686ac70fb0",
+    "/anuncios/db47c8b6-4c70-4c6d-a200-90be35437bc9",
+    "/anuncios/9c61ba6d-69eb-461f-b589-f55a32e25fec",
+    "/anuncios/7885a09d-1321-4372-a0a8-2a5807f5c4e3",
+    "/anuncios/eb007ba5-7823-4d7c-b8a7-3ecbcd276284",
+    "/anuncios/89c9ae46-cb44-45a9-9060-ad749083cdcd",
+    "/anuncios/fefa63f2-d184-4491-a427-ab6a1472d766",
+    "/anuncios/dac5aa0c-8fe4-4b2b-afda-c25a92c7d209",
+    "/anuncios/e6775fd2-3920-4afe-ab98-31ea0c35199a",
+    "/anuncios/672aeba0-914f-4139-a5f0-6fcdd685723d",
+    "/anuncios/fce6da32-8ab5-496b-b0f6-0f216126a89f",
+    "/anuncios/c2277882-5cab-4e2b-90c4-d8c00bad9d08",
+    "/anuncios/35e0e849-78a1-49af-9ce9-2b50cb5d2fa7",
+    "/anuncios/7197a39b-f43a-4a0e-bbf2-12f703a8e964",
+    "/anuncios/f2874831-33d0-4a3b-be79-82d9182a16b5",
+    "/anuncios/21cbe107-ac8c-4fd4-818d-094dd307f6b0",
+    "/anuncios/a1c8de06-7dca-420f-9cab-e729e13db71e",
+    "/anuncios/393e5ade-8dab-4138-b47b-d83108afccd1",
+    "/anuncios/32a07564-0b2a-4aa7-9919-0a577d33a7e5"
+   ]
+  },
+  {
+   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/m3",
+   "status": 200,
+   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/m3",
+   "bytes": 538048,
+   "title": "BMW M3 usados e seminovos à venda no Brasil",
+   "pp_keys": [
+    "sop",
+    "userLocationByCookie",
+    "filterLocation",
+    "makes",
+    "deals",
+    "similarDeals",
+    "query",
+    "canonicalPath",
+    "requestSop",
+    "requestSopEncoded",
+    "dealsWithAds",
+    "isOfficialStoreRoute",
+    "officialStoreActive",
+    "preFooter",
+    "makeModelTrimIdentifiers",
+    "mobile",
+    "initialVehicleType"
+   ],
+   "query": {
+    "params": [
+     "carros-usados",
+     "brasil",
+     "bmw",
+     "m3"
+    ]
+   },
+   "page": "/[...params]",
+   "lists": [
+    [
+     ".deals.results",
+     12,
+     [
+      "deal0km",
+      "dealer",
+      "hasMechanicalWarranty",
+      "hasProductFeirao",
+      "hasProductVideocall",
+      "hasRepairAssistance",
+      "hasVehicleConsult",
+      "id",
+      "images",
+      "km",
+      "oem",
+      "panScoreTag",
+      "price",
+      "priceTag",
+      "trim"
+     ],
+     "{\"id\": 33803006, \"price\": 629900, \"deal0km\": false, \"km\": 23000, \"hasProductFeirao\": true, \"hasProductVideocall\": false, \"oem\": false, \"hasMechanicalWarranty\": false, \"hasRepairAssistance\": false, \"images\": [{\"imageId\": 748379644, \"position\": 0}, {\"imageId\": 748379652, \"position\": 1}, {\"imageId\": 748379657, \"position\": 2}, {\"imageId\": 748379661, \"position\": 3}, {\"imageId\": 748379665, \"position\": 4}, {\"imageId\": 748379668, \"position\": 5}, {\"imageId\": 748379671, \"position\": 6}, {\"imageId\": 748379674, \"position\": 7}, {\"imageId\": 748379681, \"position\": 8}, {\"imageId\": 748379688, \"position\": 9}, {\"imageId\": 748379691, \"position\": 10}, {\"imageId\": 748379701, \"position\": 11}, {\"imageId\": 748379706, \"position\": 12}, {\"imageId\": 748379714, \"position\": 13}, {\"imageId\": 748379717, \"position\": 14}, {\"imageId\": 748379725, \"position\": 15}, {\"imageId\": 748379735, \"position\": 16}, {\"imageId\": 748379745, \"position\": 17}, {\"imageId\": 748379761, \"position\": 18}, {\"imageId\": 748379772, \"position\": 19}], \"trim\": {\"vehicleType\": \"CAR\", \"name\": \"Competition M 3.0 Bi-Turbo\", \"doors\": 4, \"productionYear\": 2025, \"make\": {\"name\": \"BMW\", \"imageId\": 64089257}, \"model\": {\"name\": \"M3\", \"year\": 2025}, \"bodystyle\": {\"name\": \"Sedan\"}, \"fuel\": {\"name\": \"Gasolina\"}, \"transmission\": {\"name\": \"Automática\"}}, \"dealer\": {\"name\": \"IGS Autom�veis\", \"location\": {\"coordinates\": \"-27.6358643,-48.6596773\", \"city\": \"Palhoça\", \"state\": \"SC\"}}, \"panScoreTag\": false, \"hasVehicleConsult\": false}"
+    ]
+   ],
+   "ld_types": [
+    [
+     "BreadcrumbList",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem"
+    ],
+    [
+     "SearchResultsPage"
+    ],
+    [
+     "ItemList",
+     "ListItem",
+     "Vehicle",
+     "Brand",
+     "QuantitativeValue",
+     "Offer"
+    ],
+    [
+     "Organization"
+    ],
+    [
+     "Corporation"
+    ],
+    [
+     "WebSite"
+    ]
+   ],
+   "detail_links": [
+    "https://www.mobiauto.com.br/comprar/carros/sc-palhoca/bmw/m3/2025/competition-m-3-0-bi-turbo/detalhes/33803006?page=detail",
+    "https://www.mobiauto.com.br/comprar/carros/sc-palhoca/bmw/m3/2025/competition-m-3-0-bi-turbo/detalhes/33803006?page=detail#details-financing-step",
+    "https://www.mobiauto.com.br/comprar/carros/sp-sao-paulo/bmw/m3/2024/competition-3-0-turbo-aut/detalhes/31850027?page=detail",
+    "https://www.mobiauto.com.br/comprar/carros/sp-sao-paulo/bmw/m3/2024/competition-3-0-turbo-aut/detalhes/31850027?page=detail#details-financing-step",
+    "https://www.mobiauto.com.br/comprar/carros/sc-florianopolis/bmw/m3/2024/competition-3-0-turbo-aut/detalhes/33359501?page=detail",
+    "https://www.mobiauto.com.br/comprar/carros/sc-florianopolis/bmw/m3/2024/competition-3-0-turbo-aut/detalhes/33359501?page=detail#details-financing-step",
+    "https://www.mobiauto.com.br/comprar/carros/pb-joao-pessoa/bmw/m3/2024/competition-3-0-turbo-aut/detalhes/33044310?page=detail",
+    "https://www.mobiauto.com.br/comprar/carros/pb-joao-pessoa/bmw/m3/2024/competition-3-0-turbo-aut/detalhes/33044310?page=detail#details-financing-step",
+    "https://www.mobiauto.com.br/comprar/carros/sp-itaquaquecetuba/bmw/m3/2024/competition-3-0-turbo-aut/detalhes/33927891?page=detail",
+    "https://www.mobiauto.com.br/comprar/carros/sp-itaquaquecetuba/bmw/m3/2024/competition-3-0-turbo-aut/detalhes/33927891?page=detail#details-financing-step",
+    "https://www.mobiauto.com.br/comprar/carros/sp-sao-roque/bmw/m3/2024/competition-3-0-turbo-aut/detalhes/33147744?page=detail",
+    "https://www.mobiauto.com.br/comprar/carros/sp-sao-roque/bmw/m3/2024/competition-3-0-turbo-aut/detalhes/33147744?page=detail#details-financing-step"
+   ],
+   "href_sample": [
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/um-novo-olhar",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/quintanilha",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/autos-originais",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/cronometro-zerado",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/observatorio-automotivo",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/podcast-perda-total",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/zeca-chaves",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/homero-gottardello",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/coluna-do-edu",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/boris-feldman",
+    "https://www.mobiauto.com.br/revista/carros/editorial/guia-de-compra",
+    "https://www.mobiauto.com.br/revista/carros/editorial/guia-de-compra/principais-problemas",
+    "https://www.mobiauto.com.br/revista/carros/editorial/manutencao-de-veiculos",
+    "https://www.mobiauto.com.br/revista/carros/editorial/mobilidade",
+    "https://www.mobiauto.com.br/revista/carros/editorial/melhores-veiculos",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias/tecnologia",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias/novidades-mobiauto",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias/curiosidades",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias/flagras-e-segredos",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias/lancamentos",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias/seguranca",
+    "https://www.mobiauto.com.br/painel/anuncios",
+    "https://mobigestor.com.br/mobigestor",
+    "/comprar/carros-usados/brasil/bmw/m3",
+    "/comprar/motos-usadas/brasil",
+    "/comprar/caminhoes-usados/brasil",
+    "/comprar/carros-usados/brasil/audi",
+    "/comprar/carros-usados/brasil/chevrolet",
+    "/comprar/carros-usados/brasil/citroen",
+    "/comprar/carros-usados/brasil/fiat",
+    "/comprar/carros-usados/brasil/ford",
+    "/comprar/carros-usados/brasil/honda",
+    "/comprar/carros-usados/brasil/hyundai",
+    "/comprar/carros-usados/brasil/jeep",
+    "/comprar/carros-usados/brasil/kia",
+    "/comprar/carros-usados/brasil/mitsubishi",
+    "/comprar/carros-usados/brasil/nissan",
+    "/comprar/carros-usados/brasil/peugeot",
+    "/comprar/carros-usados/brasil/renault",
+    "/comprar/carros-usados/brasil/toyota",
+    "/comprar/carros-usados/brasil/volkswagen",
+    "/comprar/carros-usados/brasil/ac-cars",
+    "/comprar/carros-usados/brasil/agrale",
+    "/comprar/carros-usados/brasil/alfa-romeo",
+    "/comprar/carros-usados/brasil/aston-martin",
+    "/comprar/carros-usados/brasil/baic",
+    "/comprar/carros-usados/brasil/brm",
+    "/comprar/carros-usados/brasil/byd",
+    "/comprar/carros-usados/brasil/baby"
+   ]
+  },
+  {
+   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic",
+   "status": 200,
+   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic",
+   "bytes": 753247,
+   "title": "Honda Civic usados e seminovos à venda no Brasil",
+   "pp_keys": [
+    "sop",
+    "userLocationByCookie",
+    "filterLocation",
+    "makes",
+    "deals",
+    "similarDeals",
+    "query",
+    "canonicalPath",
+    "requestSop",
+    "requestSopEncoded",
+    "dealsWithAds",
+    "isOfficialStoreRoute",
+    "officialStoreActive",
+    "preFooter",
+    "makeModelTrimIdentifiers",
+    "mobile",
+    "initialVehicleType"
+   ],
+   "query": {
+    "params": [
+     "carros-usados",
+     "brasil",
+     "honda",
+     "civic"
+    ]
+   },
+   "page": "/[...params]",
+   "lists": [
+    [
+     ".deals.results",
+     24,
+     [
+      "deal0km",
+      "dealer",
+      "hasMechanicalWarranty",
+      "hasProductFeirao",
+      "hasProductVideocall",
+      "hasRepairAssistance",
+      "hasVehicleConsult",
+      "id",
+      "images",
+      "km",
+      "oem",
+      "panScoreTag",
+      "price",
+      "priceTag",
+      "trim"
+     ],
+     "{\"id\": 20987139, \"price\": 51900.01, \"deal0km\": false, \"km\": 108474, \"hasProductFeirao\": true, \"hasProductVideocall\": false, \"oem\": false, \"hasMechanicalWarranty\": false, \"hasRepairAssistance\": false, \"images\": [{\"imageId\": 614756966, \"position\": 0}, {\"imageId\": 614756945, \"position\": 1}, {\"imageId\": 614756942, \"position\": 2}, {\"imageId\": 614756951, \"position\": 3}, {\"imageId\": 614756949, \"position\": 4}, {\"imageId\": 614756959, \"position\": 5}, {\"imageId\": 614756972, \"position\": 6}, {\"imageId\": 614756935, \"position\": 7}, {\"imageId\": 614756941, \"position\": 8}, {\"imageId\": 614756954, \"position\": 9}, {\"imageId\": 614756944, \"position\": 10}, {\"imageId\": 614756968, \"position\": 11}], \"trim\": {\"vehicleType\": \"CAR\", \"name\": \"New  LXL 1.8 i-VTEC (Couro) (Aut) (Flex)\", \"doors\": 4, \"productionYear\": 2011, \"make\": {\"name\": \"Honda\", \"imageId\": 64089248}, \"model\": {\"name\": \"Civic\", \"year\": 2011}, \"bodystyle\": {\"name\": \"Sedan\"}, \"fuel\": {\"name\": \"Flex\"}, \"transmission\": {\"name\": \"Automática\"}}, \"dealer\": {\"name\": \"MERCES VEÍCULOS\", \"location\": {\"coordinates\": \"-23.6213442,-46.607954\", \"city\": \"São Paulo\", \"state\": \"SP\"}}, \"priceTag\": \"GOOD_PRICE\", \"panScoreTag\": true, \"hasVehicleConsult\": false}"
+    ]
+   ],
+   "ld_types": [
+    [
+     "BreadcrumbList",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem"
+    ],
+    [
+     "SearchResultsPage"
+    ],
+    [
+     "ItemList",
+     "ListItem",
+     "Vehicle",
+     "Brand",
+     "QuantitativeValue",
+     "Offer"
+    ],
+    [
+     "Organization"
+    ],
+    [
+     "Corporation"
+    ],
+    [
+     "WebSite"
+    ]
+   ],
+   "detail_links": [
+    "https://www.mobiauto.com.br/comprar/carros/sp-sao-paulo/honda/civic/2011/new-lxl-1-8-i-vtec-couro-aut-flex/detalhes/20987139?page=detail",
+    "https://www.mobiauto.com.br/comprar/carros/sp-sao-paulo/honda/civic/2011/new-lxl-1-8-i-vtec-couro-aut-flex/detalhes/20987139?page=detail#details-financing-step",
+    "https://www.mobiauto.com.br/comprar/carros/sp-sao-paulo/honda/civic/2013/new-lxl-1-8-16v-i-vtec-aut-flex/detalhes/33721811?page=detail",
+    "https://www.mobiauto.com.br/comprar/carros/sp-sao-paulo/honda/civic/2013/new-lxl-1-8-16v-i-vtec-aut-flex/detalhes/33721811?page=detail#details-financing-step",
+    "https://www.mobiauto.com.br/comprar/carros/sp-franca/honda/civic/2020/touring-1-5-turbo-cvt/detalhes/33105824?page=detail",
+    "https://www.mobiauto.com.br/comprar/carros/sp-franca/honda/civic/2020/touring-1-5-turbo-cvt/detalhes/33105824?page=detail#details-financing-step",
+    "https://www.mobiauto.com.br/comprar/carros/sp-campinas/honda/civic/2017/exl-2-0-i-vtec-cvt/detalhes/33597258?page=detail",
+    "https://www.mobiauto.com.br/comprar/carros/sp-campinas/honda/civic/2017/exl-2-0-i-vtec-cvt/detalhes/33597258?page=detail#details-financing-step",
+    "https://www.mobiauto.com.br/comprar/carros/sc-lages/honda/civic/2015/lxs-1-8-i-vtec-aut-flex/detalhes/33632892?page=detail",
+    "https://www.mobiauto.com.br/comprar/carros/sc-lages/honda/civic/2015/lxs-1-8-i-vtec-aut-flex/detalhes/33632892?page=detail#details-financing-step",
+    "https://www.mobiauto.com.br/comprar/carros/sp-campinas/honda/civic/2021/ex-2-0-i-vtec-cvt/detalhes/33594027?page=detail",
+    "https://www.mobiauto.com.br/comprar/carros/sp-campinas/honda/civic/2021/ex-2-0-i-vtec-cvt/detalhes/33594027?page=detail#details-financing-step"
+   ],
+   "href_sample": [
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/um-novo-olhar",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/quintanilha",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/autos-originais",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/cronometro-zerado",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/observatorio-automotivo",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/podcast-perda-total",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/zeca-chaves",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/homero-gottardello",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/coluna-do-edu",
+    "https://www.mobiauto.com.br/revista/carros/editorial/colunas/boris-feldman",
+    "https://www.mobiauto.com.br/revista/carros/editorial/guia-de-compra",
+    "https://www.mobiauto.com.br/revista/carros/editorial/guia-de-compra/principais-problemas",
+    "https://www.mobiauto.com.br/revista/carros/editorial/manutencao-de-veiculos",
+    "https://www.mobiauto.com.br/revista/carros/editorial/mobilidade",
+    "https://www.mobiauto.com.br/revista/carros/editorial/melhores-veiculos",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias/tecnologia",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias/novidades-mobiauto",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias/curiosidades",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias/flagras-e-segredos",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias/lancamentos",
+    "https://www.mobiauto.com.br/revista/carros/editorial/noticias/seguranca",
+    "https://www.mobiauto.com.br/painel/anuncios",
+    "https://mobigestor.com.br/mobigestor",
+    "/comprar/carros-usados/brasil/honda/civic",
+    "/comprar/motos-usadas/brasil",
+    "/comprar/caminhoes-usados/brasil",
+    "/comprar/carros-usados/brasil/audi",
+    "/comprar/carros-usados/brasil/bmw",
+    "/comprar/carros-usados/brasil/chevrolet",
+    "/comprar/carros-usados/brasil/citroen",
+    "/comprar/carros-usados/brasil/fiat",
+    "/comprar/carros-usados/brasil/ford",
+    "/comprar/carros-usados/brasil/hyundai",
+    "/comprar/carros-usados/brasil/jeep",
+    "/comprar/carros-usados/brasil/kia",
+    "/comprar/carros-usados/brasil/mitsubishi",
+    "/comprar/carros-usados/brasil/nissan",
+    "/comprar/carros-usados/brasil/peugeot",
+    "/comprar/carros-usados/brasil/renault",
+    "/comprar/carros-usados/brasil/toyota",
+    "/comprar/carros-usados/brasil/volkswagen",
+    "/comprar/carros-usados/brasil/ac-cars",
+    "/comprar/carros-usados/brasil/agrale",
+    "/comprar/carros-usados/brasil/alfa-romeo",
+    "/comprar/carros-usados/brasil/aston-martin",
+    "/comprar/carros-usados/brasil/baic",
+    "/comprar/carros-usados/brasil/brm",
+    "/comprar/carros-usados/brasil/byd",
+    "/comprar/carros-usados/brasil/baby"
+   ]
+  },
+  {
+   "url": "https://napista.com.br/busca/honda/civic?page=2",
+   "status": 200,
+   "final": "https://napista.com.br/busca/honda/civic?page=2",
+   "bytes": 432127,
+   "title": "Honda Civic usados e seminovos à venda | NaPista",
+   "pp_keys": [
+    "searchResult",
+    "searchParams"
+   ],
+   "query": {
+    "page": "2",
+    "id": [
+     "honda",
+     "civic"
+    ]
+   },
+   "page": "/busca/[...id]",
+   "ld_types": [
+    [
+     "SearchResultsPage",
+     "ItemList",
+     "Vehicle",
+     "Organization",
+     "Offer",
+     "UnitPriceSpecification"
+    ]
+   ],
+   "n_ids": 32,
+   "first_ids": [
+    "73336",
+    "099383",
+    "59984969",
+    "9418437",
+    "98402166",
+    "70724947"
+   ],
+   "manual_words": 1,
+   "auto_words": 1
+  },
+  {
+   "url": "https://napista.com.br/busca/honda/civic?pagina=2",
+   "status": 200,
+   "final": "https://napista.com.br/busca/honda/civic?pagina=2",
+   "bytes": 432131,
+   "title": "Honda Civic usados e seminovos à venda | NaPista",
+   "pp_keys": [
+    "searchResult",
+    "searchParams"
+   ],
+   "query": {
+    "pagina": "2",
+    "id": [
+     "honda",
+     "civic"
+    ]
+   },
+   "page": "/busca/[...id]",
+   "ld_types": [
+    [
+     "SearchResultsPage",
+     "ItemList",
+     "Vehicle",
+     "Organization",
+     "Offer",
+     "UnitPriceSpecification"
+    ]
+   ],
+   "n_ids": 32,
+   "first_ids": [
+    "73336",
+    "099383",
+    "59984969",
+    "9418437",
+    "98402166",
+    "70724947"
+   ],
+   "manual_words": 1,
+   "auto_words": 1
+  },
+  {
+   "url": "https://napista.com.br/busca/honda/civic?cambio=manual",
+   "status": 200,
+   "final": "https://napista.com.br/busca/honda/civic?cambio=manual",
+   "bytes": 432141,
+   "title": "Honda Civic usados e seminovos à venda | NaPista",
+   "pp_keys": [
+    "searchResult",
+    "searchParams"
+   ],
+   "query": {
+    "cambio": "manual",
+    "id": [
+     "honda",
+     "civic"
+    ]
+   },
+   "page": "/busca/[...id]",
+   "ld_types": [
+    [
+     "SearchResultsPage",
+     "ItemList",
+     "Vehicle",
+     "Organization",
+     "Offer",
+     "UnitPriceSpecification"
+    ]
+   ],
+   "n_ids": 32,
+   "first_ids": [
+    "73336",
+    "099383",
+    "59984969",
+    "9418437",
+    "98402166",
+    "70724947"
+   ],
+   "manual_words": 3,
+   "auto_words": 1
+  },
+  {
+   "url": "https://napista.com.br/busca/honda/civic/manual",
+   "status": 200,
+   "final": "https://napista.com.br/busca/honda/civic/manual",
+   "bytes": 334185,
+   "title": "Honda Civic usados e seminovos à venda manual | NaPista",
+   "pp_keys": [
+    "searchResult",
+    "searchParams"
+   ],
+   "query": {
+    "id": [
+     "honda",
+     "civic",
+     "manual"
+    ]
+   },
+   "page": "/busca/[...id]",
+   "ld_types": [
+    [
+     "SearchResultsPage",
+     "ItemList",
+     "Vehicle",
+     "Organization",
+     "Offer",
+     "UnitPriceSpecification"
+    ]
+   ],
+   "n_ids": 20,
+   "first_ids": [
+    "099383",
+    "856711",
+    "033411",
+    "61949",
+    "232321",
+    "38857096"
+   ],
+   "manual_words": 22,
+   "auto_words": 1
+  },
+  {
+   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic?page=2",
+   "status": 200,
+   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic?page=2",
+   "bytes": 753271,
+   "title": "Honda Civic usados e seminovos à venda no Brasil",
+   "pp_keys": [
+    "sop",
+    "userLocationByCookie",
+    "filterLocation",
+    "makes",
+    "deals",
+    "similarDeals",
+    "query",
+    "canonicalPath",
+    "requestSop",
+    "requestSopEncoded",
+    "dealsWithAds",
+    "isOfficialStoreRoute",
+    "officialStoreActive",
+    "preFooter",
+    "makeModelTrimIdentifiers",
+    "mobile",
+    "initialVehicleType"
+   ],
+   "query": {
+    "page": "2",
+    "params": [
+     "carros-usados",
+     "brasil",
+     "honda",
+     "civic"
+    ]
+   },
+   "page": "/[...params]",
+   "ld_types": [
+    [
+     "BreadcrumbList",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem"
+    ],
+    [
+     "SearchResultsPage"
+    ],
+    [
+     "ItemList",
+     "ListItem",
+     "Vehicle",
+     "Brand",
+     "QuantitativeValue",
+     "Offer"
+    ],
+    [
+     "Organization"
+    ],
+    [
+     "Corporation"
+    ],
+    [
+     "WebSite"
+    ]
+   ],
+   "n_ids": 95,
+   "first_ids": [
+    "20183",
+    "20184",
+    "20185",
+    "20187",
+    "20194",
+    "20195"
+   ],
+   "manual_words": 4,
+   "auto_words": 69
+  },
+  {
+   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic?pagina=2",
+   "status": 200,
+   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic?pagina=2",
+   "bytes": 753273,
+   "title": "Honda Civic usados e seminovos à venda no Brasil",
+   "pp_keys": [
+    "sop",
+    "userLocationByCookie",
+    "filterLocation",
+    "makes",
+    "deals",
+    "similarDeals",
+    "query",
+    "canonicalPath",
+    "requestSop",
+    "requestSopEncoded",
+    "dealsWithAds",
+    "isOfficialStoreRoute",
+    "officialStoreActive",
+    "preFooter",
+    "makeModelTrimIdentifiers",
+    "mobile",
+    "initialVehicleType"
+   ],
+   "query": {
+    "pagina": "2",
+    "params": [
+     "carros-usados",
+     "brasil",
+     "honda",
+     "civic"
+    ]
+   },
+   "page": "/[...params]",
+   "ld_types": [
+    [
+     "BreadcrumbList",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem"
+    ],
+    [
+     "SearchResultsPage"
+    ],
+    [
+     "ItemList",
+     "ListItem",
+     "Vehicle",
+     "Brand",
+     "QuantitativeValue",
+     "Offer"
+    ],
+    [
+     "Organization"
+    ],
+    [
+     "Corporation"
+    ],
+    [
+     "WebSite"
+    ]
+   ],
+   "n_ids": 95,
+   "first_ids": [
+    "20183",
+    "20184",
+    "20185",
+    "20187",
+    "20194",
+    "20195"
+   ],
+   "manual_words": 4,
+   "auto_words": 69
+  },
+  {
+   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/cambio-manual",
+   "status": 200,
+   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil",
+   "bytes": 862785,
+   "title": "Carros usados e seminovos à venda no Brasil",
+   "pp_keys": [
+    "sop",
+    "userLocationByCookie",
+    "filterLocation",
+    "makes",
+    "deals",
+    "similarDeals",
+    "query",
+    "canonicalPath",
+    "requestSop",
+    "requestSopEncoded",
+    "dealsWithAds",
+    "isOfficialStoreRoute",
+    "officialStoreActive",
+    "preFooter",
+    "makeModelTrimIdentifiers",
+    "mobile",
+    "initialVehicleType"
+   ],
+   "query": {
+    "params": [
+     "carros-usados",
+     "brasil"
+    ]
+   },
+   "page": "/[...params]",
+   "ld_types": [
+    [
+     "BreadcrumbList",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem"
+    ],
+    [
+     "SearchResultsPage"
+    ],
+    [
+     "ItemList",
+     "ListItem",
+     "Vehicle",
+     "Brand",
+     "QuantitativeValue",
+     "Offer"
+    ],
+    [
+     "Organization"
+    ],
+    [
+     "Corporation"
+    ],
+    [
+     "WebSite"
+    ]
+   ],
+   "n_ids": 1448,
+   "first_ids": [
+    "20183",
+    "20184",
+    "20185",
+    "20187",
+    "20194",
+    "20195"
+   ],
+   "manual_words": 34,
+   "auto_words": 47
+  },
+  {
+   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic?cambio=manual",
+   "status": 200,
+   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic?cambio=manual",
+   "bytes": 753283,
+   "title": "Honda Civic usados e seminovos à venda no Brasil",
+   "pp_keys": [
+    "sop",
+    "userLocationByCookie",
+    "filterLocation",
+    "makes",
+    "deals",
+    "similarDeals",
+    "query",
+    "canonicalPath",
+    "requestSop",
+    "requestSopEncoded",
+    "dealsWithAds",
+    "isOfficialStoreRoute",
+    "officialStoreActive",
+    "preFooter",
+    "makeModelTrimIdentifiers",
+    "mobile",
+    "initialVehicleType"
+   ],
+   "query": {
+    "cambio": "manual",
+    "params": [
+     "carros-usados",
+     "brasil",
+     "honda",
+     "civic"
+    ]
+   },
+   "page": "/[...params]",
+   "ld_types": [
+    [
+     "BreadcrumbList",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem"
+    ],
+    [
+     "SearchResultsPage"
+    ],
+    [
+     "ItemList",
+     "ListItem",
+     "Vehicle",
+     "Brand",
+     "QuantitativeValue",
+     "Offer"
+    ],
+    [
+     "Organization"
+    ],
+    [
+     "Corporation"
+    ],
+    [
+     "WebSite"
+    ]
+   ],
+   "n_ids": 95,
+   "first_ids": [
+    "20183",
+    "20184",
+    "20185",
+    "20187",
+    "20194",
+    "20195"
+   ],
+   "manual_words": 6,
+   "auto_words": 69
+  },
+  {
+   "url": "https://napista.com.br/anuncios/246ecfde-c408-438c-b6ad-f366733f271a",
+   "status": 200,
+   "final": "https://napista.com.br/anuncios/246ecfde-c408-438c-b6ad-f366733f271a",
+   "bytes": 180993,
+   "title": "Bmw M3 Competition M 3.0 Bi-tb 510cv | NaPista",
+   "pp_keys": [
+    "offer",
+    "slug",
+    "params"
+   ],
+   "query": {
+    "slug": "246ecfde-c408-438c-b6ad-f366733f271a"
+   },
+   "page": "/anuncios/[slug]",
+   "lists": [
+    [
+     ".offer.pricingDetails.histogram",
+     4,
+     [
+      "price",
+      "quantity"
+     ],
+     "{\"price\": 590000, \"quantity\": 1}"
+    ],
+    [
+     ".offer.similarOffers",
+     9,
+     [
+      "activeProductTags",
+      "armoured",
+      "badges",
+      "campaignGroupId",
+      "category",
+      "color",
+      "compMakeModelName",
+      "compVersionName",
+      "createdDate",
+      "description",
+      "endOfPlate",
+      "equipments",
+      "features",
+      "fuelType",
+      "id",
+      "isNotFinanciable",
+      "location",
+      "makeName",
+      "manufacturedYear",
+      "mileage",
+      "modelYear",
+      "newVehicle",
+      "numberOfDoors",
+      "photos",
+      "price",
+      "seller",
+      "sellerId",
+      "status",
+      "transmissionType",
+      "vehicleImplements",
+      "versionId",
+      "versionName"
+     ],
+     "{\"id\": \"68d9b43d-f094-41c4-8175-dd9bad60b2e5\", \"versionName\": \"BMW SERIES 3 2.0 320I FLEX SPORT GP AUTO\", \"description\": \"Carro impecavel, com todas as revisoes na concessionaria, pneus zeros, extremamente bem cuidada. \", \"modelYear\": 2024, \"manufacturedYear\": 2023, \"mileage\": 19800, \"armoured\": false, \"isNotFinanciable\": false, \"seller\": \"Apex Motors\", \"price\": 244899, \"photos\": [{\"id\": \"be07abaa-5c98-4046-9c12-d3a1e81147d7\", \"url\": \"https://storage.napista.com.br/static/photos/68d9b43d-f094-41c4-8175-dd9bad60b2e5_be07abaa-5c98-4046-9c12-d3a1e81147d7\", \"order\": 0, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/68d9b43d-f094-41c4-8175-dd9bad60b2e5_be07abaa-5c98-4046-9c12-d3a1e81147d7\"}], \"location\": {\"city\": \"RIBEIRAO PRETO\", \"state\": \"São Paulo\", \"neighborhood\": \"City Ribeirão\", \"street\": \"Av Alzira Couto Machado\", \"number\": \"630\", \"complement\": \"\", \"geoLocation\": {\"latitude\": -21.214255, \"longitude\": -47.7802114}, \"uf\": \"SP\"}, \"createdDate\": \"2026-11-09T19:33:12.029Z\", \"fuelType\": {\"code\": \"Flex\", \"name\": \"Flex\"}, \"numberOfDoors\": 4, \"color\": {\"name\": \"Preto\"}, \"category\": {\"code\": \"CAR\"}, \"transmissionType\": {\"name\": \"Automático\"}, \"endOfPlate\": \"2\", \"equipments\": [{\"name\": \"Freios ABS\"}, {\"name\": \"Air Bag\"}, {\"name\": \"Alarme\"}, {\"name\": \"Ar Condicionado\"}, {\"name\": \"Cd Player\"}, {\"name\": \"MP3 Player\"}, {\"name\": \"Desembaçador Traseiro\"}, {\"name\": \"Limpador Traseiro\"}, {\"name\": \"Rodas de Liga Leve\"}, {\"name\": \"Trava Elétrica\"}, {\"name\": \"Vidros Elétricos\"}, {\"name\": \"Ar Digital\"}, {\"name\": \"Ar Quente\"}, {\"name\": \"Bancos de Couro\"}, {\"name\": \"Computador de Bordo\"}, {\"name\": \"Controle de Tração\"}, {\"name\": \"Farol de Neblina\"}, {\"name\": \"Farol de Neblina\"}, {\"name\": \"GPS\"}, {\"name\": \"Retrovisor Elétrico\"}, {\"name\": \"Sensor de Chuva\"}, {\"name\": \"Sensor de Estacionamento\"}], \"vehicleImplements\": [], \"badges\": [{\"code\": \"LOW_PRICE\", \"name\": \"🤑 Abaixo da Fipe\"}, {\"code\": \"NEW_TIRES\", \"name\": \"🛞 Pneu novo\"}, {\"code\": \"LOW_KM\", \"name\": \"😱 Baixa Km\"}], \"features\": [], \"status\": \"PUBLISHED\", \"sellerId\": \"4b3589c9-9b9a-460a-a1d9-bf1997834cab\", \"makeName\": \"BMW\", \"compMakeModelName\": \"BMW SERIES\", \"compVersionName\": \"3 2.0 320I FLEX SPORT GP AUTO\", \"versionId\": \"82406322021\", \"newVehicle\": false, \"activeProductTags\": [], \"campaignGroupId\": \"bmw-series-3-de-3-a-5-anos-em-ribeirao-preto-sp\"}"
+    ],
+    [
+     ".offer.sellerOffers",
+     5,
+     [
+      "activeProductTags",
+      "badges",
+      "campaignGroupId",
+      "compMakeModelName",
+      "compVersionName",
+      "createdDate",
+      "equipments",
+      "features",
+      "id",
+      "isNotFinanciable",
+      "location",
+      "makeName",
+      "manufacturedYear",
+      "mileage",
+      "modelName",
+      "modelYear",
+      "newVehicle",
+      "photos",
+      "price",
+      "seller",
+      "sellerCommercialPartnerCode",
+      "sellerId",
+      "vehicleImplements",
+      "versionName"
+     ],
+     "{\"id\": \"68d9b43d-f094-41c4-8175-dd9bad60b2e5\", \"versionName\": \"BMW SERIES 3 2.0 320I FLEX SPORT GP AUTO\", \"modelYear\": 2024, \"manufacturedYear\": 2023, \"mileage\": 19800, \"isNotFinanciable\": false, \"seller\": \"Apex Motors\", \"price\": 244899, \"photos\": [{\"id\": \"be07abaa-5c98-4046-9c12-d3a1e81147d7\", \"url\": \"https://storage.napista.com.br/static/photos/68d9b43d-f094-41c4-8175-dd9bad60b2e5_be07abaa-5c98-4046-9c12-d3a1e81147d7\", \"order\": 0, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/68d9b43d-f094-41c4-8175-dd9bad60b2e5_be07abaa-5c98-4046-9c12-d3a1e81147d7\"}], \"location\": {\"city\": \"RIBEIRAO PRETO\", \"state\": \"São Paulo\", \"neighborhood\": \"City Ribeirão\", \"street\": \"Av Alzira Couto Machado\", \"number\": \"630\", \"complement\": \"\", \"geoLocation\": {\"latitude\": -21.214255, \"longitude\": -47.7802114}, \"uf\": \"SP\"}, \"createdDate\": \"2026-11-09T19:33:12.029Z\", \"equipments\": [], \"vehicleImplements\": [], \"badges\": [], \"features\": [], \"sellerId\": \"4b3589c9-9b9a-460a-a1d9-bf1997834cab\", \"makeName\": \"BMW\", \"modelName\": \"SERIES 3\", \"compMakeModelName\": \"BMW SERIES\", \"compVersionName\": \"3 2.0 320I FLEX SPORT GP AUTO\", \"sellerCommercialPartnerCode\": 465074, \"newVehicle\": false, \"activeProductTags\": [], \"campaignGroupId\": \"bmw-series-3-de-3-a-5-anos-em-ribeirao-preto-sp\"}"
+    ]
+   ],
+   "ld_types": [
+    []
+   ],
+   "kind": "ad",
+   "desc_like": [
+    "Veiculo impecável sem retoques e com revisões feitas em concessionaria, sem detalhes.  ",
+    "Carro impecavel, com todas as revisoes na concessionaria, pneus zeros, extremamente bem cuidada. ",
+    "Flex Automatico Farois em led Teto solar Bancos em couro com ajuste eletrico e memoria de condutor Painel digital HeadUp Display Ar-condicionado digital com 3 zonas Multimidia com Apple CarPlay / Android Auto Volante multifuncional Paddle Shift Sensor de estacionamento dianteiro e traseiro Camera de"
+   ],
+   "date_like": [
+    [
+     "updatedAt",
+     "2026-11-05T16:41:12.698Z"
+    ],
+    [
+     "updatedAt",
+     "2026-11-05T16:41:12.698Z"
+    ],
+    [
+     "createdAt",
+     "2024-02-15T15:31:29.268Z"
+    ],
+    [
+     "createdDate",
+     "2026-11-09T19:33:32.833Z"
+    ],
+    [
+     "createdDate",
+     "2026-11-09T19:33:12.029Z"
+    ],
+    [
+     "createdDate",
+     "2026-11-12T18:19:01.407Z"
+    ],
+    [
+     "createdDate",
+     "2026-08-07T13:02:56.183Z"
+    ],
+    [
+     "createdDate",
+     "2026-07-21T21:20:45.371Z"
+    ],
+    [
+     "createdDate",
+     "2026-11-16T19:15:49.838Z"
+    ],
+    [
+     "createdDate",
+     "2026-08-01T12:28:05.005Z"
+    ],
+    [
+     "createdDate",
+     "2026-10-16T13:02:31.778Z"
+    ],
+    [
+     "createdDate",
+     "2026-11-12T15:34:54.076Z"
+    ]
+   ],
+   "gear_like": [
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ]
+   ],
+   "img_like": [
+    "https://storage.napista.com.br/static/marketplace-portal/advertising/map-bg.jpg",
+    "https://storage.napista.com.br/static/marketplace-portal/social/google_preferred_source_badge_light_PT-BR.png",
+    "https://storage.napista.com.br/static/marketplace-portal/social/google_preferred_source_badge_light_PT-BR@2x.png"
+   ]
+  },
+  {
+   "url": "https://napista.com.br/anuncios/80d54550-54d0-4ccc-b69a-70686ac70fb0",
+   "status": 200,
+   "final": "https://napista.com.br/anuncios/80d54550-54d0-4ccc-b69a-70686ac70fb0",
+   "bytes": 183967,
+   "title": "Honda Civic Sedan Lxs 1.8/1.8 Flex 16v Aut. 4p | NaPista",
+   "pp_keys": [
+    "offer",
+    "slug",
+    "params"
+   ],
+   "query": {
+    "slug": "80d54550-54d0-4ccc-b69a-70686ac70fb0"
+   },
+   "page": "/anuncios/[slug]",
+   "lists": [
+    [
+     ".offer.pricingDetails.histogram",
+     3,
+     [
+      "price",
+      "quantity"
+     ],
+     "{\"price\": 50000, \"quantity\": 5}"
+    ],
+    [
+     ".offer.similarOffers",
+     10,
+     [
+      "activeProductTags",
+      "armoured",
+      "badges",
+      "campaignGroupId",
+      "category",
+      "color",
+      "compMakeModelName",
+      "compVersionName",
+      "createdDate",
+      "description",
+      "endOfPlate",
+      "equipments",
+      "features",
+      "fuelType",
+      "id",
+      "isNotFinanciable",
+      "location",
+      "makeName",
+      "manufacturedYear",
+      "mileage",
+      "modelYear",
+      "newVehicle",
+      "numberOfDoors",
+      "photos",
+      "price",
+      "seller",
+      "sellerId",
+      "status",
+      "transmissionType",
+      "vehicleImplements",
+      "versionId",
+      "versionName"
+     ],
+     "{\"id\": \"bac5de64-91c4-4a08-ad2e-086f590af023\", \"versionName\": \"HONDA CIVIC 1.8 I VTEC FLEX LXS AUTO\", \"description\": \"ATENÇÃO: CONDIÇÕES EXCLUSIVAS POR TEMPO LIMITADO!\\r\\n\\r\\n• Estoque Multimarcas: Diversas opções de hatches, sedans, SUVs e picapes em um só lugar.\\r\\n• Seu usado na troca valorizado.\\r\\n• Taxas de financiamento reduzidas com as melhores financeiras do mercado.\\r\\n• Entrada facilitada no cartão de crédito.\\r\\n\\r\\nCORRA! O estoque gira muito rápido não perca a oportunidade de fechar o melhor negócio !\\r\\n\\r\\nVisite o nossa loja:\\r\\n• Estrada do Tindiba, 1150 - Taquara, Rio de Janeiro - Didi Automóveis: \\r\\n\\r\\nFale com nosso Time de Vendas e simule suas parcelas agora e solicite sua cotação:\\r\\n\\r\\n• Telefone Fixo: (21) 3594-2004\\r\\n• WhatsApp: (21) 99971-6857  \\r\\nEnvie uma mensagem agora para receber o catálogo completo com as ofertas multimarcas da Didi Automóveis!as da Didi Automóveis! anuncio refere-se a saldo de financiamento sugerido consulte condições com nosso time de venda.\", \"modelYear\": 2014, \"manufacturedYear\": 2013, \"mileage\": 0, \"armoured\": false, \"isNotFinanciable\": false, \"seller\": \"Didi Automóveis \", \"price\": 59900, \"photos\": [{\"id\": \"6ff50612-3c07-4431-acbb-13232b30c3ec\", \"url\": \"https://storage.napista.com.br/static/photos/bac5de64-91c4-4a08-ad2e-086f590af023_6ff50612-3c07-4431-acbb-13232b30c3ec\", \"order\": 0, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/bac5de64-91c4-4a08-ad2e-086f590af023_6ff50612-3c07-4431-acbb-13232b30c3ec\"}], \"location\": {\"city\": \"Rio de Janeiro\", \"state\": \"Rio de Janeiro\", \"neighborhood\": \"Pechincha\", \"street\": \"Estrada do Tindiba\", \"number\": \"1150\", \"complement\": \"\", \"geoLocation\": {\"latitude\": -22.9279342, \"longitude\": -43.3655407}, \"uf\": \"RJ\"}, \"createdDate\": \"2026-11-21T16:06:51.189Z\", \"fuelType\": {\"code\": \"Flex\", \"name\": \"Flex\"}, \"numberOfDoors\": 4, \"color\": {\"name\": \"Branco\"}, \"category\": {\"code\": \"CAR\"}, \"transmissionType\": {\"name\": \"Automático\"}, \"endOfPlate\": \"2\", \"equipments\": [{\"name\": \"Ar Quente\"}, {\"name\": \"Ar Condicionado\"}, {\"name\": \"Bancos de Couro\"}, {\"name\": \"GPS\"}, {\"name\": \"Retrovisor Elétrico\"}, {\"name\": \"TETO SOLAR\"}, {\"name\": \"Vidros Elétricos\"}, {\"name\": \"Alarme\"}, {\"name\": \"Desembaçador Traseiro\"}, {\"name\": \"Farol de Neblina\"}, {\"name\": \"Freios ABS\"}, {\"name\": \"Rodas de Liga Leve\"}, {\"name\": \"Trava Elétrica\"}, {\"name\": \"Limpador Traseiro\"}, {\"name\": \"Direção Hidráulica\"}, {\"name\": \"Direção Elétrica\"}, {\"name\": \"Ar Digital\"}, {\"name\": \"Bancos Dianteir"
+    ],
+    [
+     ".offer.sellerOffers",
+     4,
+     [
+      "activeProductTags",
+      "badges",
+      "campaignGroupId",
+      "compMakeModelName",
+      "compVersionName",
+      "createdDate",
+      "equipments",
+      "features",
+      "id",
+      "isNotFinanciable",
+      "location",
+      "makeName",
+      "manufacturedYear",
+      "mileage",
+      "modelName",
+      "modelYear",
+      "newVehicle",
+      "photos",
+      "price",
+      "seller",
+      "sellerCommercialPartnerCode",
+      "sellerId",
+      "vehicleImplements",
+      "versionName"
+     ],
+     "{\"id\": \"17bc865b-b7ce-4db4-b6aa-2fca17925191\", \"versionName\": \"NISSAN KICKS SPECIAL ED. 1.6 16V FLEX 5P AUT.\", \"modelYear\": 2022, \"manufacturedYear\": 2022, \"mileage\": 45000, \"isNotFinanciable\": false, \"seller\": \"Maiorano Veiculos\", \"price\": 101900, \"photos\": [{\"id\": \"53346764-31d9-4056-8ec3-5d1ff925a4bb\", \"url\": \"https://storage.napista.com.br/static/photos/17bc865b-b7ce-4db4-b6aa-2fca17925191_53346764-31d9-4056-8ec3-5d1ff925a4bb\", \"order\": 0, \"externalUrl\": \"https://static2.meucarronovo.com.br/fotos/static/photos/17bc865b-b7ce-4db4-b6aa-2fca17925191_53346764-31d9-4056-8ec3-5d1ff925a4bb\"}], \"location\": {\"city\": \"Rio de Janeiro\", \"state\": \"Rio de Janeiro\", \"neighborhood\": \"Madureira\", \"street\": \"Estrada Intendente Magalhães\", \"number\": \"241\", \"complement\": \"\", \"geoLocation\": {\"latitude\": -22.8828093, \"longitude\": -43.3483143}, \"uf\": \"RJ\"}, \"createdDate\": \"2026-10-08T18:51:33.401Z\", \"equipments\": [], \"vehicleImplements\": [], \"badges\": [], \"features\": [], \"sellerId\": \"152bede5-f53b-4464-9f05-65257507cd4a\", \"makeName\": \"NISSAN\", \"modelName\": \"KICKS\", \"compMakeModelName\": \"NISSAN KICKS\", \"compVersionName\": \"SPECIAL ED. 1.6 16V FLEX 5P AUT.\", \"sellerCommercialPartnerCode\": 416420, \"newVehicle\": false, \"activeProductTags\": [], \"campaignGroupId\": \"nissan-kicks-de-3-a-5-anos-em-rio-de-janeiro-rj\"}"
+    ]
+   ],
+   "ld_types": [
+    []
+   ],
+   "kind": "ad",
+   "desc_like": [
+    "- BEM VINDO A MAIORANO VEICULOS .\\n-NAO TRABALHAMOS COM VEICULOS PROVENIENTES DE LEILAO OU LOCADORAS \\n-PRECO REAL ANUNCIADO \\n-Fazemos financiamento em até 60 VEZES!\\n-Aqui você tem garantia TOTAL do veículo (3 meses ou 3.000 km)!\\n- CONTATO:   55 (21) 995690096\\n- SIGA A MAIORANO NAS REDES SOCIAS ",
+    "ATENÇÃO: CONDIÇÕES EXCLUSIVAS POR TEMPO LIMITADO!\\r\\n\\r\\n• Estoque Multimarcas: Diversas opções de hatches, sedans, SUVs e picapes em um só lugar.\\r\\n• Seu usado na troca valorizado.\\r\\n• Taxas de financiamento reduzidas com as melhores financeiras do mercado.\\r\\n• Entrada facilitada no cartão de cr",
+    "MANU AUTOMÓVEIS - Estrada Intendente Magalhães, 764 e 381 - Valqueire - RJ\\n\\nNÃO FIQUE DE FORA DO NOSSO FEIRAO LIMPA PÁTIO\\nTAXAS REDUZIDAS A PARTIR DE 0,99% A.M POR TEMPO LIMITADO \\nIPVA 2026 GRÁTIS COM 2 ANOS DE SEGURO TOTALMENTE GRÁTIS INCLUINDO 1 ANO DE GARANTIA MECÂNICA \\nCONSULTE CONDIÇÕES*\\n"
+   ],
+   "date_like": [
+    [
+     "updatedAt",
+     "2026-08-17T14:33:02.910Z"
+    ],
+    [
+     "updatedAt",
+     "2026-08-17T14:33:02.910Z"
+    ],
+    [
+     "createdAt",
+     "2023-09-22T21:24:53.555Z"
+    ],
+    [
+     "createdDate",
+     "2026-11-15T21:33:34.915Z"
+    ],
+    [
+     "createdDate",
+     "2026-11-21T16:06:51.189Z"
+    ],
+    [
+     "createdDate",
+     "2026-09-07T00:38:23.398Z"
+    ],
+    [
+     "createdDate",
+     "2026-11-14T16:10:19.605Z"
+    ],
+    [
+     "createdDate",
+     "2026-10-09T19:49:40.860Z"
+    ],
+    [
+     "createdDate",
+     "2026-10-09T14:12:21.351Z"
+    ],
+    [
+     "createdDate",
+     "2026-10-16T12:31:11.048Z"
+    ],
+    [
+     "createdDate",
+     "2026-11-17T15:37:25.897Z"
+    ],
+    [
+     "createdDate",
+     "2026-07-08T13:38:45.756Z"
+    ]
+   ],
+   "gear_like": [
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ],
+    [
+     "transmissionType",
+     "{"
+    ]
+   ],
+   "img_like": [
+    "https://storage.napista.com.br/static/marketplace-portal/advertising/map-bg.jpg",
+    "https://storage.napista.com.br/static/marketplace-portal/seller/badges/3-years.png",
+    "https://storage.napista.com.br/static/marketplace-portal/social/google_preferred_source_badge_light_PT-BR.png",
+    "https://storage.napista.com.br/static/marketplace-portal/social/google_preferred_source_badge_light_PT-BR@2x.png"
+   ]
+  },
+  {
+   "url": "https://www.mobiauto.com.br/comprar/carros/sc-palhoca/bmw/m3/2025/competition-m-3-0-bi-turbo/detalhes/33803006?page=detail",
+   "status": 200,
+   "final": "https://www.mobiauto.com.br/comprar/carros/sc-palhoca/bmw/m3/2025/competition-m-3-0-bi-turbo/detalhes/33803006?page=detail",
+   "bytes": 185164,
+   "title": "BMW Sedan Competition M 3.0 Bi-Turbo - Mobiauto - 33803006",
+   "pp_keys": [
+    "sop",
+    "deal",
+    "trim",
+    "features",
+    "imageNotFound",
+    "images",
+    "similarOffers",
+    "offersTitle",
+    "phoneDealer",
+    "bodystyles",
+    "priceRange",
+    "dealer",
+    "mobile",
+    "initialVehicleType"
+   ],
+   "query": {
+    "page": "detail",
+    "params": [
+     "33803006"
+    ]
+   },
+   "page": "/detalhes/[...params]",
+   "lists": [
+    [
+     ".similarOffers",
+     5,
+     [
+      "deal0km",
+      "dealerAddress",
+      "dealerCity",
+      "dealerId",
+      "dealerLocation",
+      "dealerLogo",
+      "dealerName",
+      "dealerPhone",
+      "dealerState",
+      "dealerType",
+      "doors",
+      "fuelName",
+      "hasMechanicalWarranty",
+      "hasProductFeirao",
+      "hasRepairAssistance",
+      "id",
+      "images",
+      "km",
+      "makeName",
+      "modelName",
+      "modelYear",
+      "panScoreTag",
+      "plate",
+      "price",
+      "priceTag",
+      "productionYear",
+      "transmissionName",
+      "trimName",
+      "vehicleType"
+     ],
+     "{\"id\": 33359501, \"vehicleType\": \"CAR\", \"deal0km\": false, \"hasProductFeirao\": true, \"hasRepairAssistance\": false, \"hasMechanicalWarranty\": false, \"makeName\": \"BMW\", \"modelName\": \"M3\", \"trimName\": \"Competition 3.0 Turbo (Aut.)\", \"modelYear\": 2024, \"productionYear\": 2023, \"transmissionName\": \"Automática\", \"fuelName\": \"Flex\", \"plate\": \"RYP-3G80\", \"doors\": 4, \"price\": 599900, \"km\": 20000, \"dealerId\": 125570, \"dealerLogo\": 733955892, \"dealerName\": \"F car select revenda de veiculos LTDA\", \"dealerCity\": \"Florianópolis\", \"dealerState\": \"SC\", \"dealerType\": \"Loja\", \"dealerLocation\": \"-27.5992072,-48.598267\", \"dealerPhone\": \"4898874347\", \"dealerAddress\": \"Prefeito Dib Cherem\", \"images\": [{\"id\": 737640690, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/737640690/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 737640691, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/737640691/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 737640692, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/737640692/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 737640693, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/737640693/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 737640694, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/737640694/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 737640695, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/737640695/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 737640696, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/737640696/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 737640697, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/737640697/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 737640699, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/737640699/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 737640704, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/737640704/transform/fl_progressive,f_webp,q_70,w_300\"}], \"priceTag\": \"SUPER_PRICE\", \"panScoreTag\": false}"
+    ]
+   ],
+   "ld_types": [
+    [
+     "BreadcrumbList",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem"
+    ],
+    [
+     "SearchResultsPage"
+    ],
+    [],
+    [
+     "Organization"
+    ],
+    [
+     "Corporation"
+    ],
+    [
+     "WebSite"
+    ]
+   ],
+   "kind": "ad",
+   "desc_like": [
+    "*Valor para pagamento à vista ou financiado, para troca, consulte um de nossos consultores."
+   ],
+   "date_like": [
+    [
+     "classifiedInitialDate",
+     "1634612400000"
+    ]
+   ],
+   "gear_like": [
+    [
+     "transmissionId",
+     "1"
+    ],
+    [
+     "transmissionName",
+     "Automática"
+    ],
+    [
+     "transmissionId",
+     "3"
+    ],
+    [
+     "transmissionName",
+     "Automatizado"
+    ],
+    [
+     "transmissionDescription",
+     "M Steptronic de 8 velocidades "
+    ],
+    [
+     "transmissionName",
+     "Automática"
+    ],
+    [
+     "transmissionName",
+     "Automática"
+    ],
+    [
+     "transmissionName",
+     "Automática"
+    ]
+   ],
+   "img_like": [
+    "https://statics.mobiauto.com.br/public/media/dados-estruturados/mobiauto-logo.png",
+    "https://statics.mobiauto.com.br/public/media/mobiauto/sop/hibrido.png",
+    "https://statics.mobiauto.com.br/public/media/mobiauto/sop/eletrico.png",
+    "https://statics.mobiauto.com.br/public/media/mobiauto/sop/premium.png"
+   ]
+  },
+  {
+   "url": "https://www.mobiauto.com.br/comprar/carros/sp-sao-paulo/honda/civic/2011/new-lxl-1-8-i-vtec-couro-aut-flex/detalhes/20987139?page=detail",
+   "status": 200,
+   "final": "https://www.mobiauto.com.br/comprar/carros/sp-sao-paulo/honda/civic/2011/new-lxl-1-8-i-vtec-couro-aut-flex/detalhes/20987139?page=detail",
+   "bytes": 221569,
+   "title": "Honda Sedan New  LXL 1.8 i-VTEC (Couro) (Aut) (Flex) - Mobiauto - 20987139",
+   "pp_keys": [
+    "sop",
+    "deal",
+    "trim",
+    "features",
+    "imageNotFound",
+    "images",
+    "similarOffers",
+    "offersTitle",
+    "phoneDealer",
+    "bodystyles",
+    "priceRange",
+    "dealer",
+    "mobile",
+    "initialVehicleType"
+   ],
+   "query": {
+    "page": "detail",
+    "params": [
+     "20987139"
+    ]
+   },
+   "page": "/detalhes/[...params]",
+   "lists": [
+    [
+     ".similarOffers",
+     10,
+     [
+      "deal0km",
+      "dealerAddress",
+      "dealerCity",
+      "dealerId",
+      "dealerLocation",
+      "dealerLogo",
+      "dealerName",
+      "dealerPhone",
+      "dealerState",
+      "dealerType",
+      "doors",
+      "fuelName",
+      "hasMechanicalWarranty",
+      "hasProductFeirao",
+      "hasRepairAssistance",
+      "id",
+      "images",
+      "km",
+      "makeName",
+      "modelName",
+      "modelYear",
+      "panScoreTag",
+      "plate",
+      "price",
+      "priceTag",
+      "productionYear",
+      "transmissionName",
+      "trimName",
+      "vehicleType"
+     ],
+     "{\"id\": 28832582, \"vehicleType\": \"CAR\", \"deal0km\": false, \"hasProductFeirao\": true, \"hasRepairAssistance\": false, \"hasMechanicalWarranty\": false, \"makeName\": \"Honda\", \"modelName\": \"Civic\", \"trimName\": \"New  LXL 1.8 16V i-VTEC (Flex)\", \"modelYear\": 2011, \"productionYear\": 2010, \"transmissionName\": \"Automática\", \"fuelName\": \"Flex\", \"plate\": \"ERM4H35\", \"doors\": 4, \"price\": 56500, \"km\": 196463, \"dealerId\": 84647, \"dealerLogo\": 362679409, \"dealerName\": \"FISH CAR MULTIMARCAS \", \"dealerCity\": \"Santo André\", \"dealerState\": \"SP\", \"dealerType\": \"Loja\", \"dealerLocation\": \"-23.646840975171173,-46.525368286526806\", \"dealerPhone\": \"11940011079\", \"dealerAddress\": \"Rua Oratória\", \"images\": [{\"id\": 646288151, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/646288151/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 646288096, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/646288096/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 646288177, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/646288177/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 646288201, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/646288201/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 646288084, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/646288084/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 646288134, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/646288134/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 646288220, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/646288220/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 646288242, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/646288242/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 646288265, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/646288265/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 646288313, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/646288313/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 646288346, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/646288346/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 646288285, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/646288285/transform/fl_progressive,f_webp,q_70,w_300\"}, {\"id\": 646288367, \"src\": \"https://image1.mobiauto.com.br/images/api/images/v1.0/646288367/transform/fl_progressive,f_webp,q_70,w_300\"}], \"priceTag\": \"GOOD_PRICE\", \"panScoreTag\": false}"
+    ],
+    [
+     ".priceRange.bands",
+     8,
+     [
+      "endPrice",
+      "startPrice",
+      "volume"
+     ],
+     "{\"startPrice\": 42900, \"endPrice\": 45275, \"volume\": 1}"
+    ]
+   ],
+   "ld_types": [
+    [
+     "BreadcrumbList",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem",
+     "ListItem"
+    ],
+    [
+     "SearchResultsPage"
+    ],
+    [],
+    [
+     "Organization"
+    ],
+    [
+     "Corporation"
+    ],
+    [
+     "WebSite"
+    ]
+   ],
+   "kind": "ad",
+   "desc_like": [
+    "Escolher a marca Honda é optar por qualidade, confiabilidade e inovação. Com tecnologia de ponta e design arrojado, os veículos Honda se destacam no mercado automotivo. O Honda Civic New LXL 1.8 i-VTEC (Couro) (Aut) (Flex) é um sedan com 108474 km que oferece um excelente equilíbrio entre desempenho",
+    "há quase 30 anos na mesma avenida trabalhando com transparência e honestidade, veículos com procedência segura, revisados com garantia, temos várias financeiras, optamos para a que oferecer a melhor taxa de juros de acordo com o CPF do cliente, venha conferir.\\n Facilitamos sua compra:\\n Financiamen"
+   ],
+   "date_like": [
+    [
+     "fipeDate",
+     "1793502000000"
+    ],
+    [
+     "classifiedInitialDate",
+     "1566788400000"
+    ]
+   ],
+   "gear_like": [
+    [
+     "transmissionId",
+     "1"
+    ],
+    [
+     "transmissionName",
+     "Automática"
+    ],
+    [
+     "transmissionId",
+     "1"
+    ],
+    [
+     "transmissionName",
+     "Automática"
+    ],
+    [
+     "transmissionName",
+     "Automática"
+    ],
+    [
+     "transmissionName",
+     "Automática"
+    ],
+    [
+     "transmissionName",
+     "Automática"
+    ],
+    [
+     "transmissionName",
+     "Automática"
+    ]
+   ],
+   "img_like": [
+    "https://statics.mobiauto.com.br/public/media/dados-estruturados/mobiauto-logo.png",
+    "https://statics.mobiauto.com.br/public/media/mobiauto/sop/hibrido.png",
+    "https://statics.mobiauto.com.br/public/media/mobiauto/sop/eletrico.png",
+    "https://statics.mobiauto.com.br/public/media/mobiauto/sop/premium.png"
+   ]
+  }
+ ],
+ "models": {
+  "napista/bmw": [
+   "/busca/bmw/2018",
+   "/busca/bmw/2019",
+   "/busca/bmw/2020",
+   "/busca/bmw/2021",
+   "/busca/bmw/2022",
+   "/busca/bmw/2023",
+   "/busca/bmw/2024",
+   "/busca/bmw/2025",
+   "/busca/bmw/2026",
+   "/busca/bmw/2027",
+   "/busca/bmw/i3",
+   "/busca/bmw/i5",
+   "/busca/bmw/i7",
+   "/busca/bmw/i8",
+   "/busca/bmw/ix",
+   "/busca/bmw/ix1",
+   "/busca/bmw/ix2",
+   "/busca/bmw/ix3",
+   "/busca/bmw/novos",
+   "/busca/bmw/seminovos",
+   "/busca/bmw/series-1",
+   "/busca/bmw/series-2",
+   "/busca/bmw/series-2-active-tourer",
+   "/busca/bmw/series-3",
+   "/busca/bmw/series-4",
+   "/busca/bmw/series-5",
+   "/busca/bmw/series-6",
+   "/busca/bmw/series-8",
+   "/busca/bmw/x1",
+   "/busca/bmw/x2",
+   "/busca/bmw/x3",
+   "/busca/bmw/x4",
+   "/busca/bmw/x5",
+   "/busca/bmw/x6",
+   "/busca/bmw/x7",
+   "/busca/bmw/z3",
+   "/busca/bmw/z4"
+  ],
+  "napista/honda": [
+   "/busca/honda/2018",
+   "/busca/honda/2019",
+   "/busca/honda/2020",
+   "/busca/honda/2021",
+   "/busca/honda/2022",
+   "/busca/honda/2023",
+   "/busca/honda/2024",
+   "/busca/honda/2025",
+   "/busca/honda/2026",
+   "/busca/honda/2027",
+   "/busca/honda/accord",
+   "/busca/honda/city",
+   "/busca/honda/civic",
+   "/busca/honda/fit",
+   "/busca/honda/legend",
+   "/busca/honda/novos",
+   "/busca/honda/seminovos"
+  ],
+  "napista/toyota": [
+   "/busca/toyota/2018",
+   "/busca/toyota/2019",
+   "/busca/toyota/2020",
+   "/busca/toyota/2021",
+   "/busca/toyota/2022",
+   "/busca/toyota/2023",
+   "/busca/toyota/2024",
+   "/busca/toyota/2025",
+   "/busca/toyota/2026",
+   "/busca/toyota/2027",
+   "/busca/toyota/bandeirante",
+   "/busca/toyota/bz4x",
+   "/busca/toyota/camry",
+   "/busca/toyota/ccross",
+   "/busca/toyota/corolla",
+   "/busca/toyota/corolla-cross",
+   "/busca/toyota/corolla-fielder",
+   "/busca/toyota/etios",
+   "/busca/toyota/hiace",
+   "/busca/toyota/hilux",
+   "/busca/toyota/hilux-sw4",
+   "/busca/toyota/landcruiser-prado",
+   "/busca/toyota/novos",
+   "/busca/toyota/paseo",
+   "/busca/toyota/prius",
+   "/busca/toyota/rav4",
+   "/busca/toyota/seminovos",
+   "/busca/toyota/sw4",
+   "/busca/toyota/yaris",
+   "/busca/toyota/yaris-cross"
+  ],
+  "napista/nissan": [
+   "/busca/nissan/2018",
+   "/busca/nissan/2019",
+   "/busca/nissan/2020",
+   "/busca/nissan/2021",
+   "/busca/nissan/2022",
+   "/busca/nissan/2023",
+   "/busca/nissan/2024",
+   "/busca/nissan/2025",
+   "/busca/nissan/2026",
+   "/busca/nissan/2027",
+   "/busca/nissan/altima",
+   "/busca/nissan/frontier",
+   "/busca/nissan/grand-livina",
+   "/busca/nissan/kait",
+   "/busca/nissan/kicks",
+   "/busca/nissan/kicks-play",
+   "/busca/nissan/leaf",
+   "/busca/nissan/livina",
+   "/busca/nissan/march",
+   "/busca/nissan/novos",
+   "/busca/nissan/pathfinder",
+   "/busca/nissan/seminovos",
+   "/busca/nissan/sentra",
+   "/busca/nissan/tiida",
+   "/busca/nissan/versa",
+   "/busca/nissan/xterra"
+  ],
+  "mobiauto/bmw": [
+   "/comprar/carros-usados/brasil/bmw/ano-1993",
+   "/comprar/carros-usados/brasil/bmw/ano-1994",
+   "/comprar/carros-usados/brasil/bmw/ano-1995",
+   "/comprar/carros-usados/brasil/bmw/ano-1996",
+   "/comprar/carros-usados/brasil/bmw/ano-2000",
+   "/comprar/carros-usados/brasil/bmw/ano-2001",
+   "/comprar/carros-usados/brasil/bmw/ano-2002",
+   "/comprar/carros-usados/brasil/bmw/ano-2003",
+   "/comprar/carros-usados/brasil/bmw/ano-2004",
+   "/comprar/carros-usados/brasil/bmw/ano-2005",
+   "/comprar/carros-usados/brasil/bmw/ano-2006",
+   "/comprar/carros-usados/brasil/bmw/ano-2007",
+   "/comprar/carros-usados/brasil/bmw/ano-2008",
+   "/comprar/carros-usados/brasil/bmw/ano-2009",
+   "/comprar/carros-usados/brasil/bmw/ano-2010",
+   "/comprar/carros-usados/brasil/bmw/ano-2011",
+   "/comprar/carros-usados/brasil/bmw/ano-2012",
+   "/comprar/carros-usados/brasil/bmw/ano-2013",
+   "/comprar/carros-usados/brasil/bmw/ano-2014",
+   "/comprar/carros-usados/brasil/bmw/ano-2015",
+   "/comprar/carros-usados/brasil/bmw/ano-2016",
+   "/comprar/carros-usados/brasil/bmw/ano-2017",
+   "/comprar/carros-usados/brasil/bmw/ano-2018",
+   "/comprar/carros-usados/brasil/bmw/ano-2019",
+   "/comprar/carros-usados/brasil/bmw/ano-2020",
+   "/comprar/carros-usados/brasil/bmw/ano-2021",
+   "/comprar/carros-usados/brasil/bmw/ano-2022",
+   "/comprar/carros-usados/brasil/bmw/ano-2023",
+   "/comprar/carros-usados/brasil/bmw/ano-2024",
+   "/comprar/carros-usados/brasil/bmw/ano-2025",
+   "/comprar/carros-usados/brasil/bmw/ano-2026",
+   "/comprar/carros-usados/brasil/bmw/pagina-2",
+   "/comprar/carros-usados/brasil/bmw/pagina-3",
+   "/comprar/carros-usados/brasil/bmw/pagina-4",
+   "/comprar/carros-usados/brasil/bmw/pagina-5",
+   "/comprar/carros-usados/brasil/bmw/pagina-6",
+   "/comprar/carros-usados/brasil/bmw/pagina-7",
+   "/comprar/carros-usados/brasil/bmw/pagina-8",
+   "/comprar/carros-usados/brasil/bmw/pagina-9",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-100000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-200000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-30000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-300000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-40000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-400000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-50000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-500000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-60000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-600000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-70000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-700000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-80000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-800000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-90000",
+   "/comprar/carros-usados/brasil/bmw/preco-ate-900000"
+  ],
+  "mobiauto/bmw_any": [
+   "/comprar/carros-novos/brasil/bmw",
+   "/comprar/carros-usados/brasil/bmw",
+   "/comprar/carros-usados/brasil/bmw/ano-1993",
+   "/comprar/carros-usados/brasil/bmw/ano-1994",
+   "/comprar/carros-usados/brasil/bmw/ano-1995",
+   "/comprar/carros-usados/brasil/bmw/ano-1996",
+   "/comprar/carros-usados/brasil/bmw/ano-2000",
+   "/comprar/carros-usados/brasil/bmw/ano-2001",
+   "/comprar/carros-usados/brasil/bmw/ano-2002",
+   "/comprar/carros-usados/brasil/bmw/ano-2003",
+   "/comprar/carros-usados/brasil/bmw/ano-2004",
+   "/comprar/carros-usados/brasil/bmw/ano-2005",
+   "/comprar/carros-usados/brasil/bmw/ano-2006",
+   "/comprar/carros-usados/brasil/bmw/ano-2007",
+   "/comprar/carros-usados/brasil/bmw/ano-2008",
+   "/comprar/carros-usados/brasil/bmw/ano-2009",
+   "/comprar/carros-usados/brasil/bmw/ano-2010",
+   "/comprar/carros-usados/brasil/bmw/ano-2011",
+   "/comprar/carros-usados/brasil/bmw/ano-2012",
+   "/comprar/carros-usados/brasil/bmw/ano-2013",
+   "/comprar/carros-usados/brasil/bmw/ano-2014",
+   "/comprar/carros-usados/brasil/bmw/ano-2015",
+   "/comprar/carros-usados/brasil/bmw/ano-2016",
+   "/comprar/carros-usados/brasil/bmw/ano-2017",
+   "/comprar/carros-usados/brasil/bmw/ano-2018",
+   "/comprar/carros-usados/brasil/bmw/ano-2019",
+   "/comprar/carros-usados/brasil/bmw/ano-2020",
+   "/comprar/carros-usados/brasil/bmw/ano-2021",
+   "/comprar/carros-usados/brasil/bmw/ano-2022",
+   "/comprar/carros-usados/brasil/bmw/ano-2023",
+   "/comprar/carros-usados/brasil/bmw/ano-2024",
+   "/comprar/carros-usados/brasil/bmw/ano-2025",
+   "/comprar/carros-usados/brasil/bmw/ano-2026",
+   "/comprar/carros-usados/brasil/bmw/pagina-2",
+   "/comprar/carros-usados/brasil/bmw/pagina-3",
+   "/comprar/carros-usados/brasil/bmw/pagina-4",
+   "/comprar/carros-usados/brasil/bmw/pagina-5",
+   "/comprar/carros-usados/brasil/bmw/pagina-6",
+   "/comprar/carros-usados/brasil/bmw/pagina-7",
+   "/comprar/carros-usados/brasil/bmw/pagina-8"
+  ],
+  "mobiauto/honda": [
+   "/comprar/carros-usados/brasil/honda/ano-1993",
+   "/comprar/carros-usados/brasil/honda/ano-1995",
+   "/comprar/carros-usados/brasil/honda/ano-1998",
+   "/comprar/carros-usados/brasil/honda/ano-1999",
+   "/comprar/carros-usados/brasil/honda/ano-2000",
+   "/comprar/carros-usados/brasil/honda/ano-2001",
+   "/comprar/carros-usados/brasil/honda/ano-2002",
+   "/comprar/carros-usados/brasil/honda/ano-2003",
+   "/comprar/carros-usados/brasil/honda/ano-2004",
+   "/comprar/carros-usados/brasil/honda/ano-2005",
+   "/comprar/carros-usados/brasil/honda/ano-2006",
+   "/comprar/carros-usados/brasil/honda/ano-2007",
+   "/comprar/carros-usados/brasil/honda/ano-2008",
+   "/comprar/carros-usados/brasil/honda/ano-2009",
+   "/comprar/carros-usados/brasil/honda/ano-2010",
+   "/comprar/carros-usados/brasil/honda/ano-2011",
+   "/comprar/carros-usados/brasil/honda/ano-2012",
+   "/comprar/carros-usados/brasil/honda/ano-2013",
+   "/comprar/carros-usados/brasil/honda/ano-2014",
+   "/comprar/carros-usados/brasil/honda/ano-2015",
+   "/comprar/carros-usados/brasil/honda/ano-2016",
+   "/comprar/carros-usados/brasil/honda/ano-2017",
+   "/comprar/carros-usados/brasil/honda/ano-2018",
+   "/comprar/carros-usados/brasil/honda/ano-2019",
+   "/comprar/carros-usados/brasil/honda/ano-2020",
+   "/comprar/carros-usados/brasil/honda/ano-2021",
+   "/comprar/carros-usados/brasil/honda/ano-2022",
+   "/comprar/carros-usados/brasil/honda/ano-2023",
+   "/comprar/carros-usados/brasil/honda/ano-2024",
+   "/comprar/carros-usados/brasil/honda/ano-2025",
+   "/comprar/carros-usados/brasil/honda/ano-2026",
+   "/comprar/carros-usados/brasil/honda/ano-2027",
+   "/comprar/carros-usados/brasil/honda/pagina-2",
+   "/comprar/carros-usados/brasil/honda/pagina-3",
+   "/comprar/carros-usados/brasil/honda/pagina-4",
+   "/comprar/carros-usados/brasil/honda/pagina-5",
+   "/comprar/carros-usados/brasil/honda/pagina-6",
+   "/comprar/carros-usados/brasil/honda/pagina-7",
+   "/comprar/carros-usados/brasil/honda/pagina-8",
+   "/comprar/carros-usados/brasil/honda/pagina-9",
+   "/comprar/carros-usados/brasil/honda/preco-ate-100000",
+   "/comprar/carros-usados/brasil/honda/preco-ate-20000",
+   "/comprar/carros-usados/brasil/honda/preco-ate-200000",
+   "/comprar/carros-usados/brasil/honda/preco-ate-30000",
+   "/comprar/carros-usados/brasil/honda/preco-ate-300000",
+   "/comprar/carros-usados/brasil/honda/preco-ate-40000",
+   "/comprar/carros-usados/brasil/honda/preco-ate-400000",
+   "/comprar/carros-usados/brasil/honda/preco-ate-50000",
+   "/comprar/carros-usados/brasil/honda/preco-ate-60000",
+   "/comprar/carros-usados/brasil/honda/preco-ate-70000",
+   "/comprar/carros-usados/brasil/honda/preco-ate-80000",
+   "/comprar/carros-usados/brasil/honda/preco-ate-90000"
+  ],
+  "mobiauto/honda_any": [
+   "/comprar/carros-novos/brasil/honda",
+   "/comprar/carros-usados/brasil/honda",
+   "/comprar/carros-usados/brasil/honda/ano-1993",
+   "/comprar/carros-usados/brasil/honda/ano-1995",
+   "/comprar/carros-usados/brasil/honda/ano-1998",
+   "/comprar/carros-usados/brasil/honda/ano-1999",
+   "/comprar/carros-usados/brasil/honda/ano-2000",
+   "/comprar/carros-usados/brasil/honda/ano-2001",
+   "/comprar/carros-usados/brasil/honda/ano-2002",
+   "/comprar/carros-usados/brasil/honda/ano-2003",
+   "/comprar/carros-usados/brasil/honda/ano-2004",
+   "/comprar/carros-usados/brasil/honda/ano-2005",
+   "/comprar/carros-usados/brasil/honda/ano-2006",
+   "/comprar/carros-usados/brasil/honda/ano-2007",
+   "/comprar/carros-usados/brasil/honda/ano-2008",
+   "/comprar/carros-usados/brasil/honda/ano-2009",
+   "/comprar/carros-usados/brasil/honda/ano-2010",
+   "/comprar/carros-usados/brasil/honda/ano-2011",
+   "/comprar/carros-usados/brasil/honda/ano-2012",
+   "/comprar/carros-usados/brasil/honda/ano-2013",
+   "/comprar/carros-usados/brasil/honda/ano-2014",
+   "/comprar/carros-usados/brasil/honda/ano-2015",
+   "/comprar/carros-usados/brasil/honda/ano-2016",
+   "/comprar/carros-usados/brasil/honda/ano-2017",
+   "/comprar/carros-usados/brasil/honda/ano-2018",
+   "/comprar/carros-usados/brasil/honda/ano-2019",
+   "/comprar/carros-usados/brasil/honda/ano-2020",
+   "/comprar/carros-usados/brasil/honda/ano-2021",
+   "/comprar/carros-usados/brasil/honda/ano-2022",
+   "/comprar/carros-usados/brasil/honda/ano-2023",
+   "/comprar/carros-usados/brasil/honda/ano-2024",
+   "/comprar/carros-usados/brasil/honda/ano-2025",
+   "/comprar/carros-usados/brasil/honda/ano-2026",
+   "/comprar/carros-usados/brasil/honda/ano-2027",
+   "/comprar/carros-usados/brasil/honda/pagina-2",
+   "/comprar/carros-usados/brasil/honda/pagina-3",
+   "/comprar/carros-usados/brasil/honda/pagina-4",
+   "/comprar/carros-usados/brasil/honda/pagina-5",
+   "/comprar/carros-usados/brasil/honda/pagina-6",
+   "/comprar/carros-usados/brasil/honda/pagina-7"
+  ],
+  "mobiauto/toyota": [
+   "/comprar/carros-usados/brasil/toyota/ano-1991",
+   "/comprar/carros-usados/brasil/toyota/ano-1992",
+   "/comprar/carros-usados/brasil/toyota/ano-1995",
+   "/comprar/carros-usados/brasil/toyota/ano-1997",
+   "/comprar/carros-usados/brasil/toyota/ano-1998",
+   "/comprar/carros-usados/brasil/toyota/ano-1999",
+   "/comprar/carros-usados/brasil/toyota/ano-2000",
+   "/comprar/carros-usados/brasil/toyota/ano-2001",
+   "/comprar/carros-usados/brasil/toyota/ano-2002",
+   "/comprar/carros-usados/brasil/toyota/ano-2003",
+   "/comprar/carros-usados/brasil/toyota/ano-2004",
+   "/comprar/carros-usados/brasil/toyota/ano-2005",
+   "/comprar/carros-usados/brasil/toyota/ano-2006",
+   "/comprar/carros-usados/brasil/toyota/ano-2007",
+   "/comprar/carros-usados/brasil/toyota/ano-2008",
+   "/comprar/carros-usados/brasil/toyota/ano-2009",
+   "/comprar/carros-usados/brasil/toyota/ano-2010",
+   "/comprar/carros-usados/brasil/toyota/ano-2011",
+   "/comprar/carros-usados/brasil/toyota/ano-2012",
+   "/comprar/carros-usados/brasil/toyota/ano-2013",
+   "/comprar/carros-usados/brasil/toyota/ano-2014",
+   "/comprar/carros-usados/brasil/toyota/ano-2015",
+   "/comprar/carros-usados/brasil/toyota/ano-2016",
+   "/comprar/carros-usados/brasil/toyota/ano-2017",
+   "/comprar/carros-usados/brasil/toyota/ano-2018",
+   "/comprar/carros-usados/brasil/toyota/ano-2019",
+   "/comprar/carros-usados/brasil/toyota/ano-2020",
+   "/comprar/carros-usados/brasil/toyota/ano-2021",
+   "/comprar/carros-usados/brasil/toyota/ano-2022",
+   "/comprar/carros-usados/brasil/toyota/ano-2023",
+   "/comprar/carros-usados/brasil/toyota/ano-2024",
+   "/comprar/carros-usados/brasil/toyota/ano-2025",
+   "/comprar/carros-usados/brasil/toyota/ano-2026",
+   "/comprar/carros-usados/brasil/toyota/ano-2027",
+   "/comprar/carros-usados/brasil/toyota/pagina-2",
+   "/comprar/carros-usados/brasil/toyota/pagina-3",
+   "/comprar/carros-usados/brasil/toyota/pagina-4",
+   "/comprar/carros-usados/brasil/toyota/pagina-5",
+   "/comprar/carros-usados/brasil/toyota/pagina-6",
+   "/comprar/carros-usados/brasil/toyota/pagina-7",
+   "/comprar/carros-usados/brasil/toyota/pagina-8",
+   "/comprar/carros-usados/brasil/toyota/pagina-9",
+   "/comprar/carros-usados/brasil/toyota/preco-a-partir-de-1000000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-100000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-1000000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-20000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-200000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-30000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-300000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-40000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-400000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-50000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-500000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-60000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-600000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-70000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-700000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-80000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-800000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-90000",
+   "/comprar/carros-usados/brasil/toyota/preco-ate-900000"
+  ],
+  "mobiauto/toyota_any": [
+   "/comprar/carros-novos/brasil/toyota",
+   "/comprar/carros-usados/brasil/toyota",
+   "/comprar/carros-usados/brasil/toyota/ano-1991",
+   "/comprar/carros-usados/brasil/toyota/ano-1992",
+   "/comprar/carros-usados/brasil/toyota/ano-1995",
+   "/comprar/carros-usados/brasil/toyota/ano-1997",
+   "/comprar/carros-usados/brasil/toyota/ano-1998",
+   "/comprar/carros-usados/brasil/toyota/ano-1999",
+   "/comprar/carros-usados/brasil/toyota/ano-2000",
+   "/comprar/carros-usados/brasil/toyota/ano-2001",
+   "/comprar/carros-usados/brasil/toyota/ano-2002",
+   "/comprar/carros-usados/brasil/toyota/ano-2003",
+   "/comprar/carros-usados/brasil/toyota/ano-2004",
+   "/comprar/carros-usados/brasil/toyota/ano-2005",
+   "/comprar/carros-usados/brasil/toyota/ano-2006",
+   "/comprar/carros-usados/brasil/toyota/ano-2007",
+   "/comprar/carros-usados/brasil/toyota/ano-2008",
+   "/comprar/carros-usados/brasil/toyota/ano-2009",
+   "/comprar/carros-usados/brasil/toyota/ano-2010",
+   "/comprar/carros-usados/brasil/toyota/ano-2011",
+   "/comprar/carros-usados/brasil/toyota/ano-2012",
+   "/comprar/carros-usados/brasil/toyota/ano-2013",
+   "/comprar/carros-usados/brasil/toyota/ano-2014",
+   "/comprar/carros-usados/brasil/toyota/ano-2015",
+   "/comprar/carros-usados/brasil/toyota/ano-2016",
+   "/comprar/carros-usados/brasil/toyota/ano-2017",
+   "/comprar/carros-usados/brasil/toyota/ano-2018",
+   "/comprar/carros-usados/brasil/toyota/ano-2019",
+   "/comprar/carros-usados/brasil/toyota/ano-2020",
+   "/comprar/carros-usados/brasil/toyota/ano-2021",
+   "/comprar/carros-usados/brasil/toyota/ano-2022",
+   "/comprar/carros-usados/brasil/toyota/ano-2023",
+   "/comprar/carros-usados/brasil/toyota/ano-2024",
+   "/comprar/carros-usados/brasil/toyota/ano-2025",
+   "/comprar/carros-usados/brasil/toyota/ano-2026",
+   "/comprar/carros-usados/brasil/toyota/ano-2027",
+   "/comprar/carros-usados/brasil/toyota/pagina-2",
+   "/comprar/carros-usados/brasil/toyota/pagina-3",
+   "/comprar/carros-usados/brasil/toyota/pagina-4",
+   "/comprar/carros-usados/brasil/toyota/pagina-5"
+  ],
+  "mobiauto/nissan": [
+   "/comprar/carros-usados/brasil/nissan/ano-1996",
+   "/comprar/carros-usados/brasil/nissan/ano-2001",
+   "/comprar/carros-usados/brasil/nissan/ano-2003",
+   "/comprar/carros-usados/brasil/nissan/ano-2004",
+   "/comprar/carros-usados/brasil/nissan/ano-2005",
+   "/comprar/carros-usados/brasil/nissan/ano-2006",
+   "/comprar/carros-usados/brasil/nissan/ano-2007",
+   "/comprar/carros-usados/brasil/nissan/ano-2008",
+   "/comprar/carros-usados/brasil/nissan/ano-2009",
+   "/comprar/carros-usados/brasil/nissan/ano-2010",
+   "/comprar/carros-usados/brasil/nissan/ano-2011",
+   "/comprar/carros-usados/brasil/nissan/ano-2012",
+   "/comprar/carros-usados/brasil/nissan/ano-2013",
+   "/comprar/carros-usados/brasil/nissan/ano-2014",
+   "/comprar/carros-usados/brasil/nissan/ano-2015",
+   "/comprar/carros-usados/brasil/nissan/ano-2016",
+   "/comprar/carros-usados/brasil/nissan/ano-2017",
+   "/comprar/carros-usados/brasil/nissan/ano-2018",
+   "/comprar/carros-usados/brasil/nissan/ano-2019",
+   "/comprar/carros-usados/brasil/nissan/ano-2020",
+   "/comprar/carros-usados/brasil/nissan/ano-2021",
+   "/comprar/carros-usados/brasil/nissan/ano-2022",
+   "/comprar/carros-usados/brasil/nissan/ano-2023",
+   "/comprar/carros-usados/brasil/nissan/ano-2024",
+   "/comprar/carros-usados/brasil/nissan/ano-2025",
+   "/comprar/carros-usados/brasil/nissan/ano-2026",
+   "/comprar/carros-usados/brasil/nissan/pagina-2",
+   "/comprar/carros-usados/brasil/nissan/pagina-3",
+   "/comprar/carros-usados/brasil/nissan/pagina-4",
+   "/comprar/carros-usados/brasil/nissan/pagina-5",
+   "/comprar/carros-usados/brasil/nissan/pagina-6",
+   "/comprar/carros-usados/brasil/nissan/pagina-7",
+   "/comprar/carros-usados/brasil/nissan/pagina-8",
+   "/comprar/carros-usados/brasil/nissan/pagina-9",
+   "/comprar/carros-usados/brasil/nissan/preco-a-partir-de-1000000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-100000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-1000000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-20000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-200000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-30000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-300000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-40000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-400000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-50000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-500000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-60000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-600000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-70000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-700000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-80000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-800000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-90000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-900000"
+  ],
+  "mobiauto/nissan_any": [
+   "/comprar/carros-novos/brasil/nissan",
+   "/comprar/carros-usados/brasil/nissan",
+   "/comprar/carros-usados/brasil/nissan/ano-1996",
+   "/comprar/carros-usados/brasil/nissan/ano-2001",
+   "/comprar/carros-usados/brasil/nissan/ano-2003",
+   "/comprar/carros-usados/brasil/nissan/ano-2004",
+   "/comprar/carros-usados/brasil/nissan/ano-2005",
+   "/comprar/carros-usados/brasil/nissan/ano-2006",
+   "/comprar/carros-usados/brasil/nissan/ano-2007",
+   "/comprar/carros-usados/brasil/nissan/ano-2008",
+   "/comprar/carros-usados/brasil/nissan/ano-2009",
+   "/comprar/carros-usados/brasil/nissan/ano-2010",
+   "/comprar/carros-usados/brasil/nissan/ano-2011",
+   "/comprar/carros-usados/brasil/nissan/ano-2012",
+   "/comprar/carros-usados/brasil/nissan/ano-2013",
+   "/comprar/carros-usados/brasil/nissan/ano-2014",
+   "/comprar/carros-usados/brasil/nissan/ano-2015",
+   "/comprar/carros-usados/brasil/nissan/ano-2016",
+   "/comprar/carros-usados/brasil/nissan/ano-2017",
+   "/comprar/carros-usados/brasil/nissan/ano-2018",
+   "/comprar/carros-usados/brasil/nissan/ano-2019",
+   "/comprar/carros-usados/brasil/nissan/ano-2020",
+   "/comprar/carros-usados/brasil/nissan/ano-2021",
+   "/comprar/carros-usados/brasil/nissan/ano-2022",
+   "/comprar/carros-usados/brasil/nissan/ano-2023",
+   "/comprar/carros-usados/brasil/nissan/ano-2024",
+   "/comprar/carros-usados/brasil/nissan/ano-2025",
+   "/comprar/carros-usados/brasil/nissan/ano-2026",
+   "/comprar/carros-usados/brasil/nissan/pagina-2",
+   "/comprar/carros-usados/brasil/nissan/pagina-3",
+   "/comprar/carros-usados/brasil/nissan/pagina-4",
+   "/comprar/carros-usados/brasil/nissan/pagina-5",
+   "/comprar/carros-usados/brasil/nissan/pagina-6",
+   "/comprar/carros-usados/brasil/nissan/pagina-7",
+   "/comprar/carros-usados/brasil/nissan/pagina-8",
+   "/comprar/carros-usados/brasil/nissan/pagina-9",
+   "/comprar/carros-usados/brasil/nissan/preco-a-partir-de-1000000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-100000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-1000000",
+   "/comprar/carros-usados/brasil/nissan/preco-ate-20000"
+  ]
+ }
+}
