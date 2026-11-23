@@ -74,7 +74,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   border-radius:999px;font:600 15px/1 var(--cond);letter-spacing:.02em;
   box-shadow:-14px 0 0 #10141a,10px 0 12px -6px #10141a}
 .gmode svg{opacity:.75}
-.gmode.is-man{background:rgba(60,207,142,.16);color:#8ef0c0;border:1px solid rgba(60,207,142,.5)}
+.gmode.is-man{background:linear-gradient(rgba(60,207,142,.16),rgba(60,207,142,.16)),var(--bg);color:#8ef0c0;border:1px solid rgba(60,207,142,.5)}
 .gmode.is-auto{background:#f0b23e;color:#1d1505;border:1px solid #f0b23e}
 .gmode.inline{position:static;box-shadow:none;margin:4px 0 2px}
 .top.auto-on{border-bottom:2px solid #f0b23e}
@@ -235,6 +235,45 @@ select.opt{background:var(--raised);color:var(--text);padding:8px 12px;font-size
 .comps .p{grid-row:1;grid-column:2;text-align:right;font:700 17px/1.2 var(--cond)}
 .comps .a{grid-row:2;grid-column:2;text-align:right;color:var(--muted);font-size:12px}
 .fine{color:var(--dim);font-size:13px;margin-top:8px!important}
+/* ---------- prices tab ---------- */
+.tabs{display:flex;gap:22px;margin:9px 0 -3px}
+.tabs button{padding:6px 1px 8px;font:600 17px/1 var(--cond);letter-spacing:.03em;color:var(--muted);border-bottom:2px solid transparent}
+.tabs button[aria-selected=true]{color:var(--text);border-bottom-color:var(--text)}
+.top.prices .controls{display:none}
+.kpis{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:11px 12px}
+.kpi small{display:block;color:var(--muted);font-size:12px}
+.kpi b{display:block;font:600 23px/1.15 var(--sans);margin:4px 0 3px}
+.kpi span{display:block;color:var(--muted);font-size:12px;line-height:1.3}
+.ana{grid-column:1/-1;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 13px;min-width:0}
+.ana h2{margin:0;font:700 20px/1.15 var(--cond);letter-spacing:.01em}
+.ana > .sub{margin:3px 0 10px;color:var(--muted);font-size:13px;line-height:1.35}
+.ana h3{margin:14px 0 6px;font:600 13px/1.3 var(--sans);color:var(--muted)}
+.ana p{margin:8px 0 0;font-size:14px}
+.ana .none{color:var(--muted)}
+.ana .m{color:var(--muted);font-size:12px}
+.viz{display:block;width:100%;height:auto;overflow:visible}
+.viz text{font:500 11px var(--sans);fill:var(--muted)}
+.viz .vl{fill:var(--text);font-weight:600}
+.legend{display:flex;align-items:center;gap:5px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin:2px 0 6px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:3px}
+.legend .ln{display:inline-block;width:16px;height:2px;border-radius:1px;background:#8d97a5;margin-left:10px}
+.readout{display:flex;align-items:center;gap:10px;min-height:46px;margin-top:8px;padding:8px 10px;border-radius:10px;background:var(--raised);font-size:13px;color:var(--muted)}
+.readout b{color:var(--text);font-size:15px}
+.readout button,.rows button{color:var(--text)}
+.readout button{margin-left:auto;padding:7px 13px;border-radius:999px;border:1px solid var(--line);font-weight:600}
+ul.facts-list{margin:2px 0 0;padding-left:18px;display:grid;gap:7px;font-size:14px}
+.rows{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:5px}
+.rows button{width:100%;display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:9px 11px;border-radius:10px;background:var(--raised);text-align:left;font-size:14px}
+.rows b{text-align:right;font:700 16px/1.2 var(--cond)}
+.rows .wide{grid-column:1/-1}
+.linkbtn{display:block;width:100%;margin-top:10px;padding:11px;border-radius:12px;border:1px solid var(--line);font-weight:600;color:var(--text)}
+.otab{width:100%;border-collapse:collapse;font-size:14px}
+.otab th{color:var(--muted);font-weight:500;font-size:12px;text-align:right;padding:2px 4px 6px}
+.otab td{padding:10px 4px;border-top:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.otab th:first-child,.otab td:first-child{text-align:left;padding-left:0}
+.otab tr[data-ana]{cursor:pointer}
+.otab .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:7px}
 @media (max-width:380px){.controls{gap:6px}.seg button{padding:7px 11px}.dir,.filters-btn{padding:8px 10px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -249,6 +288,10 @@ select.opt{background:var(--raised);color:var(--text);padding:8px 12px;font-size
         <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><circle cx="4" cy="10" r="1.8"/><circle cx="10" cy="10" r="1.8"/><circle cx="16" cy="10" r="1.8"/></svg>
       </button>
     </div>
+    <nav class="tabs" role="tablist" aria-label="View">
+      <button role="tab" id="tabList" type="button" aria-selected="true">Listings</button>
+      <button role="tab" id="tabPrices" type="button" aria-selected="false">Prices</button>
+    </nav>
     <div class="controls">
       <div class="seg" role="group" aria-label="Sort by">
         <button id="sortScore" aria-pressed="true">Score</button>
@@ -372,7 +415,8 @@ const BODY_PT = {coupe: "Cupê", conv: "Conversível", sedan: "Sedã", wagon: "P
 const BD = () => PT() ? BODY_PT : BODY_EN;
 const HARD = () => PT() ? ["Accident mentioned"] : ["Rebuilt title", "Salvage title"];   // the serious flags in each market
 const DEFAULT_STATE = {sort: "score", dir: "desc", names: [], gear: ["m", "c", "u"], bodies: [], maxPrice: 0,
-                       maxKm: 0, yearFrom: 0, yearTo: 0, hideHard: false, hideRed: false};
+                       maxKm: 0, yearFrom: 0, yearTo: 0, hideHard: false, hideRed: false,
+                       tab: "list", ana: ""};
 let DATA = null, state = load();
 
 function stateKey() { return COUNTRY === "CA" ? "cw-state" : "cw-state-" + COUNTRY; }   // filters kept per country
@@ -527,7 +571,7 @@ function card(c) {
 function renderChips() {
   const counts = {};
   DATA.cars.forEach(c => counts[c.name] = (counts[c.name] || 0) + 1);
-  const names = effNames();
+  const names = state.tab === "prices" ? (state.ana ? [state.ana] : []) : effNames();
   const gm = MAN_DATA && MAN_DATA.auto_file          // one button showing the current gearbox; a tap switches
     ? `<button class="gmode ${AUTO ? "is-auto" : "is-man"}" data-gm="${AUTO ? "m" : "a"}" type="button"
         aria-label="${AUTO ? L("Showing automatic cars. Tap for manual.", "Mostrando carros automáticos. Toque para manual.")
@@ -539,6 +583,14 @@ function renderChips() {
       <span class="dot"></span>${esc(n.name)} <span class="n">${nf(counts[n.name] || 0)}</span></button>`).join("");
 }
 function render() {
+  paintTabs();
+  if (state.tab === "prices") {                // market analysis of the chosen model (or all models)
+    LOCAL = null; LIST = []; SHOWN = 0;
+    renderChips();
+    $("#list").innerHTML = pricesView();
+    save();
+    return;
+  }
   const cars = filtered();
   $("#sortScore").setAttribute("aria-pressed", state.sort === "score");
   $("#sortPrice").setAttribute("aria-pressed", state.sort === "price");
@@ -956,6 +1008,9 @@ function paintStatic() {                       // fixed page text, in the store'
   $("#dirBtn").setAttribute("aria-label", L("Sort direction", "Direção da ordem"));
   document.querySelector(".seg").setAttribute("aria-label", L("Sort by", "Ordenar por"));
   $("#chips").setAttribute("aria-label", L("Car", "Carro"));
+  $("#tabList").textContent = L("Listings", "Anúncios");
+  $("#tabPrices").textContent = L("Prices", "Preços");
+  document.querySelector(".tabs").setAttribute("aria-label", L("View", "Visão"));
 }
 function switchCountry() {
   save();
@@ -968,6 +1023,341 @@ function switchCountry() {
   boot();
 }
 
+// ---------- prices tab: market analysis per model ----------
+const qtl = (v, p) => {
+  const s = v.filter(x => x != null && !Number.isNaN(x)).sort((a, b) => a - b);
+  if (!s.length) return null;
+  const i = (s.length - 1) * p, lo = Math.floor(i), hi = Math.min(lo + 1, s.length - 1);
+  return s[lo] + (s[hi] - s[lo]) * (i - lo);
+};
+const medv = v => qtl(v, .5);
+const pctTxt = (x, digits = 0) => (Math.round(Math.abs(x) * 10 ** (digits + 2)) === 0 ? "" : x > 0 ? "+" : "−") + dec(Math.abs(x * 100), digits) + "%";
+const pctAbs = x => dec(Math.abs(x * 100), 0) + "%";    // "6%" when the words say the direction
+const kmTick = v => v >= 1000 ? dec(v / 1000, 0) + L("k", " mil") : String(v);
+const fmtShort = iso => fmtDate(iso, false);
+function niceDomain(lo, hi, n = 4) {            // round ends and ticks for an axis
+  if (hi <= lo) hi = lo + 1;
+  const raw = (hi - lo) / n, p = 10 ** Math.floor(Math.log10(raw)), m = raw / p;
+  const step = (m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10) * p;
+  const a = Math.floor(lo / step) * step, b = Math.ceil(hi / step) * step, t = [];
+  for (let v = a; v <= b + step / 2; v += step) t.push(Math.round(v * 1e6) / 1e6);
+  return [a, b, t];
+}
+const YEAR_RAMP = ["#1c5cab", "#2a78d6", "#5598e7", "#86b6ef", "#b7d3f6"];   // older -> newer (lighter on the dark surface)
+const yearColor = (y, lo, hi) => hi <= lo ? YEAR_RAMP[2] : YEAR_RAMP[Math.round((y - lo) / (hi - lo) * (YEAR_RAMP.length - 1))];
+const VIZ = {blue: "#3987e5", red: "#e66767", grid: "#29313c", fair: "#8d97a5"};
+const mkOf = name => {
+  const n = DATA.names.find(x => x.name === name);
+  return n ? n.family + (AUTO ? "|auto" : "") : null;
+};
+const sinceTxt = () => DATA.baseline ? fmtDate(DATA.baseline) : "";
+const siteDays = cars => cars.filter(c => c.days_src === "site" && c.days != null).map(c => c.days);   // real listing dates only
+const fence = v => {                             // axis range that ignores a few extreme values
+  const a = qtl(v, .25), b = qtl(v, .75), r = (b - a) || Math.abs(b) * .1 || 1;
+  return [Math.max(qtl(v, 0), a - 2.5 * r), Math.min(qtl(v, 1), b + 2.5 * r)];
+};
+const thin = (ts, max = 4) => ts.length <= max ? ts : ts.filter((_, i) => i % Math.ceil(ts.length / max) === 0);
+let ANA = {};                                    // tap targets of the charts on screen
+
+function anaSection(title, sub, body) {
+  return `<section class="ana"><h2>${title}</h2>${sub ? `<p class="sub">${sub}</p>` : ""}${body}</section>`;
+}
+function carRow(c, extra) {
+  return `<li><button type="button" data-car="${esc(c.id)}"><span>${esc([c.year, c.trim].filter(Boolean).join(" "))}, ${kmFmt(c.km)}</span>
+    <b>${money(c.price)}</b><span class="m wide">${esc(c.place || "")}${c.place && extra ? ": " : ""}${extra}</span></button></li>`;
+}
+function dealTxt(vs) {
+  return vs == null ? "" : vs > .02 ? `${Math.round(vs * 100)}% ${L("under fair", "abaixo do justo")}`
+       : vs < -.02 ? `${Math.round(-vs * 100)}% ${L("over fair", "acima do justo")}` : L("about fair", "preço justo");
+}
+
+// KPI tiles
+function kpis(cars) {
+  const prices = cars.map(c => c.price), kms = cars.map(c => c.km), days = siteDays(cars);
+  const weekAgo = new Date(Date.now() - 7 * DAY).toISOString().slice(0, 10);
+  const fresh = cars.filter(c => c.first_seen > (DATA.baseline || "") && c.first_seen >= weekAgo).length;
+  const tracked7 = DATA.baseline && DATA.baseline <= weekAgo;
+  const old60 = days.length ? days.filter(v => v > 60).length / days.length : null;
+  const tile = (label, value, note) => `<div class="kpi"><small>${label}</small><b>${value}</b><span>${note}</span></div>`;
+  return `<div class="kpis">
+    ${tile(L("On sale", "À venda"), nf(cars.length), tracked7 ? L(`${fresh} new in 7 days`, `${fresh} ${fresh === 1 ? "novo" : "novos"} em 7 dias`) : L(`tracked since ${sinceTxt()}`, `acompanhando desde ${sinceTxt()}`))}
+    ${tile(L("Median price", "Preço mediano"), money(medv(prices)), `${L("middle half", "metade central")}: ${kShort(qtl(prices, .25))} – ${kShort(qtl(prices, .75))}`)}
+    ${tile(L("Median km", "Km mediano"), kmFmt(Math.round(medv(kms) ?? 0)), `${L("middle half", "metade central")}: ${kmTick(Math.round(qtl(kms, .25) ?? 0))} – ${kmFmt(Math.round(qtl(kms, .75) ?? 0))}`)}
+    ${tile(L("Median time listed", "Tempo anunciado (mediana)"), days.length ? `${Math.round(medv(days))} ${L("days", "dias")}` : "–",
+           old60 != null ? L(`${Math.round(old60 * 100)}% over 60 days`, `${Math.round(old60 * 100)}% há mais de 60 dias`)
+                         : L("no listing dates on these sites", "os sites não mostram a data"))}
+  </div>`;
+}
+
+// Price against km, coloured by year, with the fair-price line for the typical year
+function scatter(cars, mk) {
+  const pts = cars.filter(c => c.km != null && c.price);
+  if (pts.length < 4) return "";
+  const W = 340, H = 236, PL = 54, PR = 10, PT = 10, PB = 26;
+  const [x0, x1, tx] = niceDomain(0, fence(pts.map(c => c.km))[1], 4);
+  const [y0, y1, ty] = niceDomain(...fence(pts.map(c => c.price)), 4);
+  const X = v => PL + (v - x0) / (x1 - x0) * (W - PL - PR), Y = v => PT + (y1 - v) / (y1 - y0) * (H - PT - PB);
+  const years = pts.map(c => c.year).filter(Boolean), ylo = Math.min(...years), yhi = Math.max(...years);
+  const shown = pts.filter(c => c.km >= x0 && c.km <= x1 && c.price >= y0 && c.price <= y1).sort((a, b) => (a.year || 0) - (b.year || 0));
+  const r = shown.length > 500 ? 3 : 4;
+  ANA.scatter = shown.map(c => ({id: c.id, x: X(c.km), y: Y(c.price)}));
+  const m = DATA.market?.[mk]?.model, yr = Math.round(medv(years));
+  const convShare = pts.filter(c => c.body === "conv").length / pts.length;
+  let fair = "";
+  if (m) {
+    const f = km => Math.exp(m[0] + m[1] * km / 1e4 + m[2] * (yr - 2000) + (convShare > .5 ? DATA.b_conv || 0 : 0));
+    const seg = [];
+    for (let i = 0; i <= 24; i++) { const k = x0 + (x1 - x0) * i / 24, p = f(k); if (p >= y0 && p <= y1) seg.push(`${X(k).toFixed(1)},${Y(p).toFixed(1)}`); }
+    if (seg.length > 1) {
+      fair = `<polyline points="${seg.join(" ")}" fill="none" stroke="${VIZ.fair}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+    }
+  }
+  const grid = ty.map(v => `<line x1="${PL}" x2="${W - PR}" y1="${Y(v)}" y2="${Y(v)}" stroke="${VIZ.grid}"/><text x="${PL - 6}" y="${Y(v) + 4}" text-anchor="end">${kShort(v)}</text>`).join("")
+    + tx.map(v => `<text x="${X(v)}" y="${H - 8}" text-anchor="middle">${kmTick(v)}</text>`).join("");
+  const dots = shown.map((c, i) => `<circle cx="${X(c.km).toFixed(1)}" cy="${Y(c.price).toFixed(1)}" r="${r}" fill="${yearColor(c.year, ylo, yhi)}" stroke="var(--surface)" stroke-width="${r > 3 ? 2 : 1}"/>`).join("");
+  const hidden = pts.length - shown.length;
+  const ys = []; for (let y = ylo; y <= yhi; y++) ys.push(y);
+  const legend = `<div class="legend">${L("Year", "Ano")}: ${(ys.length > 6 ? [ylo, Math.round((ylo + yhi) / 2), yhi] : ys).map(y => `<i style="background:${yearColor(y, ylo, yhi)}"></i>${y}`).join(" ")}
+    ${fair ? `<span class="ln"></span>${L(`fair price for a ${yr}`, `preço justo de um ${yr}`)}` : ""}</div>`;
+  return `${legend}<svg class="viz" id="scat" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Asking price against km", "Preço pedido por km")}">
+    ${grid}${dots}${fair}<circle id="scatSel" r="7" fill="none" stroke="var(--text)" stroke-width="2" visibility="hidden"/></svg>
+    <div class="readout" id="scatOut">${L("Tap a dot to see that car.", "Toque num ponto para ver o carro.")}${hidden ? ` <span class="m">(${hidden} ${L("outside the scale", "fora da escala")})</span>` : ""}</div>`;
+}
+
+// What moves the price: km, year, convertible (from the fair-price fit)
+function movers(cars, mk) {
+  const m = DATA.market?.[mk]?.model;
+  if (!m) return "";
+  const p = medv(cars.map(c => c.price)), km = Math.exp(m[1]) - 1, yr = Math.exp(m[2]) - 1;
+  const lines = [];
+  lines.push(Math.abs(km) < .005
+    ? L(`<b>Km barely moves the asking price</b>: under 0.5% per 10,000 km. Lower km at the same price is the better buy.`,
+        `<b>A km quase não muda o preço pedido</b>: menos de 0,5% a cada 10 mil km. Km mais baixa pelo mesmo preço é o melhor negócio.`)
+    : L(`<b>Each 10,000 km more: ${pctTxt(km, 1)}</b> (about ${money(Math.abs(km * p))})`,
+        `<b>Cada 10 mil km a mais: ${pctTxt(km, 1)}</b> (cerca de ${money(Math.abs(km * p))})`));
+  lines.push(L(`<b>Each year newer: ${pctTxt(yr, 1)}</b> (about ${money(Math.abs(yr * p))})`,
+               `<b>Cada ano mais novo: ${pctTxt(yr, 1)}</b> (cerca de ${money(Math.abs(yr * p))})`));
+  if (DATA.b_conv && cars.some(c => c.body === "conv") && cars.some(c => c.body !== "conv"))
+    lines.push(L(`<b>Convertible: ${pctTxt(Math.exp(DATA.b_conv) - 1, 1)}</b> against a fixed roof`,
+                 `<b>Conversível: ${pctTxt(Math.exp(DATA.b_conv) - 1, 1)}</b> em relação ao teto fixo`));
+  return `<ul class="facts-list">${lines.map(l => `<li>${l}</li>`).join("")}</ul>`;
+}
+
+// Price by model year: middle half (bar) and median (dot)
+function byYear(cars) {
+  const g = {};
+  cars.forEach(c => { if (c.year) (g[c.year] = g[c.year] || []).push(c.price); });
+  const ys = Object.keys(g).map(Number).sort((a, b) => b - a);
+  if (ys.length < 2) return "";
+  const W = 340, RH = 28, PL = 44, PR = 104, PT = 4;
+  const all = ys.flatMap(y => [qtl(g[y], .25), qtl(g[y], .75)]);
+  const [x0, x1, tx0] = niceDomain(Math.min(...all), Math.max(...all), 3);
+  const tx = thin(tx0, 3);
+  const X = v => PL + (v - x0) / (x1 - x0) * (W - PL - PR);
+  const H = PT + ys.length * RH + 20;
+  const rows = ys.map((y, i) => {
+    const v = g[y], cy = PT + i * RH + RH / 2, a = qtl(v, .25), b = qtl(v, .75), m = medv(v);
+    return `<text x="0" y="${cy + 4}" class="vl">${y}</text>
+      ${v.length >= 3 ? `<rect x="${X(a).toFixed(1)}" y="${cy - 3}" width="${Math.max(6, X(b) - X(a)).toFixed(1)}" height="6" rx="3" fill="#1c5cab"/>` : ""}
+      <circle cx="${X(m).toFixed(1)}" cy="${cy}" r="5" fill="#b7d3f6" stroke="var(--surface)" stroke-width="2"/>
+      <text x="${W}" y="${cy + 4}" text-anchor="end"><tspan class="vl">${kShort(m)}</tspan> (${v.length})</text>`;
+  }).join("");
+  const axis = tx.map(v => `<line x1="${X(v)}" x2="${X(v)}" y1="${PT}" y2="${H - 18}" stroke="${VIZ.grid}"/><text x="${X(v)}" y="${H - 4}" text-anchor="middle">${kShort(v)}</text>`).join("");
+  return `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Price by model year", "Preço por ano-modelo")}">${axis}${rows}</svg>`;
+}
+
+// Time on the market: ads by days listed, and what old ads ask against new ones
+function timeListed(cars) {
+  const B = [[0, 15, "0–15"], [16, 30, "16–30"], [31, 60, "31–60"], [61, 90, "61–90"], [91, 180, "91–180"], [181, 1e9, "180+"]];
+  const withDays = cars.filter(c => c.days_src === "site" && c.days != null);
+  if (withDays.length < 5) return `<p class="none">${L("Too few ads show their listing date.", "Poucos anúncios mostram a data de publicação.")}</p>`;
+  const n = B.map(([a, b]) => withDays.filter(c => c.days >= a && c.days <= b).length), max = Math.max(...n, 1);
+  const W = 340, H = 150, PT = 18, PB = 22, slot = W / B.length, bw = 24;
+  const cols = B.map(([, , lab], i) => {
+    const h = n[i] / max * (H - PT - PB), x = i * slot + (slot - bw) / 2, y = H - PB - h;
+    return `${n[i] ? `<path d="M${x},${H - PB} V${y + 4} q0,-4 4,-4 h${bw - 8} q4,0 4,4 V${H - PB} Z" fill="${VIZ.blue}"/>` : ""}
+      <text x="${x + bw / 2}" y="${y - 5}" text-anchor="middle" class="vl">${n[i]}</text>
+      <text x="${x + bw / 2}" y="${H - 6}" text-anchor="middle">${lab}</text>`;
+  }).join("");
+  const fresh = withDays.filter(c => c.days <= 30 && c.vs_fair != null).map(c => -c.vs_fair);
+  const stale = withDays.filter(c => c.days > 60 && c.vs_fair != null).map(c => -c.vs_fair);
+  let note = "";
+  if (fresh.length >= 5 && stale.length >= 5) {
+    const f = medv(fresh), s = medv(stale), rel = v => Math.abs(v) < .005 ? L("about the fair price", "perto do preço justo")
+      : `${pctAbs(v)} ${v > 0 ? L("over fair", "acima do justo") : L("under fair", "abaixo do justo")}`;
+    note = `<p>${L(`Ads listed over 60 days ask ${rel(s)}; ads up to 30 days old, ${rel(f)}.`,
+                   `Anúncios com mais de 60 dias pedem ${rel(s)}; os de até 30 dias, ${rel(f)}.`)}
+      ${s - f > .02 ? L(" Older ads usually have more room to negotiate.", " Os mais antigos costumam ter mais margem para negociar.") : ""}</p>`;
+  }
+  const without = cars.length - withDays.length;
+  return `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Ads by days listed", "Anúncios por dias à venda")}">
+    <line x1="0" x2="${W}" y1="${H - PB}" y2="${H - PB}" stroke="${VIZ.grid}"/>${cols}</svg>${note}
+    ${without ? `<p class="fine">${L(`${without} ads have no listing date on their site and are left out.`,
+                                    `${without} anúncios não têm data de publicação no site e ficam de fora.`)}</p>` : ""}`;
+}
+
+// Price changes since tracking began
+function priceCuts(cars) {
+  const ch = cars.filter(c => c.hist && c.hist.length > 1);
+  const cut = ch.filter(c => c.hist.some(([, p], i) => i && p < c.hist[i - 1][1]));
+  if (!ch.length) return `<p class="none">${L(`No price changes since ${sinceTxt()}, when tracking began. They show here as sellers change prices.`,
+                                              `Nenhuma mudança de preço desde ${sinceTxt()}, quando o acompanhamento começou. Elas aparecem aqui conforme os vendedores mudam os preços.`)}</p>`;
+  const total = cut.map(c => c.price / c.hist[0][1] - 1);
+  const recent = ch.map(c => ({c, d: c.hist[c.hist.length - 1][0], from: c.hist[c.hist.length - 2][1]}))
+    .sort((a, b) => b.d.localeCompare(a.d)).slice(0, 6);
+  return `<p>${L(`<b>${cut.length} of ${cars.length} ads (${Math.round(cut.length / cars.length * 100)}%)</b> cut their price since ${sinceTxt()}`,
+                 `<b>${cut.length} de ${cars.length} anúncios (${Math.round(cut.length / cars.length * 100)}%)</b> baixaram o preço desde ${sinceTxt()}`)}${total.length
+      ? L(`, by a median ${pctTxt(medv(total), 1)}.`, `, em mediana ${pctTxt(medv(total), 1)}.`) : "."}</p>
+    <h3>${L("Latest changes", "Últimas mudanças")}</h3>
+    <ul class="rows">${recent.map(({c, d, from}) => carRow(c, `${money(from)} → ${money(c.price)} (${pctTxt(c.price / from - 1, 1)}), ${fmtShort(d)}`)).join("")}</ul>`;
+}
+
+// Weekly market: price level against today's fair price, and ads on sale (two charts, one scale each)
+function trend(mk) {
+  const w = (DATA.market?.[mk]?.weeks || []).filter(x => x[2] != null);
+  const newN = w.reduce((a, x) => a + x[3], 0), goneN = w.reduce((a, x) => a + x[4], 0);
+  const flow = L(`${newN} new ${newN === 1 ? "ad" : "ads"}, ${goneN} left`,
+                 `${newN} ${newN === 1 ? "anúncio novo" : "anúncios novos"}, ${goneN} ${goneN === 1 ? "saiu" : "saíram"}`);
+  if (w.length < 3) return `<p class="none">${L(`The weekly charts appear after 3 weeks of data. Since ${sinceTxt()}: ${flow}.`,
+                                                `Os gráficos semanais aparecem com 3 semanas de dados. Desde ${sinceTxt()}: ${flow}.`)}</p>`;
+  const W = 340, H = 130, PL = 40, PR = 44, PT = 14, PB = 22;
+  const lv = w.map(x => x[2] / w[0][2] - 1);
+  const [y0, y1, ty] = niceDomain(Math.min(...lv, 0), Math.max(...lv, 0), 3);
+  const X = i => PL + i / (w.length - 1) * (W - PL - PR), Y = v => PT + (y1 - v) / (y1 - y0) * (H - PT - PB);
+  const line = lv.map((v, i) => `${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(" ");
+  const last = lv.length - 1;
+  const lineSvg = `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Price level by week", "Nível de preço por semana")}">
+    ${ty.map(v => `<line x1="${PL}" x2="${W - PR}" y1="${Y(v)}" y2="${Y(v)}" stroke="${VIZ.grid}"/><text x="${PL - 6}" y="${Y(v) + 4}" text-anchor="end">${pctTxt(v)}</text>`).join("")}
+    <polyline points="${line}" fill="none" stroke="${VIZ.blue}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${X(last)}" cy="${Y(lv[last])}" r="4" fill="${VIZ.blue}" stroke="var(--surface)" stroke-width="2"/>
+    <text x="${X(last) + 8}" y="${Y(lv[last]) + 4}" class="vl">${pctTxt(lv[last], 1)}</text>
+    <text x="${PL}" y="${H - 5}">${fmtShort(w[0][0])}</text><text x="${W - PR}" y="${H - 5}" text-anchor="end">${fmtShort(w[last][0])}</text></svg>`;
+  const n = w.map(x => x[1]), nmax = Math.max(...n, 1), slot = (W - PL - PR) / w.length, bw = Math.min(24, slot - 2);
+  const cols = `<svg class="viz" viewBox="0 0 ${W} 96" role="img" aria-label="${L("Ads on sale by week", "Anúncios à venda por semana")}">
+    <line x1="${PL}" x2="${W - PR}" y1="74" y2="74" stroke="${VIZ.grid}"/>
+    ${n.map((v, i) => { const h = v / nmax * 58, x = PL + i * slot + (slot - bw) / 2;
+      return `<path d="M${x},74 V${74 - h + 3} q0,-3 3,-3 h${bw - 6} q3,0 3,3 V74 Z" fill="${VIZ.blue}"/>`; }).join("")}
+    <text x="${PL + slot / 2}" y="90" text-anchor="middle">${n[0]}</text><text x="${PL + (w.length - .5) * slot}" y="90" text-anchor="middle" class="vl">${n[last]}</text></svg>`;
+  return `<h3>${L("Asking prices against today's fair price, change since the first week", "Preço pedido em relação ao justo de hoje, variação desde a 1ª semana")}</h3>${lineSvg}
+    <h3>${L("Ads on sale each week", "Anúncios à venda por semana")}</h3>${cols}
+    <p class="fine">${L(`Since ${sinceTxt()}: ${flow}.`, `Desde ${sinceTxt()}: ${flow}.`)}</p>`;
+}
+
+// Ads that left (often sold)
+function leftMarket(cars, mk) {
+  const g = DATA.market?.[mk]?.gone;
+  if (!g || !g.n) return `<p class="none">${L(`None has left yet since ${sinceTxt()}.`, `Nenhum saiu ainda desde ${sinceTxt()}.`)}</p>`;
+  const act = medv(cars.filter(c => c.vs_fair != null).map(c => -c.vs_fair));
+  const rel = v => v == null ? "" : Math.abs(v) < .005 ? L("about the fair price", "perto do preço justo")
+    : `${pctAbs(v)} ${v > 0 ? L("over fair", "acima do justo") : L("under fair", "abaixo do justo")}`;
+  return `<p>${L(`<b>${g.n} left</b> in the last 90 days`, `<b>${g.n} ${g.n === 1 ? "saiu" : "saíram"}</b> nos últimos 90 dias`)}${g.days != null
+      ? L(`, after a median ${g.days} days on sale`, `, depois de ${g.days} ${g.days === 1 ? "dia" : "dias"} à venda (mediana)`) : ""}.</p>
+    ${g.idx != null ? `<p>${L(`They were asking ${rel(g.idx - 1)}; the ads still on sale ask ${rel(act)}.`,
+                               `Eles pediam ${rel(g.idx - 1)}; os que continuam à venda pedem ${rel(act)}.`)}</p>` : ""}
+    ${g.cut_share ? `<p>${L(`${Math.round(g.cut_share * 100)}% had cut their price first${g.cut != null ? `, by a median ${pctTxt(g.cut, 1)}` : ""}.`,
+                            `${Math.round(g.cut_share * 100)}% tinham baixado o preço antes${g.cut != null ? `, em mediana ${pctTxt(g.cut, 1)}` : ""}.`)}</p>` : ""}`;
+}
+
+// Price level by state for this model (Brazil): diverging bars around the national fair price
+function divBars(rows, label) {                  // rows: [name, value (fraction), n]
+  if (!rows.length) return "";
+  const W = 340, RH = 26, PL = 78, PR = 48, H = rows.length * RH + 6;
+  const lim = Math.max(.05, ...rows.map(r => Math.abs(r[1])));
+  const mid = PL + (W - PL - PR) / 2, half = (W - PL - PR) / 2;
+  const bars = rows.map(([nm, v, n], i) => {
+    const cy = 3 + i * RH + RH / 2, w = Math.abs(v) / lim * half, x = v < 0 ? mid - w : mid;
+    return `<text x="0" y="${cy + 4}" class="vl">${esc(nm)}</text><text x="${PL - 8}" y="${cy + 4}" text-anchor="end">${nf(n)}</text>
+      ${w >= 1 ? `<rect x="${x.toFixed(1)}" y="${cy - 6}" width="${w.toFixed(1)}" height="12" rx="3" fill="${v < 0 ? VIZ.blue : VIZ.red}"/>` : ""}
+      <text x="${W}" y="${cy + 4}" text-anchor="end" class="vl">${pctTxt(v)}</text>`;
+  }).join("");
+  return `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="${label}"><line x1="${mid}" x2="${mid}" y1="0" y2="${H}" stroke="${VIZ.fair}"/>${bars}</svg>
+    <div class="legend"><i style="background:${VIZ.blue};border-radius:2px"></i>${L("cheaper than the national level", "mais barato que a média do Brasil")}
+      <i style="background:${VIZ.red};border-radius:2px;margin-left:8px"></i>${L("more expensive", "mais caro")}</div>`;
+}
+function byState(cars) {
+  if (!DATA.areas) return "";
+  const g = {};
+  cars.forEach(c => { const uf = (c.place || "").split(",").pop().trim(); if (uf && c.vs_fair != null) (g[uf] = g[uf] || []).push(1 / (1 - c.vs_fair) - 1); });
+  const rows = Object.entries(g).filter(([, v]) => v.length >= 5).map(([uf, v]) => [uf, medv(v), v.length]).sort((a, b) => b[2] - a[2]).slice(0, 10);
+  if (rows.length < 2) return "";
+  return anaSection(L("By state", "Por estado"), L("Median asking price against the national fair price, same year and km. States with 5+ ads; the number is how many.",
+      "Preço pedido mediano em relação ao preço justo do Brasil, mesmo ano e km. Estados com 5+ anúncios; o número é quantos."),
+    divBars(rows, L("Price by state", "Preço por estado")));
+}
+
+function bestDeals(cars, name) {
+  const top = cars.filter(c => c.vs_fair != null).sort((a, b) => (b.score ?? 0) - (a.score ?? 0) || b.vs_fair - a.vs_fair).slice(0, 3);
+  if (!top.length) return "";
+  return anaSection(L("Best deals now", "Melhores negócios agora"), L("Highest scores, national fair price.", "Maiores notas, preço justo do Brasil."),
+    `<ul class="rows">${top.map(c => carRow(c, `${L("score", "nota")} ${scoreTxt(c.score)}, ${dealTxt(c.vs_fair)}`)).join("")}</ul>
+     <button class="linkbtn" type="button" data-golist="${esc(name)}">${L("See all in the list, best deals first", "Ver todos na lista, melhores negócios primeiro")}</button>`);
+}
+
+// "All": one row per model, and the price level by state for every model together
+function overview() {
+  const rows = DATA.names.map(n => {
+    const cs = DATA.cars.filter(c => c.name === n.name);
+    const days = siteDays(cs);
+    const cut = cs.filter(c => c.hist && c.hist.some(([, p], i) => i && p < c.hist[i - 1][1])).length;
+    return `<tr data-ana="${esc(n.name)}"><td><span class="dot" style="--c:${n.color}"></span>${esc(n.name)}</td><td>${nf(cs.length)}</td>
+      <td>${kShort(medv(cs.map(c => c.price)))}</td><td>${days.length ? Math.round(medv(days)) : "–"}</td><td>${cs.length ? Math.round(cut / cs.length * 100) + "%" : "–"}</td></tr>`;
+  }).join("");
+  let html = anaSection(L("All models", "Todos os modelos"), L("Tap a model for its full analysis.", "Toque num modelo para ver a análise completa."),
+    `<table class="otab"><thead><tr><th>${L("Model", "Modelo")}</th><th>${L("Ads", "Anúncios")}</th><th>${L("Median", "Mediana")}</th>
+      <th>${L("Days", "Dias")}</th><th>${L("Cut price", "Baixaram")}</th></tr></thead><tbody>${rows}</tbody></table>
+     <p class="fine">${L("Median asking price and median days listed (ads with a site date only). Cut price: share of ads that lowered their price since", "Preço pedido mediano e dias anunciado (mediana, só anúncios com data no site). Baixaram: parte dos anúncios que reduziram o preço desde")} ${sinceTxt()}.</p>`);
+  const A = DATA.areas;
+  if (A) {
+    const st = Object.entries(A.uf).filter(([, [, n]]) => n >= 10).map(([uf, [lv, n]]) => [uf, Math.exp(lv) - 1, n]).sort((a, b) => a[1] - b[1]);
+    html += anaSection(L("Price level by state", "Nível de preço por estado"),
+      L("All models, manual and automatic, against the national fair price for the same model, km and year. States with 10+ ads; the number is how many.",
+        "Todos os modelos, manuais e automáticos, em relação ao preço justo do Brasil para o mesmo modelo, km e ano. Estados com 10+ anúncios; o número é quantos."),
+      divBars(st, L("Price level by state", "Nível de preço por estado")));
+  }
+  return html;
+}
+
+function pricesView() {
+  ANA = {};
+  const name = DATA.names.some(n => n.name === state.ana) ? state.ana : "";
+  if (!name) return overview();
+  const cars = DATA.cars.filter(c => c.name === name), mk = mkOf(name);
+  const gear = AUTO ? L(" (automatic)", " (automático)") : "";
+  return kpis(cars)
+    + anaSection(L("Price against km", "Preço por km") + gear, L("Each dot is an ad on sale. The line is the fair price the score uses.",
+        "Cada ponto é um anúncio à venda. A linha é o preço justo que a nota usa."), scatter(cars, mk))
+    + anaSection(L("What moves the price", "O que muda o preço"), L("From all ads of this model, comparing like with like.",
+        "A partir de todos os anúncios deste modelo, comparando carros equivalentes."), movers(cars, mk))
+    + anaSection(L("Price by year", "Preço por ano"), L("Dot: median asking price. Bar: the middle half of the ads. In brackets: how many.",
+        "Ponto: preço pedido mediano. Barra: a metade central dos anúncios. Entre parênteses: quantos."), byYear(cars))
+    + anaSection(L("Time on sale", "Tempo à venda"), L("Ads by days since they went up.", "Anúncios por dias desde a publicação."), timeListed(cars))
+    + anaSection(L("Price changes", "Mudanças de preço"), "", priceCuts(cars))
+    + anaSection(L("Market week by week", "Mercado semana a semana"), "", trend(mk))
+    + anaSection(L("Ads that left", "Anúncios que saíram"), L("Ads that disappeared from the sites, often because they sold.",
+        "Anúncios que sumiram dos sites, muitas vezes porque foram vendidos."), leftMarket(cars, mk))
+    + byState(cars) + bestDeals(cars, name);
+}
+function scatTap(e) {
+  const svg = $("#scat");
+  if (!svg || !ANA.scatter) return;
+  const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+  const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+  let best = null, bd = 24 * 24;
+  for (const s of ANA.scatter) { const d = (s.x - p.x) ** 2 + (s.y - p.y) ** 2; if (d < bd) { bd = d; best = s; } }
+  const sel = $("#scatSel");
+  if (!best) { sel.setAttribute("visibility", "hidden"); return; }
+  const c = DATA.cars.find(x => x.id === best.id);
+  sel.setAttribute("cx", best.x); sel.setAttribute("cy", best.y); sel.setAttribute("visibility", "visible");
+  $("#scatOut").innerHTML = `<span><b>${money(c.price)}</b> ${c.year ?? ""}, ${kmFmt(c.km)}<br><span class="m">${esc(dealTxt(c.vs_fair))}${c.place ? ", " + esc(c.place) : ""}</span></span>
+    <button type="button" data-car="${esc(c.id)}">${L("Details", "Detalhes")}</button>`;
+}
+function paintTabs() {
+  const pr = state.tab === "prices";
+  $("#tabList").setAttribute("aria-selected", !pr);
+  $("#tabPrices").setAttribute("aria-selected", pr);
+  document.querySelector(".top").classList.toggle("prices", pr);
+}
+
 // ---------- events ----------
 document.addEventListener("click", e => {
   const t = e.target;
@@ -976,7 +1366,18 @@ document.addEventListener("click", e => {
   if (info) { e.stopPropagation(); return detailSheet(DATA.cars.find(c => c.id === info.dataset.info)); }
   const gmb = t.closest("[data-gm]");
   if (gmb) return setAuto(gmb.dataset.gm === "a");
+  if (t.closest("#scat")) return scatTap(e);
+  const carB = t.closest("[data-car]");
+  if (carB) return detailSheet(DATA.cars.find(c => c.id === carB.dataset.car));
+  const anaRow = t.closest("[data-ana]");
+  if (anaRow) { state.ana = anaRow.dataset.ana; window.scrollTo({top: 0}); return render(); }
+  const goList = t.closest("[data-golist]");
+  if (goList) {
+    Object.assign(state, {tab: "list", names: [goList.dataset.golist], sort: "score", dir: "desc"});
+    window.scrollTo({top: 0}); return render();
+  }
   const chip = t.closest(".chip");
+  if (chip && state.tab === "prices") { state.ana = chip.dataset.name; window.scrollTo({top: 0}); return render(); }
   if (chip) {
     const n = chip.dataset.name;
     state.names = !n ? [] : state.names.includes(n) ? state.names.filter(x => x !== n) : [...state.names, n];
@@ -1013,6 +1414,14 @@ $("#dirBtn").onclick = () => { state.dir = state.dir === "asc" ? "desc" : "asc";
 $("#filtersBtn").onclick = () => filterSheet();
 $("#menuBtn").onclick = () => menuSheet();
 $("#flagBtn").onclick = () => confirmCountry();
+$("#tabList").onclick = () => { if (state.tab !== "list") { state.tab = "list"; window.scrollTo({top: 0}); render(); } };
+$("#tabPrices").onclick = () => {
+  if (state.tab === "prices") return;
+  state.tab = "prices";
+  const one = effNames();
+  if (one.length === 1) state.ana = one[0];      // coming from the list with one model picked: open that model
+  window.scrollTo({top: 0}); render();
+};
 
 function boot() {
   const want = COUNTRY;

@@ -1183,9 +1183,12 @@ def fit_fair_price(active, adj=None):
     if len(data) < 8:
         return {}, 0.0, 0.2
     fams = sorted({mkey(r) for r in data})
+    # the convertible effect can only be measured when some model is listed both as convertible and fixed roof
+    # (Brazil: one convertible, so it would just copy that model's level)
+    conv_ok = any(len({r["body"] == "conv" for r in data if mkey(r) == f}) == 2 for f in fams)
 
     def feats(r):
-        return float(r["km"]) / 1e4, float(r["year"]) - 2000, 1.0 if r["body"] == "conv" else 0.0
+        return float(r["km"]) / 1e4, float(r["year"]) - 2000, 1.0 if r["body"] == "conv" and conv_ok else 0.0
 
     use = data
     for _ in range(2):                                 # fit, drop strong outliers, refit
@@ -1410,6 +1413,67 @@ def listing_days(r, until):
     return max(0, (until - start).days), ("site" if r.get("listed") else "tracked")
 
 
+def _med(v):
+    v = sorted(x for x in v if x is not None)
+    if not v:
+        return None
+    m = len(v)
+    return v[m // 2] if m % 2 else (v[m // 2 - 1] + v[m // 2]) / 2
+
+
+def market_stats(rows, model, b_conv, today):
+    """Per fair-price group (model, + '|auto' for automatics), for the app's Prices tab:
+    model: [level, km slope, year slope, cars] of the national fair-price fit (log price);
+    weeks: [day, ads on sale, median price / fair price, new that week, gone that week] from the first tracked day;
+    gone: ads that left in the last 90 days (often sold): count, median days listed, median last price / fair,
+          share that had cut their price, median total cut."""
+    live = [r for r in rows if r["status"] in ("active", "gone") and r["price"] and d(r["first_seen"])]
+    if not live:
+        return {}
+    start = min(d(r["first_seen"]) for r in live)
+    days = [start + dt.timedelta(days=7 * k) for k in range((today - start).days // 7 + 1)]
+    if days[-1] < today:
+        days.append(today)
+    area = (AREAS or {}).get("uf", {})
+
+    def idx(r, price):                                   # asking price / fair price (national, state-corrected)
+        lf = log_fair(model, b_conv, r)
+        if lf is None:
+            return None
+        return price / math.exp(lf + (area.get(area_of(r), [0.0])[0] if area else 0.0))
+
+    def price_on(r, day):
+        pts = [(d(x), p) for x, p in hist_points(r.get("price_hist"))]
+        before = [p for x, p in pts if x and x <= day]
+        return before[-1] if before else (pts[0][1] if pts else int(r["price"]))
+
+    out = {}
+    for key in sorted({mkey(r) for r in live}):
+        rs = [r for r in live if mkey(r) == key]
+        weeks, prev = [], None
+        for day in days:
+            on = [r for r in rs if d(r["first_seen"]) <= day and (r["status"] == "active" or d(r["last_seen"]) >= day)]
+            ix = [idx(r, price_on(r, day)) for r in on]
+            new = sum(1 for r in rs if prev and prev < d(r["first_seen"]) <= day)
+            gone = sum(1 for r in rs if r["status"] == "gone" and prev and prev < d(r["last_seen"]) <= day)
+            m = _med(ix)
+            weeks.append([day.isoformat(), len(on), round(m, 4) if m else None, new, gone])
+            prev = day
+        left = [r for r in rs if r["status"] == "gone" and d(r["last_seen"]) and (today - d(r["last_seen"])).days <= 90]
+        cuts = []
+        for r in left:
+            pts = [p for _, p in hist_points(r.get("price_hist"))]
+            cuts.append(pts[-1] / pts[0] - 1 if len(pts) > 1 and min(pts[1:]) < pts[0] else None)
+        m = model.get(key)
+        gi, gd = _med([idx(r, int(r["price"])) for r in left]), _med([listing_days(r, d(r["last_seen"]))[0] for r in left])
+        gc = _med([c for c in cuts if c is not None])
+        out[key] = {"model": [round(m[0], 5), round(m[1], 5), round(m[2], 5), m[3]] if m else None, "weeks": weeks,
+                    "gone": {"n": len(left), "days": gd, "idx": round(gi, 4) if gi else None,
+                             "cut_share": round(sum(c is not None for c in cuts) / len(left), 3) if left else None,
+                             "cut": round(gc, 4) if gc is not None else None}}
+    return out
+
+
 def export_json(rows, path, run_info=None, stats=None, comps=None):
     """cars.json for the web app: every active car with its cues, score, flags, price history and sold comps."""
     today = dt.date.today()
@@ -1476,6 +1540,7 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
         "names": [n for n in names.values() if any(c["name"] == n["name"] for c in cars)],
         "score": {**SCORE, **model_info}, "run": run_info or [],
         "areas": AREAS or None,
+        "market": market_stats(rows, model, b_conv, today), "b_conv": round(b_conv, 5),
         "searches": [{"source": s, "url": u, "ads": n} for s, u, n in (stats or {}).get("searches", [])],
         "cars": cars,
         "auto_file": os.path.basename(auto_path) if autos else None, "auto_count": len(autos),

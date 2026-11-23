@@ -76,3 +76,13 @@ and sorting. The details show both prices. Settings: `K_AREA` and `AREA_CLIP` in
 Automatics are priced only against automatics and lose no points for the gearbox. Clutch flags ("Clutch done",
 "Clutch slipping") only apply to manuals; "Gearbox serviced" and "Gearbox problem" apply to both. Ads read before
 these flags existed are checked again from their stored text on every run.
+
+### Prices tab
+
+The second tab under the title analyses the market for the model chosen in the chips (All: a table of every model
+and, in Brazil, the price level by state). Per model: headline numbers, price against km with the fair-price line,
+what moves the price (km, year, convertible, from the fair-price fit), price by year, time on sale (ads with a site
+listing date only), price changes, the weekly market (shown after 3 weeks of data), ads that left, by state (Brazil)
+and the best deals. The Manual/Automatic button switches the analysis too. The collector exports what the app can't
+work out from the cars on sale: `market` (per model: fit numbers, weekly ads on sale and price level, stats on ads
+that left) and `b_conv`. The convertible effect is only measured when a model is listed both ways.
