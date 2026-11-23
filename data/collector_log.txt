@@ -18,3 +18,4 @@
 2026-11-23 18:04 active=170 gone=28 {'checked': 0, 'failed': 0, 'gone': 0, 'back': 0, 'price_changes': 0, 'candidates': 0, 'new': 0, 'skipped': 0, 'photos_new': 0, 'comps_new': 0, 'comps_pages': 0, 'comps_total': 1540} searches=[]
 2026-11-23 18:58 active=170 gone=28 {'checked': 0, 'failed': 0, 'gone': 0, 'back': 0, 'price_changes': 0, 'candidates': 0, 'new': 0, 'skipped': 0, 'photos_new': 0, 'comps_new': 0, 'comps_pages': 0, 'comps_total': 1540} searches=[]
 2026-11-23 19:20 active=170 gone=28 {'checked': 0, 'failed': 0, 'gone': 0, 'back': 0, 'price_changes': 0, 'candidates': 0, 'new': 0, 'skipped': 0, 'photos_new': 0, 'comps_new': 0, 'comps_pages': 0, 'comps_total': 1540} searches=[]
+2026-11-23 19:32 active=170 gone=28 {'checked': 0, 'failed': 0, 'gone': 0, 'back': 0, 'price_changes': 0, 'candidates': 0, 'new': 0, 'skipped': 0, 'photos_new': 0, 'comps_new': 0, 'comps_pages': 0, 'comps_total': 1540} searches=[]
