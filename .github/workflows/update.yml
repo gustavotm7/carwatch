@@ -43,7 +43,7 @@ jobs:
         run: |
           python -u collector/car_collector.py --config cars_config_br.json --data-dir data_br \
             --export-json site/data/cars_br.json --no-xlsx --no-photos --keep-snapshots 14 \
-            --max-new 200 --no-comps $ARGS
+            --max-new 400 --no-comps $ARGS
       - name: Save data
         run: |
           git config user.name "carwatch-bot"

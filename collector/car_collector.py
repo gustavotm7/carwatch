@@ -244,11 +244,16 @@ def classify(model, year, body):
 def classify_trans(family: str, field: str, desc: str) -> str:
     """m = manual confirmed, c = field and text disagree, u = unconfirmed, a = automatic/unknown (skipped)."""
     f, d = (field or "").lower(), (desc or "").lower()
+    d = re.sub(r"manual (e|do|da|de) (chave|propriet\w*|dono|instru\w*|revis\w*)|manuais|piloto autom\u00e1tico|"
+               r"ar(-| )condicionado autom\u00e1tico|climatizador autom\u00e1tico|far(o|\u00f3)is autom\u00e1ticos", " ", d)
+    pt_auto = bool(re.search(r"c[a\u00e2]mbio:?\s*(autom|cvt)|autom[a\u00e1]tic[oa] de \d marchas|transmiss[a\u00e3]o autom", d))
+    pt_man = bool(re.search(r"c[a\u00e2]mbio:?\s*(manual|mec)|manual de [456] marchas|transmiss[a\u00e3]o manual", d))
+    if pt_auto and not pt_man:
+        return "a"                                      # Brazil: the seller says automatic, the data field is often wrong
     auto_w = r"auto|smg|dct|dkg|steptronic|sequential|dual|cvt|tiptronic"      # 'Autom\u00e1tico/Automatizado' too
     field_a = bool(re.search(auto_w, f))
     field_m = bool(re.search(r"manual|manuel|stick|6[- ]?spd|6mt", f)) and not field_a
-    text_m = bool(re.search(r"6[- ]?speed manual|\b6[- ]?spd\b|\b6mt\b|\bmanual\b|\bmanuel+e?\b|\bstick\b|three[- ]pedal"
-                            r"|c\u00e2mbio manual|cambio manual|\bmec\u00e2nico\b|\bmecanico\b", d))
+    text_m = bool(re.search(r"6[- ]?speed manual|\b6[- ]?spd\b|\b6mt\b|\bmanual\b|\bmanuel+e?\b|\bstick\b|three[- ]pedal", d)) or pt_man
     text_a = bool(re.search(r"\bsmg\b|steptronic|\bautomatic\b|\bautomatique\b|\bdct\b|\bdkg\b|tiptronic|paddle"
                             r"|c\u00e2mbio autom|cambio autom|\bautom\u00e1tic[oa]\b|\bautomatizad[oa]\b|\bcvt\b", d))
     if field_m and text_a:
@@ -879,7 +884,7 @@ def search_ids(sess, known, stats):
                 seen_here |= fresh
                 for lid in set(page_ids) - set(found):
                     if lid not in known:
-                        found.setdefault(lid, (source, page_ids[lid]))
+                        found.setdefault(lid, (source, page_ids[lid], len(stats["searches"])))
                 continue
             fresh = set(page_ids) - seen_here
             if not fresh:
@@ -887,7 +892,7 @@ def search_ids(sess, known, stats):
             seen_here |= fresh
             for lid in fresh:
                 if lid not in known:
-                    found.setdefault(lid, (source, page_ids[lid]))
+                    found.setdefault(lid, (source, page_ids[lid], len(stats["searches"])))
         stats["searches"].append((source, base, status or len(seen_here)))
     return found
 
@@ -897,7 +902,15 @@ def discover_new(sess, rows, today, stats, max_new):
     found = search_ids(sess, known, stats)
     stats["candidates"] = len(found)
     added, skipped = [], []
-    for lid, (source, url) in list(found.items())[:max_new]:
+    queues = {}
+    for lid, (source, url, n) in found.items():
+        queues.setdefault(n, []).append((lid, source, url))
+    order = []
+    while any(queues.values()):                          # one ad from each search in turn: the cap is shared fairly
+        for n in sorted(queues):
+            if queues[n]:
+                order.append(queues[n].pop(0))
+    for lid, source, url in order[:max_new]:
         r = fetch(sess, url)
         if r is None or r.status_code != 200:
             continue
@@ -909,6 +922,8 @@ def discover_new(sess, rows, today, stats, max_new):
             reason = "not one of the cars on the list"
         elif info.get("price") is None or info.get("km") is None or info["price"] < MIN_PRICE:
             reason = "price or km not readable"
+        elif info["km"] < 500 or (dt.date.today().year - (info.get("year") or 0) >= 5 and info["km"] < 5000):
+            reason = f"km not real ({info['km']} km on a {info.get('year')})"
         if not reason:
             body = fix_body(key, body_of(info.get("body_raw", ""), slug + " " + info.get("title", "")),
                             slug + " " + info.get("title", ""))
