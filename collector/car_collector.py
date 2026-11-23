@@ -1131,7 +1131,7 @@ def photo_big(row):
         if not p:
             continue
         if p.startswith("http"):
-            out.append(p)
+            out.append(re.sub(r",w_\d+$", ",w_1080", p) if "mobiauto.com.br" in p else p)   # Mobiauto: sharper size
         else:
             stem, ext = (p.rsplit(".", 1) if "." in p else (p, "jpg"))
             out.append(f"{PHOTO_BASE}{stem}.{ext}/1280x960.webp")
