@@ -39,7 +39,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .flag-btn:hover .cflag{box-shadow:0 0 0 1px rgba(255,255,255,.35)}
 .flag-btn:active .cflag{transform:scale(.94)}
 .cflag{height:.72em;width:auto;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.12);display:block;transition:transform .12s}
-.others{display:flex;align-items:center;gap:12px;margin:0 0 14px;padding:12px 14px;border-radius:14px;
+.others{grid-column:1/-1;display:flex;align-items:center;gap:12px;margin:0 0 14px;padding:12px 14px;border-radius:14px;
   background:var(--card);border:1px solid var(--line);font-size:14px;color:var(--muted)}
 .others b{color:var(--text);font-weight:600}
 .others button{margin-left:auto;padding:8px 14px;border-radius:999px;background:var(--raised);color:var(--text);font-weight:600;white-space:nowrap}
@@ -70,6 +70,21 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .chip{flex:none;display:flex;align-items:center;gap:7px;padding:7px 12px 7px 10px;border-radius:999px;
   border:1px solid var(--line);background:var(--surface);color:var(--muted);font:600 15px/1 var(--cond);letter-spacing:.02em}
 .chip .dot{width:10px;height:10px;border-radius:50%;background:var(--c,#888)}
+.gmode{flex:none;display:flex;position:sticky;left:0;z-index:2;padding:3px;border-radius:999px;border:1px solid var(--line);
+  background:var(--surface);box-shadow:-14px 0 0 #10141a,10px 0 12px -6px #10141a}
+.gmode button{padding:6px 12px;border-radius:999px;font:600 15px/1 var(--cond);letter-spacing:.02em;color:var(--muted)}
+.gmode button[aria-pressed=true]{background:var(--text);color:var(--bg)}
+.gmode button.auto[aria-pressed=true]{background:#f0b23e;color:#1d1505}
+.top.auto-on{border-bottom:2px solid #f0b23e}
+.auto-note{grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:14px;font-size:14px;
+  background:rgba(240,178,62,.12);border:1px solid rgba(240,178,62,.45);color:#ffd27e}
+.auto-note b{color:#ffe2a6}
+.auto-note button{margin-left:auto;padding:8px 14px;border-radius:999px;background:#f0b23e;color:#1d1505;font-weight:600;white-space:nowrap}
+.fact.gb-a{background:rgba(240,178,62,.10);color:#ffd27e;border-color:rgba(240,178,62,.3)}
+.confirm{display:grid;gap:10px;margin-top:20px}
+.confirm button{padding:14px;border-radius:12px;font:600 16px/1 var(--sans);background:var(--raised);color:var(--text)}
+.confirm .primary{background:var(--text);color:var(--bg)}
+#more{grid-column:1/-1;height:1px}
 .chip .n{font:500 12px/1 var(--sans);color:var(--dim)}
 .chip[aria-pressed=true]{color:var(--text);border-color:var(--c,#cfd6df);background:color-mix(in srgb,var(--c,#cfd6df) 18%,var(--surface))}
 .chip[aria-pressed=true] .n{color:var(--muted)}
@@ -246,11 +261,12 @@ const FLAGS = {
   BR: `<svg class="cflag" viewBox="0 0 720 504" role="img" aria-label="Brazil"><path fill="#009c3b" d="M0 0h720v504H0z"/><path fill="#ffdf00" d="M61 252 360 61l299 191-299 191z"/><circle cx="360" cy="252" r="126" fill="#002776"/><clipPath id="brc"><circle cx="360" cy="252" r="126"/></clipPath><path clip-path="url(#brc)" d="M230 222c90-20 180-6 262 44" fill="none" stroke="#fff" stroke-width="20"/></svg>`,
 };
 const COUNTRIES = {
-  CA: {name: "Canada", file: "data/cars.json", sym: "$", locale: "en-CA", next: "BR"},
-  BR: {name: "Brazil", file: "data/cars_br.json", sym: "R$\u00a0", locale: "pt-BR", next: "CA"},
+  CA: {name: "Canada", adj: "Canadian", file: "data/cars.json", sym: "$", locale: "en-CA", next: "BR"},
+  BR: {name: "Brazil", adj: "Brazilian", file: "data/cars_br.json", sym: "R$\u00a0", locale: "pt-BR", next: "CA"},
 };
 let COUNTRY = (() => { try { return COUNTRIES[localStorage.getItem("cw-country")] ? localStorage.getItem("cw-country") : "CA"; } catch (e) { return "CA"; } })();
 const CUR = () => COUNTRIES[COUNTRY];
+let AUTO = false, MAN_DATA = null, AUTO_DATA = null;     // gearbox mode: always starts on manual, never saved
 const money = n => n == null ? "" : CUR().sym + Math.round(n).toLocaleString(CUR().locale);
 const kmFmt = n => n == null ? "km n/a" : (n >= 1000 ? Math.round(n / 1000) + "k km" : n + " km");
 const SITES = {
@@ -264,6 +280,7 @@ const GEARBOX = {
   m: {cls: "gb-m", label: "Manual", long: "Manual: the ad's data and the seller's text both say manual."},
   c: {cls: "gb-c", label: "Check gearbox", long: "The ad's data and the seller's text disagree (manual vs automatic/SMG). Ask the seller."},
   u: {cls: "gb-u", label: "Manual?", long: "The data says manual but the text never confirms it. These cars also came with SMG/DCT, so ask."},
+  a: {cls: "gb-a", label: "Automatic", long: "Automatic gearbox (shown only with the Automatic button on)."},
 };
 const BODY = {coupe: "Coupe", conv: "Convertible", sedan: "Sedan", wagon: "Wagon", unk: "Body n/a"};
 const HARD = ["Rebuilt title", "Salvage title"];
@@ -310,7 +327,7 @@ const fmtDate = (iso, yr = true) => asDate(iso).toLocaleDateString("en-CA", yr ?
                                                                        : {month: "short", day: "numeric"});
 const kShort = n => n >= 1000 ? CUR().sym.trim() + (n / 1000).toFixed(n >= 1e5 ? 0 : 1).replace(/\.0$/, "") + "k" : money(n);
 function daysTag(c) {
-  if (c.days == null) return "";
+  if (c.days == null || (c.days_src !== "site" && c.days < 1)) return "";
   const long = c.days >= 60;
   return `<span class="tag age${long ? " long" : ""}" title="${c.days_src === "site" ? "Days since the ad went up" : "Days since CarWatch first saw it"}">${c.days}${c.days_src === "site" ? "" : "+"} days</span>`;
 }
@@ -328,10 +345,12 @@ function ago(iso) {
 }
 
 // ---------- filtering + sorting ----------
+function effNames() { return state.names.filter(n => DATA.names.some(x => x.name === n)); }
 function filtered() {
+  const names = effNames();
   let cars = DATA.cars.filter(c =>
-    (!state.names.length || state.names.includes(c.name)) &&
-    state.gear.includes(c.trans) &&
+    (!names.length || names.includes(c.name)) &&
+    (AUTO ? c.trans === "a" : state.gear.includes(c.trans)) &&
     (!state.bodies.length || state.bodies.includes(c.body)) &&
     (!state.maxPrice || c.price <= state.maxPrice) &&
     (!state.maxKm || (c.km ?? 0) <= state.maxKm) &&
@@ -347,7 +366,7 @@ function filtered() {
 }
 function activeFilterCount() {
   let n = 0;
-  if (state.gear.length < 3) n++;
+  if (!AUTO && state.gear.length < 3) n++;
   if (state.bodies.length) n++;
   if (state.maxPrice) n++;
   if (state.maxKm) n++;
@@ -397,9 +416,12 @@ function card(c) {
 function renderChips() {
   const counts = {};
   DATA.cars.forEach(c => counts[c.name] = (counts[c.name] || 0) + 1);
-  const all = `<button class="chip" data-name="" aria-pressed="${!state.names.length}">All <span class="n">${DATA.cars.length}</span></button>`;
-  $("#chips").innerHTML = all + DATA.names.map(n =>
-    `<button class="chip" style="--c:${n.color}" data-name="${esc(n.name)}" aria-pressed="${state.names.includes(n.name)}">
+  const names = effNames();
+  const gm = MAN_DATA && MAN_DATA.auto_file
+    ? `<div class="gmode" role="group" aria-label="Gearbox"><button data-gm="m" type="button" aria-pressed="${!AUTO}">Manual</button><button class="auto" data-gm="a" type="button" aria-pressed="${AUTO}">Automatic</button></div>` : "";
+  const all = `<button class="chip" data-name="" aria-pressed="${!names.length}">All <span class="n">${DATA.cars.length}</span></button>`;
+  $("#chips").innerHTML = gm + all + DATA.names.map(n =>
+    `<button class="chip" style="--c:${n.color}" data-name="${esc(n.name)}" aria-pressed="${names.includes(n.name)}">
       <span class="dot"></span>${esc(n.name)} <span class="n">${counts[n.name] || 0}</span></button>`).join("");
 }
 function render() {
@@ -415,11 +437,29 @@ function render() {
   renderChips();
   const others = (DATA.links || []).length
     ? `<div class="others"><span><b>OLX and Webmotors</b> aren't read automatically.</span><button id="othersBtn" type="button">Search them</button></div>` : "";
-  $("#list").innerHTML = others + (cars.length
-    ? `<div class="count">${cars.length === DATA.cars.length ? `${cars.length} cars` : `${cars.length} of ${DATA.cars.length} cars`}</div>` + cars.map(card).join("")
+  const autoNote = AUTO
+    ? `<div class="auto-note" role="status"><span><b>Automatic cars only.</b> ${esc(DATA.names.map(n => n.name).join(" and "))}.</span><button data-gm="m" type="button">Back to manual</button></div>` : "";
+  const word = AUTO ? "automatic cars" : "cars";
+  $("#list").innerHTML = autoNote + others + (cars.length
+    ? `<div class="count">${cars.length === DATA.cars.length ? `${cars.length} ${word}` : `${cars.length} of ${DATA.cars.length} ${word}`}</div><div id="more"></div>`
     : `<div class="empty">No cars match these filters.<br><button id="clearAll">Clear filters</button></div>`);
+  LIST = cars; SHOWN = 0;
+  moreCards();
+  watchMore();
   save();
 }
+
+let LIST = [], SHOWN = 0;
+const BATCH = 40;                              // cards added per batch as you scroll (light on a phone)
+function moreCards() {
+  const m = $("#more");
+  if (!m || SHOWN >= LIST.length) return;
+  m.insertAdjacentHTML("beforebegin", LIST.slice(SHOWN, SHOWN + BATCH).map(card).join(""));
+  SHOWN += BATCH;
+}
+const moreObs = "IntersectionObserver" in window
+  ? new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { moreCards(); watchMore(); } }, {rootMargin: "1200px 0px"}) : null;
+function watchMore() { if (!moreObs) { while (SHOWN < LIST.length) moreCards(); return; } moreObs.disconnect(); const m = $("#more"); if (m) moreObs.observe(m); }
 
 // ---------- sheets ----------
 function openSheet(html, label) {
@@ -567,8 +607,8 @@ function filterSheet() {
   const opt = (group, val, label, on) => `<button class="opt" data-g="${group}" data-v="${val}" aria-pressed="${on}">${label}</button>`;
   openSheet(`
     <h2>Filters</h2>
-    <h3>Gearbox</h3><div class="opt-group">
-      ${opt("gear", "m", "Manual", t.gear.includes("m"))}${opt("gear", "c", "Check gearbox", t.gear.includes("c"))}${opt("gear", "u", "Manual?", t.gear.includes("u"))}</div>
+    ${AUTO ? "" : `<h3>Gearbox</h3><div class="opt-group">
+      ${opt("gear", "m", "Manual", t.gear.includes("m"))}${opt("gear", "c", "Check gearbox", t.gear.includes("c"))}${opt("gear", "u", "Manual?", t.gear.includes("u"))}</div>`}
     <h3>Body</h3><div class="opt-group">
       ${["coupe", "conv", "sedan", "wagon"].map(b => opt("body", b, BODY[b], t.bodies.includes(b))).join("")}</div>
     <h3>Highest price</h3><div class="range"><input type="range" id="fPrice" min="5000" max="${pMax}" step="1000" value="${t.maxPrice || pMax}"><output id="oPrice"></output></div>
@@ -624,7 +664,7 @@ function menuSheet() {
     </nav>
     ${gone ? `<h3>Recently sold or removed</h3><ul class="gone">${gone}</ul>` : ""}`, "Menu");
   if ($("#menuLinks")) $("#menuLinks").onclick = () => linksSheet();
-  $("#menuCountry").onclick = () => { closeSheet(); switchCountry(); };
+  $("#menuCountry").onclick = () => confirmCountry();
   $("#howScore").onclick = () => openSheet(`
     <h2>How the score works</h2>
     <p>Every car starts at ${DATA.score.base} of 10. The fair price is estimated from the other cars of the same model,
@@ -650,6 +690,32 @@ function linksSheet() {
     <div class="linkset">${groups.map(g => `<div><h3>${esc(g.model)}</h3><div class="btns">${g.links.map(l =>
       `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.site)}</a>`).join("")}</div></div>`).join("")}</div>`, "Search other sites");
 }
+function setAuto(on) {
+  if (on === AUTO || !MAN_DATA) return;
+  if (!on) { AUTO = false; DATA = MAN_DATA; return paintMode(); }
+  if (AUTO_DATA) { AUTO = true; DATA = AUTO_DATA; return paintMode(); }
+  const want = COUNTRY;
+  $("#meta").textContent = "Loading automatics…";
+  fetch("data/" + MAN_DATA.auto_file + "?" + Date.now(), {cache: "no-store"})
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(d => { if (want !== COUNTRY) return; AUTO_DATA = d; AUTO = true; DATA = d; paintMode(); })
+    .catch(err => { $("#meta").textContent = `Automatics could not be loaded (${err.message})`; });
+}
+function paintMode() {
+  document.querySelector(".top").classList.toggle("auto-on", AUTO);
+  $("#meta").textContent = `${DATA.cars.length} ${AUTO ? "automatic " : ""}cars, ${ago(DATA.updated)}`;
+  window.scrollTo({top: 0});
+  render();
+}
+function confirmCountry() {
+  const to = COUNTRIES[CUR().next];
+  openSheet(`
+    <h2>Change store?</h2>
+    <p class="sub">Are you sure you want to change to the ${to.adj} store?</p>
+    <div class="confirm"><button class="primary" id="doSwitch" type="button">Change to ${to.name}</button>
+      <button data-close type="button">Stay in ${esc(CUR().name)}</button></div>`, "Change store");
+  $("#doSwitch").onclick = () => { closeSheet(); switchCountry(); };
+}
 function paintFlag() {
   const b = $("#flagBtn");
   b.innerHTML = FLAGS[COUNTRY];
@@ -672,6 +738,8 @@ document.addEventListener("click", e => {
   if (t.closest("[data-close]") || t.id === "scrim") return closeSheet();
   const info = t.closest("[data-info]");
   if (info) { e.stopPropagation(); return detailSheet(DATA.cars.find(c => c.id === info.dataset.info)); }
+  const gmb = t.closest("[data-gm]");
+  if (gmb) return setAuto(gmb.dataset.gm === "a");
   const chip = t.closest(".chip");
   if (chip) {
     const n = chip.dataset.name;
@@ -699,11 +767,13 @@ $("#sortPrice").onclick = () => { if (state.sort !== "price") { state.sort = "pr
 $("#dirBtn").onclick = () => { state.dir = state.dir === "asc" ? "desc" : "asc"; render(); };
 $("#filtersBtn").onclick = () => filterSheet();
 $("#menuBtn").onclick = () => menuSheet();
-$("#flagBtn").onclick = () => switchCountry();
+$("#flagBtn").onclick = () => confirmCountry();
 
 function boot() {
   const want = COUNTRY;
-  DATA = null;
+  DATA = MAN_DATA = AUTO_DATA = null;
+  AUTO = false;
+  document.querySelector(".top").classList.remove("auto-on");
   $("#meta").textContent = "Loading…";
   $("#chips").innerHTML = "";
   $("#list").innerHTML = "";
@@ -711,7 +781,7 @@ function boot() {
     .then(r => { if (!r.ok) throw new Error(r.status === 404 ? "not built yet" : r.status); return r.json(); })
     .then(d => {
       if (want !== COUNTRY) return;                  // switched again while loading
-      DATA = d;
+      DATA = MAN_DATA = d;
       state.names = state.names.filter(n => d.names.some(x => x.name === n));
       $("#meta").textContent = `${d.cars.length} cars, ${ago(d.updated)}`;
       render();

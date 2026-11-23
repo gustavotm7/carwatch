@@ -32,6 +32,11 @@ filters per country). The Brazil list comes from `cars_config_br.json`, same for
 - **OLX and Webmotors** block automated reading, so each car has one-tap search links (`links` in the config),
   shown at the top of the Brazil list and in the menu.
 - Prices in R$. The score works the same way, against the other Brazilian cars of the same model.
+- Manual only, except the FB Civic and the Yaris sedan (`allow_auto` in the config): their automatics are
+  shown with the Manual | Automatic toggle at the start of the car chips. The app always opens on Manual.
+- The FA5 Civic Si is its own car (`split` in the config): own chip and its own fair price.
+- On NaPista and Mobiauto, ads seen in the day's searches are confirmed from the search data without opening
+  them; automatics are added from the search data and their pages read later for the description.
 - Brazilian years are model years (a "2010/2011" car is a 2011).
 
 ## Files

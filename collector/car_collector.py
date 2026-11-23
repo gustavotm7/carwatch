@@ -91,6 +91,11 @@ DELAY_S = 2.0                                      # pause between page requests
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) personal-car-watch/2.0"
 MAX_NEW_PER_RUN = 80                               # unseen ads opened per run
 PAGES_PER_SEARCH = 3                               # result pages read per search
+PAGES_JSON = 20                                    # NaPista / Mobiauto: their search data is read directly (stops early)
+SEARCH_SEEN = {}                                   # today's search data per ad id (NaPista / Mobiauto)
+AUTO_FOUND = {}                                    # automatics found today for families that allow them
+ALLOW_AUTO = set()                                 # families kept with automatics too (Brazil: FB Civic, Yaris sedan)
+SPLITS = {}                                        # family -> [(title regex, sub-generation)]: e.g. FA5 Civic Si apart
 GONE_RECHECK_DAYS = 7                              # keep re-checking 'gone' ads this long (they sometimes return)
 
 # Searches come from cars_config.json (per car, per site). Extra searches can be added here as (source, url).
@@ -100,7 +105,7 @@ SEARCHES = []                                       # filled by load_config()
 # Score settings: written to the Summary tab every day. Change them HERE to make a change stick.
 SCORE = {
     "base": 5.0,                       # score of a car priced exactly at its fair price
-    "gearbox": {"\u2714 Manual": 0.0, "? Unconfirmed": -0.5, "\u26A0 Conflict": -1.0},
+    "gearbox": {"\u2714 Manual": 0.0, "? Unconfirmed": -0.5, "\u26A0 Conflict": -1.0, "Automatic": 0.0},
     "red": {"Rebuilt title": -3.0, "Salvage title": -4.0, "Accident mentioned": -1.0, "Sold as-is": -1.0,
             "Needs work": -1.5, "Modified": -0.5, "Price hidden": -1.0},
     "green": {"Rod bearings done": 1.0, "Subframe reinforced": 0.5, "VANOS/timing done": 0.5,
@@ -112,7 +117,7 @@ SCORE = {
 MIN_PRICE = 1500                     # below this the ad is not showing a real price ($1 = "call us" / sale pending)
 COLS = ["listing_id", "source", "family", "gen", "name", "year", "body", "price", "km", "trans",
         "place", "url", "photo_id", "note", "first_seen", "last_seen", "prev_price", "status", "verified",
-        "trim", "red_flags", "green_flags", "flags_read", "photo_alt", "desc", "listed", "price_hist"]
+        "trim", "red_flags", "green_flags", "flags_read", "photo_alt", "desc", "listed", "price_hist", "page_read"]
 # listed: date the ad went up, as the site states it (Autotrader / Kijiji). price_hist: "date:price;date:price"
 # with one entry per price change, starting with the first price CarWatch saw.
 
@@ -177,19 +182,30 @@ def load_config(path=None):
         cfg = json.load(f)
     MODELS = [m for m in cfg["models"] if m.get("enabled", True)]
     COUNTRY.update(country=cfg.get("country", "CA"), currency=cfg.get("currency", "CAD"),
-                   links=[{"model": m["model"], "families": [g["family"] for g in m["generations"]],
+                   links=[{"model": m["model"], "families": [g["family"] for g in m["generations"]] +
+                                                        [sp["family"] for g in m["generations"] for sp in g.get("split", [])],
                            "links": [{"site": s, "url": u} for s, u in m.get("links", [])]}
                           for m in MODELS if m.get("links")])
-    FAMILY_STYLE.clear(); TRIMS.clear(); NEEDS_TEXT_CONFIRM.clear(); COMPS.clear()
+    FAMILY_STYLE.clear(); TRIMS.clear(); NEEDS_TEXT_CONFIRM.clear(); COMPS.clear(); ALLOW_AUTO.clear(); SPLITS.clear()
     searches = []
     for m in MODELS:
+        gens = []
         for g in m["generations"]:
+            gens.append(g)
+            for sp in g.get("split", []):               # a trim priced on its own (own chip, own fair price)
+                sg = {k: v for k, v in g.items() if k != "split"}
+                sg.update(sp)
+                SPLITS.setdefault(g["family"], []).append((sp["match"], sg))
+                gens.append(sg)
+        for g in gens:
             FAMILY_STYLE.setdefault(g["family"], (g.get("color", "#888888").lstrip("#").upper(), "FFFFFF",
                                                   g.get("short", g["name"]), g.get("desc", g["name"])))
             if g.get("trims"):
                 TRIMS.setdefault(g["family"], ([(rx, lab) for rx, lab in g["trims"]], bool(g.get("trim_multi"))))
             if g.get("smg_risk"):
                 NEEDS_TEXT_CONFIRM.add(g["family"])
+            if g.get("allow_auto"):
+                ALLOW_AUTO.add(g["family"])
             if g.get("comps"):
                 c = COMPS.setdefault(g["family"], {**g["comps"], "years": list(g["years"])})
                 c["years"] = [min(c["years"][0], g["years"][0]), max(c["years"][1], g["years"][1])]
@@ -588,7 +604,9 @@ def parse_listing(html):
 def _place(city, uf):
     city = (city or "").strip()
     if city.isupper():
-        city = city.title()
+        city = " ".join(w if i == 0 or w not in ("de", "da", "do", "das", "dos", "e") else w
+                        for i, w in enumerate(city.title().split()))
+        city = re.sub(r"(?<=\s)(De|Da|Do|Das|Dos|E)(?=\s)", lambda m: m.group(1).lower(), city)
     return ", ".join(x for x in (city, (uf or "").strip()) if x)
 
 
@@ -626,8 +644,11 @@ def br_ad(pp):
     return {k: v for k, v in info.items() if v not in (None, "")}
 
 
+MOBI_IMG = "https://image1.mobiauto.com.br/images/api/images/v1.0/{}/transform/fl_progressive,f_webp,q_70,w_1080"
+
+
 def br_search_items(source, html):
-    """[(ad id key, title, model year, gearbox text)] from a NaPista / Mobiauto search page (main results only)."""
+    """Ads in a NaPista / Mobiauto search page (main results only), with what a card needs."""
     m = re.search(r'(?is)<script[^>]+id=["\']__NEXT_DATA__["\'][^>]*>(.*?)</script>', html)
     if not m:
         return []
@@ -638,20 +659,43 @@ def br_search_items(source, html):
     out = []
     if source == "napista":
         for o in (pp.get("searchResult") or {}).get("offers") or []:
-            out.append((str(o.get("id")), f'{o.get("modelYear", "")} {o.get("versionName", "")}', to_int(o.get("modelYear")),
-                        str(o.get("versionName") or "")))
+            loc = o.get("location") or {}
+            ph = sorted(o.get("photos") or [], key=lambda x: x.get("order", 0))
+            out.append({"key": str(o.get("id")), "title": f'{o.get("modelYear", "")} {o.get("versionName", "")}',
+                        "year": to_int(o.get("modelYear")), "gear": str(o.get("versionName") or ""),
+                        "price": to_int(o.get("price")), "km": to_int(o.get("mileage")),
+                        "place": _place(loc.get("city"), loc.get("uf")), "body_raw": str(o.get("versionName") or ""),
+                        "photo": ph[0].get("url", "") if ph else "",
+                        "listed": str(o.get("createdDate") or "")[:10] if re.match(r"\d{4}-", str(o.get("createdDate") or "")) else ""})
     else:
         for o in (pp.get("deals") or {}).get("results") or []:
             tr = o.get("trim") or {}
+            body = (tr.get("bodystyle") or {}).get("name") or ""
             title = " ".join(str(x) for x in ((tr.get("model") or {}).get("year"), (tr.get("make") or {}).get("name"),
-                                                (tr.get("model") or {}).get("name"), tr.get("name"),
-                                                (tr.get("bodystyle") or {}).get("name")) if x)
-            out.append((str(o.get("id")), title, to_int((tr.get("model") or {}).get("year") or tr.get("productionYear")),
-                        str((tr.get("transmission") or {}).get("name") or "")))
+                                                (tr.get("model") or {}).get("name"), tr.get("name"), body) if x)
+            loc = (o.get("dealer") or {}).get("location") or o.get("location") or {}
+            img = (o.get("images") or [{}])[0].get("imageId")
+            out.append({"key": str(o.get("id")), "title": title,
+                        "year": to_int((tr.get("model") or {}).get("year") or tr.get("productionYear")),
+                        "gear": str((tr.get("transmission") or {}).get("name") or ""),
+                        "price": to_int(o.get("price")), "km": to_int(o.get("km")),
+                        "place": _place(loc.get("city"), loc.get("state") or loc.get("uf")), "body_raw": body,
+                        "photo": MOBI_IMG.format(img) if img else "", "listed": ""})
     return out
 
 
 AUTO_IN_TITLE = re.compile(r"\baut\b|\baut\.|\bauto\b|autom[a\u00e1]tic|automatizad|\bcvt\b|tiptronic|steptronic|\bdct\b|\bsmg\b", re.I)
+
+
+def is_auto_gear(gear):
+    return bool(AUTO_IN_TITLE.search(gear or "")) and not re.search(r"manual|\bmec", gear or "", re.I)
+
+
+def family_of(key, year, title):
+    try:
+        return classify(key, year, fix_body(key, body_of("", title), title))[0]
+    except Exception:
+        return ""
 
 
 def photo_of(row, html, info):
@@ -788,8 +832,14 @@ def refresh_existing(sess, rows, today, stats):
                 continue
         elif st not in ("active", "unverified"):
             continue
-        outcome, res = check_listing(sess, row)
-        stats["checked"] += 1
+        seen = SEARCH_SEEN.get(row["listing_id"])
+        if seen and seen.get("price") and not (seen.get("km") and row["km"] and abs(int(seen["km"]) - int(row["km"])) > 2000):
+            outcome, res = "ok", {"price": seen["price"], "km": seen["km"] if (seen.get("km") or 0) >= 500 else None,
+                                  "_search": True}
+            stats["seen_in_search"] = stats.get("seen_in_search", 0) + 1
+        else:
+            outcome, res = check_listing(sess, row)
+            stats["checked"] += 1
         if outcome == "ok":
             hidden = res["price"] < MIN_PRICE
             if hidden:                                  # keep the last real price; flag it below
@@ -807,7 +857,8 @@ def refresh_existing(sess, rows, today, stats):
                 row["km"] = str(res["km"])
             row["status"] = "active"
             row["last_seen"] = row["verified"] = today
-            apply_page_details(row, res, today)
+            if not res.get("_search"):
+                apply_page_details(row, res, today)
             if hidden:
                 red = [f for f in (row.get("red_flags") or "").split("; ") if f and f != "Price hidden"]
                 row["red_flags"] = "; ".join(red + ["Price hidden"])
@@ -848,10 +899,12 @@ def page_url(source, base, i):
 
 def search_ids(sess, known, stats):
     found = {}
+    SEARCH_SEEN.clear()
+    AUTO_FOUND.clear()
     for source, base in SEARCHES:
         rx = LINK_RE[source]
         seen_here, status = set(), None
-        for i in range(PAGES_PER_SEARCH):
+        for i in range(PAGES_JSON if source in JSON_SEARCH else PAGES_PER_SEARCH):
             r = fetch(sess, page_url(source, base, i))
             if r is None or r.status_code != 200:
                 if i == 0:
@@ -862,29 +915,27 @@ def search_ids(sess, known, stats):
                 page_ids[make_id(source, m.group(2))] = HOSTS[source] + m.group(1)
             if source in JSON_SEARCH:
                 items = br_search_items(source, r.text)
-                keep = {}
-                for key, title, year, gear in items:
-                    lid = make_id(source, key)
-                    url = page_ids.get(lid) or (f"{HOSTS[source]}/anuncios/{key}" if source == "napista" else None)
-                    if not url:
-                        continue
-                    if not detect_key(title, "", year) or (AUTO_IN_TITLE.search(gear) and not re.search(r"manual|\bmec", gear, re.I)):
-                        stats.setdefault("prefiltered", 0)
-                        stats["prefiltered"] += 1
-                        keep.setdefault("_seen", set()).add(lid)      # still counts for paging, not opened
-                        continue
-                    keep[lid] = url
-                seen_extra = keep.pop("_seen", set())
-                page_ids = keep
-                if not page_ids and not seen_extra:
-                    break
-                fresh = (set(page_ids) | seen_extra) - seen_here
+                fresh = {make_id(source, it["key"]) for it in items} - seen_here
                 if not fresh:
-                    break
+                    break                                # last page (or paging not supported)
                 seen_here |= fresh
-                for lid in set(page_ids) - set(found):
-                    if lid not in known:
-                        found.setdefault(lid, (source, page_ids[lid], len(stats["searches"])))
+                for it in items:
+                    lid = make_id(source, it["key"])
+                    url = page_ids.get(lid) or (f"{HOSTS[source]}/anuncios/{it['key']}" if source == "napista" else None)
+                    key = detect_key(it["title"], "", it["year"]) if url else None
+                    fam = family_of(key, it["year"], it["title"]) if key else ""
+                    auto = is_auto_gear(it["gear"])
+                    if not key or (auto and fam not in ALLOW_AUTO):
+                        stats["prefiltered"] = stats.get("prefiltered", 0) + 1     # not opened
+                        continue
+                    it.update(url=url, source=source, family=fam)
+                    SEARCH_SEEN[lid] = it
+                    if lid in known or lid in found or lid in AUTO_FOUND:
+                        continue
+                    if auto:
+                        AUTO_FOUND[lid] = (it, key)       # added from the search data, page read later
+                    else:
+                        found[lid] = (source, url, len(stats["searches"]))
                 continue
             fresh = set(page_ids) - seen_here
             if not fresh:
@@ -897,9 +948,10 @@ def search_ids(sess, known, stats):
     return found
 
 
-def discover_new(sess, rows, today, stats, max_new):
+def discover_new(sess, rows, today, stats, max_new, found=None):
     known = {r["listing_id"] for r in rows}
-    found = search_ids(sess, known, stats)
+    if found is None:
+        found = search_ids(sess, known, stats)
     stats["candidates"] = len(found)
     added, skipped = [], []
     queues = {}
@@ -929,7 +981,7 @@ def discover_new(sess, rows, today, stats, max_new):
                             slug + " " + info.get("title", ""))
             fam, gen, name = classify(key, info["year"], body)
             trans = classify_trans(fam, info.get("trans_field", ""), info.get("desc", ""))
-            if trans == "a":
+            if trans == "a" and fam not in ALLOW_AUTO:
                 reason = "automatic / gearbox not stated"
         if reason:
             if reason != "price or km not readable":      # remember, so it is not opened again tomorrow
@@ -944,8 +996,50 @@ def discover_new(sess, rows, today, stats, max_new):
                "status": "active", "verified": today}
         info["_html"] = r.text
         apply_page_details(row, info, today)
+        row["page_read"] = today
         hist_add(row, today, row["price"])
         added.append(row)
+    opened = min(len(order), max_new)
+    # automatics (FB Civic, Yaris sedan) straight from the search data: no page opened today
+    n_auto = 0
+    for lid, (it, key) in AUTO_FOUND.items():
+        if lid in known or not it.get("price") or not it.get("km") or it["price"] < MIN_PRICE:
+            continue
+        if it["km"] < 500 or (dt.date.today().year - (it.get("year") or 0) >= 5 and it["km"] < 5000):
+            continue
+        body = fix_body(key, body_of(it.get("body_raw", ""), it["title"]), it["title"])
+        fam, gen, name = classify(key, it["year"], body)
+        row = {**{c: "" for c in COLS},
+               "listing_id": lid, "source": it["source"], "family": fam, "gen": gen, "name": name,
+               "year": str(it["year"]), "body": body, "price": str(it["price"]), "km": str(it["km"]), "trans": "a",
+               "place": it.get("place", ""), "url": it["url"], "note": it["title"][:120], "photo_id": it.get("photo", ""),
+               "first_seen": today, "last_seen": today, "status": "active", "verified": today}
+        if it.get("listed") and "2000-01-01" <= it["listed"] <= today:
+            row["listed"] = it["listed"]
+        row["trim"] = trim_of(fam, it["title"]) or ""
+        hist_add(row, today, row["price"])
+        added.append(row)
+        n_auto += 1
+    stats["new_auto"] = n_auto
+    # what is left of today's page budget: read ads added from search data (description, flags, true gearbox)
+    budget = max(0, max_new - opened)
+    todo = [r for r in rows + added if r["status"] == "active" and r["source"] in JSON_SEARCH
+            and not r.get("page_read") and not r.get("desc")]
+    todo.sort(key=lambda r: r["first_seen"], reverse=True)
+    n_read = 0
+    for row in todo[:budget]:
+        r = fetch(sess, row["url"])
+        if r is None or r.status_code != 200:
+            continue
+        info = parse_listing(r.text)
+        info["_html"] = r.text
+        apply_page_details(row, info, today)
+        row["page_read"] = today
+        t2 = classify_trans(row["family"], info.get("trans_field", ""), info.get("desc", ""))
+        if row["trans"] == "a" and t2 != "a":
+            row["trans"] = t2                               # the page says manual after all
+        n_read += 1
+    stats["details_read"] = n_read
     stats["new"] = len(added)
     stats["skipped"] = len(skipped)
     return added + skipped
@@ -1050,14 +1144,14 @@ def fit_fair_price(active):
             and not re.search(r"Rebuilt|Salvage", r.get("red_flags", ""))]
     if len(data) < 8:
         return {}, 0.0, 0.2
-    fams = sorted({r["family"] for r in data})
+    fams = sorted({mkey(r) for r in data})
 
     def feats(r):
         return float(r["km"]) / 1e4, float(r["year"]) - 2000, 1.0 if r["body"] == "conv" else 0.0
 
     use = data
     for _ in range(2):                                 # fit, drop strong outliers, refit
-        X = [[1.0 if r["family"] == f else 0.0 for f in fams] + list(feats(r)) for r in use]
+        X = [[1.0 if mkey(r) == f else 0.0 for f in fams] + list(feats(r)) for r in use]
         y = [math.log(float(r["price"])) for r in use]
         beta = _ols(X, y)
         res = [yy - sum(a * b for a, b in zip(x, beta)) for x, yy in zip(X, y)]
@@ -1070,7 +1164,7 @@ def fit_fair_price(active):
     model = {}
     K = 15.0                                            # shrink family slopes toward the pooled slopes
     for f in fams:
-        fr_fit = [r for r in use if r["family"] == f]
+        fr_fit = [r for r in use if mkey(r) == f]
         bk, by = b_km, b_yr
         n_fit = len(fr_fit)
         if n_fit >= 12:
@@ -1079,7 +1173,7 @@ def fit_fair_price(active):
             _, bk_f, by_f = _ols(Xf, yf, ridge=1e-3)
             bk = (n_fit * bk_f + K * b_km) / (n_fit + K)
             by = (n_fit * by_f + K * b_yr) / (n_fit + K)
-        fr = [r for r in data if r["family"] == f]       # level = MEDIAN over every car of the family (robust)
+        fr = [r for r in data if mkey(r) == f]       # level = MEDIAN over every car of the family (robust)
         lv = sorted(math.log(float(r["price"])) - bk * feats(r)[0] - by * feats(r)[1] - b_conv * feats(r)[2]
                     for r in fr)
         m = len(lv)
@@ -1088,7 +1182,20 @@ def fit_fair_price(active):
     return model, b_conv, sd
 
 
-GEARBOX_LABEL = {"m": "\u2714 Manual", "c": "\u26A0 Conflict", "u": "? Unconfirmed"}
+GEARBOX_LABEL = {"m": "\u2714 Manual", "c": "\u26A0 Conflict", "u": "? Unconfirmed", "a": "Automatic"}
+
+
+def apply_split(r):
+    """Move a car to its sub-generation (e.g. FA5 Civic -> FA5 Civic Si) when its title or trim matches."""
+    for rx, sg in SPLITS.get(r["family"], []):
+        if re.search(rx, f'{r.get("note", "")} {r.get("trim", "")}', re.I):
+            r["family"], r["gen"], r["name"] = sg["family"], sg["name"].split(" ")[0], sg["name"]
+            return
+
+
+def mkey(r):
+    """Fair-price group: automatics are priced against automatics only."""
+    return r["family"] + ("|auto" if r.get("trans") == "a" else "")
 
 
 def score_rows(active):
@@ -1098,7 +1205,7 @@ def score_rows(active):
     out = {}
     for r in active:
         o = {"fair": None, "vs_fair": None, "conf": None, "score": None}
-        m = model.get(r["family"])
+        m = model.get(mkey(r))
         try:
             price, km, year = float(r["price"]), float(r["km"] or 0), float(r["year"])
         except ValueError:
@@ -1171,6 +1278,12 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
             for nm in list((g.get("name_by_body") or {}).values()) or [g["name"]]:
                 names.setdefault(nm, {"name": nm, "family": g["family"], "color": g.get("color", "#888888"),
                                       "years": g["years"]})
+            for _, sg in SPLITS.get(g["family"], []):
+                fams.setdefault(sg["family"], {"family": sg["family"], "label": sg.get("short", sg["name"]),
+                                               "color": sg.get("color", "#888888"), "desc": sg.get("desc", ""),
+                                               "model": m["model"]})
+                names.setdefault(sg["name"], {"name": sg["name"], "family": sg["family"],
+                                              "color": sg.get("color", "#888888"), "years": sg["years"]})
     cars = []
     for r in active:
         sc = scores.get(r["listing_id"], {})
@@ -1192,6 +1305,9 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
             "listed": r.get("listed") or None, "days": days, "days_src": days_src,
             "hist": [[dd, pp] for dd, pp in hist] if len(hist) > 1 else None, "sold": sold, **sc})
     firsts = sorted(r["first_seen"] for r in rows if r["first_seen"] and r["status"] != "skip")
+    autos = [c for c in cars if c["trans"] == "a"]
+    cars = [c for c in cars if c["trans"] != "a"]
+    auto_path = re.sub(r"\.json$", "", path) + "_auto.json"
     data = {
         "updated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),
         "country": COUNTRY["country"], "currency": COUNTRY["currency"], "links": COUNTRY["links"],
@@ -1202,6 +1318,7 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
         "score": {**SCORE, **model_info}, "run": run_info or [],
         "searches": [{"source": s, "url": u, "ads": n} for s, u, n in (stats or {}).get("searches", [])],
         "cars": cars,
+        "auto_file": os.path.basename(auto_path) if autos else None, "auto_count": len(autos),
         "comps": comp_list,
         "sold_bands": sold_bands(comps, today) if comps else {},
         "gone": [{"id": r["listing_id"], "name": r["name"], "family": r["family"], "year": r["year"], "km": r["km"],
@@ -1214,6 +1331,14 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
     os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
+    if autos or os.path.exists(auto_path):
+        for c in autos:
+            c["desc"] = c["desc"][:400]                  # keeps the automatics file light on a phone
+        adata = {**data, "cars": autos, "auto_file": None, "auto_count": len(autos), "gone": [],
+                 "families": [fams[f] for f in fams if any(c["family"] == f for c in autos)],
+                 "names": [n for n in names.values() if any(c["name"] == n["name"] for c in autos)]}
+        with open(auto_path, "w", encoding="utf-8") as f:
+            json.dump(adata, f, ensure_ascii=False, separators=(",", ":"))
 
 
 def prune_snapshots(keep):
@@ -2124,6 +2249,10 @@ def run(args):
                 r["red_flags"] = "; ".join(red + ["Price hidden"])
             else:
                 r["status"] = "unverified"            # no real price known: keep it out of the list until read again
+    # automatics are now kept for some families: forget earlier 'automatic' rejections on those sites
+    rows = [r for r in rows if not (r["status"] == "skip" and r["source"] in JSON_SEARCH and r["note"].startswith("automatic"))]
+    for r in rows:
+        apply_split(r)
     n_hist = backfill_hist(rows)
     if n_hist:
         print(f"price history rebuilt from saved snapshots for {n_hist} listings")
@@ -2143,8 +2272,11 @@ def run(args):
                  photos_new=0, searches=[])
     new_rows = []
     if sess is not None:
-        refresh_existing(sess, rows, today.isoformat(), stats)
-        new_rows = discover_new(sess, rows, today.isoformat(), stats, args.max_new)
+        found = search_ids(sess, {r["listing_id"] for r in rows}, stats)    # searches first: their data
+        refresh_existing(sess, rows, today.isoformat(), stats)               # confirms ads without opening them
+        new_rows = discover_new(sess, rows, today.isoformat(), stats, args.max_new, found)
+        for r in rows + new_rows:
+            apply_split(r)
         if not args.no_photos:
             download_photos(sess, rows + new_rows, stats)
     for r in rows + new_rows:
@@ -2164,6 +2296,10 @@ def run(args):
                         f"changes, {stats['gone']} newly gone, {stats['back']} back")
         run_info.append(f"Search: {stats['candidates']} unseen ads, {stats['new']} added, {stats['skipped']} rejected "
                         f"(remembered), {stats['photos_new']} new photos")
+        if stats.get("new_auto") or stats.get("details_read") or stats.get("seen_in_search"):
+            run_info.append(f"Brazil: {stats.get('seen_in_search', 0)} ads confirmed from search pages (not opened), "
+                            f"{stats.get('new_auto', 0)} automatics added from search data, "
+                            f"{stats.get('details_read', 0)} ads read for their description")
         if "comps_total" in stats:
             run_info.append(f"Sold prices: {stats['comps_new']} new Bring a Trailer results "
                             f"({stats['comps_pages']} pages read), {stats['comps_total']} stored")
