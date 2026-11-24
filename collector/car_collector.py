@@ -1575,7 +1575,7 @@ def update_fipe(sess, rows, path, budget=300):
         if cfg.get("versions", True) and not v:
             continue
         targets.add((r["family"], v, r.get("trans") == "a", int(float(r["year"])), r.get("body") or ""))
-    if "brands" not in FIPE:
+    if not FIPE.get("brands"):                          # an empty answer is asked again next run
         FIPE["brands"] = {b["name"].split()[0].upper(): b["code"] for b in (fipe_get(sess, "/cars/brands", st) or [])}
     done = 0
     for fam, v, auto, year, body in sorted(targets, key=lambda x: (x[0], x[1] or "", x[2], x[3], x[4])):

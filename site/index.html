@@ -710,7 +710,8 @@ function verdictHTML(c) {
   if (fipe) {
     const s = DATA.fipe?.series?.[c.fipe_k], mon = monShort(DATA.fipe?.month), d = c.price / fipe - 1, p = Math.round(Math.abs(d) * 100);
     why.push(L(`FIPE table${mon ? ` (${mon})` : ""}${s ? ` for ${esc(s.name)}, ${c.year}` : ""}: ${money(fipe)}. ${p < 1 ? "This ad asks about the same." : `This ad asks ${p}% ${d > 0 ? "more" : "less"}.`}`,
-               `Tabela FIPE${mon ? ` (${mon})` : ""}${s ? ` para ${esc(s.name)}, ${c.year}` : ""}: ${money(fipe)}. ${p < 1 ? "Este anúncio pede praticamente o mesmo." : `Este anúncio pede ${p}% ${d > 0 ? "a mais" : "a menos"}.`}`));
+               `Tabela FIPE${mon ? ` (${mon})` : ""}${s ? ` para ${esc(s.name)}, ${c.year}` : ""}: ${money(fipe)}. ${p < 1 ? "Este anúncio pede praticamente o mesmo." : `Este anúncio pede ${p}% ${d > 0 ? "a mais" : "a menos"}.`}`)
+      + (d > .5 ? L(" FIPE rarely reflects rare or collectible cars.", " A FIPE raramente reflete carros raros ou de coleção.") : ""));
   }
   let offer;
   if (k === "sus") offer = `<p class="warnline">${L("This price is far below the market. Before any deposit: ask why, check the documents and get an inspection report. It is often a scam, an auction car, a write-off or a hidden fault.",
@@ -1850,7 +1851,8 @@ function fipeSection(cars) {
   }).join("");
   const ticks = [];
   for (let v = Math.ceil(x0 * 10 - 1e-9) / 10; v <= x1 + 1e-9; v += .1) ticks.push(Math.round(v * 10) / 10);
-  const tickTxt = ticks.map(v => `<text x="${xOf(v).toFixed(1)}" y="${base + 16}" text-anchor="middle">${v === 0 ? "0" : pctTxt(v)}</text>`).join("");
+  const tickTxt = ticks.map(v => { const x = xOf(v), an = x < 18 ? "start" : x > W - 18 ? "end" : "middle";
+    return `<text x="${(an === "start" ? Math.max(x - 4, 0) : an === "end" ? Math.min(x + 4, W) : x).toFixed(1)}" y="${base + 16}" text-anchor="${an}">${v === 0 ? "0" : pctTxt(v)}</text>`; }).join("");
   const xf = xOf(0), xj = fmed != null ? xOf(fmed) : null, close = xj != null && Math.abs(xj - xf) < 44;
   const lab = (x, txt, side) => `<text x="${x.toFixed(1)}" y="12" text-anchor="${side}" class="vl">${txt}</text>`;
   const lines = `<line x1="${xf.toFixed(1)}" x2="${xf.toFixed(1)}" y1="16" y2="${base}" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="3 3"/>`
@@ -1868,10 +1870,11 @@ function fipeSection(cars) {
   const keys = [...new Set(cs.map(c => c.fipe_k))].filter(k => F.series[k]?.hist?.length >= 2);
   let trendTxt = "";
   if (keys.length) {
-    const ch = medv(keys.map(k => { const h = F.series[k].hist; return h[h.length - 1][1] / h[0][1] - 1; }));
-    const longest = keys.map(k => F.series[k].hist).sort((p, q) => q.length - p.length)[0];
-    trendTxt = L(`FIPE moved ${pctTxt(ch, 1)} from ${monShort(longest[0][0])} to ${monShort(longest[longest.length - 1][0])} (median of the versions on sale).`,
-                 `A FIPE variou ${pctTxt(ch, 1)} de ${monShort(longest[0][0])} a ${monShort(longest[longest.length - 1][0])} (mediana das versões à venda).`);
+    const span = Math.min(...keys.map(k => F.series[k].hist.length));   // the months every version has
+    const ch = medv(keys.map(k => { const h = F.series[k].hist.slice(-span); return h[h.length - 1][1] / h[0][1] - 1; }));
+    const h0 = F.series[keys[0]].hist.slice(-span);
+    trendTxt = L(`FIPE moved ${pctTxt(ch, 1)} from ${monShort(h0[0][0])} to ${monShort(h0[h0.length - 1][0])} (median of the versions on sale).`,
+                 `A FIPE variou ${pctTxt(ch, 1)} de ${monShort(h0[0][0])} a ${monShort(h0[h0.length - 1][0])} (mediana das versões à venda).`);
   }
   // the most common year and version pairs: FIPE, fair price and what the ads ask
   const groups = {};
