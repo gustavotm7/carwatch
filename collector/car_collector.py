@@ -728,6 +728,21 @@ def is_auto_gear(gear):
     return bool(AUTO_IN_TITLE.search(gear or "")) and not re.search(r"manual|\bmec", gear or "", re.I)
 
 
+def resync_families(rows):
+    """A generation renamed or re-cut in the config (NSX 91-01 became NA1 / NA2): saved ads move to the new one."""
+    n = 0
+    for r in rows:
+        if not r["family"] or r["family"] in FAMILY_STYLE or not str(r["year"]).isdigit():
+            continue
+        slug = r["url"].rsplit("/", 2)[-2] if r["source"] == "kijiji" else r["url"].rsplit("/", 1)[-1]
+        key = detect_key(r["note"], slug, int(r["year"]))
+        if not key:
+            continue
+        r["family"], r["gen"], r["name"] = classify(key, int(r["year"]), r["body"] or "unk")
+        n += 1
+    return n
+
+
 def family_of(key, year, title):
     try:
         return classify(key, year, fix_body(key, body_of("", title), title))[0]
@@ -2727,6 +2742,9 @@ def run(args):
                 r["status"] = "unverified"            # no real price known: keep it out of the list until read again
     # automatics are now kept for some families: forget earlier 'automatic' rejections on those sites
     rows = [r for r in rows if not (r["status"] == "skip" and r["source"] in JSON_SEARCH and r["note"].startswith("automatic"))]
+    n_moved = resync_families(rows)
+    if n_moved:
+        print(f"{n_moved} saved ads moved to a renamed or re-cut generation", flush=True)
     for r in rows:
         apply_split(r)
     n_hist = backfill_hist(rows)

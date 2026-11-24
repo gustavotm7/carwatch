@@ -705,15 +705,42 @@
     }
    ]
   },
-  "NSX_1": {
-   "intro_en": "Durable and simple to own for a supercar; the timing belt and the early 5-speed gearboxes need proof of service.",
-   "intro_pt": "Durável e simples de manter para um superesportivo; a correia dentada e os primeiros câmbios de 5 marchas pedem comprovante de serviço.",
+  "FB_SI": {
+   "intro_en": "The 2.4 K24 and a six-speed with a limited-slip differential; many were driven hard or modified, so history matters.",
+   "intro_pt": "O 2.4 K24 e o câmbio de seis marchas com diferencial autoblocante; muitos foram andados forte ou modificados, então o histórico importa.",
+   "items": [
+    {
+     "en": "Ask what was modified, and expect the clutch, tires and brakes to be due unless there are receipts",
+     "pt": "Pergunte o que foi modificado e conte com embreagem, pneus e freios para trocar, a menos que haja notas",
+     "why_en": "Si owners often modify their cars and drive them hard; a used-car reviewer advises assuming these parts are worn until proven otherwise.",
+     "why_pt": "Donos de Si costumam modificar o carro e andar forte; um avaliador de usados recomenda contar com essas peças gastas até prova em contrário.",
+     "src": "https://www.thecasket.ca/wheels/used-wheels-2011-15-honda-civic-248855/"
+    },
+    {
+     "en": "Turn the wheel all the way and pull away: no clicking or grinding",
+     "pt": "Esterce tudo e arranque: sem estalos nem rangidos",
+     "why_en": "A clicking grind when accelerating while turning is a known fault on this generation: a worn outer CV joint.",
+     "why_pt": "Estalos ao acelerar com a direção esterçada são um defeito conhecido desta geração: junta homocinética externa gasta.",
+     "src": "https://us.haynes.com/blogs/tips-tutorials/honda-civic-problems-and-recalls-2012-2015"
+    },
+    {
+     "en": "Run the A/C: it must blow cold without noise",
+     "pt": "Ligue o ar-condicionado: tem que gelar e não fazer barulho",
+     "why_en": "This generation's compressor has known failures, and a broken one can contaminate the whole system.",
+     "why_pt": "O compressor desta geração tem falhas conhecidas, e quando quebra pode contaminar o sistema todo.",
+     "src": "https://au7o.io/pt-br/known-issues/honda-civic"
+    }
+   ]
+  },
+  "NSX_NA1": {
+   "intro_en": "The original: 3.0 V6 and 5-speed. Durable and simple to own for a supercar; the timing belt and the early gearboxes need proof of service.",
+   "intro_pt": "O original: V6 3.0 e câmbio de 5 marchas. Durável e simples de manter para um superesportivo; a correia dentada e os primeiros câmbios pedem comprovante de serviço.",
    "items": [
     {
      "en": "Ask when the timing belt and water pump were done",
      "pt": "Pergunte quando a correia dentada e a bomba d'água foram trocadas",
-     "why_en": "Due about every 145,000 km on the 3.0 and 170,000 km on the 3.2 (1997 on); with no record, budget for it.",
-     "why_pt": "A troca é a cada 145 mil km mais ou menos no 3.0 e 170 mil km no 3.2 (a partir de 1997); sem comprovante, reserve dinheiro para isso.",
+     "why_en": "Due about every 145,000 km on the 3.0; with no record, budget for it.",
+     "why_pt": "A troca é a cada 145 mil km mais ou menos no 3.0; sem comprovante, reserve dinheiro para isso.",
      "src": "https://www.pistonheads.com/news/ph-buying-guide-contents/honda-nsx-buying-guide-powertrain/25298"
     },
     {
@@ -739,9 +766,9 @@
     }
    ]
   },
-  "NSX_2": {
-   "intro_en": "The facelift with fixed headlights, the 3.2 and the 6-speed; the timing belt history is the big item.",
-   "intro_pt": "A reestilização com faróis fixos, motor 3.2 e câmbio de 6 marchas; o histórico da correia dentada é o item mais importante.",
+  "NSX_NA2": {
+   "intro_en": "The 3.2 V6 and 6-speed, still with pop-up headlights; the timing belt history is the big item.",
+   "intro_pt": "V6 3.2 e câmbio de 6 marchas, ainda com faróis escamoteáveis; o histórico da correia dentada é o item mais importante.",
    "items": [
     {
      "en": "Ask when the timing belt and water pump were done",
@@ -759,30 +786,23 @@
     }
    ]
   },
-  "FB_SI": {
-   "intro_en": "The 2.4 K24 and a six-speed with a limited-slip differential; many were driven hard or modified, so history matters.",
-   "intro_pt": "O 2.4 K24 e o câmbio de seis marchas com diferencial autoblocante; muitos foram andados forte ou modificados, então o histórico importa.",
+  "NSX_NA2F": {
+   "intro_en": "The 2002 facelift: fixed headlights, with the 3.2 and the 6-speed; the timing belt history is the big item.",
+   "intro_pt": "A reestilização de 2002: faróis fixos, com o 3.2 e o câmbio de 6 marchas; o histórico da correia dentada é o item mais importante.",
    "items": [
     {
-     "en": "Ask what was modified, and expect the clutch, tires and brakes to be due unless there are receipts",
-     "pt": "Pergunte o que foi modificado e conte com embreagem, pneus e freios para trocar, a menos que haja notas",
-     "why_en": "Si owners often modify their cars and drive them hard; a used-car reviewer advises assuming these parts are worn until proven otherwise.",
-     "why_pt": "Donos de Si costumam modificar o carro e andar forte; um avaliador de usados recomenda contar com essas peças gastas até prova em contrário.",
-     "src": "https://www.thecasket.ca/wheels/used-wheels-2011-15-honda-civic-248855/"
+     "en": "Ask when the timing belt and water pump were done",
+     "pt": "Pergunte quando a correia dentada e a bomba d'água foram trocadas",
+     "why_en": "Due about every 170,000 km on the 3.2; with no record, budget for it.",
+     "why_pt": "A troca é a cada 170 mil km mais ou menos no 3.2; sem comprovante, reserve dinheiro para isso.",
+     "src": "https://www.pistonheads.com/news/ph-buying-guide-contents/honda-nsx-buying-guide-powertrain/25298"
     },
     {
-     "en": "Turn the wheel all the way and pull away: no clicking or grinding",
-     "pt": "Esterce tudo e arranque: sem estalos nem rangidos",
-     "why_en": "A clicking grind when accelerating while turning is a known fault on this generation: a worn outer CV joint.",
-     "why_pt": "Estalos ao acelerar com a direção esterçada são um defeito conhecido desta geração: junta homocinética externa gasta.",
-     "src": "https://us.haynes.com/blogs/tips-tutorials/honda-civic-problems-and-recalls-2012-2015"
-    },
-    {
-     "en": "Run the A/C: it must blow cold without noise",
-     "pt": "Ligue o ar-condicionado: tem que gelar e não fazer barulho",
-     "why_en": "This generation's compressor has known failures, and a broken one can contaminate the whole system.",
-     "why_pt": "O compressor desta geração tem falhas conhecidas, e quando quebra pode contaminar o sistema todo.",
-     "src": "https://au7o.io/pt-br/known-issues/honda-civic"
+     "en": "Test the climate control and the stereo",
+     "pt": "Teste o ar-condicionado digital e o som",
+     "why_en": "Owners list them among the usual faults.",
+     "why_pt": "Donos citam esses itens entre os defeitos comuns.",
+     "src": "https://honda-tech.com/forums/acura-nsx-43/buying-nsx-what-look-2897403/"
     }
    ]
   }

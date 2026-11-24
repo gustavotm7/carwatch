@@ -169,10 +169,12 @@
 
     {"enabled": true, "model": "NSX", "match": ["\\bnsx\\b"], "bodies": ["coupe"],
      "generations": [
-       {"family": "NSX_1", "years": [1991, 2001], "name": "NSX 91–01", "color": "#E6564E", "smg_risk": false, "desc": "Honda / Acura NSX 1991-2001 (pop-up headlights)",
-        "trims": [["nsx ?-? ?t\\b|targa", "NSX-T"], ["type ?r", "Type R"], ["type ?s", "Type S"]]},
-       {"family": "NSX_2", "years": [2002, 2005], "name": "NSX 02–05", "color": "#8FA8FF", "smg_risk": false, "desc": "Honda / Acura NSX 2002-2005 (facelift, fixed headlights)",
-        "trims": [["nsx ?-? ?t\\b|targa", "NSX-T"], ["type ?r", "Type R"], ["type ?s", "Type S"]]}
+       {"family": "NSX_NA1", "years": [1991, 1996], "name": "NA1 NSX", "color": "#D9534F", "smg_risk": false, "desc": "Honda / Acura NSX NA1 1991-1996 (3.0 C30A, 5-speed, pop-up headlights)",
+        "trims": [["nsx ?-? ?t\\b|targa|open ?top", "NSX-T"], ["type ?r|nsx ?-? ?r\\b", "Type R"]]},
+       {"family": "NSX_NA2", "years": [1997, 2001], "name": "NA2 NSX", "color": "#9B6BE0", "smg_risk": false, "desc": "Honda / Acura NSX NA2 1997-2001 (3.2 C32B, 6-speed, pop-up headlights)",
+        "trims": [["zanardi", "Zanardi"], ["nsx ?-? ?t\\b|targa|open ?top", "NSX-T"], ["type ?s", "Type S"]]},
+       {"family": "NSX_NA2F", "years": [2002, 2005], "name": "NA2 NSX facelift", "color": "#2FA3B5", "smg_risk": false, "desc": "Honda / Acura NSX NA2 facelift 2002-2005 (3.2 C32B, 6-speed, fixed headlights)",
+        "trims": [["nsx ?-? ?t\\b|targa|open ?top", "NSX-T"], ["type ?r|nsx ?-? ?r\\b", "NSX-R"], ["type ?s", "Type S"]]}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/honda/nsx"],
                   "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/nsx"]},

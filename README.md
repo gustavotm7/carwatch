@@ -2,7 +2,8 @@
 
 Used, mostly manual cars in Canada and Brazil, checked every morning, shown in a phone-friendly web page. Both stores
 track the same cars: E36 / E46 / E9X M3, E39 / E60 M5, E46 330, E91 wagon, 350Z, 370Z, AP1 / AP2 S2000,
-FA5 / FB Civic sedan (Si apart), Yaris sedan, BK1 / BK2 Genesis Coupe, and the first NSX (91–01 and 02–05).
+FA5 / FB Civic sedan (Si apart), Yaris sedan, BK1 / BK2 Genesis Coupe, and the first NSX: NA1 (3.0, 1991–96),
+NA2 (3.2, 1997–2001) and the NA2 facelift (2002–05).
 
 - **Web app:** `https://gustavotm7.github.io/carwatch/` (add it to your phone's home screen).
 - **Update now:** Actions tab > **update** > **Run workflow** (or the menu in the app). Takes about 10 minutes.
