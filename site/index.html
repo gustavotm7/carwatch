@@ -43,6 +43,24 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   background:var(--card);border:1px solid var(--line);font-size:14px;color:var(--muted)}
 .others b{color:var(--text);font-weight:600}
 .others button{margin-left:auto;padding:8px 14px;border-radius:999px;background:var(--raised);color:var(--text);font-weight:600;white-space:nowrap}
+.others{flex-wrap:wrap}
+.others .ob{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+.others .ob button{margin-left:0}
+.others .ob button[aria-pressed=true]{background:var(--text);color:var(--bg)}
+.others .ob .n{opacity:.7;font-weight:500}
+#sheet .sub a,#sheet p a{color:var(--text);text-decoration:underline;text-underline-offset:2px}
+.tag.grp{background:#dfe8ff;color:#122046}
+.evpaste{display:flex;gap:8px;align-items:stretch;margin:4px 0 6px}
+.evpaste textarea{flex:1;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--raised);color:var(--text);font:15px/1.35 var(--sans);resize:vertical}
+.evpaste button{padding:0 16px;border-radius:12px;background:var(--text);color:var(--bg);font-weight:700}
+.evform{display:grid;grid-template-columns:1fr 1fr;gap:10px 10px;margin:12px 0 4px}
+.evform label{display:grid;gap:5px;font-size:13px;color:var(--muted)}
+.evform .wide{grid-column:1/-1}
+.evform input,.evform select{width:100%;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--raised);color:var(--text);font:600 16px var(--sans)}
+.extnote{margin:10px 0 0;padding:10px 12px;border-radius:12px;background:var(--raised);font-size:14px;color:var(--muted)}
+.sheet-actions.wrap{flex-wrap:wrap}
+.sheet-actions.wrap button{flex:1 1 40%}
+.sheet-actions button:disabled{opacity:.5}
 .linkset{display:grid;gap:14px;margin-top:6px}
 .linkset h3{margin:0 0 6px!important}
 .linkset .btns{display:flex;gap:8px;flex-wrap:wrap}
@@ -123,6 +141,8 @@ main{max-width:1100px;margin:0 auto;padding:12px 10px 40px;display:grid;gap:14px
 .photo img.pic{width:100%;height:100%;object-fit:cover;display:block}
 .photo .nophoto{position:absolute;inset:0;display:grid;place-items:center;color:var(--dim);font-size:13px}
 .photo .nophoto[hidden]{display:none}
+.card.ext .photo{aspect-ratio:auto;height:112px}
+.card.ext .nophoto{display:none}
 .photo::after{content:"";position:absolute;inset:auto 0 0 0;height:42%;
   background:linear-gradient(to top,rgba(10,13,17,.78),rgba(10,13,17,0));pointer-events:none}
 .name{position:absolute;left:10px;top:10px;z-index:2;background:var(--c);color:#fff;border-radius:8px;
@@ -263,9 +283,13 @@ select.opt{background:var(--raised);color:var(--text);padding:8px 12px;font-size
 .comps .a{grid-row:2;grid-column:2;text-align:right;color:var(--muted);font-size:12px}
 .fine{color:var(--dim);font-size:13px;margin-top:8px!important}
 /* ---------- prices tab ---------- */
-.tabs{display:flex;gap:22px;margin:9px 0 -3px}
-.tabs button{padding:6px 1px 8px;font:600 17px/1 var(--cond);letter-spacing:.03em;color:var(--muted);border-bottom:2px solid transparent}
-.tabs button[aria-selected=true]{color:var(--text);border-bottom-color:var(--text)}
+.tabs{display:flex;gap:6px;margin:9px 0 -3px;border-bottom:1px solid var(--line)}
+.tabs button{display:flex;align-items:center;gap:7px;margin-bottom:-1px;padding:7px 12px 8px;border-radius:10px 10px 0 0;
+  font:600 17px/1 var(--cond);letter-spacing:.03em;color:#b9c1cc;border-bottom:3px solid transparent}
+.tabs button svg{opacity:.85}
+.tabs button:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.tabs button[aria-selected=true]{color:var(--text);background:var(--raised);border-bottom-color:#5aa2f0}
+.tabs button[aria-selected=true] svg{opacity:1;color:#5aa2f0}
 .top.prices .controls{display:none}
 .kpis{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:11px 12px}
@@ -326,6 +350,7 @@ ul.facts-list{margin:2px 0 0;padding-left:18px;display:grid;gap:7px;font-size:14
 .breakdown dd{font-variant-numeric:tabular-nums}
 .otab .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:7px}
 @media (max-width:380px){.controls{gap:6px}.seg button{padding:7px 11px}.dir,.filters-btn{padding:8px 10px}}
+@media (min-width:381px) and (max-width:420px){.controls{gap:6px}.seg button{padding:7px 13px}.dir,.filters-btn{padding:8px 10px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -340,8 +365,8 @@ ul.facts-list{margin:2px 0 0;padding-left:18px;display:grid;gap:7px;font-size:14
       </button>
     </div>
     <nav class="tabs" role="tablist" aria-label="View">
-      <button role="tab" id="tabList" type="button" aria-selected="true">Listings</button>
-      <button role="tab" id="tabPrices" type="button" aria-selected="false">Prices</button>
+      <button role="tab" id="tabList" type="button" aria-selected="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5.5 4h8M5.5 8h8M5.5 12h8"/><circle cx="2.4" cy="4" r=".9" fill="currentColor" stroke="none"/><circle cx="2.4" cy="8" r=".9" fill="currentColor" stroke="none"/><circle cx="2.4" cy="12" r=".9" fill="currentColor" stroke="none"/></svg><span>Listings</span></button>
+      <button role="tab" id="tabPrices" type="button" aria-selected="false"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2.5 13.5V9M6.2 13.5V5.5M9.8 13.5V7.5M13.5 13.5V2.5"/></svg><span>Prices</span></button>
     </nav>
     <div class="controls">
       <div class="seg" role="group" aria-label="Sort by">
@@ -447,6 +472,11 @@ const SITES = {
   carpages: {label: "CarPages", domain: "carpages.ca"},
   napista: {label: "NaPista", domain: "napista.com.br"},
   mobiauto: {label: "Mobiauto", domain: "mobiauto.com.br"},
+  olx: {label: "OLX", domain: "olx.com.br"},
+  mercadolivre: {label: "Mercado Livre", domain: "mercadolivre.com.br"},
+  webmotors: {label: "Webmotors", domain: "webmotors.com.br"},
+  icarros: {label: "iCarros", domain: "icarros.com.br"},
+  marketplace: {label: "Marketplace", domain: "facebook.com"},
 };
 const GEARBOX_PT = {
   m: {cls: "gb-m", label: "Manual", long: "Manual: os dados do anúncio e o texto do vendedor dizem manual."},
@@ -467,7 +497,7 @@ const BD = () => PT() ? BODY_PT : BODY_EN;
 const HARD = () => PT() ? ["Accident mentioned"] : ["Rebuilt title", "Salvage title"];   // the serious flags in each market
 const DEFAULT_STATE = {sort: "score", dir: "desc", names: [], gear: ["m", "c", "u"], bodies: [], maxPrice: 0,
                        maxKm: 0, yearFrom: 0, yearTo: 0, hideHard: false, hideRed: false, hideHigh: false, hideSus: false,
-                       tab: "list", ana: "", budget: 0};
+                       tab: "list", ana: "", budget: 0, ext: false};
 let DATA = null, state = load();
 
 function stateKey() { return COUNTRY === "CA" ? "cw-state" : "cw-state-" + COUNTRY; }   // filters kept per country
@@ -570,7 +600,7 @@ function locRowHTML() {                         // Anywhere / favourite towns / 
 const basisTxt = () => `${L("based on", "base")}: ${nf(LOCAL.n)} ${L(LOCAL.n === 1 ? "car" : "cars", LOCAL.n === 1 ? "carro" : "carros")}${LOCAL.few ? L(` + the ${LOCAL.uf} average`, ` + média de ${LOCAL.uf}`) : ""}`;
 function filtered() {
   const names = effNames();
-  let cars = DATA.cars.filter(c =>
+  let cars = [...DATA.cars, ...sharedCars()].filter(c =>
     (!names.length || names.includes(c.name)) &&
     (AUTO ? c.trans === "a" : state.gear.includes(c.trans)) &&
     (!state.bodies.length || state.bodies.includes(c.body)) &&
@@ -578,6 +608,7 @@ function filtered() {
     (!state.maxKm || (c.km ?? 0) <= state.maxKm) &&
     (!state.yearFrom || (c.year ?? 0) >= state.yearFrom) &&
     (!state.yearTo || (c.year ?? 9999) <= state.yearTo) &&
+    (!state.ext || c.mine || c.shared) &&
     !(state.hideHard && c.red.some(f => HARD().includes(f))) &&
     !(state.hideRed && c.red.length));
   cars = applyLoc(cars);
@@ -596,6 +627,7 @@ function activeFilterCount() {
   if (!AUTO && state.gear.length < 3) n++;
   if (state.bodies.length) n++;
   if (state.maxPrice) n++;
+  if (state.ext) n++;
   if (state.maxKm) n++;
   if (state.yearFrom || state.yearTo) n++;
   if (state.hideHard || state.hideRed || state.hideHigh || state.hideSus) n++;
@@ -846,7 +878,7 @@ function guideOverview(cars) {                   // "All": where the good prices
 }
 
 function card(c) {
-  const col = nameColor(c.name), site = SITES[c.source] || {label: c.source, domain: ""};
+  const col = nameColor(c.name), site = SITES[c.source] || {label: c.source || L("Saved", "Salvo"), domain: ""};
   const g = GB()[c.trans] || GB().u;
   const deal = dealPill(c);                     // price label against the local fair price while a town is selected
   const tc = totalChange(c);
@@ -854,14 +886,15 @@ function card(c) {
       ? `<span class="tag ${tc.diff < 0 ? "drop" : "rise"}">${tc.diff < 0 ? "▼" : "▲"} ${money(Math.abs(tc.diff))}</span>` : "";
   const km = c.km ?? 0, kmW = Math.min(100, km / 250000 * 100);
   const flags = c.red.map(f => `<span class="flag${HARD().includes(f) ? " hard" : ""}">${flagTxt(f)}</span>`).join("");
-  return `<article class="card" tabindex="0" data-id="${esc(c.id)}" aria-label="${esc(c.year + " " + c.name + ", " + money(c.price))}">
+  return `<article class="card${c.mine || c.shared ? " ext" : ""}" tabindex="0" data-id="${esc(c.id)}" aria-label="${esc(c.year + " " + c.name + ", " + money(c.price))}">
     <div class="photo">
       ${c.photos.length ? `<img class="pic" src="${esc(c.photos[0])}" alt="" loading="lazy" decoding="async" data-alt="${esc(c.photos[1] || "")}">` : ""}
       <span class="nophoto"${c.photos.length ? " hidden" : ""}>${L("No photo", "Sem foto")}</span>
       <span class="name" style="--c:${col}">${esc(c.name)}</span>
       ${gauge(scoreOf(c))}
       <span class="src">${site.domain ? `<img src="https://www.google.com/s2/favicons?domain=${site.domain}&sz=64" alt="" loading="lazy">` : ""}${esc(site.label)}</span>
-      <span class="tags">${isNew(c) ? `<span class="tag new">${L("New", "Novo")}</span>` : ""}${change}${daysTag(c)}</span>
+      <span class="tags">${c.shared ? `<span class="tag grp">${L("Group", "Grupo")}</span>` : c.mine ? `<span class="tag grp">${L("Saved", "Salvo")}</span>`
+        : isNew(c) ? `<span class="tag new">${L("New", "Novo")}</span>` : ""}${change}${daysTag(c)}</span>
     </div>
     <div class="body">
       <div class="row1"><span class="price">${money(c.price)}</span>${deal}
@@ -914,9 +947,11 @@ function render() {
   const n = activeFilterCount();
   $("#fCount").hidden = !n; $("#fCount").textContent = n;
   renderChips();
-  const others = (DATA.links || []).length
-    ? L(`<div class="others"><span><b>OLX, Webmotors and Mercado Livre</b> aren't read automatically.</span><button id="othersBtn" type="button">Search them</button></div>`,
-        `<div class="others"><span><b>OLX, Webmotors e Mercado Livre</b> não são lidos automaticamente.</span><button id="othersBtn" type="button">Pesquisar</button></div>`) : "";
+  const others = `<div class="others"><span>${(DATA.links || []).length ? L("<b>OLX, Webmotors, Mercado Livre and Marketplace</b> aren't read automatically.",
+      "<b>OLX, Webmotors, Mercado Livre e Marketplace</b> não são lidos automaticamente.") : L("<b>Marketplace and other sites</b> aren't read automatically.",
+      "<b>Marketplace e outros sites</b> não são lidos automaticamente.")}</span><span class="ob">${(DATA.links || []).length
+      ? `<button id="othersBtn" type="button">${L("Search them", "Pesquisar")}</button>` : ""}<button id="evalBtn" type="button">${L("Check an ad", "Avaliar anúncio")}</button>${(n => n || state.ext
+      ? `<button id="extBtn" type="button" aria-pressed="${state.ext}">${L("Saved and group", "Salvos e grupo")} <span class="n">${n}</span></button>` : "")(sharedCars().length)}</span></div>`;
   const autoNote = AUTO
     ? `<div class="auto-note" role="status"><span><b>${L("Automatic cars only.", "Só carros automáticos.")}</b> ${esc(DATA.names.map(n => n.name).join(L(" and ", " e ")))}.</span><button data-gm="m" type="button">${L("Back to manual", "Voltar ao manual")}</button></div>` : "";
   const word = AUTO ? L("automatic cars", "carros automáticos") : L("cars", "carros");
@@ -1053,7 +1088,7 @@ function goneTxt(g) {                         // "gone Nov 3 after 20 days"
   return g.days ? L(`gone ${d} after ${g.days} days`, `saiu em ${d}, após ${g.days} ${g.days === 1 ? "dia" : "dias"}`) : L(`gone ${d}`, `saiu em ${d}`);
 }
 function detailSheet(c) {
-  const g = GB()[c.trans] || GB().u, site = SITES[c.source] || {label: c.source};
+  const g = GB()[c.trans] || GB().u, site = SITES[c.source] || {label: c.source}, ext = c.mine || c.shared;
   const sc = DATA.score, gearPts = sc.gearbox[{m: "✔ Manual", c: "⚠ Conflict", u: "? Unconfirmed"}[c.trans]] ?? 0;
   const redPts = c.red.reduce((a, f) => a + (sc.red[f] || 0), 0);
   const greenPts = Math.min(sc.green_cap, c.green.reduce((a, f) => a + (sc.green[f] || 0), 0));
@@ -1065,15 +1100,20 @@ function detailSheet(c) {
     <p class="sub">${esc([c.trim, BD()[c.body], money(c.price)].filter(Boolean).join(", "))}</p>
     ${verdictHTML(c)}
     ${compareStrip(c)}
+    ${ext ? `<p class="extnote">${c.shared ? L(`Shared with the group on ${fmtDate(c.first_seen)}.`, `Compartilhado no grupo em ${fmtDate(c.first_seen)}.`)
+      : L(`Saved on this phone on ${fmtDate(c.first_seen)}.`, `Salvo neste aparelho em ${fmtDate(c.first_seen)}.`)}${c.km_guess ? " " + L("Km not given: the typical km for the year is used.", "Km não informada: usada a km típica do ano.") : ""}</p>` : ""}
     <h3>${L("Ad details", "Detalhes do anúncio")}</h3>
     <p>${esc(c.note)}</p>
     ${c.desc ? `<div class="desc">${esc(c.desc)}${c.desc.length >= 690 ? "…" : ""}</div>` : ""}
+    ${ext ? `<h3>${L("Red flags", "Alertas")}</h3><p class="none">${L("CarWatch can't read ads from this site, so there are no automatic flags: read the ad carefully.",
+      "O CarWatch não lê anúncios deste site, então não há alertas automáticos: leia o anúncio com atenção.")}</p>` : `
     <h3>${L("Red flags", "Alertas")}</h3>
     ${c.red.length ? `<div class="flags">${c.red.map(f => `<span class="flag${HARD().includes(f) ? " hard" : ""}">${flagTxt(f)}</span>`).join("")}</div>`
                    : `<p class="none">${c.flags_read ? L("None found in the ad text.", "Nenhum no texto do anúncio.") : L("Ad text not read yet.", "Texto do anúncio ainda não lido.")}</p>`}
     <h3>${L("Good signs", "Pontos positivos")}</h3>
     ${c.green.length ? `<div class="good-list">${c.green.map(f => `<span class="plus">${flagTxt(f)}</span>`).join("")}</div>`
                      : `<p class="none">${c.flags_read ? L("None mentioned.", "Nenhum mencionado.") : L("Ad text not read yet.", "Texto do anúncio ainda não lido.")}</p>`}
+    `}
     <h3>${L("Price and score", "Preço e nota")}</h3>
     <dl class="kv">
       <dt>${L("Listed", "Pedido")}</dt><dd>${money(c.price)}${c.prev_price && c.prev_price !== c.price ? ` (${L("was", "era")} ${money(c.prev_price)})` : ""}${c.red.includes("Price hidden")
@@ -1086,7 +1126,7 @@ function detailSheet(c) {
       <dt>${L("Confidence", "Confiança")}</dt><dd>${c.conf != null ? Math.round(c.conf * 100) + L("% (fewer cars of this model = less weight on price)", "% (menos carros deste modelo = menos peso no preço)") : L("n/a", "n/d")}</dd>
     </dl>
     ${fairBreakdown(c)}
-    ${historySection(c)}
+    ${ext ? "" : historySection(c)}
     ${soldSection(c)}
     <h3>${L("The car", "O carro")}</h3>
     <dl class="kv">
@@ -1095,10 +1135,13 @@ function detailSheet(c) {
       <dt>${L("Body", "Carroceria")}</dt><dd>${BD()[c.body] || L("n/a", "n/d")}</dd>
       <dt>${L("Location", "Localização")}</dt><dd>${esc(c.place || L("n/a", "n/d"))}</dd>
       <dt>${L("Listed on", "Site")}</dt><dd>${esc(site.label)}${c.listed ? `, ${fmtDate(c.listed)}` : ""}</dd>
+      ${ext ? `<dt>${c.shared ? L("Shared", "Compartilhado em") : L("Saved", "Salvo em")}</dt><dd>${fmtDate(c.first_seen)}</dd>` : `
       <dt>${L("First seen", "Visto pela 1ª vez")}</dt><dd>${PT() ? fmtDate(c.first_seen) : esc(c.first_seen)}</dd>
-      <dt>${L("Last checked", "Última verificação")}</dt><dd>${PT() ? fmtDate(c.verified || c.last_seen) : esc(c.verified || c.last_seen)}</dd>
+      <dt>${L("Last checked", "Última verificação")}</dt><dd>${PT() ? fmtDate(c.verified || c.last_seen) : esc(c.verified || c.last_seen)}</dd>`}
     </dl>
-    <a class="primary" href="${esc(c.url)}" target="_blank" rel="noopener">${L(`Open ad on ${esc(site.label)}`, `Abrir anúncio (${esc(site.label)})`)}</a>`, L("Car details", "Detalhes do carro"));
+    ${c.url ? `<a class="primary" href="${esc(c.url)}" target="_blank" rel="noopener">${site.label ? L(`Open ad on ${esc(site.label)}`, `Abrir anúncio (${esc(site.label)})`) : L("Open the ad", "Abrir o anúncio")}</a>` : ""}
+    ${ext ? extActions(c) : ""}`, L("Car details", "Detalhes do carro"));
+  if (ext) bindExt(c);
 }
 function filterSheet() {
   const prices = DATA.cars.map(c => c.price), kms = DATA.cars.map(c => c.km || 0), years = DATA.cars.map(c => c.year).filter(Boolean);
@@ -1168,11 +1211,19 @@ function menuSheet() {
                                       "Como a nota funciona<small>Preço comparado a carros parecidos, certeza do câmbio, alertas e pontos positivos</small>")}</span></button>
       ${(DATA.links || []).length ? `<button id="menuLinks"><span>${L("Search OLX, Webmotors, Mercado Livre<small>Sites CarWatch can't read: one-tap searches per car, manual or automatic</small>",
                                       "Pesquisar na OLX, Webmotors e Mercado Livre<small>Sites que o CarWatch não consegue ler: buscas com um toque por carro, manual ou automático</small>")}</span></button>` : ""}
+      <button id="menuEval"><span>${L("Check an ad from another site<small>Paste or share any ad (OLX, Marketplace...) to see its fair price and what to offer</small>",
+                                       "Avaliar anúncio de outro site<small>Cole ou compartilhe qualquer anúncio (OLX, Marketplace...) para ver o preço justo e quanto oferecer</small>")}</span></button>
+      <button id="menuGroup"><span>${groupCfg().url ? L("Group<small>Connected: invite people, or leave</small>", "Grupo<small>Conectado: convide pessoas ou saia</small>")
+        : L("Group<small>Share ads with friends: everyone sees them in the list</small>", "Grupo<small>Divida anúncios com amigos: todos veem na lista</small>")}</span></button>
+      ${INSTALL ? `<button id="menuInstall"><span>${L("Install CarWatch<small>It then shows in Android's Share menu</small>", "Instalar o CarWatch<small>Assim ele aparece no menu Compartilhar do Android</small>")}</span></button>` : ""}
       <button id="menuCountry"><span>${L(`Switch to ${COUNTRIES[CUR().next].name}<small>Or tap the flag next to the name</small>`,
                                           `Mudar para o Canadá<small>Ou toque na bandeira ao lado do nome</small>`)}</span></button>
     </nav>
     ${gone ? `<h3>${L("Recently sold or removed", "Vendidos ou removidos recentemente")}</h3><ul class="gone">${gone}</ul>` : ""}`, "Menu");
   if ($("#menuLinks")) $("#menuLinks").onclick = () => linksSheet();
+  $("#menuEval").onclick = () => evalSheet();
+  $("#menuGroup").onclick = () => groupSheet();
+  if ($("#menuInstall")) $("#menuInstall").onclick = () => { const p = INSTALL; INSTALL = null; closeSheet(); p.prompt(); };
   $("#menuCountry").onclick = () => confirmCountry();
   $("#howScore").onclick = () => openSheet(PT() ? `
     <h2>Como a nota funciona</h2>
@@ -1317,8 +1368,8 @@ function paintStatic() {                       // fixed page text, in the store'
   $("#dirBtn").setAttribute("aria-label", L("Sort direction", "Direção da ordem"));
   document.querySelector(".seg").setAttribute("aria-label", L("Sort by", "Ordenar por"));
   $("#chips").setAttribute("aria-label", L("Car", "Carro"));
-  $("#tabList").textContent = L("Listings", "Anúncios");
-  $("#tabPrices").textContent = L("Prices", "Preços");
+  $("#tabList span").textContent = L("Listings", "Anúncios");
+  $("#tabPrices span").textContent = L("Prices", "Preços");
   document.querySelector(".tabs").setAttribute("aria-label", L("View", "Visão"));
 }
 function switchCountry() {
@@ -2037,6 +2088,445 @@ function paintTabs() {
   document.querySelector(".top").classList.toggle("prices", pr);
 }
 
+// ---------- ads from other sites: check one, keep it, share it with a group ----------
+// An ad shared from another app (Android share menu), pasted, or opened from the group gets the same fair price,
+// verdict and score as the cars CarWatch reads itself. Saved ads stay on this phone; group ads live in a Google sheet
+// (apps-script/Code.gs) that everyone with the invite reads and, with the code, adds to.
+const SITE_OF = [[/(^|\.)olx\.com\.br$/, "olx"], [/(^|\.)mercadoli[vb]re\.com(\.br)?$/, "mercadolivre"], [/(^|\.)webmotors\.com\.br$/, "webmotors"],
+  [/(^|\.)icarros\.com\.br$/, "icarros"], [/(^|\.)(facebook\.com|fb\.com|fb\.me)$/, "marketplace"], [/(^|\.)kijiji\.ca$/, "kijiji"],
+  [/(^|\.)autotrader\.ca$/, "autotrader"], [/(^|\.)carpages\.ca$/, "carpages"], [/(^|\.)napista\.com\.br$/, "napista"], [/(^|\.)mobiauto\.com\.br$/, "mobiauto"]];
+const MODEL_RX = [["FA5_SI", /\bcivic\b.*\bsi\b|\bsi\b.*\bcivic\b/], ["FA5", /\bcivic\b/], ["FB", /\bcivic\b/], ["YARIS_S", /\byaris\b/],
+  ["E36M3", /\bm3\b/], ["E46M3", /\bm3\b/], ["E9XM3", /\bm3\b/], ["E39M5", /\bm5\b/], ["E60M5", /\bm5\b/],
+  ["E91", /\b(wagon|touring|sport ?wagon|perua)\b/], ["E46_330", /\b330 ?c?i?\b/], ["Z350", /\b350 ?z\b/], ["Z370", /\b370 ?z\b/]];
+const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const hashId = s => { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return "sh" + h.toString(36).padStart(7, "0"); };
+function cleanUrl(u) {                           // the same ad shared twice gives the same address: no tracking, no anchor
+  try {
+    const x = new URL(String(u).trim());
+    if (!/^https?:$/.test(x.protocol)) return null;
+    const fb = x.pathname.match(/\/marketplace\/item\/(\d+)/);
+    if (fb) return "https://www.facebook.com/marketplace/item/" + fb[1];
+    return (x.protocol + "//" + x.hostname.replace(/^(www|m)\./, "") + x.pathname).replace(/\/+$/, "").toLowerCase();
+  } catch (e) { return null; }
+}
+function allNames() {                            // every model this store tracks, manual or automatic
+  const seen = new Map();
+  for (const d of [MAN_DATA, AUTO_DATA, DATA]) for (const n of (d?.names || [])) if (!seen.has(n.name)) seen.set(n.name, n);
+  return [...seen.values()];
+}
+function bodiesOf(name) {                        // bodies seen for a model, most common first
+  const cnt = {};
+  for (const d of [MAN_DATA, AUTO_DATA]) for (const c of (d?.cars || [])) if (c.name === name && c.body) cnt[c.body] = (cnt[c.body] || 0) + 1;
+  return Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a]);
+}
+function loadTowns() {
+  if (TOWNS || COUNTRY !== "BR") return Promise.resolve(TOWNS);
+  return fetch("data/geo_br.json").then(r => r.json()).then(d => (TOWNS = d)).catch(() => null);
+}
+function findTown(raw, ufHint) {                 // "Campinas - SP" / "Campinas, SP" in the ad text, or the town in a site's own state
+  if (!TOWNS || !raw) return null;
+  const w = " " + plain(raw).replace(/[^a-z0-9]+/g, " ") + " ";
+  let best = null;
+  for (const t of TOWNS) {
+    const tn = plain(t[0]).replace(/[^a-z0-9]+/g, " ").trim();
+    if (tn.length < 4 || !w.includes(" " + tn + " ")) continue;
+    const s = (w.includes(" " + tn + " " + t[1].toLowerCase() + " ") ? 2 : 0) + (ufHint && t[1] === ufHint ? 1 : 0) + tn.length / 100;
+    if (s >= 1 && (!best || s > best.s)) best = {t, s};
+  }
+  return best ? {name: best.t[0] + ", " + best.t[1], geo: [best.t[2], best.t[3]]} : null;
+}
+function parseAd(title, text, url) {             // what an ad's link and text say: site, model, year, km, price, version, gearbox
+  const raw = [title, text, url].filter(Boolean).join(" ");
+  const link = (String(url || "").match(/https?:\/\/[^\s"'<>]+/i) || raw.match(/https?:\/\/[^\s"'<>]+/i) || [])[0] || "";
+  let host = "", path = "";
+  try { const u = new URL(link); host = u.hostname.replace(/^(www|m)\./, ""); path = decodeURIComponent(u.pathname); } catch (e) {}
+  const site = (SITE_OF.find(([rx]) => rx.test(host)) || [null, host])[1];
+  const country = /\.br$/.test(host) ? "BR" : /\.ca$/.test(host) ? "CA" : null;
+  const prose = raw.replace(/https?:\/\/\S+/g, " ");
+  const words = plain(prose + " " + path.replace(/[\/_.-]+/g, " "));
+  const ys = allNames().flatMap(n => n.years || []), y0 = Math.min(...ys) - 1, y1 = Math.max(...ys) + 1;
+  let year = null;
+  const pair = plain(prose + " " + path).match(/\b((?:19|20)\d\d) ?[\/-] ?((?:19|20)\d\d)\b/);         // "2014/2015": model year
+  if (pair && +pair[2] - +pair[1] >= 0 && +pair[2] - +pair[1] <= 1) year = +pair[2];
+  else year = [...words.matchAll(/\b(19[89]\d|20[0-3]\d)\b/g)].map(m => +m[1]).find(v => v >= y0 && v <= y1) || null;
+  const br = (country || COUNTRY) === "BR";
+  const pm = prose.match(br ? /R\$\s?(\d{1,3}(?:\.\d{3})+|\d{4,})(?:,\d{2})?/i : /\$\s?(\d{1,3}(?:,\d{3})+|\d{4,})(?:\.\d{2})?/);
+  const price = pm ? +pm[1].replace(/[.,]/g, "") : null;
+  const kmM = words.match(/\b(\d{1,3}(?:[.,]\d{3})+|\d+(?:[.,]\d+)?) ?(mil|k)? ?(km|kms|quilometros)\b/);
+  let km = kmM ? (kmM[2] ? parseFloat(kmM[1].replace(",", ".")) * 1000 : +kmM[1].replace(/[.,]/g, "")) : null;
+  if (!(km > 0 && km < 1e6)) km = null;
+  const names = allNames(), fit = n => !year || (year >= n.years[0] && year <= n.years[1]);
+  const fam = (MODEL_RX.find(([f, rx]) => rx.test(words) && names.some(n => n.family === f && fit(n))) || [])[0];
+  const body = /\b(conversivel|cabrio|cabriolet|convertible|roadster)\b/.test(words) ? "conv" : /\b(sedan|seda|4p|4 portas)\b/.test(words) ? "sedan"
+    : /\b(coupe|cupe|2p|2 portas)\b/.test(words) ? "coupe" : /\b(wagon|touring|perua)\b/.test(words) ? "wagon" : "";
+  const cands = names.filter(n => n.family === fam && fit(n));
+  const name = (cands.find(n => body && bodiesOf(n.name)[0] === body) || cands[0] || {}).name || "";
+  const gear = /\b(aut|automatico|automatica|automatic|cvt)\b/.test(words) ? "a" : /\b(manual|mec|mecanico)\b/.test(words) ? "m" : (AUTO ? "a" : "m");
+  const mk = fam ? fam + (gear === "a" ? "|auto" : "") : "";
+  const version = Object.keys((DATA.score.versions || {})[mk] || {}).sort((a, b) => b.length - a.length)
+    .find(v => new RegExp("(^|[^a-z0-9])" + plain(v).replace(/[^a-z0-9]+/g, " ") + "([^a-z0-9]|$)").test(words)) || "";
+  const ufHint = (host.match(/^([a-z]{2})\.olx\.com\.br$/) || [])[1]?.toUpperCase() || "";
+  const kj = path.match(/^\/v-[^/]+\/([a-z-]+)-([a-z]{2})\//);                  // Kijiji: /v-cars-trucks/kingston-on/...
+  const town = kj ? {name: kj[1].split("-").map(w => w[0].toUpperCase() + w.slice(1)).join(" ") + ", " + kj[2].toUpperCase(), geo: null} : null;
+  const short = String(title || prose).replace(/\s+/g, " ").trim().slice(0, 140);
+  return {url: link, site, host, country, title: short, year, km, price, name, gear, version, body: body && name && bodiesOf(name).includes(body) ? body : "",
+          town, ufHint, raw: prose};
+}
+
+// saved ads (this phone) and the group's ads (the Google sheet), as cars the list understands
+const lsGet = (k, d) => { try { return JSON.parse(localStorage.getItem(k) || "null") ?? d; } catch (e) { return d; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const groupCfg = () => lsGet("cw-group", {}) || {};
+const mineAds = () => lsGet("cw-mine-" + COUNTRY, []) || [];
+const feedAds = () => (lsGet("cw-feed-" + COUNTRY, {}) || {}).ads || [];
+let SHARED_VER = 0, SHARED_CACHE = {key: "", cars: []}, INSTALL = null;
+function adToCar(a, origin) {
+  const n = allNames().find(x => x.name === a.name) || allNames().find(x => x.family === a.family);
+  const year = +a.year || null, price = +a.price || null;
+  if (!n || !year || !price) return null;
+  const trans = a.gear === "a" ? "a" : "m";
+  const first = String(a.added || new Date().toISOString()).slice(0, 10), last = String(a.updated || a.added || first).slice(0, 10);
+  const c = {id: a.id || "sh-eval", name: n.name, family: n.family, year, km: +a.km || null, price, trim: a.version || "", trans,
+    body: a.body || bodiesOf(n.name)[0] || "coupe", place: a.city ? a.city + (a.uf ? ", " + a.uf : "") : a.uf || "",
+    geo: a.lat !== "" && a.lat != null && a.lon !== "" && a.lon != null && isFinite(+a.lat) ? [+a.lat, +a.lon] : null,
+    url: a.url || "", source: a.site || "", photos: [], red: [], green: [], flags_read: false, note: a.title || "", desc: "",
+    first_seen: first, last_seen: last, verified: last, days: Math.max(0, Math.round((Date.now() - asDate(first)) / DAY)), days_src: "tracked",
+    shared: origin === "group", mine: origin === "mine"};
+  if (!c.km) { const tk = typicalKm(n.name, year); c.km = tk ? Math.round(tk / 1000) * 1000 : null; c.km_guess = true; }
+  const mk = mkOfCar(c), m = DATA.market?.[mk]?.model;
+  if (m && c.km != null) {                       // the collector's maths: national fair price, % under it, confidence, score
+    c.fair = Math.round(fairAt(mk, year, c.km, verOf(c), c.body === "conv") / 100) * 100;
+    c.vs_fair = 1 - price / c.fair;
+    c.conf = Math.round(m[3] / (m[3] + 5) * 100) / 100;
+    c.sr = DATA.score.base + pricePart(c.vs_fair) / DATA.score.pct_per_point * c.conf;
+    c.score = Math.round(Math.max(0, Math.min(10, c.sr)) * 10) / 10;
+  } else c.fair = c.vs_fair = c.conf = c.sr = c.score = null;
+  const S = DATA.fipe?.series;
+  if (S) for (const k of [`${n.family}|${verOf(c) || ""}|${trans}|${year}`, `${n.family}||${trans}|${year}`].map(k => k + (c.body === "conv" ? "|conv" : ""))) {
+    if (S[k]) { const h = S[k].hist; c.fipe = h[h.length - 1][1]; c.fipe_k = k; break; }
+  }
+  return c;
+}
+function sharedCars() {                          // saved and group ads for the current gearbox; the group copy wins
+  if (!DATA) return [];
+  const key = COUNTRY + "|" + SHARED_VER + "|" + (AUTO ? "a" : "m");
+  if (SHARED_CACHE.key !== key) {
+    const by = new Map(), cut = Date.now() - 60 * DAY;
+    for (const a of mineAds()) { const c = adToCar(a, "mine"); if (c) by.set(c.id, c); }
+    for (const a of feedAds()) {
+      if (a.country !== COUNTRY || a.status === "gone" || new Date(a.updated || a.added) < cut) continue;
+      const c = adToCar(a, "group");
+      if (c) { c.mine = by.has(c.id); by.set(c.id, c); }
+    }
+    SHARED_CACHE = {key, cars: [...by.values()]};
+  }
+  return SHARED_CACHE.cars.filter(c => AUTO ? c.trans === "a" : c.trans !== "a");
+}
+const carById = id => DATA.cars.find(c => c.id === id) || SHARED_CACHE.cars.find(c => c.id === id);
+function loadFeed() {                            // the group's ads, refreshed in the background after the list shows
+  const g = groupCfg();
+  if (!g.url) return;
+  const want = COUNTRY, ctl = new AbortController();
+  setTimeout(() => ctl.abort(), 15000);
+  fetch(g.url + (g.url.includes("?") ? "&" : "?") + "country=" + COUNTRY, {signal: ctl.signal})
+    .then(r => r.json()).then(d => {
+      if (want !== COUNTRY || !d || !d.ok) return;
+      const before = JSON.stringify(feedAds());
+      lsSet("cw-feed-" + COUNTRY, {at: Date.now(), ads: d.ads || []});
+      if (JSON.stringify(d.ads || []) === before) return;
+      SHARED_VER++;
+      if (state.tab === "list" && window.scrollY < 300 && $("#layer").hidden) render();
+    }).catch(() => {});
+}
+function groupPost(body) {                       // plain-text body: Apps Script answers without a CORS pre-check
+  const g = groupCfg();
+  if (!g.url || !g.code) return Promise.reject(new Error("nogroup"));
+  return fetch(g.url, {method: "POST", body: JSON.stringify({...body, code: g.code})}).then(r => r.json());
+}
+const groupErr = e => ({code: L("The group code is wrong: check it in Menu > Group.", "Código do grupo errado: confira em Menu > Grupo."),
+  invalid: L("Something in the ad doesn't look right: check the link, year, km and price.", "Algo no anúncio não parece certo: confira o link, ano, km e preço."),
+  full: L("The group's sheet is full.", "A planilha do grupo está cheia."), missing: L("This ad is no longer in the group.", "Este anúncio não está mais no grupo."),
+  nogroup: L("Join a group first: Menu > Group.", "Entre em um grupo primeiro: Menu > Grupo.")}[e] ||
+  L("Couldn't reach the group. Check the connection and try again.", "Não foi possível falar com o grupo. Confira a conexão e tente de novo."));
+
+// the "Check an ad" sheet
+let EV = null;
+function evalSheet(ad) {
+  EV = Object.assign({id: "", url: "", site: "", host: "", title: "", name: "", year: "", km: "", price: "", version: "", gear: AUTO ? "a" : "m",
+                      body: "", town: null, ufHint: "", raw: ""}, ad || {});
+  if (EV.name && !EV.body) EV.body = bodiesOf(EV.name)[0] || "";
+  paintEval();
+  if (COUNTRY === "BR" && !EV.town && EV.raw) loadTowns().then(() => {
+    const t = findTown(EV.raw, EV.ufHint);
+    if (t && EV && !EV.town && $("#evTown")) { EV.town = t; $("#evTown").value = t.name; paintOut(); }
+  });
+}
+function evRecord() {
+  const n = allNames().find(x => x.name === EV.name), tn = EV.town?.name || "";
+  return {id: EV.id || (EV.url ? hashId(cleanUrl(EV.url) || EV.url) : "sh" + Date.now().toString(36)), country: COUNTRY, site: EV.site || "", url: EV.url || "",
+    name: EV.name, family: n?.family || "", year: +EV.year || "", km: +EV.km || "", price: +EV.price || "", version: EV.version || "", gear: EV.gear,
+    body: EV.body || "", city: tn.split(",")[0].trim(), uf: (tn.split(",")[1] || EV.ufHint || "").trim(),
+    lat: EV.town?.geo?.[0] ?? "", lon: EV.town?.geo?.[1] ?? "", title: EV.title || ""};
+}
+function evalOut() {
+  const n = allNames().find(x => x.name === EV.name);
+  if (!n) return `<p class="none">${L("Choose the model to see the verdict.", "Escolha o modelo para ver o veredito.")}</p>`;
+  if (!EV.year || !EV.price) return `<p class="none">${L("Fill in the year and the price to see the verdict.", "Preencha o ano e o preço para ver o veredito.")}</p>`;
+  if (EV.year < n.years[0] || EV.year > n.years[1])
+    return `<p class="none">${L(`CarWatch tracks the ${esc(n.name)} from ${n.years[0]} to ${n.years[1]}: check the year or the model.`,
+                                `O CarWatch acompanha o ${esc(n.name)} de ${n.years[0]} a ${n.years[1]}: confira o ano ou o modelo.`)}</p>`;
+  const c = adToCar(evRecord(), "eval");
+  if (!c || !c.fair) return `<p class="none">${L("Not enough cars of this model to estimate a fair price.", "Poucos carros deste modelo para estimar um preço justo.")}</p>`;
+  const notes = [];
+  if (c.km_guess) notes.push(L(`Km not given: using the typical km for a ${c.year} (${kmFmt(c.km)}).`, `Km não informada: usei a km típica de um ${c.year} (${kmFmt(c.km)}).`));
+  let show = c;
+  const a = EV.town?.geo ? areaLevel(EV.town, LOC.radius) : null;
+  if (a && Math.abs(a.lv) > .001) {              // priced where the car is, not where you are
+    const lf = Math.round(c.fair * Math.exp(a.lv) / 100) * 100;
+    show = {...c, fair: lf, vs_fair: 1 - c.price / lf};
+    notes.push(L(`Fair price for ${esc(EV.town.name)}, where prices are ${levelTxt(a.lv)}.`, `Preço justo de ${esc(EV.town.name)}, onde os preços estão ${levelTxt(a.lv)}.`));
+  }
+  return verdictHTML(show) + (notes.length ? `<p class="fine">${notes.join(" ")}</p>` : "") + compareStrip(show);
+}
+const paintOut = () => { if ($("#evOut")) $("#evOut").innerHTML = evalOut(); };
+function paintEval(msg = "", show = false) {
+  const names = allNames(), n = names.find(x => x.name === EV.name), fam = n?.family;
+  const hasAuto = !!(fam && DATA.market?.[fam + "|auto"]), hasMan = !!(fam && DATA.market?.[fam]);
+  if (fam && EV.gear === "a" && !hasAuto) EV.gear = "m";
+  if (fam && EV.gear === "m" && !hasMan && hasAuto) EV.gear = "a";
+  const vers = fam ? Object.keys((DATA.score.versions || {})[fam + (EV.gear === "a" ? "|auto" : "")] || {}).sort() : [];
+  if (EV.version && !vers.includes(EV.version)) EV.version = "";
+  const bodies = n ? bodiesOf(n.name) : [];
+  if (bodies.length && !bodies.includes(EV.body)) EV.body = bodies[0];
+  const site = SITES[EV.site] || {label: EV.host || ""}, g = groupCfg();
+  const known = !!EV.id && mineAds().some(a => a.id === EV.id);
+  const tk = n && EV.year ? typicalKm(n.name, +EV.year) : null;
+  const towns = [...(LOC.active ? [LOC.active] : []), ...LOC.favs].filter((t, i, a) => a.findIndex(x => x.name === t.name) === i).slice(0, 4);
+  openSheet(`
+    <h2>${L("Check an ad", "Avaliar anúncio")}</h2>
+    <p class="sub">${EV.url ? `${site.label ? L(`From ${esc(site.label)}.`, `Site: ${esc(site.label)}.`) + " " : ""}<a href="${esc(EV.url)}" target="_blank" rel="noopener">${L("Open the ad", "Abrir o anúncio")}</a>`
+      : L("Paste the link or the text of an ad from any site (OLX, Mercado Livre, Webmotors, Marketplace...). On Android you can also share it straight to CarWatch.",
+          "Cole o link ou o texto de um anúncio de qualquer site (OLX, Mercado Livre, Webmotors, Marketplace...). No Android, dá para compartilhar direto para o CarWatch.")}</p>
+    ${EV.url ? "" : `<div class="evpaste"><textarea id="evPaste" rows="3" placeholder="${L("Paste here", "Cole aqui")}" aria-label="${L("Ad link or text", "Link ou texto do anúncio")}"></textarea>
+      <button id="evRead" type="button">${L("Read", "Ler")}</button></div>`}
+    <div class="evform">
+      <label class="wide">${L("Model", "Modelo")}<select id="evName"><option value="">${L("Choose", "Escolha")}</option>${names.map(x =>
+        `<option value="${esc(x.name)}" ${x.name === EV.name ? "selected" : ""}>${esc(x.name)} (${x.years[0]}–${x.years[1]})</option>`).join("")}</select></label>
+      <label>${L("Year", "Ano")}<input id="evYear" inputmode="numeric" maxlength="4" autocomplete="off" value="${EV.year || ""}"></label>
+      <label>Km<input id="evKm" inputmode="numeric" autocomplete="off" value="${EV.km ? nf(+EV.km) : ""}" placeholder="${tk ? L("typical ", "típica ") + nf(Math.round(tk / 1000) * 1000) : ""}"></label>
+      <label class="wide">${L("Price", "Preço")} (${CUR().sym.trim()})<input id="evPrice" inputmode="numeric" autocomplete="off" value="${EV.price ? nf(+EV.price) : ""}"></label>
+      ${vers.length ? `<label>${L("Version", "Versão")}<select id="evVer"><option value="">${L("Not sure", "Não sei")}</option>${vers.map(v =>
+        `<option ${v === EV.version ? "selected" : ""}>${esc(v)}</option>`).join("")}</select></label>` : ""}
+      ${bodies.length > 1 ? `<label>${L("Body", "Carroceria")}<select id="evBody">${bodies.map(b => `<option value="${esc(b)}" ${b === EV.body ? "selected" : ""}>${BD()[b] || esc(b)}</option>`).join("")}</select></label>` : ""}
+      ${hasAuto && hasMan ? `<div class="wide opt-group" role="group" aria-label="${L("Gearbox", "Câmbio")}">${[["m", "Manual"], ["a", L("Automatic", "Automático")]].map(([v, l]) =>
+        `<button class="opt" type="button" data-evgear="${v}" aria-pressed="${EV.gear === v}">${l}</button>`).join("")}</div>` : ""}
+      <label class="wide">${L("Town", "Cidade")}<input id="evTown" ${COUNTRY === "BR" ? 'list="evTowns"' : ""} autocomplete="off" value="${esc(EV.town?.name || "")}"
+        placeholder="${L("Where the car is, e.g. Kingston, ON", "Onde o carro está, ex.: Campinas, SP")}"></label>
+      ${COUNTRY === "BR" ? `<datalist id="evTowns"></datalist>` : ""}
+      ${towns.length ? `<div class="wide opt-group">${towns.map(t => `<button class="opt" type="button" data-evtown="${esc(t.name)}" aria-pressed="${EV.town?.name === t.name}">${esc(t.name)}</button>`).join("")}</div>` : ""}
+    </div>
+    <div id="evOut">${evalOut()}</div>
+    <div class="sheet-actions">
+      <button id="evSave" type="button">${known ? L("Update my copy", "Atualizar minha cópia") : L("Save to my list", "Salvar na minha lista")}</button>
+      ${g.url && g.code ? `<button class="go" id="evSend" type="button">${L("Send to the group", "Enviar ao grupo")}</button>` : ""}
+    </div>
+    <p class="addmsg" id="evMsg" role="status">${esc(msg)}${show ? ` <button class="linkbtn" id="evShow" type="button">${L("See it in the list", "Ver na lista")}</button>` : ""}</p>
+    <p class="fine">${g.url && g.code ? L("Saved ads stay on this phone. Group ads show for everyone in your group.", "Anúncios salvos ficam só neste aparelho. Os do grupo aparecem para todos do seu grupo.")
+      : L("Saved ads show in your list with a score, on this phone only. To share them with friends, set up a group: Menu > Group.",
+          "Anúncios salvos aparecem na sua lista com nota, só neste aparelho. Para dividir com amigos, crie um grupo: Menu > Grupo.")}</p>`, L("Check an ad", "Avaliar anúncio"));
+  if ($("#evShow")) $("#evShow").onclick = () => {      // the list of the ad's gearbox, filtered to its model
+    const want = EV.gear === "a";
+    Object.assign(state, {tab: "list", names: [EV.name], ext: true});
+    closeSheet();
+    if (want !== AUTO && MAN_DATA?.auto_file) setAuto(want); else { window.scrollTo({top: 0}); render(); }
+  };
+  const digits = v => +String(v).replace(/\D/g, "") || "";
+  const onNum = (id, key) => $(id).oninput = e => { EV[key] = digits(e.target.value); paintOut(); };
+  onNum("#evYear", "year"); onNum("#evKm", "km"); onNum("#evPrice", "price");
+  $("#evYear").onchange = () => paintEval();                                    // the typical km follows the year
+  $("#evName").onchange = e => { EV.name = e.target.value; EV.body = ""; paintEval(); };
+  if ($("#evVer")) $("#evVer").onchange = e => { EV.version = e.target.value; paintOut(); };
+  if ($("#evBody")) $("#evBody").onchange = e => { EV.body = e.target.value; paintOut(); };
+  document.querySelectorAll("[data-evgear]").forEach(b => b.onclick = () => { EV.gear = b.dataset.evgear; paintEval(); });
+  document.querySelectorAll("[data-evtown]").forEach(b => b.onclick = () => {
+    EV.town = [LOC.active, ...LOC.favs].find(t => t && t.name === b.dataset.evtown) || null; paintEval();
+  });
+  $("#evTown").onchange = e => {                 // Brazil: a town from the list (it has coordinates); Canada: any text
+    const v = e.target.value.trim();
+    if (COUNTRY !== "BR") { EV.town = v ? {name: v, geo: null} : null; return paintOut(); }
+    const hit = (TOWNS || []).find(x => plain(x[0] + ", " + x[1]).replace(/\s+/g, " ") === plain(v).replace(/\s+/g, " "));
+    EV.town = hit ? {name: hit[0] + ", " + hit[1], geo: [hit[2], hit[3]]} : v ? {name: v, geo: null} : null;
+    paintOut();
+  };
+  if (COUNTRY === "BR") $("#evTown").onfocus = () => loadTowns().then(T => {
+    if (T && $("#evTowns") && !$("#evTowns").childElementCount) $("#evTowns").innerHTML = T.map(x => `<option value="${esc(x[0] + ", " + x[1])}">`).join("");
+  });
+  if ($("#evPaste")) {                           // a paste reads itself; typed text waits for Read
+    const go = () => {
+      const v = $("#evPaste").value;
+      if (!v.trim()) return;
+      const a = parseAd("", v, ""), hit = listedCar(a.url);
+      if (hit) return detailSheet(hit);
+      evalSheet({...EV, ...Object.fromEntries(Object.entries(a).filter(([, x]) => x)), id: a.url ? hashId(cleanUrl(a.url) || a.url) : EV.id});
+    };
+    $("#evPaste").onpaste = () => setTimeout(go, 0);
+    $("#evRead").onclick = go;
+  }
+  const check = () => {
+    const r = evRecord();
+    if (!r.name || !r.year || !r.price) { $("#evMsg").textContent = L("Fill in the model, year and price first.", "Preencha modelo, ano e preço primeiro."); return null; }
+    return r;
+  };
+  $("#evSave").onclick = () => {
+    const r = check();
+    if (!r) return;
+    const old = mineAds().find(a => a.id === r.id), now = new Date().toISOString();
+    lsSet("cw-mine-" + COUNTRY, [{...r, added: old?.added || now, updated: now}, ...mineAds().filter(a => a.id !== r.id)].slice(0, 200));
+    SHARED_VER++; EV.id = r.id;
+    if (state.tab === "list") render();
+    paintEval(L("Saved: it's in your list with a score.", "Salvo: está na sua lista, com nota."), true);
+  };
+  if ($("#evSend")) $("#evSend").onclick = () => {
+    const r = check();
+    if (!r) return;
+    if (!r.url) { $("#evMsg").textContent = L("To send it to the group, paste the ad's link.", "Para enviar ao grupo, cole o link do anúncio."); return; }
+    $("#evSend").disabled = true; $("#evMsg").textContent = L("Sending…", "Enviando…");
+    groupPost({action: "add", ad: r}).then(d => {
+      if (!d.ok) throw new Error(d.error);
+      const now = new Date().toISOString(), old = feedAds().find(a => a.id === r.id);
+      lsSet("cw-feed-" + COUNTRY, {at: Date.now(), ads: [{...r, added: old?.added || now, updated: now, status: "active"}, ...feedAds().filter(a => a.id !== r.id)]});
+      SHARED_VER++; EV.id = r.id;
+      if (state.tab === "list") render();
+      paintEval(d.updated ? L("Updated in the group.", "Atualizado no grupo.") : L("Sent: everyone in the group sees it now.", "Enviado: todos do grupo já veem o anúncio."), true);
+    }).catch(e => { if ($("#evSend")) $("#evSend").disabled = false; if ($("#evMsg")) $("#evMsg").textContent = groupErr(e.message); });
+  };
+}
+function listedCar(url) {                        // an ad CarWatch already reads: open it instead of checking it again
+  const u = url && cleanUrl(url);
+  if (!u) return null;
+  for (const d of [MAN_DATA, AUTO_DATA]) { const c = (d?.cars || []).find(x => cleanUrl(x.url) === u); if (c) return c; }
+  return null;
+}
+function extActions(c) {                         // buttons under a saved or group ad
+  const g = groupCfg(), canSend = c.mine && !c.shared && g.url && g.code && c.url;
+  return `<div class="sheet-actions wrap"><button id="extEdit" type="button">${L("Edit", "Editar")}</button>
+    ${canSend ? `<button id="extSend" type="button">${L("Send to the group", "Enviar ao grupo")}</button>` : ""}
+    ${c.mine ? `<button id="extDel" type="button">${L("Remove from my list", "Tirar da minha lista")}</button>` : ""}
+    ${c.shared ? `<button id="extGone" type="button">${L("Sold or removed", "Vendido ou saiu do ar")}</button>` : ""}</div>
+    <p class="addmsg" id="extMsg" role="status"></p>`;
+}
+function bindExt(c) {
+  const rec = () => mineAds().find(a => a.id === c.id) || feedAds().find(a => a.id === c.id);
+  const asEV = a => ({...a, town: a.city ? {name: a.city + (a.uf ? ", " + a.uf : ""), geo: a.lat !== "" && a.lat != null ? [+a.lat, +a.lon] : null} : null});
+  if ($("#extEdit")) $("#extEdit").onclick = () => { const a = rec(); if (a) evalSheet(asEV(a)); };
+  if ($("#extSend")) $("#extSend").onclick = () => { const a = rec(); if (a) { evalSheet(asEV(a)); $("#evSend")?.click(); } };
+  if ($("#extDel")) $("#extDel").onclick = () => {
+    lsSet("cw-mine-" + COUNTRY, mineAds().filter(a => a.id !== c.id));
+    SHARED_VER++; closeSheet(); render();
+  };
+  if ($("#extGone")) $("#extGone").onclick = () => {
+    $("#extGone").disabled = true; $("#extMsg").textContent = L("Sending…", "Enviando…");
+    groupPost({action: "gone", id: c.id}).then(d => {
+      if (!d.ok && d.error !== "missing") throw new Error(d.error);
+      lsSet("cw-feed-" + COUNTRY, {at: Date.now(), ads: feedAds().filter(a => a.id !== c.id)});
+      SHARED_VER++; closeSheet(); render();
+    }).catch(e => { if ($("#extGone")) $("#extGone").disabled = false; if ($("#extMsg")) $("#extMsg").textContent = groupErr(e.message); });
+  };
+}
+
+// the group: settings, invite link, install hint
+const inviteLink = g => location.origin + location.pathname + "?g=" + encodeURIComponent(g.code) + "&s=" + encodeURIComponent(g.url);
+const standalone = () => window.matchMedia?.("(display-mode: standalone)").matches || navigator.standalone === true;
+function installHint() {
+  if (standalone()) return `<p class="fine">${L("Installed: share an ad from any app and pick CarWatch.", "Instalado: compartilhe um anúncio de qualquer app e escolha o CarWatch.")}</p>`;
+  return `<p class="fine">${L("To get CarWatch in Android's Share menu, install it: Chrome menu ⋮ > Install app (or Add to home screen). On an iPhone, paste the link in Check an ad.",
+    "Para o CarWatch aparecer no menu Compartilhar do Android, instale o app: menu ⋮ do Chrome > Instalar app (ou Adicionar à tela inicial). No iPhone, cole o link em Avaliar anúncio.")}</p>`
+    + (INSTALL ? `<div class="confirm"><button id="doInstall" type="button">${L("Install CarWatch", "Instalar o CarWatch")}</button></div>` : "");
+}
+function bindInstall() {
+  if ($("#doInstall")) $("#doInstall").onclick = () => { const p = INSTALL; INSTALL = null; p.prompt(); p.userChoice?.finally(() => closeSheet()); };
+}
+function groupSheet(msg = "") {
+  const g = groupCfg(), on = !!(g.url && g.code), repo = (MAN_DATA || DATA)?.repo;
+  const n = feedAds().filter(a => a.status !== "gone").length;
+  openSheet(`
+    <h2>${L("Group", "Grupo")}</h2>
+    <p class="sub">${L("Share ads from sites CarWatch can't read with people you invite. Everyone in the group sees them in the list, with a score and a verdict.",
+                       "Compartilhe anúncios de sites que o CarWatch não lê com quem você convidar. Todos do grupo veem esses anúncios na lista, com nota e veredito.")}</p>
+    ${on ? `<p>${L(`Connected. ${n} group ${n === 1 ? "ad" : "ads"} in this store.`, `Conectado. ${n} ${n === 1 ? "anúncio do grupo" : "anúncios do grupo"} nesta loja.`)}</p>
+      <div class="confirm"><button class="primary" id="gInvite" type="button">${L("Invite someone", "Convidar alguém")}</button></div>`
+    : `<p>${L("Got an invite? Just open its link. To start a group, set up the free Google sheet that keeps the ads, once (about 5 minutes on a computer):",
+              "Recebeu um convite? É só abrir o link. Para criar um grupo, configure uma vez a planilha gratuita do Google que guarda os anúncios (uns 5 minutos num computador):")}
+      ${repo ? `<a href="https://github.com/${esc(repo)}/blob/carwatch-test/apps-script/README.md" target="_blank" rel="noopener">${L("setup steps", "passo a passo")}</a>.` : ""}</p>`}
+    <h3>${L("Group address", "Endereço do grupo")}</h3>
+    <div class="addtown"><input id="gUrl" placeholder="https://script.google.com/macros/s/…/exec" value="${esc(g.url || "")}" autocomplete="off" inputmode="url"></div>
+    <h3>${L("Group code", "Código do grupo")}</h3>
+    <div class="addtown"><input id="gCode" value="${esc(g.code || "")}" autocomplete="off" autocapitalize="characters" spellcheck="false">
+      <button id="gSave" type="button">${L("Save", "Salvar")}</button></div>
+    <p class="addmsg" id="gMsg" role="status">${esc(msg)}</p>
+    ${on ? `<button class="linkbtn" id="gLeave" type="button">${L("Leave the group on this phone", "Sair do grupo neste aparelho")}</button>` : ""}
+    <p class="fine">${L("Group ads are public listings: the sheet keeps only the link, model, year, km, price, version, gearbox and town. Anyone with the invite sees them, and the code lets them add ads. An ad nobody updates for 60 days leaves the list.",
+                        "Os anúncios do grupo são anúncios públicos: a planilha guarda só o link, modelo, ano, km, preço, versão, câmbio e cidade. Quem tem o convite vê os anúncios, e o código permite adicionar. Um anúncio que ninguém atualiza por 60 dias sai da lista.")}</p>
+    ${installHint()}`, L("Group", "Grupo"));
+  bindInstall();
+  if ($("#gInvite")) $("#gInvite").onclick = () => {
+    const link = inviteLink(g), text = L("Join my CarWatch group to share used-car ads:", "Entre no meu grupo do CarWatch para dividir anúncios de carros usados:");
+    if (navigator.share) return navigator.share({title: "CarWatch", text, url: link}).catch(() => {});
+    navigator.clipboard?.writeText(link).then(() => groupSheet(L("Invite link copied: send it to whoever you want in the group.", "Link do convite copiado: mande para quem você quiser no grupo.")),
+      () => groupSheet(link));
+  };
+  if ($("#gLeave")) $("#gLeave").onclick = () => { localStorage.removeItem("cw-group"); SHARED_VER++; render(); groupSheet(L("You left the group on this phone.", "Você saiu do grupo neste aparelho.")); };
+  $("#gSave").onclick = () => {
+    const url = $("#gUrl").value.trim(), code = $("#gCode").value.trim().toUpperCase();
+    if (!/^https:\/\/script\.google(usercontent)?\.com\/\S+$/.test(url)) return void ($("#gMsg").textContent = L("The address should look like https://script.google.com/macros/s/…/exec", "O endereço deve ser como https://script.google.com/macros/s/…/exec"));
+    if (!code) return void ($("#gMsg").textContent = L("Type the group code too.", "Digite o código do grupo também."));
+    joinGroup({url, code}, m => groupSheet(m));
+  };
+}
+function joinGroup(g, done) {                    // checks the address and the code before keeping them
+  lsSet("cw-group", g);
+  if ($("#gMsg")) $("#gMsg").textContent = L("Checking…", "Conferindo…");
+  groupPost({action: "ping"}).then(d => {
+    if (!d.ok) throw new Error(d.error);
+    lsSet("cw-feed-" + COUNTRY, {}); SHARED_VER++; loadFeed();
+    done(L("You're in the group. Shared ads show in the list with a Group tag.", "Você está no grupo. Os anúncios compartilhados aparecem na lista com a etiqueta Grupo."));
+  }).catch(e => {
+    if (e.message === "code" || e.name === "SyntaxError") {               // wrong code, or an address that isn't a CarWatch group
+      localStorage.removeItem("cw-group");
+      return done(e.name === "SyntaxError" ? L("That address didn't answer like a CarWatch group: check it.", "Esse endereço não respondeu como um grupo do CarWatch: confira.") : groupErr("code"));
+    }
+    SHARED_VER++;
+    done(L("Saved, but the group couldn't be reached now: its ads load when the connection is back.", "Salvo, mas não deu para falar com o grupo agora: os anúncios carregam quando a conexão voltar."));
+  });
+}
+
+// arriving from the share menu (?title=&text=&url=) or from an invite (?g=code&s=address)
+const INCOMING = (() => {
+  const p = new URLSearchParams(location.search), out = {};
+  if (p.get("g") && p.get("s")) out.invite = {code: p.get("g").trim().toUpperCase(), url: p.get("s").trim()};
+  if (p.get("title") || p.get("text") || p.get("url")) out.share = {title: p.get("title") || "", text: p.get("text") || "", url: p.get("url") || ""};
+  if (out.invite || out.share) history.replaceState(null, "", location.pathname);
+  return out;
+})();
+function handleIncoming() {
+  if (INCOMING.invite) {
+    const g = INCOMING.invite;
+    INCOMING.invite = null;
+    if (/^https:\/\/script\.google(usercontent)?\.com\//.test(g.url)) return joinGroup(g, m => groupSheet(m));
+  }
+  if (!INCOMING.share) return;
+  const s = INCOMING.share, a = parseAd(s.title, s.text, s.url);
+  if (a.country && a.country !== COUNTRY) return switchCountry();     // the store of that site; boot() comes back here
+  INCOMING.share = null;
+  const hit = listedCar(a.url);
+  if (hit) return detailSheet(hit);
+  const id = a.url ? hashId(cleanUrl(a.url) || a.url) : "", saved = id && (mineAds().find(x => x.id === id) || feedAds().find(x => x.id === id));
+  evalSheet(saved ? {...saved, town: saved.city ? {name: saved.city + (saved.uf ? ", " + saved.uf : ""), geo: saved.lat !== "" && saved.lat != null ? [+saved.lat, +saved.lon] : null} : null}
+                  : {...a, id});
+}
+window.addEventListener("beforeinstallprompt", e => { INSTALL = e; });          // Chrome's own install banner still shows
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+
 // ---------- events ----------
 document.addEventListener("submit", e => {
   const f = e.target.closest("form[data-budget]");
@@ -2050,7 +2540,7 @@ document.addEventListener("click", e => {
   const t = e.target;
   if (t.closest("[data-close]") || t.id === "scrim") return closeSheet();
   const info = t.closest("[data-info]");
-  if (info) { e.stopPropagation(); return detailSheet(DATA.cars.find(c => c.id === info.dataset.info)); }
+  if (info) { e.stopPropagation(); return detailSheet(carById(info.dataset.info)); }
   const gmb = t.closest("[data-gm]");
   if (gmb) return setAuto(gmb.dataset.gm === "a");
   if (t.closest("#scat")) return scatTap(e);
@@ -2091,6 +2581,8 @@ document.addEventListener("click", e => {
   }
   if (t.id === "clearAll") { Object.assign(state, DEFAULT_STATE); return render(); }
   if (t.closest("#othersBtn")) return linksSheet();
+  if (t.closest("#evalBtn")) return evalSheet();
+  if (t.closest("#extBtn")) { state.ext = !state.ext; window.scrollTo({top: 0}); return render(); }
   if (t.closest("#locEdit") || t.closest("#locEdit2") || t.closest("#locPin")) return locSheet();
   const lb = t.closest("[data-loc]");
   if (lb) {
@@ -2101,7 +2593,7 @@ document.addEventListener("click", e => {
     saveLoc(); window.scrollTo({top: 0}); return render();
   }
   const cardEl = t.closest(".card");
-  if (cardEl) { const c = DATA.cars.find(x => x.id === cardEl.dataset.id); if (c) window.open(c.url, "_blank", "noopener"); }
+  if (cardEl) { const c = carById(cardEl.dataset.id); if (c && c.url) window.open(c.url, "_blank", "noopener"); else if (c) detailSheet(c); }
 });
 document.addEventListener("keydown", e => {
   if (e.key === "Escape" && !$("#layer").hidden) closeSheet();
@@ -2144,7 +2636,10 @@ function boot() {
       DATA = MAN_DATA = d;
       state.names = state.names.filter(n => d.names.some(x => x.name === n));
       $("#meta").textContent = `${nf(d.cars.length)} ${L("cars", "carros")}, ${ago(d.updated)}`;
+      SHARED_VER++;
       render();
+      handleIncoming();
+      loadFeed();
     })
     .catch(err => {
       if (want !== COUNTRY) return;

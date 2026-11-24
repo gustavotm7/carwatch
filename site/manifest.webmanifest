@@ -1,6 +1,8 @@
 {
+ "id": "./",
  "name": "CarWatch",
  "short_name": "CarWatch",
+ "description": "Used manual-car prices: scores, fair prices and buying advice.",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",
@@ -18,5 +20,14 @@
    "type": "image/png",
    "purpose": "any maskable"
   }
- ]
+ ],
+ "share_target": {
+  "action": "./",
+  "method": "GET",
+  "params": {
+   "title": "title",
+   "text": "text",
+   "url": "url"
+  }
+ }
 }

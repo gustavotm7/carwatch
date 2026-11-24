@@ -115,3 +115,14 @@ in the name, and how the brand marks automatics when it doesn't say "Aut." (`330
 convertible's FIPE entry. The app shows the FIPE price in the verdict and as a tick on its scale, and the Prices tab
 has **Preço x Tabela FIPE**: how the ads ask against FIPE, where the fair price sits, how FIPE moved over the
 months in the cache, and FIPE, fair and asking prices for the most common years and versions. `--no-fipe` skips it.
+
+### Ads from other sites, and the group
+
+OLX, Mercado Livre, Webmotors and Facebook Marketplace block automated reading, so CarWatch doesn't collect them.
+Instead, **Check an ad** (the list's banner, or the menu) takes any ad's link or text: on Android, once CarWatch is
+installed, share an ad from those apps and pick CarWatch (`share_target` in `site/manifest.webmanifest`). It reads the
+site, model, year, km, price, version, gearbox and town it can find, you fix the rest, and it shows the same verdict,
+fair price and score as any other car, priced where the car is. **Save to my list** keeps it on that phone; **Send to
+the group** puts it in a Google Sheet that everyone invited to the group sees in their list (`apps-script/`, set up
+once: see `apps-script/README.md`). An ad already in the list opens its details instead. `site/sw.js` keeps the last
+copy of the app for offline use, which also lets Chrome offer to install it.
