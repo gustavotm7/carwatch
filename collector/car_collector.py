@@ -97,6 +97,7 @@ SEARCH_SEEN = {}                                   # today's search data per ad 
 AUTO_FOUND = {}                                    # automatics found today for families that allow them
 ALLOW_AUTO = set()                                 # families kept with automatics too (Brazil: FB Civic, Yaris sedan)
 SPLITS = {}                                        # family -> [(title regex, sub-generation)]: e.g. FA5 Civic Si apart
+GEN_BODY = {}                                      # family -> the only body it came in ('body' in the config)
 GONE_RECHECK_DAYS = 7                              # keep re-checking 'gone' ads this long (they sometimes return)
 
 # Searches come from cars_config.json (per car, per site). Extra searches can be added here as (source, url).
@@ -189,7 +190,7 @@ def load_config(path=None):
                            "links": [{"site": s, "url": u} for s, u in m.get("links", [])],
                            "links_auto": [{"site": s, "url": u} for s, u in m.get("links_auto", [])]}
                           for m in MODELS if m.get("links") or m.get("links_auto")])
-    FAMILY_STYLE.clear(); TRIMS.clear(); NEEDS_TEXT_CONFIRM.clear(); COMPS.clear(); ALLOW_AUTO.clear(); SPLITS.clear()
+    FAMILY_STYLE.clear(); TRIMS.clear(); NEEDS_TEXT_CONFIRM.clear(); COMPS.clear(); ALLOW_AUTO.clear(); SPLITS.clear(); GEN_BODY.clear()
     searches = []
     for m in MODELS:
         gens = []
@@ -213,6 +214,8 @@ def load_config(path=None):
                 NEEDS_TEXT_CONFIRM.add(g["family"])
             if g.get("allow_auto"):
                 ALLOW_AUTO.add(g["family"])
+            if g.get("body"):
+                GEN_BODY[g["family"]] = g["body"]
             if g.get("comps"):
                 c = COMPS.setdefault(g["family"], {**g["comps"], "years": list(g["years"])})
                 c["years"] = [min(c["years"][0], g["years"][0]), max(c["years"][1], g["years"][1])]
@@ -240,7 +243,7 @@ def detect_key(title: str, slug: str, year):
             continue
         if any(re.search(rx, t) for rx in m.get("none", [])):
             continue
-        if any(g["years"][0] <= year <= g["years"][1] for g in m["generations"]):
+        if gen_for(m, year, t):
             return m
     return None
 
@@ -250,18 +253,32 @@ def fix_body(model, body, text=""):
     allowed = model.get("bodies") or []
     if not allowed or body in allowed:
         return body
-    if "conv" in allowed and re.search(r"roadster|convertible|cabrio", _norm(text)):
+    if "conv" in allowed and re.search(r"roadster|convertible|cabrio|spyder|spider", _norm(text)):
         return "conv"
     return allowed[0] if len(allowed) == 1 or body in ("unk", "sedan", "wagon") else body
 
 
-def classify(model, year, body):
-    """-> (family, generation/chassis, display name)"""
+def gen_for(model, year, text=""):
+    """The generation an ad belongs to: by year, unless the ad names a generation's chassis code ('code' in the
+    config) within a year of its range: a JDM 'S13 Silvia' first registered in 1988, an FD RX-7 sold as a 1992."""
+    t = _norm(text) if text else ""
+    if t:
+        for g in model["generations"]:
+            if g.get("code") and g["years"][0] - 1 <= year <= g["years"][1] + 1 and re.search(g["code"], t):
+                return g
     for g in model["generations"]:
         if g["years"][0] <= year <= g["years"][1]:
-            name = (g.get("name_by_body") or {}).get(body, g["name"])
-            return g["family"], name.split(" ")[0], name
-    raise ValueError(f"{model['model']} {year}")
+            return g
+    return None
+
+
+def classify(model, year, body, text=""):
+    """-> (family, generation/chassis, display name)"""
+    g = gen_for(model, year, text)
+    if g is None:
+        raise ValueError(f"{model['model']} {year}")
+    name = (g.get("name_by_body") or {}).get(body, g["name"])
+    return g["family"], name.split(" ")[0], name
 
 
 def classify_trans(family: str, field: str, desc: str) -> str:
@@ -738,14 +755,14 @@ def resync_families(rows):
         key = detect_key(r["note"], slug, int(r["year"]))
         if not key:
             continue
-        r["family"], r["gen"], r["name"] = classify(key, int(r["year"]), r["body"] or "unk")
+        r["family"], r["gen"], r["name"] = classify(key, int(r["year"]), r["body"] or "unk", f'{r["note"]} {slug}')
         n += 1
     return n
 
 
 def family_of(key, year, title):
     try:
-        return classify(key, year, fix_body(key, body_of("", title), title))[0]
+        return classify(key, year, fix_body(key, body_of("", title), title), title)[0]
     except Exception:
         return ""
 
@@ -1033,7 +1050,7 @@ def discover_new(sess, rows, today, stats, max_new, found=None):
         if not reason:
             body = fix_body(key, body_of(info.get("body_raw", ""), slug + " " + info.get("title", "")),
                             slug + " " + info.get("title", ""))
-            fam, gen, name = classify(key, info["year"], body)
+            fam, gen, name = classify(key, info["year"], body, f'{info.get("title", "")} {slug}')
             trans = classify_trans(fam, info.get("trans_field", ""), info.get("desc", ""))
             if trans == "a" and fam not in ALLOW_AUTO:
                 reason = "automatic / gearbox not stated"
@@ -1062,7 +1079,7 @@ def discover_new(sess, rows, today, stats, max_new, found=None):
         if it["km"] < 500 or (dt.date.today().year - (it.get("year") or 0) >= 5 and it["km"] < 5000):
             continue
         body = fix_body(key, body_of(it.get("body_raw", ""), it["title"]), it["title"])
-        fam, gen, name = classify(key, it["year"], body)
+        fam, gen, name = classify(key, it["year"], body, it["title"])
         row = {**{c: "" for c in COLS},
                "listing_id": lid, "source": it["source"], "family": fam, "gen": gen, "name": name,
                "year": str(it["year"]), "body": body, "price": str(it["price"]), "km": str(it["km"]), "trans": "a",
@@ -1248,13 +1265,14 @@ GEARBOX_LABEL = {"m": "\u2714 Manual", "c": "\u26A0 Conflict", "u": "? Unconfirm
 
 
 def apply_split(r):
-    """Move a car to its sub-generation (e.g. FA5 Civic -> FA5 Civic Si) when its title or trim matches."""
+    """Move a car to its sub-generation (e.g. FA5 Civic -> FA5 Civic Si) when its title or trim matches, and give
+    a generation that only came one way its body (Brazil's FB Civic Si: coupe; MR2 Spyder: roadster)."""
     for rx, sg in SPLITS.get(r["family"], []):
         if re.search(rx, f'{r.get("note", "")} {r.get("trim", "")}', re.I):
             r["family"], r["gen"], r["name"] = sg["family"], sg["name"].split(" ")[0], sg["name"]
-            if sg.get("body"):
-                r["body"] = sg["body"]                  # Brazil's FB Civic Si only came as a coupe
-            return
+            break
+    if r["family"] in GEN_BODY:
+        r["body"] = GEN_BODY[r["family"]]
 
 
 def mkey(r):

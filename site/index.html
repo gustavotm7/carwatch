@@ -2100,6 +2100,15 @@ const MODEL_RX = [["FA5_SI", /\bcivic\b.*\bsi\b|\bsi\b.*\bcivic\b/], ["FB_SI", /
   ["FA5", /\bcivic\b/], ["FB", /\bcivic\b/], ["YARIS_S", /\byaris\b/],
   ["S2K_AP1", /\bs ?2000\b/], ["S2K_AP2", /\bs ?2000\b/], ["GC_BK1", /\bgenesis\b.*\bcoup|\bcoup.*\bgenesis\b/], ["GC_BK2", /\bgenesis\b.*\bcoup|\bcoup.*\bgenesis\b/],
   ["NSX_NA1", /\bnsx\b/], ["NSX_NA2", /\bnsx\b/], ["NSX_NA2F", /\bnsx\b/],
+  ["A80_TT", /\bsupra\b.*(twin.?turbo|\btt\b|2jz.?gte|\bturbo\b|\brz\b|\bgz\b)|(twin.?turbo|2jz.?gte|\bturbo\b).*\bsupra\b/], ["A80", /\bsupra\b/],
+  ["RX7_FC_T2", /\brx.?7\b.*(turbo|\btii\b)|(turbo|\btii\b).*\brx.?7\b/], ["RX7_FB", /\brx.?7\b/], ["RX7_FC", /\brx.?7\b/], ["RX7_FD", /\brx.?7\b/],
+  ["RX8", /\brx.?8\b/],
+  ["GTR_R32", /\bgt.?r\b.*(skyline|\br3[234]\b)|(skyline|\br3[234]\b).*\bgt.?r\b/], ["GTR_R33", /\bgt.?r\b.*(skyline|\br3[234]\b)|(skyline|\br3[234]\b).*\bgt.?r\b/],
+  ["GTR_R34", /\bgt.?r\b.*(skyline|\br3[234]\b)|(skyline|\br3[234]\b).*\bgt.?r\b/],
+  ["MR2_SW20T", /\bmr.?2\b.*\bturbo\b|\bturbo\b.*\bmr.?2\b/], ["MR2_ZZW30", /\bmr.?2\b.*spyder|spyder.*\bmr.?2\b|\bmr.?s\b/],
+  ["MR2_AW11", /\bmr.?2\b/], ["MR2_SW20", /\bmr.?2\b/], ["MR2_ZZW30", /\bmr.?2\b/],
+  ["AE86", /\bae.?86\b|trueno|levin|corolla.*\b(gt.?s|sr.?5)\b/],
+  ["S10", /\bs[iy]lvia\b/], ["S110", /\bs[iy]lvia\b/], ["S12", /\bs[iy]lvia\b/], ["S13", /\bs[iy]lvia\b/], ["S14", /\bs[iy]lvia\b/], ["S15", /\bs[iy]lvia\b/],
   ["E36M3", /\bm3\b/], ["E46M3", /\bm3\b/], ["E9XM3", /\bm3\b/], ["E39M5", /\bm5\b/], ["E60M5", /\bm5\b/],
   ["E91", /\b(wagon|touring|sport ?wagon|perua)\b/], ["E46_330", /\b330 ?c?i?\b/], ["Z350", /\b350 ?z\b/], ["Z370", /\b370 ?z\b/]];
 const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();

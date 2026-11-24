@@ -179,6 +179,112 @@
      "searches": {"napista": ["https://napista.com.br/busca/honda/nsx"],
                   "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/nsx"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=honda%20nsx&gb=1"],
-               ["Mercado Livre", "https://lista.mercadolivre.com.br/honda-nsx-manual"]]}
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/honda-nsx-manual"]]},
+
+    {"enabled": true, "model": "Supra", "match": ["\\bsupra\\b"], "none": ["mk ?iii\\b|mk ?3\\b|\\bma ?70\\b|\\bjza ?70\\b|\\ba70\\b|\\b7m\\b|celica|\\bgr ?supra\\b|\\ba90\\b"],
+     "bodies": ["coupe"],
+     "generations": [
+       {"family": "A80", "years": [1993, 2002], "name": "A80 Supra", "color": "#F08A4B", "smg_risk": false, "code": "\\ba80\\b|\\bjza ?80\\b|\\bmk ?(iv|4)\\b",
+        "desc": "Toyota Supra A80 1993-2002 (North America to 1998), 2JZ-GE 3.0 non-turbo (225 cv JDM, 223 cv US)",
+        "trims": [["\\bsz ?r\\b", "SZ-R"], ["\\bsz\\b", "SZ"], ["\\bna ?t\\b", "NA-T"], ["\\brz ?s\\b", "RZ-S"], ["\\brz\\b", "RZ"], ["\\bgz\\b", "GZ"], ["twin ?turbo|\\btt\\b|2jz ?gte|\\bturbo\\b", "Turbo"]],
+        "split": [{"match": "^(?!.*(non[ -]?turbo|\\bna[ -]?t\\b|n/a\\b|\\bsz\\b|\\bsz[ -]?r\\b|2jz[ -]?ge\\b)).*(twin[ -]?turbo|\\btt\\b|2jz[ -]?gte|\\bturbo\\b|\\brz\\b|\\brz[ -]?s\\b|\\bgz\\b)", "family": "A80_TT", "name": "A80 Supra Turbo", "color": "#D9603B", "desc": "Toyota Supra A80 Turbo, 2JZ-GTE sequential twin turbo (280 cv JDM, 324 cv US)", "trims": [["\\brz ?s\\b", "RZ-S"], ["\\brz\\b", "RZ"], ["\\bgz\\b", "GZ"], [".", "Turbo"]]}]}
+     ],
+     "searches": {"mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/supra"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=toyota%20supra"], ["Mercado Livre", "https://lista.mercadolivre.com.br/toyota-supra"]]},
+
+    {"enabled": true, "model": "RX-7", "match": ["\\brx ?7\\b"],
+     "bodies": ["coupe", "conv"],
+     "generations": [
+       {"family": "RX7_FB", "years": [1978, 1985], "name": "FB RX-7", "color": "#E3B23C", "smg_risk": false, "code": "\\bfb\\b|\\bsa ?22c?\\b|\\bsa\\b|1st gen|first gen|\\b12a\\b",
+        "desc": "Mazda RX-7 first generation (SA22C / FB) 1978-1985, 12A rotary; GSL-SE with the 13B 1984-85",
+        "trims": [["gsl ?se", "GSL-SE"], ["\\bgsl\\b", "GSL"], ["\\bgs\\b", "GS"], ["limited", "Limited"]]},
+       {"family": "RX7_FC", "years": [1986, 1991], "name": "FC RX-7", "color": "#5D9CEC", "smg_risk": false, "code": "\\bfc\\b|fc3[sc]|2nd gen|second gen",
+        "desc": "Mazda RX-7 FC3S 1986-1991 (Japan to 1992), 13B 148 cv US; convertible 1988-1991",
+        "trims": [["turbo ?(ii|2)|\\btii\\b|\\bturbo\\b", "Turbo II"], ["\\bgxl\\b", "GXL"], ["\\bgtu ?s?\\b", "GTUs"], ["\\bse\\b", "SE"], ["convertible|cabrio", "Convertible"], ["infini", "Infini"]],
+        "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b)).*(turbo|\\bt[ -]?ii\\b|\\btii\\b|13b[ -]?t\\b|infini)", "family": "RX7_FC_T2", "name": "FC RX-7 Turbo II", "color": "#3B6FD4", "desc": "Mazda RX-7 FC Turbo II, 13B-T turbo (185 cv, 203 cv from 1989, US)", "trims": [["convertible|cabrio", "Convertible"], ["infini", "Infini"], [".", "Turbo II"]]}]},
+       {"family": "RX7_FD", "years": [1992, 2002], "name": "FD RX-7", "color": "#E14D6A", "smg_risk": false, "code": "\\bfd\\b|fd3s|3rd gen|third gen",
+        "desc": "Mazda RX-7 FD3S 1992-2002 (North America 1993-1995), 13B-REW sequential twin turbo, 259 cv US, up to 280 cv JDM",
+        "trims": [["spirit ?r", "Spirit R"], ["type ?rs\\b", "Type RS"], ["type ?rz", "Type RZ"], ["type ?rb", "Type RB"], ["type ?r\\b", "Type R"], ["\\br2\\b", "R2"], ["\\br1\\b", "R1"], ["touring", "Touring"], ["bathurst", "Bathurst"]]}
+     ],
+     "searches": {"mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/mazda/rx-7"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=mazda%20rx7"], ["Mercado Livre", "https://lista.mercadolivre.com.br/mazda-rx7"]]},
+
+    {"enabled": true, "model": "RX-8", "match": ["\\brx ?8\\b"],
+     "bodies": ["coupe"],
+     "generations": [
+       {"family": "RX8", "years": [2003, 2012], "name": "SE3P RX-8", "color": "#A77BD9", "smg_risk": false,
+        "desc": "Mazda RX-8 SE3P 2003-2012 (North America 2004-2011), Renesis 13B-MSP rotary; 6-speed 241 cv US (235 cv from 2009)",
+        "trims": [["spirit ?r", "Spirit R"], ["\\br3\\b", "R3"], ["type ?rs", "Type RS"], ["type ?s\\b", "Type S"], ["40th", "40th Anniversary"], ["shinka", "Shinka"], ["\\bgt\\b|grand touring", "GT"], ["\\bgs\\b", "GS"], ["\\bsport\\b", "Sport"]]}
+     ],
+     "searches": {"mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/mazda/rx-8"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=mazda%20rx8"], ["Mercado Livre", "https://lista.mercadolivre.com.br/mazda-rx8"]]},
+
+    {"enabled": true, "model": "Skyline GT-R", "match": ["\\bgt ?r\\b", "skyline|\\br3[234]\\b|bnr ?3[24]|bcnr ?33"], "none": ["\\bgts\\b|\\bgts ?t\\b|\\bgt ?t\\b|gtst|25 ?gt|gts ?4|\\bhcr ?32\\b|\\becr ?33\\b|\\ber ?34\\b|replica|clone|tribute|conver(sion|ted)|(gt ?r|gtr) ?(look|style|kit|body|front|bumper|badge)"],
+     "bodies": ["coupe"],
+     "generations": [
+       {"family": "GTR_R32", "years": [1989, 1994], "name": "R32 GT-R", "color": "#8C99A6", "smg_risk": false, "code": "\\br ?32\\b|bnr ?32",
+        "desc": "Nissan Skyline GT-R BNR32 1989-1994, RB26DETT twin turbo 280 cv, 5-speed, ATTESA E-TS AWD",
+        "trims": [["v ?spec ?(ii|2)", "V-Spec II"], ["v ?spec", "V-Spec"], ["\\bn1\\b", "N1"], ["nismo", "Nismo"]]},
+       {"family": "GTR_R33", "years": [1995, 1998], "name": "R33 GT-R", "color": "#8E6BBF", "smg_risk": false, "code": "\\br ?33\\b|bcnr ?33",
+        "desc": "Nissan Skyline GT-R BCNR33 1995-1998, RB26DETT twin turbo 280 cv, 5-speed, AWD",
+        "trims": [["400 ?r", "400R"], ["lm ?limited", "LM Limited"], ["v ?spec", "V-Spec"], ["\\bn1\\b", "N1"], ["autech|4 ?door", "Autech 4-door"]]},
+       {"family": "GTR_R34", "years": [1999, 2002], "name": "R34 GT-R", "color": "#2F7FD1", "smg_risk": false, "code": "\\br ?34\\b|bnr ?34",
+        "desc": "Nissan Skyline GT-R BNR34 1999-2002, RB26DETT twin turbo 280 cv, Getrag 6-speed, AWD",
+        "trims": [["v ?spec ?(ii|2) ?n(u|ü|ue)r", "V-Spec II Nür"], ["m ?spec ?n(u|ü|ue)r", "M-Spec Nür"], ["v ?spec ?(ii|2)", "V-Spec II"], ["m ?spec", "M-Spec"], ["v ?spec", "V-Spec"], ["\\bn1\\b", "N1"], ["z ?tune", "Z-tune"]]}
+     ],
+     "searches": {},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=skyline%20gtr"], ["Mercado Livre", "https://lista.mercadolivre.com.br/nissan-skyline-gtr"]]},
+
+    {"enabled": true, "model": "MR2", "match": ["\\bmr ?2\\b|\\bmr ?s\\b"],
+     "bodies": ["coupe", "conv"],
+     "generations": [
+       {"family": "MR2_AW11", "years": [1984, 1989], "name": "AW11 MR2", "color": "#D4A72C", "smg_risk": false, "code": "\\baw ?1[01]\\b|\\bmk ?(1|i)\\b|1st gen|first gen|4a ?g[ez]",
+        "desc": "Toyota MR2 W10 / AW11 1984-1989, 4A-GE 1.6 (114 cv US, 130 cv JDM); supercharged 4A-GZE 1988-89 (147 cv)",
+        "trims": [["supercharg|\\bsc\\b|4a ?gze", "Supercharged"]]},
+       {"family": "MR2_SW20", "years": [1990, 1999], "name": "SW20 MR2", "color": "#C94C3A", "smg_risk": false, "code": "\\bsw ?2[0-2]\\b|\\bmk ?(2|ii)\\b|2nd gen|second gen|3s ?gte|5s ?fe",
+        "desc": "Toyota MR2 W20 / SW20 1989-1999 (North America 1991-1995), 5S-FE 132 cv US, 3S-GE JDM",
+        "trims": [["\\bturbo\\b|3s ?gte|\\bgt ?s\\b|\\bgt\\b", "Turbo"], ["g ?limited", "G-Limited"], ["t ?(top|bar)", "T-bar"]],
+        "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b|5s[ -]?fe|3s[ -]?ge\\b|\\bg[ -]?limited\\b)).*(\\bturbo\\b|3s[ -]?gte|\\bgt[ -]?s\\b|\\bgt\\b)", "family": "MR2_SW20T", "name": "SW20 MR2 Turbo", "color": "#93332A", "desc": "Toyota MR2 SW20 Turbo, 3S-GTE (203 cv US, up to 248 cv JDM)", "trims": [["\\bgt ?s\\b", "GT-S"], [".", "Turbo"]]}]},
+       {"family": "MR2_ZZW30", "years": [2000, 2007], "name": "ZZW30 MR2 Spyder", "color": "#E8833A", "smg_risk": true, "code": "zzw ?30|spyder|spider|\\bmr ?s\\b|\\bmk ?(3|iii)\\b|3rd gen|third gen|1zz",
+        "body": "conv",
+        "desc": "Toyota MR2 Spyder / MR-S ZZW30 1999-2007 (North America 2000-2005), 1ZZ-FE 1.8 140 cv; clutchless SMT optional from 2002",
+        "trims": [["\\bsmt\\b|sequential", "SMT"], ["v ?edition", "V Edition"]]}
+     ],
+     "searches": {"mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/mr2"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=toyota%20mr2"], ["Mercado Livre", "https://lista.mercadolivre.com.br/toyota-mr2"]]},
+
+    {"enabled": true, "model": "AE86", "match": ["\\bae ?86\\b|trueno|levin|corolla.*\\b(gt ?s|sr ?5)\\b|\\b(gt ?s|sr ?5)\\b.*corolla"], "none": ["\\bfx ?(16)?\\b|\\bae ?8[0-5]\\b|\\bae ?9\\d\\b|\\bae ?1[01]\\d\\b|sedan|wagon|\\b[45] ?(dr|door|portes)\\b|\\bfwd\\b|front ?wheel|tercel|\\bgr ?86\\b|\\bgt ?86\\b|\\bbrz\\b|\\bfr ?s\\b"],
+     "bodies": ["coupe"],
+     "generations": [
+       {"family": "AE86", "years": [1983, 1987], "name": "AE86", "color": "#C9CED6", "smg_risk": false,
+        "desc": "Toyota AE86 1983-1987, rear-wheel drive only: Corolla Levin, Sprinter Trueno, Corolla GT-S and SR5; 4A-GE 1.6 (130 cv JDM gross, 114 cv US)",
+        "trims": [["trueno", "Trueno"], ["levin", "Levin"], ["\\bgt ?s\\b", "GT-S"], ["\\bsr ?5\\b", "SR5"]]}
+     ],
+     "searches": {},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=ae86"], ["Mercado Livre", "https://lista.mercadolivre.com.br/toyota-ae86"]]},
+
+    {"enabled": true, "model": "Silvia", "match": ["\\bsilvia\\b|\\bsylvia\\b"], "none": ["240 ?sx|180 ?sx|200 ?sx|sileighty|sil ?80\\b|onevia|(silvia|s ?1[345]) ?(front|nose|face|conversion|converted)"],
+     "bodies": ["coupe", "conv"],
+     "generations": [
+       {"family": "S10", "years": [1975, 1978], "name": "S10 Silvia", "color": "#B49A7A", "smg_risk": false, "code": "\\bs ?10\\b",
+        "desc": "Nissan Silvia S10 1975-1979 (Datsun 200SX in the US: not tracked)"},
+       {"family": "S110", "years": [1979, 1982], "name": "S110 Silvia", "color": "#A88664", "smg_risk": false, "code": "\\bs ?110\\b",
+        "desc": "Nissan Silvia S110 1979-1983",
+        "trims": [["turbo", "Turbo"]]},
+       {"family": "S12", "years": [1983, 1987], "name": "S12 Silvia", "color": "#9C7A5C", "smg_risk": false, "code": "\\bs ?12\\b",
+        "desc": "Nissan Silvia S12 1983-1988",
+        "trims": [["turbo", "Turbo"]]},
+       {"family": "S13", "years": [1988, 1993], "name": "S13 Silvia", "color": "#4FB59B", "smg_risk": false, "code": "\\b[pkc]?s ?13\\b",
+        "desc": "Nissan Silvia S13 1988-1993; K's turbo: CA18DET 175 cv to 1990, SR20DET 205 cv from 1991",
+        "trims": [["\\bk ?'?s\\b", "K's"], ["\\bq ?'?s\\b", "Q's"], ["\\bj ?'?s\\b", "J's"], ["club ?selection", "Club Selection"], ["convertible|cabrio", "Convertible"]]},
+       {"family": "S14", "years": [1994, 1998], "name": "S14 Silvia", "color": "#3D9DB3", "smg_risk": false, "code": "\\b[kc]?s ?14a?\\b",
+        "desc": "Nissan Silvia S14 1993-1998 (kouki from 1996); K's SR20DET 220 cv",
+        "trims": [["\\bk ?'?s\\b", "K's"], ["\\bq ?'?s\\b", "Q's"], ["\\bj ?'?s\\b", "J's"], ["kouki", "Kouki"], ["zenki", "Zenki"]]},
+       {"family": "S15", "years": [1999, 2002], "name": "S15 Silvia", "color": "#5A7FD6", "smg_risk": false, "code": "\\bs ?15\\b",
+        "desc": "Nissan Silvia S15 1999-2002 (Japan only); Spec-R SR20DET 250 cv with the 6-speed",
+        "trims": [["spec ?r", "Spec-R"], ["spec ?s", "Spec-S"], ["autech", "Autech"], ["varietta", "Varietta"]]}
+     ],
+     "searches": {},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=nissan%20silvia"], ["Mercado Livre", "https://lista.mercadolivre.com.br/nissan-silvia"]]}
   ]
 }

@@ -805,6 +805,923 @@
      "src": "https://honda-tech.com/forums/acura-nsx-43/buying-nsx-what-look-2897403/"
     }
    ]
+  },
+  "A80": {
+   "intro_en": "The non-turbo A80: 2JZ-GE and a 5-speed in North America. Tough mechanics; check the cooling and how it was driven.",
+   "intro_pt": "O A80 aspirado: 2JZ-GE e câmbio de 5 marchas na América do Norte. Mecânica forte; confira o arrefecimento e como foi usado.",
+   "items": [
+    {
+     "en": "Check the radiator, the expansion tank and the coolant",
+     "pt": "Confira o radiador, o reservatório de expansão e o líquido de arrefecimento",
+     "why_en": "Look for corrosion and leaks, and for oily coolant: a failed head gasket. Hot spots mean air is trapped.",
+     "why_pt": "Procure corrosão e vazamentos, e óleo misturado ao líquido: junta do cabeçote queimada. Pontos quentes indicam ar no sistema.",
+     "src": "https://classicandsportscar.com/node/62237"
+    },
+    {
+     "en": "Drive it through every gear: smooth shifts, no jumping out of gear, no clutch slip",
+     "pt": "Passe todas as marchas: trocas suaves, sem escapar marcha, sem embreagem patinando",
+     "why_en": "The gearboxes are strong but often abused; listen for flywheel rattle too, and ask when the gearbox oil was changed (due about every 24,000 km).",
+     "why_pt": "Os câmbios são fortes, mas costumam ser maltratados; escute também ruído do volante do motor e pergunte quando o óleo do câmbio foi trocado (a cada 24 mil km mais ou menos).",
+     "src": "https://classicandsportscar.com/node/62237"
+    },
+    {
+     "en": "If a turbo was added, ask for the parts list and who tuned it",
+     "pt": "Se colocaram turbo, peça a lista de peças e quem fez o acerto",
+     "why_en": "Non-turbo cars converted to a single turbo are sometimes listed as 'Supra Turbo': a conversion is a modified car, not a factory Turbo.",
+     "why_pt": "Aspirados convertidos para turbo às vezes são anunciados como 'Supra Turbo': conversão é carro modificado, não Turbo de fábrica.",
+     "src": "https://www.jdmbuysell.com/ad/sprengermotorcars-1996-toyota-supra-1996-toyota-supra-turbo/"
+    },
+    {
+     "en": "Get an insurance quote before you buy",
+     "pt": "Faça uma cotação de seguro antes de comprar",
+     "why_en": "A80s attract thieves and high premiums; plan for secure parking and an agreed-value policy.",
+     "why_pt": "O A80 atrai ladrões e seguro caro; planeje garagem segura e uma apólice de valor acordado.",
+     "src": "https://www.jdmbuysell.com/learn/toyota/supra/a60/"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "A80_TT": {
+   "intro_en": "The 2JZ-GTE twin turbo, most with the Getrag 6-speed. Prove it's a factory Turbo, then check how hard it was used.",
+   "intro_pt": "O 2JZ-GTE biturbo, a maioria com o câmbio Getrag de 6 marchas. Comprove que é Turbo de fábrica e veja o quanto foi exigido.",
+   "items": [
+    {
+     "en": "Confirm it's a factory Turbo",
+     "pt": "Confirme que é um Turbo de fábrica",
+     "why_en": "JDM RZ, RZ-S and GZ grades and North American Turbos have the 2JZ-GTE twin turbo; SZ and SZ-R are non-turbo.",
+     "why_pt": "As versões japonesas RZ, RZ-S e GZ e os Turbo norte-americanos têm o 2JZ-GTE biturbo; SZ e SZ-R são aspirados.",
+     "src": "https://www.jdmbuysell.com/blog/toyota-supra/"
+    },
+    {
+     "en": "Check the radiator, the expansion tank and the coolant",
+     "pt": "Confira o radiador, o reservatório de expansão e o líquido de arrefecimento",
+     "why_en": "Look for corrosion and leaks, and for oily coolant: a failed head gasket. Hot spots mean air is trapped.",
+     "why_pt": "Procure corrosão e vazamentos, e óleo misturado ao líquido: junta do cabeçote queimada. Pontos quentes indicam ar no sistema.",
+     "src": "https://classicandsportscar.com/node/62237"
+    },
+    {
+     "en": "Drive it through every gear: smooth shifts, no jumping out of gear, no clutch slip",
+     "pt": "Passe todas as marchas: trocas suaves, sem escapar marcha, sem embreagem patinando",
+     "why_en": "The gearboxes are strong but often abused; listen for flywheel rattle too, and ask when the gearbox oil was changed (due about every 24,000 km).",
+     "why_pt": "Os câmbios são fortes, mas costumam ser maltratados; escute também ruído do volante do motor e pergunte quando o óleo do câmbio foi trocado (a cada 24 mil km mais ou menos).",
+     "src": "https://classicandsportscar.com/node/62237"
+    },
+    {
+     "en": "Get an insurance quote before you buy",
+     "pt": "Faça uma cotação de seguro antes de comprar",
+     "why_en": "A80s attract thieves and high premiums; plan for secure parking and an agreed-value policy.",
+     "why_pt": "O A80 atrai ladrões e seguro caro; planeje garagem segura e uma apólice de valor acordado.",
+     "src": "https://www.jdmbuysell.com/learn/toyota/supra/a60/"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "RX7_FB": {
+   "intro_en": "Light and simple, with the 12A rotary (13B on the 1984-85 GSL-SE). Compression and rust decide the price.",
+   "intro_pt": "Leve e simples, com o rotativo 12A (13B no GSL-SE de 1984-85). Compressão e ferrugem decidem o preço.",
+   "items": [
+    {
+     "en": "Ask for a rotary compression test",
+     "pt": "Peça um teste de compressão próprio para motor rotativo",
+     "why_en": "Anything much below about 5.2 bar (75 psi) points to a costly engine rebuild.",
+     "why_pt": "Muito abaixo de uns 5,2 bar (75 psi) indica retífica cara do motor.",
+     "src": "https://classicsworld.co.uk/?p=31278"
+    },
+    {
+     "en": "Start it cold and hot, and watch it idle",
+     "pt": "Dê a partida frio e quente e observe a marcha lenta",
+     "why_en": "Hard hot starts mean low compression; an engine with even compression doesn't shake much at idle.",
+     "why_pt": "Partida difícil a quente indica compressão baixa; um motor com compressão igual não treme muito em marcha lenta.",
+     "src": "https://classicmotorsports.com/forum/grm/learn-me-2nd-gen-turbo-rx-7/50243/page1"
+    },
+    {
+     "en": "Look for rust at the bottom of the doors",
+     "pt": "Procure ferrugem na parte de baixo das portas",
+     "why_en": "They rust from the inside: look for bubbling paint and filler.",
+     "why_pt": "Elas enferrujam por dentro: procure bolhas na pintura e massa.",
+     "src": "https://classicsworld.co.uk/?p=31278"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "RX7_FC": {
+   "intro_en": "The second generation: rotary health first, then rust and the gearbox.",
+   "intro_pt": "A segunda geração: primeiro a saúde do rotativo, depois ferrugem e câmbio.",
+   "items": [
+    {
+     "en": "Ask for a rotary compression test",
+     "pt": "Peça um teste de compressão próprio para motor rotativo",
+     "why_en": "It's the best way to judge the engine and its rotor seals: look at the highest reading and at how the pulses build up.",
+     "why_pt": "É a melhor forma de avaliar o motor e as vedações dos rotores: veja a leitura máxima e como os pulsos sobem.",
+     "src": "https://grassrootsmotorsports.com/articles/vintage-views-fc-chassis-mazda-rx-7"
+    },
+    {
+     "en": "Start it cold and hot, and watch it idle",
+     "pt": "Dê a partida frio e quente e observe a marcha lenta",
+     "why_en": "Hard hot starts mean low compression; an engine with even compression doesn't shake much at idle.",
+     "why_pt": "Partida difícil a quente indica compressão baixa; um motor com compressão igual não treme muito em marcha lenta.",
+     "src": "https://classicmotorsports.com/forum/grm/learn-me-2nd-gen-turbo-rx-7/50243/page1"
+    },
+    {
+     "en": "Check the gearbox and the clutch",
+     "pt": "Confira o câmbio e a embreagem",
+     "why_en": "Crunchy synchros or a slipping clutch mean a worn gearbox.",
+     "why_pt": "Sincronizados arranhando ou embreagem patinando indicam câmbio gasto.",
+     "src": "https://www.autocar.co.uk/node/59588"
+    },
+    {
+     "en": "Coupe with a sunroof: check the sills for rust",
+     "pt": "Cupê com teto solar: procure ferrugem nas soleiras",
+     "why_en": "Water can get trapped in the sills.",
+     "why_pt": "A água pode ficar presa nas soleiras.",
+     "src": "https://www.autocar.co.uk/node/59588"
+    },
+    {
+     "en": "Test the interior electrics and listen to the rear differential",
+     "pt": "Teste a elétrica interna e escute o diferencial traseiro",
+     "why_en": "Both are on the FC's list of common problems, with apex seals, low compression and rust.",
+     "why_pt": "Os dois estão na lista de problemas comuns do FC, junto com os selos dos ápices, compressão baixa e ferrugem.",
+     "src": "https://www.fastcar.co.uk/tuning-tech-guides/mazda-rx-7-fc-buyers-guide/"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "RX7_FC_T2": {
+   "intro_en": "The Turbo II is the FC people want: check the engine and the turbo as much as the car.",
+   "intro_pt": "O Turbo II é o FC mais procurado: confira motor e turbo tanto quanto o carro.",
+   "items": [
+    {
+     "en": "Ask for a rotary compression test",
+     "pt": "Peça um teste de compressão próprio para motor rotativo",
+     "why_en": "It's the best way to judge the engine and its rotor seals: look at the highest reading and at how the pulses build up.",
+     "why_pt": "É a melhor forma de avaliar o motor e as vedações dos rotores: veja a leitura máxima e como os pulsos sobem.",
+     "src": "https://grassrootsmotorsports.com/articles/vintage-views-fc-chassis-mazda-rx-7"
+    },
+    {
+     "en": "Start it cold and hot, and watch it idle",
+     "pt": "Dê a partida frio e quente e observe a marcha lenta",
+     "why_en": "Hard hot starts mean low compression; an engine with even compression doesn't shake much at idle.",
+     "why_pt": "Partida difícil a quente indica compressão baixa; um motor com compressão igual não treme muito em marcha lenta.",
+     "src": "https://classicmotorsports.com/forum/grm/learn-me-2nd-gen-turbo-rx-7/50243/page1"
+    },
+    {
+     "en": "Ask how old the turbo is",
+     "pt": "Pergunte a idade do turbo",
+     "why_en": "The FC's turbo lasts about 130,000 to 160,000 km on average.",
+     "why_pt": "O turbo do FC dura em média de 130 a 160 mil km.",
+     "src": "https://www.fastcar.co.uk/tuning-tech-guides/mazda-rx-7-fc-buyers-guide/"
+    },
+    {
+     "en": "Check the gearbox and the clutch",
+     "pt": "Confira o câmbio e a embreagem",
+     "why_en": "Crunchy synchros or a slipping clutch mean a worn gearbox.",
+     "why_pt": "Sincronizados arranhando ou embreagem patinando indicam câmbio gasto.",
+     "src": "https://www.autocar.co.uk/node/59588"
+    },
+    {
+     "en": "Coupe with a sunroof: check the sills for rust",
+     "pt": "Cupê com teto solar: procure ferrugem nas soleiras",
+     "why_en": "Water can get trapped in the sills.",
+     "why_pt": "A água pode ficar presa nas soleiras.",
+     "src": "https://www.autocar.co.uk/node/59588"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "RX7_FD": {
+   "intro_en": "Sequential twin turbos and a 13B-REW: brilliant when sorted, costly when not. Compression and the turbo system come first.",
+   "intro_pt": "Biturbo sequencial e 13B-REW: brilhante quando acertado, caro quando não. Compressão e sistema dos turbos vêm primeiro.",
+   "items": [
+    {
+     "en": "Ask for a compression test of every chamber",
+     "pt": "Peça teste de compressão de todas as câmaras",
+     "why_en": "Factory spec is about 6.9 bar (100 psi), with no more than 1.4 bar (21 psi) between chambers; below 5.9 bar (85 psi) a rebuild is coming.",
+     "why_pt": "O padrão de fábrica é uns 6,9 bar (100 psi), com no máximo 1,4 bar (21 psi) de diferença entre câmaras; abaixo de 5,9 bar (85 psi), vem retífica.",
+     "src": "https://hagerty.com/media/?p=4486"
+    },
+    {
+     "en": "Have a passenger watch the boost gauge on the drive",
+     "pt": "No test drive, peça para alguém olhar o manômetro do turbo",
+     "why_en": "Stock boost stays at about 0.7 bar (10 psi) to mid-4,000 rpm, dips to about 0.55 bar as the second turbo comes in, then returns; more means it was modified.",
+     "why_pt": "De fábrica a pressão fica em uns 0,7 bar até perto de 4.500 rpm, cai para uns 0,55 bar quando entra o segundo turbo e depois volta; mais que isso indica modificação.",
+     "src": "https://hagerty.com/media/?p=4486"
+    },
+    {
+     "en": "Look at the vacuum hoses around the turbos",
+     "pt": "Olhe as mangueiras de vácuo em volta dos turbos",
+     "why_en": "This 'rat's nest' controls the sequential turbos; hard, brittle hoses are a common cause of turbo trouble.",
+     "why_pt": "Esse emaranhado controla os turbos sequenciais; mangueiras duras e ressecadas são causa comum de problema nos turbos.",
+     "src": "https://hagerty.com/media/?p=4486"
+    },
+    {
+     "en": "Watch the temperature gauge and look for coolant leaks",
+     "pt": "Observe o marcador de temperatura e procure vazamentos",
+     "why_en": "The needle should sit in the middle; the plastic air separation tank can crack and dump the coolant.",
+     "why_pt": "O ponteiro deve ficar no meio; o reservatório separador de ar, de plástico, pode trincar e despejar o líquido.",
+     "src": "https://hagerty.com/media/?p=4486"
+    },
+    {
+     "en": "Look for rust in the arches, sills and rear box sections",
+     "pt": "Procure ferrugem nas caixas de roda, soleiras e longarinas traseiras",
+     "why_en": "Also under the taillights, under the rear bumper cover and in the spare-wheel well, where water collects.",
+     "why_pt": "Veja também embaixo das lanternas, sob a capa do para-choque traseiro e no poço do estepe, onde a água acumula.",
+     "src": "https://hagerty.com/media/?p=4486"
+    },
+    {
+     "en": "Check the VIN",
+     "pt": "Confira o número do chassi",
+     "why_en": "North American FDs start JM1FD33; the next digit is 1 for a US car and 2 for a Canadian one. Right-hand drive means a Japanese import. The plates in the engine bay, on the dash and on the door must match.",
+     "why_pt": "Os FD norte-americanos começam com JM1FD33; o dígito seguinte é 1 para carro dos EUA e 2 para canadense. Volante à direita indica importado do Japão. As plaquetas do cofre, do painel e da porta devem bater.",
+     "src": "https://hagerty.com/media/?p=4486",
+     "only": "CA"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "RX8": {
+   "intro_en": "A great chassis around a rotary that needs care: the compression test decides everything.",
+   "intro_pt": "Um ótimo chassi em volta de um rotativo que pede cuidado: o teste de compressão decide tudo.",
+   "items": [
+    {
+     "en": "Ask for a rotary compression test",
+     "pt": "Peça um teste de compressão próprio para motor rotativo",
+     "why_en": "It matters more than the mileage; have it done by a rotary specialist or a Mazda dealer.",
+     "why_pt": "Vale mais que a quilometragem; faça com especialista em rotativo ou concessionária Mazda.",
+     "src": "https://www.pistonheads.com/news/ph-buying-guide-contents/mazda-rx-8-buying-guide-powertrain/27404"
+    },
+    {
+     "en": "Restart it hot after the drive",
+     "pt": "Desligue e dê nova partida com o motor quente",
+     "why_en": "Poor hot starting means a worn engine, or worn or damaged ignition coils.",
+     "why_pt": "Partida ruim a quente indica motor gasto ou bobinas de ignição gastas.",
+     "src": "https://www.pistonheads.com/news/ph-buying-guide-contents/mazda-rx-8-buying-guide-powertrain/27404"
+    },
+    {
+     "en": "Cold start: if it doesn't fire at once, stop cranking",
+     "pt": "Partida a frio: se não pegar na hora, pare de girar",
+     "why_en": "Cranking floods the engine. If the seller started it to move it, don't let them switch it off before the drive.",
+     "why_pt": "Insistir afoga o motor. Se o vendedor já ligou o carro, não deixe desligar antes do test drive.",
+     "src": "https://www.parkers.co.uk/cars/reviews/mazda/rx-8-2003.aspx"
+    },
+    {
+     "en": "Ask how the oil level was kept up",
+     "pt": "Pergunte como o nível de óleo era mantido",
+     "why_en": "The rotor tips wear with use; topping up with the correct oil is vital to the engine's life.",
+     "why_pt": "As pontas dos rotores gastam com o uso; completar com o óleo certo é vital para a vida do motor.",
+     "src": "https://www.pistonheads.com/news/ph-buying-guide-contents/mazda-rx-8-buying-guide-powertrain/27404"
+    },
+    {
+     "en": "Test the air conditioning and the electrics",
+     "pt": "Teste o ar-condicionado e a parte elétrica",
+     "why_en": "The A/C units were a weak point when new and won't be better now.",
+     "why_pt": "O ar-condicionado já era ponto fraco quando novo, e não melhorou com o tempo.",
+     "src": "https://www.canberratimes.com.au/story/9348933/last-mazda-rotary-is-a-used-car-conundrum/"
+    }
+   ]
+  },
+  "GTR_R32": {
+   "intro_en": "The BNR32 that revived the GT-R. Prove it's a real GT-R and that the mileage is real, then check the RB26 and the AWD.",
+   "intro_pt": "O BNR32 que trouxe o GT-R de volta. Comprove que é GT-R de verdade e que a quilometragem é real, depois confira o RB26 e a tração.",
+   "items": [
+    {
+     "en": "Check the chassis code on the plate: BNR32",
+     "pt": "Confira o código do chassi na plaqueta: BNR32",
+     "why_en": "An RB26 engine swap doesn't make a car a GT-R.",
+     "why_pt": "Um motor RB26 trocado não transforma o carro em GT-R.",
+     "src": "https://www.jdmbuysell.com/blog/nissan-skyline/"
+    },
+    {
+     "en": "Don't trust the odometer without records",
+     "pt": "Não confie no hodômetro sem histórico",
+     "why_en": "Speedometers reading 260, 300 or 320 km/h are often swapped in, odometer and all; compare the pedals, shift knob and handbrake with the mileage.",
+     "why_pt": "Velocímetros de 260, 300 ou 320 km/h costumam ser trocados junto com o hodômetro; compare pedais, manopla e freio de mão com a quilometragem.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Check the oil pressure",
+     "pt": "Confira a pressão do óleo",
+     "why_en": "Expect about 0.7 bar per 1,000 rpm, rising with revs; the oil pump is driven off the front of the crank and is a known weak spot.",
+     "why_pt": "Espere uns 0,7 bar a cada 1.000 rpm, subindo com o giro; a bomba de óleo, tocada pela frente do virabrequim, é ponto fraco conhecido.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Ask when the timing belt was done",
+     "pt": "Pergunte quando a correia dentada foi trocada",
+     "why_en": "It's an interference engine: the belt is due every 100,000 km, with the water pump, idler and tensioner.",
+     "why_pt": "O motor é de interferência: a correia vence a cada 100 mil km, junto com bomba d'água, polia e tensor.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Test the four-wheel drive",
+     "pt": "Teste a tração integral",
+     "why_en": "In first gear above 5,000 rpm, rear wheels spinning mean the front isn't getting power: electronics, hydraulics or just a 30 A fuse.",
+     "why_pt": "Em primeira acima de 5.000 rpm, traseiras patinando indicam que a dianteira não recebe força: eletrônica, hidráulica ou só um fusível de 30 A.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Look for rust underneath, at the jacking points and around the rear arches",
+     "pt": "Procure ferrugem embaixo, nos pontos de macaco e nas caixas de roda traseiras",
+     "why_en": "Also at the base of the C-pillar, where water pools, and in the floors under the carpet.",
+     "why_pt": "Veja também a base da coluna C, onde a água empoça, e o assoalho sob o carpete.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Ask about the boost and the turbos",
+     "pt": "Pergunte sobre a pressão do turbo e os turbos",
+     "why_en": "The stock turbine wheels are ceramic and brittle; extra boost or a lot of rev-limiter use can break them.",
+     "why_pt": "As turbinas originais são de cerâmica e frágeis; pressão acima da original ou muito corte de giro pode quebrá-las.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Shift through third gear under load",
+     "pt": "Passe a terceira com carga",
+     "why_en": "The 5-speed's third gear commonly breaks under the four-wheel-drive load.",
+     "why_pt": "A terceira do câmbio de 5 marchas costuma quebrar com a carga da tração integral.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "GTR_R33": {
+   "intro_en": "The longer BCNR33: same RB26 and AWD checks, plus the mileage and the chassis code.",
+   "intro_pt": "O BCNR33, mais longo: as mesmas verificações de RB26 e tração, mais quilometragem e código do chassi.",
+   "items": [
+    {
+     "en": "Check the chassis code on the plate: BCNR33",
+     "pt": "Confira o código do chassi na plaqueta: BCNR33",
+     "why_en": "An RB26 engine swap doesn't make a car a GT-R.",
+     "why_pt": "Um motor RB26 trocado não transforma o carro em GT-R.",
+     "src": "https://www.jdmbuysell.com/blog/nissan-skyline/"
+    },
+    {
+     "en": "Don't trust the odometer without records",
+     "pt": "Não confie no hodômetro sem histórico",
+     "why_en": "Speedometers reading 260, 300 or 320 km/h are often swapped in, odometer and all; compare the pedals, shift knob and handbrake with the mileage.",
+     "why_pt": "Velocímetros de 260, 300 ou 320 km/h costumam ser trocados junto com o hodômetro; compare pedais, manopla e freio de mão com a quilometragem.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Check the oil pressure",
+     "pt": "Confira a pressão do óleo",
+     "why_en": "Expect about 0.7 bar per 1,000 rpm, rising with revs; the oil pump is driven off the front of the crank and is a known weak spot.",
+     "why_pt": "Espere uns 0,7 bar a cada 1.000 rpm, subindo com o giro; a bomba de óleo, tocada pela frente do virabrequim, é ponto fraco conhecido.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Ask when the timing belt was done",
+     "pt": "Pergunte quando a correia dentada foi trocada",
+     "why_en": "It's an interference engine: the belt is due every 100,000 km, with the water pump, idler and tensioner.",
+     "why_pt": "O motor é de interferência: a correia vence a cada 100 mil km, junto com bomba d'água, polia e tensor.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Test the four-wheel drive",
+     "pt": "Teste a tração integral",
+     "why_en": "In first gear above 5,000 rpm, rear wheels spinning mean the front isn't getting power: electronics, hydraulics or just a 30 A fuse.",
+     "why_pt": "Em primeira acima de 5.000 rpm, traseiras patinando indicam que a dianteira não recebe força: eletrônica, hidráulica ou só um fusível de 30 A.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Look for rust underneath, at the jacking points and around the rear arches",
+     "pt": "Procure ferrugem embaixo, nos pontos de macaco e nas caixas de roda traseiras",
+     "why_en": "Also at the base of the C-pillar, where water pools, and in the floors under the carpet.",
+     "why_pt": "Veja também a base da coluna C, onde a água empoça, e o assoalho sob o carpete.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Ask about the boost and the turbos",
+     "pt": "Pergunte sobre a pressão do turbo e os turbos",
+     "why_en": "The stock turbine wheels are ceramic and brittle; extra boost or a lot of rev-limiter use can break them.",
+     "why_pt": "As turbinas originais são de cerâmica e frágeis; pressão acima da original ou muito corte de giro pode quebrá-las.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Shift through third gear under load",
+     "pt": "Passe a terceira com carga",
+     "why_en": "The 5-speed's third gear commonly breaks under the four-wheel-drive load.",
+     "why_pt": "A terceira do câmbio de 5 marchas costuma quebrar com a carga da tração integral.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "GTR_R34": {
+   "intro_en": "The last RB26 GT-R, with the Getrag 6-speed. Prices are high, so the paperwork and the chassis code matter most.",
+   "intro_pt": "O último GT-R com RB26, com câmbio Getrag de 6 marchas. Os preços são altos, então documentos e código do chassi pesam mais.",
+   "items": [
+    {
+     "en": "Check the chassis code on the plate: BNR34",
+     "pt": "Confira o código do chassi na plaqueta: BNR34",
+     "why_en": "An RB26 engine swap doesn't make a car a GT-R.",
+     "why_pt": "Um motor RB26 trocado não transforma o carro em GT-R.",
+     "src": "https://www.jdmbuysell.com/blog/nissan-skyline/"
+    },
+    {
+     "en": "Don't trust the odometer without records",
+     "pt": "Não confie no hodômetro sem histórico",
+     "why_en": "Speedometers reading 260, 300 or 320 km/h are often swapped in, odometer and all; compare the pedals, shift knob and handbrake with the mileage.",
+     "why_pt": "Velocímetros de 260, 300 ou 320 km/h costumam ser trocados junto com o hodômetro; compare pedais, manopla e freio de mão com a quilometragem.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Check the oil pressure",
+     "pt": "Confira a pressão do óleo",
+     "why_en": "Expect about 0.7 bar per 1,000 rpm, rising with revs; the oil pump is driven off the front of the crank and is a known weak spot.",
+     "why_pt": "Espere uns 0,7 bar a cada 1.000 rpm, subindo com o giro; a bomba de óleo, tocada pela frente do virabrequim, é ponto fraco conhecido.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Ask when the timing belt was done",
+     "pt": "Pergunte quando a correia dentada foi trocada",
+     "why_en": "It's an interference engine: the belt is due every 100,000 km, with the water pump, idler and tensioner.",
+     "why_pt": "O motor é de interferência: a correia vence a cada 100 mil km, junto com bomba d'água, polia e tensor.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Test the four-wheel drive",
+     "pt": "Teste a tração integral",
+     "why_en": "In first gear above 5,000 rpm, rear wheels spinning mean the front isn't getting power: electronics, hydraulics or just a 30 A fuse.",
+     "why_pt": "Em primeira acima de 5.000 rpm, traseiras patinando indicam que a dianteira não recebe força: eletrônica, hidráulica ou só um fusível de 30 A.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Look for rust underneath, at the jacking points and around the rear arches",
+     "pt": "Procure ferrugem embaixo, nos pontos de macaco e nas caixas de roda traseiras",
+     "why_en": "Also at the base of the C-pillar, where water pools, and in the floors under the carpet.",
+     "why_pt": "Veja também a base da coluna C, onde a água empoça, e o assoalho sob o carpete.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Ask about the boost and the turbos",
+     "pt": "Pergunte sobre a pressão do turbo e os turbos",
+     "why_en": "The stock turbine wheels are ceramic and brittle; extra boost or a lot of rev-limiter use can break them.",
+     "why_pt": "As turbinas originais são de cerâmica e frágeis; pressão acima da original ou muito corte de giro pode quebrá-las.",
+     "src": "https://hagerty.com/media/?p=4338"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "MR2_AW11": {
+   "intro_en": "The light first MR2: rust is the big risk; the supercharged cars are worth more.",
+   "intro_pt": "O primeiro MR2, leve: a ferrugem é o grande risco; os com compressor valem mais.",
+   "items": [
+    {
+     "en": "Look for rust, rust and more rust",
+     "pt": "Procure ferrugem, ferrugem e mais ferrugem",
+     "why_en": "It hides under the carpets in the boot, the front trunk and the cabin floor: lift them.",
+     "why_pt": "Ela se esconde sob os carpetes do porta-malas traseiro, do dianteiro e do assoalho: levante-os.",
+     "src": "https://carthrottle.com/post/the-ultimate-guide-to-buying-a-toyota-aw11-mr2-icon"
+    },
+    {
+     "en": "Confirm the engine: 4A-GE or supercharged 4A-GZE",
+     "pt": "Confirme o motor: 4A-GE ou 4A-GZE com compressor",
+     "why_en": "The supercharged cars (147 cv) are worth more, and many were imported from Japan.",
+     "why_pt": "Os com compressor (147 cv) valem mais, e muitos vieram importados do Japão.",
+     "src": "https://www.jdmbuysell.com/learn/toyota/mr2/w10/"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "MR2_SW20": {
+   "intro_en": "The SW20, the 'baby Ferrari': neglect, not design, causes most problems. Check the gearbox, the roof and the cooling.",
+   "intro_pt": "O SW20, apelidado de 'mini Ferrari': o descaso causa a maioria dos problemas, não o projeto. Confira câmbio, teto e arrefecimento.",
+   "items": [
+    {
+     "en": "Check for crunchy shifts",
+     "pt": "Veja se as marchas arranham",
+     "why_en": "The synchros were notorious for crunchy shifts on earlier cars; later ones were improved.",
+     "why_pt": "Os sincronizados eram famosos por arranhar nos primeiros carros; depois foram melhorados.",
+     "src": "https://hagerty.com/media/?p=256555"
+    },
+    {
+     "en": "Confirm which engine it has",
+     "pt": "Confirme qual motor ele tem",
+     "why_en": "Engine swaps are common, and Turbos sell for about double the non-turbo cars.",
+     "why_pt": "Trocas de motor são comuns, e os Turbo valem cerca do dobro dos aspirados.",
+     "src": "https://hagerty.com/media/?p=256555"
+    },
+    {
+     "en": "Check the T-bar roof for leaks",
+     "pt": "Confira se o teto T-bar tem infiltração",
+     "why_en": "The removable T-bar panels are a known weak point.",
+     "why_pt": "Os painéis removíveis do teto T-bar são ponto fraco conhecido.",
+     "src": "https://www.carthrottle.com/post/9-things-you-need-to-know-before-buying-an-sw20-toyota-mr2"
+    },
+    {
+     "en": "Check the radiator and the cooling system",
+     "pt": "Confira o radiador e o arrefecimento",
+     "why_en": "The low front radiator gets damaged by stones and rust; look for leaks.",
+     "why_pt": "O radiador baixo, na frente, sofre com pedras e ferrugem; procure vazamentos.",
+     "src": "https://www.classicandsportscar.com/node/50085"
+    },
+    {
+     "en": "Look at the inner headlight brackets",
+     "pt": "Olhe os suportes internos dos faróis",
+     "why_en": "They are prone to corrosion.",
+     "why_pt": "Eles costumam enferrujar.",
+     "src": "https://classicsworld.co.uk/guides/toyota-mr2-mk2-sw20-buyers-guide/"
+    },
+    {
+     "en": "1993 or later? Look for the revised rear suspension and the limited-slip option",
+     "pt": "1993 em diante? Veja a suspensão traseira revisada e o diferencial autoblocante opcional",
+     "why_en": "Toyota changed the rear geometry and went to 15-inch wheels in 1993, the Turbo got bigger brakes, and the optional LSD adds value.",
+     "why_pt": "A Toyota mudou a geometria traseira e passou a rodas aro 15 em 1993, o Turbo ganhou freios maiores, e o autoblocante opcional valoriza.",
+     "src": "https://hagerty.com/media/?p=256555"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "MR2_SW20T": {
+   "intro_en": "The 3S-GTE Turbo sells for about double the non-turbo car: prove the engine, then check the usual SW20 points.",
+   "intro_pt": "O Turbo 3S-GTE vale cerca do dobro do aspirado: comprove o motor e depois confira os pontos de sempre do SW20.",
+   "items": [
+    {
+     "en": "Confirm which engine it has",
+     "pt": "Confirme qual motor ele tem",
+     "why_en": "Engine swaps are common, and Turbos sell for about double the non-turbo cars.",
+     "why_pt": "Trocas de motor são comuns, e os Turbo valem cerca do dobro dos aspirados.",
+     "src": "https://hagerty.com/media/?p=256555"
+    },
+    {
+     "en": "Check for crunchy shifts",
+     "pt": "Veja se as marchas arranham",
+     "why_en": "The synchros were notorious for crunchy shifts on earlier cars; later ones were improved.",
+     "why_pt": "Os sincronizados eram famosos por arranhar nos primeiros carros; depois foram melhorados.",
+     "src": "https://hagerty.com/media/?p=256555"
+    },
+    {
+     "en": "Check the T-bar roof for leaks",
+     "pt": "Confira se o teto T-bar tem infiltração",
+     "why_en": "The removable T-bar panels are a known weak point.",
+     "why_pt": "Os painéis removíveis do teto T-bar são ponto fraco conhecido.",
+     "src": "https://www.carthrottle.com/post/9-things-you-need-to-know-before-buying-an-sw20-toyota-mr2"
+    },
+    {
+     "en": "Check the radiator and the cooling system",
+     "pt": "Confira o radiador e o arrefecimento",
+     "why_en": "The low front radiator gets damaged by stones and rust; look for leaks.",
+     "why_pt": "O radiador baixo, na frente, sofre com pedras e ferrugem; procure vazamentos.",
+     "src": "https://www.classicandsportscar.com/node/50085"
+    },
+    {
+     "en": "1993 or later? Look for the revised rear suspension and the limited-slip option",
+     "pt": "1993 em diante? Veja a suspensão traseira revisada e o diferencial autoblocante opcional",
+     "why_en": "Toyota changed the rear geometry and went to 15-inch wheels in 1993, the Turbo got bigger brakes, and the optional LSD adds value.",
+     "why_pt": "A Toyota mudou a geometria traseira e passou a rodas aro 15 em 1993, o Turbo ganhou freios maiores, e o autoblocante opcional valoriza.",
+     "src": "https://hagerty.com/media/?p=256555"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "MR2_ZZW30": {
+   "intro_en": "The light roadster: the early pre-cat problem and the optional SMT gearbox are what to check.",
+   "intro_pt": "O roadster leve: o problema do pré-catalisador dos primeiros anos e o câmbio SMT opcional são o que conferir.",
+   "items": [
+    {
+     "en": "Look for signs of pre-cat failure",
+     "pt": "Procure sinais de falha do pré-catalisador",
+     "why_en": "Blue smoke on the overrun, oil use between services and uneven running; 2003-on cars have a revised pre-cat, and a compression test is wise on earlier ones.",
+     "why_pt": "Fumaça azul ao desacelerar, consumo de óleo entre revisões e funcionamento irregular; os 2003 em diante têm pré-catalisador revisado, e nos anteriores vale fazer teste de compressão.",
+     "src": "https://www.octane-magazine.com/articles/buying-guides/toyota-mr2-mk3-w30-buying-guide-history-and-model-review/"
+    },
+    {
+     "en": "Rev it past 5,000 rpm on the drive, and check the soft top",
+     "pt": "No test drive, passe de 5.000 rpm, e confira a capota",
+     "why_en": "Hesitating to rev past 5,000 is a sign of pre-cat failure; leaky soft tops are common too.",
+     "why_pt": "Hesitar acima de 5.000 rpm é sinal de falha do pré-catalisador; capota com infiltração também é comum.",
+     "src": "https://classicmotorsports.com/forum/grm/problems-to-look-for-on-an-mr-s/15242/page1"
+    },
+    {
+     "en": "Make sure it has a clutch pedal",
+     "pt": "Confirme que tem pedal de embreagem",
+     "why_en": "From 2002 a clutchless SMT sequential gearbox was optional; a Toyota bulletin covers SMT warning lights, buzzing and gears that won't change.",
+     "why_pt": "A partir de 2002 havia o câmbio sequencial SMT, sem pedal de embreagem; um boletim da Toyota trata de luz de alerta do SMT, zumbido e marchas que não trocam.",
+     "src": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10141577-9999.pdf"
+    }
+   ]
+  },
+  "AE86": {
+   "intro_en": "The rear-wheel-drive Levin, Trueno, GT-S and SR5. Rust and a real AE86 identity matter more than anything.",
+   "intro_pt": "Os Levin, Trueno, GT-S e SR5 de tração traseira. Ferrugem e identidade de AE86 verdadeiro importam mais que tudo.",
+   "items": [
+    {
+     "en": "Look for rust everywhere",
+     "pt": "Procure ferrugem em todo lugar",
+     "why_en": "Including under the spare wheel and in the rear three-quarter pockets; look for poor repairs too.",
+     "why_pt": "Inclusive sob o estepe e nos cantos traseiros da carroceria; procure também reparos malfeitos.",
+     "src": "https://www.whichcar.com.au/?p=539035"
+    },
+    {
+     "en": "Check around the windows and under the fuel door",
+     "pt": "Confira em volta dos vidros e sob a tampa do combustível",
+     "why_en": "Rust starts above the windshield, around the windows, under the fuel door and in the door jambs.",
+     "why_pt": "A ferrugem começa acima do para-brisa, em volta dos vidros, sob a tampa do combustível e nos batentes das portas.",
+     "src": "https://grassrootsmotorsports.com/forum/grm/whats-it-worth/13851/page1"
+    },
+    {
+     "en": "Check the sills, the doors and the door handles",
+     "pt": "Confira soleiras, portas e maçanetas",
+     "why_en": "Sills get damaged by bad lifting, doors sag with age, and outside handles fail and are hard to replace.",
+     "why_pt": "As soleiras sofrem com macaco mal posto, as portas cedem com o tempo e as maçanetas externas quebram e são difíceis de achar.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide"
+    },
+    {
+     "en": "Check the chassis code: AE86, not AE85",
+     "pt": "Confira o código do chassi: AE86, não AE85",
+     "why_en": "AE86 is the 1.6; Toyota codes the 1.5-litre cars AE85. Check the papers as well as the engine bay.",
+     "why_pt": "AE86 é o 1.6; a Toyota chama os 1.5 de AE85. Confira os documentos, além do cofre do motor.",
+     "src": "https://www.jdmbuysell.com/learn/toyota/ae86/"
+    },
+    {
+     "en": "North American car: GT-S or SR5?",
+     "pt": "Carro norte-americano: GT-S ou SR5?",
+     "why_en": "The GT-S has the 4A-GE twin-cam and only came as a 5-speed, and its VIN shows AE88; the SR5 has the 4A-C, and some are automatic.",
+     "why_pt": "O GT-S tem o 4A-GE de duplo comando e só veio com 5 marchas, e o chassi mostra AE88; o SR5 tem o 4A-C, e alguns são automáticos.",
+     "src": "https://en.wikipedia.org/wiki/Toyota_AE86",
+     "only": "CA"
+    },
+    {
+     "en": "Look for oil leaks and exhaust smoke",
+     "pt": "Procure vazamento de óleo e fumaça no escapamento",
+     "why_en": "The 4A-GE is tough, but its seals perish with age.",
+     "why_pt": "O 4A-GE é resistente, mas os retentores ressecam com a idade.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "S10": {
+   "intro_en": "The S10: a collector's Silvia now; bodywork and paperwork decide the price.",
+   "intro_pt": "O S10: hoje um Silvia de colecionador; lataria e documentos decidem o preço.",
+   "items": [
+    {
+     "en": "Check the bodywork, the air dam and skirts, and the cabin plastics",
+     "pt": "Confira a lataria, o spoiler dianteiro e as saias, e os plásticos internos",
+     "why_en": "Look for rust and filler, cracked air dams and skirts, and sun-cracked plastics; test the A/C too, especially on recent imports.",
+     "why_pt": "Procure ferrugem e massa, spoiler e saias trincados e plásticos rachados pelo sol; teste também o ar-condicionado, ainda mais em importados recentes.",
+     "src": "https://retrorides.com.au/?p=10596"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "S110": {
+   "intro_en": "The S110: a collector's Silvia now; bodywork and paperwork decide the price.",
+   "intro_pt": "O S110: hoje um Silvia de colecionador; lataria e documentos decidem o preço.",
+   "items": [
+    {
+     "en": "Check the bodywork, the air dam and skirts, and the cabin plastics",
+     "pt": "Confira a lataria, o spoiler dianteiro e as saias, e os plásticos internos",
+     "why_en": "Look for rust and filler, cracked air dams and skirts, and sun-cracked plastics; test the A/C too, especially on recent imports.",
+     "why_pt": "Procure ferrugem e massa, spoiler e saias trincados e plásticos rachados pelo sol; teste também o ar-condicionado, ainda mais em importados recentes.",
+     "src": "https://retrorides.com.au/?p=10596"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "S12": {
+   "intro_en": "The S12: a collector's Silvia now; bodywork and paperwork decide the price.",
+   "intro_pt": "O S12: hoje um Silvia de colecionador; lataria e documentos decidem o preço.",
+   "items": [
+    {
+     "en": "Check the bodywork, the air dam and skirts, and the cabin plastics",
+     "pt": "Confira a lataria, o spoiler dianteiro e as saias, e os plásticos internos",
+     "why_en": "Look for rust and filler, cracked air dams and skirts, and sun-cracked plastics; test the A/C too, especially on recent imports.",
+     "why_pt": "Procure ferrugem e massa, spoiler e saias trincados e plásticos rachados pelo sol; teste também o ar-condicionado, ainda mais em importados recentes.",
+     "src": "https://retrorides.com.au/?p=10596"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "S13": {
+   "intro_en": "Light and drift-famous: rust, crash repairs and the grade matter more than the engine fitted.",
+   "intro_pt": "Leve e famoso no drift: ferrugem, reparos de batida e a versão importam mais que o motor instalado.",
+   "items": [
+    {
+     "en": "Look for rust at the strut towers, under the windscreen cowl, at the battery tray and the lower radiator support",
+     "pt": "Procure ferrugem nas torres de suspensão, sob o cowl do para-brisa, na bandeja da bateria e no suporte inferior do radiador",
+     "why_en": "These are the S13's known rust points, with the sills and rails.",
+     "why_pt": "São os pontos de ferrugem conhecidos do S13, junto com soleiras e longarinas.",
+     "src": "https://www.jdmbuysell.com/learn/nissan/silvia/"
+    },
+    {
+     "en": "Look for crash damage and drift wear",
+     "pt": "Procure danos de batida e desgaste de drift",
+     "why_en": "Many have hidden repairs; hard launches and drifting tear the rear subframe mounts.",
+     "why_pt": "Muitos têm reparos escondidos; arrancadas fortes e drift rasgam os suportes do subchassi traseiro.",
+     "src": "https://www.jdmbuysell.com/learn/nissan/silvia/s13/"
+    },
+    {
+     "en": "Watch the temperature under load",
+     "pt": "Observe a temperatura com carga",
+     "why_en": "A small radiator, weak fans or clogged passages make them overheat.",
+     "why_pt": "Radiador pequeno, ventoinha fraca ou dutos entupidos fazem o motor esquentar.",
+     "src": "https://www.jdmbuysell.com/learn/nissan/silvia/s13/"
+    },
+    {
+     "en": "Check the grade: K's is the turbo",
+     "pt": "Confira a versão: a K's é a turbo",
+     "why_en": "The K's has the CA18DET (175 cv) until 1990 and the SR20DET (205 cv) from 1991.",
+     "why_pt": "A K's tem o CA18DET (175 cv) até 1990 e o SR20DET (205 cv) a partir de 1991.",
+     "src": "https://www.jdmbuysell.com/blog/nissan-silvia/"
+    },
+    {
+     "en": "Check the bodywork, the air dam and skirts, and the cabin plastics",
+     "pt": "Confira a lataria, o spoiler dianteiro e as saias, e os plásticos internos",
+     "why_en": "Look for rust and filler, cracked air dams and skirts, and sun-cracked plastics; test the A/C too, especially on recent imports.",
+     "why_pt": "Procure ferrugem e massa, spoiler e saias trincados e plásticos rachados pelo sol; teste também o ar-condicionado, ainda mais em importados recentes.",
+     "src": "https://retrorides.com.au/?p=10596"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "S14": {
+   "intro_en": "Stiffer and more refined than the S13; the same rust and crash checks apply.",
+   "intro_pt": "Mais rígido e refinado que o S13; valem as mesmas verificações de ferrugem e batida.",
+   "items": [
+    {
+     "en": "Look for rust and crash damage: sills, strut towers, rear quarters",
+     "pt": "Procure ferrugem e batidas: soleiras, torres de suspensão, laterais traseiras",
+     "why_en": "Drift impacts and poor repairs are common.",
+     "why_pt": "Batidas de drift e reparos malfeitos são comuns.",
+     "src": "https://www.jdmbuysell.com/learn/nissan/silvia/s14/"
+    },
+    {
+     "en": "Zenki or kouki?",
+     "pt": "Zenki ou kouki?",
+     "why_en": "The 1996 kouki facelift brought projector headlights and a ball-bearing turbo.",
+     "why_pt": "A reestilização kouki de 1996 trouxe faróis de projetor e turbo com rolamento de esferas.",
+     "src": "https://www.jdmbuysell.com/learn/nissan/silvia/s14/"
+    },
+    {
+     "en": "Check the bodywork, the air dam and skirts, and the cabin plastics",
+     "pt": "Confira a lataria, o spoiler dianteiro e as saias, e os plásticos internos",
+     "why_en": "Look for rust and filler, cracked air dams and skirts, and sun-cracked plastics; test the A/C too, especially on recent imports.",
+     "why_pt": "Procure ferrugem e massa, spoiler e saias trincados e plásticos rachados pelo sol; teste também o ar-condicionado, ainda mais em importados recentes.",
+     "src": "https://retrorides.com.au/?p=10596"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
+  },
+  "S15": {
+   "intro_en": "The last and sharpest Silvia, sold in Japan only; near-stock cars command the premium.",
+   "intro_pt": "O último e mais afiado Silvia, vendido só no Japão; carros quase originais valem mais.",
+   "items": [
+    {
+     "en": "Look for rust and prior damage: sills, rear arches, strut towers",
+     "pt": "Procure ferrugem e danos anteriores: soleiras, caixas de roda traseiras, torres",
+     "why_en": "The best buys are near-stock cars with verified mileage.",
+     "why_pt": "As melhores compras são carros quase originais com quilometragem comprovada.",
+     "src": "https://www.jdmbuysell.com/learn/nissan/silvia/s15/"
+    },
+    {
+     "en": "Spec-R or Spec-S?",
+     "pt": "Spec-R ou Spec-S?",
+     "why_en": "The Spec-R is the turbo: 250 cv with the six-speed manual.",
+     "why_pt": "O Spec-R é o turbo: 250 cv com câmbio manual de seis marchas.",
+     "src": "https://www.jdmbuysell.com/blog/nissan-silvia/"
+    },
+    {
+     "en": "Check the bodywork, the air dam and skirts, and the cabin plastics",
+     "pt": "Confira a lataria, o spoiler dianteiro e as saias, e os plásticos internos",
+     "why_en": "Look for rust and filler, cracked air dams and skirts, and sun-cracked plastics; test the A/C too, especially on recent imports.",
+     "why_pt": "Procure ferrugem e massa, spoiler e saias trincados e plásticos rachados pelo sol; teste também o ar-condicionado, ainda mais em importados recentes.",
+     "src": "https://retrorides.com.au/?p=10596"
+    },
+    {
+     "en": "Imported from Japan: ask for the export certificate and the auction sheet",
+     "pt": "Importado do Japão: peça o certificado de exportação e a folha do leilão",
+     "why_en": "They record the mileage and condition when it left Japan; auction and registration records can be checked online.",
+     "why_pt": "Eles registram a quilometragem e o estado na saída do Japão; os registros de leilão e de registro podem ser conferidos pela internet.",
+     "src": "https://www.whichcar.com.au/features/1986-toyota-ae86-sprinter-used-car-guide",
+     "only": "CA"
+    }
+   ]
   }
  }
 }
