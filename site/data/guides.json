@@ -1,5 +1,5 @@
 {
- "_note": "What to check before buying: 'general' steps per country, then each model's own list (keyed by family). Every item says why and links its source. A list to help ask the right questions, not a substitute for an inspection.",
+ "_note": "What to check before buying: 'general' steps per country, then each model's own list (keyed by family). Every item says why and links its source. A list to help ask the right questions, not a substitute for an inspection. An item with 'only' shows in that country's store only. intro_en_CA / intro_pt_BR replace the intro in that store.",
  "general": {
   "BR": [
    {
@@ -430,6 +430,14 @@
    "intro_pt": "Mecânica simples e durável; os pontos de atenção são a suspensão traseira e a injeção.",
    "items": [
     {
+     "en": "2006–2009 1.8: look for coolant leaks and ask if the engine block was replaced",
+     "pt": "1.8 de 2006–2009: procure vazamento de arrefecimento e pergunte se o bloco foi trocado",
+     "why_en": "On some 2006–08 and early 2009 Civics the engine block can leak coolant and overheat; Honda's extended warranty for it has run out.",
+     "why_pt": "Em alguns Civic 2006–08 e do início de 2009 o bloco pode vazar líquido de arrefecimento e superaquecer; a garantia estendida da Honda para isso já acabou.",
+     "src": "https://static.nhtsa.gov/odi/tsbs/2017/MC-10115157-9999.pdf",
+     "only": "CA"
+    },
+    {
      "en": "Listen for knocks from the rear over bumps",
      "pt": "Escute batidas na traseira ao passar em buracos",
      "why_en": "Repairers report that the lower bushing of the rear shock absorbers often fails, even on low-km cars.",
@@ -441,7 +449,8 @@
      "pt": "Motor falhando ou sem força: pergunte pelos bicos injetores",
      "why_en": "A small filter inside the injectors tends to dry out and clog.",
      "why_pt": "Um pequeno filtro dentro dos bicos costuma ressecar e entupir.",
-     "src": "https://autopapo.com.br/noticia/usado-honda-civic-2008/"
+     "src": "https://autopapo.com.br/noticia/usado-honda-civic-2008/",
+     "only": "BR"
     },
     {
      "en": "Ask for the service history with the right oil",
@@ -450,7 +459,8 @@
      "why_pt": "Óleo ruim pode entupir o filtro da solenoide do VTEC, e o motor perde força em giros altos.",
      "src": "https://www.autoo.com.br/honda-civic-veja-5-motivos-para-comprar-e-5-para-fugir-do-seda-usado/"
     }
-   ]
+   ],
+   "intro_en_CA": "Simple, durable mechanics; on 2006–2009 cars check the 1.8's engine block first, then the rear suspension."
   },
   "FA5_SI": {
    "intro_en": "The 192 hp K20 and six-speed are the reason to buy one; many were driven hard, so history matters.",
@@ -484,20 +494,30 @@
      "src": "https://au7o.io/pt-br/known-issues/honda-civic"
     },
     {
+     "en": "Turn the wheel all the way and pull away: no clicking or grinding",
+     "pt": "Esterce tudo e arranque: sem estalos nem rangidos",
+     "why_en": "A clicking grind when accelerating while turning is a known fault on this generation: a worn outer CV joint.",
+     "why_pt": "Estalos ao acelerar com a direção esterçada são um defeito conhecido desta geração: junta homocinética externa gasta.",
+     "src": "https://us.haynes.com/blogs/tips-tutorials/honda-civic-problems-and-recalls-2012-2015"
+    },
+    {
      "en": "Automatic: drive it cold and warm; shifts must be smooth",
      "pt": "Automático: dirija frio e quente; as trocas têm que ser suaves",
      "why_en": "The 1.8's five-speed automatic is naturally slow to shift, but jolts, slipping or slow engagement point to a problem.",
      "why_pt": "O automático de 5 marchas do 1.8 é naturalmente lento nas trocas, mas trancos, patinação ou demora para engatar indicam problema.",
-     "src": "https://www.mercadolivre.com.br/blog/mo-defeitos-comuns-honda-civic-usado"
+     "src": "https://www.mercadolivre.com.br/blog/mo-defeitos-comuns-honda-civic-usado",
+     "only": "BR"
     },
     {
      "en": "Check the airbag recall at honda.com.br/recall",
      "pt": "Consulte o recall do airbag em honda.com.br/recall",
      "why_en": "Civics from 2011 to 2015 are in the Takata airbag recall; look up the plate or chassis. The repair is free.",
      "why_pt": "Civic de 2011 a 2015 estão no recall dos airbags Takata; consulte pela placa ou chassi. O reparo é gratuito.",
-     "src": "https://verificarauto.com.br/recall-honda-takata/"
+     "src": "https://verificarauto.com.br/recall-honda-takata/",
+     "only": "BR"
     }
-   ]
+   ],
+   "intro_en_CA": "Very reliable; check the air conditioning and the CV joints."
   },
   "YARIS_S": {
    "intro_en": "Simple, economical mechanics; the main thing is the CVT's service history.",
@@ -508,14 +528,261 @@
      "pt": "Peça o histórico de troca do fluido do câmbio CVT",
      "why_en": "The CVT needs regular changes with the right fluid to last.",
      "why_pt": "O CVT precisa de trocas regulares com o fluido certo para durar.",
-     "src": "https://napista.com.br/radar/yaris-usado-e-economico"
+     "src": "https://napista.com.br/radar/yaris-usado-e-economico",
+     "only": "BR"
     },
     {
      "en": "Test the media screen and the electrics",
      "pt": "Teste a central multimídia e a parte elétrica",
      "why_en": "Owners report media-unit faults, and some battery and alternator replacements.",
      "why_pt": "Donos relatam defeitos na central multimídia e algumas trocas de bateria e alternador.",
-     "src": "https://www.autoo.com.br/toyota-yaris-sedan-usado-e-aposta-certa-para-quem-nao-quer-perder-dinheiro/"
+     "src": "https://www.autoo.com.br/toyota-yaris-sedan-usado-e-aposta-certa-para-quem-nao-quer-perder-dinheiro/",
+     "only": "BR"
+    }
+   ]
+  },
+  "S2K_AP1": {
+   "intro_en": "A 9,000 rpm F20C and a 6-speed: the risks are an over-revved engine, the soft top and rust.",
+   "intro_pt": "Motor F20C de 9.000 rpm e câmbio de 6 marchas: os riscos são motor que passou do giro, a capota e a ferrugem.",
+   "items": [
+    {
+     "en": "Ask whether the intake valve retainers were replaced",
+     "pt": "Pergunte se os pratos das molas das válvulas de admissão foram trocados",
+     "why_en": "A missed shift can over-rev the AP1 and crack these retainers, which drops a valve. The damage only shows with the valve cover off, so upgraded retainers are cheap insurance.",
+     "why_pt": "Uma marcha errada pode passar o giro do AP1 e trincar esses pratos, o que derruba uma válvula. O dano só aparece com a tampa de válvulas aberta, então pratos reforçados são um seguro barato.",
+     "src": "https://www.s2ki.com/forums/s2000-talk-1/what-common-s2000-problems-issues-524410/page2/"
+    },
+    {
+     "en": "Check the oil level and ask how much it uses",
+     "pt": "Confira o nível de óleo e pergunte quanto ele consome",
+     "why_en": "The F20C can use oil, so owners check it at every fill-up.",
+     "why_pt": "O F20C pode consumir óleo, então os donos conferem a cada abastecimento.",
+     "src": "https://www.jdmbuysell.com/learn/honda/s2000/ap1/"
+    },
+    {
+     "en": "Shift 2nd to 3rd and back: no grinding",
+     "pt": "Troque de 2ª para 3ª e de volta: sem arranhar",
+     "why_en": "A grind there is a known fault with a factory fix.",
+     "why_pt": "Arranhar ali é um defeito conhecido, com reparo de fábrica.",
+     "src": "https://www.s2ki.com/forums/introductions-21/what-look-when-buying-used-s2000-590849/"
+    },
+    {
+     "en": "Inspect the soft top for tears and worn spots",
+     "pt": "Inspecione a capota de lona: rasgos e pontos gastos",
+     "why_en": "A new top is expensive. Cars up to 2001 have a plastic rear window that yellows; glass came in 2002.",
+     "why_pt": "Uma capota nova é cara. Os carros até 2001 têm vigia de plástico, que amarela; a de vidro veio em 2002.",
+     "src": "https://hagerty.com/media/?p=4686"
+    },
+    {
+     "en": "Look for rust: wheel wells, front subframe, frame rails and rear quarters",
+     "pt": "Procure ferrugem: caixas de roda, subchassi dianteiro, longarinas e laterais traseiras",
+     "why_en": "Where the S2000 rusts; also look behind the rubber strip at the rear wheel arches.",
+     "why_pt": "Onde o S2000 enferruja; olhe também atrás da borracha das caixas de roda traseiras.",
+     "src": "https://hagerty.com/media/?p=4686"
+    },
+    {
+     "en": "Check the VIN stickers on the body panels",
+     "pt": "Confira as etiquetas com o número do chassi nas peças",
+     "why_en": "Fenders, doors and the front bumper carry one; missing or painted-over stickers mean bodywork.",
+     "why_pt": "Para-lamas, portas e para-choque dianteiro têm uma; etiqueta faltando ou pintada indica funilaria.",
+     "src": "https://hagerty.com/media/?p=4686"
+    }
+   ]
+  },
+  "S2K_AP2": {
+   "intro_en": "The 2.2 F22C1 has more torque and stronger valve retainers; 2006 on got drive-by-wire and stability control. Check the top, rust and past repairs.",
+   "intro_pt": "O 2.2 F22C1 tem mais torque e pratos de válvula mais fortes; a partir de 2006 vieram acelerador eletrônico e controle de estabilidade. Confira a capota, a ferrugem e reparos.",
+   "items": [
+    {
+     "en": "Shift 2nd to 3rd and back: no grinding",
+     "pt": "Troque de 2ª para 3ª e de volta: sem arranhar",
+     "why_en": "A grind there is a known fault with a factory fix.",
+     "why_pt": "Arranhar ali é um defeito conhecido, com reparo de fábrica.",
+     "src": "https://www.s2ki.com/forums/introductions-21/what-look-when-buying-used-s2000-590849/"
+    },
+    {
+     "en": "Inspect the soft top for tears and worn spots",
+     "pt": "Inspecione a capota de lona: rasgos e pontos gastos",
+     "why_en": "A new top is expensive. Cars up to 2001 have a plastic rear window that yellows; glass came in 2002.",
+     "why_pt": "Uma capota nova é cara. Os carros até 2001 têm vigia de plástico, que amarela; a de vidro veio em 2002.",
+     "src": "https://hagerty.com/media/?p=4686"
+    },
+    {
+     "en": "Look for rust: wheel wells, front subframe, frame rails and rear quarters",
+     "pt": "Procure ferrugem: caixas de roda, subchassi dianteiro, longarinas e laterais traseiras",
+     "why_en": "Where the S2000 rusts; also look behind the rubber strip at the rear wheel arches.",
+     "why_pt": "Onde o S2000 enferruja; olhe também atrás da borracha das caixas de roda traseiras.",
+     "src": "https://hagerty.com/media/?p=4686"
+    },
+    {
+     "en": "Check the VIN stickers on the body panels",
+     "pt": "Confira as etiquetas com o número do chassi nas peças",
+     "why_en": "Fenders, doors and the front bumper carry one; missing or painted-over stickers mean bodywork.",
+     "why_pt": "Para-lamas, portas e para-choque dianteiro têm uma; etiqueta faltando ou pintada indica funilaria.",
+     "src": "https://hagerty.com/media/?p=4686"
+    }
+   ]
+  },
+  "GC_BK1": {
+   "intro_en": "Cheap rear-wheel-drive fun with a 2.0 turbo or a 3.8 V6; the manual gearbox is the weak point, and many 2.0Ts were modified.",
+   "intro_pt": "Tração traseira barata com 2.0 turbo ou V6 3.8; o câmbio manual é o ponto fraco, e muitos 2.0T foram modificados.",
+   "items": [
+    {
+     "en": "Shift through every gear, cold and warm: no grinding or refusals",
+     "pt": "Passe todas as marchas, frio e quente: sem arranhar nem travar",
+     "why_en": "The 6-speed manual is the weak point: owners report grinding (2nd, 3rd, 5th) and refused shifts. Hyundai campaigns replaced the shift lever and the gearbox oil: ask if they were done.",
+     "why_pt": "O câmbio manual de 6 marchas é o ponto fraco: donos relatam arranhadas (2ª, 3ª, 5ª) e marchas que não entram. Campanhas da Hyundai trocaram a alavanca e o óleo do câmbio: pergunte se foram feitas.",
+     "src": "https://www.carcomplaints.com/Hyundai/Genesis_Coupe/2010/tsbs/index.shtml"
+    },
+    {
+     "en": "2.0T: ask what was modified",
+     "pt": "2.0T: pergunte o que foi modificado",
+     "why_en": "Intake and exhaust are usually fine; be wary of more boost, a reprogrammed ECU or engine work.",
+     "why_pt": "Admissão e escapamento costumam ser tranquilos; desconfie de mais pressão do turbo, central reprogramada ou motor mexido.",
+     "src": "https://www.auto123.com/en/news/hyundai-genesis-coupe-used/50641/"
+    },
+    {
+     "en": "Look for smoke at idle and under hard acceleration, and for warning lights",
+     "pt": "Veja se sai fumaça em marcha lenta e em aceleração forte, e se há luzes de alerta",
+     "why_en": "Smoke or a check-engine light means the engine needs a closer look.",
+     "why_pt": "Fumaça ou luz de injeção acesa pedem uma avaliação do motor.",
+     "src": "https://www.auto123.com/en/news/hyundai-genesis-coupe-used/50641/"
+    },
+    {
+     "en": "Listen for clunks from the suspension and steering",
+     "pt": "Escute batidas na suspensão e na direção",
+     "why_en": "Clunks or grinding there point to worn parts.",
+     "why_pt": "Batidas ou rangidos ali indicam peças gastas.",
+     "src": "https://www.auto123.com/en/news/hyundai-genesis-coupe-used/50641/"
+    },
+    {
+     "en": "Check the push-button start, the A/C, the windows and every key",
+     "pt": "Teste a partida por botão, o ar-condicionado, os vidros e todas as chaves",
+     "why_en": "The engine should start at once; a delay can mean a faulty button or ignition switch.",
+     "why_pt": "O motor deve pegar na hora; demora pode ser defeito no botão ou no comutador de ignição.",
+     "src": "https://www.auto123.com/en/news/hyundai-genesis-coupe-used/50641/"
+    }
+   ]
+  },
+  "GC_BK2": {
+   "intro_en": "The facelift: more power (2.0T 274 hp to 2014, 3.8 V6 348 hp). The manual gearbox and past modifications are what to check.",
+   "intro_pt": "A reestilização: mais potência (2.0T de 274 cv até 2014, V6 3.8 de 348 cv). O câmbio manual e as modificações são o que conferir.",
+   "items": [
+    {
+     "en": "Shift through every gear, cold and warm: no grinding or refusals",
+     "pt": "Passe todas as marchas, frio e quente: sem arranhar nem travar",
+     "why_en": "The 6-speed manual is the weak point: owners report grinding (2nd, 3rd, 5th) and refused shifts. Hyundai campaigns replaced the shift lever and the gearbox oil: ask if they were done.",
+     "why_pt": "O câmbio manual de 6 marchas é o ponto fraco: donos relatam arranhadas (2ª, 3ª, 5ª) e marchas que não entram. Campanhas da Hyundai trocaram a alavanca e o óleo do câmbio: pergunte se foram feitas.",
+     "src": "https://www.carcomplaints.com/Hyundai/Genesis_Coupe/2010/tsbs/index.shtml"
+    },
+    {
+     "en": "2.0T: ask what was modified",
+     "pt": "2.0T: pergunte o que foi modificado",
+     "why_en": "Intake and exhaust are usually fine; be wary of more boost, a reprogrammed ECU or engine work.",
+     "why_pt": "Admissão e escapamento costumam ser tranquilos; desconfie de mais pressão do turbo, central reprogramada ou motor mexido.",
+     "src": "https://www.auto123.com/en/news/hyundai-genesis-coupe-used/50641/"
+    },
+    {
+     "en": "Look for smoke at idle and under hard acceleration, and for warning lights",
+     "pt": "Veja se sai fumaça em marcha lenta e em aceleração forte, e se há luzes de alerta",
+     "why_en": "Smoke or a check-engine light means the engine needs a closer look.",
+     "why_pt": "Fumaça ou luz de injeção acesa pedem uma avaliação do motor.",
+     "src": "https://www.auto123.com/en/news/hyundai-genesis-coupe-used/50641/"
+    },
+    {
+     "en": "Listen for clunks from the suspension and steering",
+     "pt": "Escute batidas na suspensão e na direção",
+     "why_en": "Clunks or grinding there point to worn parts.",
+     "why_pt": "Batidas ou rangidos ali indicam peças gastas.",
+     "src": "https://www.auto123.com/en/news/hyundai-genesis-coupe-used/50641/"
+    },
+    {
+     "en": "Check the push-button start, the A/C, the windows and every key",
+     "pt": "Teste a partida por botão, o ar-condicionado, os vidros e todas as chaves",
+     "why_en": "The engine should start at once; a delay can mean a faulty button or ignition switch.",
+     "why_pt": "O motor deve pegar na hora; demora pode ser defeito no botão ou no comutador de ignição.",
+     "src": "https://www.auto123.com/en/news/hyundai-genesis-coupe-used/50641/"
+    }
+   ]
+  },
+  "NSX_1": {
+   "intro_en": "Durable and simple to own for a supercar; the timing belt and the early 5-speed gearboxes need proof of service.",
+   "intro_pt": "Durável e simples de manter para um superesportivo; a correia dentada e os primeiros câmbios de 5 marchas pedem comprovante de serviço.",
+   "items": [
+    {
+     "en": "Ask when the timing belt and water pump were done",
+     "pt": "Pergunte quando a correia dentada e a bomba d'água foram trocadas",
+     "why_en": "Due about every 145,000 km on the 3.0 and 170,000 km on the 3.2 (1997 on); with no record, budget for it.",
+     "why_pt": "A troca é a cada 145 mil km mais ou menos no 3.0 e 170 mil km no 3.2 (a partir de 1997); sem comprovante, reserve dinheiro para isso.",
+     "src": "https://www.pistonheads.com/news/ph-buying-guide-contents/honda-nsx-buying-guide-powertrain/25298"
+    },
+    {
+     "en": "1991–1992 5-speed: check the gearbox number",
+     "pt": "1991–1992 com câmbio de 5 marchas: confira o número do câmbio",
+     "why_en": "Gearboxes J4A4-1003542 to J4A4-1005978 can break a snap ring and wreck themselves; ask for proof of the fix.",
+     "why_pt": "Os câmbios J4A4-1003542 a J4A4-1005978 podem quebrar um anel-trava e se destruir; peça comprovante do reparo.",
+     "src": "https://www.pistonheads.com/news/ph-buying-guide-contents/honda-nsx-buying-guide-powertrain/25298"
+    },
+    {
+     "en": "1991–1996: look for leaks at the coolant reservoir",
+     "pt": "1991–1996: procure vazamentos no reservatório de arrefecimento",
+     "why_en": "A known leak on these years.",
+     "why_pt": "Vazamento conhecido nesses anos.",
+     "src": "https://www.hagerty.com/media/?p=1305"
+    },
+    {
+     "en": "Test the climate control and the stereo",
+     "pt": "Teste o ar-condicionado digital e o som",
+     "why_en": "Owners list them among the usual faults.",
+     "why_pt": "Donos citam esses itens entre os defeitos comuns.",
+     "src": "https://honda-tech.com/forums/acura-nsx-43/buying-nsx-what-look-2897403/"
+    }
+   ]
+  },
+  "NSX_2": {
+   "intro_en": "The facelift with fixed headlights, the 3.2 and the 6-speed; the timing belt history is the big item.",
+   "intro_pt": "A reestilização com faróis fixos, motor 3.2 e câmbio de 6 marchas; o histórico da correia dentada é o item mais importante.",
+   "items": [
+    {
+     "en": "Ask when the timing belt and water pump were done",
+     "pt": "Pergunte quando a correia dentada e a bomba d'água foram trocadas",
+     "why_en": "Due about every 170,000 km on the 3.2; with no record, budget for it.",
+     "why_pt": "A troca é a cada 170 mil km mais ou menos no 3.2; sem comprovante, reserve dinheiro para isso.",
+     "src": "https://www.pistonheads.com/news/ph-buying-guide-contents/honda-nsx-buying-guide-powertrain/25298"
+    },
+    {
+     "en": "Test the climate control and the stereo",
+     "pt": "Teste o ar-condicionado digital e o som",
+     "why_en": "Owners list them among the usual faults.",
+     "why_pt": "Donos citam esses itens entre os defeitos comuns.",
+     "src": "https://honda-tech.com/forums/acura-nsx-43/buying-nsx-what-look-2897403/"
+    }
+   ]
+  },
+  "FB_SI": {
+   "intro_en": "The 2.4 K24 and a six-speed with a limited-slip differential; many were driven hard or modified, so history matters.",
+   "intro_pt": "O 2.4 K24 e o câmbio de seis marchas com diferencial autoblocante; muitos foram andados forte ou modificados, então o histórico importa.",
+   "items": [
+    {
+     "en": "Ask what was modified, and expect the clutch, tires and brakes to be due unless there are receipts",
+     "pt": "Pergunte o que foi modificado e conte com embreagem, pneus e freios para trocar, a menos que haja notas",
+     "why_en": "Si owners often modify their cars and drive them hard; a used-car reviewer advises assuming these parts are worn until proven otherwise.",
+     "why_pt": "Donos de Si costumam modificar o carro e andar forte; um avaliador de usados recomenda contar com essas peças gastas até prova em contrário.",
+     "src": "https://www.thecasket.ca/wheels/used-wheels-2011-15-honda-civic-248855/"
+    },
+    {
+     "en": "Turn the wheel all the way and pull away: no clicking or grinding",
+     "pt": "Esterce tudo e arranque: sem estalos nem rangidos",
+     "why_en": "A clicking grind when accelerating while turning is a known fault on this generation: a worn outer CV joint.",
+     "why_pt": "Estalos ao acelerar com a direção esterçada são um defeito conhecido desta geração: junta homocinética externa gasta.",
+     "src": "https://us.haynes.com/blogs/tips-tutorials/honda-civic-problems-and-recalls-2012-2015"
+    },
+    {
+     "en": "Run the A/C: it must blow cold without noise",
+     "pt": "Ligue o ar-condicionado: tem que gelar e não fazer barulho",
+     "why_en": "This generation's compressor has known failures, and a broken one can contaminate the whole system.",
+     "why_pt": "O compressor desta geração tem falhas conhecidas, e quando quebra pode contaminar o sistema todo.",
+     "src": "https://au7o.io/pt-br/known-issues/honda-civic"
     }
    ]
   }

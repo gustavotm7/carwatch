@@ -521,7 +521,7 @@ function gauge(s) {                            // 270 degree tach arc
     <b style="color:${col}">${scoreTxt(s)}</b><small>${L("score", "nota")}</small></div>`;
 }
 function nameColor(name) {
-  const n = DATA.names.find(x => x.name === name);
+  const n = DATA.names.find(x => x.name === name) || allNames().find(x => x.name === name);
   return n ? n.color : "#59626e";
 }
 function yearShade(y) {
@@ -774,12 +774,13 @@ function loadGuides() {
 }
 function checklistSheet(name) {
   loadGuides().then(G => {
-    const fam = (DATA.names.find(n => n.name === name) || {}).family;
+    const fam = (allNames().find(n => n.name === name) || {}).family;
     const gen = (G.general || {})[COUNTRY] || [], mod = ((G.models || {})[fam] || {});
+    const items = (mod.items || []).filter(it => !it.only || it.only === COUNTRY);       // some checks are one country's
     const item = it => `<li><b>${esc(PT() ? it.pt || it.en : it.en)}</b>${it.why_en ? `<br><span class="m">${esc(PT() ? it.why_pt || it.why_en : it.why_en)}</span>` : ""}
       ${it.src ? `<br><a href="${esc(it.src)}" target="_blank" rel="noopener" class="src-link">${L("Source", "Fonte")}: ${esc(new URL(it.src).hostname.replace(/^www\./, ""))}</a>` : ""}</li>`;
     openSheet(`<h2>${L("What to check", "O que verificar")}</h2>
-      ${mod.items?.length ? `<h3>${esc(name)}</h3><p class="sub">${esc(PT() ? mod.intro_pt || mod.intro_en || "" : mod.intro_en || "")}</p><ol class="checks">${mod.items.map(item).join("")}</ol>` : ""}
+      ${items.length ? `<h3>${esc(name)}</h3><p class="sub">${esc(PT() ? mod["intro_pt_" + COUNTRY] || mod.intro_pt || mod.intro_en || "" : mod["intro_en_" + COUNTRY] || mod.intro_en || "")}</p><ol class="checks">${items.map(item).join("")}</ol>` : ""}
       <h3>${L("Every used car", "Todo carro usado")}</h3><ol class="checks">${gen.map(item).join("")}</ol>
       <p class="fine">${L("A list to help you ask the right questions; it doesn't replace an inspection by a mechanic you trust.",
                           "Uma lista para ajudar a fazer as perguntas certas; não substitui a vistoria de um mecânico de confiança.")}</p>`,
@@ -2095,7 +2096,10 @@ function paintTabs() {
 const SITE_OF = [[/(^|\.)olx\.com\.br$/, "olx"], [/(^|\.)mercadoli[vb]re\.com(\.br)?$/, "mercadolivre"], [/(^|\.)webmotors\.com\.br$/, "webmotors"],
   [/(^|\.)icarros\.com\.br$/, "icarros"], [/(^|\.)(facebook\.com|fb\.com|fb\.me)$/, "marketplace"], [/(^|\.)kijiji\.ca$/, "kijiji"],
   [/(^|\.)autotrader\.ca$/, "autotrader"], [/(^|\.)carpages\.ca$/, "carpages"], [/(^|\.)napista\.com\.br$/, "napista"], [/(^|\.)mobiauto\.com\.br$/, "mobiauto"]];
-const MODEL_RX = [["FA5_SI", /\bcivic\b.*\bsi\b|\bsi\b.*\bcivic\b/], ["FA5", /\bcivic\b/], ["FB", /\bcivic\b/], ["YARIS_S", /\byaris\b/],
+const MODEL_RX = [["FA5_SI", /\bcivic\b.*\bsi\b|\bsi\b.*\bcivic\b/], ["FB_SI", /\bcivic\b.*\bsi\b|\bsi\b.*\bcivic\b/],
+  ["FA5", /\bcivic\b/], ["FB", /\bcivic\b/], ["YARIS_S", /\byaris\b/],
+  ["S2K_AP1", /\bs ?2000\b/], ["S2K_AP2", /\bs ?2000\b/], ["GC_BK1", /\bgenesis\b.*\bcoup|\bcoup.*\bgenesis\b/], ["GC_BK2", /\bgenesis\b.*\bcoup|\bcoup.*\bgenesis\b/],
+  ["NSX_1", /\bnsx\b/], ["NSX_2", /\bnsx\b/],
   ["E36M3", /\bm3\b/], ["E46M3", /\bm3\b/], ["E9XM3", /\bm3\b/], ["E39M5", /\bm5\b/], ["E60M5", /\bm5\b/],
   ["E91", /\b(wagon|touring|sport ?wagon|perua)\b/], ["E46_330", /\b330 ?c?i?\b/], ["Z350", /\b350 ?z\b/], ["Z370", /\b370 ?z\b/]];
 const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
@@ -2111,13 +2115,14 @@ function cleanUrl(u) {                           // the same ad shared twice giv
 }
 function allNames() {                            // every model this store tracks, manual or automatic
   const seen = new Map();
-  for (const d of [MAN_DATA, AUTO_DATA, DATA]) for (const n of (d?.names || [])) if (!seen.has(n.name)) seen.set(n.name, n);
+  for (const d of [MAN_DATA, AUTO_DATA, DATA]) for (const n of [...(d?.names || []), ...(d?.names_all || [])]) if (!seen.has(n.name)) seen.set(n.name, n);
   return [...seen.values()];
 }
-function bodiesOf(name) {                        // bodies seen for a model, most common first
+function bodiesOf(name) {                        // bodies seen for a model, most common first; else the ones it came in
   const cnt = {};
   for (const d of [MAN_DATA, AUTO_DATA]) for (const c of (d?.cars || [])) if (c.name === name && c.body) cnt[c.body] = (cnt[c.body] || 0) + 1;
-  return Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a]);
+  const seen = Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a]);
+  return seen.length ? seen : [...((allNames().find(n => n.name === name) || {}).bodies || [])];
 }
 function loadTowns() {
   if (TOWNS || COUNTRY !== "BR") return Promise.resolve(TOWNS);

@@ -9,12 +9,16 @@
     "bodies: the bodies this car came in; the first one is used when the ad does not say.",
     "trims: [regex, label] pairs, first match wins.",
     "comps: optional, sold prices from Bring a Trailer. bat = id(s) of the model's results page (open e.g. bringatrailer.com/bmw/e46-m3/ and find keyword_pages in the page source); match = regex the auction title must contain; body = body when the title does not say.",
-    "searches: search pages to read every day, per site."
+    "searches: search pages to read every day, per site.",
+    "none_body: regexes on the body the listing page states (Coupe, Hatchback...): a match drops the ad.",
+    "split: optional, a version priced on its own with its own chip (FA5 Civic Si): match on the title or trim, family, name, color; body forces the body (Brazil's FB Civic Si was only a coupe)."
   ],
   "models": [
     {
       "enabled": true, "model": "M3", "make": "bmw", "match": ["\\bm3\\b"], "bodies": ["coupe", "conv", "sedan"],
       "generations": [
+        {"family": "E36M3", "years": [1995, 1999], "name": "E36 M3", "color": "#C46BD6", "smg_risk": true,
+         "desc": "BMW E36 M3 1995-1999 (North America)", "trims": [["\\blightweight|\\bltw\\b", "Lightweight"]]},
         {"family": "E46M3", "years": [2001, 2006], "name": "E46 M3", "color": "#8B84E8", "smg_risk": true,
          "comps": {"bat": [1833234], "match": "\\bM3\\b", "body": "coupe"},
          "desc": "BMW E46 M3 2001-2006",
@@ -116,16 +120,74 @@
                    "carpages": ["https://www.carpages.ca/used-cars/nissan/370z/"]}
     },
     {
-      "enabled": false, "model": "S2000 (example: set enabled to true to track it)", "make": "honda",
-      "match": ["\\bs ?2000\\b"], "bodies": ["conv"],
+      "enabled": true, "model": "S2000", "match": ["\\bs ?2000\\b"], "bodies": ["conv"],
       "generations": [
-        {"family": "S2K_AP1", "years": [2000, 2003], "name": "AP1 S2000", "color": "#D9B53B", "smg_risk": false,
-         "desc": "Honda S2000 AP1 2000-2003 (F20C)"},
-        {"family": "S2K_AP2", "years": [2004, 2009], "name": "AP2 S2000", "color": "#B9C94A", "smg_risk": false,
+        {"family": "S2K_AP1", "years": [2000, 2003], "name": "AP1 S2000", "color": "#A3D65C", "smg_risk": false,
+         "desc": "Honda S2000 AP1 2000-2003 (F20C, 9,000 rpm)"},
+        {"family": "S2K_AP2", "years": [2004, 2009], "name": "AP2 S2000", "color": "#62C7C3", "smg_risk": false,
          "desc": "Honda S2000 AP2 2004-2009 (F22C1)", "trims": [["\\bcr\\b|club racer", "CR"]]}
       ],
-      "searches": {"autotrader": ["https://www.autotrader.ca/cars/honda/s2000/"],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/honda/s2000"],
                    "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/honda-s2000/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "Civic", "match": ["\\bcivic\\b"],
+      "none": ["coupe|coup[eé]|\\bcpe\\b|\\b2 ?(dr|door|portes)\\b|hatch|\\bhb\\b|\\b5 ?(dr|door|portes)\\b|type ?r|hybrid|hybride|del ?sol"],
+      "none_body": ["coup|hatch"], "bodies": ["sedan"],
+      "generations": [
+        {"family": "FA5", "years": [2006, 2011], "name": "FA5 Civic", "color": "#E8B931", "smg_risk": false,
+         "desc": "Honda Civic 8th gen sedan 2006-2011",
+         "trims": [["\\bsi\\b", "Si"], ["\\bex ?l\\b", "EX-L"], ["\\bsport\\b", "Sport"], ["\\bex\\b", "EX"], ["\\blx\\b", "LX"], ["\\bdx ?g\\b", "DX-G"], ["\\bdx\\b", "DX"]],
+         "split": [{"match": "\\bsi\\b", "family": "FA5_SI", "name": "FA5 Civic Si", "color": "#FF4D6D",
+                    "desc": "Honda Civic Si 8th gen sedan (2.0, manual)", "trims": [["\\bsi\\b", "Si"]]}]},
+        {"family": "FB", "years": [2012, 2015], "name": "FB Civic", "color": "#3FB58F", "smg_risk": false,
+         "desc": "Honda Civic 9th gen sedan 2012-2015",
+         "trims": [["\\bsi\\b", "Si"], ["\\btouring\\b", "Touring"], ["\\bex ?l\\b", "EX-L"], ["\\bex\\b", "EX"], ["\\blx\\b", "LX"], ["\\bdx\\b", "DX"]],
+         "split": [{"match": "\\bsi\\b", "family": "FB_SI", "name": "FB Civic Si", "color": "#FF8A5B",
+                    "desc": "Honda Civic Si 9th gen sedan (2.4, manual)", "trims": [["\\bsi\\b", "Si"]]}]}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/honda/civic/tr_manual?fregfrom=2006&fregto=2015"],
+                   "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/honda-civic-sedan-manual/k0c174l0",
+                              "https://www.kijiji.ca/b-cars-trucks/canada/honda-civic-si/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "Yaris sedan", "make": "toyota", "match": ["\\byaris\\b"],
+      "none": ["hatch|\\bhb\\b|liftback|\\b[35] ?(dr|door|portes)\\b|\\bcross\\b"], "none_body": ["hatch|compact"],
+      "bodies": ["sedan"],
+      "generations": [
+        {"family": "YARIS_S", "years": [2007, 2019], "name": "Yaris Sedan", "color": "#9AA7B8", "smg_risk": false,
+         "desc": "Toyota Yaris sedan, Canada: 2007-2011, and 2016-2019 (built by Mazda)",
+         "trims": [["\\bxle\\b", "XLE"], ["\\bpremium\\b", "Premium"], ["\\ble\\b", "LE"]]}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/toyota/yaris/tr_manual"],
+                   "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/toyota-yaris-sedan-manual/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "Genesis Coupe", "match": ["\\bgenesis\\b", "\\bcoup"], "none": ["\\bg[789]0\\b|\\bgv[0-9]0\\b|sedan|berline"],
+      "bodies": ["coupe"],
+      "generations": [
+        {"family": "GC_BK1", "years": [2010, 2012], "name": "BK1 Genesis Coupe", "color": "#E89A6B", "smg_risk": false,
+         "desc": "Hyundai Genesis Coupe BK1 2010-2012 (2.0T 210 hp, 3.8 V6 306 hp)",
+         "trims": [["3\\.8|\\bv6\\b", "3.8 V6"], ["2\\.0", "2.0T"]]},
+        {"family": "GC_BK2", "years": [2013, 2016], "name": "BK2 Genesis Coupe", "color": "#C77B4A", "smg_risk": false,
+         "desc": "Hyundai Genesis Coupe BK2 2013-2016 (2.0T 274 hp to 2014, 3.8 V6 348 hp)",
+         "trims": [["3\\.8|\\bv6\\b", "3.8 V6"], ["2\\.0", "2.0T"]]}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/hyundai/genesis-coupe/tr_manual"],
+                   "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/hyundai-genesis-coupe-manual/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "NSX", "match": ["\\bnsx\\b"], "bodies": ["coupe"],
+      "generations": [
+        {"family": "NSX_1", "years": [1991, 2001], "name": "NSX 91–01", "color": "#E6564E", "smg_risk": false,
+         "desc": "Acura / Honda NSX 1991-2001 (pop-up headlights)",
+         "trims": [["nsx ?-? ?t\\b|targa", "NSX-T"], ["zanardi", "Zanardi"], ["type ?r", "Type R"], ["type ?s", "Type S"]]},
+        {"family": "NSX_2", "years": [2002, 2005], "name": "NSX 02–05", "color": "#8FA8FF", "smg_risk": false,
+         "desc": "Acura / Honda NSX 2002-2005 (facelift, fixed headlights)",
+         "trims": [["nsx ?-? ?t\\b|targa", "NSX-T"], ["type ?r", "Type R"], ["type ?s", "Type S"]]}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/acura/nsx"],
+                   "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/acura-nsx/k0c174l0"]}
     }
   ]
 }

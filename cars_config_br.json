@@ -75,7 +75,7 @@
                ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/nissan/370z/cambio.manual"],
                ["Mercado Livre", "https://lista.mercadolivre.com.br/nissan-370z-manual"]]},
 
-    {"enabled": true, "model": "Civic", "make": "honda", "match": ["\\bcivic\\b"], "none": ["cup[eê]|coupe|\\bhatch|type ?r"],
+    {"enabled": true, "model": "Civic", "make": "honda", "match": ["\\bcivic\\b"], "none": ["^(?!.*\\bsi\\b).*(cup[eê]|coup[eéê])|\\bhatch|type ?r"],
      "bodies": ["sedan"],
      "generations": [
        {"family": "FA5", "fipe": {"brand": "Honda", "match": "^Civic Sed.*\\b(1\\.8|2\\.0)\\b", "versions": true}, "years": [2007, 2011], "name": "FA5 Civic", "color": "#E8B931", "smg_risk": false,
@@ -83,7 +83,9 @@
         "split": [{"match": "\\bsi\\b", "family": "FA5_SI", "name": "FA5 Civic Si", "color": "#FF4D6D",
                    "desc": "Honda Civic Si 8th gen sedan (2.0, manual)", "trims": [["\\bsi\\b", "Si"]]}]},
        {"family": "FB", "fipe": {"brand": "Honda", "match": "^Civic Sed.*\\b(1\\.8|2\\.0)\\b", "versions": true}, "years": [2012, 2016], "name": "FB Civic", "color": "#3FB58F", "smg_risk": false, "allow_auto": true,
-        "desc": "Honda Civic 9th gen sedan 2012-2016", "trims": [["\\bexr\\b", "EXR"], ["\\blxr\\b", "LXR"], ["\\blxl\\b", "LXL"], ["\\blxs\\b", "LXS"]]}
+        "desc": "Honda Civic 9th gen sedan 2012-2016", "trims": [["\\bsi\\b", "Si"], ["\\bexr\\b", "EXR"], ["\\blxr\\b", "LXR"], ["\\blxl\\b", "LXL"], ["\\blxs\\b", "LXS"]],
+        "split": [{"match": "\\bsi\\b", "family": "FB_SI", "name": "FB Civic Si", "color": "#FF8A5B", "allow_auto": false, "body": "coupe",
+                   "desc": "Honda Civic Si 9th gen (2.4, manual); sold in Brazil as a coupe only", "trims": [["\\bsi\\b", "Si"]]}]}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/honda/civic/2007/manual", "https://napista.com.br/busca/honda/civic/2008/manual",
                               "https://napista.com.br/busca/honda/civic/2009/manual", "https://napista.com.br/busca/honda/civic/2010/manual",
@@ -140,6 +142,41 @@
                ["Mercado Livre", "https://lista.mercadolivre.com.br/toyota-yaris-sedan-manual"]],
      "links_auto": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=yaris%20sedan&gb=2"],
                ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/toyota/yaris/de.2018/cambio.automatico"],
-               ["Mercado Livre", "https://lista.mercadolivre.com.br/toyota-yaris-sedan-automatico"]]}
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/toyota-yaris-sedan-automatico"]]},
+
+    {"enabled": true, "model": "S2000", "match": ["\\bs ?2000\\b"], "bodies": ["conv"],
+     "generations": [
+       {"family": "S2K_AP1", "years": [1999, 2003], "name": "AP1 S2000", "color": "#A3D65C", "smg_risk": false, "desc": "Honda S2000 AP1 1999-2003 (F20C, 9,000 rpm)"},
+       {"family": "S2K_AP2", "years": [2004, 2009], "name": "AP2 S2000", "color": "#62C7C3", "smg_risk": false, "desc": "Honda S2000 AP2 2004-2009 (F22C1)",
+        "trims": [["\\bcr\\b|club racer", "CR"]]}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/honda/s2000"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=honda%20s2000"],
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/honda-s2000"]]},
+
+    {"enabled": true, "model": "Genesis Coupe", "match": ["\\bgenesis\\b", "\\bcoup|cup[eê]|\\b2p\\b|2 portas"], "none": ["sedan|sed[aã]\\b|\\b4p\\b"],
+     "bodies": ["coupe"],
+     "generations": [
+       {"family": "GC_BK1", "years": [2010, 2012], "name": "BK1 Genesis Coupe", "color": "#E89A6B", "smg_risk": false,
+        "desc": "Hyundai Genesis Coupe BK1 2010-2012 (2.0T 210 cv, 3.8 V6 306 cv)", "trims": [["3\\.8|\\bv6\\b", "3.8 V6"], ["2\\.0", "2.0T"]]},
+       {"family": "GC_BK2", "years": [2013, 2016], "name": "BK2 Genesis Coupe", "color": "#C77B4A", "smg_risk": false,
+        "desc": "Hyundai Genesis Coupe BK2 2013-2016 (2.0T 274 cv, 3.8 V6 348 cv)", "trims": [["3\\.8|\\bv6\\b", "3.8 V6"], ["2\\.0", "2.0T"]]}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/hyundai/genesis"],
+                  "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/hyundai/genesis"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=hyundai%20genesis%20coupe&gb=1"],
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/hyundai-genesis-coupe-manual"]]},
+
+    {"enabled": true, "model": "NSX", "match": ["\\bnsx\\b"], "bodies": ["coupe"],
+     "generations": [
+       {"family": "NSX_1", "years": [1991, 2001], "name": "NSX 91–01", "color": "#E6564E", "smg_risk": false, "desc": "Honda / Acura NSX 1991-2001 (pop-up headlights)",
+        "trims": [["nsx ?-? ?t\\b|targa", "NSX-T"], ["type ?r", "Type R"], ["type ?s", "Type S"]]},
+       {"family": "NSX_2", "years": [2002, 2005], "name": "NSX 02–05", "color": "#8FA8FF", "smg_risk": false, "desc": "Honda / Acura NSX 2002-2005 (facelift, fixed headlights)",
+        "trims": [["nsx ?-? ?t\\b|targa", "NSX-T"], ["type ?r", "Type R"], ["type ?s", "Type S"]]}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/honda/nsx"],
+                  "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/nsx"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=honda%20nsx&gb=1"],
+               ["Mercado Livre", "https://lista.mercadolivre.com.br/honda-nsx-manual"]]}
   ]
 }

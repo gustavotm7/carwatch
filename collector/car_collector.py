@@ -1013,6 +1013,8 @@ def discover_new(sess, rows, today, stats, max_new, found=None):
             reason = "price or km not readable"
         elif info["km"] < 500 or (dt.date.today().year - (info.get("year") or 0) >= 5 and info["km"] < 5000):
             reason = f"km not real ({info['km']} km on a {info.get('year')})"
+        if not reason and any(re.search(rx, _norm(info.get("body_raw", ""))) for rx in key.get("none_body", [])):
+            reason = f"body not on the list ({info.get('body_raw')})"   # a hatchback Yaris, a coupe Civic
         if not reason:
             body = fix_body(key, body_of(info.get("body_raw", ""), slug + " " + info.get("title", "")),
                             slug + " " + info.get("title", ""))
@@ -1235,6 +1237,8 @@ def apply_split(r):
     for rx, sg in SPLITS.get(r["family"], []):
         if re.search(rx, f'{r.get("note", "")} {r.get("trim", "")}', re.I):
             r["family"], r["gen"], r["name"] = sg["family"], sg["name"].split(" ")[0], sg["name"]
+            if sg.get("body"):
+                r["body"] = sg["body"]                  # Brazil's FB Civic Si only came as a coupe
             return
 
 
@@ -1735,15 +1739,20 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
             fams.setdefault(g["family"], {"family": g["family"], "label": g.get("short", g["name"]),
                                           "color": g.get("color", "#888888"), "desc": g.get("desc", ""),
                                           "model": m["model"]})
-            for nm in list((g.get("name_by_body") or {}).values()) or [g["name"]]:
-                names.setdefault(nm, {"name": nm, "family": g["family"], "color": g.get("color", "#888888"),
-                                      "years": g["years"]})
+            nb = g.get("name_by_body") or {}              # bodies it leaves out keep the generation's own name
+            pairs = [(v, k) for k, v in nb.items()] + [(g["name"], b) for b in m.get("bodies") or [] if b not in nb]
+            for nm, b in pairs or [(g["name"], None)]:
+                n = names.setdefault(nm, {"name": nm, "family": g["family"], "color": g.get("color", "#888888"),
+                                          "years": g["years"], "bodies": []})
+                if b and b not in n["bodies"]:
+                    n["bodies"].append(b)                   # the ad reader's default body
             for _, sg in SPLITS.get(g["family"], []):
                 fams.setdefault(sg["family"], {"family": sg["family"], "label": sg.get("short", sg["name"]),
                                                "color": sg.get("color", "#888888"), "desc": sg.get("desc", ""),
                                                "model": m["model"]})
                 names.setdefault(sg["name"], {"name": sg["name"], "family": sg["family"],
-                                              "color": sg.get("color", "#888888"), "years": sg["years"]})
+                                              "color": sg.get("color", "#888888"), "years": sg["years"],
+                                              "bodies": [sg["body"]] if sg.get("body") else list(m.get("bodies") or [])})
     cars = []
     for r in active:
         sc = scores.get(r["listing_id"], {})
@@ -1777,6 +1786,7 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
         "repo": os.environ.get("GITHUB_REPOSITORY", ""),
         "families": [fams[f] for f in fams if any(c["family"] == f for c in cars)],
         "names": [n for n in names.values() if any(c["name"] == n["name"] for c in cars)],
+        "names_all": list(names.values()),            # every tracked model, with or without ads: the ad reader needs them
         "score": {**SCORE, **model_info}, "run": run_info or [],
         "areas": AREAS or None,
         "market": market_stats(rows, model, b_conv, today), "b_conv": round(b_conv, 5),

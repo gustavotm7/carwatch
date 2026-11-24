@@ -1,6 +1,8 @@
 # CarWatch
 
-Used manual BMW M / E46 / E91 and Nissan Z cars in Canada, checked every morning, shown in a phone-friendly web page.
+Used, mostly manual cars in Canada and Brazil, checked every morning, shown in a phone-friendly web page. Both stores
+track the same cars: E36 / E46 / E9X M3, E39 / E60 M5, E46 330, E91 wagon, 350Z, 370Z, AP1 / AP2 S2000,
+FA5 / FB Civic sedan (Si apart), Yaris sedan, BK1 / BK2 Genesis Coupe, and the first NSX (91–01 and 02–05).
 
 - **Web app:** `https://gustavotm7.github.io/carwatch/` (add it to your phone's home screen).
 - **Update now:** Actions tab > **update** > **Run workflow** (or the menu in the app). Takes about 10 minutes.
@@ -9,8 +11,7 @@ Used manual BMW M / E46 / E91 and Nissan Z cars in Canada, checked every morning
 ## Add a car
 
 Edit `cars_config.json` and push (the GitHub web editor works). Copy a block under `models`, change it, set
-`"enabled": true`. The S2000 block at the end is a ready example: switch it on and the next run starts tracking
-AP1 and AP2 S2000s.
+`"enabled": true`. The next run starts tracking it. Brazil's list is `cars_config_br.json`, same format.
 
 | Field | What it does |
 |---|---|
@@ -21,6 +22,8 @@ AP1 and AP2 S2000s.
 | `bodies` | Bodies the car came in (first one is the default) |
 | `trims` | `[regex, label]` pairs, first match wins |
 | `comps` | Optional sold prices from Bring a Trailer: `bat` = results page id(s) of the model, `match` = regex the auction title must contain, `body` = body when the title doesn't say |
+| `none_body` | Bodies the listing page states that drop the ad (a hatchback Yaris, a Civic coupe) |
+| `split` | Optional: a version priced on its own, with its own chip (FA5 / FB Civic Si); `body` forces the body |
 | `searches` | Search pages read every day, per site |
 
 ## Brazil
@@ -36,7 +39,9 @@ English. The data stays in English inside (flag names, gearbox codes), and the a
 - Prices in R$. The score works the same way, against the other Brazilian cars of the same model.
 - Manual only, except the FB Civic and the Yaris sedan (`allow_auto` in the config): their automatics are
   shown with the Manual | Automatic toggle at the start of the car chips. The app always opens on Manual.
-- The FA5 Civic Si is its own car (`split` in the config): own chip and its own fair price.
+- The FA5 and FB Civic Si are their own cars (`split` in the config): own chip and own fair price. Brazil only
+  had the FB Si as a coupe, so Brazil's FB Civic Si list is coupes; Canada's is the Si sedan.
+- The S2000, NSX and Genesis Coupe are rare in Brazil: few ads on NaPista and Mobiauto, and no FIPE price. Their OLX and Mercado Livre links are in the list, and the ad reader recognizes them.
 - On NaPista and Mobiauto, ads seen in the day's searches are confirmed from the search data without opening
   them; automatics are added from the search data and their pages read later for the description.
 - Brazilian years are model years (a "2010/2011" car is a 2011).
