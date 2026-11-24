@@ -42,7 +42,7 @@ def probe(source, url, open_n):
             continue
         info = cc.parse_listing(rr.text)
         print("    ", info.get("year"), "|", (info.get("title") or "")[:70], "|", info.get("trans_field"), "|",
-              info.get("price"), "|", info.get("km"))
+              info.get("price"), "|", info.get("km"), "| body:", info.get("body_raw"), "|", u.rsplit("/", 1)[-1][:60])
 
 
 def params(url, words):

@@ -1,30 +1,14 @@
 {"probe": [
-  ["autotrader", "https://www.autotrader.ca/cars/honda/s2000/", 3],
-  ["autotrader", "https://www.autotrader.ca/cars/hyundai/genesis%20coupe/", 3],
-  ["autotrader", "https://www.autotrader.ca/cars/hyundai/genesis-coupe/", 2],
-  ["autotrader", "https://www.autotrader.ca/cars/kw_hyundai-genesis-coupe", 2],
-  ["autotrader", "https://www.autotrader.ca/cars/acura/nsx/", 4],
-  ["autotrader", "https://www.autotrader.ca/cars/honda/civic/", 3],
-  ["autotrader", "https://www.autotrader.ca/cars/honda/civic/?fregfrom=2006&fregto=2015&gear=M", 4],
-  ["autotrader", "https://www.autotrader.ca/cars/toyota/yaris/", 3],
-  ["autotrader", "https://www.autotrader.ca/cars/kw_bmw-e36-m3", 3],
-  ["kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/honda-s2000/k0c174l0", 2],
-  ["kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/hyundai-genesis-coupe/k0c174l0", 2],
-  ["kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/acura-nsx/k0c174l0", 2],
-  ["kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/honda-civic-si/k0c174l0", 2],
-  ["kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/honda-civic-manual/k0c174l0", 2],
-  ["kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/toyota-yaris-sedan/k0c174l0", 2],
-  ["kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/bmw-e36-m3/k0c174l0", 2],
-  ["napista", "https://napista.com.br/busca/honda/s2000", 0],
-  ["napista", "https://napista.com.br/busca/hyundai/genesis", 0],
-  ["napista", "https://napista.com.br/busca/hyundai/genesis-coupe", 0],
-  ["napista", "https://napista.com.br/busca/honda/nsx", 0],
-  ["mobiauto", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/s2000", 0],
-  ["mobiauto", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/hyundai/genesis", 0],
-  ["mobiauto", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/hyundai/genesis-coupe", 0],
-  ["mobiauto", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/nsx", 0]
+  ["autotrader", "https://www.autotrader.ca/cars/toyota/yaris/tr_manual?fregfrom=2016&fregto=2019", 8],
+  ["autotrader", "https://www.autotrader.ca/cars/toyota/yaris/tr_manual?fregfrom=2016&fregto=2019&page=2", 0],
+  ["autotrader", "https://www.autotrader.ca/cars/honda/civic/tr_manual?fregfrom=2006&fregto=2015&page=2", 2],
+  ["autotrader", "https://www.autotrader.ca/cars/acura/nsx?fregfrom=1991&fregto=2005", 3],
+  ["autotrader", "https://www.autotrader.ca/cars/bmw/m3?fregfrom=1995&fregto=1999", 3],
+  ["autotrader", "https://www.autotrader.ca/cars/hyundai/genesis-coupe/tr_manual", 4],
+  ["autotrader", "https://www.autotrader.ca/cars/hyundai/genesis-coupe/tr_manual?page=2", 0],
+  ["autotrader", "https://www.autotrader.ca/cars/honda/s2000?page=2", 0],
+  ["kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/toyota-yaris-sedan-manual/k0c174l0", 3],
+  ["kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/hyundai-genesis-coupe-manual/k0c174l0", 3],
+  ["kijiji", "https://www.kijiji.ca/b-cars-trucks/canada/honda-civic-sedan-manual/k0c174l0", 3]
 ],
-"params": [
-  ["https://www.autotrader.ca/cars/honda/civic/", ["fregfrom|fregto", "gear=|\"gear\"", "yearFrom|yearTo|yRng", "[Tt]ransmission"]],
-  ["https://www.kijiji.ca/b-cars-trucks/canada/honda-civic/k0c174l0", ["[Tt]ransmission", "caryear|carYear|year_|yearRange"]]
-]}
+"params": []}
