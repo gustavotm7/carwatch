@@ -1,0 +1,14 @@
+name: Search probe
+on:
+  push:
+    branches: [carwatch-test]
+    paths: ["tests/search_probe.py", "tests/search_probe_urls.json"]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install requests openpyxl
+      - run: python -u tests/search_probe.py
