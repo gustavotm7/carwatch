@@ -47,7 +47,9 @@ English. The data stays in English inside (flag names, gearbox codes), and the a
 - `data/` – daily snapshots (last 14 kept). Each listing carries its price history (`price_hist`) and the date the
   ad went up on the site (`listed`). `comps_bat.csv` holds Bring a Trailer sales (last 3 years, in CAD at the
   Bank of Canada rate of the sale day, `fx_usdcad.csv`).
-- `site/` – the web app; `site/data/cars.json` is rebuilt every run.
+- `site/` – the web app; `site/data/cars.json` is rebuilt every run. `site/data/guides.json` holds the
+  "what to check" lists (edit it by hand).
+- `data_br/fipe_cache.json` – FIPE reference prices (Brazil), kept between runs.
 
 Scores, fair prices and flags are guides, not appraisals: flags only catch what the seller wrote.
 Sold prices are US auction results (hammer price, before the 5% buyer's fee and import costs); they are shown
@@ -86,3 +88,30 @@ listing date only), price changes, the weekly market (shown after 3 weeks of dat
 and the best deals. The Manual/Automatic button switches the analysis too. The collector exports what the app can't
 work out from the cars on sale: `market` (per model: fit numbers, weekly ads on sale and price level, stats on ads
 that left) and `b_conv`. The convertible effect is only measured when a model is listed both ways.
+
+### Verdict and buying guide
+
+Every ad gets a price label against its fair price: Great, Good, Fair, High, Overpriced, and **Be careful** when it is
+far below (often a scam, an auction car, a write-off or a hidden fault). The cut-offs follow how spread the
+model's prices are (`deal` in the export). The fair price also counts the version (LXR, XLS, Nismo...): each
+version's level is measured per model and shrunk toward the average when few cars have it (`K_VER`).
+
+The car details open with a verdict: the label on a scale, what to offer (open with, good deal at, don't pay over,
+from the price cuts seen on that model), the reasons (km against the typical km for the year, version, price cuts,
+days listed, flags, FIPE) and **What to check before buying**: each model's known weak points plus the general
+steps for the country, every item with its source (`site/data/guides.json`). Prices tab, per model: a buying guide
+(which year and version, what to pay, how to negotiate, warning signs), a budget finder (the years and versions
+that fit an amount, and the best fair-or-better ads up to it; the list link applies it as the price filter),
+the years x km grid (tap a cell for its best ads), the version ladder and, in Brazil, a state tile map. The details
+also show similar cars for sale and how the fair price is built.
+
+### FIPE (Brazil)
+
+The collector looks up the FIPE price of each version and model year on sale with the free FIPE API
+(`fipe.parallelum.com.br`, 500 requests a day; a run uses at most 300 and only asks for what the cache lacks, so
+after the first day a run costs one request until the month changes). Each generation's `fipe` rule in
+`cars_config_br.json` says how to find it: brand, a regex on the FIPE model name, whether the ad's version must be
+in the name, and how the brand marks automatics when it doesn't say "Aut." (`330iA`). Convertibles only take a
+convertible's FIPE entry. The app shows the FIPE price in the verdict and as a tick on its scale, and the Prices tab
+has **Preço x Tabela FIPE**: how the ads ask against FIPE, where the fair price sits, how FIPE moved over the
+months in the cache, and FIPE, fair and asking prices for the most common years and versions. `--no-fipe` skips it.

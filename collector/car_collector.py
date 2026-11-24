@@ -195,6 +195,10 @@ def load_config(path=None):
         gens = []
         for g in m["generations"]:
             gens.append(g)
+            if g.get("fipe"):                            # FIPE matching rule; split families use their parent's
+                FIPE_CFG[g["family"]] = g["fipe"]
+                for sp in g.get("split", []):
+                    FIPE_CFG[sp["family"]] = g["fipe"]
             for sp in g.get("split", []):               # a trim priced on its own (own chip, own fair price)
                 sg = {k: v for k, v in g.items() if k != "split"}
                 sg.update(sp)
@@ -1177,7 +1181,7 @@ def fit_fair_price(active, adj=None):
     adj = adj or {}
 
     def ly(r):
-        return math.log(float(r["price"])) - adj.get(area_of(r), 0.0)
+        return math.log(float(r["price"])) - adj.get(area_of(r), 0.0) - VADJ.get((mkey(r), version_of(r)), 0.0)
     data = [r for r in active if r["price"] and r["km"] and r["year"]
             and not re.search(r"Rebuilt|Salvage", r.get("red_flags", ""))]
     if len(data) < 8:
@@ -1257,8 +1261,41 @@ def area_of(r):
     return uf if uf in REGION_OF else None
 
 
-def log_fair(model, b_conv, r):
-    """Log of the national fair price, or None."""
+K_VER = 6.0           # a version with few cars leans on the model's average as if it had this many at 0
+VADJ = {}             # (model key, version) -> log price level against the model's average version
+VERSIONS = {}         # export: {model key: {version: [level, cars]}}
+
+
+def version_of(r):
+    v = (r.get("trim") or "").strip().upper()
+    return v or None
+
+
+def version_levels(gaps):
+    """gaps: [(row, log gap against the model without versions)]. Per model, each version's level, shrunk toward
+    the model's average; the car-weighted mean over known versions is 0, so an ad without a version gets 0."""
+    by = {}
+    for r, e in gaps:
+        v = version_of(r)
+        if v:
+            s = by.setdefault(mkey(r), {}).setdefault(v, [0.0, 0])
+            s[0] += e
+            s[1] += 1
+    adj, exp_ = {}, {}
+    for k, vs in by.items():
+        raw = {v: s / (n + K_VER) for v, (s, n) in vs.items() if n >= 2}
+        if len(raw) < 2:
+            continue
+        tot = sum(vs[v][1] for v in raw)
+        mean = sum(raw[v] * vs[v][1] for v in raw) / tot
+        for v in raw:
+            adj[(k, v)] = raw[v] - mean
+            exp_.setdefault(k, {})[v] = [round(raw[v] - mean, 4), vs[v][1]]
+    return adj, exp_
+
+
+def log_fair_base(model, b_conv, r):
+    """Log of the model's fair price for this year, km and body, before version and region; or None."""
     m = model.get(mkey(r))
     try:
         km, year = float(r["km"]), float(r["year"])
@@ -1268,6 +1305,12 @@ def log_fair(model, b_conv, r):
         return None
     a, bk, by, _ = m
     return a + bk * km / 1e4 + by * (year - 2000) + b_conv * (r["body"] == "conv")
+
+
+def log_fair(model, b_conv, r):
+    """Log of the national fair price (with the version's level), or None."""
+    b = log_fair_base(model, b_conv, r)
+    return None if b is None else b + VADJ.get((mkey(r), version_of(r)), 0.0)
 
 
 def area_levels(gaps, normalize=True):
@@ -1292,26 +1335,41 @@ def area_levels(gaps, normalize=True):
 
 
 def fit_with_areas(active):
-    """Fair-price model. In Brazil prices are first corrected for their state's price level, so the national
-    fair price is the typical state's, not pulled up by Rio or set by Sao Paulo's many ads."""
-    global AREAS
+    """Fair-price model. Prices are first corrected for their version (LXR, EXR...: each version's level against the
+    model's average) and, in Brazil, for their state's price level, so the national fair price is the typical
+    state's, not pulled up by Rio or set by Sao Paulo's many ads. A few rounds of fitting settle the three together."""
+    global AREAS, VADJ, VERSIONS
+    VADJ, VERSIONS, AREAS = {}, {}, {}
     model, b_conv, sd = fit_fair_price(active)
-    if COUNTRY["country"] != "BR":
+    br = COUNTRY["country"] == "BR"
+    if br:
+        load_geo()
+    usable = [r for r in active if r["price"] and r["year"] and not re.search(r"Rebuilt|Salvage", r.get("red_flags", ""))]
+
+    def clip(x):
+        return max(-AREA_CLIP, min(AREA_CLIP, x))
+    lv = {}
+    for _ in range(3):
+        base = []
+        for r in usable:
+            lb = log_fair_base(model, b_conv, r)
+            if lb is not None:
+                base.append((r, math.log(float(r["price"])) - lb))
+        if br:
+            lv = area_levels([(area_of(r), clip(e - VADJ.get((mkey(r), version_of(r)), 0.0))) for r, e in base if area_of(r)])[0]
+        VADJ, VERSIONS = version_levels([(r, clip(e - lv.get(area_of(r), 0.0))) for r, e in base])
+        model, b_conv, sd = fit_fair_price(active, lv)
+    if not br:
         return model, b_conv, sd
-    load_geo()
-    usable = [r for r in active if area_of(r) and r["price"] and r["year"]
-              and not re.search(r"Rebuilt|Salvage", r.get("red_flags", ""))]
+    usable = [r for r in usable if area_of(r)]
 
     def gaps():
         out = []
         for r in usable:
             lf = log_fair(model, b_conv, r)
             if lf is not None:
-                out.append((r, max(-AREA_CLIP, min(AREA_CLIP, math.log(float(r["price"])) - lf))))
+                out.append((r, clip(math.log(float(r["price"])) - lf)))
         return out
-    for _ in range(3):                                   # levels <-> model, a few rounds settle it
-        lv = area_levels([(area_of(r), e) for r, e in gaps()])[0]
-        model, b_conv, sd = fit_fair_price(active, lv)
     g = gaps()
     lv, reg, n_st, n_rg = area_levels([(area_of(r), e) for r, e in g], normalize=False)
     towns = {}
@@ -1331,6 +1389,16 @@ def score_rows(active):
     """Same maths as the workbook: fair price, % under fair, confidence and the 0-10 score, per listing id."""
     model, b_conv, sd = fit_with_areas(active)
     ppp = max(0.03, round(2 * sd / 5, 2))
+
+    def clamp(x, lo, hi):
+        return max(lo, min(hi, x))
+    good, great = clamp(0.5 * sd, 0.03, 0.07), clamp(1.25 * sd, 0.08, 0.15)
+    deal = {"good": round(good, 3), "great": round(great, 3),          # % under (or over) the fair price for each label
+            "sus": round(max(great + 0.07, clamp(2.2 * sd, 0.15, 0.30)), 3)}
+
+    def price_part(vs):                                  # a price far under the market earns nothing: too good to be true
+        s = deal["sus"]
+        return vs if vs < s else max(0.0, s - (vs - s) * 3)
     out = {}
     for r in active:
         o = {"fair": None, "vs_fair": None, "conf": None, "score": None}
@@ -1343,12 +1411,13 @@ def score_rows(active):
         value_pts = 0.0
         if m:
             a, bk, by, n = m
-            fair = round(math.exp(a + bk * km / 1e4 + by * (year - 2000) + b_conv * (r["body"] == "conv")), -2)
+            fair = round(math.exp(a + bk * km / 1e4 + by * (year - 2000) + b_conv * (r["body"] == "conv")
+                                  + VADJ.get((mkey(r), version_of(r)), 0.0)), -2)
             conf = n / (n + 5)
             vs = 1 - price / fair if fair else None
             o.update(fair=int(fair), vs_fair=round(vs, 4) if vs is not None else None, conf=round(conf, 2))
             if vs is not None:
-                value_pts = vs / ppp * conf
+                value_pts = price_part(vs) / ppp * conf
         red = [f for f in (r.get("red_flags") or "").split("; ") if f]
         green = [f for f in (r.get("green_flags") or "").split("; ") if f]
         pts = (SCORE["base"] + value_pts + SCORE["gearbox"].get(GEARBOX_LABEL.get(r["trans"], ""), 0.0)
@@ -1357,7 +1426,7 @@ def score_rows(active):
         o["score"] = round(max(0.0, min(10.0, pts)), 1)
         o["sr"] = round(pts, 3)                          # before the 0-10 limits: the app moves it for a local price
         out[r["listing_id"]] = o
-    return out, {"sd": round(sd, 3), "pct_per_point": ppp,
+    return out, {"sd": round(sd, 3), "pct_per_point": ppp, "deal": deal, "versions": VERSIONS,
                  "families": {f: {"n": v[3]} for f, v in model.items()}}
 
 
@@ -1411,6 +1480,175 @@ def listing_days(r, until):
     if not start or not until:
         return None, None
     return max(0, (until - start).days), ("site" if r.get("listed") else "tracked")
+
+
+# --------------------------------------------------------------------------------------------
+# FIPE (Brazil): the national reference price of each version and model year, from the public FIPE API
+# (fipe.parallelum.com.br, its own copy of the FIPE table; free: 500 requests a day, 3 months of history).
+# Cached in data_br/fipe_cache.json, so a month costs only the new prices.
+# --------------------------------------------------------------------------------------------
+FIPE_BASES = ["https://fipe.parallelum.com.br/api/v2", "https://fipe.api.br/api/v2"]
+FIPE_CFG = {}          # family -> {"brand": "Honda", "match": regex on the FIPE model name, "versions": bool}
+FIPE = {}              # the cache
+
+
+def fipe_get(sess, path, st):
+    if st["left"] <= 0:
+        return None
+    st["left"] -= 1
+    time.sleep(0.2)
+    for b in FIPE_BASES:
+        try:
+            r = sess.get(b + path, timeout=30, headers={"User-Agent": "CarWatch/1.0 (personal used-car price tracker)"})
+        except Exception:
+            continue
+        if r.status_code == 200:
+            return r.json()
+        if r.status_code in (402, 404):
+            return None
+    return None
+
+
+def fipe_price(s):
+    """'R$ 71.094,00' -> 71094"""
+    s = re.sub(r"[^\d,]", "", s or "")
+    return int(float(s.replace(",", "."))) if s else None
+
+
+def fipe_key(family, version, auto, year, body=""):
+    return f"{family}|{version or ''}|{'a' if auto else 'm'}|{year}" + ("|conv" if body == "conv" else "")
+
+
+def fipe_candidates(cfg, models, version, auto, body=""):
+    """FIPE models for a family, version, gearbox and body. Best first: the same body, then the shortest name
+    (the base version: 'XL Sedan' before 'XL Live Sedan'). A convertible's FIPE entry never prices a closed car."""
+    rx = re.compile(cfg["match"], re.I)
+    arx = re.compile(cfg["auto"], re.I) if cfg.get("auto") else None     # brands that mark automatics their own way (330iA)
+    out = []
+    for m in models:
+        n = m["name"]
+        if not rx.search(n):
+            continue
+        if cfg.get("versions", True) and not re.search(r"(?<![A-Za-z])" + re.escape(version) + r"(?![A-Za-z])", n, re.I):
+            continue
+        aut = re.search(r"\bAut\b|\bCVT\b", n, re.I) or (arx and arx.search(n))
+        mec = re.search(r"\bMec\b", n, re.I)
+        if (auto and mec and not aut) or (not auto and aut and not mec):
+            continue
+        cab = re.search(r"Cabrio|Conv|Roadster", n, re.I)
+        if cab and body != "conv":
+            continue
+        pen = (0 if cab else 1) if body == "conv" else \
+              2 if (body == "sedan" and re.search(r"Coup|\b2p\b", n, re.I)) or (body == "coupe" and re.search(r"Sedan|Sed\.|\b4p\b", n, re.I)) else 0
+        out.append((pen, len(n), m))
+    return [m for _, _, m in sorted(out, key=lambda x: (x[0], x[1]))]
+
+
+def load_fipe(path):
+    global FIPE
+    try:
+        with open(path, encoding="utf-8") as f:
+            FIPE = json.load(f)
+    except (OSError, ValueError):
+        FIPE = {}
+
+
+def update_fipe(sess, rows, path, budget=300):
+    """Fetch what's missing for the versions and years on sale; at most `budget` requests a run."""
+    load_fipe(path)
+    st = {"left": budget}
+    refs = fipe_get(sess, "/references", st)
+    if not refs:
+        print("FIPE: no answer")
+        return
+    cur, month = str(refs[0]["code"]), refs[0]["month"]
+    if FIPE.get("ref") != cur:                          # a new month: refresh the lists too
+        FIPE.update(ref=cur, month=month, models={}, years={})
+    for k in ("prices", "map", "models", "years"):
+        FIPE.setdefault(k, {})
+    targets = set()
+    for r in rows:
+        cfg = FIPE_CFG.get(r["family"])
+        if not cfg or r["status"] != "active" or not r["year"]:
+            continue
+        v = version_of(r) if cfg.get("versions", True) else None
+        if cfg.get("versions", True) and not v:
+            continue
+        targets.add((r["family"], v, r.get("trans") == "a", int(float(r["year"])), r.get("body") or ""))
+    if "brands" not in FIPE:
+        FIPE["brands"] = {b["name"].split()[0].upper(): b["code"] for b in (fipe_get(sess, "/cars/brands", st) or [])}
+    done = 0
+    for fam, v, auto, year, body in sorted(targets, key=lambda x: (x[0], x[1] or "", x[2], x[3], x[4])):
+        cfg = FIPE_CFG[fam]
+        bcode = FIPE["brands"].get(cfg["brand"].upper())
+        if not bcode:
+            continue
+        if cfg["brand"] not in FIPE["models"]:
+            ms = fipe_get(sess, f"/cars/brands/{bcode}/models", st)
+            if ms is None:
+                break
+            FIPE["models"][cfg["brand"]] = ms
+        key = fipe_key(fam, v, auto, year, body)
+        for m in fipe_candidates(cfg, FIPE["models"][cfg["brand"]], v or "", auto, body):
+            if m["code"] not in FIPE["years"]:
+                ys = fipe_get(sess, f"/cars/brands/{bcode}/models/{m['code']}/years", st)
+                if ys is None:
+                    break
+                FIPE["years"][m["code"]] = ys
+            yc = next((y["code"] for y in FIPE["years"][m["code"]] if str(y["code"]).startswith(f"{year}-")), None)
+            if not yc:
+                continue
+            pk = f"{m['code']}|{yc}"
+            pr = FIPE["prices"].setdefault(pk, {"name": m["name"], "hist": {}})
+            if pr.get("ref") != cur:
+                if not pr.get("codeFipe"):
+                    one = fipe_get(sess, f"/cars/brands/{bcode}/models/{m['code']}/years/{yc}", st)
+                    if not one:
+                        break
+                    pr["codeFipe"] = one.get("codeFipe")
+                    pr["hist"][cur] = [month, fipe_price(one.get("price"))]
+                h = fipe_get(sess, f"/cars/{pr['codeFipe']}/years/{yc}/history", st) if pr.get("codeFipe") else None
+                for x in (h or {}).get("priceHistory", []):
+                    if fipe_price(x.get("price")):
+                        pr["hist"][str(x["reference"])] = [x["month"], fipe_price(x["price"])]
+                if pr["hist"].get(cur):
+                    pr["ref"] = cur
+                    done += 1
+            if pr["hist"]:
+                FIPE["map"][key] = pk
+            break
+        if st["left"] <= 0:
+            break
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(FIPE, f, ensure_ascii=False, separators=(",", ":"))
+    print(f"FIPE {month}: {done} prices updated, {len(FIPE['map'])} versions matched, {budget - st['left']} requests")
+
+
+def fipe_export(active):
+    """For the app: the month, and each version/year on sale with its FIPE history [[month, price], ...] (oldest first)."""
+    series = {}
+    for r in active:
+        _, key = fipe_of(r)
+        if key and key not in series:
+            pr = FIPE["prices"][FIPE["map"][key]]
+            series[key] = {"name": pr["name"], "hist": [pr["hist"][k] for k in sorted(pr["hist"], key=int)]}
+    return {"month": FIPE.get("month"), "series": series}
+
+
+def fipe_of(r):
+    """(latest FIPE price, map key) for a listing, or (None, None)."""
+    cfg = FIPE_CFG.get(r.get("family"))
+    if not cfg or not FIPE.get("map") or not r.get("year"):
+        return None, None
+    v = version_of(r) if cfg.get("versions", True) else None
+    key = fipe_key(r["family"], v, r.get("trans") == "a", int(float(r["year"])), r.get("body") or "")
+    pk = FIPE["map"].get(key)
+    pr = FIPE.get("prices", {}).get(pk) if pk else None
+    if not pr or not pr.get("hist"):
+        return None, None
+    last = pr["hist"][max(pr["hist"], key=int)]
+    return last[1], key
 
 
 def _med(v):
@@ -1525,6 +1763,7 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
             "photos": photo_big(r),
             "first_seen": r["first_seen"], "last_seen": r["last_seen"], "verified": r["verified"],
             "listed": r.get("listed") or None, "days": days, "days_src": days_src,
+            **(lambda fp: {"fipe": fp[0], "fipe_k": fp[1]} if fp[0] else {})(fipe_of(r)),
             "geo": geo_of(r["place"]),
             "hist": [[dd, pp] for dd, pp in hist] if len(hist) > 1 else None, "sold": sold, **sc})
     firsts = sorted(r["first_seen"] for r in rows if r["first_seen"] and r["status"] != "skip")
@@ -1541,6 +1780,7 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
         "score": {**SCORE, **model_info}, "run": run_info or [],
         "areas": AREAS or None,
         "market": market_stats(rows, model, b_conv, today), "b_conv": round(b_conv, 5),
+        "fipe": fipe_export(active) if FIPE.get("map") else None,
         "searches": [{"source": s, "url": u, "ads": n} for s, u, n in (stats or {}).get("searches", [])],
         "cars": cars,
         "auto_file": os.path.basename(auto_path) if autos else None, "auto_count": len(autos),
@@ -2425,6 +2665,7 @@ def main(argv=None):
     ap.add_argument("--skip-sources", default="", help="comma list of sites not to visit, e.g. carpages")
     ap.add_argument("--keep-snapshots", type=int, default=0, help="delete snapshots older than the newest N (0 = keep all)")
     ap.add_argument("--no-comps", action="store_true", help="do not read sold prices (Bring a Trailer)")
+    ap.add_argument("--no-fipe", action="store_true", help="do not fetch FIPE reference prices (Brazil)")
     ap.add_argument("--done-file", help="write 'ok ...' or 'error: ...' here when the run ends (used by CarWatch.xlsm)")
     args = ap.parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
@@ -2505,6 +2746,14 @@ def run(args):
         if not args.no_photos:
             download_photos(sess, rows + new_rows, stats)
     gear_flags(rows + new_rows)
+    if COUNTRY["country"] == "BR" and FIPE_CFG:
+        fpath = os.path.join(DATA_DIR, "fipe_cache.json")
+        if sess is not None and not args.no_fipe:
+            try:
+                update_fipe(sess, rows + new_rows, fpath)
+            except Exception as e:                       # never let the reference prices break the run
+                print(f"FIPE update failed: {e}")
+        load_fipe(fpath)
     for r in rows + new_rows:
         snap.add(r)
     snap.finish()

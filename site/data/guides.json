@@ -1,0 +1,523 @@
+{
+ "_note": "What to check before buying: 'general' steps per country, then each model's own list (keyed by family). Every item says why and links its source. A list to help ask the right questions, not a substitute for an inspection.",
+ "general": {
+  "BR": [
+   {
+    "pt": "Confira se quem vende é o dono",
+    "en": "Check the seller is the owner",
+    "why_pt": "O documento (CRLV) deve estar no nome dele, ou ele precisa de autorização formal para vender.",
+    "why_en": "The registration (CRLV) should be in their name, or they need formal authorization to sell.",
+    "src": "https://www.instacarro.com/blog/?p=314620"
+   },
+   {
+    "pt": "Consulte a placa no Detran do estado",
+    "en": "Look up the plate at the state Detran",
+    "why_pt": "Mostra IPVA, multas, licenciamento e restrições (financiamento, bloqueio judicial). Bloqueio judicial: desista.",
+    "why_en": "Shows unpaid taxes, fines, licensing and restrictions (finance, court block). A court block: walk away.",
+    "src": "https://www.numerando.com.br/blog/pesquisar-historico-veiculo-antes-comprar"
+   },
+   {
+    "pt": "Consulte recall pelo chassi",
+    "en": "Check recalls by chassis number",
+    "why_pt": "Recall pendente pode impedir o licenciamento e continua ligado ao carro depois da compra.",
+    "why_en": "An open recall can block licensing and stays with the car after you buy it.",
+    "src": "https://napista.com.br/radar/?p=2029"
+   },
+   {
+    "pt": "Faça o laudo cautelar",
+    "en": "Get a laudo cautelar (history inspection)",
+    "why_pt": "Feito por empresa credenciada, revela passagem por leilão, sinistro e numeração de chassi ou motor adulterada.",
+    "why_en": "Done by an accredited company, it reveals auction or write-off history and tampered chassis or engine numbers.",
+    "src": "https://napista.com.br/radar/evitar-golpes-comprar-carro-usado/"
+   },
+   {
+    "pt": "Leve a um mecânico de confiança e faça test-drive",
+    "en": "Have a trusted mechanic look at it and test drive it",
+    "why_pt": "O laudo cautelar não avalia embreagem, suspensão nem parte elétrica. Teste com o motor frio.",
+    "why_en": "The laudo doesn't check the clutch, suspension or electrics. Test it with a cold engine.",
+    "src": "https://www.comprecar.com.br/blog/2022/07/19/dicas-como-comprar-carros-usados-seguranca/"
+   },
+   {
+    "pt": "Nunca pague sinal antes de ver o carro e os documentos",
+    "en": "Never pay a deposit before seeing the car and documents",
+    "why_pt": "Pedir pagamento antecipado antes da vistoria é um dos golpes mais comuns.",
+    "why_en": "Asking for payment before the inspection is one of the most common scams.",
+    "src": "https://napista.com.br/radar/?p=996"
+   },
+   {
+    "pt": "Preço muito abaixo do mercado: peça explicação",
+    "en": "Price far below the market: ask why",
+    "why_pt": "Descontos acima de 15% sem justificativa clara exigem investigação. Se o vendedor não aceita esperar o laudo, encerre.",
+    "why_en": "Discounts over 15% without a clear reason need investigating. If the seller won't wait for the inspection, walk away.",
+    "src": "https://napista.com.br/radar/?p=759"
+   }
+  ],
+  "CA": [
+   {
+    "en": "Private sale in Ontario: get the Used Vehicle Information Package (UVIP)",
+    "pt": "Venda particular em Ontário: peça o UVIP",
+    "why_en": "The seller must give it to you. It shows the car's Ontario history, if it was reported wrecked, and liens.",
+    "why_pt": "O vendedor é obrigado a entregar. Mostra o histórico em Ontário, se foi dado como destruído e dívidas sobre o carro.",
+    "src": "https://www.ontario.ca/page/used-vehicle-information-package"
+   },
+   {
+    "en": "Check recalls by VIN",
+    "pt": "Consulte recalls pelo VIN",
+    "why_en": "Use Transport Canada's recall database or the maker's site with the 17-digit VIN.",
+    "why_pt": "Use a base de recalls da Transport Canada ou o site da montadora com o VIN de 17 dígitos.",
+    "src": "https://tc.canada.ca/en/road-transportation/defects-recalls-vehicles-tires-child-car-seats/stay-informed-about-recalls-vehicles-tires-child-car-seats"
+   },
+   {
+    "en": "Get a history report",
+    "pt": "Tire um relatório de histórico",
+    "why_en": "A CARFAX Canada report shows reported accidents, registrations in other provinces and more.",
+    "why_pt": "Um relatório CARFAX Canada mostra acidentes registrados, registros em outras províncias e mais.",
+    "src": "https://www.carfax.ca"
+   },
+   {
+    "en": "Have an independent mechanic inspect it",
+    "pt": "Leve a um mecânico independente",
+    "why_en": "A Safety Standards Certificate isn't a warranty: it only means the car met minimum criteria on the day, and it's valid 36 days.",
+    "why_pt": "O Safety Standards Certificate não é garantia: só indica que o carro passou nos critérios mínimos naquele dia, e vale 36 dias.",
+    "src": "https://www.omvic.ca/buying/shopping-tips/"
+   },
+   {
+    "en": "Plan for the safety certificate",
+    "pt": "Conte com o certificado de segurança",
+    "why_en": "In Ontario you need a Safety Standards Certificate to register and plate a used car.",
+    "why_pt": "Em Ontário é preciso um Safety Standards Certificate para registrar e emplacar um usado.",
+    "src": "https://www.ontario.ca/page/buy-or-sell-used-vehicle-ontario"
+   },
+   {
+    "en": "Watch for curbsiders",
+    "pt": "Cuidado com revendedores disfarçados",
+    "why_en": "Warning signs: the seller isn't named on the registration, refuses the UVIP or a mechanic's inspection, or has several cars for sale. Never send a deposit before seeing the car.",
+    "why_pt": "Sinais: o vendedor não está no registro, recusa o UVIP ou a vistoria de um mecânico, ou tem vários carros à venda. Nunca mande sinal antes de ver o carro.",
+    "src": "https://www.ontario.ca/page/buying-new-or-used-vehicle-your-rights"
+   }
+  ]
+ },
+ "models": {
+  "E36M3": {
+   "intro_en": "A strong engine; the weak spots are cooling, the rear suspension mounts and rust. At this age, condition matters more than km.",
+   "intro_pt": "Motor forte; os pontos fracos são o arrefecimento, as fixações da suspensão traseira e a ferrugem. Nessa idade, o estado importa mais que a km.",
+   "items": [
+    {
+     "en": "Ask when the cooling system was last renewed",
+     "pt": "Pergunte quando o arrefecimento foi refeito",
+     "why_en": "Radiator, water pump (plastic impeller) and expansion tank are its most common failure; an overheat can ruin the head.",
+     "why_pt": "Radiador, bomba d'água (rotor plástico) e reservatório são a falha mais comum; um superaquecimento pode estragar o cabeçote.",
+     "src": "https://www.bmwblog.com/2016/08/08/buyers-guide-look-bmw-e36-m3/"
+    },
+    {
+     "en": "Listen for a rattle and feel for weak low-rpm pull (VANOS)",
+     "pt": "Escute chocalho e sinta se falta força em baixa (VANOS)",
+     "why_en": "The seals of the VANOS, the variable cam timing, wear out.",
+     "why_pt": "As vedações do VANOS, o comando variável, se desgastam.",
+     "src": "https://www.fcpeuro.com/blog/bmw-e36-m3-common-issues-repairs"
+    },
+    {
+     "en": "Check the rear shock mounts and trailing-arm bushings",
+     "pt": "Confira os coxins dos amortecedores traseiros e as buchas dos braços traseiros",
+     "why_en": "Clunks over bumps mean they're worn; driving on them can tear the body. Reinforcement plates are a good sign.",
+     "why_pt": "Batidas em buracos indicam desgaste; rodar assim pode rasgar a carroceria. Chapas de reforço são bom sinal.",
+     "src": "https://www.fcpeuro.com/blog/how-to-buy-and-own-a-bmw-e36"
+    },
+    {
+     "en": "Look under the car where the rear subframe meets the body",
+     "pt": "Olhe embaixo do carro onde o subchassi traseiro se prende à carroceria",
+     "why_en": "Cracks or tears there are a known E36 problem and an expensive repair.",
+     "why_pt": "Trincas ou rasgos ali são um problema conhecido do E36 e um conserto caro.",
+     "src": "https://www.fcpeuro.com/blog/how-to-buy-and-own-a-bmw-e36"
+    },
+    {
+     "en": "Look for rust: wings, boot floor, jacking points, rear suspension mounts",
+     "pt": "Procure ferrugem: para-lamas, assoalho do porta-malas, pontos de macaco, fixações da suspensão traseira",
+     "why_en": "The E36 rusts in these places.",
+     "why_pt": "O E36 enferruja nesses pontos.",
+     "src": "https://www.autocar.co.uk/node/102292"
+    },
+    {
+     "en": "Convertible: work the roof several times",
+     "pt": "Conversível: abra e feche a capota várias vezes",
+     "why_en": "The roof is complex and expensive to repair when worn.",
+     "why_pt": "A capota é complexa e cara de consertar quando gasta.",
+     "src": "https://classicandsportscar.com/node/63808"
+    }
+   ]
+  },
+  "E46M3": {
+   "intro_en": "The S54 engine is the heart of the car and its main risk: ask for proof of the big jobs.",
+   "intro_pt": "O motor S54 é o coração do carro e o maior risco: peça comprovantes dos serviços grandes.",
+   "items": [
+    {
+     "en": "Ask whether the rod bearings were replaced",
+     "pt": "Pergunte se as bronzinas de biela foram trocadas",
+     "why_en": "Worn rod bearings can destroy the engine; early cars had a recall, and many owners replace them as prevention.",
+     "why_pt": "Bronzinas gastas podem destruir o motor; os primeiros carros tiveram recall, e muitos donos trocam como prevenção.",
+     "src": "https://blog.ecstuning.com/the-ecs-tuning-bmw-e46-m3-buyers-guide/"
+    },
+    {
+     "en": "Check the rear subframe mounts for cracks",
+     "pt": "Confira trincas nas fixações do subchassi traseiro",
+     "why_en": "A known E46 weakness; a proper repair reinforces the body.",
+     "why_pt": "Ponto fraco conhecido do E46; o conserto certo reforça a carroceria.",
+     "src": "https://blog.ecstuning.com/the-ecs-tuning-bmw-e46-m3-buyers-guide/"
+    },
+    {
+     "en": "Ask about the VANOS and the last valve adjustment",
+     "pt": "Pergunte pelo VANOS e pela última regulagem de válvulas",
+     "why_en": "The VANOS can fail (rattle, warning light) and the valve clearances need regular adjustment.",
+     "why_pt": "O VANOS pode falhar (chocalho, luz de alerta) e as válvulas precisam de regulagem periódica.",
+     "src": "https://blog.ecstuning.com/the-ecs-tuning-bmw-e46-m3-buyers-guide/"
+    },
+    {
+     "en": "SMG gearbox: it must shift without warnings",
+     "pt": "Câmbio SMG: tem que trocar sem alertas no painel",
+     "why_en": "The SMG hydraulic pump is a known failure.",
+     "why_pt": "A bomba hidráulica do SMG é uma falha conhecida.",
+     "src": "https://blog.ecstuning.com/the-ecs-tuning-bmw-e46-m3-buyers-guide/"
+    },
+    {
+     "en": "Look under the car for leaks and at the tyres for uneven wear",
+     "pt": "Procure vazamentos embaixo do carro e desgaste irregular nos pneus",
+     "why_en": "Oil pan, valve cover, rear main seal, cooling and power steering leaks are common; uneven wear points to worn suspension or bad alignment.",
+     "why_pt": "Vazamentos de cárter, tampa de válvulas, retentor traseiro, arrefecimento e direção são comuns; desgaste irregular indica suspensão gasta ou alinhamento ruim.",
+     "src": "https://www.turnermotorsport.com/t-BMW_E46_Buyers_Guide"
+    }
+   ]
+  },
+  "E9XM3": {
+   "intro_en": "A V8 that revs past 8,000 rpm: rod bearings and throttle actuators are what to ask about.",
+   "intro_pt": "Um V8 que gira acima de 8.000 rpm: bronzinas e atuadores de borboleta são o que perguntar.",
+   "items": [
+    {
+     "en": "Ask when the rod bearings were last replaced",
+     "pt": "Pergunte quando as bronzinas de biela foram trocadas",
+     "why_en": "Specialists treat them as maintenance, about every 100,000–130,000 km; a failure ruins the engine.",
+     "why_pt": "Especialistas tratam como manutenção, a cada 100 a 130 mil km mais ou menos; uma falha destrói o motor.",
+     "src": "https://www.truecar.com/blog/used-buying-guide-2008-2013-bmw-m3/"
+    },
+    {
+     "en": "2008 cars: check that the updates were done",
+     "pt": "Carros 2008: confira se as atualizações foram feitas",
+     "why_en": "The first year had more engine failures and needed a clutch update.",
+     "why_pt": "O primeiro ano teve mais falhas de motor e precisou de atualização da embreagem.",
+     "src": "https://www.turnermotorsport.com/t-BMW_E9X_M3_Buyers_Guide"
+    },
+    {
+     "en": "Watch for limp mode or a check-engine light",
+     "pt": "Atenção a modo de emergência ou luz de injeção",
+     "why_en": "The two throttle actuators often fail; the car loses power until they're replaced.",
+     "why_pt": "Os dois atuadores de borboleta falham com frequência; o carro perde força até a troca.",
+     "src": "https://www.truecar.com/blog/used-buying-guide-2008-2013-bmw-m3/"
+    },
+    {
+     "en": "Look for oil around the valve covers",
+     "pt": "Procure óleo em volta das tampas de válvulas",
+     "why_en": "A common leak on this V8.",
+     "why_pt": "Um vazamento comum neste V8.",
+     "src": "https://blog.ecstuning.com/?p=12288"
+    },
+    {
+     "en": "Cars with adaptive dampers (EDC): look for leaks",
+     "pt": "Com amortecedores adaptativos (EDC): procure vazamentos",
+     "why_en": "Leaking dampers are expensive.",
+     "why_pt": "Amortecedor vazando é caro.",
+     "src": "https://www.autocar.co.uk/node/97893"
+    }
+   ]
+  },
+  "E39M5": {
+   "intro_en": "Only ever built with a six-speed manual. The V8 is tough if maintained; timing chain guides and VANOS are the expensive parts.",
+   "intro_pt": "Só existe com câmbio manual de 6 marchas. O V8 é forte se bem mantido; guias da corrente e VANOS são as partes caras.",
+   "items": [
+    {
+     "en": "Start it cold and listen for chain noise",
+     "pt": "Dê partida a frio e escute ruído de corrente",
+     "why_en": "The plastic timing chain guides wear; ignored, the chain can jump and bend valves.",
+     "why_pt": "As guias plásticas da corrente se desgastam; se ignoradas, a corrente pode pular e entortar válvulas.",
+     "src": "https://classicmotorsports.com/articles/buyers-guide-bmw-e39-m5-six-figure-club-member"
+    },
+    {
+     "en": "Listen for a rattle when warm and look for oil leaks (VANOS)",
+     "pt": "Escute chocalho com o motor quente e procure vazamentos (VANOS)",
+     "why_en": "A VANOS rattle when warm is a concern.",
+     "why_pt": "Chocalho do VANOS com o motor quente é sinal de problema.",
+     "src": "https://www.pistonheads.com/features/ph-buying-guides/bmw-m5-e39--ph-buying-guide/31568"
+    },
+    {
+     "en": "Ask for the oil change history",
+     "pt": "Peça o histórico de troca de óleo",
+     "why_en": "The chain tensioner is sensitive to the wrong oil, and the chains need renewing at around 160,000 km.",
+     "why_pt": "O tensor da corrente é sensível a óleo errado, e as correntes pedem troca por volta de 160 mil km.",
+     "src": "https://www.autocar.co.uk/node/78920"
+    },
+    {
+     "en": "Check the suspension and steering for wear",
+     "pt": "Confira desgaste de suspensão e direção",
+     "why_en": "A heavy, fast car wears them; parts aren't cheap.",
+     "why_pt": "Um carro pesado e rápido desgasta esses itens; as peças não são baratas.",
+     "src": "https://www.autocar.co.uk/node/78920"
+    }
+   ]
+  },
+  "E60M5": {
+   "intro_en": "The V10 is special and costly to keep: ask for proof of the rod bearings.",
+   "intro_pt": "O V10 é especial e caro de manter: peça comprovante das bronzinas.",
+   "items": [
+    {
+     "en": "Ask for proof the rod bearings were replaced",
+     "pt": "Peça comprovante da troca das bronzinas de biela",
+     "why_en": "Specialists consider it mandatory every 80,000–100,000 km; worn bearings can destroy the engine.",
+     "why_pt": "Especialistas consideram obrigatória a cada 80 a 100 mil km; bronzinas gastas podem destruir o motor.",
+     "src": "https://www.classicdriver.com/en/article/cars/do-not-buy-a-bmw-e60-m5-without-reading-first"
+    },
+    {
+     "en": "Check the oil level and ask about consumption",
+     "pt": "Confira o nível de óleo e pergunte sobre o consumo",
+     "why_en": "The V10 uses oil, and running low is a main cause of bearing damage.",
+     "why_pt": "O V10 consome óleo, e rodar com nível baixo é uma das principais causas de dano às bronzinas.",
+     "src": "https://www.classicdriver.com/en/article/cars/do-not-buy-a-bmw-e60-m5-without-reading-first"
+    },
+    {
+     "en": "A VANOS warning: check the VANOS pump and its oil hose",
+     "pt": "Alerta do VANOS: verifique a bomba do VANOS e a mangueira de óleo",
+     "why_en": "The pump and the sump-to-head hose are known weak points.",
+     "why_pt": "A bomba e a mangueira do cárter ao cabeçote são pontos fracos conhecidos.",
+     "src": "https://www.pistonheads.com/news/ph-buying-guide-contents/bmw-m5-m6-buying-guide-powertrain/36329"
+    },
+    {
+     "en": "Loss of power or limp mode: throttle actuators",
+     "pt": "Perda de força ou modo de emergência: atuadores de borboleta",
+     "why_en": "There are two, and when one goes both are usually replaced.",
+     "why_pt": "São dois, e quando um falha costuma-se trocar os dois.",
+     "src": "https://www.autocar.co.uk/node/66830"
+    },
+    {
+     "en": "SMG cars: slow shifts or a warning mean a tired pump",
+     "pt": "Carros SMG: trocas lentas ou alerta indicam bomba cansada",
+     "why_en": "An improved pump came from 2006.",
+     "why_pt": "Uma bomba melhorada veio a partir de 2006.",
+     "src": "https://www.pistonheads.com/news/ph-buying-guide-contents/bmw-m5-m6-buying-guide-powertrain/36329"
+    }
+   ]
+  },
+  "E46_330": {
+   "intro_en": "A reliable straight-six once the cooling system and oil leaks have been dealt with.",
+   "intro_pt": "Um seis em linha confiável, desde que o arrefecimento e os vazamentos já tenham sido resolvidos.",
+   "items": [
+    {
+     "en": "Ask whether the cooling system was renewed",
+     "pt": "Pergunte se o arrefecimento foi refeito",
+     "why_en": "Water pump, expansion tank, radiator and hoses age out; overheating is the main cause of engine damage. With no record, budget for it.",
+     "why_pt": "Bomba d'água, reservatório, radiador e mangueiras envelhecem; superaquecer é a principal causa de dano ao motor. Sem comprovante, reserve dinheiro para isso.",
+     "src": "https://europremiumparts.com/en-ie/blogs/bmw-buying-guides/bmw-3-series-e46-reliability-guide-everything-you-need-to-know-before-buying"
+    },
+    {
+     "en": "Check the rear subframe area for cracks",
+     "pt": "Confira trincas na região do subchassi traseiro",
+     "why_en": "A known E46 weakness.",
+     "why_pt": "Ponto fraco conhecido do E46.",
+     "src": "https://catatwo.github.io/e46vault/buying/overview"
+    },
+    {
+     "en": "Look for oil leaks: valve cover and oil filter housing",
+     "pt": "Procure vazamentos de óleo: tampa de válvulas e suporte do filtro",
+     "why_en": "Common on high-km engines; a failed crankcase vent (CCV) causes oil use and rough idle.",
+     "why_pt": "Comum em motores de km alta; o respiro do cárter (CCV) com defeito causa consumo de óleo e marcha lenta irregular.",
+     "src": "https://europremiumparts.com/en-ie/blogs/bmw-buying-guides/bmw-3-series-e46-reliability-guide-everything-you-need-to-know-before-buying"
+    },
+    {
+     "en": "Run every window and the sunroof",
+     "pt": "Teste todos os vidros e o teto solar",
+     "why_en": "Window regulators are a known weak point.",
+     "why_pt": "As máquinas de vidro são um ponto fraco conhecido.",
+     "src": "https://www.autocar.co.uk/node/111584"
+    }
+   ]
+  },
+  "E91": {
+   "intro_en": "The N52 engine is strong; the electric water pump and oil leaks are what fail.",
+   "intro_pt": "O motor N52 é forte; a bomba d'água elétrica e os vazamentos de óleo são o que falha.",
+   "items": [
+    {
+     "en": "Ask if the electric water pump and thermostat were replaced",
+     "pt": "Pergunte se a bomba d'água elétrica e a válvula termostática foram trocadas",
+     "why_en": "The pump can fail without warning, often between 130,000 and 190,000 km, and the engine overheats.",
+     "why_pt": "A bomba pode falhar sem aviso, muitas vezes entre 130 e 190 mil km, e o motor superaquece.",
+     "src": "https://europremiumparts.com/en-au/blogs/bmw-buying-guides/bmw-3-series-e90-e92-reliability-guide-everything-you-need-to-know-before-buying"
+    },
+    {
+     "en": "Look for oil leaks: valve cover, oil filter housing, oil pan",
+     "pt": "Procure vazamentos de óleo: tampa de válvulas, suporte do filtro, cárter",
+     "why_en": "Very common on this engine; the valve cover and filter housing gaskets are the usual sources.",
+     "why_pt": "Muito comum neste motor; as juntas da tampa de válvulas e do suporte do filtro são as fontes habituais.",
+     "src": "https://samarins.com/reviews/bmw-3-series.html"
+    }
+   ]
+  },
+  "Z350": {
+   "intro_en": "A tough V6 and gearbox; check oil use, clutch hydraulics and past modifications.",
+   "intro_pt": "V6 e câmbio fortes; confira consumo de óleo, hidráulico da embreagem e modificações.",
+   "items": [
+    {
+     "en": "Pull the dipstick and look for blue smoke",
+     "pt": "Puxe a vareta de óleo e veja se sai fumaça azul",
+     "why_en": "The 2005–2006 'Rev Up' engines are known to burn oil, and running low can ruin the engine.",
+     "why_pt": "Os motores 'Rev Up' de 2005–2006 são conhecidos por queimar óleo, e rodar com nível baixo pode destruir o motor.",
+     "src": "https://www.cargurus.com/cars/articles/nissan-350z-buying-guide-cost"
+    },
+    {
+     "en": "Check oil pressure at idle when hot",
+     "pt": "Confira a pressão de óleo em marcha lenta com o motor quente",
+     "why_en": "It should read at least about 1 bar at idle.",
+     "why_pt": "Deve marcar pelo menos cerca de 1 bar em marcha lenta.",
+     "src": "https://classicandsportscar.com/node/47925"
+    },
+    {
+     "en": "Ask about modifications",
+     "pt": "Pergunte sobre modificações",
+     "why_en": "Many have been remapped or modified; prefer standard cars or well-documented work.",
+     "why_pt": "Muitos foram remapeados ou modificados; prefira carros originais ou com serviço bem documentado.",
+     "src": "https://classicandsportscar.com/node/47925"
+    },
+    {
+     "en": "Press the clutch several times: it must not stick or feel spongy",
+     "pt": "Pise na embreagem várias vezes: não pode prender nem ficar esponjosa",
+     "why_en": "The concentric slave cylinder is a common failure and needs the gearbox out to replace.",
+     "why_pt": "O atuador hidráulico da embreagem (rolamento hidráulico) falha com frequência e exige tirar o câmbio para trocar.",
+     "src": "https://www.truedelta.com/Nissan-Z/expensive-problems-221"
+    }
+   ]
+  },
+  "Z370": {
+   "intro_en": "Reliable overall; check clutch hydraulics, oil pressure and, on early cars, the steering lock.",
+   "intro_pt": "Confiável no geral; confira o hidráulico da embreagem, a pressão de óleo e, nos primeiros anos, a trava da direção.",
+   "items": [
+    {
+     "en": "Press the clutch several times: it must not stick to the floor",
+     "pt": "Pise na embreagem várias vezes: não pode grudar no assoalho",
+     "why_en": "The concentric slave cylinder fails, often taking the clutch with it.",
+     "why_pt": "O atuador hidráulico da embreagem falha e muitas vezes leva a embreagem junto.",
+     "src": "https://blog.1aauto.com/?p=13786"
+    },
+    {
+     "en": "2009–2012: check oil pressure and leaks",
+     "pt": "2009–2012: confira pressão de óleo e vazamentos",
+     "why_en": "The oil gallery gaskets that feed the timing chain can fail on earlier cars.",
+     "why_pt": "As juntas das galerias de óleo que lubrificam a corrente podem falhar nos carros mais antigos.",
+     "src": "https://motorandwheels.com/nissan-370z-problems/"
+    },
+    {
+     "en": "Early cars: make sure it starts every time",
+     "pt": "Carros mais antigos: confira se dá partida sempre",
+     "why_en": "The electronic steering lock can fail and stop the car starting.",
+     "why_pt": "A trava eletrônica da direção pode falhar e impedir a partida.",
+     "src": "https://www.whatcar.com/nissan/370z/coupe/used-review/n24316/advice"
+    },
+    {
+     "en": "Look for stone chips and repainted front panels",
+     "pt": "Procure lascas de pedra e repintura na frente",
+     "why_en": "The bonnet and bumper chip easily; overspray shows earlier repairs.",
+     "why_pt": "Capô e para-choque lascam fácil; respingos de tinta mostram reparos antigos.",
+     "src": "https://www.pistonheads.com/news/ph-buying-guides/nissan-370z-ph-used-buying-guide/38816"
+    }
+   ]
+  },
+  "FA5": {
+   "intro_en": "Simple, durable mechanics; the points to check are the rear suspension and the fuel injection.",
+   "intro_pt": "Mecânica simples e durável; os pontos de atenção são a suspensão traseira e a injeção.",
+   "items": [
+    {
+     "en": "Listen for knocks from the rear over bumps",
+     "pt": "Escute batidas na traseira ao passar em buracos",
+     "why_en": "Repairers report that the lower bushing of the rear shock absorbers often fails, even on low-km cars.",
+     "why_pt": "Reparadores relatam que a bucha inferior do amortecedor traseiro costuma estourar, mesmo em carros de km baixa.",
+     "src": "https://oficinabrasil.com.br/noticia/avaliacao-do-reparador/honda-new-civic-1-8-16v-defeitos-recorrentes-e-falta-de-informacao-tecnica-chamam-a-atencao"
+    },
+    {
+     "en": "Misfires or weak running: ask about the injectors",
+     "pt": "Motor falhando ou sem força: pergunte pelos bicos injetores",
+     "why_en": "A small filter inside the injectors tends to dry out and clog.",
+     "why_pt": "Um pequeno filtro dentro dos bicos costuma ressecar e entupir.",
+     "src": "https://autopapo.com.br/noticia/usado-honda-civic-2008/"
+    },
+    {
+     "en": "Ask for the service history with the right oil",
+     "pt": "Peça o histórico de revisões com o óleo correto",
+     "why_en": "Poor oil can clog the VTEC solenoid filter, and the engine loses power at high rpm.",
+     "why_pt": "Óleo ruim pode entupir o filtro da solenoide do VTEC, e o motor perde força em giros altos.",
+     "src": "https://www.autoo.com.br/honda-civic-veja-5-motivos-para-comprar-e-5-para-fugir-do-seda-usado/"
+    }
+   ]
+  },
+  "FA5_SI": {
+   "intro_en": "The 192 hp K20 and six-speed are the reason to buy one; many were driven hard, so history matters.",
+   "intro_pt": "O K20 de 192 cv e o câmbio de 6 marchas são o motivo da compra; muitos foram bem exigidos, então o histórico importa.",
+   "items": [
+    {
+     "en": "Shift 2nd to 3rd briskly, also with the gearbox cold",
+     "pt": "Troque de 2ª para 3ª com firmeza, também com o câmbio frio",
+     "why_en": "2006–2008 cars are known to grind or pop out of 3rd (synchros); later cars came with revised parts.",
+     "why_pt": "Os 2006–2008 são conhecidos por arranhar ou escapar da 3ª (sincronizados); os posteriores vieram com peças revisadas.",
+     "src": "https://tpautorepair.net/what-year-civic-si-to-stay-away-from/"
+    },
+    {
+     "en": "Listen for knocks from the rear over bumps",
+     "pt": "Escute batidas na traseira ao passar em buracos",
+     "why_en": "Repairers report that the lower bushing of the rear shock absorbers often fails, even on low-km cars.",
+     "why_pt": "Reparadores relatam que a bucha inferior do amortecedor traseiro costuma estourar, mesmo em carros de km baixa.",
+     "src": "https://oficinabrasil.com.br/noticia/avaliacao-do-reparador/honda-new-civic-1-8-16v-defeitos-recorrentes-e-falta-de-informacao-tecnica-chamam-a-atencao"
+    }
+   ]
+  },
+  "FB": {
+   "intro_en": "Very reliable; check the air conditioning, the automatic gearbox and the airbag recall.",
+   "intro_pt": "Muito confiável; confira o ar-condicionado, o câmbio automático e o recall do airbag.",
+   "items": [
+    {
+     "en": "Run the A/C: it must blow cold without noise",
+     "pt": "Ligue o ar-condicionado: tem que gelar e não fazer barulho",
+     "why_en": "This generation's compressor has known failures, and a broken one can contaminate the whole system.",
+     "why_pt": "O compressor desta geração tem falhas conhecidas, e quando quebra pode contaminar o sistema todo.",
+     "src": "https://au7o.io/pt-br/known-issues/honda-civic"
+    },
+    {
+     "en": "Automatic: drive it cold and warm; shifts must be smooth",
+     "pt": "Automático: dirija frio e quente; as trocas têm que ser suaves",
+     "why_en": "The 1.8's five-speed automatic is naturally slow to shift, but jolts, slipping or slow engagement point to a problem.",
+     "why_pt": "O automático de 5 marchas do 1.8 é naturalmente lento nas trocas, mas trancos, patinação ou demora para engatar indicam problema.",
+     "src": "https://www.mercadolivre.com.br/blog/mo-defeitos-comuns-honda-civic-usado"
+    },
+    {
+     "en": "Check the airbag recall at honda.com.br/recall",
+     "pt": "Consulte o recall do airbag em honda.com.br/recall",
+     "why_en": "Civics from 2011 to 2015 are in the Takata airbag recall; look up the plate or chassis. The repair is free.",
+     "why_pt": "Civic de 2011 a 2015 estão no recall dos airbags Takata; consulte pela placa ou chassi. O reparo é gratuito.",
+     "src": "https://verificarauto.com.br/recall-honda-takata/"
+    }
+   ]
+  },
+  "YARIS_S": {
+   "intro_en": "Simple, economical mechanics; the main thing is the CVT's service history.",
+   "intro_pt": "Mecânica simples e econômica; o principal é o histórico do câmbio CVT.",
+   "items": [
+    {
+     "en": "Ask for the CVT fluid change history",
+     "pt": "Peça o histórico de troca do fluido do câmbio CVT",
+     "why_en": "The CVT needs regular changes with the right fluid to last.",
+     "why_pt": "O CVT precisa de trocas regulares com o fluido certo para durar.",
+     "src": "https://napista.com.br/radar/yaris-usado-e-economico"
+    },
+    {
+     "en": "Test the media screen and the electrics",
+     "pt": "Teste a central multimídia e a parte elétrica",
+     "why_en": "Owners report media-unit faults, and some battery and alternator replacements.",
+     "why_pt": "Donos relatam defeitos na central multimídia e algumas trocas de bateria e alternador.",
+     "src": "https://www.autoo.com.br/toyota-yaris-sedan-usado-e-aposta-certa-para-quem-nao-quer-perder-dinheiro/"
+    }
+   ]
+  }
+ }
+}

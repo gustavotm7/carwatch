@@ -149,6 +149,33 @@ main{max-width:1100px;margin:0 auto;padding:12px 10px 40px;display:grid;gap:14px
 .deal{font-size:13px;font-weight:600;color:var(--muted);border-radius:7px;padding:4px 8px;border:1px solid var(--line)}
 .deal.under{color:#8ef0c0;background:rgba(60,207,142,.12);border-color:rgba(60,207,142,.3)}
 .deal.over{color:#ffaaa2;background:rgba(242,103,92,.12);border-color:rgba(242,103,92,.32)}
+.deal b{font-weight:700;margin-left:2px}
+.dl-great{color:#9cf0c6;background:rgba(47,156,102,.28);border-color:rgba(47,156,102,.6)}
+.dl-good{color:#a8e6c4;background:rgba(98,185,138,.14);border-color:rgba(98,185,138,.38)}
+.dl-fair{color:var(--muted)}
+.dl-high{color:#f5c58e;background:rgba(201,138,69,.14);border-color:rgba(201,138,69,.38)}
+.dl-over{color:#ffaaa2;background:rgba(210,100,91,.16);border-color:rgba(210,100,91,.42)}
+.dl-sus{color:#cdc6ff;background:rgba(144,133,233,.2);border-color:rgba(144,133,233,.6)}
+.verdict{margin:12px 0 4px;padding:13px 14px 12px;border-radius:14px;background:var(--raised);border:1px solid var(--line)}
+.verdict.v-great,.verdict.v-good{border-color:rgba(98,185,138,.45)}
+.verdict.v-high,.verdict.v-over{border-color:rgba(210,100,91,.4)}
+.verdict.v-sus{border-color:rgba(144,133,233,.65)}
+.v-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.v-head b{font:700 21px/1.1 var(--cond);letter-spacing:.01em}
+.v-head span{color:var(--muted);font-size:14px}
+.verdict .viz text{font:500 11px var(--sans);fill:var(--muted)}
+.verdict .viz text.vl{fill:var(--text);font-weight:700}
+.verdict .kv{margin:8px 0 0}
+ul.why{margin:10px 0 0;padding-left:18px;display:grid;gap:6px;font-size:14px}
+.warnline{margin:8px 0 0;padding:9px 11px;border-radius:10px;background:rgba(144,133,233,.16);color:#d9d4ff;font-size:14px}
+.fine{color:var(--muted);font-size:12px;margin:8px 0 0}
+ol.checks{margin:6px 0 0;padding-left:20px;display:grid;gap:10px;font-size:14px}
+ol.checks .m{color:var(--muted)}
+.src-link{color:#9ccaf5;font-size:12px}
+.guide .mix{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 4px}
+.guide .mix .deal{font-size:12px}
+ul.facts-list.plain{list-style:none;padding-left:0}
+ul.facts-list.plain .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:7px}
 .info{margin-left:auto;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;
   color:var(--muted);flex:none}
 .info:hover{color:var(--text);border-color:#4a5563}
@@ -269,12 +296,34 @@ ul.facts-list{margin:2px 0 0;padding-left:18px;display:grid;gap:7px;font-size:14
 .rows .wide{grid-column:1/-1}
 .linkbtn{display:block;width:100%;margin-top:10px;padding:11px;border-radius:12px;border:1px solid var(--line);font-weight:600;color:var(--text)}
 .otab{width:100%;border-collapse:collapse;font-size:14px}
+.otab caption{caption-side:top;text-align:left;color:var(--muted);font-size:12px;padding:10px 0 2px}
+.budget-in{display:flex;align-items:center;gap:8px;margin-top:4px}
+.budget-in label{color:var(--muted);font-size:14px}
+.budget-in input{flex:1;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--raised);color:var(--text);font:600 17px var(--sans)}
+.budget-in button{padding:10px 16px;border-radius:12px;background:var(--text);color:var(--bg);font-weight:700}
+.bud-picks{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.bud-picks button{padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-weight:600}
+.bud-picks button[aria-pressed=true]{color:var(--text);border-color:var(--text);background:var(--raised)}
+#fipeHist text{font:500 11px var(--sans);fill:var(--muted)}
+#fipeHist text.vl{fill:var(--text);font-weight:600}
+#fipeHist [data-fbin]{cursor:pointer}
 .otab th{color:var(--muted);font-weight:500;font-size:12px;text-align:right;padding:2px 4px 6px}
 .otab td{padding:10px 4px;border-top:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .otab th:first-child,.otab td:first-child{text-align:left;padding-left:0}
 .otab tr[data-ana]{cursor:pointer}
 .otab td.m{color:var(--muted);font-size:13px}
 .loc-card{border-color:rgba(59,143,224,.45)}
+.ygrid{display:grid;gap:3px;font-size:12px;text-align:center;margin-top:4px}
+.ygrid .gh{color:var(--muted);padding:2px 0 4px}
+.ygrid .gy{text-align:left;font-weight:600;align-self:center}
+.ygrid .gc{padding:7px 0 5px;border-radius:6px;font:600 13px/1.1 var(--sans);display:flex;flex-direction:column;align-items:center;gap:1px}
+.ygrid .gc small{font-size:11px;font-weight:500;opacity:.8}
+.ygrid .gc.few{color:var(--muted);background:rgba(105,113,125,.1);justify-content:center}
+.minisw{display:flex;align-items:center;gap:6px;margin:0 0 6px;font-size:12px;color:var(--muted)}
+.minisw button{padding:5px 11px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-weight:600}
+.minisw button[aria-pressed=true]{color:var(--text);border-color:var(--text)}
+.legend .bandkey{width:16px;height:9px;border-radius:2px;background:rgba(141,151,165,.35);margin-left:10px}
+.breakdown dd{font-variant-numeric:tabular-nums}
 .otab .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:7px}
 @media (max-width:380px){.controls{gap:6px}.seg button{padding:7px 11px}.dir,.filters-btn{padding:8px 10px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -417,8 +466,8 @@ const BODY_PT = {coupe: "Cupê", conv: "Conversível", sedan: "Sedã", wagon: "P
 const BD = () => PT() ? BODY_PT : BODY_EN;
 const HARD = () => PT() ? ["Accident mentioned"] : ["Rebuilt title", "Salvage title"];   // the serious flags in each market
 const DEFAULT_STATE = {sort: "score", dir: "desc", names: [], gear: ["m", "c", "u"], bodies: [], maxPrice: 0,
-                       maxKm: 0, yearFrom: 0, yearTo: 0, hideHard: false, hideRed: false,
-                       tab: "list", ana: ""};
+                       maxKm: 0, yearFrom: 0, yearTo: 0, hideHard: false, hideRed: false, hideHigh: false, hideSus: false,
+                       tab: "list", ana: "", budget: 0};
 let DATA = null, state = load();
 
 function stateKey() { return COUNTRY === "CA" ? "cw-state" : "cw-state-" + COUNTRY; }   // filters kept per country
@@ -488,6 +537,10 @@ function ago(iso) {
 
 // ---------- filtering + sorting ----------
 function effNames() { return state.names.filter(n => DATA.names.some(x => x.name === n)); }
+function pricePart(vs) {                       // same as the collector: a price far under the market earns nothing
+  const s = dealCuts().sus;
+  return vs < s ? vs : Math.max(0, s - (vs - s) * 3);
+}
 function applyLoc(cars) {                     // cars within the selected town's radius, with local fair price, % and score
   LOCAL = LOC.active ? areaLevel(LOC.active, LOC.radius) : null;
   if (!LOC.active) return cars;
@@ -499,7 +552,7 @@ function applyLoc(cars) {                     // cars within the selected town's
       c._lf = c.fair ? Math.round(c.fair * Math.exp(LOCAL.lv) / 100) * 100 : null;
       c._lvs = c._lf ? 1 - c.price / c._lf : null;
       c._ls = c._lvs != null && c.sr != null && c.vs_fair != null
-        ? Math.round(Math.max(0, Math.min(10, c.sr + (c._lvs - c.vs_fair) / ppp * (c.conf ?? 1))) * 10) / 10 : c.score;
+        ? Math.round(Math.max(0, Math.min(10, c.sr + (pricePart(c._lvs) - pricePart(c.vs_fair)) / ppp * (c.conf ?? 1))) * 10) / 10 : c.score;
     }
   }
   return near;
@@ -528,6 +581,10 @@ function filtered() {
     !(state.hideHard && c.red.some(f => HARD().includes(f))) &&
     !(state.hideRed && c.red.length));
   cars = applyLoc(cars);
+  if (state.hideHigh || state.hideSus) cars = cars.filter(c => {
+    const k = dealOf(vsOf(c));
+    return !(state.hideHigh && (k === "high" || k === "over")) && !(state.hideSus && k === "sus");
+  });
   const key = {score: c => scoreOf(c) ?? -1, price: c => c.price, km: c => c.km ?? 1e9, year: c => c.year ?? 0,
                deal: c => vsOf(c) ?? -9, new: c => c.first_seen || "", days: c => c.days ?? -1,
                sold: c => c.sold?.vs ?? -9, near: c => c._dist ?? 1e9}[state.sort] || (c => c.score ?? -1);
@@ -541,19 +598,256 @@ function activeFilterCount() {
   if (state.maxPrice) n++;
   if (state.maxKm) n++;
   if (state.yearFrom || state.yearTo) n++;
-  if (state.hideHard || state.hideRed) n++;
+  if (state.hideHard || state.hideRed || state.hideHigh || state.hideSus) n++;
   if (!["score", "price"].includes(state.sort)) n++;
   return n;
 }
 
 // ---------- rendering ----------
+// ---------- verdicts: price labels, suggested offers, buying guide ----------
+const DEAL_TXT = {sus: ["Too good? Be careful", "Bom demais? Desconfie"], great: ["Great price", "Ótimo preço"],
+                  good: ["Good price", "Bom preço"], fair: ["Fair price", "Preço justo"], high: ["High price", "Preço alto"],
+                  over: ["Overpriced", "Caro"]};
+const DEAL_SHORT = {sus: ["Be careful", "Desconfie"], great: ["Great", "Ótimo"], good: ["Good", "Bom"], fair: ["Fair", "Justo"],
+                    high: ["High", "Alto"], over: ["Overpriced", "Caro"]};
+const DEAL_ORDER = ["sus", "great", "good", "fair", "high", "over"];
+const pctSmall = x => dec(Math.abs(x * 100), Math.abs(x) < .02 ? 1 : 0) + "%";   // "0.4%", "3%": the words say the direction
+const DEAL_COL = {sus: "#9085e9", great: "#2f9c66", good: "#62b98a", fair: "#69717d", high: "#c98a45", over: "#d2645b"};
+const dealCuts = () => (DATA.score && DATA.score.deal) || {good: .03, great: .08, sus: .15};
+function dealOf(vs) {                            // vs: fraction under the fair price (negative = over)
+  if (vs == null) return null;
+  const D = dealCuts();
+  return vs >= D.sus ? "sus" : vs >= D.great ? "great" : vs >= D.good ? "good" : vs > -D.good ? "fair" : vs > -D.great ? "high" : "over";
+}
+const dealName = k => L(...DEAL_TXT[k]);
+const mkOfCar = c => c.family + (c.trans === "a" ? "|auto" : "");
+const verOf = c => (c.trim || "").trim().toUpperCase() || null;
+const verAdj = (mk, v) => ((DATA.score.versions || {})[mk] || {})[v]?.[0] || 0;
+const stepOf = () => COUNTRY === "BR" ? 500 : 250;
+const roundTo = (v, s = stepOf()) => Math.round(v / s) * s;
+function fairAt(mk, year, km, ver, conv, lv = 0) {  // the fair-price model for any year, km and version
+  const m = DATA.market?.[mk]?.model;
+  if (!m) return null;
+  return Math.exp(m[0] + m[1] * km / 1e4 + m[2] * (year - 2000) + (conv ? DATA.b_conv || 0 : 0) + verAdj(mk, ver) + lv);
+}
+function typicalKm(name, year) {
+  const same = DATA.cars.filter(c => c.name === name && c.year === year && c.km).map(c => c.km);
+  return same.length >= 5 ? medv(same) : medv(DATA.cars.filter(c => c.name === name && c.km).map(c => c.km));
+}
+const fairUsed = c => LOCAL && c._lf ? c._lf : c.fair;
+function cutStats(cars) {                        // price cuts since tracking began
+  const cut = cars.filter(c => c.hist && c.hist.some(([, p], i) => i && p < c.hist[i - 1][1]));
+  return {n: cut.length, share: cars.length ? cut.length / cars.length : 0, med: cut.length ? medv(cut.map(c => 1 - c.price / c.hist[0][1])) : null};
+}
+function roomOf(name) {                          // typical negotiating room for this model: observed cuts, else 5%
+  const s = cutStats(DATA.cars.filter(c => c.name === name));
+  return s.n >= 5 && s.med ? Math.max(.03, Math.min(.10, s.med)) : .05;
+}
+function offerFor(c) {
+  const F = fairUsed(c);
+  if (!F || !c.price) return null;
+  const D = dealCuts(), k = dealOf(1 - c.price / F);
+  let room = roomOf(c.name);
+  if (c.days_src === "site" && c.days > 60) room += .02;              // older ads: sellers bend more
+  const base = Math.min(c.price, F);
+  return {F, k, room, start: roundTo(base * (1 - room)), close: roundTo(base * (1 - room / 2)), max: roundTo(F * (1 + D.good))};
+}
+function dealPill(c) {
+  const vs = vsOf(c), k = dealOf(vs);
+  if (!k || c.red.includes("Price hidden")) return "";
+  const pct = Math.round(Math.abs(vs) * 100);
+  return `<span class="deal dl-${k}">${L(...DEAL_SHORT[k])}${pct >= 1 && k !== "fair" ? ` <b>${vs > 0 ? "−" : "+"}${pct}%</b>` : ""}</span>`;
+}
+function dealScale(vs, extra = []) {             // six equal bands, a marker for this price, ticks for other references
+  const W = 340, n = DEAL_ORDER.length, w = (W - (n - 1) * 3) / n, D = dealCuts(), k = dealOf(vs);
+  const edges = {sus: [D.sus + .06, D.sus], great: [D.sus, D.great], good: [D.great, D.good], fair: [D.good, -D.good],
+                 high: [-D.good, -D.great], over: [-D.great, -D.great - .06]};
+  const xOf = v => {                             // position of a "fraction under fair" on the band scale
+    for (let i = 0; i < n; i++) {
+      const [a, b] = edges[DEAL_ORDER[i]];
+      if ((v <= a && v >= b) || (i === 0 && v > a) || (i === n - 1 && v < b)) {
+        const t = Math.max(0, Math.min(1, (a - v) / (a - b)));
+        return i * (w + 3) + t * w;
+      }
+    }
+    return W / 2;
+  };
+  const bands = DEAL_ORDER.map((d, i) => `<rect x="${(i * (w + 3)).toFixed(1)}" y="16" width="${w.toFixed(1)}" height="12" rx="4" fill="${DEAL_COL[d]}" opacity="${d === k ? 1 : .32}"/>
+      <text x="${(i * (w + 3) + w / 2).toFixed(1)}" y="44" text-anchor="middle" class="${d === k ? "vl" : ""}">${L(...DEAL_SHORT[d])}</text>`).join("");
+  const ticks = extra.map(([v, lab]) => `<line x1="${xOf(v).toFixed(1)}" x2="${xOf(v).toFixed(1)}" y1="12" y2="32" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="2 2"/>
+      <text x="${Math.min(W - 2, Math.max(2, xOf(v))).toFixed(1)}" y="58" text-anchor="middle">${lab}</text>`).join("");
+  const x = xOf(vs);
+  return `<svg class="viz" viewBox="0 0 ${W} ${extra.length ? 62 : 50}" role="img" aria-label="${dealName(k)}">${bands}
+    <line x1="${xOf(0).toFixed(1)}" x2="${xOf(0).toFixed(1)}" y1="12" y2="32" stroke="var(--text)" stroke-width="2"/>${ticks}
+    <path d="M${x.toFixed(1)} 13 l-6 -9 h12 z" fill="var(--text)"/></svg>`;
+}
+function verdictHTML(c) {
+  const o = offerFor(c);
+  if (!o || c.red.includes("Price hidden")) return "";
+  const vs = 1 - c.price / o.F, k = dealOf(vs), mk = mkOfCar(c), pct = Math.round(Math.abs(vs) * 100);
+  const hard = c.red.some(f => HARD().includes(f)), where = LOCAL && c._lf ? L(` near ${esc(LOC.active.name)}`, ` perto de ${esc(LOC.active.name)}`) : "";
+  const what = esc([c.name, c.year, verOf(c) || "", c.trans === "a" ? L("automatic", "automático") : ""].filter(Boolean).join(" "));
+  const why = [];
+  why.push(Math.abs(vs) < .01 ? L(`At the fair price${where} for a ${what} with ${kmFmt(c.km)}.`, `No preço justo${where} para um ${what} com ${kmFmt(c.km)}.`)
+    : L(`${pct}% ${vs > 0 ? "under" : "over"} the fair price${where} (${money(o.F)}) for a ${what} with ${kmFmt(c.km)}.`,
+        `${pct}% ${vs > 0 ? "abaixo" : "acima"} do preço justo${where} (${money(o.F)}) para um ${what} com ${kmFmt(c.km)}.`));
+  const tk = c.year && c.km ? typicalKm(c.name, c.year) : null;
+  if (tk && c.km < tk * .8) why.push(L(`Low km for a ${c.year} (typical: ${kmFmt(Math.round(tk))}).`, `Km baixa para um ${c.year} (típico: ${kmFmt(Math.round(tk))}).`)
+    + (Math.abs(Math.exp(DATA.market?.[mk]?.model?.[1] || 0) - 1) < .005 ? L(" The market barely charges for it: an advantage for you.", " O mercado quase não cobra por isso: vantagem para você.") : ""));
+  if (tk && c.km > tk * 1.25) why.push(L(`High km for a ${c.year} (typical: ${kmFmt(Math.round(tk))}): check maintenance records.`, `Km alta para um ${c.year} (típico: ${kmFmt(Math.round(tk))}): peça o histórico de revisões.`));
+  if (!verOf(c) && DATA.score.versions?.[mk]) why.push(L("Version not identified: the fair price uses the average of the versions. Confirm it with the seller.", "Versão não identificada: o preço justo usa a média das versões. Confirme com o vendedor."));
+  const tc = totalChange(c);
+  if (tc && tc.diff < 0) why.push(L(`Price already cut by ${money(-tc.diff)} since ${fmtDate(tc.since)}: the seller is open to offers.`, `Já baixou ${money(-tc.diff)} desde ${fmtDate(tc.since)}: o vendedor está aberto a propostas.`));
+  if (c.days_src === "site" && c.days > 60) why.push(L(`Listed ${c.days} days ago: more room to negotiate.`, `Anunciado há ${c.days} dias: mais margem para negociar.`));
+  if (hard) why.push(L("The ad mentions an auction or insurance write-off history, which explains part of a low price. Only buy with a full inspection report.",
+                       "O anúncio cita leilão ou sinistro, o que explica parte de um preço baixo. Só compre com laudo cautelar."));
+  const reds = c.red.filter(f => !HARD().includes(f) && f !== "Price hidden");
+  if (reds.length) why.push(L(`Watch out: ${reds.map(flagTxt).join(", ")}.`, `Atenção: ${reds.map(flagTxt).join(", ")}.`));
+  if (c.green.length) why.push(L(`Good signs: ${c.green.map(flagTxt).join(", ")}.`, `Pontos positivos: ${c.green.map(flagTxt).join(", ")}.`));
+  if (c.trans === "u" || c.trans === "c") why.push(L("Confirm it really is a manual before visiting.", "Confirme que é mesmo manual antes de ir ver."));
+  if ((c.conf ?? 1) < .6) why.push(L("Few cars of this model for sale: the fair price is rough.", "Poucos carros deste modelo à venda: o preço justo é aproximado."));
+  const fipe = fipeOf(c);
+  if (fipe) {
+    const s = DATA.fipe?.series?.[c.fipe_k], mon = monShort(DATA.fipe?.month), d = c.price / fipe - 1, p = Math.round(Math.abs(d) * 100);
+    why.push(L(`FIPE table${mon ? ` (${mon})` : ""}${s ? ` for ${esc(s.name)}, ${c.year}` : ""}: ${money(fipe)}. ${p < 1 ? "This ad asks about the same." : `This ad asks ${p}% ${d > 0 ? "more" : "less"}.`}`,
+               `Tabela FIPE${mon ? ` (${mon})` : ""}${s ? ` para ${esc(s.name)}, ${c.year}` : ""}: ${money(fipe)}. ${p < 1 ? "Este anúncio pede praticamente o mesmo." : `Este anúncio pede ${p}% ${d > 0 ? "a mais" : "a menos"}.`}`));
+  }
+  let offer;
+  if (k === "sus") offer = `<p class="warnline">${L("This price is far below the market. Before any deposit: ask why, check the documents and get an inspection report. It is often a scam, an auction car, a write-off or a hidden fault.",
+                                                    "Este preço está muito abaixo do mercado. Antes de qualquer sinal: pergunte o motivo, confira os documentos e faça o laudo cautelar. Costuma ser golpe, carro de leilão, sinistro ou defeito escondido.")}</p>`;
+  else if (k === "high" || k === "over") offer = `<dl class="kv"><dt>${L("Worth it at", "Vale a pena por")}</dt><dd>${L("up to", "até")} ${money(o.max)}</dd>
+      <dt>${L("Open with", "Proponha")}</dt><dd>${money(o.start)}</dd></dl><p class="fine">${L("Above that, similar cars cost less: compare before visiting.", "Acima disso, carros parecidos custam menos: compare antes de ir ver.")}</p>`;
+  else offer = `<dl class="kv"><dt>${L("Open with", "Proponha")}</dt><dd>${money(o.start)}</dd><dt>${L("Good deal at", "Bom fechamento")}</dt><dd>${L("up to", "até")} ${money(Math.max(o.close, o.start))}</dd>
+      <dt>${L("Don't pay over", "Não pague mais que")}</dt><dd>${money(Math.min(o.max, c.price))}</dd></dl>`;
+  const ticks = fipe ? [[1 - fipe / o.F, "FIPE"]] : [];
+  return `<section class="verdict v-${k}">
+    <div class="v-head"><b>${dealName(k)}</b><span>${money(c.price)}${pct >= 1 ? `, ${pct}% ${vs > 0 ? L("under", "abaixo do") : L("over", "acima do")} ${L("fair", "justo")}` : ""}</span></div>
+    ${dealScale(vs, ticks)}
+    <p class="fine" style="margin-top:2px">${L("Triangle: this ad. Line: fair price", "Triângulo: este anúncio. Linha: preço justo")} ${money(o.F)}${where}.</p>
+    ${offer}
+    <ul class="why">${why.map(x => `<li>${x}</li>`).join("")}</ul>
+    <button class="linkbtn" type="button" data-checklist="${esc(c.name)}">${L("What to check before buying", "O que verificar antes de comprar")}</button>
+    <p class="fine">${L("This judges the price, not the car's condition.", "Isto avalia o preço, não o estado do carro.")}</p>
+  </section>`;
+}
+
+// What to check: general steps for each country, then the model's own list (CHECKS, filled from data/guides.json)
+let GUIDES = null;
+const fipeOf = c => c.fipe || null;
+const monShort = m => m ? String(m).replace(/^(\S{3})\S*(?: de |\/)(\d{4})$/, "$1/$2") : "";   // "novembro de 2026" -> "nov/2026"
+function loadGuides() {
+  if (GUIDES) return Promise.resolve(GUIDES);
+  return fetch("data/guides.json").then(r => r.ok ? r.json() : {}).catch(() => ({})).then(g => (GUIDES = g || {}));
+}
+function checklistSheet(name) {
+  loadGuides().then(G => {
+    const fam = (DATA.names.find(n => n.name === name) || {}).family;
+    const gen = (G.general || {})[COUNTRY] || [], mod = ((G.models || {})[fam] || {});
+    const item = it => `<li><b>${esc(PT() ? it.pt || it.en : it.en)}</b>${it.why_en ? `<br><span class="m">${esc(PT() ? it.why_pt || it.why_en : it.why_en)}</span>` : ""}
+      ${it.src ? `<br><a href="${esc(it.src)}" target="_blank" rel="noopener" class="src-link">${L("Source", "Fonte")}: ${esc(new URL(it.src).hostname.replace(/^www\./, ""))}</a>` : ""}</li>`;
+    openSheet(`<h2>${L("What to check", "O que verificar")}</h2>
+      ${mod.items?.length ? `<h3>${esc(name)}</h3><p class="sub">${esc(PT() ? mod.intro_pt || mod.intro_en || "" : mod.intro_en || "")}</p><ol class="checks">${mod.items.map(item).join("")}</ol>` : ""}
+      <h3>${L("Every used car", "Todo carro usado")}</h3><ol class="checks">${gen.map(item).join("")}</ol>
+      <p class="fine">${L("A list to help you ask the right questions; it doesn't replace an inspection by a mechanic you trust.",
+                          "Uma lista para ajudar a fazer as perguntas certas; não substitui a vistoria de um mecânico de confiança.")}</p>`,
+      L("What to check", "O que verificar"));
+  });
+}
+
+// Year by year: how much each newer year costs, for the same km and version
+function yearSteps(cars, mk) {
+  const m = DATA.market?.[mk]?.model;
+  if (!m) return null;
+  const kmRef = medv(cars.filter(c => c.km).map(c => c.km));
+  const g = {};
+  cars.forEach(c => {
+    if (!c.year || !c.km || !c.price) return;
+    const p = c.price * Math.exp(-m[1] * (c.km - kmRef) / 1e4 - verAdj(mk, verOf(c)) - (c.body === "conv" ? DATA.b_conv || 0 : 0));
+    (g[c.year] = g[c.year] || []).push(p);
+  });
+  const ys = Object.keys(g).map(Number).filter(y => g[y].length >= 5).sort((a, b) => a - b);
+  const med = Object.fromEntries(ys.map(y => [y, medv(g[y])]));
+  const steps = ys.slice(1).map((y, i) => ({y, from: ys[i], step: ys[i] === y - 1 ? med[y] / med[ys[i]] - 1 : null})).filter(s => s.step != null);
+  const pos = steps.filter(s => s.step > 0).map(s => s.step), avg = pos.length ? pos.reduce((a, b) => a + b, 0) / pos.length : 0;
+  return {ys, med, n: Object.fromEntries(ys.map(y => [y, g[y].length])), steps, avg, kmRef,
+          best: steps.filter(s => s.step <= Math.max(.01, avg * .4)), jumps: steps.filter(s => avg && s.step >= Math.max(.06, avg * 1.8))};
+}
+
+function guideCard(name, cars, mk) {             // the plain-language buying guide for one model
+  const D = dealCuts(), lv = LOCAL ? LOCAL.lv : 0, m = DATA.market?.[mk]?.model;
+  if (!cars.length || !m) return "";
+  const S = yearSteps(cars, mk) || {steps: [], best: [], jumps: [], ys: []};
+  const buy = [];
+  S.best.forEach(s => buy.push(s.step <= 0
+    ? L(`<b>${s.y}</b> costs no more than ${s.from} (${pctTxt(s.step)} for the same km and version): the newer year is the better buy.`,
+        `<b>${s.y}</b> não custa mais que ${s.from} (${pctTxt(s.step)} com a mesma km e versão): o ano mais novo é a melhor compra.`)
+    : L(`<b>${s.y}</b> costs only ${pctSmall(s.step)} more than ${s.from}: good value for a newer car.`,
+        `<b>${s.y}</b> custa só ${pctSmall(s.step)} a mais que ${s.from}: bom custo-benefício por um carro mais novo.`)));
+  S.jumps.forEach(s => buy.push(L(`<b>${s.y}</b> costs ${pctAbs(s.step)} more than ${s.from}: a ${s.from} saves the most.`,
+                                  `<b>${s.y}</b> custa ${pctAbs(s.step)} a mais que ${s.from}: um ${s.from} economiza mais.`)));
+  const V = (DATA.score.versions || {})[mk];
+  if (V) {
+    const vs = Object.entries(V).sort((a, b) => a[1][0] - b[1][0]), lo = vs[0], hi = vs[vs.length - 1], top = vs.slice().sort((a, b) => b[1][1] - a[1][1])[0];
+    buy.push(L(`Versions: <b>${esc(hi[0])}</b> costs about ${pctAbs(Math.exp(hi[1][0] - lo[1][0]) - 1)} more than <b>${esc(lo[0])}</b>; ${esc(top[0])} is the most common.`,
+               `Versões: <b>${esc(hi[0])}</b> custa cerca de ${pctAbs(Math.exp(hi[1][0] - lo[1][0]) - 1)} a mais que <b>${esc(lo[0])}</b>; ${esc(top[0])} é a mais comum.`));
+  }
+  const kmEff = Math.exp(m[1]) - 1;
+  buy.push(Math.abs(kmEff) < .005 ? L("Km barely changes the price here: for the same money, pick the lowest km.", "A km quase não muda o preço aqui: pelo mesmo valor, escolha a de km mais baixa.")
+    : L(`Each 10,000 km more takes about ${pctSmall(kmEff)} off the price.`, `Cada 10 mil km a mais tira cerca de ${pctSmall(kmEff)} do preço.`));
+  const byY = {};
+  cars.forEach(c => { if (c.year) (byY[c.year] = byY[c.year] || []).push(c); });
+  const pay = Object.entries(byY).sort((a, b) => b[1].length - a[1].length).slice(0, 3).sort((a, b) => a[0] - b[0]).map(([y, cs]) => {
+    const vc = {}; cs.forEach(c => { const v = verOf(c); if (v) vc[v] = (vc[v] || 0) + 1; });
+    const ver = Object.entries(vc).sort((a, b) => b[1] - a[1])[0]?.[0] || null, km = medv(cs.filter(c => c.km).map(c => c.km)) || S.kmRef;
+    const F = fairAt(mk, +y, km, ver, cs.filter(c => c.body === "conv").length > cs.length / 2, lv);
+    return F ? `<li><b>${y}${ver ? " " + esc(ver) : ""}</b>, ~${kmFmt(Math.round(km / 1000) * 1000)}: ${kShort(F * (1 - D.good))} – ${kShort(F * (1 + D.good))}</li>` : "";
+  }).join("");
+  const neg = [], cs = cutStats(cars);
+  if (cs.n >= 5) neg.push(L(`${Math.round(cs.share * 100)}% of sellers have already cut their price, by a median ${pctSmall(cs.med)}.`,
+                            `${Math.round(cs.share * 100)}% dos vendedores já baixaram o preço, em mediana ${pctSmall(cs.med)}.`));
+  const dated = cars.filter(c => c.days_src === "site" && c.vs_fair != null);
+  const fresh = dated.filter(c => c.days <= 30).map(c => -c.vs_fair), stale = dated.filter(c => c.days > 60).map(c => -c.vs_fair);
+  if (fresh.length >= 5 && stale.length >= 5 && medv(stale) - medv(fresh) > .015)
+    neg.push(L(`Ads listed over 60 days ask ${pctAbs(medv(stale) - medv(fresh))} more than new ones: push harder on those.`,
+               `Anúncios com mais de 60 dias pedem ${pctAbs(medv(stale) - medv(fresh))} a mais que os novos: negocie mais forte neles.`));
+  neg.push(L(`Open around ${Math.round(roomOf(name) * 100)}% below the fair price and justify it with what the car needs (tyres, service, km).`,
+             `Comece cerca de ${Math.round(roomOf(name) * 100)}% abaixo do preço justo e justifique com o que o carro precisa (pneus, revisões, km).`));
+  neg.push(L(`Don't pay over the top of the fair range unless the car is exceptional (full records, one owner, low km).`,
+             `Não passe do topo da faixa justa, a não ser que o carro seja excepcional (revisões completas, único dono, km baixa).`));
+  const sus = cars.filter(c => dealOf(vsOf(c)) === "sus").length;
+  const warn = [L(`Prices ${Math.round(D.sus * 100)}%+ under fair${sus ? ` (${sus} ${sus === 1 ? "ad" : "ads"} now)` : ""}: often a scam, an auction car, a write-off or a hidden fault. Ask why before anything else.`,
+                  `Preço ${Math.round(D.sus * 100)}%+ abaixo do justo${sus ? ` (${sus} ${sus === 1 ? "anúncio" : "anúncios"} agora)` : ""}: costuma ser golpe, leilão, sinistro ou defeito escondido. Pergunte o motivo antes de tudo.`),
+                L("Never pay a deposit before seeing the car and its documents in person.", "Nunca pague sinal antes de ver o carro e os documentos pessoalmente.")];
+  const counts = {};
+  cars.forEach(c => { const k = dealOf(vsOf(c)); if (k) counts[k] = (counts[k] || 0) + 1; });
+  const mix = ["great", "good", "fair", "high", "over"].map(k => counts[k] ? `<span class="deal dl-${k}">${L(...DEAL_SHORT[k])} <b>${counts[k]}</b></span>` : "").join("");
+  const sec = (t, body) => body ? `<h3>${t}</h3>${body}` : "";
+  return `<section class="ana guide"><h2>${L("Buying guide", "Guia de compra")}</h2>
+    <p class="sub">${L(`From ${nf(cars.length)} ads${LOCAL ? ` near ${esc(LOC.active.name)}` : ""}, comparing like with like. It judges prices, not each car's condition.`,
+                       `A partir de ${nf(cars.length)} anúncios${LOCAL ? ` perto de ${esc(LOC.active.name)}` : ""}, comparando carros equivalentes. Avalia preços, não o estado de cada carro.`)}</p>
+    <div class="mix">${mix}</div>
+    ${sec(L("Which to buy", "Qual comprar"), `<ul class="facts-list">${buy.map(x => `<li>${x}</li>`).join("")}</ul>`)}
+    ${sec(L("What to pay", "Quanto pagar") + (LOCAL ? L(" here", " aqui") : ""), pay ? `<ul class="facts-list">${pay}</ul><p class="fine">${L("Fair range for the most common version and km of the years with most ads.", "Faixa justa para a versão e a km mais comuns dos anos com mais anúncios.")}</p>` : "")}
+    ${sec(L("How to negotiate", "Como negociar"), `<ul class="facts-list">${neg.map(x => `<li>${x}</li>`).join("")}</ul>`)}
+    ${sec(L("Warning signs", "Sinais de alerta"), `<ul class="facts-list">${warn.map(x => `<li>${x}</li>`).join("")}</ul>`)}
+    <button class="linkbtn" type="button" data-checklist="${esc(name)}">${L("What to check before buying", "O que verificar antes de comprar")}</button>
+  </section>`;
+}
+function guideOverview(cars) {                   // "All": where the good prices are, and the general steps
+  const rows = DATA.names.map(n => {
+    const cs = cars.filter(c => c.name === n.name), good = cs.filter(c => ["great", "good"].includes(dealOf(vsOf(c)))).length;
+    return cs.length ? `<li><span class="dot" style="--c:${n.color}"></span>${esc(n.name)}: <b>${good}</b> ${L("good or great prices", "com preço bom ou ótimo")} ${L("of", "de")} ${nf(cs.length)}</li>` : "";
+  }).join("");
+  return `<section class="ana guide"><h2>${L("Buying guide", "Guia de compra")}</h2>
+    <p class="sub">${L("Pick a model above for advice on years, versions, prices and negotiating.", "Escolha um modelo acima para ver conselhos de ano, versão, preço e negociação.")}</p>
+    <h3>${L("Good prices right now", "Bons preços agora")}${LOCAL ? L(" here", " aqui") : ""}</h3><ul class="facts-list plain">${rows}</ul>
+    <button class="linkbtn" type="button" data-checklist="">${L("What to check before buying any used car", "O que verificar antes de comprar qualquer usado")}</button></section>`;
+}
+
 function card(c) {
   const col = nameColor(c.name), site = SITES[c.source] || {label: c.source, domain: ""};
   const g = GB()[c.trans] || GB().u;
-  const vs = vsOf(c);                           // against the local fair price while a town is selected
-  const deal = vs == null ? "" : vs > .02 ? `<span class="deal under">${Math.round(vs * 100)}% ${L("under fair", "abaixo do justo")}</span>`
-             : vs < -.02 ? `<span class="deal over">${Math.round(-vs * 100)}% ${L("over fair", "acima do justo")}</span>`
-             : `<span class="deal">${L("about fair", "preço justo")}</span>`;
+  const deal = dealPill(c);                     // price label against the local fair price while a town is selected
   const tc = totalChange(c);
   const change = tc && tc.diff
       ? `<span class="tag ${tc.diff < 0 ? "drop" : "rise"}">${tc.diff < 0 ? "▼" : "▲"} ${money(Math.abs(tc.diff))}</span>` : "";
@@ -768,6 +1062,8 @@ function detailSheet(c) {
   openSheet(`
     <h2><span class="pill" style="--c:${nameColor(c.name)}">${esc(c.name)}</span>${c.year ?? ""}</h2>
     <p class="sub">${esc([c.trim, BD()[c.body], money(c.price)].filter(Boolean).join(", "))}</p>
+    ${verdictHTML(c)}
+    ${compareStrip(c)}
     <h3>${L("Ad details", "Detalhes do anúncio")}</h3>
     <p>${esc(c.note)}</p>
     ${c.desc ? `<div class="desc">${esc(c.desc)}${c.desc.length >= 690 ? "…" : ""}</div>` : ""}
@@ -788,6 +1084,7 @@ function detailSheet(c) {
         ${L("price", "preço")} ${pts(valuePts)}, ${c.trans === "a" ? L("gearbox: automatic, no deduction", "câmbio: automático, sem desconto") : `${L("gearbox", "câmbio")} ${pts(gearPts)}`}, ${L("flags", "alertas e pontos positivos")} ${pts(redPts + greenPts)}</dd>
       <dt>${L("Confidence", "Confiança")}</dt><dd>${c.conf != null ? Math.round(c.conf * 100) + L("% (fewer cars of this model = less weight on price)", "% (menos carros deste modelo = menos peso no preço)") : L("n/a", "n/d")}</dd>
     </dl>
+    ${fairBreakdown(c)}
     ${historySection(c)}
     ${soldSection(c)}
     <h3>${L("The car", "O carro")}</h3>
@@ -819,7 +1116,8 @@ function filterSheet() {
     <h3>${L("Most km", "Km máximo")}</h3><div class="range"><input type="range" id="fKm" min="10000" max="${kMax}" step="5000" value="${t.maxKm || kMax}"><output id="oKm"></output></div>
     <h3>${L("Year", "Ano")}</h3><div class="range"><select id="fY1" class="opt">${yOpts(t.yearFrom)}</select><span>${L("to", "até")}</span><select id="fY2" class="opt">${yOpts(t.yearTo)}</select></div>
     <h3>${L("Hide", "Ocultar")}</h3><div class="opt-group">
-      ${opt("hide", "hard", L("Rebuilt or salvage titles", "Leilão ou sinistro"), t.hideHard)}${opt("hide", "red", L("Any red flag", "Qualquer alerta"), t.hideRed)}</div>
+      ${opt("hide", "hard", L("Rebuilt or salvage titles", "Leilão ou sinistro"), t.hideHard)}${opt("hide", "red", L("Any red flag", "Qualquer alerta"), t.hideRed)}
+      ${opt("hide", "high", L("High prices", "Preço alto ou caro"), t.hideHigh)}${opt("hide", "sus", L("Too good to be true", "Bom demais (desconfie)"), t.hideSus)}</div>
     <h3>${L("More ways to sort", "Mais formas de ordenar")}</h3><div class="opt-group">
       ${[["score", L("Score", "Nota")], ["price", L("Price", "Preço")], ["deal", L("% under fair", "% abaixo do justo")],
          ...((DATA.comps || []).length ? [["sold", "% under sold"]] : []), ["days", L("Longest listed", "Mais tempo anunciado")],
@@ -849,6 +1147,7 @@ function filterSheet() {
     state.maxKm = +$("#fKm").value >= kMax ? 0 : +$("#fKm").value;
     state.yearFrom = +$("#fY1").value; state.yearTo = +$("#fY2").value;
     const hide = on("hide"); state.hideHard = hide.includes("hard"); state.hideRed = hide.includes("red");
+    state.hideHigh = hide.includes("high"); state.hideSus = hide.includes("sus");
     const srt = on("sort")[0] || "score";
     if (srt !== state.sort) { state.sort = srt; state.dir = ["price", "km"].includes(srt) ? "asc" : "desc"; }
     closeSheet(); render(); window.scrollTo({top: 0});
@@ -1135,24 +1434,35 @@ function scatter(cars, mk, here) {               // here: the local cars (colour
   const m = DATA.market?.[mk]?.model, yr = Math.round(medv(years));
   const convShare = pts.filter(c => c.body === "conv").length / pts.length;
   const lv = here && LOCAL ? LOCAL.lv : 0;
-  let fair = "";
+  let fair = "", band = "";
+  const byDeal = (state.scatCol || "deal") === "deal";
   if (m) {
     const f = km => Math.exp(m[0] + m[1] * km / 1e4 + m[2] * (yr - 2000) + (convShare > .5 ? DATA.b_conv || 0 : 0) + lv);
-    const seg = [];
-    for (let i = 0; i <= 24; i++) { const k = x0 + (x1 - x0) * i / 24, p = f(k); if (p >= y0 && p <= y1) seg.push(`${X(k).toFixed(1)},${Y(p).toFixed(1)}`); }
+    const seg = [], up = [], dn = [], g = dealCuts().good, cy = p => Y(Math.max(y0, Math.min(y1, p))).toFixed(1);
+    for (let i = 0; i <= 24; i++) {
+      const k = x0 + (x1 - x0) * i / 24, p = f(k);
+      if (p >= y0 && p <= y1) seg.push(`${X(k).toFixed(1)},${Y(p).toFixed(1)}`);
+      up.push(`${X(k).toFixed(1)},${cy(p * (1 + g))}`); dn.unshift(`${X(k).toFixed(1)},${cy(p * (1 - g))}`);
+    }
     if (seg.length > 1) fair = `<polyline points="${seg.join(" ")}" fill="none" stroke="${VIZ.fair}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+    band = `<polygon points="${up.concat(dn).join(" ")}" fill="${VIZ.fair}" opacity=".16"/>`;
   }
   const grid = ty.map(v => `<line x1="${PL}" x2="${W - PR}" y1="${Y(v)}" y2="${Y(v)}" stroke="${VIZ.grid}"/><text x="${PL - 6}" y="${Y(v) + 4}" text-anchor="end">${kShort(v)}</text>`).join("")
     + tx.map(v => `<text x="${X(v)}" y="${H - 8}" text-anchor="middle">${kmTick(v)}</text>`).join("");
   const bg = back.map(c => `<circle cx="${X(c.km).toFixed(1)}" cy="${Y(c.price).toFixed(1)}" r="${back.length > 500 ? 2.5 : 3}" fill="#3a4350"/>`).join("");
-  const dots = front.map(c => `<circle cx="${X(c.km).toFixed(1)}" cy="${Y(c.price).toFixed(1)}" r="${r}" fill="${yearColor(c.year, ylo, yhi)}" stroke="var(--surface)" stroke-width="${r > 3 ? 2 : 1}"/>`).join("");
+  const dotCol = c => byDeal ? DEAL_COL[dealOf(vsOf(c))] || VIZ.fair : yearColor(c.year, ylo, yhi);
+  const dots = front.map(c => `<circle cx="${X(c.km).toFixed(1)}" cy="${Y(c.price).toFixed(1)}" r="${r}" fill="${dotCol(c)}" stroke="var(--surface)" stroke-width="${r > 3 ? 2 : 1}"/>`).join("");
   const hidden = (here || pts).filter(c => !inside(c)).length;
   const ys = []; for (let y = ylo; y <= yhi; y++) ys.push(y);
-  const legend = `<div class="legend">${here ? L("Here, by year", "Aqui, por ano") : L("Year", "Ano")}: ${(ys.length > 6 ? [ylo, Math.round((ylo + yhi) / 2), yhi] : ys).map(y => `<i style="background:${yearColor(y, ylo, yhi)}"></i>${y}`).join(" ")}
+  const present = DEAL_ORDER.filter(k => front.some(c => dealOf(vsOf(c)) === k));
+  const legend = `<div class="minisw" role="group" aria-label="${L("Dot colour", "Cor dos pontos")}"><span>${L("Colour:", "Cor:")}</span>
+      <button type="button" data-scatcol="deal" aria-pressed="${byDeal}">${L("price label", "preço")}</button><button type="button" data-scatcol="year" aria-pressed="${!byDeal}">${L("year", "ano")}</button></div>
+    <div class="legend">${byDeal ? present.map(k => `<i style="background:${DEAL_COL[k]}"></i>${L(...DEAL_SHORT[k])}`).join(" ")
+      : `${here ? L("Here, by year", "Aqui, por ano") : L("Year", "Ano")}: ${(ys.length > 6 ? [ylo, Math.round((ylo + yhi) / 2), yhi] : ys).map(y => `<i style="background:${yearColor(y, ylo, yhi)}"></i>${y}`).join(" ")}`}
     ${here ? `<i style="background:#3a4350;margin-left:10px"></i>${L("rest of Brazil", "resto do Brasil")}` : ""}
-    ${fair ? `<span class="ln"></span>${here && LOCAL ? L(`local fair price, ${yr}`, `preço justo local, ${yr}`) : L(`fair price for a ${yr}`, `preço justo de um ${yr}`)}` : ""}</div>`;
+    ${fair ? `<span class="ln"></span>${here && LOCAL ? L(`local fair price, ${yr}`, `preço justo local, ${yr}`) : L(`fair price for a ${yr}`, `preço justo de um ${yr}`)}<i class="bandkey"></i>${L("fair range", "faixa justa")}` : ""}</div>`;
   return `${legend}<svg class="viz" id="scat" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Asking price against km", "Preço pedido por km")}">
-    ${grid}${bg}${dots}${fair}<circle id="scatSel" r="7" fill="none" stroke="var(--text)" stroke-width="2" visibility="hidden"/></svg>
+    ${grid}${band}${bg}${dots}${fair}<circle id="scatSel" r="7" fill="none" stroke="var(--text)" stroke-width="2" visibility="hidden"/></svg>
     <div class="readout" id="scatOut">${L("Tap a dot to see that car.", "Toque num ponto para ver o carro.")}${hidden ? ` <span class="m">(${hidden} ${L("outside the scale", "fora da escala")})</span>` : ""}</div>`;
 }
 // What moves the price: km, year, convertible (from the fair-price fit)
@@ -1178,12 +1488,14 @@ function movers(cars, mk) {
 }
 
 // Price by model year: middle half (bar) and median (dot)
-function byYear(cars, here) {                     // here: local cars; Brazil's median then shows as a grey tick
+function byYear(cars, here, mk) {                 // here: local cars; Brazil's median then shows as a grey tick
   const group = cs => { const g = {}; cs.forEach(c => { if (c.year) (g[c.year] = g[c.year] || []).push(c.price); }); return g; };
   const g = group(cars), h = here ? group(here) : null, main = h || g;
   const ys = Object.keys(g).map(Number).sort((a, b) => b - a);
   if (ys.length < 2) return "";
-  const W = 340, RH = 28, PL = 44, PR = 104, PT = 4;
+  const W = 340, RH = 28, PL = 84, PR = 100, PT = 4;
+  const S = mk ? yearSteps(cars, mk) : null, stepTxt = {};
+  if (S) S.steps.forEach(s => stepTxt[s.y] = [s.step, S.best.includes(s) ? "best" : S.jumps.includes(s) ? "jump" : ""]);
   const all = ys.flatMap(y => [qtl(g[y], .25), qtl(g[y], .75), ...(h && h[y] ? [qtl(h[y], .25), qtl(h[y], .75)] : [])]);
   const [x0, x1, tx0] = niceDomain(Math.min(...all), Math.max(...all), 3);
   const tx = thin(tx0, 3);
@@ -1192,16 +1504,20 @@ function byYear(cars, here) {                     // here: local cars; Brazil's 
   const rows = ys.map((y, i) => {
     const v = main[y] || [], cy = PT + i * RH + RH / 2;
     const tick = h ? `<rect x="${(X(medv(g[y])) - 1).toFixed(1)}" y="${cy - 7}" width="2" height="14" rx="1" fill="${VIZ.fair}"/>` : "";
-    if (!v.length) return `<text x="0" y="${cy + 4}" class="vl">${y}</text>${tick}<text x="${W}" y="${cy + 4}" text-anchor="end">${L("none here", "nenhum aqui")}</text>`;
+    const st = stepTxt[y], stepEl = st ? `<rect x="38" y="${cy - 9}" width="40" height="18" rx="6" fill="${st[1] === "best" ? "rgba(47,156,102,.35)" : st[1] === "jump" ? "rgba(201,138,69,.3)" : "rgba(105,113,125,.25)"}"/>
+      <text x="58" y="${cy + 4}" text-anchor="middle" style="fill:var(--text);font-size:11px">${pctTxt(st[0])}</text>` : "";
+    if (!v.length) return `<text x="0" y="${cy + 4}" class="vl">${y}</text>${stepEl}${tick}<text x="${W}" y="${cy + 4}" text-anchor="end">${L("none here", "nenhum aqui")}</text>`;
     const a = qtl(v, .25), b = qtl(v, .75), m = medv(v);
-    return `<text x="0" y="${cy + 4}" class="vl">${y}</text>
+    return `<text x="0" y="${cy + 4}" class="vl">${y}</text>${stepEl}
       ${v.length >= 3 ? `<rect x="${X(a).toFixed(1)}" y="${cy - 3}" width="${Math.max(6, X(b) - X(a)).toFixed(1)}" height="6" rx="3" fill="#1c5cab"/>` : ""}
       ${tick}<circle cx="${X(m).toFixed(1)}" cy="${cy}" r="5" fill="#b7d3f6" stroke="var(--surface)" stroke-width="2"/>
       <text x="${W}" y="${cy + 4}" text-anchor="end"><tspan class="vl">${kShort(m)}</tspan> (${v.length})</text>`;
   }).join("");
   const axis = tx.map(v => `<line x1="${X(v)}" x2="${X(v)}" y1="${PT}" y2="${H - 18}" stroke="${VIZ.grid}"/><text x="${X(v)}" y="${H - 4}" text-anchor="middle">${kShort(v)}</text>`).join("");
   return `${h ? `<div class="legend"><i style="background:#b7d3f6"></i>${L("median here", "mediana aqui")}<span class="ln" style="width:2px;height:12px"></span>${L("median in Brazil", "mediana no Brasil")}</div>` : ""}
-    <svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Price by model year", "Preço por ano-modelo")}">${axis}${rows}</svg>`;
+    <svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Price by model year", "Preço por ano-modelo")}">${axis}${rows}</svg>
+    ${S && S.steps.length ? `<p class="fine">${L("Tag: how much more than the year before, for the same km and version. Green: best value; amber: a big jump.",
+                                                  "Etiqueta: quanto custa a mais que o ano anterior, com a mesma km e versão. Verde: melhor custo-benefício; laranja: um salto grande.")}</p>` : ""}`;
 }
 // Time on the market: ads by days listed, and what old ads ask against new ones
 function timeListed(cars, nat) {
@@ -1364,6 +1680,7 @@ function overview(near) {                         // near: cars within the selec
       ${near ? "" : `<td>${cs.length ? Math.round(cut / cs.length * 100) + "%" : "–"}</td>`}</tr>`;
   }).join("");
   let html = near ? locCard(near.length, DATA.cars.length, AUTO ? L("automatic cars", "carros automáticos") : L("cars", "carros")) : "";
+  html += guideOverview(near || DATA.cars) + budgetCard(near || DATA.cars, "");
   html += anaSection(L("All models", "Todos os modelos"), L("Tap a model for its full analysis.", "Toque num modelo para ver a análise completa."),
     `<table class="otab"><thead><tr><th>${L("Model", "Modelo")}</th><th>${near ? L("Here", "Aqui") : L("Ads", "Anúncios")}</th>
       ${near ? `<th>${L("Brazil", "Brasil")}</th>` : ""}<th>${L("Median", "Mediana")}</th><th>${L("Days", "Dias")}</th>
@@ -1379,13 +1696,293 @@ function overview(near) {                         // near: cars within the selec
     const few = uf0 && A.uf[uf0] && A.uf[uf0][1] < 10 ? (r => `<p>${L(`${uf0}: only ${A.uf[uf0][1]} ads, so its level leans on the average of ${r[0]}.`,
         `${uf0}: só ${A.uf[uf0][1]} anúncios, então o nível também usa a média do ${r[1]}.`)}</p>`)(REGION_NAME[(A.region_of || {})[uf0]] || ["its region", "região"]) : "";
     html += anaSection(L("Price level by state", "Nível de preço por estado"),
-      L("All models, manual and automatic, against the national fair price for the same model, km and year. States with 10+ ads; the number is how many.",
-        "Todos os modelos, manuais e automáticos, em relação ao preço justo do Brasil para o mesmo modelo, km e ano. Estados com 10+ anúncios; o número é quantos.")
+      L("All models, manual and automatic, against the national fair price for the same model, km and year. Dashed: under 10 ads.",
+        "Todos os modelos, manuais e automáticos, em relação ao preço justo do Brasil para o mesmo modelo, km e ano. Tracejado: menos de 10 anúncios.")
         + (uf0 ? L(` ◂ marks ${uf0}, the selected town's state.`, ` ◂ marca ${uf0}, o estado da cidade escolhida.`) : ""),
-      divBars(st, L("Price level by state", "Nível de preço por estado"), uf0) + few);
+      tileMap(A, uf0) + few);
   }
   return html;
 }
+// ---------- phase 2 charts ----------
+// Where the good prices are: years x km bands, coloured by the median asking price against fair
+function yearKmGrid(cars) {
+  const cs = cars.filter(c => c.year && c.km && vsOf(c) != null);
+  if (cs.length < 12) return "";
+  const kms = cs.map(c => c.km), st = 10000;
+  const cuts = [...new Set([qtl(kms, .25), qtl(kms, .5), qtl(kms, .75)].map(v => Math.round(v / st) * st))].filter(v => v > 0).sort((a, b) => a - b);
+  const bands = [0, ...cuts, Infinity].slice(0, -1).map((a, i, arr) => [a, i + 1 < arr.length ? arr[i + 1] : Infinity]);
+  const bandOf = km => bands.findIndex(([a, b]) => km >= a && km < b);
+  const lab = ([a, b]) => b === Infinity ? `${kmTick(a)}+` : a === 0 ? `<${kmTick(b)}` : `${kmTick(a).replace(/ mil$|k$/, "")}–${kmTick(b)}`;
+  const yc = {};
+  cs.forEach(c => yc[c.year] = (yc[c.year] || 0) + 1);
+  const ys = Object.keys(yc).map(Number).filter(y => yc[y] >= 3).sort((a, b) => b - a);
+  if (ys.length < 2) return "";
+  ANA.grid = {};
+  cs.forEach(c => { const k = c.year + "|" + bandOf(c.km); (ANA.grid[k] = ANA.grid[k] || []).push(c); });
+  const shade = v => v <= -.05 ? ["rgba(57,135,229,.55)", "#d6e8fd"] : v <= -.02 ? ["rgba(57,135,229,.25)", "#b7d3f6"]
+    : v < .02 ? ["rgba(105,113,125,.28)", "var(--text)"] : v < .05 ? ["rgba(230,103,103,.25)", "#f5c0bb"] : ["rgba(230,103,103,.5)", "#ffe0dc"];
+  const head = `<span></span>${bands.map(b => `<span class="gh">${lab(b)}</span>`).join("")}`;
+  const rows = ys.map(y => `<span class="gy">${y}</span>${bands.map((_, i) => {
+    const c = ANA.grid[y + "|" + i] || [];
+    if (c.length < 3) return `<span class="gc few">${c.length ? c.length : "–"}</span>`;
+    const v = medv(c.map(x => -vsOf(x))), [bg, fg] = shade(v);
+    return `<button class="gc" type="button" data-cell="${y}|${i}" style="background:${bg};color:${fg}">${pctTxt(v)}<small>${c.length}</small></button>`;
+  }).join("")}`).join("");
+  return `<div class="ygrid" style="grid-template-columns:44px repeat(${bands.length},minmax(0,1fr))">${head}${rows}</div>
+    <div class="legend"><i style="background:rgba(57,135,229,.55);border-radius:2px"></i>${L("asking under fair", "pedem menos que o justo")}
+      <i style="background:rgba(230,103,103,.5);border-radius:2px;margin-left:8px"></i>${L("over fair", "mais que o justo")}</div>
+    <div class="readout" id="gridOut">${L("Tap a cell to see its best ads. Small number: how many ads.", "Toque numa célula para ver os melhores anúncios. Número pequeno: quantos anúncios.")}</div>`;
+}
+function gridTap(cell) {
+  const list = (ANA.grid[cell] || []).slice().sort((a, b) => (scoreOf(b) ?? 0) - (scoreOf(a) ?? 0)).slice(0, 3);
+  const [y] = cell.split("|");
+  $("#gridOut").outerHTML = `<div id="gridOut"><p class="fine">${L(`Best ${y} ads in this km band:`, `Melhores anúncios ${y} nesta faixa de km:`)}</p>
+    <ul class="rows">${list.map(c => carRow(c, `${dealName(dealOf(vsOf(c)))}, ${L("score", "nota")} ${scoreTxt(scoreOf(c))}`)).join("")}</ul></div>`;
+}
+
+// Versions: what each costs over the cheapest one, for the same year and km
+function versionLadder(mk, cars) {
+  const V = (DATA.score.versions || {})[mk];
+  if (!V || Object.keys(V).length < 2) return "";
+  const rows = Object.entries(V).map(([v, [adj, n]]) => [v, adj, n, medv(cars.filter(c => verOf(c) === v).map(c => c.price))]).sort((a, b) => a[1] - b[1]);
+  const lo = rows[0][1], prem = rows.map(r => Math.exp(r[1] - lo) - 1), max = Math.max(.05, ...prem);
+  const W = 340, RH = 28, PL = 112, PR = 84, H = rows.length * RH + 4;
+  const bars = rows.map(([v, , n, med], i) => {
+    const cy = 2 + i * RH + RH / 2, w = prem[i] / max * (W - PL - PR - 50);
+    return `<text x="0" y="${cy + 4}" class="vl">${esc(v)}</text><text x="${PL - 8}" y="${cy + 4}" text-anchor="end">${nf(n)}</text>
+      ${w >= 1 ? `<path d="M${PL},${cy - 6} h${(w - 4).toFixed(1)} q4,0 4,4 v4 q0,4 -4,4 h-${(w - 4).toFixed(1)} z" fill="${VIZ.blue}"/>` : `<rect x="${PL}" y="${cy - 6}" width="2" height="12" fill="${VIZ.fair}"/>`}
+      <text x="${(PL + Math.max(w, 2) + 6).toFixed(1)}" y="${cy + 4}" class="vl">${i ? "+" + pctSmall(prem[i]) : L("base", "base")}</text>
+      <text x="${W}" y="${cy + 4}" text-anchor="end">${med ? kShort(med) : ""}</text>`;
+  }).join("");
+  return `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Price of each version", "Preço de cada versão")}">${bars}</svg>
+    <p class="fine">${L("Bar: how much more than the cheapest version, same year and km. Left: how many ads. Right: their median asking price.",
+                       "Barra: quanto custa a mais que a versão mais barata, com o mesmo ano e km. À esquerda: quantos anúncios. À direita: preço pedido mediano.")}</p>`;
+}
+
+// Brazil as a grid of equal tiles, coloured by each state's price level
+const BR_TILES = {RR: [1, 0], AP: [3, 0], AM: [1, 1], PA: [2, 1], MA: [3, 1], CE: [4, 1], RN: [5, 1], AC: [0, 2], RO: [1, 2], TO: [2, 2],
+  PI: [3, 2], PE: [4, 2], PB: [5, 2], MT: [1, 3], GO: [2, 3], BA: [3, 3], SE: [4, 3], AL: [5, 3], MS: [1, 4], DF: [2, 4], MG: [3, 4],
+  ES: [4, 4], PR: [1, 5], SP: [2, 5], RJ: [3, 5], SC: [1, 6], RS: [1, 7]};
+function tileMap(A, mark) {
+  const W = 340, cols = 6, gap = 4, tw = (W - gap * (cols - 1)) / cols, th = 40, H = 8 * (th + gap);
+  const fill = v => v <= -.05 ? "#2a78d6" : v <= -.02 ? "rgba(57,135,229,.5)" : v < .02 ? "#4a525e" : v < .05 ? "rgba(230,103,103,.55)" : "#d2564f";
+  ANA.tiles = {};
+  const tiles = Object.entries(BR_TILES).map(([uf, [cx, cy]]) => {
+    const [lv, n] = A.uf[uf] || [0, 0], v = Math.exp(lv) - 1, x = cx * (tw + gap), y = cy * (th + gap), few = n < 10;
+    ANA.tiles[uf] = [v, n];
+    return `<g data-tile="${uf}" style="cursor:pointer">
+      <rect x="${x.toFixed(1)}" y="${y}" width="${tw.toFixed(1)}" height="${th}" rx="6" fill="${fill(v)}" opacity="${few ? .45 : 1}"
+        ${uf === mark ? `stroke="var(--text)" stroke-width="2.5"` : few ? `stroke="var(--muted)" stroke-dasharray="3 3"` : ""}/>
+      <text x="${(x + tw / 2).toFixed(1)}" y="${y + 17}" text-anchor="middle" class="vl">${uf}</text>
+      <text x="${(x + tw / 2).toFixed(1)}" y="${y + 31}" text-anchor="middle" style="fill:var(--text)">${n ? pctTxt(v) : "–"}</text></g>`;
+  }).join("");
+  return `<svg class="viz" id="tiles" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Price level by state", "Nível de preço por estado")}">${tiles}</svg>
+    <div class="legend"><i style="background:#2a78d6;border-radius:2px"></i>${L("cheaper", "mais barato")}<i style="background:#4a525e;border-radius:2px;margin-left:8px"></i>${L("about average", "na média")}
+      <i style="background:#d2564f;border-radius:2px;margin-left:8px"></i>${L("more expensive", "mais caro")}<i style="border:1px dashed var(--muted);margin-left:8px"></i>${L("under 10 ads", "menos de 10 anúncios")}</div>
+    <div class="readout" id="tileOut">${L("Tap a state for details.", "Toque num estado para ver detalhes.")}</div>`;
+}
+function tileTap(uf) {
+  const [v, n] = ANA.tiles[uf] || [0, 0], A = DATA.areas, reg = REGION_NAME[(A.region_of || {})[uf]] || ["its region", "região"];
+  $("#tileOut").innerHTML = `<span><b>${uf}</b>: ${levelTxt(Math.log(1 + v))}, ${L("based on", "base")}: ${nf(n)} ${L(n === 1 ? "ad" : "ads", n === 1 ? "anúncio" : "anúncios")}${n < 10 ? L(`, so it leans on the average of ${reg[0]}`, `, então usa também a média do ${reg[1]}`) : ""}.</span>`;
+}
+
+// Car details: where this car sits among similar ones, and how its fair price is built
+function compareStrip(c) {
+  const v0 = vsOf(c);
+  if (v0 == null || !c.year) return "";
+  const peers = DATA.cars.filter(x => x.name === c.name && x.year && Math.abs(x.year - c.year) <= 1 && vsOf(x) != null && x.id !== c.id && !x.red.includes("Price hidden"));
+  if (peers.length < 5) return "";
+  const W = 340, H = 74, lim = .3, X = v => 8 + (Math.max(-lim, Math.min(lim, v)) + lim) / (2 * lim) * (W - 16);
+  const dots = peers.map((x, i) => `<circle cx="${X(-vsOf(x)).toFixed(1)}" cy="${(14 + (i * 7) % 35).toFixed(1)}" r="3" fill="#69717d" opacity=".75"/>`).join("");
+  const cheaper = peers.filter(x => -vsOf(x) > -v0).length;
+  return `<h3>${L("Against similar ads", "Comparado com anúncios parecidos")}</h3>
+    <svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("This ad against similar ones", "Este anúncio comparado com parecidos")}">
+      <line x1="${X(0)}" x2="${X(0)}" y1="6" y2="52" stroke="var(--text)" stroke-width="1.5" opacity=".6"/>${dots}
+      <circle cx="${X(-v0).toFixed(1)}" cy="31" r="7" fill="${DEAL_COL[dealOf(v0)]}" stroke="var(--text)" stroke-width="2"/>
+      <text x="8" y="${H - 4}">−30%</text><text x="${X(0)}" y="${H - 4}" text-anchor="middle">${L("fair", "justo")}</text><text x="${W - 8}" y="${H - 4}" text-anchor="end">+30%</text></svg>
+    <p class="fine">${L(`Cheaper than ${Math.round(cheaper / peers.length * 100)}% of ${peers.length} similar ads (${esc(c.name)} ${c.year - 1}–${c.year + 1}), comparing each with its own fair price.`,
+                       `Mais barato que ${Math.round(cheaper / peers.length * 100)}% de ${peers.length} anúncios parecidos (${esc(c.name)} ${c.year - 1}–${c.year + 1}), comparando cada um com o seu preço justo.`)}</p>`;
+}
+function fairBreakdown(c) {
+  const mk = mkOfCar(c);
+  if (!DATA.market?.[mk]?.model || !c.year || !c.fair) return "";
+  const tk = typicalKm(c.name, c.year) || c.km, km = c.km || tk, conv = c.body === "conv";
+  const base = fairAt(mk, c.year, tk, null, conv), withKm = fairAt(mk, c.year, km, null, conv), withVer = fairAt(mk, c.year, km, verOf(c), conv);
+  const lv = LOCAL && c._lf ? LOCAL.lv : 0, fin = withVer * Math.exp(lv);
+  const d = v => `${v >= 0 ? "+" : "−"}${money(Math.abs(Math.round(v / 100) * 100))}`;
+  const rows = [[L(`${esc(c.name)} ${c.year}${c.trans === "a" ? " automatic" : ""}, typical ${kmFmt(Math.round(tk / 1000) * 1000)}`, `${esc(c.name)} ${c.year}${c.trans === "a" ? " automático" : ""}, ${kmFmt(Math.round(tk / 1000) * 1000)} típicos`), money(Math.round(base / 100) * 100)],
+    [L(`This car's km (${kmFmt(km)})`, `Km deste carro (${kmFmt(km)})`), d(withKm - base)],
+    [verOf(c) ? L(`Version ${esc(verOf(c))}`, `Versão ${esc(verOf(c))}`) : L("Version not identified (average)", "Versão não identificada (média)"), d(withVer - withKm)]];
+  if (lv) rows.push([L(`Region: near ${esc(LOC.active.name)}`, `Região: perto de ${esc(LOC.active.name)}`), d(fin - withVer)]);
+  rows.push([`<b>${L("Fair price", "Preço justo")}</b>`, `<b>${money(Math.round(fin / 100) * 100)}</b>`]);
+  return `<h3>${L("How the fair price is built", "Como o preço justo é calculado")}</h3>
+    <dl class="kv breakdown">${rows.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join("")}</dl>
+    <p class="fine">${L("From every ad of this model: year, km and version, compared like with like.", "A partir de todos os anúncios deste modelo: ano, km e versão, comparando carros equivalentes.")}</p>`;
+}
+
+// ---------- phase 3: FIPE and budget ----------
+const barTop = (x, y, w, h, r = 3) => {          // a bar with rounded top corners, anchored to its baseline
+  r = Math.min(r, w / 2, h);
+  return `M${x.toFixed(1)} ${(y + h).toFixed(1)}V${(y + r).toFixed(1)}Q${x.toFixed(1)} ${y.toFixed(1)} ${(x + r).toFixed(1)} ${y.toFixed(1)}`
+    + `H${(x + w - r).toFixed(1)}Q${(x + w).toFixed(1)} ${y.toFixed(1)} ${(x + w).toFixed(1)} ${(y + r).toFixed(1)}V${(y + h).toFixed(1)}Z`;
+};
+// Asking prices against the FIPE table, Brazil's national reference price for each version and year
+function fipeSection(cars) {
+  const F = DATA.fipe;
+  if (!F || !F.series) return "";
+  const cs = cars.filter(c => c.fipe && c.price && !c.red.includes("Price hidden"));
+  if (cs.length < 8) return "";
+  const rel = c => c.price / c.fipe - 1, r = cs.map(rel), med = medv(r), q1 = qtl(r, .25), q3 = qtl(r, .75);
+  const fmed = medv(cs.map(c => fairUsed(c) ? fairUsed(c) / c.fipe - 1 : null).filter(x => x != null));
+  const lo = -.3, bw = .05, nb = 14, z = 6;                       // 5% bins from -30% to +40%; the end bins hold the rest
+  const bins = Array.from({length: nb}, () => []);
+  cs.forEach(c => bins[Math.max(0, Math.min(nb - 1, Math.floor((rel(c) - lo) / bw + 1e-9)))].push(c));
+  let a = bins.findIndex(b => b.length), b = nb - 1 - bins.slice().reverse().findIndex(b => b.length);
+  a = Math.min(a, z - 1); b = Math.max(b, z);
+  ANA.fbins = bins.slice(a, b + 1).map((list, i) => ({list, from: lo + (a + i) * bw, first: a + i === 0, last: a + i === nb - 1}));
+  const W = 340, PL = 4, PR = 4, base = 104, top = 26, n = b - a + 1, cw = (W - PL - PR) / n;
+  const max = Math.max(...ANA.fbins.map(x => x.list.length));
+  const x0 = lo + a * bw, x1 = lo + (b + 1) * bw, xOf = v => PL + (Math.max(x0, Math.min(x1, v)) - x0) / bw * cw;
+  const bars = ANA.fbins.map((x, i) => {
+    const h = x.list.length / max * (base - top);
+    return `<g data-fbin="${i}"><rect x="${(PL + i * cw).toFixed(1)}" y="${top - 10}" width="${cw.toFixed(1)}" height="${base - top + 26}" fill="transparent"/>`
+      + (x.list.length ? `<path d="${barTop(PL + i * cw + 1, base - h, cw - 2, h)}" fill="${VIZ.blue}" opacity=".85"/>` : "") + `</g>`;
+  }).join("");
+  const ticks = [];
+  for (let v = Math.ceil(x0 * 10 - 1e-9) / 10; v <= x1 + 1e-9; v += .1) ticks.push(Math.round(v * 10) / 10);
+  const tickTxt = ticks.map(v => `<text x="${xOf(v).toFixed(1)}" y="${base + 16}" text-anchor="middle">${v === 0 ? "0" : pctTxt(v)}</text>`).join("");
+  const xf = xOf(0), xj = fmed != null ? xOf(fmed) : null, close = xj != null && Math.abs(xj - xf) < 44;
+  const lab = (x, txt, side) => `<text x="${x.toFixed(1)}" y="12" text-anchor="${side}" class="vl">${txt}</text>`;
+  const lines = `<line x1="${xf.toFixed(1)}" x2="${xf.toFixed(1)}" y1="16" y2="${base}" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="3 3"/>`
+    + lab(xf, "FIPE", close ? (xj >= xf ? "end" : "start") : "middle")
+    + (xj != null ? `<line x1="${xj.toFixed(1)}" x2="${xj.toFixed(1)}" y1="16" y2="${base}" stroke="${VIZ.fair}" stroke-width="2"/>`
+       + lab(xj, L("fair", "justo"), close ? (xj >= xf ? "start" : "end") : "middle") : "")
+    + `<path d="M${xOf(med).toFixed(1)} ${base + 2} l-5 7 h10 z" fill="var(--text)"/>`;
+  const svg = `<svg class="viz" id="fipeHist" viewBox="0 0 ${W} ${base + 22}" role="img" aria-label="${L("Asking prices against FIPE", "Preços pedidos em relação à FIPE")}">
+    <line x1="${PL}" x2="${W - PR}" y1="${base}" y2="${base}" stroke="${VIZ.grid}"/>${bars}${lines}${tickTxt}</svg>`;
+  const adv = fmed == null ? "" : fmed > .02
+    ? L(`The fair price runs ${pctAbs(fmed)} above FIPE here: paying FIPE or less is a good price.`, `O preço justo fica ${pctAbs(fmed)} acima da FIPE: pagar a FIPE ou menos é um bom preço.`)
+    : fmed < -.02 ? L(`The fair price runs ${pctAbs(fmed)} below FIPE here: treat FIPE as a ceiling, not a target.`, `O preço justo fica ${pctAbs(fmed)} abaixo da FIPE: use a FIPE como teto, não como alvo.`)
+    : L("The fair price is close to FIPE.", "O preço justo está perto da FIPE.");
+  // FIPE's own movement over the months we have, for the versions on sale
+  const keys = [...new Set(cs.map(c => c.fipe_k))].filter(k => F.series[k]?.hist?.length >= 2);
+  let trendTxt = "";
+  if (keys.length) {
+    const ch = medv(keys.map(k => { const h = F.series[k].hist; return h[h.length - 1][1] / h[0][1] - 1; }));
+    const longest = keys.map(k => F.series[k].hist).sort((p, q) => q.length - p.length)[0];
+    trendTxt = L(`FIPE moved ${pctTxt(ch, 1)} from ${monShort(longest[0][0])} to ${monShort(longest[longest.length - 1][0])} (median of the versions on sale).`,
+                 `A FIPE variou ${pctTxt(ch, 1)} de ${monShort(longest[0][0])} a ${monShort(longest[longest.length - 1][0])} (mediana das versões à venda).`);
+  }
+  // the most common year and version pairs: FIPE, fair price and what the ads ask
+  const groups = {};
+  cs.forEach(c => (groups[c.fipe_k] = groups[c.fipe_k] || []).push(c));
+  const rows = Object.entries(groups).sort((p, q) => q[1].length - p[1].length).slice(0, 6).map(([k, g]) => {
+    const [, ver, , year] = k.split("|");
+    return {year: +year, ver, n: g.length, fipe: g[0].fipe, fair: medv(g.map(c => fairUsed(c)).filter(Boolean)), ask: medv(g.map(c => c.price))};
+  }).sort((p, q) => p.year - q.year || p.ver.localeCompare(q.ver));
+  const th = v => dec(v / 1000, 1);                // thousands, so four columns fit a phone
+  const table = `<table class="otab"><caption>${L("In thousands of reais", "Em milhares de reais")}</caption><thead><tr><th>${L("Year, version", "Ano, versão")}</th><th>FIPE</th><th>${L("Fair", "Justo")}</th><th>${L("Asking", "Pedem")}</th></tr></thead><tbody>
+    ${rows.map(x => `<tr><td>${x.year}${x.ver ? " " + esc(x.ver) : ""} <span class="m">(${x.n})</span></td><td>${th(x.fipe)}</td><td>${x.fair ? th(x.fair) : "–"}</td><td>${th(x.ask)}</td></tr>`).join("")}</tbody></table>`;
+  return anaSection(L("Price against the FIPE table", "Preço x Tabela FIPE"),
+    L(`${nf(cs.length)} ads matched to their FIPE version and year. The middle half asks between ${pctTxt(q1)} and ${pctTxt(q3)} of FIPE; ▲ the median, ${pctTxt(med)}.`,
+      `${nf(cs.length)} anúncios ligados à versão e ao ano da FIPE. A metade central pede entre ${pctTxt(q1)} e ${pctTxt(q3)} da FIPE; ▲ a mediana, ${pctTxt(med)}.`),
+    svg + `<div class="readout" id="fipeOut">${L("Tap a bar to see its best ads.", "Toque numa barra para ver os melhores anúncios dela.")}</div>`
+    + `<p>${adv}${trendTxt ? " " + trendTxt : ""}</p>` + table
+    + `<p class="fine">${L(`FIPE (${monShort(F.month)}): the national reference table, used in Brazil to negotiate and insure; it doesn't see each car's condition or region. Fair: this site's price for the same cars, at their km. In brackets: how many ads.`,
+                           `FIPE (${monShort(F.month)}): a tabela nacional de referência, usada para negociar e para seguro; não vê o estado nem a região de cada carro. Justo: o preço deste site para os mesmos carros, com a km deles. Entre parênteses: quantos anúncios.`)}</p>`);
+}
+function fipeTap(i) {
+  const x = ANA.fbins?.[i];
+  if (!x) return;
+  const range = x.first ? L(`${pctTxt(x.from + .05)} or less`, `${pctTxt(x.from + .05)} ou menos`) : x.last ? L(`${pctTxt(x.from)} or more`, `${pctTxt(x.from)} ou mais`)
+    : `${x.from === 0 ? "0" : pctTxt(x.from)} ${L("to", "a")} ${pctTxt(x.from + .05)}`;
+  const best = x.list.slice().sort((p, q) => (scoreOf(q) ?? 0) - (scoreOf(p) ?? 0)).slice(0, 3);
+  $("#fipeOut").outerHTML = `<div id="fipeOut"><p class="fine">${L(`${x.list.length} ${x.list.length === 1 ? "ad" : "ads"} asking ${range} against FIPE`, `${x.list.length} ${x.list.length === 1 ? "anúncio pede" : "anúncios pedem"} ${range} em relação à FIPE`)}${best.length ? L("; the best:", "; os melhores:") : "."}</p>
+    <ul class="rows">${best.map(c => carRow(c, `FIPE ${kShort(c.fipe)}, ${dealName(dealOf(vsOf(c)))}`)).join("")}</ul></div>`;
+}
+
+// What a budget buys: per version, the newest year whose fair price fits, and the best ads up to it
+const budStep = () => COUNTRY === "BR" ? 5000 : 2500;
+function budgetPicks(cars) {                     // three round amounts around the middle of the asking prices
+  const ps = cars.map(c => c.price).filter(Boolean);
+  if (ps.length < 5) return [];
+  return [...new Set([.25, .5, .75].map(q => Math.max(budStep(), Math.round(qtl(ps, q) / budStep()) * budStep())))];
+}
+function parseBudget(s) {                        // "70 mil", "70k", "70.000", "R$ 70.000,00", "$45,000"
+  const t = String(s || "").toLowerCase().trim();
+  if (/\d\s*(k|mil)\b/.test(t)) {
+    const f = parseFloat(t.replace(/[^\d,.]/g, "").replace(",", "."));
+    return f ? Math.round(f * 1000) : 0;
+  }
+  let v = +t.replace(/[.,]\d{1,2}$/, "").replace(/\D/g, "");
+  if (v && v < 1000) v *= 1000;
+  return v || 0;
+}
+function budgetFit(name, B) {
+  const mk = mkOf(name), m = DATA.market?.[mk]?.model;
+  if (!m) return [];
+  const cs = DATA.cars.filter(c => c.name === name && c.year), lv = LOCAL ? LOCAL.lv : 0;
+  const conv = cs.filter(c => c.body === "conv").length > cs.length / 2;
+  const V = (DATA.score.versions || {})[mk];
+  return (V ? Object.keys(V) : [null]).map(v => {
+    const mine = cs.filter(c => !v || verOf(c) === v);
+    const at = [...new Set(mine.map(c => c.year))].sort((p, q) => p - q).map(y => {
+      const km = typicalKm(name, y);
+      return {y, km, F: fairAt(mk, y, km, v, conv, lv)};
+    }).filter(x => x.F);
+    const fit = at.filter(x => x.F <= B), best = fit.length ? fit[fit.length - 1] : null;
+    const next = best ? at.find(x => x.y > best.y) : at[0];
+    let more = null;                             // the next year up fits too with more km, where km moves the price
+    if (next && m[1] < -.005) {
+      const km2 = next.km + Math.log(B / next.F) / m[1] * 1e4;
+      if (km2 > next.km * 1.05 && km2 <= Math.min(next.km * 1.7, 320000)) more = {y: next.y, km: km2};
+    }
+    return {v, best, more, from: at.length ? Math.min(...at.map(x => x.F)) : null, n: mine.length, adj: v ? V[v][0] : 0};
+  }).filter(r => r.n >= 2 && r.from).sort((p, q) => p.adj - q.adj);
+}
+function budgetCard(cars, name) {
+  const B = state.budget || 0, picks = budgetPicks(cars);
+  if (!picks.length) return "";
+  const kmR = v => kmFmt(Math.round(v / 5000) * 5000);
+  let body = "";
+  if (B) {
+    const inB = cars.filter(c => c.price && c.price <= B && !c.red.includes("Price hidden"));
+    const moreTxt = r => !r.more ? "" : r.best ? L(`; ${r.more.y} if it has over ${kmR(r.more.km)}`, `; ${r.more.y} se tiver mais de ${kmR(r.more.km)}`)
+      : L(`; a ${r.more.y} fits with over ${kmR(r.more.km)}`, `; um ${r.more.y} cabe com mais de ${kmR(r.more.km)}`);
+    let li;
+    if (name) {
+      const cap = (s, r) => r.v ? s : s.charAt(0).toUpperCase() + s.slice(1);
+      li = budgetFit(name, B).map(r => `<li>${r.v ? `<b>${esc(r.v)}</b>: ` : ""}${cap(r.best
+        ? L(`up to <b>${r.best.y}</b>, with ~${kmR(r.best.km)} (fair ~${kShort(r.best.F)})`, `até <b>${r.best.y}</b>, com ~${kmR(r.best.km)} (justo ~${kShort(r.best.F)})`)
+        : L(`at typical km, from ${kShort(r.from)}`, `com km típica, a partir de ${kShort(r.from)}`), r)}${moreTxt(r)}.</li>`).join("");
+    } else {
+      li = DATA.names.map(n => {
+        const fit = budgetFit(n.name, B), ok = fit.filter(r => r.best).sort((p, q) => q.best.y - p.best.y || p.best.F - q.best.F);
+        const g = inB.filter(c => c.name === n.name && ["great", "good"].includes(dealOf(vsOf(c)))).length;
+        if (!fit.length) return "";
+        const dot = `<span class="dot" style="--c:${n.color}"></span>${esc(n.name)}: `;
+        if (!ok.length) return `<li>${dot}${L("from", "a partir de")} ${kShort(Math.min(...fit.map(r => r.from)))}</li>`;
+        return `<li>${dot}${L("up to", "até")} <b>${ok[0].best.y}</b>${ok[0].v ? " " + esc(ok[0].v) : ""}${g ? L(`; ${g} good or great ${g === 1 ? "price" : "prices"}`, `; ${g} com preço bom ou ótimo`) : ""}</li>`;
+      }).join("");
+    }
+    body += li ? `<h3>${L("What fits", "O que cabe")}</h3><ul class="facts-list${name ? "" : " plain"}">${li}</ul>` : "";
+    const top = inB.filter(c => ["great", "good", "fair"].includes(dealOf(vsOf(c)))).sort((p, q) => (scoreOf(q) ?? 0) - (scoreOf(p) ?? 0)).slice(0, 4);
+    body += top.length ? `<h3>${L(`Best ads up to ${kShort(B)}`, `Melhores anúncios até ${kShort(B)}`)}</h3>
+        <ul class="rows">${top.map(c => carRow(c, `${name ? "" : esc(c.name) + ", "}${dealName(dealOf(vsOf(c)))}, ${L("score", "nota")} ${scoreTxt(scoreOf(c))}`)).join("")}</ul>
+        <button class="linkbtn" type="button" data-budlist="${esc(name || "")}">${L(`See all ${nf(inB.length)} up to ${kShort(B)} in the list`, `Ver os ${nf(inB.length)} até ${kShort(B)} na lista`)}</button>`
+      : `<p>${L("No ads at or under this amount right now.", "Nenhum anúncio até esse valor agora.")}</p>`;
+    body += `<p class="fine">${L(`Fair prices at each year's typical km${LOCAL ? ` near ${esc(LOC.active.name)}` : ""}. Leave room for taxes, registration and the first maintenance.`,
+                                 `Preços justos com a km típica de cada ano${LOCAL ? ` perto de ${esc(LOC.active.name)}` : ""}. Reserve dinheiro para transferência, documentação e as primeiras manutenções.`)}</p>`;
+  }
+  return `<section class="ana budget"><h2>${L("What your budget buys", "O que seu orçamento compra")}</h2>
+    <p class="sub">${L("Pick or type an amount to see the years and versions that fit, and the best ads up to it.", "Escolha ou digite um valor para ver os anos e versões que cabem e os melhores anúncios até ele.")}</p>
+    <form class="budget-in" data-budget><label for="budIn">${L("Up to", "Até")}</label>
+      <input id="budIn" inputmode="numeric" enterkeyhint="go" autocomplete="off" placeholder="${esc(nf(picks[Math.floor(picks.length / 2)]))}" value="${B ? esc(nf(B)) : ""}">
+      <button type="submit">${L("Show", "Ver")}</button></form>
+    <div class="bud-picks">${picks.map(p => `<button type="button" data-bud="${p}" aria-pressed="${p === B}">${kShort(p)}</button>`).join("")}
+      ${B ? `<button type="button" data-bud="0">${L("Clear", "Limpar")}</button>` : ""}</div>${body}</section>`;
+}
+
 function pricesView() {
   ANA = {};
   const near = LOC.active ? applyLoc(DATA.cars.slice()) : (LOCAL = null);
@@ -1396,14 +1993,18 @@ function pricesView() {
   const use = here || cars;
   const gear = AUTO ? L(" (automatic)", " (automático)") : "";
   const brT = here ? L(" (Brazil)", " (Brasil)") : "";
-  return (here ? locCard(here.length, cars.length, name) : "") + kpis(use, here ? cars : null)
+  return (here ? locCard(here.length, cars.length, name) : "") + guideCard(name, use, mk) + budgetCard(use, name) + kpis(use, here ? cars : null)
+    + fipeSection(use)
     + anaSection(L("Price against km", "Preço por km") + gear, here ? L("Each dot is an ad: the ones here in colour, the rest of Brazil in grey. The line is the local fair price the score uses.",
         "Cada ponto é um anúncio: os daqui em cor, o resto do Brasil em cinza. A linha é o preço justo local que a nota usa.")
         : L("Each dot is an ad on sale. The line is the fair price the score uses.", "Cada ponto é um anúncio à venda. A linha é o preço justo que a nota usa."), scatter(cars, mk, here))
+    + anaSection(L("Where the good prices are", "Onde estão os bons preços"), L("Median asking price against fair, by year and km.",
+        "Preço pedido mediano em relação ao justo, por ano e km."), yearKmGrid(use))
     + anaSection(L("What moves the price", "O que muda o preço"), L("From all ads of this model, comparing like with like.",
         "A partir de todos os anúncios deste modelo, comparando carros equivalentes."), movers(cars, mk))
     + anaSection(L("Price by year", "Preço por ano"), L("Dot: median asking price. Bar: the middle half of the ads. In brackets: how many.",
-        "Ponto: preço pedido mediano. Barra: a metade central dos anúncios. Entre parênteses: quantos."), byYear(cars, here))
+        "Ponto: preço pedido mediano. Barra: a metade central dos anúncios. Entre parênteses: quantos."), byYear(cars, here, mk))
+    + (versionLadder(mk, cars) ? anaSection(L("Versions", "Versões"), "", versionLadder(mk, cars)) : "")
     + anaSection(L("Time on sale", "Tempo à venda"), L("Ads by days since they went up.", "Anúncios por dias desde a publicação."), timeListed(use, here ? cars : null))
     + anaSection(L("Price changes", "Mudanças de preço"), "", priceCuts(use))
     + anaSection(L("Market week by week", "Mercado semana a semana") + brT, "", trend(mk))
@@ -1434,6 +2035,14 @@ function paintTabs() {
 }
 
 // ---------- events ----------
+document.addEventListener("submit", e => {
+  const f = e.target.closest("form[data-budget]");
+  if (!f) return;
+  e.preventDefault();
+  state.budget = parseBudget(f.querySelector("input").value);
+  f.querySelector("input").blur();
+  save(); render();
+});
 document.addEventListener("click", e => {
   const t = e.target;
   if (t.closest("[data-close]") || t.id === "scrim") return closeSheet();
@@ -1442,6 +2051,23 @@ document.addEventListener("click", e => {
   const gmb = t.closest("[data-gm]");
   if (gmb) return setAuto(gmb.dataset.gm === "a");
   if (t.closest("#scat")) return scatTap(e);
+  const cellB = t.closest("[data-cell]");
+  if (cellB) return gridTap(cellB.dataset.cell);
+  const tile = t.closest("[data-tile]");
+  if (tile) return tileTap(tile.dataset.tile);
+  const sc = t.closest("[data-scatcol]");
+  if (sc) { state.scatCol = sc.dataset.scatcol; return render(); }
+  const fb = t.closest("[data-fbin]");
+  if (fb) return fipeTap(+fb.dataset.fbin);
+  const bud = t.closest("[data-bud]");
+  if (bud) { state.budget = +bud.dataset.bud; save(); return render(); }
+  const budList = t.closest("[data-budlist]");
+  if (budList) {
+    Object.assign(state, {tab: "list", names: budList.dataset.budlist ? [budList.dataset.budlist] : [], maxPrice: state.budget, sort: "score", dir: "desc"});
+    window.scrollTo({top: 0}); return render();
+  }
+  const chk = t.closest("[data-checklist]");
+  if (chk) return checklistSheet(chk.dataset.checklist);
   const carB = t.closest("[data-car]");
   if (carB) return detailSheet(DATA.cars.find(c => c.id === carB.dataset.car));
   const anaRow = t.closest("[data-ana]");

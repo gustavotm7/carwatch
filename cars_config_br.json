@@ -4,15 +4,16 @@
   "currency": "BRL",
   "_automatics": "Only generations with allow_auto keep automatic cars (FB Civic, Yaris sedan); every other car is manual only.",
   "_split": "split: a trim with its own chip and its own fair price (FA5 Civic Si apart from the regular FA5 Civic).",
+  "_fipe": "fipe: how to find the FIPE reference price of each car: brand, a regex on the FIPE model name, whether the ad's version (LXR, XLS...) must appear in it, and how the brand marks automatics when it doesn't say Aut. Fetched within the free API limit and cached in data_br/fipe_cache.json.",
   "models": [
     {"enabled": true, "model": "M3", "make": "bmw", "match": ["\\bm3\\b"], "none": ["\\bx[1-7]\\b|m35i|m340i"],
      "bodies": ["coupe", "conv", "sedan"],
      "generations": [
-       {"family": "E36M3", "years": [1992, 1999], "name": "E36 M3", "color": "#C46BD6", "smg_risk": true,
+       {"family": "E36M3", "fipe": {"brand": "BMW", "match": "^M3 (3\\.2 24V|(Coup|Cabrio)\\S* 3\\.0)", "versions": false}, "years": [1992, 1999], "name": "E36 M3", "color": "#C46BD6", "smg_risk": true,
         "desc": "BMW E36 M3 1992-1999", "trims": [["\\bevo\\b|3\\.2", "3.2 Evo"], ["\\blightweight|\\bltw\\b", "Lightweight"], ["\\bgt\\b", "GT"]]},
-       {"family": "E46M3", "years": [2001, 2006], "name": "E46 M3", "color": "#8B84E8", "smg_risk": true,
+       {"family": "E46M3", "fipe": {"brand": "BMW", "match": "^M3 3\\.2 24V", "versions": false}, "years": [2001, 2006], "name": "E46 M3", "color": "#8B84E8", "smg_risk": true,
         "desc": "BMW E46 M3 2001-2006", "trims": [["\\bcsl\\b", "CSL"], ["\\bzcp\\b|competition", "Competition (ZCP)"]]},
-       {"family": "E9XM3", "years": [2008, 2013], "name": "E9X M3", "color": "#3B8FE0", "smg_risk": true,
+       {"family": "E9XM3", "fipe": {"brand": "BMW", "match": "^M3 (Coup.|Sedan|Cabrio) 4\\.0", "versions": false}, "years": [2008, 2013], "name": "E9X M3", "color": "#3B8FE0", "smg_risk": true,
         "name_by_body": {"sedan": "E90 M3", "coupe": "E92 M3", "conv": "E93 M3"},
         "desc": "BMW E90 / E92 / E93 M3 2008-2013", "trims": [["\\bgts\\b", "GTS"], ["\\bcrt\\b", "CRT"], ["\\bzcp\\b|competition", "Competition (ZCP)"]]}
      ],
@@ -24,8 +25,8 @@
 
     {"enabled": true, "model": "M5", "make": "bmw", "match": ["\\bm5\\b"], "bodies": ["sedan"],
      "generations": [
-       {"family": "E39M5", "years": [1999, 2003], "name": "E39 M5", "color": "#DB5C8A", "smg_risk": false, "desc": "BMW E39 M5 1999-2003"},
-       {"family": "E60M5", "years": [2005, 2010], "name": "E60 M5", "color": "#E0703E", "smg_risk": true, "desc": "BMW E60 M5 2005-2010"}
+       {"family": "E39M5", "fipe": {"brand": "BMW", "match": "^M5 5\\.0", "versions": false}, "years": [1999, 2003], "name": "E39 M5", "color": "#DB5C8A", "smg_risk": false, "desc": "BMW E39 M5 1999-2003"},
+       {"family": "E60M5", "fipe": {"brand": "BMW", "match": "^M5 5\\.0", "versions": false}, "years": [2005, 2010], "name": "E60 M5", "color": "#E0703E", "smg_risk": true, "desc": "BMW E60 M5 2005-2010"}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/bmw/series-5-m5"],
                   "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/m5"]},
@@ -36,7 +37,7 @@
     {"enabled": true, "model": "330i", "make": "bmw", "match": ["\\b330 ?c? ?i\\b"], "none": ["touring|wagon|wgn|\\bxi\\b|xdrive"],
      "bodies": ["sedan", "coupe", "conv"],
      "generations": [
-       {"family": "E46_330", "years": [2000, 2006], "name": "E46 330i", "color": "#E5534B", "smg_risk": false,
+       {"family": "E46_330", "fipe": {"brand": "BMW", "match": "^330C?i", "versions": false, "auto": "^330C?iA"}, "years": [2000, 2006], "name": "E46 330i", "color": "#E5534B", "smg_risk": false,
         "name_by_body": {"coupe": "E46 330Ci", "conv": "E46 330Ci"},
         "desc": "BMW E46 330i / 330Ci 2000-2006", "trims": [["zhp|performance", "ZHP"], ["motorsport|m ?sport", "M Sport"]]}
      ],
@@ -55,7 +56,7 @@
 
     {"enabled": true, "model": "350Z", "make": "nissan", "match": ["\\b350 ?z\\b"], "bodies": ["coupe", "conv"],
      "generations": [
-       {"family": "Z350", "years": [2003, 2009], "name": "Z33 350Z", "color": "#6FA032", "smg_risk": false, "desc": "Nissan 350Z (Z33) 2003-2009",
+       {"family": "Z350", "fipe": {"brand": "Nissan", "match": "^350Z", "versions": false}, "years": [2003, 2009], "name": "Z33 350Z", "color": "#6FA032", "smg_risk": false, "desc": "Nissan 350Z (Z33) 2003-2009",
         "trims": [["nismo", "NISMO"], ["35th", "35th Anniversary"], ["roadster", "Roadster"]]}
      ],
      "searches": {"mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/nissan/370z",
@@ -77,11 +78,11 @@
     {"enabled": true, "model": "Civic", "make": "honda", "match": ["\\bcivic\\b"], "none": ["cup[eê]|coupe|\\bhatch|type ?r"],
      "bodies": ["sedan"],
      "generations": [
-       {"family": "FA5", "years": [2007, 2011], "name": "FA5 Civic", "color": "#E8B931", "smg_risk": false,
+       {"family": "FA5", "fipe": {"brand": "Honda", "match": "^Civic Sed.*\\b(1\\.8|2\\.0)\\b", "versions": true}, "years": [2007, 2011], "name": "FA5 Civic", "color": "#E8B931", "smg_risk": false,
         "desc": "Honda Civic 8th gen sedan 2007-2011", "trims": [["\\bsi\\b", "Si"], ["\\bexs\\b", "EXS"], ["\\blxl\\b", "LXL"], ["\\blxs\\b", "LXS"]],
         "split": [{"match": "\\bsi\\b", "family": "FA5_SI", "name": "FA5 Civic Si", "color": "#FF4D6D",
                    "desc": "Honda Civic Si 8th gen sedan (2.0, manual)", "trims": [["\\bsi\\b", "Si"]]}]},
-       {"family": "FB", "years": [2012, 2016], "name": "FB Civic", "color": "#3FB58F", "smg_risk": false, "allow_auto": true,
+       {"family": "FB", "fipe": {"brand": "Honda", "match": "^Civic Sed.*\\b(1\\.8|2\\.0)\\b", "versions": true}, "years": [2012, 2016], "name": "FB Civic", "color": "#3FB58F", "smg_risk": false, "allow_auto": true,
         "desc": "Honda Civic 9th gen sedan 2012-2016", "trims": [["\\bexr\\b", "EXR"], ["\\blxr\\b", "LXR"], ["\\blxl\\b", "LXL"], ["\\blxs\\b", "LXS"]]}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/honda/civic/2007/manual", "https://napista.com.br/busca/honda/civic/2008/manual",
@@ -115,7 +116,7 @@
     {"enabled": true, "model": "Yaris sedan", "make": "toyota", "match": ["\\byaris\\b", "sedan|sed[aã]\\b|\\bsed\\b"], "none": ["hatch|cross"],
      "bodies": ["sedan"],
      "generations": [
-       {"family": "YARIS_S", "years": [2018, 2024], "name": "Yaris Sedan", "color": "#9AA7B8", "smg_risk": false, "allow_auto": true,
+       {"family": "YARIS_S", "fipe": {"brand": "Toyota", "match": "^YARIS.*Sed", "versions": true}, "years": [2018, 2024], "name": "Yaris Sedan", "color": "#9AA7B8", "smg_risk": false, "allow_auto": true,
         "desc": "Toyota Yaris sedan (Brazil) 2018-2024", "trims": [["\\bxls\\b", "XLS"], ["\\bxs\\b", "XS"], ["\\bxl\\b", "XL"], ["\\blive\\b", "Live"]]}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/toyota/yaris/manual",
