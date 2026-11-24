@@ -32,7 +32,7 @@ def probe(source, url, open_n):
         u = cc.HOSTS[source] + m.group(1)
         if u not in links:
             links.append(u)
-    print(f"   {len(links)} ads on page 1")
+    print(f"   {len(links)} ads on page 1 ({r.text.count('/offers/')} '/offers/' and {r.text.count('vehicleTransmission')} 'vehicleTransmission' in the page)")
     if source == "kijiji":
         print("   addresses:", [u.split("/v-cars-trucks/", 1)[-1][:60] for u in links[:20]])
     for u in links[:open_n]:
