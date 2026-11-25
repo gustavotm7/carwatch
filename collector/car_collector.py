@@ -469,6 +469,13 @@ class Snapshot:
 _last_request = [0.0]
 
 
+DEADLINE = [0.0]                                   # --max-minutes: past this time, no more pages are opened
+
+
+def time_up():
+    return bool(DEADLINE[0]) and time.time() > DEADLINE[0]
+
+
 def fetch(sess, url, delay=None):
     """GET with a pause between requests; returns a Response or None."""
     wait = (DELAY_S if delay is None else delay) - (time.time() - _last_request[0])
@@ -907,6 +914,9 @@ def refresh_existing(sess, rows, today, stats):
                                   "_search": True}
             stats["seen_in_search"] = stats.get("seen_in_search", 0) + 1
         else:
+            if time_up():                                # out of time: this ad keeps its status until the next run
+                stats["late"] = stats.get("late", 0) + 1
+                continue
             outcome, res = check_listing(sess, row)
             stats["checked"] += 1
         if outcome == "ok":
@@ -974,6 +984,8 @@ def search_ids(sess, known, stats):
         rx = LINK_RE[source]
         seen_here, status = set(), None
         for i in range(PAGES_JSON if source in JSON_SEARCH else PAGES_PER_SEARCH):
+            if time_up():
+                break
             r = fetch(sess, page_url(source, base, i))
             if r is None or r.status_code != 200:
                 if i == 0:
@@ -1032,6 +1044,8 @@ def discover_new(sess, rows, today, stats, max_new, found=None):
             if queues[n]:
                 order.append(queues[n].pop(0))
     for lid, source, url in order[:max_new]:
+        if time_up():
+            break
         r = fetch(sess, url)
         if r is None or r.status_code != 200:
             continue
@@ -1099,6 +1113,8 @@ def discover_new(sess, rows, today, stats, max_new, found=None):
     todo.sort(key=lambda r: r["first_seen"], reverse=True)
     n_read = 0
     for row in todo[:budget]:
+        if time_up():
+            break
         r = fetch(sess, row["url"])
         if r is None or r.status_code != 200:
             continue
@@ -1530,7 +1546,7 @@ FIPE = {}              # the cache
 
 
 def fipe_get(sess, path, st):
-    if st["left"] <= 0:
+    if st["left"] <= 0 or time_up():
         return None
     st["left"] -= 1
     time.sleep(0.2)
@@ -2700,6 +2716,8 @@ def main(argv=None):
     ap.add_argument("--no-network", action="store_true", help="rebuild the workbook from the latest snapshot only")
     ap.add_argument("--selftest", action="store_true", help="read stored listings + search pages and print what was parsed")
     ap.add_argument("--max-new", type=int, default=MAX_NEW_PER_RUN)
+    ap.add_argument("--max-minutes", type=float, default=0,
+                    help="stop opening pages after this many minutes (the run still saves and exports; the rest waits)")
     ap.add_argument("--config", help="path of cars_config.json (default: next to the script, or one folder up)")
     ap.add_argument("--data-dir", help="folder for snapshots, workbook and log (default: the script's folder)")
     ap.add_argument("--export-json", help="also write the web app's data file here (e.g. site/data/cars.json)")
@@ -2742,6 +2760,8 @@ def run(args):
         PHOTO_DIR = os.path.join(DATA_DIR, "photos")
         os.makedirs(DATA_DIR, exist_ok=True)
     print("config:", load_config(args.config), flush=True)
+    if getattr(args, "max_minutes", 0):
+        DEADLINE[0] = time.time() + args.max_minutes * 60
     skip = {x.strip() for x in (args.skip_sources or "").split(",") if x.strip()}
     if skip:
         SEARCHES[:] = [x for x in SEARCHES if x[0] not in skip]
@@ -2817,6 +2837,8 @@ def run(args):
                         f"changes, {stats['gone']} newly gone, {stats['back']} back")
         run_info.append(f"Search: {stats['candidates']} unseen ads, {stats['new']} added, {stats['skipped']} rejected "
                         f"(remembered), {stats['photos_new']} new photos")
+        if time_up():
+            run_info.append(f"Out of time: {stats.get('late', 0)} ads not re-checked; the next run carries on")
         if stats.get("new_auto") or stats.get("details_read") or stats.get("seen_in_search"):
             run_info.append(f"Brazil: {stats.get('seen_in_search', 0)} ads confirmed from search pages (not opened), "
                             f"{stats.get('new_auto', 0)} automatics added from search data, "

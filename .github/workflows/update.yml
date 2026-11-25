@@ -20,7 +20,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 110           # a day with many new cars: ~25 min Canada + ~45 min Brazil
+    timeout-minutes: 120           # each collector stops opening pages at its own time budget (--max-minutes)
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,16 +41,18 @@ jobs:
           git fetch -q --depth=1 origin "${GITHUB_REF_NAME}" && git reset -q --hard FETCH_HEAD
           git log --oneline -1
       - name: Collect
+        timeout-minutes: 45              # hard stop if a site hangs; the budget below normally ends it at ~35
         run: |
           python -u collector/car_collector.py --config cars_config.json --data-dir data \
             --export-json site/data/cars.json --no-xlsx --no-photos --keep-snapshots 14 \
-            --max-new 250 --skip-sources carpages $ARGS
+            --max-new 250 --max-minutes 35 --skip-sources carpages $ARGS
       - name: Collect Brazil
         continue-on-error: true          # a problem with the Brazilian sites never stops the Canadian update
+        timeout-minutes: 65
         run: |
           python -u collector/car_collector.py --config cars_config_br.json --data-dir data_br \
             --export-json site/data/cars_br.json --no-xlsx --no-photos --keep-snapshots 14 \
-            --max-new 400 --no-comps $ARGS
+            --max-new 400 --max-minutes 55 --no-comps $ARGS
       - name: Save data
         run: |
           git config user.name "carwatch-bot"
