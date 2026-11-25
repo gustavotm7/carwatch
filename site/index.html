@@ -926,6 +926,10 @@ function renderChips() {
   $("#chips").innerHTML = gm + all + DATA.names.map(n =>
     `<button class="chip" style="--c:${n.color}" data-name="${esc(n.name)}" aria-pressed="${names.includes(n.name)}">
       <span class="dot"></span>${esc(n.name)} <span class="n">${nf(counts[n.name] || 0)}</span></button>`).join("");
+  const row = $("#chips"), r0 = row.getBoundingClientRect();     // 30+ chips: keep a chosen model in view
+  const on = [...row.querySelectorAll('.chip[aria-pressed="true"]:not([data-name=""])')];
+  const seen = c => { const b = c.getBoundingClientRect(); return b.left >= r0.left && b.right <= r0.right; };
+  if (on.length && !on.some(seen)) row.scrollLeft += on[0].getBoundingClientRect().left - r0.left - (row.clientWidth - on[0].offsetWidth) / 2;
 }
 function render() {
   paintTabs();
