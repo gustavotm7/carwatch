@@ -151,7 +151,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .pk-empty{padding:48px 20px;text-align:center;color:var(--muted)}
 span.dot{display:none!important}
 .chip .x{margin-left:2px}
-.garage{grid-column:1/-1;display:flex;gap:10px;overflow-x:auto;margin:2px -14px 14px;padding:2px 14px;scrollbar-width:none}
+.garage{grid-column:1/-1;min-width:0;display:flex;gap:10px;overflow-x:auto;margin:2px -14px 14px;padding:2px 14px;scrollbar-width:none}
 .garage::-webkit-scrollbar{display:none}
 .gc{flex:none;width:150px;padding:0;border-radius:14px;border:1px solid var(--line);background:var(--surface);overflow:hidden;text-align:left;display:flex;flex-direction:column}
 .gc[aria-pressed=true]{border-color:var(--text);box-shadow:inset 0 0 0 1px var(--text)}
@@ -191,6 +191,34 @@ span.dot{display:none!important}
 .gp[aria-pressed=true]{background:var(--text);color:var(--bg);border-color:var(--text)}
 .gp[aria-pressed=true] span{color:var(--bg);opacity:.7}
 .gp.zero{border-style:dashed;background:none;color:var(--dim)}
+.gc-g{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 2px}
+.gc-g i{font:600 12px/1.5 var(--cond);letter-spacing:.03em;font-style:normal;padding:0 6px;border-radius:5px;background:var(--raised);color:var(--text)}
+.gc-g i.off{background:none;color:var(--dim);box-shadow:inset 0 0 0 1px var(--line)}
+.picks{grid-column:1/-1;min-width:0;max-width:100%}
+.pkc,.pkl,.pkl li{min-width:0}
+.picks-h h2{font:700 26px/1.1 var(--cond);margin:6px 0 4px}
+.picks-h p{color:var(--muted);font-size:13px;margin:0 0 6px;max-width:60ch}
+.picks-g{font:600 15px/1 var(--cond);letter-spacing:.04em;color:var(--dim);margin:22px 0 8px}
+.pkc{border:1px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:8px;overflow:hidden}
+.pkc-h{display:flex;align-items:center;gap:10px;width:100%;min-height:60px;padding:10px 14px;text-align:left}
+.pkc-h .t{flex:1;min-width:0}
+.pkc-h b{display:block;font:700 19px/1.15 var(--cond);letter-spacing:.02em}
+.pkc-h small{display:block;color:var(--muted);font-size:13px;margin-top:3px}
+.pkc-h .chev{flex:none;color:var(--muted);transition:transform .2s}
+.pkc-h[aria-expanded=true] .chev{transform:rotate(180deg)}
+.pkl{list-style:none;margin:0;padding:0 8px 6px}
+.pkr{display:flex;align-items:center;gap:10px;width:100%;padding:8px 6px;border-top:1px solid var(--line);text-align:left}
+.pkr-n{flex:none;width:16px;color:var(--dim);font:700 16px/1 var(--cond);text-align:center}
+.pkr-ph{flex:none;width:84px;height:56px;border-radius:8px;overflow:hidden;background:#232a33}
+.pkr-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.pkr-t{flex:1;min-width:0}
+.pkr-t b{display:block;font:600 16px/1.15 var(--cond);letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pkr-t>span{display:block;color:var(--muted);font-size:12px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pkr-t .pkr-w{color:#cfd5dd}
+.pkr-w i{font-style:normal;margin-left:4px;padding:0 6px;border-radius:999px;background:#e9eef5;color:#10151c;font-size:11px;font-weight:600}
+.pkr-s{flex:none;font:700 20px/1 var(--cond);min-width:30px;text-align:right}
+.pkc-src{color:var(--dim);font-size:12px;margin:0;padding:4px 14px 12px}
+.pkc-gone{color:var(--muted);font-size:13px;line-height:1.6}
 .pk-foot{padding:10px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg)}
 .pk-foot .go{width:100%;height:50px;border-radius:12px;background:var(--text);color:var(--bg);font:700 18px/1 var(--cond);letter-spacing:.03em}
 .gmode{flex:none;display:flex;align-items:center;gap:7px;position:sticky;left:0;z-index:2;padding:7px 12px 7px 11px;
@@ -397,6 +425,8 @@ select.opt{background:var(--raised);color:var(--text);padding:8px 12px;font-size
 .tabs button[aria-selected=true]{color:var(--text);background:var(--raised);border-bottom-color:#5aa2f0}
 .tabs button[aria-selected=true] svg{opacity:1;color:#5aa2f0}
 .top.prices .controls{display:none}
+.top.picks .controls,.top.picks #chips>:not(.gmode){display:none}
+.top.picks #chips:not(:has(.gmode)){display:none}
 .kpis{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:11px 12px}
 .kpi small{display:block;color:var(--muted);font-size:12px}
@@ -472,6 +502,7 @@ ul.facts-list{margin:2px 0 0;padding-left:18px;display:grid;gap:7px;font-size:14
     </div>
     <nav class="tabs" role="tablist" aria-label="View">
       <button role="tab" id="tabList" type="button" aria-selected="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5.5 4h8M5.5 8h8M5.5 12h8"/><circle cx="2.4" cy="4" r=".9" fill="currentColor" stroke="none"/><circle cx="2.4" cy="8" r=".9" fill="currentColor" stroke="none"/><circle cx="2.4" cy="12" r=".9" fill="currentColor" stroke="none"/></svg><span>Listings</span></button>
+      <button role="tab" id="tabPicks" type="button" aria-selected="false"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.6l2.3 4.8 5.2.7-3.8 3.6.9 5.2L10 14.4l-4.6 2.5.9-5.2-3.8-3.6 5.2-.7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span>Picks</span></button>
       <button role="tab" id="tabPrices" type="button" aria-selected="false"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2.5 13.5V9M6.2 13.5V5.5M9.8 13.5V7.5M13.5 13.5V2.5"/></svg><span>Prices</span></button>
     </nav>
     <div class="controls">
@@ -1045,16 +1076,25 @@ const ICON = {
   star: '<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.6l2.3 4.8 5.2.7-3.8 3.6.9 5.2L10 14.4l-4.6 2.5.9-5.2-3.8-3.6 5.2-.7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
 };
 const gKey = () => "cw-garage-" + COUNTRY;
-function garageKeys() {                          // starred models, as "Brand|Model"; the first version starred names
+function garageList() {                         // [{k: "Brand|Model", g: [names] or null for all}]; older versions kept names or keys
   let g = lsGet(gKey(), null);
   if (!g) {
     const old = lsGet("cw-pins-" + COUNTRY, []), names = allNames();
     g = [...new Set(old.map(x => names.find(n => n.name === x)).filter(Boolean).map(mKey))];
-    lsSet(gKey(), g);
   }
+  g = g.map(x => typeof x === "string" ? {k: x, g: null} : x);
+  lsSet(gKey(), g);
   return g;
 }
-function togglePin(key) { const g = garageKeys(); lsSet(gKey(), g.includes(key) ? g.filter(k => k !== key) : [...g, key]); }
+function garageKeys() { return garageList().map(x => x.k); }
+function togglePin(key, gens) {                 // star: the generations picked right now, or all of them
+  const g = garageList();
+  lsSet(gKey(), g.some(x => x.k === key) ? g.filter(x => x.k !== key) : [...g, {k: key, g: gens && gens.length ? gens : null}]);
+}
+function garageGens(m) {                         // the starred generations of a model (all when none were named)
+  const e = garageList().find(x => x.k === m.key), want = e && e.g ? m.gens.filter(g => e.g.includes(g.name)) : m.gens;
+  return want.length ? want : m.gens;
+}
 function adCounts() { const k = {}; for (const c of DATA.cars) k[c.name] = (k[c.name] || 0) + 1; return k; }
 const modelOfName = n => n.model || ((DATA.families || []).find(f => f.family === n.family) || {}).model || n.name;
 const mKey = n => (n.brand || "") + "|" + modelOfName(n);
@@ -1149,13 +1189,16 @@ function renderChips() {                       // one row: the car picker, then 
 function garageHTML() {                         // your starred models as cards: photo, ads, new, best deal
   const M = modelsHere(), prices = state.tab === "prices";
   const cards = garageKeys().map(k => M.get(k)).filter(Boolean);
-  const on = m => prices ? m.gens.some(g => g.name === state.ana)
-    : m.gens.some(g => g.s) && m.gens.filter(g => g.s).every(g => isSel(g.name));
+  const mine = m => garageGens(m).filter(g => g.s);
+  const on = m => prices ? garageGens(m).some(g => g.name === state.ana)
+    : mine(m).length > 0 && mine(m).every(g => isSel(g.name));
+  const st = m => mine(m).reduce((s, g) => ({n: s.n + g.s.n, f: s.f + g.s.fresh, b: g.s.best != null && (s.b == null || g.s.best > s.b) ? g.s.best : s.b}), {n: 0, f: 0, b: null});
   const card = m => `<button class="gc" type="button" data-gmodel="${esc(m.key)}" aria-pressed="${on(m)}">
       <span class="gc-ph">${m.photo ? `<img class="mph" src="${esc(m.photo)}" alt="" loading="lazy" decoding="async">` : ""}</span>
       <span class="gc-t"><small>${esc(m.brand)}</small><b>${esc(m.model)}</b>
-        <span class="gc-s">${nf(m.n)} ${L(m.n === 1 ? "ad" : "ads", m.n === 1 ? "anúncio" : "anúncios")}${m.fresh ? `, ${nf(m.fresh)} ${L("new", m.fresh === 1 ? "novo" : "novos")}` : ""}</span>
-        ${m.best != null ? `<span class="gc-d">${bestTxt(m.best)}</span>` : ""}</span></button>`;
+        <span class="gc-g">${garageGens(m).map(g => `<i${g.s ? "" : ` class="off"`}>${esc(genLabel(g, m))}</i>`).join("")}</span>
+        <span class="gc-s">${nf(st(m).n)} ${L(st(m).n === 1 ? "ad" : "ads", st(m).n === 1 ? "anúncio" : "anúncios")}${st(m).f ? `, ${nf(st(m).f)} ${L("new", st(m).f === 1 ? "novo" : "novos")}` : ""}</span>
+        ${st(m).b != null ? `<span class="gc-d">${bestTxt(st(m).b)}</span>` : ""}</span></button>`;
   return `<div class="garage" role="group" aria-label="${L("Your garage", "Sua garagem")}">${cards.map(card).join("")}
     <button class="gc add" type="button" data-pick>${ICON.star}<span>${cards.length ? L("Add cars", "Adicionar") : L("Star cars to keep them here", "Marque carros com a estrela para deixá-los aqui")}</span></button></div>`;
 }
@@ -1182,6 +1225,12 @@ let chipT = 0;
 window.addEventListener("resize", () => { clearTimeout(chipT); chipT = setTimeout(() => DATA && renderChips(), 150); });
 function render() {
   paintTabs();
+  if (state.tab === "picks") {                 // today's top 5 in each category
+    LIST = []; SHOWN = 0;
+    $("#list").innerHTML = locRowHTML() + picksView();
+    save();
+    return;
+  }
   if (state.tab === "prices") {                // market analysis of the chosen model (or all models)
     LIST = []; SHOWN = 0;
     renderChips();
@@ -1321,7 +1370,11 @@ function pickerSheet() {
     const ct = t.closest("[data-pcountry]");
     if (ct) { const k = ct.dataset.pcountry; PK_OPEN.has(k) ? PK_OPEN.delete(k) : PK_OPEN.add(k); return pkFill(); }
     const st = t.closest("[data-pstar]");
-    if (st) { togglePin(st.dataset.pstar); pkFill(); return render(); }
+    if (st) {                                    // star what is picked of this model, or the whole model
+      const m = modelsHere().get(st.dataset.pstar), picked = m ? m.gens.filter(g => g.s && (single ? state.ana === g.name : isSel(g.name))).map(g => g.name) : [];
+      const live = m ? m.gens.filter(g => g.s).length : 0;
+      togglePin(st.dataset.pstar, picked.length && picked.length < live ? picked : null); pkFill(); return render();
+    }
     const all = t.closest("[data-pball]");
     if (all) {
       if (single) { state.ana = ""; state.brand = all.dataset.pball; return done(); }
@@ -1355,13 +1408,14 @@ function modelCard(m, single, flat) {           // photo, name, figures; its gen
     : `<span class="gp zero" title="${L("No ads right now", "Sem anúncios agora")}">${esc(genLabel(g, m))}</span>`;
   const tl = cols.map(c => `<div class="tl-c">${c.gens.map(pill).join("")}<small class="tl-y">${c.y0 === c.y1 ? c.y0 : `${c.y0}–${String(c.y1).slice(2)}`}</small></div>`)
     .join(`<span class="tl-l" aria-hidden="true"></span>`);
-  const pin = garageKeys().includes(m.key);
+  const pin = garageKeys().includes(m.key), pinG = pin ? garageGens(m) : [];
   const figs = m.n ? `${nf(m.n)} ${L(m.n === 1 ? "ad" : "ads", m.n === 1 ? "anúncio" : "anúncios")}, ${L("from", "a partir de")} ${kShort(m.from)}${selN && !full && !single ? `, ${L(`${selN} picked`, `${selN} ${selN === 1 ? "escolhido" : "escolhidos"}`)}` : ""}`
     : L("No ads right now", "Sem anúncios agora");
   return `<div class="md${m.n ? "" : " off"}">
     <div class="md-top"><button class="md-h" type="button" data-pmodel="${esc(m.key)}" aria-pressed="${full}"${m.n ? "" : " disabled"}>
       <span class="md-ph">${m.photo ? `<img class="mph" src="${esc(m.photo)}" alt="" loading="lazy" decoding="async">` : ""}${full ? `<span class="ck">${ICON.check}</span>` : ""}</span>
       <span class="md-t">${flat ? `<small>${esc(m.brand)}</small>` : ""}<b>${esc(m.model)}</b><span class="md-s">${figs}</span>
+        ${pin && pinG.length < m.gens.length ? `<span class="md-s">${L("In your garage", "Na garagem")}: ${pinG.map(g => esc(genLabel(g, m))).join(", ")}</span>` : ""}
         ${m.fresh || m.best != null ? `<span class="md-k">${m.fresh ? `<i class="nw">${nf(m.fresh)} ${L("new", m.fresh === 1 ? "novo" : "novos")}</i>` : ""}${m.best != null ? `<i class="dl">${bestTxt(m.best)}</i>` : ""}</span>` : ""}</span></button>
       ${m.n ? `<button class="pk-star" type="button" data-pstar="${esc(m.key)}" aria-pressed="${pin}"
         aria-label="${esc(pin ? L(`Take ${m.model} out of your garage`, `Tirar ${m.model} da garagem`) : L(`Add ${m.model} to your garage`, `Pôr ${m.model} na garagem`))}">${ICON.star}</button>` : ""}</div>
@@ -1421,6 +1475,143 @@ function pkFill() {
                          : L(`Show all ${nf(n)} cars`, `Mostrar os ${nf(n)} carros`);
   }
 }
+// ---------- Daily picks: the best 5 ads of the day in each category ----------
+// Categories come from what enthusiasts say (forums, Reddit, Hagerty, Road & Track, Grassroots Motorsports)
+// and from the data itself (new, price cuts, km, days listed, budget, distance). A car needs to pass the
+// checks below to be picked: no serious title or accident flag, not "too good to be true", photos, a price.
+const PICK_CATS = [
+  {id: "track", grp: "type", en: ["Track-day starters", "Light, cheap to run and forgiving: the cars track-day regulars tell beginners to buy."],
+   pt: ["Para começar na pista", "Leves, baratos de manter e fáceis de guiar: os carros que quem anda em track day indica para iniciantes."],
+   src: "r/CarTrackDays, Grassroots Motorsports, Road & Track",
+   fam: ["MX5_NA", "MX5_NB", "MX5_NB_MS", "MX5_NC", "ZN6", "ZC6", "S2K_AP1", "S2K_AP2", "FA5_SI", "FB_SI", "ITR_DC2", "RSX_S", "EP3", "FK8",
+         "B986", "B986S", "B987", "B987S", "Z350", "E46_330", "C5", "M2_F87", "M2C_F87"]},
+  {id: "drift", grp: "type", en: ["Drift-ready", "Rear-drive, easy to slide and backed by a big aftermarket: grassroots drift favourites."],
+   pt: ["Prontos para drift", "Tração traseira, fáceis de sair de traseira e com muitas peças: os favoritos do drift amador."],
+   src: "Drifted, Fast Car, CarGurus, HotCars",
+   fam: ["S13", "S14", "S15", "S13_240", "S14_240", "RPS13", "Z350", "Z370", "AE86", "E46_330", "E46M3", "GC_BK1", "GC_BK2", "MX5_NA", "MX5_NB", "JZX100", "E36M3"]},
+  {id: "revs", grp: "type", en: ["High-revving NA engines", "No turbo, all revs: the engines enthusiasts rank among the best ever made."],
+   pt: ["Aspirados de giro alto", "Sem turbo e com muito giro: motores que os entusiastas colocam entre os melhores já feitos."],
+   src: "Car and Driver, Goodwood, evo, S2Ki",
+   fam: ["S2K_AP1", "S2K_AP2", "ITR_DC2", "EP3", "RSX_S", "E30M3", "E46M3", "Z4M_R", "Z4M_C", "E9XM3", "E60M5", "RX8", "NSX_NA1", "NSX_NA2", "NSX_NA2F"]},
+  {id: "classic", grp: "type", en: ["Future classics", "Models whose values are rising, several on Hagerty's Bull Market lists."],
+   pt: ["Clássicos do futuro", "Modelos que estão valorizando; vários estão nas listas de valorização da Hagerty."],
+   src: "Hagerty Bull Market 2025 and 2026, Hagerty price guide",
+   fam: ["S2K_AP1", "S2K_AP2", "ITR_DC2", "MX5_NB", "MX5_NB_MS", "GTR_R32", "GTR_R33", "GTR_R34", "E60M5", "C6Z06", "E46M3", "E9XM3",
+         "NSX_NA1", "NSX_NA2", "NSX_NA2F", "Z4M_C", "A80_TT", "RX7_FD", "E82_1M", "M2CS_F87"]},
+  {id: "sleeper", grp: "type", en: ["Sleepers", "Quick cars that look ordinary."], pt: ["Lobos em pele de cordeiro", "Carros rápidos com cara de carro comum."],
+   src: "Road & Track, Hagerty, HotCars", fam: ["E39M5", "E9X_335", "JZX100", "E91"]},
+  {id: "tuner", grp: "type", en: ["Tuner platforms", "Engines known to take big power with tuning and bolt-ons."],
+   pt: ["Bases para preparação", "Motores conhecidos por aguentar muita potência com preparação."],
+   src: "Bimmerpost, Spool Street, EvoM, NASIOC",
+   fam: ["E9X_335", "E82_135", "EVO8", "EVO9", "EVOX", "STI_GD", "STI_GR", "GC_BK1", "GC_BK2", "A80_TT", "Z32_TT", "MR2_SW20T", "VR4",
+         "GTR_R32", "GTR_R33", "GTR_R34", "S13", "S14", "S15", "RPS13", "A70_TT"]},
+  {id: "easy", grp: "type", en: ["Low-drama ownership", "Known for running for years on routine maintenance."],
+   pt: ["Pouca dor de cabeça", "Conhecidos por durar anos só com manutenção básica."],
+   src: "The Drive, S2Ki, Classic Motorsports, Road & Track",
+   fam: ["MX5_NA", "MX5_NB", "MX5_NB_MS", "MX5_NC", "S2K_AP1", "S2K_AP2", "FA5", "FA5_SI", "FB", "FB_SI", "ITR_DC2", "RSX_S", "EP3",
+         "ZN6", "ZC6", "C5", "YARIS_S"]},
+  {id: "v8", grp: "type", en: ["Eight cylinders and up", "V8s, and the E60 M5's V10."], pt: ["Oito cilindros ou mais", "V8 e o V10 do M5 E60."],
+   fam: ["S197_46", "S197_50", "S550", "CAM5_SS", "C5", "C5Z06", "C6", "C6Z06", "C6ZR1", "GTO_LS1", "GTO_LS2", "E9XM3", "E39M5", "E60M5"]},
+  {id: "awd", grp: "type", en: ["Turbo all-wheel drive", "Rally heroes and Skylines: grip in any weather."], pt: ["Turbo com tração integral", "Heróis do rali e Skylines: aderência em qualquer tempo."],
+   fam: ["EVO8", "EVO9", "EVOX", "STI_GD", "STI_GR", "GTR_R32", "GTR_R33", "GTR_R34", "VR4"]},
+  {id: "rotary", grp: "type", en: ["Rotary", "Wankel engines: RX-7 and RX-8."], pt: ["Motor rotativo", "Motores Wankel: RX-7 e RX-8."],
+   fam: ["RX7_FB", "RX7_FC", "RX7_FC_T2", "RX7_FD", "RX8"]},
+  {id: "jdm90", grp: "type", en: ["90s JDM heroes", "Japan's golden era, 1989 to 2002."], pt: ["Japoneses dos anos 90", "A era de ouro japonesa, de 1989 a 2002."],
+   fam: ["A70", "A70_TT", "A80", "A80_TT", "GTR_R32", "GTR_R33", "GTR_R34", "RX7_FC", "RX7_FC_T2", "RX7_FD", "NSX_NA1", "NSX_NA2", "Z32", "Z32_TT",
+         "S13", "S14", "S15", "S13_240", "S14_240", "RPS13", "JZX100", "ITR_DC2", "VR4", "MR2_SW20", "MR2_SW20T", "BB6", "BB6_SH", "MX5_NA", "MX5_NB"],
+   test: c => c.year >= 1989 && c.year <= 2002},
+  {id: "old", grp: "type", en: ["Built before 1990", "Classics from the 70s and 80s."], pt: ["Antes de 1990", "Clássicos dos anos 70 e 80."], test: c => c.year && c.year < 1990},
+  {id: "roof", grp: "type", en: ["Roadsters and convertibles", "Roof down, all of them."], pt: ["Roadsters e conversíveis", "Todos de capota aberta."], test: c => c.body === "conv"},
+  {id: "doors", grp: "type", en: ["Fun with four doors", "Sedans, wagons and hatchbacks you can live with."], pt: ["Diversão com quatro portas", "Sedãs, peruas e hatches para o dia a dia."],
+   test: c => ["sedan", "wagon", "hatch"].includes(c.body)},
+  {id: "fresh", grp: "today", en: ["Just listed", "First seen in the last 3 days."], pt: ["Recém-anunciados", "Vistos pela primeira vez nos últimos 3 dias."], test: c => isNew(c)},
+  {id: "drop", grp: "today", en: ["Price just dropped", "Biggest cuts since CarWatch first saw the ad."], pt: ["Preço acabou de cair", "Maiores reduções desde que o CarWatch viu o anúncio."],
+   test: c => { const t = totalChange(c); return t && t.diff < 0 && -t.diff / t.from >= .02; },
+   rank: c => { const t = totalChange(c); return -t.diff / t.from; }},
+  {id: "near", grp: "today", en: ["Near you", "Within the distance you set."], pt: ["Perto de você", "Dentro da distância que você escolheu."], test: c => c._near},
+  {id: "cheap", grp: "money", en: ["Under $15k", "The best cars at the lowest prices."], pt: ["Até R$ 60 mil", "Os melhores carros pelos menores preços."],
+   test: c => c.price <= (COUNTRY === "BR" ? 60000 : 15000)},
+  {id: "lowkm", grp: "money", en: ["Low km for the year", "Well under the usual distance for their age."], pt: ["Km baixa para o ano", "Bem abaixo da quilometragem normal para a idade."],
+   test: c => c.km > 0 && c.year && c.km / Math.max(1, new Date().getFullYear() - c.year + .5) < 6000},
+  {id: "deal", grp: "money", en: ["Room to negotiate", "Listed 60 days or more at a fair price or better: sellers may move."],
+   pt: ["Espaço para negociar", "Anunciados há 60 dias ou mais por preço justo ou melhor: o vendedor pode ceder."],
+   test: c => c.days >= 60 && ["great", "good", "fair"].includes(dealOf(vsOf(c))), rank: c => c.days},
+];
+const PICK_GROUPS = [["today", "Today", "Hoje"], ["type", "By kind of car", "Por tipo de carro"], ["money", "Price and condition", "Preço e estado"]];
+let PICK_OPEN = new Set(["garage"]);
+function pickable(c) {
+  return c.price > 0 && (c.photos || []).length && dealOf(vsOf(c)) !== "sus" && !c.red.some(f => HARD().includes(f));
+}
+function topFive(cars, rank) {                   // best first, at most 2 of the same model
+  const by = (rank || (c => scoreOf(c) ?? -1)), out = [], per = {};
+  for (const c of cars.slice().sort((a, b) => by(b) - by(a) || a.price - b.price)) {
+    const n = allNames().find(x => x.name === c.name), k = n ? mKey(n) : c.name;
+    if ((per[k] || 0) >= 2) continue;
+    per[k] = (per[k] || 0) + 1; out.push(c);
+    if (out.length === 5) break;
+  }
+  return out;
+}
+function pickWhy(c) {                            // up to three short reasons
+  const r = [], vs = vsOf(c), d = dealOf(vs), t = totalChange(c);
+  if (d === "great" || d === "good") r.push(dealTxt(vs));
+  if (isNew(c)) r.push(L("new", "novo"));
+  if (t && t.diff < 0) r.push(`${L("down", "baixou")} ${money(-t.diff)}`);
+  if (c.km > 0 && c.year && c.km / Math.max(1, new Date().getFullYear() - c.year + .5) < 6000) r.push(L("low km", "km baixa"));
+  if (c.days >= 60) r.push(`${c.days} ${L("days listed", "dias anunciado")}`);
+  if (c._dist != null && LOC.active) r.push(`${Math.round(c._dist)} km`);
+  return r.slice(0, 3).join(", ");
+}
+function picksView() {
+  const near = LOC.active ? applyLoc(DATA.cars.slice()) : (LOCAL = null);
+  const nearIds = new Set((near || []).map(c => c.id));
+  const pool = DATA.cars.filter(pickable);
+  for (const c of pool) c._near = nearIds.has(c.id);
+  const M = modelsHere(), cats = [];
+  const gNames = new Set(garageList().flatMap(e => { const m = M.get(e.k); return m ? garageGens(m).map(g => g.name) : []; }));
+  if (gNames.size) cats.push({id: "garage", grp: "today", en: [L("Your garage", "Sua garagem"), ""], pt: ["Sua garagem", ""], cars: topFive(pool.filter(c => gNames.has(c.name)))});
+  for (const k of PICK_CATS) {
+    const fam = k.fam ? new Set(k.fam) : null;
+    const cs = pool.filter(c => (!fam || fam.has(c.family)) && (!k.test || k.test(c)));
+    if (cs.length >= 3) cats.push({...k, cars: topFive(cs, k.rank)});
+  }
+  // what's new since the last data day this phone saw, and what dropped out (sold or taken down)
+  const day = String(DATA.updated || "").slice(0, 10), seenKey = "cw-picks-" + COUNTRY + (AUTO ? "-a" : "");
+  const all = [...new Map(cats.flatMap(k => k.cars).map(c => [c.id, c])).values()];
+  let seen = lsGet(seenKey, null);
+  if (!seen || seen.day !== day) {
+    seen = {day, ids: all.map(c => c.id), prev: seen ? seen.ids : [], prevInfo: seen ? seen.info || {} : {},
+            info: Object.fromEntries(all.map(c => [c.id, `${c.year || ""} ${c.name}, ${money(c.price)}`]))};
+    lsSet(seenKey, seen);
+  }
+  const prev = new Set(seen.prev || []), live = new Set(DATA.cars.map(c => c.id));
+  const gone = (seen.prev || []).filter(id => !live.has(id)).map(id => (seen.prevInfo || {})[id]).filter(Boolean);
+  const row = (c, i) => `<li><button type="button" class="pkr" data-car="${esc(c.id)}">
+      <span class="pkr-n">${i + 1}</span>
+      <span class="pkr-ph">${(c.photos || [])[0] ? `<img class="mph" src="${esc(c.photos[0])}" alt="" loading="lazy" decoding="async">` : ""}</span>
+      <span class="pkr-t"><b>${esc(`${c.year || ""} ${c.name}`)}</b><span>${money(c.price)}, ${kmFmt(c.km)}${c.place ? `, ${esc(c.place)}` : ""}</span>
+        <span class="pkr-w">${esc(pickWhy(c))}${prev.size && !prev.has(c.id) ? ` <i>${L("New pick", "Nova escolha")}</i>` : ""}</span></span>
+      <span class="pkr-s" style="color:${scoreColor(scoreOf(c))}">${scoreTxt(scoreOf(c))}</span></button></li>`;
+  let html = `<section class="picks"><header class="picks-h"><h2>${L("Today's picks", "Escolhas do dia")}</h2>
+    <p>${L("The 5 best ads in each category, by score. At most 2 of the same model; no serious title or accident flags, no prices too good to be true.",
+           "Os 5 melhores anúncios de cada categoria, pela nota. No máximo 2 do mesmo modelo; sem alertas graves e sem preços bons demais para ser verdade.")}</p></header>`;
+  for (const [g, en, pt] of PICK_GROUPS) {
+    const ks = cats.filter(k => k.grp === g);
+    if (!ks.length) continue;
+    html += `<h3 class="picks-g">${L(en, pt)}</h3>`;
+    for (const k of ks) {
+      const [title, why] = PT() ? k.pt : k.en, open = PICK_OPEN.has(k.id), top = k.cars[0];
+      html += `<div class="pkc"><button class="pkc-h" type="button" data-pcat="${k.id}" aria-expanded="${open}">
+          <span class="t"><b>${esc(k.id === "garage" ? L("Your garage", "Sua garagem") : title)}</b>
+          <small>${open && why ? esc(why) : top ? esc(`1. ${top.year || ""} ${top.name}, ${money(top.price)}`) : ""}</small></span>
+          <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+        ${open ? `<ol class="pkl">${k.cars.map(row).join("")}</ol>${k.src ? `<p class="pkc-src">${L("Based on", "Com base em")}: ${esc(k.src)}</p>` : ""}` : ""}</div>`;
+    }
+  }
+  if (gone.length) html += `<h3 class="picks-g">${L("Gone since your last visit", "Saíram desde a última visita")}</h3><p class="pkc-gone">${gone.map(esc).join("<br>")}</p>`;
+  return html + `</section>`;
+}
+
 function priceChart(c) {                      // step chart of asking price since CarWatch first saw the ad
   const pts = (c.hist || []).map(([d, p]) => [asDate(d).getTime(), p]);
   if (pts.length < 2) return "";
@@ -1808,6 +1999,7 @@ function paintStatic() {                       // fixed page text, in the store'
   $("#chips").setAttribute("aria-label", L("Car", "Carro"));
   $("#tabList span").textContent = L("Listings", "Anúncios");
   $("#tabPrices span").textContent = L("Prices", "Preços");
+  $("#tabPicks span").textContent = L("Picks", "Escolhas");
   document.querySelector(".tabs").setAttribute("aria-label", L("View", "Visão"));
 }
 function switchCountry() {
@@ -2526,10 +2718,12 @@ function scatTap(e) {
     <button type="button" data-car="${esc(c.id)}">${L("Details", "Detalhes")}</button>`;
 }
 function paintTabs() {
-  const pr = state.tab === "prices";
-  $("#tabList").setAttribute("aria-selected", !pr);
+  const pr = state.tab === "prices", pk = state.tab === "picks";
+  $("#tabList").setAttribute("aria-selected", !pr && !pk);
   $("#tabPrices").setAttribute("aria-selected", pr);
+  $("#tabPicks").setAttribute("aria-selected", pk);
   document.querySelector(".top").classList.toggle("prices", pr);
+  document.querySelector(".top").classList.toggle("picks", pk);
 }
 
 // ---------- ads from other sites: check one, keep it, share it with a group ----------
@@ -3063,14 +3257,19 @@ document.addEventListener("click", e => {
     else state.brands = state.brands.filter(b => b !== bchip.dataset.pbrand);
     window.scrollTo({top: 0}); return render();
   }
+  const pcat = t.closest("[data-pcat]");
+  if (pcat) { const k = pcat.dataset.pcat; PICK_OPEN.has(k) ? PICK_OPEN.delete(k) : PICK_OPEN.add(k); return render(); }
   const gcard = t.closest("[data-gmodel]");
-  if (gcard) {                                   // a garage card: that model on the list, or its busiest generation on Prices
-    const m = modelsHere().get(gcard.dataset.gmodel);
-    if (!m || !m.n) return;
+  if (gcard) {                                   // a garage card: its starred generations on the list, or the busiest one on Prices
+    const m = modelsHere().get(gcard.dataset.gmodel), mine = m ? garageGens(m).filter(x => x.s) : [];
+    if (!mine.length) return;
     if (state.tab === "prices") {
-      const g = m.gens.filter(x => x.s).sort((a, b) => b.s.n - a.s.n)[0];
-      state.ana = m.gens.some(x => x.name === state.ana) ? "" : g.name; state.brand = state.ana ? m.brand : "";
-    } else modelToggle(m);
+      const g = mine.slice().sort((a, b) => b.s.n - a.s.n)[0];
+      state.ana = mine.some(x => x.name === state.ana) ? "" : g.name; state.brand = state.ana ? m.brand : "";
+    } else {
+      const on = mine.every(x => isSel(x.name));
+      for (const x of mine) if (isSel(x.name) === on) pkToggle(x.name);
+    }
     window.scrollTo({top: 0}); return render();
   }
   const mchip = t.closest(".chip[data-pmodelchip]");
@@ -3119,6 +3318,7 @@ $("#filtersBtn").onclick = () => filterSheet();
 $("#menuBtn").onclick = () => menuSheet();
 $("#flagBtn").onclick = () => confirmCountry();
 $("#tabList").onclick = () => { if (state.tab !== "list") { state.tab = "list"; window.scrollTo({top: 0}); render(); } };
+$("#tabPicks").onclick = () => { if (state.tab !== "picks") { state.tab = "picks"; window.scrollTo({top: 0}); render(); } };
 $("#tabPrices").onclick = () => {
   if (state.tab === "prices") return;
   state.tab = "prices";
