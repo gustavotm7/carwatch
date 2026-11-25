@@ -264,7 +264,8 @@ def gen_for(model, year, text="", body=None):
     config) within a year of its range: a JDM 'S13 Silvia' first registered in 1988, an FD RX-7 sold as a 1992.
     A generation with its own 'bodies' takes only those bodies once the body is known (Z3 M Coupe vs Roadster)."""
     t = _norm(text) if text else ""
-    fits = lambda g: body is None or not g.get("bodies") or body in g["bodies"]
+    fits = lambda g: ((body is None or not g.get("bodies") or body in g["bodies"])
+                      and (not g.get("need") or bool(t and re.search(g["need"], t))))   # 'need': a word the ad must have (Si coupe)
     if t:
         for g in model["generations"]:
             if (g.get("code") and g["years"][0] - 1 <= year <= g["years"][1] + 1 and re.search(g["code"], t)
@@ -1858,7 +1859,8 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
             pairs = [(v, k) for k, v in nb.items() if k in bodies] + [(g["name"], b) for b in bodies if b not in nb]
             for nm, b in pairs or [(g["name"], None)]:
                 n = names.setdefault(nm, {"name": nm, "family": g["family"], "color": g.get("color", "#888888"),
-                                          "years": list(g["years"]), "bodies": [], "brand": brand, "model": m["model"]})
+                                          "years": list(g["years"]), "bodies": [], "brand": brand, "model": m["model"],
+                                          **({"daily": True} if g.get("daily") else {})})   # daily drivers: their own group in the app
                 n["years"] = [min(n["years"][0], g["years"][0]), max(n["years"][1], g["years"][1])]
                 if b and b not in n["bodies"]:
                     n["bodies"].append(b)                   # the ad reader's default body
@@ -1869,7 +1871,7 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
                 names.setdefault(sg["name"], {"name": sg["name"], "family": sg["family"],
                                               "color": sg.get("color", "#888888"), "years": list(sg["years"]),
                                               "bodies": [sg["body"]] if sg.get("body") else list(bodies), "brand": brand,
-                                              "model": m["model"]})
+                                              "model": m["model"], **({"daily": True} if sg.get("daily") else {})})
     cars = []
     for r in active:
         sc = scores.get(r["listing_id"], {})

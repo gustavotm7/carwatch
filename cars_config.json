@@ -17,7 +17,9 @@
     "brand: the make the app groups the model chips under (Acura NSX in Canada, Honda NSX in Brazil).",
     "bodies on a generation: the only bodies it takes, so one model can split by body (Z3 M Roadster vs Z3 M Coupe) or by year (the 2012-2013 335i sedan is an F30: E9X 335i 2012-2013 lists coupe and conv only).",
     "Bodies: coupe, conv, sedan, wagon, hatch (FK8 Civic Type R, GR STI, 180SX).",
-    "recheck: true on the models of a new batch: ads rejected earlier whose address names one get opened once more."
+    "recheck: true on the models of a new batch: ads rejected earlier whose address names one get opened once more.",
+    "need on a generation: a word the ad must have to count as that generation (the Civic Si coupes need 'Si', so a base coupe is skipped).",
+    "daily: true on a generation: a daily driver, not an enthusiast car (FB Civic, Yaris sedan). The app lists it under Daily drivers and keeps it out of the enthusiast picks."
   ],
   "models": [
     {
@@ -26,13 +28,13 @@
         {"family": "E30M3", "years": [1986, 1991], "name": "E30 M3", "color": "#CEC5FE", "smg_risk": false, "code": "\\be30\\b",
          "desc": "BMW E30 M3 1986-1991 (North America 1988-1991), S14 2.3 four, 195-200 cv; Evolution and Sport Evolution in Europe",
          "trims": [["sport ?evo|evo(lution)? ?(iii|3)\\b", "Sport Evolution"], ["evo(lution)? ?(ii|2)\\b", "Evolution II"], ["\\bevo(lution)?\\b", "Evolution"], ["europameister", "Europameister"], ["cecotto|ravaglia", "Cecotto / Ravaglia"], ["convertible|cabrio", "Convertible"]]},
-        {"family": "E36M3", "years": [1995, 1999], "name": "E36 M3", "color": "#CBC1FE", "smg_risk": true,
+        {"family": "E36M3", "years": [1995, 1999], "name": "E36 M3", "color": "#C9BEFF", "smg_risk": true,
          "desc": "BMW E36 M3 1995-1999 (North America)", "trims": [["\\blightweight|\\bltw\\b", "Lightweight"]]},
-        {"family": "E46M3", "years": [2001, 2006], "name": "E46 M3", "color": "#BEB0FE", "smg_risk": true,
+        {"family": "E46M3", "years": [2001, 2006], "name": "E46 M3", "color": "#BCADFF", "smg_risk": true,
          "comps": {"bat": [1833234], "match": "\\bM3\\b", "body": "coupe"},
          "desc": "BMW E46 M3 2001-2006",
          "trims": [["\\bcsl\\b", "CSL"], ["\\bzcp\\b|competition", "Competition (ZCP)"]]},
-        {"family": "E9XM3", "years": [2007, 2013], "name": "E9X M3", "color": "#AB99F3", "smg_risk": true,
+        {"family": "E9XM3", "years": [2007, 2013], "name": "E9X M3", "color": "#AD9BF6", "smg_risk": true,
          "comps": {"bat": [2904138], "match": "\\bM3\\b", "body": "coupe"},
          "name_by_body": {"sedan": "E90 M3", "coupe": "E92 M3", "conv": "E93 M3"},
          "desc": "BMW E90 / E92 / E93 M3 2007-2013",
@@ -46,10 +48,10 @@
     {
       "enabled": true, "model": "M5", "brand": "BMW", "make": "bmw", "match": ["\\bm5\\b"], "bodies": ["sedan"],
       "generations": [
-        {"family": "E39M5", "years": [1999, 2003], "name": "E39 M5", "color": "#C1B4FF", "smg_risk": false,
+        {"family": "E39M5", "years": [1999, 2003], "name": "E39 M5", "color": "#BFB0FF", "smg_risk": false,
          "comps": {"bat": [1833021], "match": "\\bM5\\b", "body": "sedan", "all_manual": true},
          "desc": "BMW E39 M5 1999-2003"},
-        {"family": "E60M5", "years": [2005, 2010], "name": "E60 M5", "color": "#B8A8FC", "smg_risk": true,
+        {"family": "E60M5", "years": [2005, 2010], "name": "E60 M5", "color": "#B7A6FE", "smg_risk": true,
          "comps": {"bat": [2423302], "match": "\\bM5\\b", "body": "sedan"},
          "desc": "BMW E60 M5 2005-2010"}
       ],
@@ -61,7 +63,7 @@
       "enabled": true, "model": "330Ci", "brand": "BMW", "make": "bmw", "match": ["\\b330 ?c ?i\\b"], "none": ["touring|wagon|wgn"],
       "bodies": ["coupe", "conv"],
       "generations": [
-        {"family": "E46_330", "years": [2001, 2006], "name": "E46 330Ci", "color": "#BBACFD", "smg_risk": false,
+        {"family": "E46_330", "years": [2001, 2006], "name": "E46 330Ci", "color": "#BAAAFF", "smg_risk": false,
          "comps": {"bat": [25078037, 25078204, 25033702, 12870552], "match": "\\b330C?i\\b", "body": "coupe",
                    "body_by_title": [["\\b330i\\b", "sedan"]]},
          "desc": "BMW E46 330i / 330Ci (M Sport / ZHP)",
@@ -75,7 +77,7 @@
       "match": ["\\b330 ?i\\b", "m ?sport|m ?tech|zhp|performance"], "none": ["touring|wagon|wgn"],
       "bodies": ["sedan"],
       "generations": [
-        {"family": "E46_330", "years": [2001, 2005], "name": "E46 330i", "color": "#BBACFD", "smg_risk": false,
+        {"family": "E46_330", "years": [2001, 2005], "name": "E46 330i", "color": "#BAAAFF", "smg_risk": false,
          "comps": {"bat": [25078037, 25078204, 25033702, 12870552], "match": "\\b330C?i\\b", "body": "coupe",
                    "body_by_title": [["\\b330i\\b", "sedan"]]},
          "desc": "BMW E46 330i / 330Ci (M Sport / ZHP)",
@@ -103,7 +105,7 @@
     {
       "enabled": true, "model": "350Z", "brand": "Nissan", "make": "nissan", "match": ["\\b350 ?z\\b"], "bodies": ["coupe", "conv"],
       "generations": [
-        {"family": "Z350", "years": [2003, 2009], "name": "Z33 350Z", "color": "#3DADCF", "smg_risk": false,
+        {"family": "Z350", "years": [2003, 2009], "name": "Z33 350Z", "color": "#3CACCE", "smg_risk": false,
          "comps": {"bat": [17412355], "match": "\\b350Z\\b", "body": "coupe"},
          "desc": "Nissan 350Z (Z33) 2003-2009",
          "trims": [["nismo", "NISMO"], ["35th", "35th Anniversary"], ["track", "Track"],
@@ -131,40 +133,50 @@
     {
       "enabled": true, "model": "S2000", "brand": "Honda", "match": ["\\bs ?2000\\b"], "bodies": ["conv"],
       "generations": [
-        {"family": "S2K_AP1", "years": [2000, 2003], "name": "AP1 S2000", "color": "#FB96BE", "smg_risk": false,
+        {"family": "S2K_AP1", "years": [2000, 2003], "name": "AP1 S2000", "color": "#FA95BE", "smg_risk": false,
          "desc": "Honda S2000 AP1 2000-2003 (F20C, 9,000 rpm)"},
-        {"family": "S2K_AP2", "years": [2004, 2009], "name": "AP2 S2000", "color": "#E682AB", "smg_risk": false,
+        {"family": "S2K_AP2", "years": [2004, 2009], "name": "AP2 S2000", "color": "#EC88B0", "smg_risk": false,
          "desc": "Honda S2000 AP2 2004-2009 (F22C1)", "trims": [["\\bcr\\b|club racer", "CR"]]}
       ],
       "searches": {"autotrader": ["https://www.autotrader.ca/cars/honda/s2000"],
                    "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/honda-s2000/k0c174l0"]}
     },
     {
-      "enabled": true, "model": "Civic", "brand": "Honda", "match": ["\\bcivic\\b"],
-      "none": ["coupe|coup[eé]|\\bcpe\\b|\\b2 ?(dr|door|portes)\\b|hatch|\\bhb\\b|\\b5 ?(dr|door|portes)\\b|type ?r|hybrid|hybride|del ?sol"],
-      "none_body": ["coup|hatch"], "bodies": ["sedan"],
+      "enabled": true, "model": "Civic", "brand": "Honda", "recheck": true, "match": ["\\bcivic\\b"],
+      "none": ["hatch|\\bhb\\b|\\b5 ?(dr|door|portes)\\b|type ?r|hybrid|hybride|del ?sol"],
+      "none_body": ["hatch"], "bodies": ["sedan", "coupe"],
       "generations": [
-        {"family": "FA5", "years": [2006, 2011], "name": "FA5 Civic", "color": "#E07DA6", "smg_risk": false,
+        {"family": "FA5", "bodies": ["sedan"], "years": [2006, 2011], "name": "FA5 Civic", "color": "#E884AD", "smg_risk": false,
          "desc": "Honda Civic 8th gen sedan 2006-2011",
          "trims": [["\\bsi\\b", "Si"], ["\\bex ?l\\b", "EX-L"], ["\\bsport\\b", "Sport"], ["\\bex\\b", "EX"], ["\\blx\\b", "LX"], ["\\bdx ?g\\b", "DX-G"], ["\\bdx\\b", "DX"]],
-         "split": [{"match": "\\bsi\\b", "family": "FA5_SI", "name": "FA5 Civic Si", "color": "#D76797",
+         "split": [{"match": "\\bsi\\b", "family": "FA5_SI", "name": "FA5 Civic Si", "color": "#DF6E9E",
                     "desc": "Honda Civic Si 8th gen sedan (2.0, manual)", "trims": [["\\bsi\\b", "Si"]]}]},
-        {"family": "FB", "years": [2012, 2015], "name": "FB Civic", "color": "#DB79A1", "smg_risk": false,
+        {"family": "FB", "bodies": ["sedan"], "daily": true, "years": [2012, 2015], "name": "FB Civic", "color": "#E17EA6", "smg_risk": false,
          "desc": "Honda Civic 9th gen sedan 2012-2015",
          "trims": [["\\bsi\\b", "Si"], ["\\btouring\\b", "Touring"], ["\\bex ?l\\b", "EX-L"], ["\\bex\\b", "EX"], ["\\blx\\b", "LX"], ["\\bdx\\b", "DX"]],
-         "split": [{"match": "\\bsi\\b", "family": "FB_SI", "name": "FB Civic Si", "color": "#D26292",
-                    "desc": "Honda Civic Si 9th gen sedan (2.4, manual)", "trims": [["\\bsi\\b", "Si"]]}]}
+         "split": [{"match": "\\bsi\\b", "family": "FB_SI", "daily": false, "name": "FB Civic Si", "color": "#D86797",
+                    "desc": "Honda Civic Si 9th gen sedan (2.4, manual)", "trims": [["\\bsi\\b", "Si"]]}]},
+         {"family": "FG2_SI", "years": [2006, 2011], "name": "FG2 Civic Si coupe", "color": "#E481A9", "smg_risk": false, "code": "\\bfg2\\b",
+          "bodies": ["coupe"],
+          "need": "\\bsi\\b",
+          "desc": "Honda Civic Si coupe (FG2) 2006-2011, 2.0 K20Z3 (200 cv), 6-speed manual"},
+         {"family": "FG4_SI", "years": [2012, 2015], "name": "FG4 Civic Si coupe", "color": "#DD7BA3", "smg_risk": false, "code": "\\bfg4\\b",
+          "bodies": ["coupe"],
+          "need": "\\bsi\\b",
+          "desc": "Honda Civic Si coupe (FG4) 2012-2015, 2.4 K24Z7 (204-208 cv), 6-speed manual"},
+         {"family": "FC3_SI", "years": [2017, 2020], "name": "FC3 Civic Si coupe", "color": "#D977A0", "smg_risk": false, "code": "\\bfc3\\b",
+          "bodies": ["coupe"],
+          "need": "\\bsi\\b",
+          "desc": "Honda Civic Si coupe (FC3) 2017-2020, 1.5 turbo (208 cv), 6-speed manual"}
       ],
-      "searches": {"autotrader": ["https://www.autotrader.ca/cars/honda/civic/tr_manual?fregfrom=2006&fregto=2015"],
-                   "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/honda-civic-sedan-manual/k0c174l0",
-                              "https://www.kijiji.ca/b-cars-trucks/canada/honda-civic-si/k0c174l0"]}
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/honda/civic/tr_manual?fregfrom=2006&fregto=2015"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/honda-civic-sedan-manual/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/honda-civic-si/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/honda-civic-si-coupe/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/civic-si-coupe-manual/k0c174l0"]}
     },
     {
       "enabled": true, "model": "Yaris sedan", "brand": "Toyota", "make": "toyota", "match": ["\\byaris\\b"],
       "none": ["hatch|\\bhb\\b|liftback|\\b[35] ?(dr|door|portes)\\b|\\bcross\\b"], "none_body": ["hatch|compact"],
       "bodies": ["sedan"],
       "generations": [
-        {"family": "YARIS_S", "years": [2007, 2019], "name": "Yaris Sedan", "color": "#AFA130", "smg_risk": false,
+        {"family": "YARIS_S", "daily": true, "years": [2007, 2019], "name": "Yaris Sedan", "color": "#B4A636", "smg_risk": false,
          "desc": "Toyota Yaris sedan, Canada: 2007-2011, and 2016-2019 (built by Mazda)",
          "trims": [["\\bxle\\b", "XLE"], ["\\bpremium\\b", "Premium"], ["\\ble\\b", "LE"]]}
       ],
@@ -178,7 +190,7 @@
         {"family": "GC_BK1", "years": [2010, 2012], "name": "BK1 Genesis Coupe", "color": "#F4B2FE", "smg_risk": false,
          "desc": "Hyundai Genesis Coupe BK1 2010-2012 (2.0T 210 hp, 3.8 V6 306 hp)",
          "trims": [["3\\.8|\\bv6\\b", "3.8 V6"], ["2\\.0", "2.0T"]]},
-        {"family": "GC_BK2", "years": [2013, 2016], "name": "BK2 Genesis Coupe", "color": "#BD7CC8", "smg_risk": false,
+        {"family": "GC_BK2", "years": [2013, 2016], "name": "BK2 Genesis Coupe", "color": "#E39FED", "smg_risk": false,
          "desc": "Hyundai Genesis Coupe BK2 2013-2016 (2.0T 274 hp to 2014, 3.8 V6 348 hp)",
          "trims": [["3\\.8|\\bv6\\b", "3.8 V6"], ["2\\.0", "2.0T"]]}
       ],
@@ -188,13 +200,13 @@
     {
       "enabled": true, "model": "NSX", "brand": "Acura", "match": ["\\bnsx\\b"], "bodies": ["coupe"],
       "generations": [
-        {"family": "NSX_NA1", "years": [1991, 1996], "name": "NA1 NSX", "color": "#FEB6D1", "smg_risk": false,
+        {"family": "NSX_NA1", "years": [1991, 1996], "name": "NA1 NSX", "color": "#FFAFCE", "smg_risk": false,
          "desc": "Acura / Honda NSX NA1 1991-1996 (3.0 C30A, 5-speed, pop-up headlights)",
          "trims": [["nsx ?-? ?t\\b|targa|open ?top", "NSX-T"], ["type ?r|nsx ?-? ?r\\b", "Type R"]]},
-        {"family": "NSX_NA2", "years": [1997, 2001], "name": "NA2 NSX", "color": "#FE9CC3", "smg_risk": false,
+        {"family": "NSX_NA2", "years": [1997, 2001], "name": "NA2 NSX", "color": "#FE98C1", "smg_risk": false,
          "desc": "Acura / Honda NSX NA2 1997-2001 (3.2 C32B, 6-speed, pop-up headlights)",
          "trims": [["zanardi", "Zanardi"], ["nsx ?-? ?t\\b|targa|open ?top", "NSX-T"], ["type ?s", "Type S"]]},
-        {"family": "NSX_NA2F", "years": [2002, 2005], "name": "NA2 NSX facelift", "color": "#F08CB4", "smg_risk": false,
+        {"family": "NSX_NA2F", "years": [2002, 2005], "name": "NA2 NSX facelift", "color": "#F38EB7", "smg_risk": false,
          "desc": "Acura / Honda NSX NA2 facelift 2002-2005 (3.2 C32B, 6-speed, fixed headlights)",
          "trims": [["nsx ?-? ?t\\b|targa|open ?top", "NSX-T"], ["type ?r|nsx ?-? ?r\\b", "NSX-R"], ["type ?s", "Type S"]]}
       ],
@@ -205,14 +217,14 @@
       "enabled": true, "model": "Supra", "brand": "Toyota", "recheck": true, "match": ["\\bsupra\\b"], "none": ["celica|\\bgr ?supra\\b|\\ba90\\b|\\ba60\\b|\\bma ?6[0-7]\\b"],
       "bodies": ["coupe"],
       "generations": [
-        {"family": "A70", "years": [1986, 1992], "name": "A70 Supra", "color": "#D1C356", "smg_risk": false, "code": "\\ba70\\b|\\bma ?7[01]\\b|\\bga ?70\\b|\\bjza ?70\\b|\\bmk ?(iii|3)\\b|\\b7m\\b",
+        {"family": "A70", "years": [1986, 1992], "name": "A70 Supra", "color": "#D2C458", "smg_risk": false, "code": "\\ba70\\b|\\bma ?7[01]\\b|\\bga ?70\\b|\\bjza ?70\\b|\\bmk ?(iii|3)\\b|\\b7m\\b",
          "desc": "Toyota Supra A70 (MA70 / MA71) 1986-1992 in North America (to 1993 in Japan), 7M-GE 3.0 non-turbo 203 cv",
          "trims": [["targa|sport ?roof", "Sport Roof"]],
-         "split": [{"match": "^(?!.*(non[ -]?turbo|7m[ -]?ge\\b|\\bn/?a\\b)).*(\\bturbo\\b|7m[ -]?gte|1jz|twin[ -]?turbo|\\btt\\b)", "family": "A70_TT", "name": "A70 Supra Turbo", "color": "#C4B323", "desc": "Toyota Supra A70 Turbo: 7M-GTE 3.0 turbo 235 cv (US 1987-1992); JZA70 1JZ-GTE 2.5 twin turbo in Japan (1990-1993)", "trims": [["turbo ?a\\b", "Turbo A"], ["1jz", "1JZ-GTE"], ["targa|sport ?roof", "Sport Roof"], [".", "Turbo"]]}]},
-        {"family": "A80", "years": [1993, 2002], "name": "A80 Supra", "color": "#C3B548", "smg_risk": false, "code": "\\ba80\\b|\\bjza ?80\\b|\\bmk ?(iv|4)\\b",
+         "split": [{"match": "^(?!.*(non[ -]?turbo|7m[ -]?ge\\b|\\bn/?a\\b)).*(\\bturbo\\b|7m[ -]?gte|1jz|twin[ -]?turbo|\\btt\\b)", "family": "A70_TT", "name": "A70 Supra Turbo", "color": "#C5B426", "desc": "Toyota Supra A70 Turbo: 7M-GTE 3.0 turbo 235 cv (US 1987-1992); JZA70 1JZ-GTE 2.5 twin turbo in Japan (1990-1993)", "trims": [["turbo ?a\\b", "Turbo A"], ["1jz", "1JZ-GTE"], ["targa|sport ?roof", "Sport Roof"], [".", "Turbo"]]}]},
+        {"family": "A80", "years": [1993, 2002], "name": "A80 Supra", "color": "#C6B84B", "smg_risk": false, "code": "\\ba80\\b|\\bjza ?80\\b|\\bmk ?(iv|4)\\b",
          "desc": "Toyota Supra A80 1993-2002 (North America to 1998), 2JZ-GE 3.0 non-turbo (225 cv JDM, 223 cv US)",
          "trims": [["\\bsz ?r\\b", "SZ-R"], ["\\bsz\\b", "SZ"], ["\\bna ?t\\b", "NA-T"], ["\\brz ?s\\b", "RZ-S"], ["\\brz\\b", "RZ"], ["\\bgz\\b", "GZ"], ["twin ?turbo|\\btt\\b|2jz ?gte|\\bturbo\\b", "Turbo"]],
-         "split": [{"match": "^(?!.*(non[ -]?turbo|\\bna[ -]?t\\b|n/a\\b|\\bsz\\b|\\bsz[ -]?r\\b|2jz[ -]?ge\\b)).*(twin[ -]?turbo|\\btt\\b|2jz[ -]?gte|\\bturbo\\b|\\brz\\b|\\brz[ -]?s\\b|\\bgz\\b)", "family": "A80_TT", "name": "A80 Supra Turbo", "color": "#B6A517", "desc": "Toyota Supra A80 Turbo, 2JZ-GTE sequential twin turbo (280 cv JDM, 324 cv US)", "trims": [["\\brz ?s\\b", "RZ-S"], ["\\brz\\b", "RZ"], ["\\bgz\\b", "GZ"], [".", "Turbo"]]}]}
+         "split": [{"match": "^(?!.*(non[ -]?turbo|\\bna[ -]?t\\b|n/a\\b|\\bsz\\b|\\bsz[ -]?r\\b|2jz[ -]?ge\\b)).*(twin[ -]?turbo|\\btt\\b|2jz[ -]?gte|\\bturbo\\b|\\brz\\b|\\brz[ -]?s\\b|\\bgz\\b)", "family": "A80_TT", "name": "A80 Supra Turbo", "color": "#B9A80A", "desc": "Toyota Supra A80 Turbo, 2JZ-GTE sequential twin turbo (280 cv JDM, 324 cv US)", "trims": [["\\brz ?s\\b", "RZ-S"], ["\\brz\\b", "RZ"], ["\\bgz\\b", "GZ"], [".", "Turbo"]]}]}
       ],
       "searches": {"autotrader": ["https://www.autotrader.ca/cars/toyota/supra"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/toyota-supra-turbo/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/supra-2jz/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/supra-mk4/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/supra-mk3/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/supra-7mgte/k0c174l0"]}
     },
@@ -223,11 +235,11 @@
         {"family": "RX7_FB", "years": [1978, 1985], "name": "FB RX-7", "color": "#FEBDA0", "smg_risk": false, "code": "\\bfb\\b|\\bsa ?22c?\\b|\\bsa\\b|1st gen|first gen|\\b12a\\b",
          "desc": "Mazda RX-7 first generation (SA22C / FB) 1978-1985, 12A rotary; GSL-SE with the 13B 1984-85",
          "trims": [["gsl ?se", "GSL-SE"], ["\\bgsl\\b", "GSL"], ["\\bgs\\b", "GS"], ["limited", "Limited"]]},
-        {"family": "RX7_FC", "years": [1986, 1991], "name": "FC RX-7", "color": "#FEAF8B", "smg_risk": false, "code": "\\bfc\\b|fc3[sc]|2nd gen|second gen",
+        {"family": "RX7_FC", "years": [1986, 1991], "name": "FC RX-7", "color": "#FFB391", "smg_risk": false, "code": "\\bfc\\b|fc3[sc]|2nd gen|second gen",
          "desc": "Mazda RX-7 FC3S 1986-1991 (Japan to 1992), 13B 148 cv US; convertible 1988-1991",
          "trims": [["turbo ?(ii|2)|\\btii\\b|\\bturbo\\b", "Turbo II"], ["\\bgxl\\b", "GXL"], ["\\bgtu ?s?\\b", "GTUs"], ["\\bse\\b", "SE"], ["convertible|cabrio", "Convertible"], ["infini", "Infini"]],
-         "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b)).*(turbo|\\bt[ -]?ii\\b|\\btii\\b|13b[ -]?t\\b|infini)", "family": "RX7_FC_T2", "name": "FC RX-7 Turbo II", "color": "#FD9666", "desc": "Mazda RX-7 FC Turbo II, 13B-T turbo (185 cv, 203 cv from 1989, US)", "trims": [["convertible|cabrio", "Convertible"], ["infini", "Infini"], [".", "Turbo II"]]}]},
-        {"family": "RX7_FD", "years": [1992, 2002], "name": "FD RX-7", "color": "#F7966A", "smg_risk": false, "code": "\\bfd\\b|fd3s|3rd gen|third gen",
+         "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b)).*(turbo|\\bt[ -]?ii\\b|\\btii\\b|13b[ -]?t\\b|infini)", "family": "RX7_FC_T2", "name": "FC RX-7 Turbo II", "color": "#FE9A6C", "desc": "Mazda RX-7 FC Turbo II, 13B-T turbo (185 cv, 203 cv from 1989, US)", "trims": [["convertible|cabrio", "Convertible"], ["infini", "Infini"], [".", "Turbo II"]]}]},
+        {"family": "RX7_FD", "years": [1992, 2002], "name": "FD RX-7", "color": "#FEA176", "smg_risk": false, "code": "\\bfd\\b|fd3s|3rd gen|third gen",
          "desc": "Mazda RX-7 FD3S 1992-2002 (North America 1993-1995), 13B-REW sequential twin turbo, 259 cv US, up to 280 cv JDM",
          "trims": [["spirit ?r", "Spirit R"], ["type ?rs\\b", "Type RS"], ["type ?rz", "Type RZ"], ["type ?rb", "Type RB"], ["type ?r\\b", "Type R"], ["\\br2\\b", "R2"], ["\\br1\\b", "R1"], ["touring", "Touring"], ["bathurst", "Bathurst"]]}
       ],
@@ -237,7 +249,7 @@
       "enabled": true, "model": "RX-8", "brand": "Mazda", "match": ["\\brx ?8\\b"],
       "bodies": ["coupe"],
       "generations": [
-        {"family": "RX8", "years": [2003, 2012], "name": "SE3P RX-8", "color": "#E38559", "smg_risk": false,
+        {"family": "RX8", "years": [2003, 2012], "name": "SE3P RX-8", "color": "#F39467", "smg_risk": false,
          "desc": "Mazda RX-8 SE3P 2003-2012 (North America 2004-2011), Renesis 13B-MSP rotary; 6-speed 241 cv US (235 cv from 2009)",
          "trims": [["spirit ?r", "Spirit R"], ["\\br3\\b", "R3"], ["type ?rs", "Type RS"], ["type ?s\\b", "Type S"], ["40th", "40th Anniversary"], ["shinka", "Shinka"], ["\\bgt\\b|grand touring", "GT"], ["\\bgs\\b", "GS"], ["\\bsport\\b", "Sport"]]}
       ],
@@ -247,13 +259,13 @@
       "enabled": true, "model": "Skyline GT-R", "brand": "Nissan", "match": ["\\bgt ?r\\b", "skyline|\\br3[234]\\b|bnr ?3[24]|bcnr ?33"], "none": ["\\bgts\\b|\\bgts ?t\\b|\\bgt ?t\\b|gtst|25 ?gt|gts ?4|\\bhcr ?32\\b|\\becr ?33\\b|\\ber ?34\\b|replica|clone|tribute|conver(sion|ted)|(gt ?r|gtr) ?(look|style|kit|body|front|bumper|badge)"],
       "bodies": ["coupe"],
       "generations": [
-        {"family": "GTR_R32", "years": [1989, 1994], "name": "R32 GT-R", "color": "#5DC9EC", "smg_risk": false, "code": "\\br ?32\\b|bnr ?32",
+        {"family": "GTR_R32", "years": [1989, 1994], "name": "R32 GT-R", "color": "#5CC8EA", "smg_risk": false, "code": "\\br ?32\\b|bnr ?32",
          "desc": "Nissan Skyline GT-R BNR32 1989-1994, RB26DETT twin turbo 280 cv, 5-speed, ATTESA E-TS AWD",
          "trims": [["v ?spec ?(ii|2)", "V-Spec II"], ["v ?spec", "V-Spec"], ["\\bn1\\b", "N1"], ["nismo", "Nismo"]]},
-        {"family": "GTR_R33", "years": [1995, 1998], "name": "R33 GT-R", "color": "#4DBBDD", "smg_risk": false, "code": "\\br ?33\\b|bcnr ?33",
+        {"family": "GTR_R33", "years": [1995, 1998], "name": "R33 GT-R", "color": "#4CBADC", "smg_risk": false, "code": "\\br ?33\\b|bcnr ?33",
          "desc": "Nissan Skyline GT-R BCNR33 1995-1998, RB26DETT twin turbo 280 cv, 5-speed, AWD",
          "trims": [["400 ?r", "400R"], ["lm ?limited", "LM Limited"], ["v ?spec", "V-Spec"], ["\\bn1\\b", "N1"], ["autech|4 ?door", "Autech 4-door"]]},
-        {"family": "GTR_R34", "years": [1999, 2002], "name": "R34 GT-R", "color": "#47B5D7", "smg_risk": false, "code": "\\br ?34\\b|bnr ?34",
+        {"family": "GTR_R34", "years": [1999, 2002], "name": "R34 GT-R", "color": "#46B5D7", "smg_risk": false, "code": "\\br ?34\\b|bnr ?34",
          "desc": "Nissan Skyline GT-R BNR34 1999-2002, RB26DETT twin turbo 280 cv, Getrag 6-speed, AWD",
          "trims": [["v ?spec ?(ii|2) ?n(u|ü|ue)r", "V-Spec II Nür"], ["m ?spec ?n(u|ü|ue)r", "M-Spec Nür"], ["v ?spec ?(ii|2)", "V-Spec II"], ["m ?spec", "M-Spec"], ["v ?spec", "V-Spec"], ["\\bn1\\b", "N1"], ["z ?tune", "Z-tune"]]}
       ],
@@ -263,14 +275,14 @@
       "enabled": true, "model": "MR2", "brand": "Toyota", "match": ["\\bmr ?2\\b|\\bmr ?s\\b"],
       "bodies": ["coupe", "conv"],
       "generations": [
-        {"family": "MR2_AW11", "years": [1984, 1989], "name": "AW11 MR2", "color": "#D8CA5E", "smg_risk": false, "code": "\\baw ?1[01]\\b|\\bmk ?(1|i)\\b|1st gen|first gen|4a ?g[ez]",
+        {"family": "MR2_AW11", "years": [1984, 1989], "name": "AW11 MR2", "color": "#D9CB5F", "smg_risk": false, "code": "\\baw ?1[01]\\b|\\bmk ?(1|i)\\b|1st gen|first gen|4a ?g[ez]",
          "desc": "Toyota MR2 W10 / AW11 1984-1989, 4A-GE 1.6 (114 cv US, 130 cv JDM); supercharged 4A-GZE 1988-89 (147 cv)",
          "trims": [["supercharg|\\bsc\\b|4a ?gze", "Supercharged"]]},
-        {"family": "MR2_SW20", "years": [1990, 1999], "name": "SW20 MR2", "color": "#CABC4F", "smg_risk": false, "code": "\\bsw ?2[0-2]\\b|\\bmk ?(2|ii)\\b|2nd gen|second gen|3s ?gte|5s ?fe",
+        {"family": "MR2_SW20", "years": [1990, 1999], "name": "SW20 MR2", "color": "#CCBE52", "smg_risk": false, "code": "\\bsw ?2[0-2]\\b|\\bmk ?(2|ii)\\b|2nd gen|second gen|3s ?gte|5s ?fe",
          "desc": "Toyota MR2 W20 / SW20 1989-1999 (North America 1991-1995), 5S-FE 132 cv US, 3S-GE JDM",
          "trims": [["\\bturbo\\b|3s ?gte|\\bgt ?s\\b|\\bgt\\b", "Turbo"], ["g ?limited", "G-Limited"], ["t ?(top|bar)", "T-bar"]],
-         "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b|5s[ -]?fe|3s[ -]?ge\\b|\\bg[ -]?limited\\b)).*(\\bturbo\\b|3s[ -]?gte|\\bgt[ -]?s\\b|\\bgt\\b)", "family": "MR2_SW20T", "name": "SW20 MR2 Turbo", "color": "#BDAC16", "desc": "Toyota MR2 SW20 Turbo, 3S-GTE (203 cv US, up to 248 cv JDM)", "trims": [["\\bgt ?s\\b", "GT-S"], [".", "Turbo"]]}]},
-        {"family": "MR2_ZZW30", "years": [2000, 2007], "name": "ZZW30 MR2 Spyder", "color": "#B6A838", "smg_risk": true, "code": "zzw ?30|spyder|spider|\\bmr ?s\\b|\\bmk ?(3|iii)\\b|3rd gen|third gen|1zz",
+         "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b|5s[ -]?fe|3s[ -]?ge\\b|\\bg[ -]?limited\\b)).*(\\bturbo\\b|3s[ -]?gte|\\bgt[ -]?s\\b|\\bgt\\b)", "family": "MR2_SW20T", "name": "SW20 MR2 Turbo", "color": "#BFAE1B", "desc": "Toyota MR2 SW20 Turbo, 3S-GTE (203 cv US, up to 248 cv JDM)", "trims": [["\\bgt ?s\\b", "GT-S"], [".", "Turbo"]]}]},
+        {"family": "MR2_ZZW30", "years": [2000, 2007], "name": "ZZW30 MR2 Spyder", "color": "#BAAC3D", "smg_risk": true, "code": "zzw ?30|spyder|spider|\\bmr ?s\\b|\\bmk ?(3|iii)\\b|3rd gen|third gen|1zz",
          "body": "conv",
          "desc": "Toyota MR2 Spyder / MR-S ZZW30 1999-2007 (North America 2000-2005), 1ZZ-FE 1.8 140 cv; clutchless SMT optional from 2002",
          "trims": [["\\bsmt\\b|sequential", "SMT"], ["v ?edition", "V Edition"]]}
@@ -293,16 +305,16 @@
       "generations": [
         {"family": "S10", "years": [1975, 1978], "name": "S10 Silvia", "color": "#6DD8FB", "smg_risk": false, "code": "\\bs ?10\\b",
          "desc": "Nissan Silvia S10 1975-1979 (Datsun 200SX in the US: not tracked)"},
-        {"family": "S110", "years": [1979, 1982], "name": "S110 Silvia", "color": "#67D2F5", "smg_risk": false, "code": "\\bs ?110\\b",
+        {"family": "S110", "years": [1979, 1982], "name": "S110 Silvia", "color": "#64D0F3", "smg_risk": false, "code": "\\bs ?110\\b",
          "desc": "Nissan Silvia S110 1979-1983",
          "trims": [["turbo", "Turbo"]]},
-        {"family": "S12", "years": [1983, 1987], "name": "S12 Silvia", "color": "#64CFF2", "smg_risk": false, "code": "\\bs ?12\\b",
+        {"family": "S12", "years": [1983, 1987], "name": "S12 Silvia", "color": "#62CDF0", "smg_risk": false, "code": "\\bs ?12\\b",
          "desc": "Nissan Silvia S12 1983-1988",
          "trims": [["turbo", "Turbo"]]},
-        {"family": "S13", "years": [1988, 1993], "name": "S13 Silvia", "color": "#61CCEF", "smg_risk": false, "code": "\\b[pkc]?s ?13\\b",
+        {"family": "S13", "years": [1988, 1993], "name": "S13 Silvia", "color": "#5FCAED", "smg_risk": false, "code": "\\b[pkc]?s ?13\\b",
          "desc": "Nissan Silvia S13 1988-1993; K's turbo: CA18DET 175 cv to 1990, SR20DET 205 cv from 1991",
          "trims": [["\\bk ?'?s\\b", "K's"], ["\\bq ?'?s\\b", "Q's"], ["\\bj ?'?s\\b", "J's"], ["club ?selection", "Club Selection"], ["convertible|cabrio", "Convertible"]]},
-        {"family": "S14", "years": [1994, 1998], "name": "S14 Silvia", "color": "#51BEE0", "smg_risk": false, "code": "\\b[kc]?s ?14a?\\b",
+        {"family": "S14", "years": [1994, 1998], "name": "S14 Silvia", "color": "#4FBDDF", "smg_risk": false, "code": "\\b[kc]?s ?14a?\\b",
          "desc": "Nissan Silvia S14 1993-1998 (kouki from 1996); K's SR20DET 220 cv",
          "trims": [["\\bk ?'?s\\b", "K's"], ["\\bq ?'?s\\b", "Q's"], ["\\bj ?'?s\\b", "J's"], ["kouki", "Kouki"], ["zenki", "Zenki"]]},
         {"family": "S15", "years": [1999, 2002], "name": "S15 Silvia", "color": "#43B2D4", "smg_risk": false, "code": "\\bs ?15\\b",
@@ -312,19 +324,21 @@
       "searches": {"kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/nissan-silvia/k0c174l0"]}
     },
     {
-      "enabled": true, "model": "MX-5", "brand": "Mazda", "recheck": true, "match": ["\\bmx ?5\\b|\\bmiata\\b|\\beunos ?roadster\\b"], "none": ["\\bnd[12]?\\b|\\brf\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
+      "enabled": true, "model": "MX-5", "brand": "Mazda", "recheck": true, "match": ["\\bmx ?5\\b|\\bmiata\\b|\\beunos ?roadster\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["conv"],
       "generations": [
-        {"family": "MX5_NA", "years": [1989, 1997], "name": "NA MX-5", "color": "#FEA176", "smg_risk": false, "code": "\\bna[68]c?\\b|\\bna ?(miata|mx ?5)\\b|\\b(miata|mx ?5) ?na\\b|\\beunos\\b|pop ?ups?\\b|1st gen|first gen",
+        {"family": "MX5_NA", "years": [1989, 1997], "name": "NA MX-5", "color": "#FDAB85", "smg_risk": false, "code": "\\bna[68]c?\\b|\\bna ?(miata|mx ?5)\\b|\\b(miata|mx ?5) ?na\\b|\\beunos\\b|pop ?ups?\\b|1st gen|first gen",
          "desc": "Mazda MX-5 / Miata NA 1989-1997: 1.6 (118 cv) to 1993, 1.8 (130-135 cv) from 1994",
          "trims": [["\\bm ?edition\\b", "M Edition"], ["\\br ?(package|pkg)\\b", "R Package"], ["\\ble\\b|limited", "LE"], ["special ?edition|\\bse\\b", "Special Edition"], ["club ?sport", "Club Sport"], ["\\b1\\.8\\b", "1.8"], ["\\b1\\.6\\b", "1.6"]]},
-        {"family": "MX5_NB", "years": [1998, 2005], "name": "NB MX-5", "color": "#ED8E62", "smg_risk": false, "code": "\\bnb[12]?\\b|\\bnb[68]c\\b|2nd gen|second gen|mazda ?speed",
+        {"family": "MX5_NB", "years": [1998, 2005], "name": "NB MX-5", "color": "#FA996D", "smg_risk": false, "code": "\\bnb[12]?\\b|\\bnb[68]c\\b|2nd gen|second gen|mazda ?speed",
          "desc": "Mazda MX-5 / Miata NB 1998-2005, 1.8 (142-144 cv); Mazdaspeed turbo 2004-2005",
          "trims": [["\\bls\\b", "LS"], ["shinsen", "Shinsen"], ["special ?edition|\\bse\\b", "Special Edition"], ["club ?spec", "Club Spec"], ["\\bgs\\b", "GS"], ["\\bgx\\b", "GX"]],
-         "split": [{"match": "mazda[ -]?speed|\\bmsm\\b", "family": "MX5_NB_MS", "name": "NB MX-5 Mazdaspeed", "color": "#E47844", "desc": "Mazdaspeed MX-5 / Miata NB 2004-2005, 1.8 turbo (180 cv), 6-speed", "trims": [[".", "Mazdaspeed"]]}]},
-        {"family": "MX5_NC", "years": [2006, 2015], "name": "NC MX-5", "color": "#D97C50", "smg_risk": false, "code": "\\bnc[123]?\\b|3rd gen|third gen|\\bprht\\b",
+         "split": [{"match": "mazda[ -]?speed|\\bmsm\\b", "family": "MX5_NB_MS", "name": "NB MX-5 Mazdaspeed", "color": "#F18450", "desc": "Mazdaspeed MX-5 / Miata NB 2004-2005, 1.8 turbo (180 cv), 6-speed", "trims": [[".", "Mazdaspeed"]]}]},
+        {"family": "MX5_NC", "years": [2006, 2015], "name": "NC MX-5", "color": "#ED8E62", "smg_risk": false, "code": "\\bnc[123]?\\b|3rd gen|third gen|\\bprht\\b",
          "desc": "Mazda MX-5 NC 2006-2015, 2.0 MZR (168-170 cv); folding hardtop (PRHT) from 2007",
-         "trims": [["\\bprht\\b|hard ?top|retractable", "PRHT"], ["grand ?touring|\\bgt\\b", "GT"], ["\\bgs\\b", "GS"], ["\\bgx\\b", "GX"], ["\\bclub\\b", "Club"], ["\\bsport\\b", "Sport"], ["touring", "Touring"]]}
+         "trims": [["\\bprht\\b|hard ?top|retractable", "PRHT"], ["grand ?touring|\\bgt\\b", "GT"], ["\\bgs\\b", "GS"], ["\\bgx\\b", "GX"], ["\\bclub\\b", "Club"], ["\\bsport\\b", "Sport"], ["touring", "Touring"]]},
+        {"family": "MX5_ND", "years": [2016, 2026], "name": "ND MX-5", "color": "#D97C50", "smg_risk": false, "code": "\\bnd[12]?\\b|\\brf\\b|4th gen|fourth gen",
+         "desc": "Mazda MX-5 ND 2016-: 2.0 Skyactiv (157 cv, 184 cv from 2019); RF targa"}
       ],
       "searches": {"autotrader": ["https://www.autotrader.ca/cars/mazda/mx-5-miata/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/mazda-miata-manual/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/mazda-mx5-manual/k0c174l0"]}
     },
@@ -332,18 +346,18 @@
       "enabled": true, "model": "Z3 M / Z4 M", "brand": "BMW", "recheck": true, "match": ["\\bz ?[34] ?m\\b|\\bm ?(roadster|coup[eé]?)\\b"], "none": ["m ?sport|m ?package|m ?pkg|m ?tech|m ?aero|m ?wheels?\\b|m ?style|sdrive|\\bm ?40 ?i\\b|\\be89\\b|\\bg29\\b|1 ?series|\\b1 ?m\\b|\\be82\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["conv", "coupe"],
       "generations": [
-        {"family": "Z3M_R", "years": [1998, 2002], "name": "E36/7 Z3 M Roadster", "color": "#C4B9FC", "smg_risk": false, "code": "\\be36 ?/? ?7\\b|\\bz ?3 ?m ?roadster\\b",
+        {"family": "Z3M_R", "years": [1998, 2002], "name": "E36/7 Z3 M Roadster", "color": "#C1B4FF", "smg_risk": false, "code": "\\be36 ?/? ?7\\b|\\bz ?3 ?m ?roadster\\b",
          "bodies": ["conv"],
          "desc": "BMW Z3 M Roadster (E36/7) 1998-2002: S52 3.2 243 cv in North America to 2000, S54 319 cv 2001-2002; Europe S50 321 cv",
          "trims": [["\\bs54\\b", "S54"], ["\\bs52\\b", "S52"], ["\\bs50\\b", "S50"]]},
-        {"family": "Z3M_C", "years": [1998, 2002], "name": "E36/8 Z3 M Coupe", "color": "#C8BDFD", "smg_risk": false, "code": "\\be36 ?/? ?8\\b|clown ?shoe|bread ?(van|box|loaf)",
+        {"family": "Z3M_C", "years": [1998, 2002], "name": "E36/8 Z3 M Coupe", "color": "#C4B7FF", "smg_risk": false, "code": "\\be36 ?/? ?8\\b|clown ?shoe|bread ?(van|box|loaf)",
          "bodies": ["coupe"],
          "desc": "BMW Z3 M Coupe (E36/8) 1998-2002, the 'clown shoe': S52 243 cv to 2000, S54 319 cv 2001-2002 (North America)",
          "trims": [["\\bs54\\b", "S54"], ["\\bs52\\b", "S52"], ["\\bs50\\b", "S50"]]},
-        {"family": "Z4M_R", "years": [2006, 2008], "name": "E85 Z4 M Roadster", "color": "#AE9CF7", "smg_risk": false, "code": "\\be85\\b",
+        {"family": "Z4M_R", "years": [2006, 2008], "name": "E85 Z4 M Roadster", "color": "#AF9DF8", "smg_risk": false, "code": "\\be85\\b",
          "bodies": ["conv"],
          "desc": "BMW Z4 M Roadster (E85) 2006-2008, S54 3.2 (335 cv North America, 343 cv Europe), 6-speed manual only"},
-        {"family": "Z4M_C", "years": [2006, 2008], "name": "E86 Z4 M Coupe", "color": "#B19FFB", "smg_risk": false, "code": "\\be86\\b",
+        {"family": "Z4M_C", "years": [2006, 2008], "name": "E86 Z4 M Coupe", "color": "#B2A0FB", "smg_risk": false, "code": "\\be86\\b",
          "bodies": ["coupe"],
          "desc": "BMW Z4 M Coupe (E86) 2006-2008, S54 3.2 (335 cv North America), 6-speed manual only"}
       ],
@@ -357,10 +371,10 @@
          "desc": "Porsche Boxster 986 1997-2004: 2.5 (204 cv), 2.7 (220-228 cv) from 2000",
          "trims": [["\\b2\\.7\\b", "2.7"], ["\\b2\\.5\\b", "2.5"]],
          "split": [{"match": "box(s)?ter[ -]?s\\b|\\b3\\.2\\b", "family": "B986S", "name": "986 Boxster S", "color": "#D9B982", "desc": "Porsche Boxster S 986 2000-2004, 3.2 (253-264 cv), 6-speed", "trims": [["550", "550 Spyder Anniversary"], [".", "S"]]}]},
-        {"family": "B987", "years": [2005, 2012], "name": "987 Boxster", "color": "#AC956E", "smg_risk": false, "code": "\\b987(\\.?[12])?\\b",
+        {"family": "B987", "years": [2005, 2012], "name": "987 Boxster", "color": "#CCB48D", "smg_risk": false, "code": "\\b987(\\.?[12])?\\b",
          "desc": "Porsche Boxster 987 2005-2012: 2.7 (240-245 cv); 987.2 from 2009 with the 2.9 (255 cv)",
          "trims": [["\\b987\\.?2\\b|\\b2\\.9\\b", "987.2"], ["design ?edition", "Design Edition"], ["black ?edition", "Black Edition"]],
-         "split": [{"match": "\\bspyder\\b", "family": "B987SP", "name": "987 Boxster Spyder", "color": "#A3844F", "desc": "Porsche Boxster Spyder 2011-2012, 3.4 (320 cv), lighter, with a manual roof", "trims": [[".", "Spyder"]]}, {"match": "box(s)?ter[ -]?s\\b|\\b3\\.[24]\\b|\\brs[ -]?60\\b", "family": "B987S", "name": "987 Boxster S", "color": "#A3844F", "desc": "Porsche Boxster S 987 2005-2012: 3.2 (280-295 cv); 987.2 from 2009 with the 3.4 (310 cv)", "trims": [["rs ?60", "RS 60 Spyder"], ["\\b987\\.?2\\b|\\b3\\.4\\b", "987.2"], ["design ?edition", "Design Edition"], ["black ?edition", "Black Edition"], [".", "S"]]}]}
+         "split": [{"match": "\\bspyder\\b", "family": "B987SP", "name": "987 Boxster Spyder", "color": "#C3A36E", "desc": "Porsche Boxster Spyder 2011-2012, 3.4 (320 cv), lighter, with a manual roof", "trims": [[".", "Spyder"]]}, {"match": "box(s)?ter[ -]?s\\b|\\b3\\.[24]\\b|\\brs[ -]?60\\b", "family": "B987S", "name": "987 Boxster S", "color": "#C3A36E", "desc": "Porsche Boxster S 987 2005-2012: 3.2 (280-295 cv); 987.2 from 2009 with the 3.4 (310 cv)", "trims": [["rs ?60", "RS 60 Spyder"], ["\\b987\\.?2\\b|\\b3\\.4\\b", "987.2"], ["design ?edition", "Design Edition"], ["black ?edition", "Black Edition"], [".", "S"]]}]}
       ],
       "searches": {"autotrader": ["https://www.autotrader.ca/cars/porsche/boxster/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/porsche-boxster-manual/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/porsche-boxster-s-manual/k0c174l0"]}
     },
@@ -368,7 +382,7 @@
       "enabled": true, "model": "Integra Type R", "brand": "Acura", "recheck": true, "match": ["\\bintegra\\b", "type ?r\\b|\\bitr\\b"], "none": ["\\bdc5\\b|type ?s\\b|replica|clone|tribute|conver(sion|ted)|(type ?r|itr) ?(look|style|kit|seats?|wheels?|rims?|front|swap|badges?)|\\bgs ?r\\b|\\bls\\b|\\brs\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe", "sedan"],
       "generations": [
-        {"family": "ITR_DC2", "years": [1995, 2001], "name": "DC2 Integra Type R", "color": "#FDAECC", "smg_risk": false, "code": "\\bdc2\\b|\\bdb8\\b",
+        {"family": "ITR_DC2", "years": [1995, 2001], "name": "DC2 Integra Type R", "color": "#FFA4C7", "smg_risk": false, "code": "\\bdc2\\b|\\bdb8\\b",
          "desc": "Honda / Acura Integra Type R DC2 (DB8 4-door in Japan) 1995-2001; North America 1997-1998 and 2000-2001, B18C5 198 cv (Japan 200 cv)",
          "trims": [["\\bjdm\\b|\\b9[68] ?spec\\b|\\b00 ?spec\\b", "JDM"], ["champ(ionship)? ?white", "Championship White"], ["\\bdb8\\b|sedan|4 ?door", "4-door"]]}
       ],
@@ -378,7 +392,7 @@
       "enabled": true, "model": "RSX Type-S", "brand": "Acura", "recheck": true, "match": ["\\brsx\\b", "type ?s\\b|\\brsx ?s\\b|\\bk20a2\\b|\\bk20z1\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe"],
       "generations": [
-        {"family": "RSX_S", "years": [2002, 2006], "name": "DC5 RSX Type-S", "color": "#EB87AF", "smg_risk": false, "code": "\\bdc5\\b",
+        {"family": "RSX_S", "years": [2002, 2006], "name": "DC5 RSX Type-S", "color": "#EF8BB3", "smg_risk": false, "code": "\\bdc5\\b",
          "desc": "Acura RSX Type-S DC5 2002-2006, K20A2 2.0 with the 6-speed (203 cv; 213 cv 2005-2006 with the K20Z1)",
          "trims": [["a ?spec", "A-Spec"]]}
       ],
@@ -388,7 +402,7 @@
       "enabled": true, "model": "Civic SiR", "brand": "Honda", "recheck": true, "match": ["\\bcivic\\b", "\\bsi ?r\\b|\\bep3\\b|\\bsi\\b"], "none": ["sedan|coup[eé]?\\b|\\bcpe\\b|\\b2 ?(dr|door)\\b|\\b4 ?(dr|door|portes)\\b|\\bdx\\b|\\blx\\b|\\bex\\b|\\bse\\b|type ?r|\\bem[12]\\b|\\bes[12]\\b|\\bep[12]\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["hatch"],
       "generations": [
-        {"family": "EP3", "years": [2002, 2005], "name": "EP3 Civic SiR", "color": "#F691B9", "smg_risk": false, "code": "\\bep3\\b",
+        {"family": "EP3", "years": [2002, 2005], "name": "EP3 Civic SiR", "color": "#F792BA", "smg_risk": false, "code": "\\bep3\\b",
          "desc": "Honda Civic SiR (Si in the US) EP3 2002-2005, 3-door built in Swindon, K20A3 2.0 162 cv, 5-speed"}
       ],
       "searches": {"autotrader": ["https://www.autotrader.ca/cars/honda/civic/tr_manual?fregfrom=2002&fregto=2005"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/civic-sir/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/civic-ep3/k0c174l0"]}
@@ -404,13 +418,17 @@
       "searches": {"autotrader": ["https://www.autotrader.ca/cars/honda/civic/va_civic-type-r"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/civic-type-r/k0c174l0"]}
     },
     {
-      "enabled": true, "model": "Prelude", "brand": "Honda", "recheck": true, "match": ["\\bprelude\\b"], "none": ["hybrid|\\be ?hev\\b|\\bbb[1-4]\\b|\\bba[0-9]\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
+      "enabled": true, "model": "Prelude", "brand": "Honda", "recheck": true, "match": ["\\bprelude\\b"], "none": ["hybrid|\\be ?hev\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe"],
       "generations": [
-        {"family": "BB6", "years": [1997, 2001], "name": "BB6 Prelude", "color": "#FFA4C8", "smg_risk": false, "code": "\\bbb[68]\\b|5th gen|fifth gen",
+        {"family": "BB6", "years": [1997, 2001], "name": "BB6 Prelude", "color": "#FD9FC4", "smg_risk": false, "code": "\\bbb[68]\\b|5th gen|fifth gen",
          "desc": "Honda Prelude BB6 1997-2001 (BB8 Type S in Japan), H22A4 2.2 VTEC 203 cv with the 5-speed (Japan SiR 220 cv)",
          "trims": [["type ?sh\\b|\\bsh\\b", "Type SH"], ["type ?s\\b", "Type S"], ["s ?spec", "SiR S-spec"], ["\\bsir\\b", "SiR"], ["\\bse\\b", "SE"]],
-         "split": [{"match": "type[ -]?sh\\b|\\bsh\\b|\\batts\\b", "family": "BB6_SH", "name": "BB6 Prelude Type SH", "color": "#FD89B9", "desc": "Honda Prelude Type SH 1997-2001: the 5-speed with ATTS, which sends more torque to the outside front wheel in corners", "trims": [[".", "Type SH"]]}]}
+         "split": [{"match": "type[ -]?sh\\b|\\bsh\\b|\\batts\\b", "family": "BB6_SH", "name": "BB6 Prelude Type SH", "color": "#F985B5", "desc": "Honda Prelude Type SH 1997-2001: the 5-speed with ATTS, which sends more torque to the outside front wheel in corners", "trims": [[".", "Type SH"]]}]},
+         {"family": "BA4", "years": [1988, 1991], "name": "BA4 Prelude", "color": "#FEB6D1", "smg_risk": false, "code": "\\bba[4-7]\\b|3rd gen|third gen",
+          "desc": "Honda Prelude 3rd gen (BA4/BA5) 1988-1991, 2.0 (Si 4WS)"},
+         {"family": "BB1", "years": [1992, 1996], "name": "BB1 Prelude", "color": "#FEAACA", "smg_risk": false, "code": "\\bbb[1-4]\\b|4th gen|fourth gen",
+          "desc": "Honda Prelude 4th gen (BB1-BB4) 1992-1996, 2.2 VTEC H22 in the VTEC / SR-V"}
       ],
       "searches": {"autotrader": ["https://www.autotrader.ca/cars/honda/prelude/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/honda-prelude/k0c174l0"]}
     },
@@ -418,10 +436,10 @@
       "enabled": true, "model": "300ZX", "brand": "Nissan", "recheck": true, "match": ["\\b300 ?zx\\b|\\bfairlady ?z\\b"], "none": ["\\bz31\\b|\\b280 ?zx\\b|\\b350 ?z\\b|\\b370 ?z\\b|\\bz3[34]\\b|\\bs30\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe", "conv"],
       "generations": [
-        {"family": "Z32", "years": [1990, 2000], "name": "Z32 300ZX", "color": "#54C1E3", "smg_risk": false, "code": "\\bz32\\b",
+        {"family": "Z32", "years": [1990, 2000], "name": "Z32 300ZX", "color": "#52BFE2", "smg_risk": false, "code": "\\bz32\\b",
          "desc": "Nissan 300ZX Z32 1990-1996 (Fairlady Z to 2000 in Japan), VG30DE 3.0 non-turbo 225 cv; T-top, 2+2 and convertible (1993-1996)",
          "trims": [["convertible|cabrio|roadster", "Convertible"], ["2 ?\\+ ?2|2 ?by ?2|\\b2x2\\b", "2+2"], ["t ?tops?\\b|t ?bar", "T-top"], ["slick ?top", "Slicktop"], ["commemorative|50th", "Commemorative Edition"]],
-         "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b|naturally aspirated|vg30de\\b)).*(twin[ -]?turbo|\\btt\\b|vg30dett|\\bturbo\\b)", "family": "Z32_TT", "name": "Z32 300ZX Twin Turbo", "color": "#0AB3DB", "body": "coupe", "desc": "Nissan 300ZX Twin Turbo (Z32) 1990-1996, VG30DETT 304 cv (280 cv in Japan), coupe only", "trims": [["2 ?\\+ ?2|2 ?by ?2", "2+2"], ["t ?tops?\\b|t ?bar", "T-top"], ["slick ?top", "Slicktop"], ["commemorative|50th", "Commemorative Edition"], [".", "Twin Turbo"]]}]}
+         "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b|naturally aspirated|vg30de\\b)).*(twin[ -]?turbo|\\btt\\b|vg30dett|\\bturbo\\b)", "family": "Z32_TT", "name": "Z32 300ZX Twin Turbo", "color": "#04B1DA", "body": "coupe", "desc": "Nissan 300ZX Twin Turbo (Z32) 1990-1996, VG30DETT 304 cv (280 cv in Japan), coupe only", "trims": [["2 ?\\+ ?2|2 ?by ?2", "2+2"], ["t ?tops?\\b|t ?bar", "T-top"], ["slick ?top", "Slicktop"], ["commemorative|50th", "Commemorative Edition"], [".", "Twin Turbo"]]}]}
       ],
       "searches": {"autotrader": ["https://www.autotrader.ca/cars/nissan/300-zx"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/nissan-300zx/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/300zx-twin-turbo/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/fairlady-z-z32/k0c174l0"]}
     },
@@ -459,7 +477,7 @@
          "body": "sedan",
          "desc": "Subaru Impreza WRX STI GD 2004-2007 in North America (GDB in Japan from 2000), EJ257 2.5 turbo 304 cv, 6-speed",
          "trims": [["spec ?c", "Spec C"], ["\\bra\\b", "RA"], ["\\bs20[2-4]\\b", "S20x"], ["limited", "Limited"], ["hawk ?eye", "Hawkeye"], ["blob ?eye", "Blobeye"], ["bug ?eye|peanut ?eye", "Bugeye"]]},
-        {"family": "STI_GR", "years": [2008, 2014], "name": "GR WRX STI", "color": "#8FB1FC", "smg_risk": false, "code": "\\bgr[bf]?\\b|\\bgv[bf]?\\b",
+        {"family": "STI_GR", "years": [2008, 2014], "name": "GR WRX STI", "color": "#9CBBFD", "smg_risk": false, "code": "\\bgr[bf]?\\b|\\bgv[bf]?\\b",
          "name_by_body": {"hatch": "GR WRX STI", "sedan": "GV WRX STI"},
          "desc": "Subaru Impreza WRX STI GR hatchback (2008-2014) and GV sedan (2011-2014), EJ257 2.5 turbo 309 cv, 6-speed",
          "trims": [["spec ?c", "Spec C"], ["launch ?edition", "Launch Edition"], ["special ?edition", "Special Edition"], ["limited|\\bltd\\b", "Limited"], ["sport ?tech", "Sport-tech"], ["\\bs206\\b", "S206"]]}
@@ -470,7 +488,7 @@
       "enabled": true, "model": "Chaser", "brand": "Toyota", "recheck": true, "match": ["\\bchaser\\b"], "none": ["\\bjzx ?(8\\d|9\\d|11\\d)\\b|\\bx ?(80|90|110)\\b|\\bgx ?\\d+|\\bsx ?\\d+|\\blx ?\\d+|verossa|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["sedan"],
       "generations": [
-        {"family": "JZX100", "years": [1996, 2001], "name": "JZX100 Chaser", "color": "#BDAE40", "smg_risk": false, "code": "\\bjzx ?100\\b|\\bx ?100\\b",
+        {"family": "JZX100", "years": [1996, 2001], "name": "JZX100 Chaser", "color": "#C0B244", "smg_risk": false, "code": "\\bjzx ?100\\b|\\bx ?100\\b",
          "desc": "Toyota Chaser JZX100 1996-2001 (Japan only); Tourer V: 1JZ-GTE 2.5 single turbo with VVT-i, 280 cv, R154 5-speed",
          "trims": [["tourer ?v\\b", "Tourer V"], ["tourer ?s\\b", "Tourer S"], ["avante", "Avante"], ["\\btrd\\b", "TRD"]]}
       ],
@@ -480,10 +498,10 @@
       "enabled": true, "model": "240SX", "brand": "Nissan", "recheck": true, "match": ["\\b240 ?sx\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe", "hatch", "conv"],
       "generations": [
-        {"family": "S13_240", "years": [1989, 1994], "name": "S13 240SX", "color": "#57C4E6", "smg_risk": false, "code": "\\b[pkr]?s ?13\\b|\\brps ?13\\b",
+        {"family": "S13_240", "years": [1989, 1994], "name": "S13 240SX", "color": "#56C2E5", "smg_risk": false, "code": "\\b[pkr]?s ?13\\b|\\brps ?13\\b",
          "desc": "Nissan 240SX S13 1989-1994: coupe, fastback and convertible (1992-1994); KA24E 142 cv to 1990, KA24DE 157 cv from 1991",
          "trims": [["\\bse\\b", "SE"], ["\\ble\\b", "LE"], ["\\bxe\\b", "XE"], ["fastback|hatch", "Fastback"], ["convertible|cabrio", "Convertible"], ["\\bsr ?20", "SR20 swap"]]},
-        {"family": "S14_240", "years": [1995, 1998], "name": "S14 240SX", "color": "#4AB8DA", "smg_risk": false, "code": "\\bs ?14a?\\b",
+        {"family": "S14_240", "years": [1995, 1998], "name": "S14 240SX", "color": "#49B7D9", "smg_risk": false, "code": "\\bs ?14a?\\b",
          "body": "coupe",
          "desc": "Nissan 240SX S14 1995-1998 (facelift 'kouki' from 1997), coupe only, KA24DE 157 cv",
          "trims": [["\\bse\\b", "SE"], ["\\ble\\b", "LE"], ["kouki", "Kouki"], ["zenki", "Zenki"], ["\\bsr ?20", "SR20 swap"]]}
@@ -494,29 +512,33 @@
       "enabled": true, "model": "180SX", "brand": "Nissan", "recheck": true, "match": ["\\b180 ?sx\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["hatch"],
       "generations": [
-        {"family": "RPS13", "years": [1989, 1998], "name": "RPS13 180SX", "color": "#5AC7E9", "smg_risk": false, "code": "\\bk?rps ?13\\b",
+        {"family": "RPS13", "years": [1989, 1998], "name": "RPS13 180SX", "color": "#59C5E8", "smg_risk": false, "code": "\\bk?rps ?13\\b",
          "desc": "Nissan 180SX RPS13 1989-1998 (Japan), fastback; CA18DET 175 cv to 1991, SR20DET 205 cv from 1991",
          "trims": [["type ?x", "Type X"], ["type ?r", "Type R"], ["type ?s", "Type S"], ["kouki", "Kouki"], ["chuki", "Chuki"], ["zenki", "Zenki"], ["sileighty|sil ?80", "Sileighty"]]}
       ],
       "searches": {"kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/180sx/k0c174l0"]}
     },
     {
-      "enabled": true, "model": "86", "brand": "Toyota", "recheck": true, "match": ["\\b(gt ?)?86\\b|\\bfr ?s\\b|\\bft ?86\\b", "toyota|scion|\\bgt ?86\\b|\\bfr ?s\\b|\\bft ?86\\b"], "none": ["\\bgr ?86\\b|\\bae ?86\\b|subaru|\\bbrz\\b|corolla|trueno|levin|sprinter|\\bzn8\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
+      "enabled": true, "model": "86", "brand": "Toyota", "recheck": true, "match": ["\\b(gt ?)?86\\b|\\bfr ?s\\b|\\bft ?86\\b|\\bgr ?86\\b", "toyota|scion|\\bgt ?86\\b|\\bfr ?s\\b|\\bft ?86\\b|\\bgr ?86\\b"], "none": ["\\bae ?86\\b|subaru|\\bbrz\\b|corolla|trueno|levin|sprinter|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe"],
       "generations": [
-        {"family": "ZN6", "years": [2012, 2021], "name": "ZN6 86", "color": "#A99A27", "smg_risk": false, "code": "\\bzn6\\b",
+        {"family": "ZN6", "years": [2012, 2021], "name": "ZN6 86", "color": "#AFA02F", "smg_risk": false, "code": "\\bzn6\\b",
          "desc": "Toyota 86 / Scion FR-S / GT86 ZN6 2012-2021 (FR-S 2013-2016, Toyota 86 2017-2020 in North America), FA20 2.0 boxer 203 cv (208 cv with the manual from 2017)",
-         "trims": [["\\bfr ?s\\b", "FR-S"], ["\\btrd\\b", "TRD"], ["860", "860 Special Edition"], ["hakone", "Hakone Edition"], ["release ?series", "Release Series"], ["\\bgt ?86\\b", "GT86"], ["\\bgt\\b", "GT"]]}
+         "trims": [["\\bfr ?s\\b", "FR-S"], ["\\btrd\\b", "TRD"], ["860", "860 Special Edition"], ["hakone", "Hakone Edition"], ["release ?series", "Release Series"], ["\\bgt ?86\\b", "GT86"], ["\\bgt\\b", "GT"]]},
+        {"family": "ZN8", "years": [2022, 2026], "name": "ZN8 GR86", "color": "#A99A27", "smg_risk": false, "code": "\\bzn8\\b|\\bgr ?86\\b",
+         "desc": "Toyota GR86 (ZN8) 2022-, 2.4 FA24 boxer (234 cv)"}
       ],
-      "searches": {"autotrader": ["https://www.autotrader.ca/cars/toyota/86/tr_manual", "https://www.autotrader.ca/cars/scion/fr-s"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/toyota-86/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/scion-frs/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/scion-fr-s/k0c174l0"]}
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/toyota/86/tr_manual", "https://www.autotrader.ca/cars/scion/fr-s", "https://www.autotrader.ca/cars/toyota/gr86/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/toyota-86/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/scion-frs/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/scion-fr-s/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/toyota-gr86-manual/k0c174l0"]}
     },
     {
-      "enabled": true, "model": "BRZ", "brand": "Subaru", "recheck": true, "match": ["\\bbrz\\b"], "none": ["\\bzd8\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
+      "enabled": true, "model": "BRZ", "brand": "Subaru", "recheck": true, "match": ["\\bbrz\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe"],
       "generations": [
-        {"family": "ZC6", "years": [2012, 2020], "name": "ZC6 BRZ", "color": "#7496E3", "smg_risk": false, "code": "\\bzc6\\b",
+        {"family": "ZC6", "years": [2012, 2020], "name": "ZC6 BRZ", "color": "#85A8F6", "smg_risk": false, "code": "\\bzc6\\b",
          "desc": "Subaru BRZ ZC6 2012-2020 (North America 2013-2020), FA20 2.0 boxer 203 cv (208 cv with the manual from 2017)",
-         "trims": [["\\bts\\b", "tS"], ["series ?\\.? ?(blue|gr[ae]y|yellow|hyperblue)", "Series edition"], ["hikari", "Hikari Edition"], ["raijin", "Raijin Edition"], ["sport ?tech", "Sport-tech"], ["\\brs\\b", "RS"], ["limited", "Limited"], ["premium", "Premium"]]}
+         "trims": [["\\bts\\b", "tS"], ["series ?\\.? ?(blue|gr[ae]y|yellow|hyperblue)", "Series edition"], ["hikari", "Hikari Edition"], ["raijin", "Raijin Edition"], ["sport ?tech", "Sport-tech"], ["\\brs\\b", "RS"], ["limited", "Limited"], ["premium", "Premium"]]},
+        {"family": "ZD8", "years": [2022, 2026], "name": "ZD8 BRZ", "color": "#7496E3", "smg_risk": false, "code": "\\bzd8\\b",
+         "desc": "Subaru BRZ (ZD8) 2022-, 2.4 FA24 boxer (234 cv)"}
       ],
       "searches": {"autotrader": ["https://www.autotrader.ca/cars/subaru/brz/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/subaru-brz-manual/k0c174l0"]}
     },
@@ -530,7 +552,7 @@
         {"family": "S30_260", "years": [1974, 1978], "name": "S30 260Z", "color": "#70DBFE", "smg_risk": false, "code": "\\b260 ?z\\b",
          "desc": "Datsun 260Z (S30) 1974 in North America (to 1978 elsewhere), L26 2.6 six; 2+2 (GS30) added",
          "trims": [["2 ?\\+ ?2", "2+2"]]},
-        {"family": "S30_280", "years": [1975, 1978], "name": "S30 280Z", "color": "#6AD5F8", "smg_risk": false, "code": "\\b280 ?z\\b",
+        {"family": "S30_280", "years": [1975, 1978], "name": "S30 280Z", "color": "#6AD6F9", "smg_risk": false, "code": "\\b280 ?z\\b",
          "desc": "Datsun 280Z (S30) 1975-1978, L28 2.8 six with fuel injection; 2+2 (GS30)",
          "trims": [["2 ?\\+ ?2", "2+2"]]}
       ],
@@ -540,7 +562,7 @@
       "enabled": true, "model": "G35 Coupe", "brand": "Infiniti", "recheck": true, "match": ["\\bg ?35 ?c?\\b"], "none": ["sedan|berline|\\bg ?35 ?x\\b|\\bawd\\b|\\b4 ?(dr|door|portes)\\b|journey|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"], "none_body": ["sedan|berline|wagon"],
       "bodies": ["coupe"],
       "generations": [
-        {"family": "G35C", "years": [2003, 2007], "name": "CV35 G35 Coupe", "color": "#40B0D1", "smg_risk": false, "code": "\\bcv ?35\\b",
+        {"family": "G35C", "years": [2003, 2007], "name": "CV35 G35 Coupe", "color": "#3FAFD1", "smg_risk": false, "code": "\\bcv ?35\\b",
          "desc": "Infiniti G35 Coupe CV35 2003-2007 (Nissan Skyline coupe V35 in Japan), VQ35DE 3.5 V6; 6-speed manual 284-302 cv ('Rev-Up' engine 2005-2007)",
          "trims": [["rev ?up", "Rev-Up"], ["\\bsport\\b", "Sport"], ["premium|\\bprem\\b", "Premium"]]}
       ],
@@ -550,7 +572,7 @@
       "enabled": true, "model": "G37 Coupe", "brand": "Infiniti", "recheck": true, "match": ["\\bg ?37 ?s?\\b|\\bq ?60\\b"], "none": ["sedan|berline|\\bg ?37 ?x\\b|\\bawd\\b|\\b4 ?(dr|door|portes)\\b|convertible|cabrio|journey|red ?sport|\\b3\\.0 ?t\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"], "none_body": ["sedan|berline|wagon|convertible|cabrio"],
       "bodies": ["coupe"],
       "generations": [
-        {"family": "G37C", "years": [2008, 2015], "name": "CV36 G37 Coupe", "color": "#39AACC", "smg_risk": false, "code": "\\bcv ?36\\b",
+        {"family": "G37C", "years": [2008, 2015], "name": "CV36 G37 Coupe", "color": "#39AACB", "smg_risk": false, "code": "\\bcv ?36\\b",
          "desc": "Infiniti G37 Coupe CV36 2008-2013 (Q60 Coupe 2014-2015), VQ37VHR 3.7 V6 335 cv; the 6-speed manual came on the Sport (G37S) with a limited-slip differential",
          "trims": [["\\bipl\\b", "IPL"], ["g ?37 ?s\\b|\\bsport\\b", "Sport"], ["\\bq ?60\\b", "Q60"], ["premium", "Premium"]]}
       ],
@@ -560,7 +582,7 @@
       "enabled": true, "model": "1M", "brand": "BMW", "recheck": true, "match": ["\\b1 ?m\\b|\\b1 ?series ?m\\b", "bmw|coup|\\be82\\b|1 ?series"], "none": ["m ?sport|m ?package|m ?pkg|m ?performance|m ?tech|\\b1[23]\\d ?i\\b|\\bx1\\b|\\bm1\\b|\\bm ?1[34]\\d|\\bf2[01]\\b|\\bf40\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe"],
       "generations": [
-        {"family": "E82_1M", "years": [2011, 2012], "name": "E82 1M", "color": "#A18FE9", "smg_risk": false, "code": "\\be82\\b",
+        {"family": "E82_1M", "years": [2011, 2012], "name": "E82 1M", "color": "#A593ED", "smg_risk": false, "code": "\\be82\\b",
          "desc": "BMW 1 Series M Coupe (1M) E82 2011, N54 3.0 twin turbo 340 cv, 6-speed manual only"}
       ],
       "searches": {"autotrader": ["https://www.autotrader.ca/cars/bmw/1-series/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/bmw-1m/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/bmw-1-series-m-coupe/k0c174l0"]}
@@ -569,7 +591,7 @@
       "enabled": true, "model": "135i", "brand": "BMW", "recheck": true, "match": ["\\b135 ?is?\\b"], "none": ["\\bm ?135|\\bf2[01]\\b|xdrive|\\bx ?drive\\b|convertible|cabrio|\\be88\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"], "none_body": ["convertible|cabrio|roadster"],
       "bodies": ["coupe"],
       "generations": [
-        {"family": "E82_135", "years": [2008, 2013], "name": "E82 135i", "color": "#A492EC", "smg_risk": false, "code": "\\be82\\b",
+        {"family": "E82_135", "years": [2008, 2013], "name": "E82 135i", "color": "#A795F0", "smg_risk": false, "code": "\\be82\\b",
          "desc": "BMW 135i Coupe E82 2008-2013: N54 twin turbo 304 cv to 2010, N55 304 cv from 2011; 135is 2013 (324 cv)",
          "trims": [["135 ?is\\b", "135is"], ["m ?sport", "M Sport"], ["premium", "Premium"]]}
       ],
@@ -579,10 +601,10 @@
       "enabled": true, "model": "335i", "brand": "BMW", "recheck": true, "match": ["\\b335 ?is?\\b"], "none": ["\\bx ?i\\b|\\b335 ?xi\\b|xdrive|\\bx ?drive\\b|\\b335 ?d\\b|\\bf3[0-4]\\b|gran ?turismo|\\bgt\\b|wagon|touring|wgn|\\b435|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe", "sedan", "conv"],
       "generations": [
-        {"family": "E9X_335", "years": [2007, 2011], "name": "E9X 335i", "color": "#A795F0", "smg_risk": false, "code": "\\be9[0-3]\\b",
+        {"family": "E9X_335", "years": [2007, 2011], "name": "E9X 335i", "color": "#AA98F3", "smg_risk": false, "code": "\\be9[0-3]\\b",
          "desc": "BMW 335i E90 sedan (2007-2011), E92 coupe and E93 convertible (2007-2013): N54 twin turbo 304 cv to 2010, N55 304 cv from 2011; 335is 2011-2013 (324 cv)",
          "trims": [["335 ?is\\b", "335is"], ["m ?sport", "M Sport"], ["premium", "Premium"]]},
-        {"family": "E9X_335", "years": [2012, 2013], "name": "E9X 335i", "color": "#A795F0", "smg_risk": false, "code": "\\be9[23]\\b",
+        {"family": "E9X_335", "years": [2012, 2013], "name": "E9X 335i", "color": "#AA98F3", "smg_risk": false, "code": "\\be9[23]\\b",
          "bodies": ["coupe", "conv"],
          "desc": "BMW 335i E92 coupe and E93 convertible 2012-2013 (the 2012-2013 sedan is the F30, not tracked)",
          "trims": [["335 ?is\\b", "335is"], ["m ?sport", "M Sport"], ["premium", "Premium"]]}
@@ -593,7 +615,7 @@
       "enabled": true, "model": "M2", "brand": "BMW", "recheck": true, "match": ["\\bm ?2\\b", "bmw|\\bf87\\b|competition|\\bcs\\b|coup"], "none": ["\\bg87\\b|\\bm ?235|\\bm ?240|\\bm2 ?(pro|max|ultra|ssd)\\b|macbook|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe"],
       "generations": [
-        {"family": "M2_F87", "years": [2016, 2018], "name": "F87 M2", "color": "#9E8BE5", "smg_risk": true, "code": "\\bn55\\b",
+        {"family": "M2_F87", "years": [2016, 2018], "name": "F87 M2", "color": "#A08DE7", "smg_risk": true, "code": "\\bn55\\b",
          "desc": "BMW M2 F87 2016-2018, N55 3.0 turbo 370 cv; 6-speed manual or 7-speed M DCT"},
         {"family": "M2C_F87", "years": [2019, 2021], "name": "F87 M2 Competition", "color": "#9A88E1", "smg_risk": true, "code": "competition|\\bcomp\\b|\\bs55\\b",
          "desc": "BMW M2 Competition F87 2019-2021, S55 3.0 twin turbo 410 cv (from the M4); 6-speed manual or M DCT",
@@ -605,10 +627,10 @@
       "enabled": true, "model": "Mustang GT", "brand": "Ford", "recheck": true, "match": ["\\bmustang\\b", "\\bgt\\b"], "none": ["shelby|\\bgt ?350|\\bgt ?500|\\bmach ?(1|e)\\b|\\bboss\\b|\\bcobra\\b|roush|saleen|steeda|hennessey|\\bv6\\b|eco ?boost|\\b2\\.3\\b|\\b3\\.7\\b|\\b4\\.0\\b|\\bgt ?(look|style|kit|wheels?|rims?|badges?)\\b|\\bgt ?h\\b|\\bgt ?40\\b|dark ?horse|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe", "conv"],
       "generations": [
-        {"family": "S197_46", "years": [2005, 2010], "name": "S197 Mustang GT", "color": "#ABD4F2", "smg_risk": false, "code": "\\b4\\.6\\b|\\b3 ?v\\b",
+        {"family": "S197_46", "years": [2005, 2010], "name": "S197 Mustang GT", "color": "#9CC4E1", "smg_risk": false, "code": "\\b4\\.6\\b|\\b3 ?v\\b",
          "desc": "Ford Mustang GT S197 2005-2010, 4.6 3-valve V8 304 cv (319 cv in 2010), Tremec TR-3650 5-speed",
          "trims": [["california ?special|\\bgt ?cs\\b", "California Special"], ["premium", "Premium"], ["45th", "45th Anniversary"], ["\\bbullitt\\b", "Bullitt"], ["track ?pack", "Track Pack"], ["pony ?(pack|package)", "Pony Package"]]},
-        {"family": "S197_50", "years": [2011, 2014], "name": "S197 Mustang GT 5.0", "color": "#90B8D5", "smg_risk": false,
+        {"family": "S197_50", "years": [2011, 2014], "name": "S197 Mustang GT 5.0", "color": "#8DB5D2", "smg_risk": false,
          "desc": "Ford Mustang GT S197 2011-2014, 5.0 Coyote V8 418 cv (426 cv 2013-2014), Getrag MT82 6-speed",
          "trims": [["california ?special|\\bgt ?cs\\b", "California Special"], ["premium", "Premium"], ["track ?pack", "Track Pack"], ["brembo", "Brembo"]]},
         {"family": "S550", "years": [2015, 2023], "name": "S550 Mustang GT", "color": "#779EBA", "smg_risk": false, "code": "\\bs550\\b",
@@ -621,7 +643,7 @@
       "enabled": true, "model": "Camaro SS", "brand": "Chevrolet", "recheck": true, "match": ["\\bcamaro\\b", "\\b[12]?ss[12]?\\b|\\b1le\\b|\\bls3\\b|\\b6\\.2\\b"], "none": ["\\bzl ?1\\b|\\bz ?28\\b|\\b[123]lt\\b|\\blt[123]?\\b|\\b[12]ls\\b|\\bls\\b|\\bv6\\b|\\b3\\.6\\b|\\bcopo\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe", "conv"],
       "generations": [
-        {"family": "CAM5_SS", "years": [2010, 2015], "name": "5th-gen Camaro SS", "color": "#7CA857", "smg_risk": false,
+        {"family": "CAM5_SS", "years": [2010, 2015], "name": "5th-gen Camaro SS", "color": "#81AD5B", "smg_risk": false,
          "desc": "Chevrolet Camaro SS fifth generation 2010-2015, 6.2 LS3 V8 432 cv with the Tremec TR6060 6-speed (the automatics had the 406 cv L99); 1LE track package 2013-2015",
          "trims": [["\\b2ss\\b|\\bss ?2\\b", "2SS"], ["\\b1ss\\b|\\bss ?1\\b", "1SS"], ["\\b1le\\b", "1LE"], ["45th", "45th Anniversary"], ["transformers", "Transformers"], ["indy|pace ?car", "Indy 500"], ["\\brs\\b", "RS"], ["synergy", "Synergy"]]}
       ],
@@ -631,14 +653,14 @@
       "enabled": true, "model": "Corvette", "brand": "Chevrolet", "recheck": true, "match": ["\\bcorvette\\b|\\bvette\\b"], "none": ["\\bc[12348]\\b|sting ?ray|\\b(z ?06|zr ?1) ?(look|style|wheels?|rims?|kit)\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe", "conv"],
       "generations": [
-        {"family": "C5", "years": [1997, 2004], "name": "C5 Corvette", "color": "#B1DE8B", "smg_risk": false, "code": "\\bc5\\b",
+        {"family": "C5", "years": [1997, 2004], "name": "C5 Corvette", "color": "#98C573", "smg_risk": false, "code": "\\bc5\\b",
          "desc": "Chevrolet Corvette C5 1997-2004, LS1 5.7 V8 350-355 cv; 6-speed manual (Tremec T56) in the rear transaxle",
          "trims": [["\\bz ?51\\b", "Z51"], ["\\bfrc\\b|fixed ?roof|hard ?top", "Fixed-roof (FRC)"], ["50th", "50th Anniversary"], ["commemorative", "Commemorative Edition"], ["pace ?car", "Pace Car"], ["targa", "Targa"]],
-         "split": [{"match": "\\bz[ -]?06\\b", "family": "C5Z06", "name": "C5 Corvette Z06", "color": "#9CD06E", "body": "coupe", "desc": "Chevrolet Corvette Z06 C5 2001-2004, LS6 5.7 V8 390 cv (2001), 411 cv (2002-2004), fixed-roof hardtop, manual only", "trims": [["commemorative", "Commemorative Edition"], [".", "Z06"]]}]},
-        {"family": "C6", "years": [2005, 2013], "name": "C6 Corvette", "color": "#96C371", "smg_risk": false, "code": "\\bc6\\b",
+         "split": [{"match": "\\bz[ -]?06\\b", "family": "C5Z06", "name": "C5 Corvette Z06", "color": "#84B756", "body": "coupe", "desc": "Chevrolet Corvette Z06 C5 2001-2004, LS6 5.7 V8 390 cv (2001), 411 cv (2002-2004), fixed-roof hardtop, manual only", "trims": [["commemorative", "Commemorative Edition"], [".", "Z06"]]}]},
+        {"family": "C6", "years": [2005, 2013], "name": "C6 Corvette", "color": "#8FBB6A", "smg_risk": false, "code": "\\bc6\\b",
          "desc": "Chevrolet Corvette C6 2005-2013: LS2 6.0 V8 406 cv to 2007, LS3 6.2 436 cv (442 cv with the NPP exhaust) from 2008; Grand Sport 2010-2013",
          "trims": [["grand ?sport|\\bgs\\b", "Grand Sport"], ["\\bz ?51\\b", "Z51"], ["\\b[34]lt\\b", "3LT/4LT"], ["\\b[12]lt\\b", "1LT/2LT"], ["\\b427\\b", "427 Convertible"], ["60th", "60th Anniversary"], ["targa", "Targa"]],
-         "split": [{"match": "\\bzr[ -]?1\\b|\\b3zr\\b", "family": "C6ZR1", "name": "C6 Corvette ZR1", "color": "#82B553", "body": "coupe", "desc": "Chevrolet Corvette ZR1 C6 2009-2013, LS9 6.2 supercharged V8 647 cv", "trims": [["\\b3zr\\b", "3ZR"], [".", "ZR1"]]}, {"match": "\\bz[ -]?06\\b", "family": "C6Z06", "name": "C6 Corvette Z06", "color": "#82B553", "body": "coupe", "desc": "Chevrolet Corvette Z06 C6 2006-2013, LS7 7.0 V8 512 cv, aluminium frame", "trims": [["carbon", "Carbon Limited Edition"], ["\\b3lz\\b", "3LZ"], ["\\b2lz\\b", "2LZ"], ["\\b1lz\\b", "1LZ"], [".", "Z06"]]}]}
+         "split": [{"match": "\\bzr[ -]?1\\b|\\b3zr\\b", "family": "C6ZR1", "name": "C6 Corvette ZR1", "color": "#7BAE4C", "body": "coupe", "desc": "Chevrolet Corvette ZR1 C6 2009-2013, LS9 6.2 supercharged V8 647 cv", "trims": [["\\b3zr\\b", "3ZR"], [".", "ZR1"]]}, {"match": "\\bz[ -]?06\\b", "family": "C6Z06", "name": "C6 Corvette Z06", "color": "#7BAE4C", "body": "coupe", "desc": "Chevrolet Corvette Z06 C6 2006-2013, LS7 7.0 V8 512 cv, aluminium frame", "trims": [["carbon", "Carbon Limited Edition"], ["\\b3lz\\b", "3LZ"], ["\\b2lz\\b", "2LZ"], ["\\b1lz\\b", "1LZ"], [".", "Z06"]]}]}
       ],
       "searches": {"autotrader": ["https://www.autotrader.ca/cars/chevrolet/corvette/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/corvette-manual/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/corvette-z06/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/corvette-c5/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/corvette-c6/k0c174l0"]}
     },
@@ -646,12 +668,207 @@
       "enabled": true, "model": "GTO", "brand": "Pontiac", "recheck": true, "match": ["\\bgto\\b"], "none": ["mitsubishi|\\bvr ?4\\b|\\b3000 ?gt\\b|monaro|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
       "bodies": ["coupe"],
       "generations": [
-        {"family": "GTO_LS1", "years": [2004, 2004], "name": "LS1 GTO", "color": "#A3D17E", "smg_risk": false, "code": "\\bls1\\b|\\b5\\.7\\b",
+        {"family": "GTO_LS1", "years": [2004, 2004], "name": "LS1 GTO", "color": "#94C06E", "smg_risk": false, "code": "\\bls1\\b|\\b5\\.7\\b",
          "desc": "Pontiac GTO 2004 (built by Holden from the Monaro), LS1 5.7 V8 355 cv, Tremec T56 6-speed"},
-        {"family": "GTO_LS2", "years": [2005, 2006], "name": "LS2 GTO", "color": "#89B564", "smg_risk": false, "code": "\\bls2\\b|\\b6\\.0\\b",
+        {"family": "GTO_LS2", "years": [2005, 2006], "name": "LS2 GTO", "color": "#8AB665", "smg_risk": false, "code": "\\bls2\\b|\\b6\\.0\\b",
          "desc": "Pontiac GTO 2005-2006, LS2 6.0 V8 406 cv, Tremec T56 6-speed"}
       ],
       "searches": {"autotrader": ["https://www.autotrader.ca/cars/pontiac/gto"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/pontiac-gto/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "Golf GTI", "brand": "Volkswagen", "recheck": true, "match": ["\\bgti\\b"], "none": ["\\bgli\\b|jetta|polo|\\bup\\b|golf ?r\\b|\\br32\\b|\\bmk ?8\\b|\\bautobahn\\b ?dsg|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["hatch"],
+      "generations": [
+        {"family": "GTI_MK5", "years": [2006, 2009], "name": "Mk5 GTI", "color": "#80B1E3", "smg_risk": false, "code": "\\bmk ?v\\b|\\bmk ?5\\b",
+         "desc": "VW GTI Mk5 (Typ 1K) 2006-2009, 2.0 TFSI turbo (203 cv)"},
+        {"family": "GTI_MK6", "years": [2010, 2014], "name": "Mk6 GTI", "color": "#79AADC", "smg_risk": false, "code": "\\bmk ?vi\\b|\\bmk ?6\\b",
+         "desc": "VW GTI Mk6 2010-2014, 2.0 TSI turbo (203-213 cv)"},
+        {"family": "GTI_MK7", "years": [2015, 2021], "name": "Mk7 GTI", "color": "#6D9DCE", "smg_risk": false, "code": "\\bmk ?vii\\b|\\bmk ?7(\\.5)?\\b",
+         "desc": "VW Golf GTI Mk7 / 7.5 2015-2021, 2.0 TSI EA888 (213-231 cv)"}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/volkswagen/gti/tr_manual", "https://www.autotrader.ca/cars/volkswagen/golf-gti/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/vw-gti-manual/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/volkswagen-golf-gti-manual/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "Golf R", "brand": "Volkswagen", "recheck": true, "match": ["\\bgolf ?r\\b"], "none": ["\\bline\\b|\\br ?line\\b|\\br32\\b|\\bmk ?8\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["hatch"],
+      "generations": [
+        {"family": "GOLFR_MK7", "years": [2015, 2019], "name": "Mk7 Golf R", "color": "#73A3D5", "smg_risk": false, "code": "\\bmk ?7(\\.5)?\\b",
+         "desc": "VW Golf R Mk7 2015-2019, 2.0 TSI, 4Motion all-wheel drive (296 cv)"}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/volkswagen/golf-r/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/golf-r-manual/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/vw-golf-r/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "Focus ST", "brand": "Ford", "recheck": true, "match": ["\\bfocus\\b", "\\bst\\b"], "none": ["\\bst ?line\\b|\\brs\\b|\\bse\\b ?sport|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["hatch"],
+      "generations": [
+        {"family": "FOCUS_ST3", "years": [2013, 2018], "name": "Mk3 Focus ST", "color": "#85ADCA", "smg_risk": false,
+         "desc": "Ford Focus ST Mk3 2013-2018, 2.0 EcoBoost (256 cv), 6-speed manual"}
+      ],
+      "searches": {"kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/ford-focus-st/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/focus-st-manual/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "Fiesta ST", "brand": "Ford", "recheck": true, "match": ["\\bfiesta\\b", "\\bst\\b"], "none": ["\\bst ?line\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["hatch"],
+      "generations": [
+        {"family": "FIESTA_ST", "years": [2014, 2019], "name": "Mk7 Fiesta ST", "color": "#7EA5C2", "smg_risk": false,
+         "desc": "Ford Fiesta ST 2014-2019, 1.6 EcoBoost (200 cv), 6-speed manual only"}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/ford/fiesta/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/ford-fiesta-st/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "Mazdaspeed3", "brand": "Mazda", "recheck": true, "match": ["mazda ?speed ?3|\\bms ?3\\b|\\bspeed ?3\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["hatch"],
+      "generations": [
+        {"family": "MS3_BK", "years": [2007, 2009], "name": "BK Mazdaspeed3", "color": "#E6885C", "smg_risk": false, "code": "\\bbk\\b|1st gen|gen ?1",
+         "desc": "Mazdaspeed3 (BK) 2007-2009, 2.3 DISI turbo (267 cv), 6-speed manual only"},
+        {"family": "MS3_BL", "years": [2010, 2013], "name": "BL Mazdaspeed3", "color": "#E08256", "smg_risk": false, "code": "\\bbl\\b|2nd gen|gen ?2",
+         "desc": "Mazdaspeed3 (BL) 2010-2013, 2.3 DISI turbo (267 cv), 6-speed manual only"}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/mazda/mazdaspeed3"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/mazdaspeed3/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/mazdaspeed-3/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "Veloster N", "brand": "Hyundai", "recheck": true, "match": ["\\bveloster ?n\\b"], "none": ["\\bn ?line\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["hatch"],
+      "generations": [
+        {"family": "VELO_N", "years": [2019, 2022], "name": "JS Veloster N", "color": "#D08DDA", "smg_risk": false,
+         "desc": "Hyundai Veloster N 2019-2022, 2.0 turbo (279 cv with Performance Pack); 6-speed manual or 8-speed DCT"}
+      ],
+      "searches": {"kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/veloster-n/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "Elantra N", "brand": "Hyundai", "recheck": true, "match": ["\\belantra ?n\\b"], "none": ["\\bn ?line\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["sedan"],
+      "generations": [
+        {"family": "ELAN_N", "years": [2022, 2026], "name": "CN7 Elantra N", "color": "#BD7CC8", "smg_risk": false,
+         "desc": "Hyundai Elantra N 2022-, 2.0 turbo (280 cv); 6-speed manual or 8-speed DCT"}
+      ],
+      "searches": {"kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/elantra-n-manual/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/hyundai-elantra-n/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "Cooper S", "brand": "MINI", "recheck": true, "match": ["\\bcooper ?s\\b|\\bjcw\\b|john ?cooper"], "none": ["countryman|clubman|paceman|\\bse\\b|electric|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["hatch", "conv"],
+      "generations": [
+        {"family": "R53", "years": [2002, 2006], "name": "R53 Cooper S", "color": "#92E2B7", "smg_risk": false, "code": "\\br53\\b",
+         "bodies": ["hatch"],
+         "desc": "MINI Cooper S (R53) 2002-2006, 1.6 supercharged (165-170 cv; JCW up to 210 cv)"},
+        {"family": "R52", "years": [2005, 2008], "name": "R52 Cooper S Convertible", "color": "#5CAB83", "smg_risk": false, "code": "\\br52\\b",
+         "bodies": ["conv"],
+         "desc": "MINI Cooper S Convertible (R52) 2005-2008, 1.6 supercharged"}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/mini/cooper/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/mini-cooper-s-r53/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/mini-cooper-s-supercharged/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "Cayman", "brand": "Porsche", "recheck": true, "match": ["\\bcayman\\b"], "none": ["\\b718\\b|\\bgt4\\b ?rs|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["coupe"],
+      "generations": [
+        {"family": "C987", "years": [2006, 2012], "name": "987 Cayman", "color": "#B79F78", "smg_risk": false, "code": "\\b987(\\.?[12])?\\b",
+         "split": [{"match": "cayman[ -]?s\\b|\\b3\\.4\\b|\\bcayman r\\b", "family": "C987S", "name": "987 Cayman S", "color": "#AD8E59", "desc": "Porsche Cayman S 987 2006-2012, 3.4 (295-320 cv); Cayman R 2011-2012"}],
+         "desc": "Porsche Cayman 987 2006-2012: 2.7 (245 cv), 2.9 from 2009 (265 cv)"},
+        {"family": "C981", "years": [2013, 2016], "name": "981 Cayman", "color": "#AC956E", "smg_risk": false, "code": "\\b981\\b",
+         "split": [{"match": "cayman[ -]?s\\b|\\bgts\\b|\\bgt4\\b|\\b3\\.4\\b|\\b3\\.8\\b", "family": "C981S", "name": "981 Cayman S / GTS / GT4", "color": "#A3844F", "desc": "Porsche Cayman S 981 (3.4, 325 cv), GTS (340 cv) and GT4 (3.8, 385 cv)"}],
+         "desc": "Porsche Cayman 981 2013-2016, 2.7 (275 cv)"}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/porsche/cayman/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/porsche-cayman-manual/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "911 Carrera", "brand": "Porsche", "recheck": true, "match": ["\\b911\\b|\\bcarrera\\b"], "none": ["\\bturbo\\b|\\bgt ?[23]\\b|\\bgts\\b|\\b99[123]\\b|\\b964\\b|\\b930\\b|\\bsc\\b|cayman|boxster|carrera ?gt\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["coupe", "conv"],
+      "generations": [
+        {"family": "P996", "years": [1999, 2004], "name": "996 Carrera", "color": "#D8BF97", "smg_risk": false, "code": "\\b996\\b",
+         "desc": "Porsche 911 Carrera (996) 1999-2004, 3.4 then 3.6 flat-six (300-320 cv); Carrera 4 and 4S"},
+        {"family": "P997", "years": [2005, 2012], "name": "997 Carrera", "color": "#C2AA82", "smg_risk": false, "code": "\\b997(\\.?[12])?\\b",
+         "split": [{"match": "carrera ?4?s\\b|\\b3\\.8\\b", "family": "P997S", "name": "997 Carrera S", "color": "#B89963", "desc": "Porsche 911 Carrera S (997) 3.8 (355-385 cv); Carrera 4S"}],
+         "desc": "Porsche 911 Carrera (997) 2005-2012, 3.6 (325-345 cv); 997.2 from 2009"}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/porsche/911/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/porsche-911-manual/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/porsche-996/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/porsche-997/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "540i", "brand": "BMW", "recheck": true, "match": ["\\b540 ?i\\b"], "none": ["\\bm5\\b|\\be60\\b|\\bf10\\b|\\bg30\\b|xdrive|540 ?xi|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["sedan"],
+      "generations": [
+        {"family": "E39_540", "years": [1997, 2003], "name": "E39 540i", "color": "#C6BBFF", "smg_risk": false, "code": "\\be39\\b",
+         "desc": "BMW 540i (E39) 1997-2003, 4.4 V8 (286 cv); 6-speed manual sedans"}
+      ],
+      "searches": {"kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/bmw-540i-manual/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/bmw-540i-6-speed/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/e39-540i/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "3 Series (E36)", "brand": "BMW", "recheck": true, "match": ["\\b3(18|23|25|28) ?(i|is|ic|ti)\\b|\\be36\\b"], "none": ["\\bm3\\b|\\be46\\b|\\be90\\b|\\be30\\b|\\bz3\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["coupe", "sedan", "conv", "hatch"],
+      "generations": [
+        {"family": "E36_3", "years": [1992, 1999], "name": "E36 3 Series", "color": "#CCC2FF", "smg_risk": false, "code": "\\be36\\b",
+         "desc": "BMW 3 Series E36 1992-1999 (not M3): 318i/is/ti, 323i/is, 325i/is, 328i/is"}
+      ],
+      "searches": {"kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/bmw-e36-manual/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/bmw-328is/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/bmw-328i-e36/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/bmw-325i-e36/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "M235i / M240i", "brand": "BMW", "recheck": true, "match": ["\\bm ?2[34]0? ?i\\b|\\bm235 ?i\\b|\\bm240 ?i\\b"], "none": ["xdrive|gran ?coupe|\\bg42\\b|\\bf44\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["coupe", "conv"],
+      "generations": [
+        {"family": "F22_M235", "years": [2014, 2016], "name": "F22 M235i", "color": "#A290EA", "smg_risk": false,
+         "desc": "BMW M235i (F22/F23) 2014-2016, 3.0 N55 turbo six (326 cv); 6-speed manual"},
+        {"family": "F22_M240", "years": [2017, 2021], "name": "F22 M240i", "color": "#9D8BE4", "smg_risk": false,
+         "desc": "BMW M240i (F22/F23) 2017-2021, 3.0 B58 turbo six (340 cv); 6-speed manual"}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/bmw/2-series/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/bmw-m235i/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/bmw-m240i-manual/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "IS300", "brand": "Lexus", "recheck": true, "match": ["\\bis ?300\\b"], "none": ["\\bh\\b ?hybrid|\\bawd\\b|\\bf ?sport\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["sedan"],
+      "generations": [
+        {"family": "IS300_XE10", "years": [2001, 2005], "name": "XE10 IS300", "color": "#DDA49A", "smg_risk": false, "code": "\\bxe10\\b|\\bsxe10\\b|\\bjce10\\b|\\b2jz\\b",
+         "desc": "Lexus IS300 (XE10) 2001-2005, 2JZ-GE 3.0 six (218 cv); 5-speed manual 2002-2004"}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/lexus/is-300"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/lexus-is300-manual/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/is300-5-speed/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "280ZX", "brand": "Datsun", "recheck": true, "match": ["\\b280 ?zx\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["coupe"],
+      "generations": [
+        {"family": "S130", "years": [1978, 1983], "name": "S130 280ZX", "color": "#67D3F6", "smg_risk": false, "code": "\\bs130\\b",
+         "split": [{"match": "\\bturbo\\b", "family": "S130_T", "name": "S130 280ZX Turbo", "color": "#33C5EE", "desc": "Datsun 280ZX Turbo 1981-1983, L28ET (180 cv)"}],
+         "desc": "Datsun 280ZX (S130) 1978-1983, 2.8 L28 six; turbo 1981-1983 (180 cv)"}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/datsun/280zx"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/datsun-280zx/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/280zx/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "WRX", "brand": "Subaru", "recheck": true, "match": ["\\bwrx\\b"], "none": ["\\bsti\\b|\\bs ?ti\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["sedan", "wagon", "hatch"],
+      "generations": [
+        {"family": "WRX_GD", "years": [2002, 2007], "name": "GD WRX", "color": "#AAC4FD", "smg_risk": false, "code": "\\bgd[ab]?\\b|\\bgg\\b|bug ?eye|blob ?eye|hawk ?eye",
+         "desc": "Subaru Impreza WRX (GD/GG) 2002-2007, 2.0 then 2.5 turbo boxer"},
+        {"family": "WRX_GR", "years": [2008, 2014], "name": "GR WRX", "color": "#8FB1FC", "smg_risk": false, "code": "\\bg[ehrv]\\b",
+         "desc": "Subaru Impreza WRX (GE/GH/GR/GV) 2008-2014, 2.5 turbo boxer (227-268 cv)"},
+        {"family": "WRX_VA", "years": [2015, 2021], "name": "VA WRX", "color": "#7C9FEC", "smg_risk": false, "code": "\\bva\\b",
+         "desc": "Subaru WRX (VA) 2015-2021, 2.0 FA20DIT turbo (272 cv)"}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/subaru/wrx/tr_manual"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/subaru-wrx-manual/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "Chevrolet SS", "brand": "Chevrolet", "recheck": true, "match": ["\\bchev(rolet|y)? ss\\b"], "none": ["camaro|impala|cobalt|\\bhhr\\b|silverado|malibu|monte|trailblazer|tahoe|colorado|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["sedan"],
+      "generations": [
+        {"family": "CHEVY_SS", "years": [2014, 2017], "name": "VF Chevrolet SS", "color": "#7CA857", "smg_risk": false,
+         "desc": "Chevrolet SS 2014-2017 (Holden VF), 6.2 LS3 V8 (421 cv); 6-speed manual from 2015"}
+      ],
+      "searches": {"kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/chevrolet-ss-sedan/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/chevy-ss-manual/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "G8 GXP", "brand": "Pontiac", "recheck": true, "match": ["\\bg8\\b", "\\bgxp\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["sedan"],
+      "generations": [
+        {"family": "G8_GXP", "years": [2009, 2009], "name": "G8 GXP", "color": "#86B160", "smg_risk": false,
+         "desc": "Pontiac G8 GXP 2009, 6.2 LS3 V8 (421 cv); 6-speed manual or automatic"}
+      ],
+      "searches": {"kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/pontiac-g8-gxp/k0c174l0"]}
+    },
+    {
+      "enabled": true, "model": "CTS-V", "brand": "Cadillac", "recheck": true, "match": ["\\bcts ?v\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+      "bodies": ["sedan", "coupe", "wagon"],
+      "generations": [
+        {"family": "CTSV2", "years": [2009, 2015], "name": "2nd gen CTS-V", "color": "#BBABDB", "smg_risk": false,
+         "desc": "Cadillac CTS-V (2nd gen) 2009-2015, 6.2 supercharged LSA V8 (564 cv); 6-speed manual on sedan and coupe"}
+      ],
+      "searches": {"autotrader": ["https://www.autotrader.ca/cars/cadillac/cts-v"], "kijiji": ["https://www.kijiji.ca/b-cars-trucks/canada/cadillac-cts-v-manual/k0c174l0", "https://www.kijiji.ca/b-cars-trucks/canada/cts-v/k0c174l0"]}
     }
   ]
 }

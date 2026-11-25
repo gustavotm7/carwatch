@@ -122,6 +122,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .pk-c[aria-expanded=true] .chev{transform:rotate(180deg)}
 .pk-cb{border-bottom:1px solid var(--line)}
 .pk-cb[hidden]{display:none}
+.pk-flag.dd{box-shadow:none}
 .pk-flag{flex:none;width:27px;height:18px;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
 .pk-bh{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:10px;padding:12px 16px 8px;background:var(--bg)}
 .sq{flex:none;width:12px;height:12px;border-radius:3px;background:var(--c)}
@@ -1097,7 +1098,7 @@ function garageGens(m) {                         // the starred generations of a
 }
 function adCounts() { const k = {}; for (const c of DATA.cars) k[c.name] = (k[c.name] || 0) + 1; return k; }
 const modelOfName = n => n.model || ((DATA.families || []).find(f => f.family === n.family) || {}).model || n.name;
-const mKey = n => (n.brand || "") + "|" + modelOfName(n);
+const mKey = n => (n.brand || "") + "|" + modelOfName(n) + (n.daily ? "|d" : "");   // daily drivers are their own model card
 function modelsHere() {                          // every model of this list: its generations, ads, new ads, best deal, a photo
   const st = {};
   for (const c of DATA.cars) {
@@ -1112,7 +1113,7 @@ function modelsHere() {                          // every model of this list: it
   const M = new Map();
   const add = n => {
     const k = mKey(n);
-    if (!M.has(k)) M.set(k, {key: k, brand: n.brand, model: modelOfName(n), gens: [], n: 0, fresh: 0, from: Infinity, best: null, deals: 0, photo: "", ps: -1});
+    if (!M.has(k)) M.set(k, {key: k, brand: n.brand, model: modelOfName(n), daily: !!n.daily, gens: [], n: 0, fresh: 0, from: Infinity, best: null, deals: 0, photo: "", ps: -1});
     const m = M.get(k), s = st[n.name];
     if (m.gens.some(g => g.name === n.name)) return;
     m.gens.push({...n, s: s || null});
@@ -1314,17 +1315,31 @@ window.addEventListener("popstate", () => {
 });
 
 // ---------- car picker: brands grouped by country, search, counts, pins ----------
-const BRAND_COUNTRY = {Acura: "jp", Datsun: "jp", Honda: "jp", Infiniti: "jp", Mazda: "jp", Mitsubishi: "jp", Nissan: "jp",
+const BRAND_COUNTRY = {Lexus: "jp", Volkswagen: "de", Audi: "de", Cadillac: "us", Fiat: "it", Renault: "fr", "Citroën": "fr", Peugeot: "fr",
+  MINI: "gb", Puma: "br",
+  Acura: "jp", Datsun: "jp", Honda: "jp", Infiniti: "jp", Mazda: "jp", Mitsubishi: "jp", Nissan: "jp",
   Subaru: "jp", Toyota: "jp", BMW: "de", Porsche: "de", Chevrolet: "us", Ford: "us", Pontiac: "us", Hyundai: "kr"};
 const MINI_FLAG = {                           // small flags for the country headings in the car picker
   jp: '<svg class="pk-flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="6" fill="#BC002D"/></svg>',
   de: '<svg class="pk-flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="7" fill="#000"/><rect y="6.67" width="30" height="6.67" fill="#DD0000"/><rect y="13.33" width="30" height="6.67" fill="#FFCE00"/></svg>',
   us: '<svg class="pk-flag" viewBox="0 0 38 20" aria-hidden="true"><rect width="38" height="20" fill="#fff"/><rect y="0.00" width="38" height="1.54" fill="#B22234"/><rect y="3.08" width="38" height="1.54" fill="#B22234"/><rect y="6.15" width="38" height="1.54" fill="#B22234"/><rect y="9.23" width="38" height="1.54" fill="#B22234"/><rect y="12.31" width="38" height="1.54" fill="#B22234"/><rect y="15.38" width="38" height="1.54" fill="#B22234"/><rect y="18.46" width="38" height="1.54" fill="#B22234"/><rect width="15.2" height="10.77" fill="#3C3B6E"/></svg>',
   kr: '<svg class="pk-flag" viewBox="0 0 36 24" aria-hidden="true"><rect width="36" height="24" fill="#fff"/><g transform="rotate(33.7 18 12)"><path d="M12 12a6 6 0 0 1 12 0z" fill="#CD2E3A"/><path d="M12 12a6 6 0 0 0 12 0z" fill="#0047A0"/><circle cx="15" cy="12" r="3" fill="#CD2E3A"/><circle cx="21" cy="12" r="3" fill="#0047A0"/></g><g stroke="#000" stroke-width="1.1"><path d="M5.2 6.8l3.2-4.8M6.4 7.6l3.2-4.8M7.6 8.4l3.2-4.8M25.4 15.6l3.2 4.8M26.6 14.8l3.2 4.8M27.8 14l3.2 4.8M25.4 8.4l3.2-4.8M27.8 6.8l3.2-4.8M5.2 17.2l3.2 4.8M7.6 15.6l3.2 4.8"/></g></svg>',
+  it: '<svg class="pk-flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#009246"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#CE2B37"/></svg>',
+  fr: '<svg class="pk-flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#0055A4"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#EF4135"/></svg>',
+  gb: '<svg class="pk-flag" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#012169"/><path d="M0 0l60 30M60 0 0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30M60 0 0 30" stroke="#C8102E" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></svg>',
+  br: '<svg class="pk-flag" viewBox="0 0 30 21" aria-hidden="true"><rect width="30" height="21" fill="#009C3B"/><path d="M15 2.5 27 10.5 15 18.5 3 10.5z" fill="#FFDF00"/><circle cx="15" cy="10.5" r="4.6" fill="#002776"/></svg>',
+  dd: '<svg class="pk-flag dd" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" rx="2" fill="#2a313b"/><path d="M5 10.5h14M7 10.5l1.6-3.6h6.8l1.6 3.6M8 12.6v.4M16 12.6v.4" fill="none" stroke="#aeb7c2" stroke-width="1.4" stroke-linecap="round"/></svg>',
   xx: "",
 };
-const COUNTRY_ORDER = [["jp", "Japan", "Japão"], ["de", "Germany", "Alemanha"], ["us", "USA", "EUA"], ["kr", "South Korea", "Coreia do Sul"], ["xx", "Other", "Outros"]];
-const CAR_ALIAS = {"S2000": "s2k", "Lancer Evolution": "evo evolution", "MX-5": "miata eunos roadster", "Skyline GT-R": "skyline godzilla",
+const COUNTRY_ORDER = [["jp", "Japan", "Japão"], ["de", "Germany", "Alemanha"], ["us", "USA", "EUA"], ["kr", "South Korea", "Coreia do Sul"],
+  ["it", "Italy", "Itália"], ["fr", "France", "França"], ["gb", "United Kingdom", "Reino Unido"], ["br", "Brazil", "Brasil"], ["xx", "Other", "Outros"],
+  ["dd", "Daily drivers", "Carros do dia a dia"]];
+const groupOf = m => m.daily ? "dd" : BRAND_COUNTRY[m.brand] || "xx";   // a country, or the daily drivers
+const CAR_ALIAS = {"Golf GTI": "gti mk5 mk6 mk7 golf", "Golf R": "mk7", "Mazdaspeed3": "ms3 speed3", "Cooper S": "mini r53 jcw",
+  "911 Carrera": "996 997 carrera porsche", "Cayman": "987 981", "3 Series (E36)": "e36 328is 325i 318is", "M235i / M240i": "f22 2 series",
+  "Chevrolet SS": "chevy ss", "Gol GTI": "gti quadrado bolinha", "Escort XR3": "xr3", "Kadett GSi": "gsi", "Vectra GSi": "gsi",
+  "Opala": "ss comodoro diplomata 250", "Uno Turbo": "uno turbo", "Marea Turbo": "weekend", "Punto T-Jet": "tjet", "Sandero R.S.": "rs renault sport",
+  "S2000": "s2k", "Lancer Evolution": "evo evolution", "MX-5": "miata eunos roadster", "Skyline GT-R": "skyline godzilla",
   "Supra": "mk3 mk4 mkiii mkiv", "AE86": "hachiroku corolla trueno levin", "86": "gt86 frs scion", "BRZ": "gt86 frs",
   "350Z": "fairlady", "370Z": "fairlady", "300ZX": "fairlady", "240Z / 260Z / 280Z": "fairlady", "Civic Type R": "ctr", "Integra Type R": "itr",
   "Impreza WRX STI": "subie", "Corvette": "vette", "Genesis Coupe": "gen coupe", "Z3 M / Z4 M": "clown shoe clownshoe",
@@ -1438,11 +1453,12 @@ function pkFill() {
     html = live.map(m => modelCard(m, single, true)).join("")
       || `<div class="pk-empty">${PK_SORT === "new" ? L("No new ads in the last 3 days.", "Nenhum anúncio novo nos últimos 3 dias.") : L("No good or great prices right now.", "Nenhum preço bom ou ótimo agora.")}</div>`;
   } else {
-    const by = {};
-    for (const m of ms) (by[m.brand] ??= []).push(m);
-    const here = COUNTRY_ORDER.filter(([k]) => Object.keys(by).some(b => (BRAND_COUNTRY[b] || "xx") === k));
+    const G = {};                                 // group (country or daily drivers) -> brand -> models
+    for (const m of ms) ((G[groupOf(m)] ??= {})[m.brand] ??= []).push(m);
+    const here = COUNTRY_ORDER.filter(([k]) => G[k]);
     for (const [k, en, pt] of here) {
-      const bs = Object.keys(by).filter(b => (BRAND_COUNTRY[b] || "xx") === k)
+      const by = G[k];
+      const bs = Object.keys(by)
         .sort((a, b) => (by[b].some(m => m.n) - by[a].some(m => m.n)) || a.localeCompare(b));   // brands with ads first, A to Z
       const open = toks.length > 0 || here.length === 1 || PK_OPEN.has(k);
       const ads = bs.reduce((s, b) => s + by[b].reduce((x, m) => x + m.n, 0), 0);
@@ -1458,7 +1474,7 @@ function pkFill() {
         const on = single ? !state.ana && state.brand === b : state.brands.includes(b);
         html += `<div class="pk-b"><div class="pk-bh"><b>${esc(b)}</b>
             <span class="n">${tot ? `${nf(tot)} ${L(tot === 1 ? "ad" : "ads", tot === 1 ? "anúncio" : "anúncios")}` : L("no ads right now", "sem anúncios agora")}</span>
-            ${tot ? `<button class="pk-all" type="button" data-pball="${esc(b)}" aria-pressed="${on}" aria-label="${esc(L(`All ${b}`, `Todos ${b}`))}">${L("All", "Todos")}</button>` : ""}</div>
+            ${tot && k !== "dd" ? `<button class="pk-all" type="button" data-pball="${esc(b)}" aria-pressed="${on}" aria-label="${esc(L(`All ${b}`, `Todos ${b}`))}">${L("All", "Todos")}</button>` : ""}</div>
           ${by[b].sort((x, y) => (y.n > 0) - (x.n > 0)).map(m => modelCard(m, single, false)).join("")}</div>`;
       }
       html += `</div>`;
@@ -1537,6 +1553,32 @@ const PICK_CATS = [
    pt: ["Espaço para negociar", "Anunciados há 60 dias ou mais por preço justo ou melhor: o vendedor pode ceder."],
    test: c => c.days >= 60 && ["great", "good", "fair"].includes(dealOf(vsOf(c))), rank: c => c.days},
 ];
+PICK_CATS.push(
+  {id: "hothatch", grp: "type", en: ["Hot hatches", "Practical hatchbacks with real performance."], pt: ["Hot hatches", "Hatches práticos com desempenho de verdade."],
+   src: "What Car, PistonHeads, Auto Express, Grassroots Motorsports",
+   fam: ["GTI_MK5", "GTI_MK6", "GTI_MK7", "GOLFR_MK7", "FOCUS_ST3", "FIESTA_ST", "MS3_BK", "MS3_BL", "VELO_N", "R53", "EP3", "FK8",
+         "GOLF4_GTI", "GOL_GTI1", "GOL_GTI2", "GOL_GTI3", "GOL_GTS", "PUNTO_TJET", "SANDERO_RS", "DS3_THP", "P208_GT", "F500_ABARTH", "KA_SPORT", "UNO_TURBO", "XR3_MK3", "XR3_MK5", "KADETT_GSI"]},
+  {id: "brclassic", grp: "type", en: ["Brazilian classics", "The Brazilian-built cars collectors chase, several up strongly on Fipe."],
+   pt: ["Clássicos nacionais", "Os nacionais que os colecionadores procuram; vários valorizaram forte na Fipe."], src: "Fipe via NSC Total, AutoPapo, Autoo, Garagem 360",
+   fam: ["GOL_GTI1", "GOL_GTI2", "GOL_GTI3", "GOL_GTS", "XR3_MK3", "XR3_MK5", "KADETT_GSI", "VECTRA_GSI", "OMEGA_A", "OPALA", "OPALA_SS", "PUMA_GT",
+         "UNO_TURBO", "TEMPRA_TURBO", "MAREA_TURBO", "CHEVETTE"]},
+  {id: "brturbo", grp: "type", en: ["Brazilian factory turbos", "From the 1994 Uno Turbo to the T-Jet."], pt: ["Turbos de fábrica nacionais", "Do Uno Turbo de 1994 ao T-Jet."],
+   src: "AutoPapo, iCarros", fam: ["UNO_TURBO", "TEMPRA_TURBO", "MAREA_TURBO", "PUNTO_TJET", "GOLF4_GTI"]},
+  {id: "dailyd", grp: "money", en: ["Daily drivers", "The sensible cars on the list."], pt: ["Carros do dia a dia", "Os carros sensatos da lista."], daily: true});
+const PICK_MORE = {                              // the new cars in the categories they belong to
+  track: ["MX5_ND", "ZN8", "ZD8", "FG2_SI", "FG4_SI", "FC3_SI", "GTI_MK5", "GTI_MK6", "GTI_MK7", "FOCUS_ST3", "FIESTA_ST", "C987", "C987S", "C981", "C981S", "SANDERO_RS"],
+  drift: ["E36_3", "IS300_XE10", "CHEVETTE", "OPALA", "OPALA_SS", "ZN8", "ZD8"],
+  revs: ["FG2_SI", "B986S", "P996", "P997", "P997S", "C987S", "C981S"],
+  classic: ["GOL_GTI1", "GOL_GTI2", "XR3_MK3", "VECTRA_GSI", "OMEGA_A", "OPALA_SS", "UNO_TURBO", "S130", "S130_T", "BA4", "BB1", "R53", "TT_8N"],
+  sleeper: ["E39_540", "CHEVY_SS", "G8_GXP", "CTSV2", "OMEGA_A", "MAREA_TURBO"],
+  tuner: ["GTI_MK5", "GTI_MK6", "GTI_MK7", "GOLFR_MK7", "FOCUS_ST3", "MS3_BK", "MS3_BL", "VELO_N", "ELAN_N", "WRX_GD", "WRX_GR", "WRX_VA", "S130_T",
+          "GOLF4_GTI", "PUNTO_TJET", "MAREA_TURBO", "TT_8N"],
+  easy: ["MX5_ND", "ZN8", "ZD8", "FG2_SI", "FG4_SI", "IS300_XE10"],
+  v8: ["CHEVY_SS", "G8_GXP", "CTSV2", "E39_540"],
+  awd: ["WRX_GD", "WRX_GR", "WRX_VA", "GOLFR_MK7", "TT_8N"],
+  jdm90: ["BA4", "BB1"],
+};
+for (const k of PICK_CATS) if (PICK_MORE[k.id]) k.fam = [...k.fam, ...PICK_MORE[k.id]];
 const PICK_GROUPS = [["today", "Today", "Hoje"], ["type", "By kind of car", "Por tipo de carro"], ["money", "Price and condition", "Preço e estado"]];
 let PICK_OPEN = new Set(["garage"]);
 function pickable(c) {
@@ -1565,6 +1607,7 @@ function pickWhy(c) {                            // up to three short reasons
 function picksView() {
   const near = LOC.active ? applyLoc(DATA.cars.slice()) : (LOCAL = null);
   const nearIds = new Set((near || []).map(c => c.id));
+  const dailyNames = new Set([...(DATA.names || []), ...(DATA.names_all || [])].filter(n => n.daily).map(n => n.name));
   const pool = DATA.cars.filter(pickable);
   for (const c of pool) c._near = nearIds.has(c.id);
   const M = modelsHere(), cats = [];
@@ -1572,7 +1615,7 @@ function picksView() {
   if (gNames.size) cats.push({id: "garage", grp: "today", en: [L("Your garage", "Sua garagem"), ""], pt: ["Sua garagem", ""], cars: topFive(pool.filter(c => gNames.has(c.name)))});
   for (const k of PICK_CATS) {
     const fam = k.fam ? new Set(k.fam) : null;
-    const cs = pool.filter(c => (!fam || fam.has(c.family)) && (!k.test || k.test(c)));
+    const cs = pool.filter(c => (!!k.daily === dailyNames.has(c.name)) && (!fam || fam.has(c.family)) && (!k.test || k.test(c)));
     if (cs.length >= 3) cats.push({...k, cars: topFive(cs, k.rank)});
   }
   // what's new since the last data day this phone saw, and what dropped out (sold or taken down)

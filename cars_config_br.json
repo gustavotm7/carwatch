@@ -12,11 +12,11 @@
        {"family": "E30M3", "years": [1986, 1991], "name": "E30 M3", "color": "#CEC5FE", "smg_risk": false, "code": "\\be30\\b",
         "desc": "BMW E30 M3 1986-1991 (North America 1988-1991), S14 2.3 four, 195-200 cv; Evolution and Sport Evolution in Europe",
         "trims": [["sport ?evo|evo(lution)? ?(iii|3)\\b", "Sport Evolution"], ["evo(lution)? ?(ii|2)\\b", "Evolution II"], ["\\bevo(lution)?\\b", "Evolution"], ["europameister", "Europameister"], ["cecotto|ravaglia", "Cecotto / Ravaglia"], ["convertible|cabrio", "Convertible"]]},
-       {"family": "E36M3", "fipe": {"brand": "BMW", "match": "^M3 (3\\.2 24V|(Coup|Cabrio)\\S* 3\\.0)", "versions": false}, "years": [1992, 1999], "name": "E36 M3", "color": "#CBC1FE", "smg_risk": true,
+       {"family": "E36M3", "fipe": {"brand": "BMW", "match": "^M3 (3\\.2 24V|(Coup|Cabrio)\\S* 3\\.0)", "versions": false}, "years": [1992, 1999], "name": "E36 M3", "color": "#C9BEFF", "smg_risk": true,
         "desc": "BMW E36 M3 1992-1999", "trims": [["\\bevo\\b|3\\.2", "3.2 Evo"], ["\\blightweight|\\bltw\\b", "Lightweight"], ["\\bgt\\b", "GT"]]},
-       {"family": "E46M3", "fipe": {"brand": "BMW", "match": "^M3 3\\.2 24V", "versions": false}, "years": [2001, 2006], "name": "E46 M3", "color": "#BEB0FE", "smg_risk": true,
+       {"family": "E46M3", "fipe": {"brand": "BMW", "match": "^M3 3\\.2 24V", "versions": false}, "years": [2001, 2006], "name": "E46 M3", "color": "#BCADFF", "smg_risk": true,
         "desc": "BMW E46 M3 2001-2006", "trims": [["\\bcsl\\b", "CSL"], ["\\bzcp\\b|competition", "Competition (ZCP)"]]},
-       {"family": "E9XM3", "fipe": {"brand": "BMW", "match": "^M3 (Coup.|Sedan|Cabrio) 4\\.0", "versions": false}, "years": [2008, 2013], "name": "E9X M3", "color": "#AB99F3", "smg_risk": true,
+       {"family": "E9XM3", "fipe": {"brand": "BMW", "match": "^M3 (Coup.|Sedan|Cabrio) 4\\.0", "versions": false}, "years": [2008, 2013], "name": "E9X M3", "color": "#AD9BF6", "smg_risk": true,
         "name_by_body": {"sedan": "E90 M3", "coupe": "E92 M3", "conv": "E93 M3"},
         "desc": "BMW E90 / E92 / E93 M3 2008-2013", "trims": [["\\bgts\\b", "GTS"], ["\\bcrt\\b", "CRT"], ["\\bzcp\\b|competition", "Competition (ZCP)"]]}
      ],
@@ -28,8 +28,8 @@
 
     {"enabled": true, "model": "M5", "brand": "BMW", "make": "bmw", "match": ["\\bm5\\b"], "bodies": ["sedan"],
      "generations": [
-       {"family": "E39M5", "fipe": {"brand": "BMW", "match": "^M5 5\\.0", "versions": false}, "years": [1999, 2003], "name": "E39 M5", "color": "#C1B4FF", "smg_risk": false, "desc": "BMW E39 M5 1999-2003"},
-       {"family": "E60M5", "fipe": {"brand": "BMW", "match": "^M5 5\\.0", "versions": false}, "years": [2005, 2010], "name": "E60 M5", "color": "#B8A8FC", "smg_risk": true, "desc": "BMW E60 M5 2005-2010"}
+       {"family": "E39M5", "fipe": {"brand": "BMW", "match": "^M5 5\\.0", "versions": false}, "years": [1999, 2003], "name": "E39 M5", "color": "#BFB0FF", "smg_risk": false, "desc": "BMW E39 M5 1999-2003"},
+       {"family": "E60M5", "fipe": {"brand": "BMW", "match": "^M5 5\\.0", "versions": false}, "years": [2005, 2010], "name": "E60 M5", "color": "#B7A6FE", "smg_risk": true, "desc": "BMW E60 M5 2005-2010"}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/bmw/series-5-m5"],
                   "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/m5"]},
@@ -40,7 +40,7 @@
     {"enabled": true, "model": "330i", "brand": "BMW", "make": "bmw", "match": ["\\b330 ?c? ?i\\b"], "none": ["touring|wagon|wgn|\\bxi\\b|xdrive"],
      "bodies": ["sedan", "coupe", "conv"],
      "generations": [
-       {"family": "E46_330", "fipe": {"brand": "BMW", "match": "^330C?i", "versions": false, "auto": "^330C?iA"}, "years": [2000, 2006], "name": "E46 330i", "color": "#BBACFD", "smg_risk": false,
+       {"family": "E46_330", "fipe": {"brand": "BMW", "match": "^330C?i", "versions": false, "auto": "^330C?iA"}, "years": [2000, 2006], "name": "E46 330i", "color": "#BAAAFF", "smg_risk": false,
         "name_by_body": {"coupe": "E46 330Ci", "conv": "E46 330Ci"},
         "desc": "BMW E46 330i / 330Ci 2000-2006", "trims": [["zhp|performance", "ZHP"], ["motorsport|m ?sport", "M Sport"]]}
      ],
@@ -59,7 +59,7 @@
 
     {"enabled": true, "model": "350Z", "brand": "Nissan", "make": "nissan", "match": ["\\b350 ?z\\b"], "bodies": ["coupe", "conv"],
      "generations": [
-       {"family": "Z350", "fipe": {"brand": "Nissan", "match": "^350Z", "versions": false}, "years": [2003, 2009], "name": "Z33 350Z", "color": "#3DADCF", "smg_risk": false, "desc": "Nissan 350Z (Z33) 2003-2009",
+       {"family": "Z350", "fipe": {"brand": "Nissan", "match": "^350Z", "versions": false}, "years": [2003, 2009], "name": "Z33 350Z", "color": "#3CACCE", "smg_risk": false, "desc": "Nissan 350Z (Z33) 2003-2009",
         "trims": [["nismo", "NISMO"], ["35th", "35th Anniversary"], ["roadster", "Roadster"]]}
      ],
      "searches": {"mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/nissan/370z",
@@ -78,39 +78,27 @@
                ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/nissan/370z/cambio.manual"],
                ["Mercado Livre", "https://lista.mercadolivre.com.br/nissan-370z-manual"]]},
 
-    {"enabled": true, "model": "Civic", "brand": "Honda", "make": "honda", "match": ["\\bcivic\\b"], "none": ["^(?!.*\\bsi\\b).*(cup[eê]|coup[eéê])|\\bhatch|type ?r"],
-     "bodies": ["sedan"],
+    {"enabled": true, "model": "Civic", "brand": "Honda", "recheck": true, "make": "honda", "match": ["\\bcivic\\b"], "none": ["\\bhatch|type ?r"],
+     "bodies": ["sedan", "coupe"],
      "generations": [
-       {"family": "FA5", "fipe": {"brand": "Honda", "match": "^Civic Sed.*\\b(1\\.8|2\\.0)\\b", "versions": true}, "years": [2007, 2011], "name": "FA5 Civic", "color": "#E07DA6", "smg_risk": false,
+       {"family": "FA5", "bodies": ["sedan"], "fipe": {"brand": "Honda", "match": "^Civic Sed.*\\b(1\\.8|2\\.0)\\b", "versions": true}, "years": [2007, 2011], "name": "FA5 Civic", "color": "#E884AD", "smg_risk": false,
         "desc": "Honda Civic 8th gen sedan 2007-2011", "trims": [["\\bsi\\b", "Si"], ["\\bexs\\b", "EXS"], ["\\blxl\\b", "LXL"], ["\\blxs\\b", "LXS"]],
-        "split": [{"match": "\\bsi\\b", "family": "FA5_SI", "name": "FA5 Civic Si", "color": "#D76797",
+        "split": [{"match": "\\bsi\\b", "family": "FA5_SI", "name": "FA5 Civic Si", "color": "#DF6E9E",
                    "desc": "Honda Civic Si 8th gen sedan (2.0, manual)", "trims": [["\\bsi\\b", "Si"]]}]},
-       {"family": "FB", "fipe": {"brand": "Honda", "match": "^Civic Sed.*\\b(1\\.8|2\\.0)\\b", "versions": true}, "years": [2012, 2016], "name": "FB Civic", "color": "#DB79A1", "smg_risk": false, "allow_auto": true,
+       {"family": "FG4_SI", "years": [2012, 2015], "name": "FG4 Civic Si coupe", "color": "#DD7BA3", "smg_risk": false, "code": "\\bfg4\\b",
+        "need": "\\bsi\\b",
+        "desc": "Honda Civic Si coupe (FG4) 2012-2015, 2.4 K24Z7 (204-208 cv), 6-speed manual",
+        "body": "coupe"},
+       {"family": "FC3_SI", "years": [2017, 2020], "name": "FC3 Civic Si coupe", "color": "#D977A0", "smg_risk": false, "code": "\\bfc3\\b",
+        "need": "\\bsi\\b",
+        "desc": "Honda Civic Si coupe (FC3) 2017-2020, 1.5 turbo (208 cv), 6-speed manual",
+        "body": "coupe"},
+       {"family": "FB", "bodies": ["sedan"], "daily": true, "fipe": {"brand": "Honda", "match": "^Civic Sed.*\\b(1\\.8|2\\.0)\\b", "versions": true}, "years": [2012, 2016], "name": "FB Civic", "color": "#E17EA6", "smg_risk": false, "allow_auto": true,
         "desc": "Honda Civic 9th gen sedan 2012-2016", "trims": [["\\bsi\\b", "Si"], ["\\bexr\\b", "EXR"], ["\\blxr\\b", "LXR"], ["\\blxl\\b", "LXL"], ["\\blxs\\b", "LXS"]],
-        "split": [{"match": "\\bsi\\b", "family": "FB_SI", "name": "FB Civic Si", "color": "#D26292", "allow_auto": false, "body": "coupe",
+        "split": [{"match": "\\bsi\\b", "family": "FB_SI", "daily": false, "name": "FB Civic Si", "color": "#D86797", "allow_auto": false, "body": "coupe",
                    "desc": "Honda Civic Si 9th gen (2.4, manual); sold in Brazil as a coupe only", "trims": [["\\bsi\\b", "Si"]]}]}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/honda/civic/2007/manual", "https://napista.com.br/busca/honda/civic/2008/manual",
-                              "https://napista.com.br/busca/honda/civic/2009/manual", "https://napista.com.br/busca/honda/civic/2010/manual",
-                              "https://napista.com.br/busca/honda/civic/2011/manual", "https://napista.com.br/busca/honda/civic/2012/manual",
-                              "https://napista.com.br/busca/honda/civic/2013/manual", "https://napista.com.br/busca/honda/civic/2014/manual",
-                              "https://napista.com.br/busca/honda/civic/2015/manual", "https://napista.com.br/busca/honda/civic/2016/manual",
-                              "https://napista.com.br/busca/honda/civic/2012",
-                              "https://napista.com.br/busca/honda/civic/2013",
-                              "https://napista.com.br/busca/honda/civic/2014",
-                              "https://napista.com.br/busca/honda/civic/2015",
-                              "https://napista.com.br/busca/honda/civic/2016"],
-                  "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/s/cambio-manual",
-                               "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2008/s/cambio-manual",
-                               "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2010/s/cambio-manual",
-                               "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2012/s/cambio-manual",
-                               "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2014/s/cambio-manual",
-                               "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2016/s/cambio-manual",
-                               "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2012/s/cambio-automatico",
-                               "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2013/s/cambio-automatico",
-                               "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2014/s/cambio-automatico",
-                               "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2015/s/cambio-automatico",
-                               "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2016/s/cambio-automatico"]},
+     "searches": {"napista": ["https://napista.com.br/busca/honda/civic/2007/manual", "https://napista.com.br/busca/honda/civic/2008/manual", "https://napista.com.br/busca/honda/civic/2009/manual", "https://napista.com.br/busca/honda/civic/2010/manual", "https://napista.com.br/busca/honda/civic/2011/manual", "https://napista.com.br/busca/honda/civic/2012/manual", "https://napista.com.br/busca/honda/civic/2013/manual", "https://napista.com.br/busca/honda/civic/2014/manual", "https://napista.com.br/busca/honda/civic/2015/manual", "https://napista.com.br/busca/honda/civic/2016/manual", "https://napista.com.br/busca/honda/civic/2012", "https://napista.com.br/busca/honda/civic/2013", "https://napista.com.br/busca/honda/civic/2014", "https://napista.com.br/busca/honda/civic/2015", "https://napista.com.br/busca/honda/civic/2016", "https://napista.com.br/busca/honda/civic/si"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2008/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2010/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2012/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2014/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2016/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2012/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2013/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2014/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2015/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2016/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2018/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2019/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2020/s/cambio-manual"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/honda/civic?gb=1"],
                ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/honda/civic/de.2007/cambio.manual"],
                ["Mercado Livre", "https://lista.mercadolivre.com.br/honda-civic-manual"]],
@@ -121,7 +109,7 @@
     {"enabled": true, "model": "Yaris sedan", "brand": "Toyota", "make": "toyota", "match": ["\\byaris\\b", "sedan|sed[aã]\\b|\\bsed\\b"], "none": ["hatch|cross"],
      "bodies": ["sedan"],
      "generations": [
-       {"family": "YARIS_S", "fipe": {"brand": "Toyota", "match": "^YARIS.*Sed", "versions": true}, "years": [2018, 2024], "name": "Yaris Sedan", "color": "#AFA130", "smg_risk": false, "allow_auto": true,
+       {"family": "YARIS_S", "daily": true, "fipe": {"brand": "Toyota", "match": "^YARIS.*Sed", "versions": true}, "years": [2018, 2024], "name": "Yaris Sedan", "color": "#B4A636", "smg_risk": false, "allow_auto": true,
         "desc": "Toyota Yaris sedan (Brazil) 2018-2024", "trims": [["\\bxls\\b", "XLS"], ["\\bxs\\b", "XS"], ["\\bxl\\b", "XL"], ["\\blive\\b", "Live"]]}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/toyota/yaris/manual",
@@ -149,8 +137,8 @@
 
     {"enabled": true, "model": "S2000", "brand": "Honda", "match": ["\\bs ?2000\\b"], "bodies": ["conv"],
      "generations": [
-       {"family": "S2K_AP1", "years": [1999, 2003], "name": "AP1 S2000", "color": "#FB96BE", "smg_risk": false, "desc": "Honda S2000 AP1 1999-2003 (F20C, 9,000 rpm)"},
-       {"family": "S2K_AP2", "years": [2004, 2009], "name": "AP2 S2000", "color": "#E682AB", "smg_risk": false, "desc": "Honda S2000 AP2 2004-2009 (F22C1)",
+       {"family": "S2K_AP1", "years": [1999, 2003], "name": "AP1 S2000", "color": "#FA95BE", "smg_risk": false, "desc": "Honda S2000 AP1 1999-2003 (F20C, 9,000 rpm)"},
+       {"family": "S2K_AP2", "years": [2004, 2009], "name": "AP2 S2000", "color": "#EC88B0", "smg_risk": false, "desc": "Honda S2000 AP2 2004-2009 (F22C1)",
         "trims": [["\\bcr\\b|club racer", "CR"]]}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/honda/s2000"]},
@@ -162,7 +150,7 @@
      "generations": [
        {"family": "GC_BK1", "years": [2010, 2012], "name": "BK1 Genesis Coupe", "color": "#F4B2FE", "smg_risk": false,
         "desc": "Hyundai Genesis Coupe BK1 2010-2012 (2.0T 210 cv, 3.8 V6 306 cv)", "trims": [["3\\.8|\\bv6\\b", "3.8 V6"], ["2\\.0", "2.0T"]]},
-       {"family": "GC_BK2", "years": [2013, 2016], "name": "BK2 Genesis Coupe", "color": "#BD7CC8", "smg_risk": false,
+       {"family": "GC_BK2", "years": [2013, 2016], "name": "BK2 Genesis Coupe", "color": "#E39FED", "smg_risk": false,
         "desc": "Hyundai Genesis Coupe BK2 2013-2016 (2.0T 274 cv, 3.8 V6 348 cv)", "trims": [["3\\.8|\\bv6\\b", "3.8 V6"], ["2\\.0", "2.0T"]]}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/hyundai/genesis"],
@@ -172,11 +160,11 @@
 
     {"enabled": true, "model": "NSX", "brand": "Honda", "match": ["\\bnsx\\b"], "bodies": ["coupe"],
      "generations": [
-       {"family": "NSX_NA1", "years": [1991, 1996], "name": "NA1 NSX", "color": "#FEB6D1", "smg_risk": false, "desc": "Honda / Acura NSX NA1 1991-1996 (3.0 C30A, 5-speed, pop-up headlights)",
+       {"family": "NSX_NA1", "years": [1991, 1996], "name": "NA1 NSX", "color": "#FFAFCE", "smg_risk": false, "desc": "Honda / Acura NSX NA1 1991-1996 (3.0 C30A, 5-speed, pop-up headlights)",
         "trims": [["nsx ?-? ?t\\b|targa|open ?top", "NSX-T"], ["type ?r|nsx ?-? ?r\\b", "Type R"]]},
-       {"family": "NSX_NA2", "years": [1997, 2001], "name": "NA2 NSX", "color": "#FE9CC3", "smg_risk": false, "desc": "Honda / Acura NSX NA2 1997-2001 (3.2 C32B, 6-speed, pop-up headlights)",
+       {"family": "NSX_NA2", "years": [1997, 2001], "name": "NA2 NSX", "color": "#FE98C1", "smg_risk": false, "desc": "Honda / Acura NSX NA2 1997-2001 (3.2 C32B, 6-speed, pop-up headlights)",
         "trims": [["zanardi", "Zanardi"], ["nsx ?-? ?t\\b|targa|open ?top", "NSX-T"], ["type ?s", "Type S"]]},
-       {"family": "NSX_NA2F", "years": [2002, 2005], "name": "NA2 NSX facelift", "color": "#F08CB4", "smg_risk": false, "desc": "Honda / Acura NSX NA2 facelift 2002-2005 (3.2 C32B, 6-speed, fixed headlights)",
+       {"family": "NSX_NA2F", "years": [2002, 2005], "name": "NA2 NSX facelift", "color": "#F38EB7", "smg_risk": false, "desc": "Honda / Acura NSX NA2 facelift 2002-2005 (3.2 C32B, 6-speed, fixed headlights)",
         "trims": [["nsx ?-? ?t\\b|targa|open ?top", "NSX-T"], ["type ?r|nsx ?-? ?r\\b", "NSX-R"], ["type ?s", "Type S"]]}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/honda/nsx"],
@@ -187,14 +175,14 @@
     {"enabled": true, "model": "Supra", "brand": "Toyota", "recheck": true, "match": ["\\bsupra\\b"], "none": ["celica|\\bgr ?supra\\b|\\ba90\\b|\\ba60\\b|\\bma ?6[0-7]\\b"],
      "bodies": ["coupe"],
      "generations": [
-       {"family": "A70", "years": [1986, 1992], "name": "A70 Supra", "color": "#D1C356", "smg_risk": false, "code": "\\ba70\\b|\\bma ?7[01]\\b|\\bga ?70\\b|\\bjza ?70\\b|\\bmk ?(iii|3)\\b|\\b7m\\b",
+       {"family": "A70", "years": [1986, 1992], "name": "A70 Supra", "color": "#D2C458", "smg_risk": false, "code": "\\ba70\\b|\\bma ?7[01]\\b|\\bga ?70\\b|\\bjza ?70\\b|\\bmk ?(iii|3)\\b|\\b7m\\b",
         "desc": "Toyota Supra A70 (MA70 / MA71) 1986-1992 in North America (to 1993 in Japan), 7M-GE 3.0 non-turbo 203 cv",
         "trims": [["targa|sport ?roof", "Sport Roof"]],
-        "split": [{"match": "^(?!.*(non[ -]?turbo|7m[ -]?ge\\b|\\bn/?a\\b)).*(\\bturbo\\b|7m[ -]?gte|1jz|twin[ -]?turbo|\\btt\\b)", "family": "A70_TT", "name": "A70 Supra Turbo", "color": "#C4B323", "desc": "Toyota Supra A70 Turbo: 7M-GTE 3.0 turbo 235 cv (US 1987-1992); JZA70 1JZ-GTE 2.5 twin turbo in Japan (1990-1993)", "trims": [["turbo ?a\\b", "Turbo A"], ["1jz", "1JZ-GTE"], ["targa|sport ?roof", "Sport Roof"], [".", "Turbo"]]}]},
-       {"family": "A80", "years": [1993, 2002], "name": "A80 Supra", "color": "#C3B548", "smg_risk": false, "code": "\\ba80\\b|\\bjza ?80\\b|\\bmk ?(iv|4)\\b",
+        "split": [{"match": "^(?!.*(non[ -]?turbo|7m[ -]?ge\\b|\\bn/?a\\b)).*(\\bturbo\\b|7m[ -]?gte|1jz|twin[ -]?turbo|\\btt\\b)", "family": "A70_TT", "name": "A70 Supra Turbo", "color": "#C5B426", "desc": "Toyota Supra A70 Turbo: 7M-GTE 3.0 turbo 235 cv (US 1987-1992); JZA70 1JZ-GTE 2.5 twin turbo in Japan (1990-1993)", "trims": [["turbo ?a\\b", "Turbo A"], ["1jz", "1JZ-GTE"], ["targa|sport ?roof", "Sport Roof"], [".", "Turbo"]]}]},
+       {"family": "A80", "years": [1993, 2002], "name": "A80 Supra", "color": "#C6B84B", "smg_risk": false, "code": "\\ba80\\b|\\bjza ?80\\b|\\bmk ?(iv|4)\\b",
         "desc": "Toyota Supra A80 1993-2002 (North America to 1998), 2JZ-GE 3.0 non-turbo (225 cv JDM, 223 cv US)",
         "trims": [["\\bsz ?r\\b", "SZ-R"], ["\\bsz\\b", "SZ"], ["\\bna ?t\\b", "NA-T"], ["\\brz ?s\\b", "RZ-S"], ["\\brz\\b", "RZ"], ["\\bgz\\b", "GZ"], ["twin ?turbo|\\btt\\b|2jz ?gte|\\bturbo\\b", "Turbo"]],
-        "split": [{"match": "^(?!.*(non[ -]?turbo|\\bna[ -]?t\\b|n/a\\b|\\bsz\\b|\\bsz[ -]?r\\b|2jz[ -]?ge\\b)).*(twin[ -]?turbo|\\btt\\b|2jz[ -]?gte|\\bturbo\\b|\\brz\\b|\\brz[ -]?s\\b|\\bgz\\b)", "family": "A80_TT", "name": "A80 Supra Turbo", "color": "#B6A517", "desc": "Toyota Supra A80 Turbo, 2JZ-GTE sequential twin turbo (280 cv JDM, 324 cv US)", "trims": [["\\brz ?s\\b", "RZ-S"], ["\\brz\\b", "RZ"], ["\\bgz\\b", "GZ"], [".", "Turbo"]]}]}
+        "split": [{"match": "^(?!.*(non[ -]?turbo|\\bna[ -]?t\\b|n/a\\b|\\bsz\\b|\\bsz[ -]?r\\b|2jz[ -]?ge\\b)).*(twin[ -]?turbo|\\btt\\b|2jz[ -]?gte|\\bturbo\\b|\\brz\\b|\\brz[ -]?s\\b|\\bgz\\b)", "family": "A80_TT", "name": "A80 Supra Turbo", "color": "#B9A80A", "desc": "Toyota Supra A80 Turbo, 2JZ-GTE sequential twin turbo (280 cv JDM, 324 cv US)", "trims": [["\\brz ?s\\b", "RZ-S"], ["\\brz\\b", "RZ"], ["\\bgz\\b", "GZ"], [".", "Turbo"]]}]}
      ],
      "searches": {"mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/supra"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=toyota%20supra"], ["Mercado Livre", "https://lista.mercadolivre.com.br/toyota-supra"]]},
@@ -205,11 +193,11 @@
        {"family": "RX7_FB", "years": [1978, 1985], "name": "FB RX-7", "color": "#FEBDA0", "smg_risk": false, "code": "\\bfb\\b|\\bsa ?22c?\\b|\\bsa\\b|1st gen|first gen|\\b12a\\b",
         "desc": "Mazda RX-7 first generation (SA22C / FB) 1978-1985, 12A rotary; GSL-SE with the 13B 1984-85",
         "trims": [["gsl ?se", "GSL-SE"], ["\\bgsl\\b", "GSL"], ["\\bgs\\b", "GS"], ["limited", "Limited"]]},
-       {"family": "RX7_FC", "years": [1986, 1991], "name": "FC RX-7", "color": "#FEAF8B", "smg_risk": false, "code": "\\bfc\\b|fc3[sc]|2nd gen|second gen",
+       {"family": "RX7_FC", "years": [1986, 1991], "name": "FC RX-7", "color": "#FFB391", "smg_risk": false, "code": "\\bfc\\b|fc3[sc]|2nd gen|second gen",
         "desc": "Mazda RX-7 FC3S 1986-1991 (Japan to 1992), 13B 148 cv US; convertible 1988-1991",
         "trims": [["turbo ?(ii|2)|\\btii\\b|\\bturbo\\b", "Turbo II"], ["\\bgxl\\b", "GXL"], ["\\bgtu ?s?\\b", "GTUs"], ["\\bse\\b", "SE"], ["convertible|cabrio", "Convertible"], ["infini", "Infini"]],
-        "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b)).*(turbo|\\bt[ -]?ii\\b|\\btii\\b|13b[ -]?t\\b|infini)", "family": "RX7_FC_T2", "name": "FC RX-7 Turbo II", "color": "#FD9666", "desc": "Mazda RX-7 FC Turbo II, 13B-T turbo (185 cv, 203 cv from 1989, US)", "trims": [["convertible|cabrio", "Convertible"], ["infini", "Infini"], [".", "Turbo II"]]}]},
-       {"family": "RX7_FD", "years": [1992, 2002], "name": "FD RX-7", "color": "#F7966A", "smg_risk": false, "code": "\\bfd\\b|fd3s|3rd gen|third gen",
+        "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b)).*(turbo|\\bt[ -]?ii\\b|\\btii\\b|13b[ -]?t\\b|infini)", "family": "RX7_FC_T2", "name": "FC RX-7 Turbo II", "color": "#FE9A6C", "desc": "Mazda RX-7 FC Turbo II, 13B-T turbo (185 cv, 203 cv from 1989, US)", "trims": [["convertible|cabrio", "Convertible"], ["infini", "Infini"], [".", "Turbo II"]]}]},
+       {"family": "RX7_FD", "years": [1992, 2002], "name": "FD RX-7", "color": "#FEA176", "smg_risk": false, "code": "\\bfd\\b|fd3s|3rd gen|third gen",
         "desc": "Mazda RX-7 FD3S 1992-2002 (North America 1993-1995), 13B-REW sequential twin turbo, 259 cv US, up to 280 cv JDM",
         "trims": [["spirit ?r", "Spirit R"], ["type ?rs\\b", "Type RS"], ["type ?rz", "Type RZ"], ["type ?rb", "Type RB"], ["type ?r\\b", "Type R"], ["\\br2\\b", "R2"], ["\\br1\\b", "R1"], ["touring", "Touring"], ["bathurst", "Bathurst"]]}
      ],
@@ -219,7 +207,7 @@
     {"enabled": true, "model": "RX-8", "brand": "Mazda", "match": ["\\brx ?8\\b"],
      "bodies": ["coupe"],
      "generations": [
-       {"family": "RX8", "years": [2003, 2012], "name": "SE3P RX-8", "color": "#E38559", "smg_risk": false,
+       {"family": "RX8", "years": [2003, 2012], "name": "SE3P RX-8", "color": "#F39467", "smg_risk": false,
         "desc": "Mazda RX-8 SE3P 2003-2012 (North America 2004-2011), Renesis 13B-MSP rotary; 6-speed 241 cv US (235 cv from 2009)",
         "trims": [["spirit ?r", "Spirit R"], ["\\br3\\b", "R3"], ["type ?rs", "Type RS"], ["type ?s\\b", "Type S"], ["40th", "40th Anniversary"], ["shinka", "Shinka"], ["\\bgt\\b|grand touring", "GT"], ["\\bgs\\b", "GS"], ["\\bsport\\b", "Sport"]]}
      ],
@@ -229,13 +217,13 @@
     {"enabled": true, "model": "Skyline GT-R", "brand": "Nissan", "match": ["\\bgt ?r\\b", "skyline|\\br3[234]\\b|bnr ?3[24]|bcnr ?33"], "none": ["\\bgts\\b|\\bgts ?t\\b|\\bgt ?t\\b|gtst|25 ?gt|gts ?4|\\bhcr ?32\\b|\\becr ?33\\b|\\ber ?34\\b|replica|clone|tribute|conver(sion|ted)|(gt ?r|gtr) ?(look|style|kit|body|front|bumper|badge)"],
      "bodies": ["coupe"],
      "generations": [
-       {"family": "GTR_R32", "years": [1989, 1994], "name": "R32 GT-R", "color": "#5DC9EC", "smg_risk": false, "code": "\\br ?32\\b|bnr ?32",
+       {"family": "GTR_R32", "years": [1989, 1994], "name": "R32 GT-R", "color": "#5CC8EA", "smg_risk": false, "code": "\\br ?32\\b|bnr ?32",
         "desc": "Nissan Skyline GT-R BNR32 1989-1994, RB26DETT twin turbo 280 cv, 5-speed, ATTESA E-TS AWD",
         "trims": [["v ?spec ?(ii|2)", "V-Spec II"], ["v ?spec", "V-Spec"], ["\\bn1\\b", "N1"], ["nismo", "Nismo"]]},
-       {"family": "GTR_R33", "years": [1995, 1998], "name": "R33 GT-R", "color": "#4DBBDD", "smg_risk": false, "code": "\\br ?33\\b|bcnr ?33",
+       {"family": "GTR_R33", "years": [1995, 1998], "name": "R33 GT-R", "color": "#4CBADC", "smg_risk": false, "code": "\\br ?33\\b|bcnr ?33",
         "desc": "Nissan Skyline GT-R BCNR33 1995-1998, RB26DETT twin turbo 280 cv, 5-speed, AWD",
         "trims": [["400 ?r", "400R"], ["lm ?limited", "LM Limited"], ["v ?spec", "V-Spec"], ["\\bn1\\b", "N1"], ["autech|4 ?door", "Autech 4-door"]]},
-       {"family": "GTR_R34", "years": [1999, 2002], "name": "R34 GT-R", "color": "#47B5D7", "smg_risk": false, "code": "\\br ?34\\b|bnr ?34",
+       {"family": "GTR_R34", "years": [1999, 2002], "name": "R34 GT-R", "color": "#46B5D7", "smg_risk": false, "code": "\\br ?34\\b|bnr ?34",
         "desc": "Nissan Skyline GT-R BNR34 1999-2002, RB26DETT twin turbo 280 cv, Getrag 6-speed, AWD",
         "trims": [["v ?spec ?(ii|2) ?n(u|ü|ue)r", "V-Spec II Nür"], ["m ?spec ?n(u|ü|ue)r", "M-Spec Nür"], ["v ?spec ?(ii|2)", "V-Spec II"], ["m ?spec", "M-Spec"], ["v ?spec", "V-Spec"], ["\\bn1\\b", "N1"], ["z ?tune", "Z-tune"]]}
      ],
@@ -245,14 +233,14 @@
     {"enabled": true, "model": "MR2", "brand": "Toyota", "match": ["\\bmr ?2\\b|\\bmr ?s\\b"],
      "bodies": ["coupe", "conv"],
      "generations": [
-       {"family": "MR2_AW11", "years": [1984, 1989], "name": "AW11 MR2", "color": "#D8CA5E", "smg_risk": false, "code": "\\baw ?1[01]\\b|\\bmk ?(1|i)\\b|1st gen|first gen|4a ?g[ez]",
+       {"family": "MR2_AW11", "years": [1984, 1989], "name": "AW11 MR2", "color": "#D9CB5F", "smg_risk": false, "code": "\\baw ?1[01]\\b|\\bmk ?(1|i)\\b|1st gen|first gen|4a ?g[ez]",
         "desc": "Toyota MR2 W10 / AW11 1984-1989, 4A-GE 1.6 (114 cv US, 130 cv JDM); supercharged 4A-GZE 1988-89 (147 cv)",
         "trims": [["supercharg|\\bsc\\b|4a ?gze", "Supercharged"]]},
-       {"family": "MR2_SW20", "years": [1990, 1999], "name": "SW20 MR2", "color": "#CABC4F", "smg_risk": false, "code": "\\bsw ?2[0-2]\\b|\\bmk ?(2|ii)\\b|2nd gen|second gen|3s ?gte|5s ?fe",
+       {"family": "MR2_SW20", "years": [1990, 1999], "name": "SW20 MR2", "color": "#CCBE52", "smg_risk": false, "code": "\\bsw ?2[0-2]\\b|\\bmk ?(2|ii)\\b|2nd gen|second gen|3s ?gte|5s ?fe",
         "desc": "Toyota MR2 W20 / SW20 1989-1999 (North America 1991-1995), 5S-FE 132 cv US, 3S-GE JDM",
         "trims": [["\\bturbo\\b|3s ?gte|\\bgt ?s\\b|\\bgt\\b", "Turbo"], ["g ?limited", "G-Limited"], ["t ?(top|bar)", "T-bar"]],
-        "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b|5s[ -]?fe|3s[ -]?ge\\b|\\bg[ -]?limited\\b)).*(\\bturbo\\b|3s[ -]?gte|\\bgt[ -]?s\\b|\\bgt\\b)", "family": "MR2_SW20T", "name": "SW20 MR2 Turbo", "color": "#BDAC16", "desc": "Toyota MR2 SW20 Turbo, 3S-GTE (203 cv US, up to 248 cv JDM)", "trims": [["\\bgt ?s\\b", "GT-S"], [".", "Turbo"]]}]},
-       {"family": "MR2_ZZW30", "years": [2000, 2007], "name": "ZZW30 MR2 Spyder", "color": "#B6A838", "smg_risk": true, "code": "zzw ?30|spyder|spider|\\bmr ?s\\b|\\bmk ?(3|iii)\\b|3rd gen|third gen|1zz",
+        "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b|5s[ -]?fe|3s[ -]?ge\\b|\\bg[ -]?limited\\b)).*(\\bturbo\\b|3s[ -]?gte|\\bgt[ -]?s\\b|\\bgt\\b)", "family": "MR2_SW20T", "name": "SW20 MR2 Turbo", "color": "#BFAE1B", "desc": "Toyota MR2 SW20 Turbo, 3S-GTE (203 cv US, up to 248 cv JDM)", "trims": [["\\bgt ?s\\b", "GT-S"], [".", "Turbo"]]}]},
+       {"family": "MR2_ZZW30", "years": [2000, 2007], "name": "ZZW30 MR2 Spyder", "color": "#BAAC3D", "smg_risk": true, "code": "zzw ?30|spyder|spider|\\bmr ?s\\b|\\bmk ?(3|iii)\\b|3rd gen|third gen|1zz",
         "body": "conv",
         "desc": "Toyota MR2 Spyder / MR-S ZZW30 1999-2007 (North America 2000-2005), 1ZZ-FE 1.8 140 cv; clutchless SMT optional from 2002",
         "trims": [["\\bsmt\\b|sequential", "SMT"], ["v ?edition", "V Edition"]]}
@@ -275,16 +263,16 @@
      "generations": [
        {"family": "S10", "years": [1975, 1978], "name": "S10 Silvia", "color": "#6DD8FB", "smg_risk": false, "code": "\\bs ?10\\b",
         "desc": "Nissan Silvia S10 1975-1979 (Datsun 200SX in the US: not tracked)"},
-       {"family": "S110", "years": [1979, 1982], "name": "S110 Silvia", "color": "#67D2F5", "smg_risk": false, "code": "\\bs ?110\\b",
+       {"family": "S110", "years": [1979, 1982], "name": "S110 Silvia", "color": "#64D0F3", "smg_risk": false, "code": "\\bs ?110\\b",
         "desc": "Nissan Silvia S110 1979-1983",
         "trims": [["turbo", "Turbo"]]},
-       {"family": "S12", "years": [1983, 1987], "name": "S12 Silvia", "color": "#64CFF2", "smg_risk": false, "code": "\\bs ?12\\b",
+       {"family": "S12", "years": [1983, 1987], "name": "S12 Silvia", "color": "#62CDF0", "smg_risk": false, "code": "\\bs ?12\\b",
         "desc": "Nissan Silvia S12 1983-1988",
         "trims": [["turbo", "Turbo"]]},
-       {"family": "S13", "years": [1988, 1993], "name": "S13 Silvia", "color": "#61CCEF", "smg_risk": false, "code": "\\b[pkc]?s ?13\\b",
+       {"family": "S13", "years": [1988, 1993], "name": "S13 Silvia", "color": "#5FCAED", "smg_risk": false, "code": "\\b[pkc]?s ?13\\b",
         "desc": "Nissan Silvia S13 1988-1993; K's turbo: CA18DET 175 cv to 1990, SR20DET 205 cv from 1991",
         "trims": [["\\bk ?'?s\\b", "K's"], ["\\bq ?'?s\\b", "Q's"], ["\\bj ?'?s\\b", "J's"], ["club ?selection", "Club Selection"], ["convertible|cabrio", "Convertible"]]},
-       {"family": "S14", "years": [1994, 1998], "name": "S14 Silvia", "color": "#51BEE0", "smg_risk": false, "code": "\\b[kc]?s ?14a?\\b",
+       {"family": "S14", "years": [1994, 1998], "name": "S14 Silvia", "color": "#4FBDDF", "smg_risk": false, "code": "\\b[kc]?s ?14a?\\b",
         "desc": "Nissan Silvia S14 1993-1998 (kouki from 1996); K's SR20DET 220 cv",
         "trims": [["\\bk ?'?s\\b", "K's"], ["\\bq ?'?s\\b", "Q's"], ["\\bj ?'?s\\b", "J's"], ["kouki", "Kouki"], ["zenki", "Zenki"]]},
        {"family": "S15", "years": [1999, 2002], "name": "S15 Silvia", "color": "#43B2D4", "smg_risk": false, "code": "\\bs ?15\\b",
@@ -294,19 +282,21 @@
      "searches": {},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=nissan%20silvia"], ["Mercado Livre", "https://lista.mercadolivre.com.br/nissan-silvia"]]},
 
-    {"enabled": true, "model": "MX-5", "brand": "Mazda", "recheck": true, "match": ["\\bmx ?5\\b|\\bmiata\\b|\\beunos ?roadster\\b"], "none": ["\\bnd[12]?\\b|\\brf\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
+    {"enabled": true, "model": "MX-5", "brand": "Mazda", "recheck": true, "match": ["\\bmx ?5\\b|\\bmiata\\b|\\beunos ?roadster\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["conv"],
      "generations": [
-       {"family": "MX5_NA", "years": [1989, 1997], "name": "NA MX-5", "color": "#FEA176", "smg_risk": false, "code": "\\bna[68]c?\\b|\\bna ?(miata|mx ?5)\\b|\\b(miata|mx ?5) ?na\\b|\\beunos\\b|pop ?ups?\\b|1st gen|first gen",
+       {"family": "MX5_NA", "years": [1989, 1997], "name": "NA MX-5", "color": "#FDAB85", "smg_risk": false, "code": "\\bna[68]c?\\b|\\bna ?(miata|mx ?5)\\b|\\b(miata|mx ?5) ?na\\b|\\beunos\\b|pop ?ups?\\b|1st gen|first gen",
         "desc": "Mazda MX-5 / Miata NA 1989-1997: 1.6 (118 cv) to 1993, 1.8 (130-135 cv) from 1994",
         "trims": [["\\bm ?edition\\b", "M Edition"], ["\\br ?(package|pkg)\\b", "R Package"], ["\\ble\\b|limited", "LE"], ["special ?edition|\\bse\\b", "Special Edition"], ["club ?sport", "Club Sport"], ["\\b1\\.8\\b", "1.8"], ["\\b1\\.6\\b", "1.6"]]},
-       {"family": "MX5_NB", "years": [1998, 2005], "name": "NB MX-5", "color": "#ED8E62", "smg_risk": false, "code": "\\bnb[12]?\\b|\\bnb[68]c\\b|2nd gen|second gen|mazda ?speed",
+       {"family": "MX5_NB", "years": [1998, 2005], "name": "NB MX-5", "color": "#FA996D", "smg_risk": false, "code": "\\bnb[12]?\\b|\\bnb[68]c\\b|2nd gen|second gen|mazda ?speed",
         "desc": "Mazda MX-5 / Miata NB 1998-2005, 1.8 (142-144 cv); Mazdaspeed turbo 2004-2005",
         "trims": [["\\bls\\b", "LS"], ["shinsen", "Shinsen"], ["special ?edition|\\bse\\b", "Special Edition"], ["club ?spec", "Club Spec"], ["\\bgs\\b", "GS"], ["\\bgx\\b", "GX"]],
-        "split": [{"match": "mazda[ -]?speed|\\bmsm\\b", "family": "MX5_NB_MS", "name": "NB MX-5 Mazdaspeed", "color": "#E47844", "desc": "Mazdaspeed MX-5 / Miata NB 2004-2005, 1.8 turbo (180 cv), 6-speed", "trims": [[".", "Mazdaspeed"]]}]},
-       {"family": "MX5_NC", "years": [2006, 2015], "name": "NC MX-5", "color": "#D97C50", "smg_risk": false, "code": "\\bnc[123]?\\b|3rd gen|third gen|\\bprht\\b",
+        "split": [{"match": "mazda[ -]?speed|\\bmsm\\b", "family": "MX5_NB_MS", "name": "NB MX-5 Mazdaspeed", "color": "#F18450", "desc": "Mazdaspeed MX-5 / Miata NB 2004-2005, 1.8 turbo (180 cv), 6-speed", "trims": [[".", "Mazdaspeed"]]}]},
+       {"family": "MX5_NC", "years": [2006, 2015], "name": "NC MX-5", "color": "#ED8E62", "smg_risk": false, "code": "\\bnc[123]?\\b|3rd gen|third gen|\\bprht\\b",
         "desc": "Mazda MX-5 NC 2006-2015, 2.0 MZR (168-170 cv); folding hardtop (PRHT) from 2007",
-        "trims": [["\\bprht\\b|hard ?top|retractable", "PRHT"], ["grand ?touring|\\bgt\\b", "GT"], ["\\bgs\\b", "GS"], ["\\bgx\\b", "GX"], ["\\bclub\\b", "Club"], ["\\bsport\\b", "Sport"], ["touring", "Touring"]]}
+        "trims": [["\\bprht\\b|hard ?top|retractable", "PRHT"], ["grand ?touring|\\bgt\\b", "GT"], ["\\bgs\\b", "GS"], ["\\bgx\\b", "GX"], ["\\bclub\\b", "Club"], ["\\bsport\\b", "Sport"], ["touring", "Touring"]]},
+       {"family": "MX5_ND", "years": [2016, 2026], "name": "ND MX-5", "color": "#D97C50", "smg_risk": false, "code": "\\bnd[12]?\\b|\\brf\\b|4th gen|fourth gen",
+        "desc": "Mazda MX-5 ND 2016-: 2.0 Skyactiv (157 cv, 184 cv from 2019); RF targa"}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/mazda/mx-5"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/mazda/mx-5"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=mazda%20mx-5&gb=1"], ["Mercado Livre", "https://lista.mercadolivre.com.br/mazda-mx5"]]},
@@ -314,18 +304,18 @@
     {"enabled": true, "model": "Z3 M / Z4 M", "brand": "BMW", "recheck": true, "match": ["\\bz ?[34] ?m\\b|\\bm ?(roadster|coup[eé]?)\\b"], "none": ["m ?sport|m ?package|m ?pkg|m ?tech|m ?aero|m ?wheels?\\b|m ?style|sdrive|\\bm ?40 ?i\\b|\\be89\\b|\\bg29\\b|1 ?series|\\b1 ?m\\b|\\be82\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["conv", "coupe"],
      "generations": [
-       {"family": "Z3M_R", "years": [1998, 2002], "name": "E36/7 Z3 M Roadster", "color": "#C4B9FC", "smg_risk": false, "code": "\\be36 ?/? ?7\\b|\\bz ?3 ?m ?roadster\\b",
+       {"family": "Z3M_R", "years": [1998, 2002], "name": "E36/7 Z3 M Roadster", "color": "#C1B4FF", "smg_risk": false, "code": "\\be36 ?/? ?7\\b|\\bz ?3 ?m ?roadster\\b",
         "bodies": ["conv"],
         "desc": "BMW Z3 M Roadster (E36/7) 1998-2002: S52 3.2 243 cv in North America to 2000, S54 319 cv 2001-2002; Europe S50 321 cv",
         "trims": [["\\bs54\\b", "S54"], ["\\bs52\\b", "S52"], ["\\bs50\\b", "S50"]]},
-       {"family": "Z3M_C", "years": [1998, 2002], "name": "E36/8 Z3 M Coupe", "color": "#C8BDFD", "smg_risk": false, "code": "\\be36 ?/? ?8\\b|clown ?shoe|bread ?(van|box|loaf)",
+       {"family": "Z3M_C", "years": [1998, 2002], "name": "E36/8 Z3 M Coupe", "color": "#C4B7FF", "smg_risk": false, "code": "\\be36 ?/? ?8\\b|clown ?shoe|bread ?(van|box|loaf)",
         "bodies": ["coupe"],
         "desc": "BMW Z3 M Coupe (E36/8) 1998-2002, the 'clown shoe': S52 243 cv to 2000, S54 319 cv 2001-2002 (North America)",
         "trims": [["\\bs54\\b", "S54"], ["\\bs52\\b", "S52"], ["\\bs50\\b", "S50"]]},
-       {"family": "Z4M_R", "years": [2006, 2008], "name": "E85 Z4 M Roadster", "color": "#AE9CF7", "smg_risk": false, "code": "\\be85\\b",
+       {"family": "Z4M_R", "years": [2006, 2008], "name": "E85 Z4 M Roadster", "color": "#AF9DF8", "smg_risk": false, "code": "\\be85\\b",
         "bodies": ["conv"],
         "desc": "BMW Z4 M Roadster (E85) 2006-2008, S54 3.2 (335 cv North America, 343 cv Europe), 6-speed manual only"},
-       {"family": "Z4M_C", "years": [2006, 2008], "name": "E86 Z4 M Coupe", "color": "#B19FFB", "smg_risk": false, "code": "\\be86\\b",
+       {"family": "Z4M_C", "years": [2006, 2008], "name": "E86 Z4 M Coupe", "color": "#B2A0FB", "smg_risk": false, "code": "\\be86\\b",
         "bodies": ["coupe"],
         "desc": "BMW Z4 M Coupe (E86) 2006-2008, S54 3.2 (335 cv North America), 6-speed manual only"}
      ],
@@ -339,10 +329,10 @@
         "desc": "Porsche Boxster 986 1997-2004: 2.5 (204 cv), 2.7 (220-228 cv) from 2000",
         "trims": [["\\b2\\.7\\b", "2.7"], ["\\b2\\.5\\b", "2.5"]],
         "split": [{"match": "box(s)?ter[ -]?s\\b|\\b3\\.2\\b", "family": "B986S", "name": "986 Boxster S", "color": "#D9B982", "desc": "Porsche Boxster S 986 2000-2004, 3.2 (253-264 cv), 6-speed", "trims": [["550", "550 Spyder Anniversary"], [".", "S"]]}]},
-       {"family": "B987", "years": [2005, 2012], "name": "987 Boxster", "color": "#AC956E", "smg_risk": false, "code": "\\b987(\\.?[12])?\\b",
+       {"family": "B987", "years": [2005, 2012], "name": "987 Boxster", "color": "#CCB48D", "smg_risk": false, "code": "\\b987(\\.?[12])?\\b",
         "desc": "Porsche Boxster 987 2005-2012: 2.7 (240-245 cv); 987.2 from 2009 with the 2.9 (255 cv)",
         "trims": [["\\b987\\.?2\\b|\\b2\\.9\\b", "987.2"], ["design ?edition", "Design Edition"], ["black ?edition", "Black Edition"]],
-        "split": [{"match": "\\bspyder\\b", "family": "B987SP", "name": "987 Boxster Spyder", "color": "#A3844F", "desc": "Porsche Boxster Spyder 2011-2012, 3.4 (320 cv), lighter, with a manual roof", "trims": [[".", "Spyder"]]}, {"match": "box(s)?ter[ -]?s\\b|\\b3\\.[24]\\b|\\brs[ -]?60\\b", "family": "B987S", "name": "987 Boxster S", "color": "#A3844F", "desc": "Porsche Boxster S 987 2005-2012: 3.2 (280-295 cv); 987.2 from 2009 with the 3.4 (310 cv)", "trims": [["rs ?60", "RS 60 Spyder"], ["\\b987\\.?2\\b|\\b3\\.4\\b", "987.2"], ["design ?edition", "Design Edition"], ["black ?edition", "Black Edition"], [".", "S"]]}]}
+        "split": [{"match": "\\bspyder\\b", "family": "B987SP", "name": "987 Boxster Spyder", "color": "#C3A36E", "desc": "Porsche Boxster Spyder 2011-2012, 3.4 (320 cv), lighter, with a manual roof", "trims": [[".", "Spyder"]]}, {"match": "box(s)?ter[ -]?s\\b|\\b3\\.[24]\\b|\\brs[ -]?60\\b", "family": "B987S", "name": "987 Boxster S", "color": "#C3A36E", "desc": "Porsche Boxster S 987 2005-2012: 3.2 (280-295 cv); 987.2 from 2009 with the 3.4 (310 cv)", "trims": [["rs ?60", "RS 60 Spyder"], ["\\b987\\.?2\\b|\\b3\\.4\\b", "987.2"], ["design ?edition", "Design Edition"], ["black ?edition", "Black Edition"], [".", "S"]]}]}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/porsche/boxster"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/porsche/boxster"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=porsche%20boxster&gb=1"], ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/porsche/boxster/cambio.manual"], ["Mercado Livre", "https://lista.mercadolivre.com.br/porsche-boxster-manual"]]},
@@ -350,7 +340,7 @@
     {"enabled": true, "model": "Integra Type R", "brand": "Honda", "recheck": true, "match": ["\\bintegra\\b", "type ?r\\b|\\bitr\\b"], "none": ["\\bdc5\\b|type ?s\\b|replica|clone|tribute|conver(sion|ted)|(type ?r|itr) ?(look|style|kit|seats?|wheels?|rims?|front|swap|badges?)|\\bgs ?r\\b|\\bls\\b|\\brs\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe", "sedan"],
      "generations": [
-       {"family": "ITR_DC2", "years": [1995, 2001], "name": "DC2 Integra Type R", "color": "#FDAECC", "smg_risk": false, "code": "\\bdc2\\b|\\bdb8\\b",
+       {"family": "ITR_DC2", "years": [1995, 2001], "name": "DC2 Integra Type R", "color": "#FFA4C7", "smg_risk": false, "code": "\\bdc2\\b|\\bdb8\\b",
         "desc": "Honda / Acura Integra Type R DC2 (DB8 4-door in Japan) 1995-2001; North America 1997-1998 and 2000-2001, B18C5 198 cv (Japan 200 cv)",
         "trims": [["\\bjdm\\b|\\b9[68] ?spec\\b|\\b00 ?spec\\b", "JDM"], ["champ(ionship)? ?white", "Championship White"], ["\\bdb8\\b|sedan|4 ?door", "4-door"]]}
      ],
@@ -360,7 +350,7 @@
     {"enabled": true, "model": "RSX Type-S", "brand": "Acura", "recheck": true, "match": ["\\brsx\\b", "type ?s\\b|\\brsx ?s\\b|\\bk20a2\\b|\\bk20z1\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe"],
      "generations": [
-       {"family": "RSX_S", "years": [2002, 2006], "name": "DC5 RSX Type-S", "color": "#EB87AF", "smg_risk": false, "code": "\\bdc5\\b",
+       {"family": "RSX_S", "years": [2002, 2006], "name": "DC5 RSX Type-S", "color": "#EF8BB3", "smg_risk": false, "code": "\\bdc5\\b",
         "desc": "Acura RSX Type-S DC5 2002-2006, K20A2 2.0 with the 6-speed (203 cv; 213 cv 2005-2006 with the K20Z1)",
         "trims": [["a ?spec", "A-Spec"]]}
      ],
@@ -370,7 +360,7 @@
     {"enabled": true, "model": "Civic SiR", "brand": "Honda", "recheck": true, "match": ["\\bcivic\\b", "\\bsi ?r\\b|\\bep3\\b|\\bsi\\b"], "none": ["sedan|coup[eé]?\\b|\\bcpe\\b|\\b2 ?(dr|door)\\b|\\b4 ?(dr|door|portes)\\b|\\bdx\\b|\\blx\\b|\\bex\\b|\\bse\\b|type ?r|\\bem[12]\\b|\\bes[12]\\b|\\bep[12]\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["hatch"],
      "generations": [
-       {"family": "EP3", "years": [2002, 2005], "name": "EP3 Civic SiR", "color": "#F691B9", "smg_risk": false, "code": "\\bep3\\b",
+       {"family": "EP3", "years": [2002, 2005], "name": "EP3 Civic SiR", "color": "#F792BA", "smg_risk": false, "code": "\\bep3\\b",
         "desc": "Honda Civic SiR (Si in the US) EP3 2002-2005, 3-door built in Swindon, K20A3 2.0 162 cv, 5-speed"}
      ],
      "searches": {},
@@ -386,13 +376,17 @@
      "searches": {"napista": ["https://napista.com.br/busca/honda/civic/2017/manual", "https://napista.com.br/busca/honda/civic/2018/manual", "https://napista.com.br/busca/honda/civic/2019/manual", "https://napista.com.br/busca/honda/civic/2020/manual", "https://napista.com.br/busca/honda/civic/2021/manual"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=honda%20civic%20type%20r"], ["Mercado Livre", "https://lista.mercadolivre.com.br/honda-civic-type-r"]]},
 
-    {"enabled": true, "model": "Prelude", "brand": "Honda", "recheck": true, "match": ["\\bprelude\\b"], "none": ["hybrid|\\be ?hev\\b|\\bbb[1-4]\\b|\\bba[0-9]\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
+    {"enabled": true, "model": "Prelude", "brand": "Honda", "recheck": true, "match": ["\\bprelude\\b"], "none": ["hybrid|\\be ?hev\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe"],
      "generations": [
-       {"family": "BB6", "years": [1997, 2001], "name": "BB6 Prelude", "color": "#FFA4C8", "smg_risk": false, "code": "\\bbb[68]\\b|5th gen|fifth gen",
+       {"family": "BB6", "years": [1997, 2001], "name": "BB6 Prelude", "color": "#FD9FC4", "smg_risk": false, "code": "\\bbb[68]\\b|5th gen|fifth gen",
         "desc": "Honda Prelude BB6 1997-2001 (BB8 Type S in Japan), H22A4 2.2 VTEC 203 cv with the 5-speed (Japan SiR 220 cv)",
         "trims": [["type ?sh\\b|\\bsh\\b", "Type SH"], ["type ?s\\b", "Type S"], ["s ?spec", "SiR S-spec"], ["\\bsir\\b", "SiR"], ["\\bse\\b", "SE"]],
-        "split": [{"match": "type[ -]?sh\\b|\\bsh\\b|\\batts\\b", "family": "BB6_SH", "name": "BB6 Prelude Type SH", "color": "#FD89B9", "desc": "Honda Prelude Type SH 1997-2001: the 5-speed with ATTS, which sends more torque to the outside front wheel in corners", "trims": [[".", "Type SH"]]}]}
+        "split": [{"match": "type[ -]?sh\\b|\\bsh\\b|\\batts\\b", "family": "BB6_SH", "name": "BB6 Prelude Type SH", "color": "#F985B5", "desc": "Honda Prelude Type SH 1997-2001: the 5-speed with ATTS, which sends more torque to the outside front wheel in corners", "trims": [[".", "Type SH"]]}]},
+        {"family": "BA4", "years": [1988, 1991], "name": "BA4 Prelude", "color": "#FEB6D1", "smg_risk": false, "code": "\\bba[4-7]\\b|3rd gen|third gen",
+         "desc": "Honda Prelude 3rd gen (BA4/BA5) 1988-1991, 2.0 (Si 4WS)"},
+        {"family": "BB1", "years": [1992, 1996], "name": "BB1 Prelude", "color": "#FEAACA", "smg_risk": false, "code": "\\bbb[1-4]\\b|4th gen|fourth gen",
+         "desc": "Honda Prelude 4th gen (BB1-BB4) 1992-1996, 2.2 VTEC H22 in the VTEC / SR-V"}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/honda/prelude"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/prelude"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=honda%20prelude"], ["Mercado Livre", "https://lista.mercadolivre.com.br/honda-prelude"]]},
@@ -400,10 +394,10 @@
     {"enabled": true, "model": "300ZX", "brand": "Nissan", "recheck": true, "match": ["\\b300 ?zx\\b|\\bfairlady ?z\\b"], "none": ["\\bz31\\b|\\b280 ?zx\\b|\\b350 ?z\\b|\\b370 ?z\\b|\\bz3[34]\\b|\\bs30\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe", "conv"],
      "generations": [
-       {"family": "Z32", "years": [1990, 2000], "name": "Z32 300ZX", "color": "#54C1E3", "smg_risk": false, "code": "\\bz32\\b",
+       {"family": "Z32", "years": [1990, 2000], "name": "Z32 300ZX", "color": "#52BFE2", "smg_risk": false, "code": "\\bz32\\b",
         "desc": "Nissan 300ZX Z32 1990-1996 (Fairlady Z to 2000 in Japan), VG30DE 3.0 non-turbo 225 cv; T-top, 2+2 and convertible (1993-1996)",
         "trims": [["convertible|cabrio|roadster", "Convertible"], ["2 ?\\+ ?2|2 ?by ?2|\\b2x2\\b", "2+2"], ["t ?tops?\\b|t ?bar", "T-top"], ["slick ?top", "Slicktop"], ["commemorative|50th", "Commemorative Edition"]],
-        "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b|naturally aspirated|vg30de\\b)).*(twin[ -]?turbo|\\btt\\b|vg30dett|\\bturbo\\b)", "family": "Z32_TT", "name": "Z32 300ZX Twin Turbo", "color": "#0AB3DB", "body": "coupe", "desc": "Nissan 300ZX Twin Turbo (Z32) 1990-1996, VG30DETT 304 cv (280 cv in Japan), coupe only", "trims": [["2 ?\\+ ?2|2 ?by ?2", "2+2"], ["t ?tops?\\b|t ?bar", "T-top"], ["slick ?top", "Slicktop"], ["commemorative|50th", "Commemorative Edition"], [".", "Twin Turbo"]]}]}
+        "split": [{"match": "^(?!.*(non[ -]?turbo|\\bn/?a\\b|naturally aspirated|vg30de\\b)).*(twin[ -]?turbo|\\btt\\b|vg30dett|\\bturbo\\b)", "family": "Z32_TT", "name": "Z32 300ZX Twin Turbo", "color": "#04B1DA", "body": "coupe", "desc": "Nissan 300ZX Twin Turbo (Z32) 1990-1996, VG30DETT 304 cv (280 cv in Japan), coupe only", "trims": [["2 ?\\+ ?2|2 ?by ?2", "2+2"], ["t ?tops?\\b|t ?bar", "T-top"], ["slick ?top", "Slicktop"], ["commemorative|50th", "Commemorative Edition"], [".", "Twin Turbo"]]}]}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/nissan/300zx"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/nissan/300zx"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=nissan%20300zx"], ["Mercado Livre", "https://lista.mercadolivre.com.br/nissan-300zx"]]},
@@ -441,7 +435,7 @@
         "body": "sedan",
         "desc": "Subaru Impreza WRX STI GD 2004-2007 in North America (GDB in Japan from 2000), EJ257 2.5 turbo 304 cv, 6-speed",
         "trims": [["spec ?c", "Spec C"], ["\\bra\\b", "RA"], ["\\bs20[2-4]\\b", "S20x"], ["limited", "Limited"], ["hawk ?eye", "Hawkeye"], ["blob ?eye", "Blobeye"], ["bug ?eye|peanut ?eye", "Bugeye"]]},
-       {"family": "STI_GR", "years": [2008, 2014], "name": "GR WRX STI", "color": "#8FB1FC", "smg_risk": false, "code": "\\bgr[bf]?\\b|\\bgv[bf]?\\b",
+       {"family": "STI_GR", "years": [2008, 2014], "name": "GR WRX STI", "color": "#9CBBFD", "smg_risk": false, "code": "\\bgr[bf]?\\b|\\bgv[bf]?\\b",
         "name_by_body": {"hatch": "GR WRX STI", "sedan": "GV WRX STI"},
         "desc": "Subaru Impreza WRX STI GR hatchback (2008-2014) and GV sedan (2011-2014), EJ257 2.5 turbo 309 cv, 6-speed",
         "trims": [["spec ?c", "Spec C"], ["launch ?edition", "Launch Edition"], ["special ?edition", "Special Edition"], ["limited|\\bltd\\b", "Limited"], ["sport ?tech", "Sport-tech"], ["\\bs206\\b", "S206"]]}
@@ -452,7 +446,7 @@
     {"enabled": true, "model": "Chaser", "brand": "Toyota", "recheck": true, "match": ["\\bchaser\\b"], "none": ["\\bjzx ?(8\\d|9\\d|11\\d)\\b|\\bx ?(80|90|110)\\b|\\bgx ?\\d+|\\bsx ?\\d+|\\blx ?\\d+|verossa|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["sedan"],
      "generations": [
-       {"family": "JZX100", "years": [1996, 2001], "name": "JZX100 Chaser", "color": "#BDAE40", "smg_risk": false, "code": "\\bjzx ?100\\b|\\bx ?100\\b",
+       {"family": "JZX100", "years": [1996, 2001], "name": "JZX100 Chaser", "color": "#C0B244", "smg_risk": false, "code": "\\bjzx ?100\\b|\\bx ?100\\b",
         "desc": "Toyota Chaser JZX100 1996-2001 (Japan only); Tourer V: 1JZ-GTE 2.5 single turbo with VVT-i, 280 cv, R154 5-speed",
         "trims": [["tourer ?v\\b", "Tourer V"], ["tourer ?s\\b", "Tourer S"], ["avante", "Avante"], ["\\btrd\\b", "TRD"]]}
      ],
@@ -462,10 +456,10 @@
     {"enabled": true, "model": "240SX", "brand": "Nissan", "recheck": true, "match": ["\\b240 ?sx\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe", "hatch", "conv"],
      "generations": [
-       {"family": "S13_240", "years": [1989, 1994], "name": "S13 240SX", "color": "#57C4E6", "smg_risk": false, "code": "\\b[pkr]?s ?13\\b|\\brps ?13\\b",
+       {"family": "S13_240", "years": [1989, 1994], "name": "S13 240SX", "color": "#56C2E5", "smg_risk": false, "code": "\\b[pkr]?s ?13\\b|\\brps ?13\\b",
         "desc": "Nissan 240SX S13 1989-1994: coupe, fastback and convertible (1992-1994); KA24E 142 cv to 1990, KA24DE 157 cv from 1991",
         "trims": [["\\bse\\b", "SE"], ["\\ble\\b", "LE"], ["\\bxe\\b", "XE"], ["fastback|hatch", "Fastback"], ["convertible|cabrio", "Convertible"], ["\\bsr ?20", "SR20 swap"]]},
-       {"family": "S14_240", "years": [1995, 1998], "name": "S14 240SX", "color": "#4AB8DA", "smg_risk": false, "code": "\\bs ?14a?\\b",
+       {"family": "S14_240", "years": [1995, 1998], "name": "S14 240SX", "color": "#49B7D9", "smg_risk": false, "code": "\\bs ?14a?\\b",
         "body": "coupe",
         "desc": "Nissan 240SX S14 1995-1998 (facelift 'kouki' from 1997), coupe only, KA24DE 157 cv",
         "trims": [["\\bse\\b", "SE"], ["\\ble\\b", "LE"], ["kouki", "Kouki"], ["zenki", "Zenki"], ["\\bsr ?20", "SR20 swap"]]}
@@ -476,29 +470,33 @@
     {"enabled": true, "model": "180SX", "brand": "Nissan", "recheck": true, "match": ["\\b180 ?sx\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["hatch"],
      "generations": [
-       {"family": "RPS13", "years": [1989, 1998], "name": "RPS13 180SX", "color": "#5AC7E9", "smg_risk": false, "code": "\\bk?rps ?13\\b",
+       {"family": "RPS13", "years": [1989, 1998], "name": "RPS13 180SX", "color": "#59C5E8", "smg_risk": false, "code": "\\bk?rps ?13\\b",
         "desc": "Nissan 180SX RPS13 1989-1998 (Japan), fastback; CA18DET 175 cv to 1991, SR20DET 205 cv from 1991",
         "trims": [["type ?x", "Type X"], ["type ?r", "Type R"], ["type ?s", "Type S"], ["kouki", "Kouki"], ["chuki", "Chuki"], ["zenki", "Zenki"], ["sileighty|sil ?80", "Sileighty"]]}
      ],
      "searches": {},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=nissan%20180sx"], ["Mercado Livre", "https://lista.mercadolivre.com.br/nissan-180sx"]]},
 
-    {"enabled": true, "model": "86", "brand": "Toyota", "recheck": true, "match": ["\\b(gt ?)?86\\b|\\bfr ?s\\b|\\bft ?86\\b", "toyota|scion|\\bgt ?86\\b|\\bfr ?s\\b|\\bft ?86\\b"], "none": ["\\bgr ?86\\b|\\bae ?86\\b|subaru|\\bbrz\\b|corolla|trueno|levin|sprinter|\\bzn8\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
+    {"enabled": true, "model": "86", "brand": "Toyota", "recheck": true, "match": ["\\b(gt ?)?86\\b|\\bfr ?s\\b|\\bft ?86\\b|\\bgr ?86\\b", "toyota|scion|\\bgt ?86\\b|\\bfr ?s\\b|\\bft ?86\\b|\\bgr ?86\\b"], "none": ["\\bae ?86\\b|subaru|\\bbrz\\b|corolla|trueno|levin|sprinter|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe"],
      "generations": [
-       {"family": "ZN6", "years": [2012, 2021], "name": "ZN6 86", "color": "#A99A27", "smg_risk": false, "code": "\\bzn6\\b",
+       {"family": "ZN6", "years": [2012, 2021], "name": "ZN6 86", "color": "#AFA02F", "smg_risk": false, "code": "\\bzn6\\b",
         "desc": "Toyota 86 / Scion FR-S / GT86 ZN6 2012-2021 (FR-S 2013-2016, Toyota 86 2017-2020 in North America), FA20 2.0 boxer 203 cv (208 cv with the manual from 2017)",
-        "trims": [["\\bfr ?s\\b", "FR-S"], ["\\btrd\\b", "TRD"], ["860", "860 Special Edition"], ["hakone", "Hakone Edition"], ["release ?series", "Release Series"], ["\\bgt ?86\\b", "GT86"], ["\\bgt\\b", "GT"]]}
+        "trims": [["\\bfr ?s\\b", "FR-S"], ["\\btrd\\b", "TRD"], ["860", "860 Special Edition"], ["hakone", "Hakone Edition"], ["release ?series", "Release Series"], ["\\bgt ?86\\b", "GT86"], ["\\bgt\\b", "GT"]]},
+       {"family": "ZN8", "years": [2022, 2026], "name": "ZN8 GR86", "color": "#A99A27", "smg_risk": false, "code": "\\bzn8\\b|\\bgr ?86\\b",
+        "desc": "Toyota GR86 (ZN8) 2022-, 2.4 FA24 boxer (234 cv)"}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/toyota/gt86"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=toyota%20gt86"], ["Mercado Livre", "https://lista.mercadolivre.com.br/toyota-gt86"]]},
 
-    {"enabled": true, "model": "BRZ", "brand": "Subaru", "recheck": true, "match": ["\\bbrz\\b"], "none": ["\\bzd8\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
+    {"enabled": true, "model": "BRZ", "brand": "Subaru", "recheck": true, "match": ["\\bbrz\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe"],
      "generations": [
-       {"family": "ZC6", "years": [2012, 2020], "name": "ZC6 BRZ", "color": "#7496E3", "smg_risk": false, "code": "\\bzc6\\b",
+       {"family": "ZC6", "years": [2012, 2020], "name": "ZC6 BRZ", "color": "#85A8F6", "smg_risk": false, "code": "\\bzc6\\b",
         "desc": "Subaru BRZ ZC6 2012-2020 (North America 2013-2020), FA20 2.0 boxer 203 cv (208 cv with the manual from 2017)",
-        "trims": [["\\bts\\b", "tS"], ["series ?\\.? ?(blue|gr[ae]y|yellow|hyperblue)", "Series edition"], ["hikari", "Hikari Edition"], ["raijin", "Raijin Edition"], ["sport ?tech", "Sport-tech"], ["\\brs\\b", "RS"], ["limited", "Limited"], ["premium", "Premium"]]}
+        "trims": [["\\bts\\b", "tS"], ["series ?\\.? ?(blue|gr[ae]y|yellow|hyperblue)", "Series edition"], ["hikari", "Hikari Edition"], ["raijin", "Raijin Edition"], ["sport ?tech", "Sport-tech"], ["\\brs\\b", "RS"], ["limited", "Limited"], ["premium", "Premium"]]},
+       {"family": "ZD8", "years": [2022, 2026], "name": "ZD8 BRZ", "color": "#7496E3", "smg_risk": false, "code": "\\bzd8\\b",
+        "desc": "Subaru BRZ (ZD8) 2022-, 2.4 FA24 boxer (234 cv)"}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/subaru/brz"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=subaru%20brz"], ["Mercado Livre", "https://lista.mercadolivre.com.br/subaru-brz"]]},
@@ -512,7 +510,7 @@
        {"family": "S30_260", "years": [1974, 1978], "name": "S30 260Z", "color": "#70DBFE", "smg_risk": false, "code": "\\b260 ?z\\b",
         "desc": "Datsun 260Z (S30) 1974 in North America (to 1978 elsewhere), L26 2.6 six; 2+2 (GS30) added",
         "trims": [["2 ?\\+ ?2", "2+2"]]},
-       {"family": "S30_280", "years": [1975, 1978], "name": "S30 280Z", "color": "#6AD5F8", "smg_risk": false, "code": "\\b280 ?z\\b",
+       {"family": "S30_280", "years": [1975, 1978], "name": "S30 280Z", "color": "#6AD6F9", "smg_risk": false, "code": "\\b280 ?z\\b",
         "desc": "Datsun 280Z (S30) 1975-1978, L28 2.8 six with fuel injection; 2+2 (GS30)",
         "trims": [["2 ?\\+ ?2", "2+2"]]}
      ],
@@ -522,7 +520,7 @@
     {"enabled": true, "model": "G35 Coupe", "brand": "Infiniti", "recheck": true, "match": ["\\bg ?35 ?c?\\b"], "none": ["sedan|berline|\\bg ?35 ?x\\b|\\bawd\\b|\\b4 ?(dr|door|portes)\\b|journey|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"], "none_body": ["sedan|berline|wagon"],
      "bodies": ["coupe"],
      "generations": [
-       {"family": "G35C", "years": [2003, 2007], "name": "CV35 G35 Coupe", "color": "#40B0D1", "smg_risk": false, "code": "\\bcv ?35\\b",
+       {"family": "G35C", "years": [2003, 2007], "name": "CV35 G35 Coupe", "color": "#3FAFD1", "smg_risk": false, "code": "\\bcv ?35\\b",
         "desc": "Infiniti G35 Coupe CV35 2003-2007 (Nissan Skyline coupe V35 in Japan), VQ35DE 3.5 V6; 6-speed manual 284-302 cv ('Rev-Up' engine 2005-2007)",
         "trims": [["rev ?up", "Rev-Up"], ["\\bsport\\b", "Sport"], ["premium|\\bprem\\b", "Premium"]]}
      ],
@@ -532,7 +530,7 @@
     {"enabled": true, "model": "G37 Coupe", "brand": "Infiniti", "recheck": true, "match": ["\\bg ?37 ?s?\\b|\\bq ?60\\b"], "none": ["sedan|berline|\\bg ?37 ?x\\b|\\bawd\\b|\\b4 ?(dr|door|portes)\\b|convertible|cabrio|journey|red ?sport|\\b3\\.0 ?t\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"], "none_body": ["sedan|berline|wagon|convertible|cabrio"],
      "bodies": ["coupe"],
      "generations": [
-       {"family": "G37C", "years": [2008, 2015], "name": "CV36 G37 Coupe", "color": "#39AACC", "smg_risk": false, "code": "\\bcv ?36\\b",
+       {"family": "G37C", "years": [2008, 2015], "name": "CV36 G37 Coupe", "color": "#39AACB", "smg_risk": false, "code": "\\bcv ?36\\b",
         "desc": "Infiniti G37 Coupe CV36 2008-2013 (Q60 Coupe 2014-2015), VQ37VHR 3.7 V6 335 cv; the 6-speed manual came on the Sport (G37S) with a limited-slip differential",
         "trims": [["\\bipl\\b", "IPL"], ["g ?37 ?s\\b|\\bsport\\b", "Sport"], ["\\bq ?60\\b", "Q60"], ["premium", "Premium"]]}
      ],
@@ -542,7 +540,7 @@
     {"enabled": true, "model": "1M", "brand": "BMW", "recheck": true, "match": ["\\b1 ?m\\b|\\b1 ?series ?m\\b", "bmw|coup|\\be82\\b|1 ?series"], "none": ["m ?sport|m ?package|m ?pkg|m ?performance|m ?tech|\\b1[23]\\d ?i\\b|\\bx1\\b|\\bm1\\b|\\bm ?1[34]\\d|\\bf2[01]\\b|\\bf40\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe"],
      "generations": [
-       {"family": "E82_1M", "years": [2011, 2012], "name": "E82 1M", "color": "#A18FE9", "smg_risk": false, "code": "\\be82\\b",
+       {"family": "E82_1M", "years": [2011, 2012], "name": "E82 1M", "color": "#A593ED", "smg_risk": false, "code": "\\be82\\b",
         "desc": "BMW 1 Series M Coupe (1M) E82 2011, N54 3.0 twin turbo 340 cv, 6-speed manual only"}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/bmw/series-1"]},
@@ -551,7 +549,7 @@
     {"enabled": true, "model": "135i", "brand": "BMW", "recheck": true, "match": ["\\b135 ?is?\\b"], "none": ["\\bm ?135|\\bf2[01]\\b|xdrive|\\bx ?drive\\b|convertible|cabrio|\\be88\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"], "none_body": ["convertible|cabrio|roadster"],
      "bodies": ["coupe"],
      "generations": [
-       {"family": "E82_135", "years": [2008, 2013], "name": "E82 135i", "color": "#A492EC", "smg_risk": false, "code": "\\be82\\b",
+       {"family": "E82_135", "years": [2008, 2013], "name": "E82 135i", "color": "#A795F0", "smg_risk": false, "code": "\\be82\\b",
         "desc": "BMW 135i Coupe E82 2008-2013: N54 twin turbo 304 cv to 2010, N55 304 cv from 2011; 135is 2013 (324 cv)",
         "trims": [["135 ?is\\b", "135is"], ["m ?sport", "M Sport"], ["premium", "Premium"]]}
      ],
@@ -561,10 +559,10 @@
     {"enabled": true, "model": "335i", "brand": "BMW", "recheck": true, "match": ["\\b335 ?is?\\b"], "none": ["\\bx ?i\\b|\\b335 ?xi\\b|xdrive|\\bx ?drive\\b|\\b335 ?d\\b|\\bf3[0-4]\\b|gran ?turismo|\\bgt\\b|wagon|touring|wgn|\\b435|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe", "sedan", "conv"],
      "generations": [
-       {"family": "E9X_335", "years": [2007, 2011], "name": "E9X 335i", "color": "#A795F0", "smg_risk": false, "code": "\\be9[0-3]\\b",
+       {"family": "E9X_335", "years": [2007, 2011], "name": "E9X 335i", "color": "#AA98F3", "smg_risk": false, "code": "\\be9[0-3]\\b",
         "desc": "BMW 335i E90 sedan (2007-2011), E92 coupe and E93 convertible (2007-2013): N54 twin turbo 304 cv to 2010, N55 304 cv from 2011; 335is 2011-2013 (324 cv)",
         "trims": [["335 ?is\\b", "335is"], ["m ?sport", "M Sport"], ["premium", "Premium"]]},
-       {"family": "E9X_335", "years": [2012, 2013], "name": "E9X 335i", "color": "#A795F0", "smg_risk": false, "code": "\\be9[23]\\b",
+       {"family": "E9X_335", "years": [2012, 2013], "name": "E9X 335i", "color": "#AA98F3", "smg_risk": false, "code": "\\be9[23]\\b",
         "bodies": ["coupe", "conv"],
         "desc": "BMW 335i E92 coupe and E93 convertible 2012-2013 (the 2012-2013 sedan is the F30, not tracked)",
         "trims": [["335 ?is\\b", "335is"], ["m ?sport", "M Sport"], ["premium", "Premium"]]}
@@ -575,7 +573,7 @@
     {"enabled": true, "model": "M2", "brand": "BMW", "recheck": true, "match": ["\\bm ?2\\b", "bmw|\\bf87\\b|competition|\\bcs\\b|coup"], "none": ["\\bg87\\b|\\bm ?235|\\bm ?240|\\bm2 ?(pro|max|ultra|ssd)\\b|macbook|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe"],
      "generations": [
-       {"family": "M2_F87", "years": [2016, 2018], "name": "F87 M2", "color": "#9E8BE5", "smg_risk": true, "code": "\\bn55\\b",
+       {"family": "M2_F87", "years": [2016, 2018], "name": "F87 M2", "color": "#A08DE7", "smg_risk": true, "code": "\\bn55\\b",
         "desc": "BMW M2 F87 2016-2018, N55 3.0 turbo 370 cv; 6-speed manual or 7-speed M DCT"},
        {"family": "M2C_F87", "years": [2019, 2021], "name": "F87 M2 Competition", "color": "#9A88E1", "smg_risk": true, "code": "competition|\\bcomp\\b|\\bs55\\b",
         "desc": "BMW M2 Competition F87 2019-2021, S55 3.0 twin turbo 410 cv (from the M4); 6-speed manual or M DCT",
@@ -587,10 +585,10 @@
     {"enabled": true, "model": "Mustang GT", "brand": "Ford", "recheck": true, "match": ["\\bmustang\\b", "\\bgt\\b"], "none": ["shelby|\\bgt ?350|\\bgt ?500|\\bmach ?(1|e)\\b|\\bboss\\b|\\bcobra\\b|roush|saleen|steeda|hennessey|\\bv6\\b|eco ?boost|\\b2\\.3\\b|\\b3\\.7\\b|\\b4\\.0\\b|\\bgt ?(look|style|kit|wheels?|rims?|badges?)\\b|\\bgt ?h\\b|\\bgt ?40\\b|dark ?horse|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe", "conv"],
      "generations": [
-       {"family": "S197_46", "years": [2005, 2010], "name": "S197 Mustang GT", "color": "#ABD4F2", "smg_risk": false, "code": "\\b4\\.6\\b|\\b3 ?v\\b",
+       {"family": "S197_46", "years": [2005, 2010], "name": "S197 Mustang GT", "color": "#9CC4E1", "smg_risk": false, "code": "\\b4\\.6\\b|\\b3 ?v\\b",
         "desc": "Ford Mustang GT S197 2005-2010, 4.6 3-valve V8 304 cv (319 cv in 2010), Tremec TR-3650 5-speed",
         "trims": [["california ?special|\\bgt ?cs\\b", "California Special"], ["premium", "Premium"], ["45th", "45th Anniversary"], ["\\bbullitt\\b", "Bullitt"], ["track ?pack", "Track Pack"], ["pony ?(pack|package)", "Pony Package"]]},
-       {"family": "S197_50", "years": [2011, 2014], "name": "S197 Mustang GT 5.0", "color": "#90B8D5", "smg_risk": false,
+       {"family": "S197_50", "years": [2011, 2014], "name": "S197 Mustang GT 5.0", "color": "#8DB5D2", "smg_risk": false,
         "desc": "Ford Mustang GT S197 2011-2014, 5.0 Coyote V8 418 cv (426 cv 2013-2014), Getrag MT82 6-speed",
         "trims": [["california ?special|\\bgt ?cs\\b", "California Special"], ["premium", "Premium"], ["track ?pack", "Track Pack"], ["brembo", "Brembo"]]},
        {"family": "S550", "years": [2015, 2023], "name": "S550 Mustang GT", "color": "#779EBA", "smg_risk": false, "code": "\\bs550\\b",
@@ -603,7 +601,7 @@
     {"enabled": true, "model": "Camaro SS", "brand": "Chevrolet", "recheck": true, "match": ["\\bcamaro\\b", "\\b[12]?ss[12]?\\b|\\b1le\\b|\\bls3\\b|\\b6\\.2\\b"], "none": ["\\bzl ?1\\b|\\bz ?28\\b|\\b[123]lt\\b|\\blt[123]?\\b|\\b[12]ls\\b|\\bls\\b|\\bv6\\b|\\b3\\.6\\b|\\bcopo\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe", "conv"],
      "generations": [
-       {"family": "CAM5_SS", "years": [2010, 2015], "name": "5th-gen Camaro SS", "color": "#7CA857", "smg_risk": false,
+       {"family": "CAM5_SS", "years": [2010, 2015], "name": "5th-gen Camaro SS", "color": "#81AD5B", "smg_risk": false,
         "desc": "Chevrolet Camaro SS fifth generation 2010-2015, 6.2 LS3 V8 432 cv with the Tremec TR6060 6-speed (the automatics had the 406 cv L99); 1LE track package 2013-2015",
         "trims": [["\\b2ss\\b|\\bss ?2\\b", "2SS"], ["\\b1ss\\b|\\bss ?1\\b", "1SS"], ["\\b1le\\b", "1LE"], ["45th", "45th Anniversary"], ["transformers", "Transformers"], ["indy|pace ?car", "Indy 500"], ["\\brs\\b", "RS"], ["synergy", "Synergy"]]}
      ],
@@ -613,14 +611,14 @@
     {"enabled": true, "model": "Corvette", "brand": "Chevrolet", "recheck": true, "match": ["\\bcorvette\\b|\\bvette\\b"], "none": ["\\bc[12348]\\b|sting ?ray|\\b(z ?06|zr ?1) ?(look|style|wheels?|rims?|kit)\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe", "conv"],
      "generations": [
-       {"family": "C5", "years": [1997, 2004], "name": "C5 Corvette", "color": "#B1DE8B", "smg_risk": false, "code": "\\bc5\\b",
+       {"family": "C5", "years": [1997, 2004], "name": "C5 Corvette", "color": "#98C573", "smg_risk": false, "code": "\\bc5\\b",
         "desc": "Chevrolet Corvette C5 1997-2004, LS1 5.7 V8 350-355 cv; 6-speed manual (Tremec T56) in the rear transaxle",
         "trims": [["\\bz ?51\\b", "Z51"], ["\\bfrc\\b|fixed ?roof|hard ?top", "Fixed-roof (FRC)"], ["50th", "50th Anniversary"], ["commemorative", "Commemorative Edition"], ["pace ?car", "Pace Car"], ["targa", "Targa"]],
-        "split": [{"match": "\\bz[ -]?06\\b", "family": "C5Z06", "name": "C5 Corvette Z06", "color": "#9CD06E", "body": "coupe", "desc": "Chevrolet Corvette Z06 C5 2001-2004, LS6 5.7 V8 390 cv (2001), 411 cv (2002-2004), fixed-roof hardtop, manual only", "trims": [["commemorative", "Commemorative Edition"], [".", "Z06"]]}]},
-       {"family": "C6", "years": [2005, 2013], "name": "C6 Corvette", "color": "#96C371", "smg_risk": false, "code": "\\bc6\\b",
+        "split": [{"match": "\\bz[ -]?06\\b", "family": "C5Z06", "name": "C5 Corvette Z06", "color": "#84B756", "body": "coupe", "desc": "Chevrolet Corvette Z06 C5 2001-2004, LS6 5.7 V8 390 cv (2001), 411 cv (2002-2004), fixed-roof hardtop, manual only", "trims": [["commemorative", "Commemorative Edition"], [".", "Z06"]]}]},
+       {"family": "C6", "years": [2005, 2013], "name": "C6 Corvette", "color": "#8FBB6A", "smg_risk": false, "code": "\\bc6\\b",
         "desc": "Chevrolet Corvette C6 2005-2013: LS2 6.0 V8 406 cv to 2007, LS3 6.2 436 cv (442 cv with the NPP exhaust) from 2008; Grand Sport 2010-2013",
         "trims": [["grand ?sport|\\bgs\\b", "Grand Sport"], ["\\bz ?51\\b", "Z51"], ["\\b[34]lt\\b", "3LT/4LT"], ["\\b[12]lt\\b", "1LT/2LT"], ["\\b427\\b", "427 Convertible"], ["60th", "60th Anniversary"], ["targa", "Targa"]],
-        "split": [{"match": "\\bzr[ -]?1\\b|\\b3zr\\b", "family": "C6ZR1", "name": "C6 Corvette ZR1", "color": "#82B553", "body": "coupe", "desc": "Chevrolet Corvette ZR1 C6 2009-2013, LS9 6.2 supercharged V8 647 cv", "trims": [["\\b3zr\\b", "3ZR"], [".", "ZR1"]]}, {"match": "\\bz[ -]?06\\b", "family": "C6Z06", "name": "C6 Corvette Z06", "color": "#82B553", "body": "coupe", "desc": "Chevrolet Corvette Z06 C6 2006-2013, LS7 7.0 V8 512 cv, aluminium frame", "trims": [["carbon", "Carbon Limited Edition"], ["\\b3lz\\b", "3LZ"], ["\\b2lz\\b", "2LZ"], ["\\b1lz\\b", "1LZ"], [".", "Z06"]]}]}
+        "split": [{"match": "\\bzr[ -]?1\\b|\\b3zr\\b", "family": "C6ZR1", "name": "C6 Corvette ZR1", "color": "#7BAE4C", "body": "coupe", "desc": "Chevrolet Corvette ZR1 C6 2009-2013, LS9 6.2 supercharged V8 647 cv", "trims": [["\\b3zr\\b", "3ZR"], [".", "ZR1"]]}, {"match": "\\bz[ -]?06\\b", "family": "C6Z06", "name": "C6 Corvette Z06", "color": "#7BAE4C", "body": "coupe", "desc": "Chevrolet Corvette Z06 C6 2006-2013, LS7 7.0 V8 512 cv, aluminium frame", "trims": [["carbon", "Carbon Limited Edition"], ["\\b3lz\\b", "3LZ"], ["\\b2lz\\b", "2LZ"], ["\\b1lz\\b", "1LZ"], [".", "Z06"]]}]}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/chevrolet/corvette"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/corvette"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=chevrolet%20corvette&gb=1"], ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/chevrolet/corvette/cambio.manual"], ["Mercado Livre", "https://lista.mercadolivre.com.br/chevrolet-corvette-manual"]]},
@@ -628,12 +626,217 @@
     {"enabled": true, "model": "GTO", "brand": "Pontiac", "recheck": true, "match": ["\\bgto\\b"], "none": ["mitsubishi|\\bvr ?4\\b|\\b3000 ?gt\\b|monaro|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["coupe"],
      "generations": [
-       {"family": "GTO_LS1", "years": [2004, 2004], "name": "LS1 GTO", "color": "#A3D17E", "smg_risk": false, "code": "\\bls1\\b|\\b5\\.7\\b",
+       {"family": "GTO_LS1", "years": [2004, 2004], "name": "LS1 GTO", "color": "#94C06E", "smg_risk": false, "code": "\\bls1\\b|\\b5\\.7\\b",
         "desc": "Pontiac GTO 2004 (built by Holden from the Monaro), LS1 5.7 V8 355 cv, Tremec T56 6-speed"},
-       {"family": "GTO_LS2", "years": [2005, 2006], "name": "LS2 GTO", "color": "#89B564", "smg_risk": false, "code": "\\bls2\\b|\\b6\\.0\\b",
+       {"family": "GTO_LS2", "years": [2005, 2006], "name": "LS2 GTO", "color": "#8AB665", "smg_risk": false, "code": "\\bls2\\b|\\b6\\.0\\b",
         "desc": "Pontiac GTO 2005-2006, LS2 6.0 V8 406 cv, Tremec T56 6-speed"}
      ],
      "searches": {},
-     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=pontiac%20gto"], ["Mercado Livre", "https://lista.mercadolivre.com.br/pontiac-gto"]]}
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=pontiac%20gto"], ["Mercado Livre", "https://lista.mercadolivre.com.br/pontiac-gto"]]},
+
+    {"enabled": true, "model": "Gol GTI", "brand": "Volkswagen", "recheck": true, "match": ["\\bgol\\b", "\\bgti\\b"], "none": ["saveiro|parati|voyage|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["hatch"],
+     "generations": [
+       {"family": "GOL_GTI1", "years": [1989, 1994], "name": "G1 Gol GTI", "color": "#9DCCFD", "smg_risk": false, "code": "\\bquadrado\\b|\\bg1\\b",
+        "desc": "VW Gol GTI (1st gen, 'quadrado') 1989-1994, AP-2000 with fuel injection (120 cv): Brazil's first injected car"},
+       {"family": "GOL_GTI2", "years": [1995, 1999], "name": "G2 Gol GTI", "color": "#94C5F9", "smg_risk": false, "code": "\\bbolinha\\b|\\bg2\\b|16v",
+        "desc": "VW Gol GTI 'bolinha' 1995-1999: 2.0 8V, then 2.0 16V from 1996 (145 cv)"},
+       {"family": "GOL_GTI3", "years": [2000, 2001], "name": "G3 Gol GTI", "color": "#86B7EA", "smg_risk": false, "code": "\\bg3\\b",
+        "desc": "VW Gol GTI G3 2000-2001, 2.0 16V (153 cv)"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/volkswagen/gol/gti"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1989/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1990/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1991/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1992/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1993/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1994/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1995/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1996/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1997/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1998/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1999/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-2000/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-2001/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=gol%20gti"], ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/volkswagen/gol/gti"], ["Mercado Livre", "https://lista.mercadolivre.com.br/gol-gti"]]},
+
+    {"enabled": true, "model": "Gol GTS", "brand": "Volkswagen", "recheck": true, "match": ["\\bgol\\b", "\\bgts\\b"], "none": ["saveiro|parati|voyage|\\bgti\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["hatch"],
+     "generations": [
+       {"family": "GOL_GTS", "years": [1987, 1994], "name": "G1 Gol GTS", "color": "#A9D2FE", "smg_risk": false,
+        "desc": "VW Gol GTS 1987-1994, AP 1.8 (94-99 cv): the Escort XR3's rival"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/volkswagen/gol/gts"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1987/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1988/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1989/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1990/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1991/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1992/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1993/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1994/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=gol%20gts"], ["Mercado Livre", "https://lista.mercadolivre.com.br/gol-gts"]]},
+
+    {"enabled": true, "model": "Golf GTI", "brand": "Volkswagen", "recheck": true, "match": ["\\bgolf\\b", "\\bgti\\b"], "none": ["\\bvr6\\b|polo|jetta|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["hatch"],
+     "generations": [
+       {"family": "GOLF4_GTI", "years": [1999, 2008], "name": "Mk4 Golf GTI", "color": "#8DBEF1", "smg_risk": false, "code": "\\bmk ?4\\b|\\bmk ?iv\\b|1\\.8 ?t",
+        "desc": "VW Golf GTI Mk4 (built in Brazil) 1999-2008, 1.8 20V turbo (180 cv; 193 cv on high-octane fuel from 2007)"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/volkswagen/golf/gti"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/golf/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=golf%20gti%20manual"], ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/volkswagen/golf/gti"], ["Mercado Livre", "https://lista.mercadolivre.com.br/golf-gti-manual"]]},
+
+    {"enabled": true, "model": "Escort XR3", "brand": "Ford", "recheck": true, "match": ["\\bescort\\b", "\\bxr ?3\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["hatch", "conv"],
+     "generations": [
+       {"family": "XR3_MK3", "years": [1983, 1992], "name": "Mk3 Escort XR3", "color": "#ABD4F2", "smg_risk": false,
+        "desc": "Ford Escort XR3 1983-1992: 1.6 CHT, then AP 1.8 from 1989; convertible from 1985"},
+       {"family": "XR3_MK5", "years": [1993, 1996], "name": "Mk5 Escort XR3", "color": "#A3CCE9", "smg_risk": false,
+        "desc": "Ford Escort XR3 1993-1996, 2.0 (Autolatina AP); convertible"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/ford/escort/xr3"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1983/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1984/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1985/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1986/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1987/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1988/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1989/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1990/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1991/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1992/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1993/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1994/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1995/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1996/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=escort%20xr3"], ["Mercado Livre", "https://lista.mercadolivre.com.br/escort-xr3"]]},
+
+    {"enabled": true, "model": "Kadett GSi", "brand": "Chevrolet", "recheck": true, "match": ["\\bkadett\\b", "\\bgsi\\b"], "none": ["ipanema|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["hatch", "conv"],
+     "generations": [
+       {"family": "KADETT_GSI", "years": [1991, 1995], "name": "Kadett GSi", "color": "#A7D481", "smg_risk": false,
+        "desc": "Chevrolet Kadett GSi 1991-1995, 2.0 with fuel injection (121 cv), Recaro seats, digital dash; convertible"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/chevrolet/kadett/gsi"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/kadett/ano-1991/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/kadett/ano-1992/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/kadett/ano-1993/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/kadett/ano-1994/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/kadett/ano-1995/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=kadett%20gsi"], ["Mercado Livre", "https://lista.mercadolivre.com.br/kadett-gsi"]]},
+
+    {"enabled": true, "model": "Vectra GSi", "brand": "Chevrolet", "recheck": true, "match": ["\\bvectra\\b", "\\bgsi\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["sedan"],
+     "generations": [
+       {"family": "VECTRA_GSI", "years": [1993, 1996], "name": "Vectra A GSi", "color": "#9DCA78", "smg_risk": false,
+        "desc": "Chevrolet Vectra GSi 1993-1996, 2.0 16V (150 cv)"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/chevrolet/vectra/gsi"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/vectra/ano-1993/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/vectra/ano-1994/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/vectra/ano-1995/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/vectra/ano-1996/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=vectra%20gsi"], ["Mercado Livre", "https://lista.mercadolivre.com.br/vectra-gsi"]]},
+
+    {"enabled": true, "model": "Omega", "brand": "Chevrolet", "recheck": true, "match": ["\\bomega\\b"], "none": ["suprema|\\bgls\\b ?2\\.[02]|\\b2\\.[02]\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["sedan"],
+     "generations": [
+       {"family": "OMEGA_A", "years": [1992, 1998], "name": "Omega A (6 cyl)", "color": "#A2CF7D", "smg_risk": false,
+        "desc": "Chevrolet Omega 1992-1998 (Brazilian-built): 3.0 then 4.1 straight-six (CD, GLS)"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/chevrolet/omega"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/omega/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=omega%20cd"], ["Mercado Livre", "https://lista.mercadolivre.com.br/chevrolet-omega-cd"]]},
+
+    {"enabled": true, "model": "Opala", "brand": "Chevrolet", "recheck": true, "match": ["\\bopala\\b"], "none": ["caravan|\\bmini ?opala\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["sedan", "coupe"],
+     "generations": [
+       {"family": "OPALA", "years": [1969, 1992], "name": "Opala", "color": "#B1DE8B", "smg_risk": false,
+        "split": [{"match": "\\bss\\b|\\bss ?[46]\\b", "family": "OPALA_SS", "name": "Opala SS", "color": "#9CD06E", "desc": "Chevrolet Opala SS, the sporty version (six-cylinder 4.1 SS6 most wanted)"}],
+        "desc": "Chevrolet Opala 1969-1992: four or six cylinders (4.1 '250'); SS, Comodoro, Diplomata"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/chevrolet/opala"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/opala"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=opala"], ["Mercado Livre", "https://lista.mercadolivre.com.br/chevrolet-opala"]]},
+
+    {"enabled": true, "model": "Chevette", "brand": "Chevrolet", "recheck": true, "match": ["\\bchevette\\b"], "none": ["marajo|chevy ?500|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["sedan", "hatch", "coupe"],
+     "generations": [
+       {"family": "CHEVETTE", "years": [1973, 1994], "name": "Chevette", "color": "#ACD986", "smg_risk": false,
+        "desc": "Chevrolet Chevette 1973-1994, rear-wheel drive 1.4 / 1.6"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/chevrolet/chevette"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/chevette"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=chevette"], ["Mercado Livre", "https://lista.mercadolivre.com.br/chevrolet-chevette"]]},
+
+    {"enabled": true, "model": "Uno Turbo", "brand": "Fiat", "recheck": true, "match": ["\\buno\\b", "\\bturbo\\b"], "none": ["\\bmille\\b ?(fire|way)?$|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["hatch"],
+     "generations": [
+       {"family": "UNO_TURBO", "years": [1994, 1996], "name": "Uno Turbo i.e.", "color": "#FFA2A9", "smg_risk": false,
+        "desc": "Fiat Uno Turbo i.e. 1994-1996, 1.4 turbo (118 cv): Brazil's first factory turbo"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/fiat/uno/turbo"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/uno/ano-1994/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/uno/ano-1995/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/uno/ano-1996/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=uno%20turbo"], ["Mercado Livre", "https://lista.mercadolivre.com.br/uno-turbo"]]},
+
+    {"enabled": true, "model": "Tempra Turbo", "brand": "Fiat", "recheck": true, "match": ["\\btempra\\b", "\\bturbo\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["coupe", "sedan"],
+     "generations": [
+       {"family": "TEMPRA_TURBO", "years": [1994, 1996], "name": "Tempra Turbo", "color": "#FEB9BD", "smg_risk": false,
+        "desc": "Fiat Tempra Turbo 1994-1996, 2.0 8V turbo (165 cv); two-door body unique to Brazil"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/fiat/tempra/turbo"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/tempra"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=tempra%20turbo"], ["Mercado Livre", "https://lista.mercadolivre.com.br/tempra-turbo"]]},
+
+    {"enabled": true, "model": "Marea Turbo", "brand": "Fiat", "recheck": true, "match": ["\\bmarea\\b", "\\bturbo\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["sedan", "wagon"],
+     "generations": [
+       {"family": "MAREA_TURBO", "years": [1999, 2006], "name": "Marea Turbo", "color": "#F5929A", "smg_risk": false,
+        "desc": "Fiat Marea Turbo and Weekend Turbo 1999-2006, 2.0 20V five-cylinder turbo (182 cv)"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/fiat/marea/turbo"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/marea/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=marea%20turbo"], ["Mercado Livre", "https://lista.mercadolivre.com.br/marea-turbo"]]},
+
+    {"enabled": true, "model": "Punto T-Jet", "brand": "Fiat", "recheck": true, "match": ["\\bpunto\\b", "t ?jet\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["hatch"],
+     "generations": [
+       {"family": "PUNTO_TJET", "years": [2009, 2017], "name": "Punto T-Jet", "color": "#E6858D", "smg_risk": false,
+        "desc": "Fiat Punto T-Jet 2009-2017, 1.4 16V turbo (152 cv), 5-speed manual"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/fiat/punto/t-jet"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/punto/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=punto%20t-jet"], ["Mercado Livre", "https://lista.mercadolivre.com.br/punto-t-jet"]]},
+
+    {"enabled": true, "model": "Sandero R.S.", "brand": "Renault", "recheck": true, "match": ["\\bsandero\\b", "\\br\\.? ?s\\b|\\brs\\b"], "none": ["stepway|gt ?line|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["hatch"],
+     "generations": [
+       {"family": "SANDERO_RS", "years": [2015, 2021], "name": "Sandero R.S. 2.0", "color": "#D2B152", "smg_risk": false,
+        "desc": "Renault Sandero R.S. 2.0 2015-2021, 2.0 16V (150 cv), 6-speed manual; about 4,600 built"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/renault/sandero/rs"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/renault/sandero/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=sandero%20rs"], ["Mercado Livre", "https://lista.mercadolivre.com.br/sandero-rs"]]},
+
+    {"enabled": true, "model": "DS3", "brand": "Citroën", "recheck": true, "match": ["\\bds ?3\\b"], "none": ["crossback|e ?tense|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["hatch"],
+     "generations": [
+       {"family": "DS3_THP", "years": [2012, 2016], "name": "DS3 THP", "color": "#D5A0D0", "smg_risk": false,
+        "desc": "Citroën DS3 1.6 THP (165 cv), 6-speed manual"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/citroen/ds3"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/citroen/ds3"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=ds3%20thp"], ["Mercado Livre", "https://lista.mercadolivre.com.br/citroen-ds3"]]},
+
+    {"enabled": true, "model": "Ka Sport", "brand": "Ford", "recheck": true, "match": ["\\bka\\b", "\\bsport\\b"], "none": ["\\bka ?\\+|sedan|\\bse\\b ?plus|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["hatch"],
+     "generations": [
+       {"family": "KA_SPORT", "years": [2008, 2021], "name": "Ka Sport", "color": "#94BCD9", "smg_risk": false,
+        "desc": "Ford Ka Sport (1.6 hatch)"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/ford/ka/sport"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/ka/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=ka%20sport"], ["Mercado Livre", "https://lista.mercadolivre.com.br/ford-ka-sport"]]},
+
+    {"enabled": true, "model": "208 GT", "brand": "Peugeot", "recheck": true, "match": ["\\b208\\b", "\\bgt\\b|\\bgti\\b"], "none": ["gt ?line|griffe|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["hatch"],
+     "generations": [
+       {"family": "P208_GT", "years": [2015, 2019], "name": "208 GT 1.6 THP", "color": "#7DC3C2", "smg_risk": false,
+        "desc": "Peugeot 208 GT, 1.6 THP turbo, 6-speed manual"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/peugeot/208/gt"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/peugeot/208/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=208%20gt%20thp"], ["Mercado Livre", "https://lista.mercadolivre.com.br/peugeot-208-gt"]]},
+
+    {"enabled": true, "model": "500 Abarth", "brand": "Fiat", "recheck": true, "match": ["\\b500\\b", "\\babarth\\b"], "none": ["pulse|fastback|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["hatch", "conv"],
+     "generations": [
+       {"family": "F500_ABARTH", "years": [2014, 2019], "name": "500 Abarth", "color": "#D87880", "smg_risk": false,
+        "desc": "Fiat 500 Abarth, 1.4 turbo MultiAir, 5-speed manual"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/fiat/500/abarth"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/500"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=500%20abarth"], ["Mercado Livre", "https://lista.mercadolivre.com.br/fiat-500-abarth"]]},
+
+    {"enabled": true, "model": "Puma GT", "brand": "Puma", "recheck": true, "match": ["\\bpuma\\b"], "none": ["\\bgtb\\b|caminh|\\bmoto\\b|tenis|\\bp ?0?18\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["coupe", "conv"],
+     "generations": [
+       {"family": "PUMA_GT", "years": [1968, 1985], "name": "Puma GTE / GTS", "color": "#99C191", "smg_risk": false,
+        "desc": "Puma GT (VW air-cooled): GTE coupe and GTS convertible, later GTI and GTC"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/puma"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/puma"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=puma%20gte"], ["Mercado Livre", "https://lista.mercadolivre.com.br/puma-gts"]]},
+
+    {"enabled": true, "model": "3 Series (E36)", "brand": "BMW", "recheck": true, "match": ["\\b3(18|20|23|25|28) ?(i|is|ia|ti)\\b|\\be36\\b|\\bserie ?3\\b"], "none": ["\\bm3\\b|\\be46\\b|\\be90\\b|\\be30\\b|\\bz3\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["coupe", "sedan", "conv", "hatch"],
+     "generations": [
+       {"family": "E36_3", "years": [1992, 1998], "name": "E36 3 Series", "color": "#CCC2FF", "smg_risk": false, "code": "\\be36\\b",
+        "desc": "BMW 3 Series E36 1992-1998 (not M3): 318i/is/ti, 320i, 325i, 328i"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/bmw/series-3"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1992/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1993/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1994/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1995/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1996/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1997/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1998/s/cambio-manual"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=bmw%20e36"], ["Mercado Livre", "https://lista.mercadolivre.com.br/bmw-e36"]]},
+
+    {"enabled": true, "model": "Impreza WRX", "brand": "Subaru", "recheck": true, "match": ["\\bwrx\\b"], "none": ["\\bsti\\b|\\bs ?ti\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["sedan", "hatch"],
+     "generations": [
+       {"family": "WRX_GR", "years": [2008, 2014], "name": "GR WRX", "color": "#8FB1FC", "smg_risk": false, "code": "\\bg[ehrv]\\b",
+        "desc": "Subaru Impreza WRX (GE/GH/GR/GV) 2008-2014, 2.5 turbo boxer, 5-speed manual"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/subaru/impreza", "https://napista.com.br/busca/subaru/wrx"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/subaru/impreza"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=impreza%20wrx"], ["Mercado Livre", "https://lista.mercadolivre.com.br/subaru-impreza-wrx"]]},
+
+    {"enabled": true, "model": "TT", "brand": "Audi", "recheck": true, "match": ["\\btt\\b"], "none": ["\\btts\\b|\\btt ?rs\\b|\\b2\\.0\\b ?tfsi|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+     "bodies": ["coupe", "conv"],
+     "generations": [
+       {"family": "TT_8N", "years": [2000, 2006], "name": "8N TT 1.8T", "color": "#8FBDC6", "smg_risk": false, "code": "\\b8n\\b",
+        "desc": "Audi TT (8N) 2000-2006, 1.8 20V turbo (180-225 cv); quattro 225 with 6-speed manual"}
+     ],
+     "searches": {"napista": ["https://napista.com.br/busca/audi/tt"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/audi/tt"]},
+     "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=audi%20tt%201.8"], ["Mercado Livre", "https://lista.mercadolivre.com.br/audi-tt-1.8"]]}
   ]
 }
