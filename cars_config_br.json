@@ -418,7 +418,7 @@
      "searches": {"napista": ["https://napista.com.br/busca/mitsubishi/3000gt"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/mitsubishi/3000gt"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=mitsubishi%203000gt"], ["Mercado Livre", "https://lista.mercadolivre.com.br/mitsubishi-3000gt"]]},
 
-    {"enabled": true, "model": "Lancer Evolution", "brand": "Mitsubishi", "recheck": true, "match": ["\\bevo(lution)?\\b", "lancer|mitsubishi|\\bevo(lution)? ?(viii|ix|x|8|9|10)\\b"], "none": ["huracan|lamborghini|\\bevo(lution)? ?(vii|vi|v|iv|iii|ii|i|[1-7])\\b|ralliart|sportback|\\bgts\\b|\\bes\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
+    {"enabled": true, "model": "Lancer Evolution", "brand": "Mitsubishi", "recheck": true, "match": ["\\bevo(lution)?\\b|\\blancer\\b.*\\b(gsr|mr|final ?edition)\\b|gr201023va2936", "lancer|mitsubishi|\\bevo(lution)? ?(viii|ix|x|8|9|10)\\b"], "none": ["huracan|lamborghini|\\bevo(lution)? ?(vii|vi|v|iv|iii|ii|i|[1-7])\\b|ralliart|sportback|\\bgts\\b|\\bes\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["sedan", "wagon"],
      "generations": [
        {"family": "EVO8", "years": [2003, 2005], "name": "CT9A Evo VIII", "color": "#7D8A99", "smg_risk": false, "code": "\\bviii\\b|evo(lution)? ?8\\b",
@@ -434,7 +434,7 @@
      "searches": {"napista": ["https://napista.com.br/busca/mitsubishi/lancer/evolution"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/mitsubishi/lancer-evolution"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=lancer%20evolution&gb=1"], ["Mercado Livre", "https://lista.mercadolivre.com.br/mitsubishi-lancer-evolution-manual"]]},
 
-    {"enabled": true, "model": "Impreza WRX STI", "brand": "Subaru", "recheck": true, "match": ["\\bsti\\b", "wrx|impreza|subaru"], "none": ["\\bvab?\\b|\\bgc8\\b|\\bgf8\\b|sti ?(look|style|wheels?|rims?|seats?|swap|swapped|front|wing|spoiler|bumper|badges?)|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
+    {"enabled": true, "model": "Impreza WRX STI", "brand": "Subaru", "recheck": true, "match": ["\\bsti\\b", "wrx|impreza|subaru"], "none": ["\\bvab?\\b|\\bgc8\\b|\\bgf8\\b|sti ?(look|style|wheels?|rims?|seats?|front|wing|spoiler|bumper|badges?)|\\bswap(ped)?\\b|scion|toyota|\\bfr ?s\\b|\\bbrz\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b"],
      "bodies": ["sedan", "hatch"],
      "generations": [
        {"family": "STI_GD", "years": [2001, 2007], "name": "GD WRX STI", "color": "#2E5AAC", "smg_risk": false, "code": "\\bgd[bf]?\\b|blob ?eye|hawk ?eye|bug ?eye|peanut ?eye",
@@ -620,7 +620,7 @@
        {"family": "C6", "years": [2005, 2013], "name": "C6 Corvette", "color": "#3E7CC9", "smg_risk": false, "code": "\\bc6\\b",
         "desc": "Chevrolet Corvette C6 2005-2013: LS2 6.0 V8 406 cv to 2007, LS3 6.2 436 cv (442 cv with the NPP exhaust) from 2008; Grand Sport 2010-2013",
         "trims": [["grand ?sport|\\bgs\\b", "Grand Sport"], ["\\bz ?51\\b", "Z51"], ["\\b[34]lt\\b", "3LT/4LT"], ["\\b[12]lt\\b", "1LT/2LT"], ["\\b427\\b", "427 Convertible"], ["60th", "60th Anniversary"], ["targa", "Targa"]],
-        "split": [{"match": "\\bzr[ -]?1\\b", "family": "C6ZR1", "name": "C6 Corvette ZR1", "color": "#1C3F73", "body": "coupe", "desc": "Chevrolet Corvette ZR1 C6 2009-2013, LS9 6.2 supercharged V8 647 cv", "trims": [["\\b3zr\\b", "3ZR"], [".", "ZR1"]]}, {"match": "\\bz[ -]?06\\b", "family": "C6Z06", "name": "C6 Corvette Z06", "color": "#2A5A9E", "body": "coupe", "desc": "Chevrolet Corvette Z06 C6 2006-2013, LS7 7.0 V8 512 cv, aluminium frame", "trims": [["carbon", "Carbon Limited Edition"], ["\\b3lz\\b", "3LZ"], ["\\b2lz\\b", "2LZ"], ["\\b1lz\\b", "1LZ"], [".", "Z06"]]}]}
+        "split": [{"match": "\\bzr[ -]?1\\b|\\b3zr\\b", "family": "C6ZR1", "name": "C6 Corvette ZR1", "color": "#1C3F73", "body": "coupe", "desc": "Chevrolet Corvette ZR1 C6 2009-2013, LS9 6.2 supercharged V8 647 cv", "trims": [["\\b3zr\\b", "3ZR"], [".", "ZR1"]]}, {"match": "\\bz[ -]?06\\b", "family": "C6Z06", "name": "C6 Corvette Z06", "color": "#2A5A9E", "body": "coupe", "desc": "Chevrolet Corvette Z06 C6 2006-2013, LS7 7.0 V8 512 cv, aluminium frame", "trims": [["carbon", "Carbon Limited Edition"], ["\\b3lz\\b", "3LZ"], ["\\b2lz\\b", "2LZ"], ["\\b1lz\\b", "1LZ"], [".", "Z06"]]}]}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/chevrolet/corvette"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/corvette"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=chevrolet%20corvette&gb=1"], ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/chevrolet/corvette/cambio.manual"], ["Mercado Livre", "https://lista.mercadolivre.com.br/chevrolet-corvette-manual"]]},

@@ -118,6 +118,7 @@ SCORE = {
 }
 
 MIN_PRICE = 1500                     # below this the ad is not showing a real price ($1 = "call us" / sale pending)
+MAX_PRICE = {"CA": 1_000_000, "BR": 8_000_000}   # above this it's a typo ($1,699,000 for a 2004 STI)
 COLS = ["listing_id", "source", "family", "gen", "name", "year", "body", "price", "km", "trans",
         "place", "url", "photo_id", "note", "first_seen", "last_seen", "prev_price", "status", "verified",
         "trim", "red_flags", "green_flags", "flags_read", "photo_alt", "desc", "listed", "price_hist", "page_read"]
@@ -442,18 +443,24 @@ def load_rows(path):
         rows = [{c: r.get(c, "") or "" for c in COLS} for r in csv.DictReader(f)]
     # v2 could not read the year on Autotrader ad pages and wrongly rejected their ads: give those a second look
     return [r for r in rows if not (r["status"] == "skip" and r["source"] == "autotrader"
-                                    and not re.search(r"\[v[34]\]$", r["note"]))]
+                                    and not re.search(r"\[v[345]\]$", r["note"]))]
 
 
-SKIP_TAG = "[v4]"                                    # bumped when the car list grows: older rejections get a second look
+SKIP_TAG = "[v5]"                                    # bumped when the car list grows: older rejections get a second look
 
 
 def recheck_old_skips(rows):
-    """Ads rejected as 'not one of the cars on the list' before the list grew get one second look when their address
-    names a car tracked now: a Kijiji address with a year must fit a generation (a 1987 Supra is an A70 now); an
-    address without one (Autotrader) must name a model marked "recheck" in the config (one added in that batch)."""
+    """Ads rejected before the current SKIP_TAG get one second look when the rules changed in their favour:
+    'not one of the cars on the list' whose address names a car tracked now (a Kijiji address with a year must fit a
+    generation: a 1987 Supra is an A70 now; one without a year, as on Autotrader, must name a model marked "recheck"),
+    and Kijiji ads rejected as automatic whose title says manual (the title counts for the gearbox now)."""
     keep, n = [], 0
     for r in rows:
+        if (r["status"] == "skip" and r["note"].startswith("automatic") and not r["note"].endswith(SKIP_TAG)
+                and r["source"] == "kijiji"
+                and re.search(r"\bmanu[ae]l|\b[56] ?(mt|spd|speed)\b|\bstick\b", _norm(r["url"].rsplit("/", 2)[-2]))):
+            n += 1                                       # '2013 Mazda Miata GS manual': the title says manual now counts
+            continue
         if r["status"] == "skip" and r["note"].startswith("not one of the cars") and not r["note"].endswith(SKIP_TAG):
             slug = r["url"].rsplit("/", 2)[-2] if r["source"] == "kijiji" else r["url"].rsplit("/", 1)[-1]
             t = _norm(slug)
@@ -1105,6 +1112,8 @@ def discover_new(sess, rows, today, stats, max_new, found=None):
             reason = "price or km not readable"
         elif info["km"] < 500 or (dt.date.today().year - (info.get("year") or 0) >= 5 and info["km"] < 5000):
             reason = f"km not real ({info['km']} km on a {info.get('year')})"
+        elif info["price"] > MAX_PRICE.get(COUNTRY["country"], 10 ** 7):
+            reason = f"price not real ({info['price']})"
         if not reason and any(re.search(rx, _norm(info.get("body_raw", ""))) for rx in key.get("none_body", [])):
             reason = f"body not on the list ({info.get('body_raw')})"   # a hatchback Yaris, a coupe Civic
         if not reason:
@@ -1115,7 +1124,8 @@ def discover_new(sess, rows, today, stats, max_new, found=None):
             except ValueError:                           # a 2012 335i sedan is an F30, not an E90
                 reason = f"body not on the list for that year ({body})"
         if not reason:
-            trans = classify_trans(fam, info.get("trans_field", ""), info.get("desc", ""))
+            trans = classify_trans(fam, info.get("trans_field", ""),     # the title counts too: '... 6-SPEED MANUAL'
+                                   f'{info.get("title", "")} {slug.replace("-", " ")}. {info.get("desc", "")}')
             if trans == "a" and fam not in ALLOW_AUTO:
                 reason = "automatic / gearbox not stated"
         if reason:
@@ -1175,7 +1185,7 @@ def discover_new(sess, rows, today, stats, max_new, found=None):
         info["_html"] = r.text
         apply_page_details(row, info, today)
         row["page_read"] = today
-        t2 = classify_trans(row["family"], info.get("trans_field", ""), info.get("desc", ""))
+        t2 = classify_trans(row["family"], info.get("trans_field", ""), f'{row["note"]}. {info.get("desc", "")}')
         if row["trans"] == "a" and t2 != "a":
             row["trans"] = t2                               # the page says manual after all
         n_read += 1
@@ -1822,7 +1832,8 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
     """cars.json for the web app: every active car with its cues, score, flags, price history and sold comps."""
     today = dt.date.today()
     load_geo()
-    active = [r for r in rows if r["status"] == "active" and r["price"]]
+    cap = MAX_PRICE.get(COUNTRY["country"], 10 ** 7)
+    active = [r for r in rows if r["status"] == "active" and r["price"] and int(r["price"]) <= cap]
     scores, model_info = score_rows(active)
     model, b_conv, _ = fit_with_areas(active)
     comps = comps or []
