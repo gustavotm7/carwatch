@@ -39,3 +39,4 @@
 2026-11-25 22:57 active=652 gone=41 {'checked': 0, 'failed': 0, 'gone': 0, 'back': 0, 'price_changes': 0, 'candidates': 0, 'new': 0, 'skipped': 0, 'photos_new': 0, 'comps_new': 0, 'comps_pages': 0, 'comps_total': 1547} searches=[]
 2026-11-25 23:04 active=652 gone=41 {'checked': 0, 'failed': 0, 'gone': 0, 'back': 0, 'price_changes': 0, 'candidates': 0, 'new': 0, 'skipped': 0, 'photos_new': 0, 'comps_new': 0, 'comps_pages': 0, 'comps_total': 1547} searches=[]
 2026-11-25 23:14 active=652 gone=41 {'checked': 0, 'failed': 0, 'gone': 0, 'back': 0, 'price_changes': 0, 'candidates': 0, 'new': 0, 'skipped': 0, 'photos_new': 0, 'comps_new': 0, 'comps_pages': 0, 'comps_total': 1547} searches=[]
+2026-11-25 23:32 active=652 gone=41 {'checked': 0, 'failed': 0, 'gone': 0, 'back': 0, 'price_changes': 0, 'candidates': 0, 'new': 0, 'skipped': 0, 'photos_new': 0, 'comps_new': 0, 'comps_pages': 0, 'comps_total': 1547} searches=[]
