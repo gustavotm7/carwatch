@@ -1,11 +1,21 @@
 # CarWatch
 
 Used, mostly manual cars in Canada and Brazil, checked every morning, shown in a phone-friendly web page. Both stores
-track the same cars: E36 / E46 / E9X M3, E39 / E60 M5, E46 330, E91 wagon, 350Z, 370Z, AP1 / AP2 S2000,
-FA5 / FB Civic sedan (Si apart), Yaris sedan, BK1 / BK2 Genesis Coupe, the first NSX: NA1 (3.0, 1991–96),
-NA2 (3.2, 1997–2001) and the NA2 facelift (2002–05), the A80 Supra (Turbo apart), FB / FC / FD RX-7 (FC Turbo II
-apart), SE3P RX-8, R32 / R33 / R34 Skyline GT-R, AW11 / SW20 / ZZW30 MR2 (SW20 Turbo apart), the rear-drive AE86,
-and the Silvia from the S10 to the S15.
+track the same cars, grouped by brand in the app (tap a brand, then a model):
+
+- **Acura / Honda:** NA1 / NA2 / NA2 facelift NSX, DC2 Integra Type R, DC5 RSX Type-S, AP1 / AP2 S2000, FA5 / FB Civic
+  sedan (Si apart), EP3 Civic SiR, FK8 Civic Type R, BB6 Prelude (Type SH apart).
+- **BMW:** E30 / E36 / E46 / E9X M3, E39 / E60 M5, E46 330, E91 wagon, Z3 M and Z4 M (roadster and coupe apart),
+  E82 1M, E82 135i, E9X 335i, F87 M2 (Competition and CS apart).
+- **Chevrolet / Ford / Pontiac:** 5th-gen Camaro SS, C5 / C6 Corvette (Z06 and ZR1 apart), S197 / S550 Mustang GT,
+  LS1 / LS2 GTO.
+- **Datsun / Nissan / Infiniti:** S30 240Z / 260Z / 280Z, Z32 300ZX (Twin Turbo apart), 350Z, 370Z, R32 / R33 / R34
+  Skyline GT-R, Silvia S10 to S15, S13 / S14 240SX, RPS13 180SX, CV35 G35 and CV36 G37 coupes.
+- **Mazda:** NA / NB / NC MX-5 (Mazdaspeed apart), FB / FC / FD RX-7 (FC Turbo II apart), SE3P RX-8.
+- **Mitsubishi / Subaru:** Z16A 3000GT VR-4, Lancer Evolution VIII / IX / X, GD / GR WRX STI, ZC6 BRZ.
+- **Porsche:** 986 / 987 Boxster (S and Spyder apart).
+- **Toyota / Hyundai:** A70 / A80 Supra (Turbo apart), AW11 / SW20 / ZZW30 MR2 (SW20 Turbo apart), rear-drive AE86,
+  JZX100 Chaser, ZN6 86 (and Scion FR-S), Yaris sedan, BK1 / BK2 Genesis Coupe.
 
 - **Web app:** `https://gustavotm7.github.io/carwatch/` (add it to your phone's home screen).
 - **Update now:** Actions tab > **update** > **Run workflow** (or the menu in the app). Takes about 10 minutes.
@@ -18,6 +28,7 @@ Edit `cars_config.json` and push (the GitHub web editor works). Copy a block und
 
 | Field | What it does |
 |---|---|
+| `brand` | The make the app groups the model under (Acura NSX in Canada, Honda NSX in Brazil) |
 | `make`, `match`, `none` | Words that must / must not be in the ad title or address (regular expressions) |
 | `generations` | One per chassis: `years`, the `name` shown in the app (e.g. `AP1 S2000`), `color` |
 | `name_by_body` | Optional: name by body, like E90 / E92 / E93 M3 |
@@ -29,6 +40,8 @@ Edit `cars_config.json` and push (the GitHub web editor works). Copy a block und
 | `split` | Optional: a version priced on its own, with its own chip (FA5 / FB Civic Si, Supra Turbo); `body` forces the body |
 | `code` | Optional, per generation: the chassis code in an ad's title (S13, FD, R34) picks that generation at a boundary year |
 | `body` | Optional, per generation: the only body it came in (MR2 Spyder: `conv`) |
+| `bodies` (per generation) | Optional: the only bodies a generation takes, so a model splits by body (Z3 M Roadster / Coupe) or drops a body for some years (the 2012–13 335i sedan is an F30) |
+| `recheck` | `true` on the models of a new batch: ads rejected before it whose address names one are opened once more |
 | `searches` | Search pages read every day, per site |
 
 ## Brazil
@@ -46,8 +59,9 @@ English. The data stays in English inside (flag names, gearbox codes), and the a
   shown with the Manual | Automatic toggle at the start of the car chips. The app always opens on Manual.
 - The FA5 and FB Civic Si are their own cars (`split` in the config): own chip and own fair price. Brazil only
   had the FB Si as a coupe, so Brazil's FB Civic Si list is coupes; Canada's is the Si sedan.
-- The S2000, NSX, Genesis Coupe and the Japanese imports (Supra, RX-7, RX-8, GT-R, MR2, AE86, Silvia) are rare in
-  Brazil: few ads on NaPista and Mobiauto, and no FIPE price. Their OLX and Mercado Livre links are in the list, and the ad reader recognizes them.
+- Most of the enthusiast cars (S2000, NSX, Genesis Coupe, the Japanese imports, the American V8s, the BMW Z and 1 Series
+  cars) are rare in Brazil with a manual gearbox: few ads on NaPista and Mobiauto, and no FIPE price. Their OLX,
+  Webmotors and Mercado Livre links are in the list, and the ad reader recognizes them.
 - On NaPista and Mobiauto, ads seen in the day's searches are confirmed from the search data without opening
   them; automatics are added from the search data and their pages read later for the description.
 - Brazilian years are model years (a "2010/2011" car is a 2011).
@@ -65,7 +79,10 @@ English. The data stays in English inside (flag names, gearbox codes), and the a
 Scores, fair prices and flags are guides, not appraisals: flags only catch what the seller wrote.
 Sold prices are US auction results (hammer price, before the 5% buyer's fee and import costs); they are shown
 next to each car but do not change the score.
-CarPages blocks GitHub's servers, so the cloud run reads Autotrader and Kijiji only.
+CarPages blocks GitHub's servers, so the cloud run reads Autotrader and Kijiji only. Kijiji's keyword searches
+return many other cars, so an address that carries a year but names none of the tracked cars is skipped without
+opening it. Each run has a time budget (`--max-minutes`, 50 for Canada and 55 for Brazil): when it runs out, the
+remaining ads keep their status until the next morning.
 
 ### Location filter (Brazil)
 

@@ -88,6 +88,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .chip{flex:none;display:flex;align-items:center;gap:7px;padding:7px 12px 7px 10px;border-radius:999px;
   border:1px solid var(--line);background:var(--surface);color:var(--muted);font:600 15px/1 var(--cond);letter-spacing:.02em}
 .chip .dot{width:10px;height:10px;border-radius:50%;background:var(--c,#888)}
+.chips[hidden]{display:none}
+.otab tr.bh th{padding:14px 8px 4px;text-align:left;font:700 12px/1 var(--sans);letter-spacing:.06em;color:var(--dim);border:0;background:none}
+.chips.models{padding-top:0;margin-top:-2px}
+.chip.brand{font-weight:700;letter-spacing:.03em}
+.chip.brand[aria-pressed=true]{color:var(--bg);background:var(--text);border-color:var(--text)}
+.chip.brand[aria-pressed=true] .n{color:var(--bg);opacity:.7}
 .gmode{flex:none;display:flex;align-items:center;gap:7px;position:sticky;left:0;z-index:2;padding:7px 12px 7px 11px;
   border-radius:999px;font:600 15px/1 var(--cond);letter-spacing:.02em;
   box-shadow:-14px 0 0 #10141a,10px 0 12px -6px #10141a}
@@ -212,6 +218,7 @@ ul.facts-list.plain .dot{display:inline-block;width:9px;height:9px;border-radius
 .fact.body-conv{box-shadow:inset 3px 0 0 #e0a34a}
 .fact.body-sedan{box-shadow:inset 3px 0 0 #8fa3b8}
 .fact.body-wagon{box-shadow:inset 3px 0 0 #b9875a}
+.fact.body-hatch{box-shadow:inset 3px 0 0 #6fbf9a}
 .fact.trim{background:none;border-color:var(--line);color:var(--text)}
 .flags{display:flex;flex-wrap:wrap;gap:6px}
 .flag{border-radius:7px;padding:4px 8px;font:600 13px/1.25 var(--sans);background:rgba(242,103,92,.14);color:#ffaaa2;
@@ -382,7 +389,8 @@ ul.facts-list{margin:2px 0 0;padding-left:18px;display:grid;gap:7px;font-size:14
         <span id="fLabel">Filters</span> <span class="badge" id="fCount" hidden>0</span>
       </button>
     </div>
-    <div class="chips" id="chips" role="group" aria-label="Car"></div>
+    <div class="chips" id="chips" role="group" aria-label="Brand"></div>
+    <div class="chips models" id="models" role="group" aria-label="Model" hidden></div>
   </div>
 </header>
 
@@ -491,13 +499,13 @@ const GEARBOX = {
   u: {cls: "gb-u", label: "Manual?", long: "The data says manual but the text never confirms it. These cars also came with SMG/DCT, so ask."},
   a: {cls: "gb-a", label: "Automatic", long: "Automatic gearbox (shown only with the Automatic button on)."},
 };
-const BODY_EN = {coupe: "Coupe", conv: "Convertible", sedan: "Sedan", wagon: "Wagon", unk: "Body n/a"};
-const BODY_PT = {coupe: "Cupê", conv: "Conversível", sedan: "Sedã", wagon: "Perua", unk: "Carroceria n/d"};
+const BODY_EN = {coupe: "Coupe", conv: "Convertible", sedan: "Sedan", wagon: "Wagon", hatch: "Hatchback", unk: "Body n/a"};
+const BODY_PT = {coupe: "Cupê", conv: "Conversível", sedan: "Sedã", wagon: "Perua", hatch: "Hatch", unk: "Carroceria n/d"};
 const BD = () => PT() ? BODY_PT : BODY_EN;
 const HARD = () => PT() ? ["Accident mentioned"] : ["Rebuilt title", "Salvage title"];   // the serious flags in each market
 const DEFAULT_STATE = {sort: "score", dir: "desc", names: [], gear: ["m", "c", "u"], bodies: [], maxPrice: 0,
                        maxKm: 0, yearFrom: 0, yearTo: 0, hideHard: false, hideRed: false, hideHigh: false, hideSus: false,
-                       tab: "list", ana: "", budget: 0, ext: false};
+                       tab: "list", ana: "", budget: 0, ext: false, brand: ""};
 let DATA = null, state = load();
 
 function stateKey() { return COUNTRY === "CA" ? "cw-state" : "cw-state-" + COUNTRY; }   // filters kept per country
@@ -567,6 +575,18 @@ function ago(iso) {
 
 // ---------- filtering + sorting ----------
 function effNames() { return state.names.filter(n => DATA.names.some(x => x.name === n)); }
+function brandOf(name) {                       // the make a model is grouped under (Acura NSX in Canada, Honda NSX in Brazil)
+  return ((DATA.names.find(n => n.name === name) || allNames().find(n => n.name === name)) || {}).brand || "";
+}
+function effBrand() {                          // the chosen brand, if this list has it (the automatics list has two)
+  const b = state.tab === "prices" && state.ana ? brandOf(state.ana) : state.brand;
+  return b && DATA.names.some(n => n.brand === b) ? b : "";
+}
+function brandsHere() {                        // [brand, ads] A to Z, for the first chip row
+  const cnt = {};
+  for (const c of DATA.cars) { const b = brandOf(c.name); if (b) cnt[b] = (cnt[b] || 0) + 1; }
+  return Object.keys(cnt).sort((a, b) => a.localeCompare(b)).map(b => [b, cnt[b]]);
+}
 function pricePart(vs) {                       // same as the collector: a price far under the market earns nothing
   const s = dealCuts().sus;
   return vs < s ? vs : Math.max(0, s - (vs - s) * 3);
@@ -599,9 +619,9 @@ function locRowHTML() {                         // Anywhere / favourite towns / 
 }
 const basisTxt = () => `${L("based on", "base")}: ${nf(LOCAL.n)} ${L(LOCAL.n === 1 ? "car" : "cars", LOCAL.n === 1 ? "carro" : "carros")}${LOCAL.few ? L(` + the ${LOCAL.uf} average`, ` + média de ${LOCAL.uf}`) : ""}`;
 function filtered() {
-  const names = effNames();
+  const names = effNames(), brand = effBrand();
   let cars = [...DATA.cars, ...sharedCars()].filter(c =>
-    (!names.length || names.includes(c.name)) &&
+    (names.length ? names.includes(c.name) : !brand || brandOf(c.name) === brand) &&
     (AUTO ? c.trans === "a" : state.gear.includes(c.trans)) &&
     (!state.bodies.length || state.bodies.includes(c.body)) &&
     (!state.maxPrice || c.price <= state.maxPrice) &&
@@ -913,21 +933,33 @@ function card(c) {
       ${c.place ? `<div class="place"><svg width="12" height="14" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 13s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C1.5 8.8 6 13 6 13Z"/><circle cx="6" cy="5.5" r="1.6"/></svg>${esc(c.place)}${LOC.active && c._dist != null ? `<span class="dist">${c._dist < 1 ? L("in town", "na cidade") : Math.round(c._dist) + " km"}</span>` : ""}</div>` : ""}
     </div></article>`;
 }
-function renderChips() {
+function renderChips() {                       // brands first; the chosen brand's models in a second row
   const counts = {};
   DATA.cars.forEach(c => counts[c.name] = (counts[c.name] || 0) + 1);
-  const names = state.tab === "prices" ? (state.ana ? [state.ana] : []) : effNames();
+  const prices = state.tab === "prices";
+  const names = prices ? (state.ana ? [state.ana] : []) : effNames();
+  const brand = effBrand();
   const gm = MAN_DATA && MAN_DATA.auto_file          // one button showing the current gearbox; a tap switches
     ? `<button class="gmode ${AUTO ? "is-auto" : "is-man"}" data-gm="${AUTO ? "m" : "a"}" type="button"
         aria-label="${AUTO ? L("Showing automatic cars. Tap for manual.", "Mostrando carros automáticos. Toque para manual.")
                            : L("Showing manual cars. Tap for automatic.", "Mostrando carros manuais. Toque para automático.")}">
         <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 4.5h9M8.5 2l2.5 2.5L8.5 7M12 9.5H3M5.5 7 3 9.5 5.5 12"/></svg>${AUTO ? L("Automatic", "Automático") : "Manual"}</button>` : "";
-  const all = `<button class="chip" data-name="" aria-pressed="${!names.length}">${L("All", "Todos")} <span class="n">${nf(DATA.cars.length)}</span></button>`;
-  $("#chips").innerHTML = gm + all + DATA.names.map(n =>
-    `<button class="chip" style="--c:${n.color}" data-name="${esc(n.name)}" aria-pressed="${names.includes(n.name)}">
-      <span class="dot"></span>${esc(n.name)} <span class="n">${nf(counts[n.name] || 0)}</span></button>`).join("");
-  const row = $("#chips"), r0 = row.getBoundingClientRect();     // 30+ chips: keep a chosen model in view
-  const on = [...row.querySelectorAll('.chip[aria-pressed="true"]:not([data-name=""])')];
+  const all = `<button class="chip" data-brand="" aria-pressed="${!brand && !names.length}">${L("All", "Todos")} <span class="n">${nf(DATA.cars.length)}</span></button>`;
+  $("#chips").innerHTML = gm + all + brandsHere().map(([b, n]) =>
+    `<button class="chip brand" data-brand="${esc(b)}" aria-pressed="${b === brand}">${esc(b)} <span class="n">${nf(n)}</span></button>`).join("");
+  const mods = brand ? DATA.names.filter(n => n.brand === brand) : [];
+  const total = mods.reduce((t, n) => t + (counts[n.name] || 0), 0);
+  const row2 = $("#models");
+  row2.hidden = !mods.length;
+  row2.setAttribute("aria-label", brand ? L(`${brand} models`, `Modelos ${brand}`) : L("Model", "Modelo"));
+  row2.innerHTML = mods.length ? `<button class="chip" data-name="" aria-pressed="${!names.length}">${L("All", "Todos")} ${esc(brand)} <span class="n">${nf(total)}</span></button>`
+    + mods.map(n => `<button class="chip" style="--c:${n.color}" data-name="${esc(n.name)}" aria-pressed="${names.includes(n.name)}">
+      <span class="dot"></span>${esc(n.name)} <span class="n">${nf(counts[n.name] || 0)}</span></button>`).join("") : "";
+  keepInView($("#chips"), ".chip.brand[aria-pressed=\"true\"]");
+  keepInView(row2, '.chip[aria-pressed="true"]:not([data-name=""])');
+}
+function keepInView(row, sel) {                 // a chosen chip scrolled off the row comes back into view
+  const r0 = row.getBoundingClientRect(), on = [...row.querySelectorAll(sel)];
   const seen = c => { const b = c.getBoundingClientRect(); return b.left >= r0.left && b.right <= r0.right; };
   if (on.length && !on.some(seen)) row.scrollLeft += on[0].getBoundingClientRect().left - r0.left - (row.clientWidth - on[0].offsetWidth) / 2;
 }
@@ -1160,7 +1192,7 @@ function filterSheet() {
     ${AUTO ? "" : `<h3>${L("Gearbox", "Câmbio")}</h3><div class="opt-group">
       ${["m", "c", "u"].map(k => opt("gear", k, GB()[k].label, t.gear.includes(k))).join("")}</div>`}
     <h3>${L("Body", "Carroceria")}</h3><div class="opt-group">
-      ${["coupe", "conv", "sedan", "wagon"].map(b => opt("body", b, BD()[b], t.bodies.includes(b))).join("")}</div>
+      ${["coupe", "conv", "sedan", "wagon", "hatch"].map(b => opt("body", b, BD()[b], t.bodies.includes(b))).join("")}</div>
     <h3>${L("Highest price", "Preço máximo")}</h3><div class="range"><input type="range" id="fPrice" min="5000" max="${pMax}" step="1000" value="${t.maxPrice || pMax}"><output id="oPrice"></output></div>
     <h3>${L("Most km", "Km máximo")}</h3><div class="range"><input type="range" id="fKm" min="10000" max="${kMax}" step="5000" value="${t.maxKm || kMax}"><output id="oKm"></output></div>
     <h3>${L("Year", "Ano")}</h3><div class="range"><select id="fY1" class="opt">${yOpts(t.yearFrom)}</select><span>${L("to", "até")}</span><select id="fY2" class="opt">${yOpts(t.yearTo)}</select></div>
@@ -1266,6 +1298,7 @@ function linksSheet(auto = AUTO) {
   const sel = new Set(effNames());
   const famOf = n => ((MAN_DATA || DATA).names.find(x => x.name === n) || {}).family;
   const selFams = new Set([...sel].map(famOf));
+  if (!sel.size && effBrand()) (MAN_DATA || DATA).names.filter(n => n.brand === effBrand()).forEach(n => selFams.add(n.family));
   const all = (MAN_DATA || DATA).links || [];
   const hasAuto = all.some(g => (g.links_auto || []).length);
   const groups = all.filter(g => (auto ? g.links_auto : g.links || []).length)
@@ -1727,18 +1760,24 @@ function bestDeals(cars, name) {                  // uses the local score and % 
 }
 // "All": one row per model, and the price level by state for every model together
 function overview(near) {                         // near: cars within the selected town's radius
-  const rows = DATA.names.map(n => {
+  const brand = effBrand();                       // a brand chip picked: that brand's models only
+  const list = brand ? DATA.names.filter(n => n.brand === brand)
+    : [...DATA.names].sort((a, b) => (a.brand || "").localeCompare(b.brand || ""));
+  const scope = (near || DATA.cars).filter(c => !brand || brandOf(c.name) === brand);
+  let lastB = "";
+  const rows = list.map(n => {
+    const head = !brand && n.brand && n.brand !== lastB ? `<tr class="bh"><th colspan="5">${esc(lastB = n.brand)}</th></tr>` : "";
     const nat = DATA.cars.filter(c => c.name === n.name), cs = near ? near.filter(c => c.name === n.name) : nat;
     const days = siteDays(cs);
     const cut = cs.filter(c => c.hist && c.hist.some(([, p], i) => i && p < c.hist[i - 1][1])).length;
-    return `<tr data-ana="${esc(n.name)}"><td><span class="dot" style="--c:${n.color}"></span>${esc(n.name)}</td><td>${nf(cs.length)}</td>
+    return head + `<tr data-ana="${esc(n.name)}"><td><span class="dot" style="--c:${n.color}"></span>${esc(n.name)}</td><td>${nf(cs.length)}</td>
       ${near ? `<td class="m">${nf(nat.length)}</td>` : ""}
       <td>${cs.length ? kShort(medv(cs.map(c => c.price))) : "–"}</td><td>${days.length ? Math.round(medv(days)) : "–"}</td>
       ${near ? "" : `<td>${cs.length ? Math.round(cut / cs.length * 100) + "%" : "–"}</td>`}</tr>`;
   }).join("");
   let html = near ? locCard(near.length, DATA.cars.length, AUTO ? L("automatic cars", "carros automáticos") : L("cars", "carros")) : "";
-  html += guideOverview(near || DATA.cars) + budgetCard(near || DATA.cars, "");
-  html += anaSection(L("All models", "Todos os modelos"), L("Tap a model for its full analysis.", "Toque num modelo para ver a análise completa."),
+  html += guideOverview(scope) + budgetCard(scope, "");
+  html += anaSection(brand ? L(`${brand} models`, `Modelos ${brand}`) : L("All models", "Todos os modelos"), L("Tap a model for its full analysis.", "Toque num modelo para ver a análise completa."),
     `<table class="otab"><thead><tr><th>${L("Model", "Modelo")}</th><th>${near ? L("Here", "Aqui") : L("Ads", "Anúncios")}</th>
       ${near ? `<th>${L("Brazil", "Brasil")}</th>` : ""}<th>${L("Median", "Mediana")}</th><th>${L("Days", "Dias")}</th>
       ${near ? "" : `<th>${L("Cut price", "Baixaram")}</th>`}</tr></thead><tbody>${rows}</tbody></table>
@@ -2015,7 +2054,7 @@ function budgetCard(cars, name) {
         ? L(`up to <b>${r.best.y}</b>, with ~${kmR(r.best.km)} (fair ~${kShort(r.best.F)})`, `até <b>${r.best.y}</b>, com ~${kmR(r.best.km)} (justo ~${kShort(r.best.F)})`)
         : L(`at typical km, from ${kShort(r.from)}`, `com km típica, a partir de ${kShort(r.from)}`), r)}${moreTxt(r)}.</li>`).join("");
     } else {
-      li = DATA.names.map(n => {
+      li = DATA.names.filter(n => !effBrand() || n.brand === effBrand()).map(n => {
         const fit = budgetFit(n.name, B), ok = fit.filter(r => r.best).sort((p, q) => q.best.y - p.best.y || p.best.F - q.best.F);
         const g = inB.filter(c => c.name === n.name && ["great", "good"].includes(dealOf(vsOf(c)))).length;
         if (!fit.length) return "";
@@ -2100,11 +2139,13 @@ function paintTabs() {
 const SITE_OF = [[/(^|\.)olx\.com\.br$/, "olx"], [/(^|\.)mercadoli[vb]re\.com(\.br)?$/, "mercadolivre"], [/(^|\.)webmotors\.com\.br$/, "webmotors"],
   [/(^|\.)icarros\.com\.br$/, "icarros"], [/(^|\.)(facebook\.com|fb\.com|fb\.me)$/, "marketplace"], [/(^|\.)kijiji\.ca$/, "kijiji"],
   [/(^|\.)autotrader\.ca$/, "autotrader"], [/(^|\.)carpages\.ca$/, "carpages"], [/(^|\.)napista\.com\.br$/, "napista"], [/(^|\.)mobiauto\.com\.br$/, "mobiauto"]];
-const MODEL_RX = [["FA5_SI", /\bcivic\b.*\bsi\b|\bsi\b.*\bcivic\b/], ["FB_SI", /\bcivic\b.*\bsi\b|\bsi\b.*\bcivic\b/],
+const MODEL_RX = [["FK8", /\bcivic\b.*(type.?r\b|\bfk8\b)|\bfk8\b/], ["EP3", /\bcivic\b.*\b(si.?r|ep3)\b|\bep3\b/],
+  ["FA5_SI", /\bcivic\b.*\bsi\b|\bsi\b.*\bcivic\b/], ["FB_SI", /\bcivic\b.*\bsi\b|\bsi\b.*\bcivic\b/],
   ["FA5", /\bcivic\b/], ["FB", /\bcivic\b/], ["YARIS_S", /\byaris\b/],
   ["S2K_AP1", /\bs ?2000\b/], ["S2K_AP2", /\bs ?2000\b/], ["GC_BK1", /\bgenesis\b.*\bcoup|\bcoup.*\bgenesis\b/], ["GC_BK2", /\bgenesis\b.*\bcoup|\bcoup.*\bgenesis\b/],
   ["NSX_NA1", /\bnsx\b/], ["NSX_NA2", /\bnsx\b/], ["NSX_NA2F", /\bnsx\b/],
   ["A80_TT", /\bsupra\b.*(twin.?turbo|\btt\b|2jz.?gte|\bturbo\b|\brz\b|\bgz\b)|(twin.?turbo|2jz.?gte|\bturbo\b).*\bsupra\b/], ["A80", /\bsupra\b/],
+  ["A70_TT", /\bsupra\b.*(turbo|7m.?gte|1jz)|(turbo|7m.?gte).*\bsupra\b/], ["A70", /\bsupra\b/],
   ["RX7_FC_T2", /\brx.?7\b.*(turbo|\btii\b)|(turbo|\btii\b).*\brx.?7\b/], ["RX7_FB", /\brx.?7\b/], ["RX7_FC", /\brx.?7\b/], ["RX7_FD", /\brx.?7\b/],
   ["RX8", /\brx.?8\b/],
   ["GTR_R32", /\bgt.?r\b.*(skyline|\br3[234]\b)|(skyline|\br3[234]\b).*\bgt.?r\b/], ["GTR_R33", /\bgt.?r\b.*(skyline|\br3[234]\b)|(skyline|\br3[234]\b).*\bgt.?r\b/],
@@ -2113,8 +2154,29 @@ const MODEL_RX = [["FA5_SI", /\bcivic\b.*\bsi\b|\bsi\b.*\bcivic\b/], ["FB_SI", /
   ["MR2_AW11", /\bmr.?2\b/], ["MR2_SW20", /\bmr.?2\b/], ["MR2_ZZW30", /\bmr.?2\b/],
   ["AE86", /\bae.?86\b|trueno|levin|corolla.*\b(gt.?s|sr.?5)\b/],
   ["S10", /\bs[iy]lvia\b/], ["S110", /\bs[iy]lvia\b/], ["S12", /\bs[iy]lvia\b/], ["S13", /\bs[iy]lvia\b/], ["S14", /\bs[iy]lvia\b/], ["S15", /\bs[iy]lvia\b/],
-  ["E36M3", /\bm3\b/], ["E46M3", /\bm3\b/], ["E9XM3", /\bm3\b/], ["E39M5", /\bm5\b/], ["E60M5", /\bm5\b/],
-  ["E91", /\b(wagon|touring|sport ?wagon|perua)\b/], ["E46_330", /\b330 ?c?i?\b/], ["Z350", /\b350 ?z\b/], ["Z370", /\b370 ?z\b/]];
+  ["E30M3", /\bm3\b/], ["E36M3", /\bm3\b/], ["E46M3", /\bm3\b/], ["E9XM3", /\bm3\b/], ["E39M5", /\bm5\b/], ["E60M5", /\bm5\b/],
+  ["E91", /\b(wagon|touring|sport ?wagon|perua)\b/], ["E46_330", /\b330 ?c?i?\b/], ["Z350", /\b350 ?z\b/], ["Z370", /\b370 ?z\b/],
+  ["MX5_NB_MS", /\b(mx.?5|miata)\b.*mazda.?speed|mazda.?speed.*\b(mx.?5|miata)\b/],
+  ["MX5_NA", /\b(mx.?5|miata|eunos)\b/], ["MX5_NB", /\b(mx.?5|miata)\b/], ["MX5_NC", /\b(mx.?5|miata)\b/],
+  ["Z3M_C", /\b(z.?3.?m|m)\b.?coup/], ["Z4M_C", /\b(z.?4.?m|m)\b.?coup/], ["Z3M_R", /\bz.?3.?m\b|\bm.?roadster\b/], ["Z4M_R", /\bz.?4.?m\b|\bm.?roadster\b/],
+  ["B987SP", /\bboxs?ter\b.*\bspyder\b/], ["B986S", /\bboxs?ter.?s\b/], ["B987S", /\bboxs?ter.?s\b/], ["B986", /\bboxs?ter\b/], ["B987", /\bboxs?ter\b/],
+  ["ITR_DC2", /\bintegra\b.*(type.?r\b|\bitr\b)|\bitr\b/], ["RSX_S", /\brsx\b.*type.?s\b|\brsx.?s\b/],
+  ["BB6_SH", /\bprelude\b.*(type.?sh|\bsh\b)/], ["BB6", /\bprelude\b/],
+  ["Z32_TT", /\b(300.?zx|fairlady.?z)\b.*(twin.?turbo|\btt\b|\bturbo\b)|twin.?turbo.*\b300.?zx\b/], ["Z32", /\b300.?zx\b|\bfairlady.?z\b/],
+  ["VR4", /\b3000.?gt\b.*\bvr.?4\b|\bvr.?4\b.*\b3000.?gt\b|mitsubishi.?gto\b/],
+  ["EVOX", /\bevo(lution)?.?(x|10)\b/], ["EVO9", /\bevo(lution)?.?(ix|9)\b/], ["EVO8", /\bevo(lution)?.?(viii|8)\b/],
+  ["EVO8", /\blancer.?evo/], ["EVO9", /\blancer.?evo/], ["EVOX", /\blancer.?evo/],
+  ["STI_GD", /\b(wrx|impreza|subaru)\b.*\bsti\b|\bsti\b.*\b(wrx|impreza)\b/], ["STI_GR", /\b(wrx|impreza|subaru)\b.*\bsti\b|\bsti\b.*\b(wrx|impreza)\b/],
+  ["JZX100", /\bchaser\b/], ["S13_240", /\b240.?sx\b/], ["S14_240", /\b240.?sx\b/], ["RPS13", /\b180.?sx\b/],
+  ["ZN6", /\b(toyota|scion|gt).?86\b|\bfr.?s\b/], ["ZC6", /\bbrz\b/],
+  ["S30_240", /\b240.?z\b/], ["S30_260", /\b260.?z\b/], ["S30_280", /\b280.?z\b/],
+  ["G35C", /\bg.?35\b/], ["G37C", /\bg.?37s?\b|\bq.?60\b/],
+  ["E82_1M", /\bbmw\b.*\b1.?m\b|\b1.?series.?m\b|\b1m.?coup/], ["E82_135", /\b135.?is?\b/], ["E9X_335", /\b335.?is?\b/],
+  ["M2CS_F87", /\bm2\b.*\bcs\b/], ["M2_F87", /\bm2\b/], ["M2C_F87", /\bm2\b/],
+  ["S197_46", /\bmustang\b.*\bgt\b|\bgt\b.*\bmustang\b/], ["S197_50", /\bmustang\b.*\bgt\b|\bgt\b.*\bmustang\b/], ["S550", /\bmustang\b.*\bgt\b|\bgt\b.*\bmustang\b/],
+  ["CAM5_SS", /\bcamaro\b/],
+  ["C6ZR1", /\bzr.?1\b/], ["C5Z06", /\b(corvette|vette)\b.*\bz.?06\b|\bz.?06\b.*\bcorvette\b/], ["C6Z06", /\b(corvette|vette)\b.*\bz.?06\b|\bz.?06\b.*\bcorvette\b/],
+  ["C5", /\b(corvette|vette)\b/], ["C6", /\b(corvette|vette)\b/], ["GTO_LS1", /\bgto\b/], ["GTO_LS2", /\bgto\b/]];
 const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 const hashId = s => { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return "sh" + h.toString(36).padStart(7, "0"); };
 function cleanUrl(u) {                           // the same ad shared twice gives the same address: no tracking, no anchor
@@ -2176,7 +2238,8 @@ function parseAd(title, text, url) {             // what an ad's link and text s
   const names = allNames(), fit = n => !year || (year >= n.years[0] && year <= n.years[1]);
   const fam = (MODEL_RX.find(([f, rx]) => rx.test(words) && names.some(n => n.family === f && fit(n))) || [])[0];
   const body = /\b(conversivel|cabrio|cabriolet|convertible|roadster)\b/.test(words) ? "conv" : /\b(sedan|seda|4p|4 portas)\b/.test(words) ? "sedan"
-    : /\b(coupe|cupe|2p|2 portas)\b/.test(words) ? "coupe" : /\b(wagon|touring|perua)\b/.test(words) ? "wagon" : "";
+    : /\b(coupe|cupe|2p|2 portas)\b/.test(words) ? "coupe" : /\b(wagon|touring|perua)\b/.test(words) ? "wagon"
+    : /\b(hatch|hatchback|liftback|fastback|3p|5p|3 portas|5 portas)\b/.test(words) ? "hatch" : "";
   const cands = names.filter(n => n.family === fam && fit(n));
   const name = (cands.find(n => body && bodiesOf(n.name)[0] === body) || cands[0] || {}).name || "";
   const gear = /\b(aut|automatico|automatica|automatic|cvt)\b/.test(words) ? "a" : /\b(manual|mec|mecanico)\b/.test(words) ? "m" : (AUTO ? "a" : "m");
@@ -2328,8 +2391,9 @@ function paintEval(msg = "", show = false) {
     ${EV.url ? "" : `<div class="evpaste"><textarea id="evPaste" rows="3" placeholder="${L("Paste here", "Cole aqui")}" aria-label="${L("Ad link or text", "Link ou texto do anúncio")}"></textarea>
       <button id="evRead" type="button">${L("Read", "Ler")}</button></div>`}
     <div class="evform">
-      <label class="wide">${L("Model", "Modelo")}<select id="evName"><option value="">${L("Choose", "Escolha")}</option>${names.map(x =>
-        `<option value="${esc(x.name)}" ${x.name === EV.name ? "selected" : ""}>${esc(x.name)} (${x.years[0]}–${x.years[1]})</option>`).join("")}</select></label>
+      <label class="wide">${L("Model", "Modelo")}<select id="evName"><option value="">${L("Choose", "Escolha")}</option>${(by => Object.keys(by).sort((a, b) => a.localeCompare(b)).map(b =>
+        `<optgroup label="${esc(b)}">${by[b].map(x => `<option value="${esc(x.name)}" ${x.name === EV.name ? "selected" : ""}>${esc(x.name)} (${x.years[0]}–${x.years[1]})</option>`).join("")}</optgroup>`).join(""))(
+        names.reduce((by, x) => ((by[x.brand || ""] ||= []).push(x), by), {}))}</select></label>
       <label>${L("Year", "Ano")}<input id="evYear" inputmode="numeric" maxlength="4" autocomplete="off" value="${EV.year || ""}"></label>
       <label>Km<input id="evKm" inputmode="numeric" autocomplete="off" value="${EV.km ? nf(+EV.km) : ""}" placeholder="${tk ? L("typical ", "típica ") + nf(Math.round(tk / 1000) * 1000) : ""}"></label>
       <label class="wide">${L("Price", "Preço")} (${CUR().sym.trim()})<input id="evPrice" inputmode="numeric" autocomplete="off" value="${EV.price ? nf(+EV.price) : ""}"></label>
@@ -2354,7 +2418,7 @@ function paintEval(msg = "", show = false) {
           "Anúncios salvos aparecem na sua lista com nota, só neste aparelho. Para dividir com amigos, crie um grupo: Menu > Grupo.")}</p>`, L("Check an ad", "Avaliar anúncio"));
   if ($("#evShow")) $("#evShow").onclick = () => {      // the list of the ad's gearbox, filtered to its model
     const want = EV.gear === "a";
-    Object.assign(state, {tab: "list", names: [EV.name], ext: true});
+    Object.assign(state, {tab: "list", names: [EV.name], brand: brandOf(EV.name), ext: true});
     closeSheet();
     if (want !== AUTO && MAN_DATA?.auto_file) setAuto(want); else { window.scrollTo({top: 0}); render(); }
   };
@@ -2575,6 +2639,7 @@ document.addEventListener("click", e => {
   const budList = t.closest("[data-budlist]");
   if (budList) {
     Object.assign(state, {tab: "list", names: budList.dataset.budlist ? [budList.dataset.budlist] : [], maxPrice: state.budget, sort: "score", dir: "desc"});
+    if (budList.dataset.budlist) state.brand = brandOf(budList.dataset.budlist);
     window.scrollTo({top: 0}); return render();
   }
   const chk = t.closest("[data-checklist]");
@@ -2587,11 +2652,23 @@ document.addEventListener("click", e => {
   if (widen) { LOC.radius = +widen.dataset.radius; saveLoc(); return render(); }
   const goList = t.closest("[data-golist]");
   if (goList) {
-    Object.assign(state, {tab: "list", names: [goList.dataset.golist], sort: "score", dir: "desc"});
+    Object.assign(state, {tab: "list", names: [goList.dataset.golist], brand: brandOf(goList.dataset.golist), sort: "score", dir: "desc"});
+    window.scrollTo({top: 0}); return render();
+  }
+  const bchip = t.closest(".chip[data-brand]");
+  if (bchip) {                                   // a brand: its cars, and its models in the second row
+    const b = bchip.dataset.brand;
+    state.brand = !b || b === effBrand() ? "" : b;
+    state.names = [];
+    if (state.tab === "prices") state.ana = "";
     window.scrollTo({top: 0}); return render();
   }
   const chip = t.closest(".chip");
-  if (chip && state.tab === "prices") { state.ana = chip.dataset.name; window.scrollTo({top: 0}); return render(); }
+  if (chip && state.tab === "prices") {
+    state.ana = chip.dataset.name;
+    if (state.ana) state.brand = brandOf(state.ana);
+    window.scrollTo({top: 0}); return render();
+  }
   if (chip) {
     const n = chip.dataset.name;
     state.names = !n ? [] : state.names.includes(n) ? state.names.filter(x => x !== n) : [...state.names, n];
@@ -2636,6 +2713,7 @@ $("#tabPrices").onclick = () => {
   state.tab = "prices";
   const one = effNames();
   if (one.length === 1) state.ana = one[0];      // coming from the list with one model picked: open that model
+  else if (state.brand && brandOf(state.ana) !== state.brand) state.ana = "";   // a brand picked: its overview
   window.scrollTo({top: 0}); render();
 };
 

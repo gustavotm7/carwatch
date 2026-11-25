@@ -231,13 +231,13 @@ def _norm(text):
     return (text or "").lower().replace("-", " ").replace("_", " ")
 
 
-def detect_key(title: str, slug: str, year):
+def detect_key(title: str, slug: str, year, ignore_make=False):
     """-> the matching model (dict) from cars_config.json, or None."""
     if year is None:
         return None
     t = _norm(title + " " + slug)
     for m in MODELS:
-        if m.get("make") and m["make"].lower() not in t:
+        if m.get("make") and not ignore_make and m["make"].lower() not in t:
             continue
         if not all(re.search(rx, t) for rx in m.get("match", [])):
             continue
@@ -255,28 +255,31 @@ def fix_body(model, body, text=""):
         return body
     if "conv" in allowed and re.search(r"roadster|convertible|cabrio|spyder|spider", _norm(text)):
         return "conv"
-    return allowed[0] if len(allowed) == 1 or body in ("unk", "sedan", "wagon") else body
+    return allowed[0] if len(allowed) == 1 or body in ("unk", "sedan", "wagon", "hatch") else body
 
 
-def gen_for(model, year, text=""):
+def gen_for(model, year, text="", body=None):
     """The generation an ad belongs to: by year, unless the ad names a generation's chassis code ('code' in the
-    config) within a year of its range: a JDM 'S13 Silvia' first registered in 1988, an FD RX-7 sold as a 1992."""
+    config) within a year of its range: a JDM 'S13 Silvia' first registered in 1988, an FD RX-7 sold as a 1992.
+    A generation with its own 'bodies' takes only those bodies once the body is known (Z3 M Coupe vs Roadster)."""
     t = _norm(text) if text else ""
+    fits = lambda g: body is None or not g.get("bodies") or body in g["bodies"]
     if t:
         for g in model["generations"]:
-            if g.get("code") and g["years"][0] - 1 <= year <= g["years"][1] + 1 and re.search(g["code"], t):
+            if (g.get("code") and g["years"][0] - 1 <= year <= g["years"][1] + 1 and re.search(g["code"], t)
+                    and fits(g)):
                 return g
     for g in model["generations"]:
-        if g["years"][0] <= year <= g["years"][1]:
+        if g["years"][0] <= year <= g["years"][1] and fits(g):
             return g
     return None
 
 
 def classify(model, year, body, text=""):
-    """-> (family, generation/chassis, display name)"""
-    g = gen_for(model, year, text)
+    """-> (family, generation/chassis, display name). ValueError: no generation for that year and body."""
+    g = gen_for(model, year, text, body)
     if g is None:
-        raise ValueError(f"{model['model']} {year}")
+        raise ValueError(f"{model['model']} {year} {body}")
     name = (g.get("name_by_body") or {}).get(body, g["name"])
     return g["family"], name.split(" ")[0], name
 
@@ -290,11 +293,12 @@ def classify_trans(family: str, field: str, desc: str) -> str:
     pt_man = bool(re.search(r"c[a\u00e2]mbio:?\s*(manual|mec)|manual de [456] marchas|transmiss[a\u00e3]o manual", d))
     if pt_auto and not pt_man:
         return "a"                                      # Brazil: the seller says automatic, the data field is often wrong
-    auto_w = r"auto|smg|dct|dkg|steptronic|sequential|dual|cvt|tiptronic"      # 'Autom\u00e1tico/Automatizado' too
+    auto_w = r"auto|smg|dct|dkg|steptronic|sequential|dual|cvt|tiptronic|\bpdk\b|\bsst\b"   # 'Autom\u00e1tico/Automatizado' too
     field_a = bool(re.search(auto_w, f))
     field_m = bool(re.search(r"manual|manuel|stick|6[- ]?spd|6mt", f)) and not field_a
     text_m = bool(re.search(r"6[- ]?speed manual|\b6[- ]?spd\b|\b6mt\b|\bmanual\b|\bmanuel+e?\b|\bstick\b|three[- ]pedal", d)) or pt_man
     text_a = bool(re.search(r"\bsmg\b|steptronic|\bautomatic\b|\bautomatique\b|\bdct\b|\bdkg\b|tiptronic|paddle"
+                            r"|\bpdk\b|\btc[ -]?sst\b|\bsst\b|twin[ -]clutch"     # Porsche PDK, Evo X MR's TC-SST
                             r"|c\u00e2mbio autom|cambio autom|\bautom\u00e1tic[oa]\b|\bautomatizad[oa]\b|\bcvt\b", d))
     if field_m and text_a:
         return "c"
@@ -322,6 +326,8 @@ def _body_words(t: str) -> str:
         return "coupe"
     if "sedan" in t or "berline" in t or re.search(r"\bsed[a\u00e3]\b|\bsed\.", t):
         return "sedan"
+    if re.search(r"hatch|liftback|fastback|\bhb\b|\b[35] ?(dr|door|portes|portas)\b|\b[35]p\b", t):
+        return "hatch"                                  # FK8 Civic Type R, GR STI; a car that never came so falls back
     return "unk"
 
 
@@ -436,7 +442,32 @@ def load_rows(path):
         rows = [{c: r.get(c, "") or "" for c in COLS} for r in csv.DictReader(f)]
     # v2 could not read the year on Autotrader ad pages and wrongly rejected their ads: give those a second look
     return [r for r in rows if not (r["status"] == "skip" and r["source"] == "autotrader"
-                                    and not r["note"].endswith("[v3]"))]
+                                    and not re.search(r"\[v[34]\]$", r["note"]))]
+
+
+SKIP_TAG = "[v4]"                                    # bumped when the car list grows: older rejections get a second look
+
+
+def recheck_old_skips(rows):
+    """Ads rejected as 'not one of the cars on the list' before the list grew get one second look when their address
+    names a car tracked now: a Kijiji address with a year must fit a generation (a 1987 Supra is an A70 now); an
+    address without one (Autotrader) must name a model marked "recheck" in the config (one added in that batch)."""
+    keep, n = [], 0
+    for r in rows:
+        if r["status"] == "skip" and r["note"].startswith("not one of the cars") and not r["note"].endswith(SKIP_TAG):
+            slug = r["url"].rsplit("/", 2)[-2] if r["source"] == "kijiji" else r["url"].rsplit("/", 1)[-1]
+            t = _norm(slug)
+            y = re.search(r"\b(19[5-9]\d|20[0-3]\d)\b", t)
+            if y:
+                again = detect_key(slug, "", int(y.group(1)), ignore_make=True) is not None
+            else:
+                again = any(m.get("recheck") and all(re.search(rx, t) for rx in m.get("match", []))
+                            and not any(re.search(rx, t) for rx in m.get("none", [])) for m in MODELS)
+            if again:
+                n += 1
+                continue
+        keep.append(r)
+    return keep, n
 
 
 class Snapshot:
@@ -762,7 +793,10 @@ def resync_families(rows):
         key = detect_key(r["note"], slug, int(r["year"]))
         if not key:
             continue
-        r["family"], r["gen"], r["name"] = classify(key, int(r["year"]), r["body"] or "unk", f'{r["note"]} {slug}')
+        try:
+            r["family"], r["gen"], r["name"] = classify(key, int(r["year"]), r["body"] or "unk", f'{r["note"]} {slug}')
+        except ValueError:
+            continue
         n += 1
     return n
 
@@ -976,6 +1010,14 @@ def page_url(source, base, i):
     return f"{base}{sep}page={i + 1}"
 
 
+def kijiji_slug_may_match(url):
+    """Kijiji addresses carry the ad's title ('.../2023-bmw-x1-xdrive28i-gr-sup.../1744574968'). Keyword searches
+    return many other cars, so an address with a year that names none of the tracked cars is not opened."""
+    slug = url.rsplit("/", 2)[-2]
+    m = re.search(r"\b(19[5-9]\d|20[0-3]\d)\b", _norm(slug))
+    return not m or detect_key(slug, "", int(m.group(1)), ignore_make=True) is not None
+
+
 def search_ids(sess, known, stats):
     found = {}
     SEARCH_SEEN.clear()
@@ -1023,8 +1065,12 @@ def search_ids(sess, known, stats):
                 break                                    # paging not supported this way / last page
             seen_here |= fresh
             for lid in fresh:
-                if lid not in known:
-                    found.setdefault(lid, (source, page_ids[lid], len(stats["searches"])))
+                if lid in known:
+                    continue
+                if source == "kijiji" and not kijiji_slug_may_match(page_ids[lid]):
+                    stats["prefiltered"] = stats.get("prefiltered", 0) + 1     # 2023 X1 under 'bmw-1m': not opened
+                    continue
+                found.setdefault(lid, (source, page_ids[lid], len(stats["searches"])))
         stats["searches"].append((source, base, status or len(seen_here)))
     return found
 
@@ -1064,14 +1110,18 @@ def discover_new(sess, rows, today, stats, max_new, found=None):
         if not reason:
             body = fix_body(key, body_of(info.get("body_raw", ""), slug + " " + info.get("title", "")),
                             slug + " " + info.get("title", ""))
-            fam, gen, name = classify(key, info["year"], body, f'{info.get("title", "")} {slug}')
+            try:
+                fam, gen, name = classify(key, info["year"], body, f'{info.get("title", "")} {slug}')
+            except ValueError:                           # a 2012 335i sedan is an F30, not an E90
+                reason = f"body not on the list for that year ({body})"
+        if not reason:
             trans = classify_trans(fam, info.get("trans_field", ""), info.get("desc", ""))
             if trans == "a" and fam not in ALLOW_AUTO:
                 reason = "automatic / gearbox not stated"
         if reason:
             if reason != "price or km not readable":      # remember, so it is not opened again tomorrow
                 skipped.append({**{c: "" for c in COLS}, "listing_id": lid, "source": source, "url": url,
-                                "note": reason + " [v3]", "first_seen": today, "last_seen": today, "status": "skip"})
+                                "note": reason + " " + SKIP_TAG, "first_seen": today, "last_seen": today, "status": "skip"})
             continue
         row = {**{c: "" for c in COLS},
                "listing_id": lid, "source": source, "family": fam, "gen": gen, "name": name,
@@ -1093,7 +1143,10 @@ def discover_new(sess, rows, today, stats, max_new, found=None):
         if it["km"] < 500 or (dt.date.today().year - (it.get("year") or 0) >= 5 and it["km"] < 5000):
             continue
         body = fix_body(key, body_of(it.get("body_raw", ""), it["title"]), it["title"])
-        fam, gen, name = classify(key, it["year"], body, it["title"])
+        try:
+            fam, gen, name = classify(key, it["year"], body, it["title"])
+        except ValueError:
+            continue
         row = {**{c: "" for c in COLS},
                "listing_id": lid, "source": it["source"], "family": fam, "gen": gen, "name": name,
                "year": str(it["year"]), "body": body, "price": str(it["price"]), "km": str(it["km"]), "trans": "a",
@@ -1784,24 +1837,27 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
         return comp_idx[c["id"]]
     names, fams = {}, {}
     for m in MODELS:
+        brand = m.get("brand") or m["model"]                # the app groups its model chips by brand
         for g in m["generations"]:
             fams.setdefault(g["family"], {"family": g["family"], "label": g.get("short", g["name"]),
                                           "color": g.get("color", "#888888"), "desc": g.get("desc", ""),
-                                          "model": m["model"]})
+                                          "model": m["model"], "brand": brand})
             nb = g.get("name_by_body") or {}              # bodies it leaves out keep the generation's own name
-            pairs = [(v, k) for k, v in nb.items()] + [(g["name"], b) for b in m.get("bodies") or [] if b not in nb]
+            bodies = [g["body"]] if g.get("body") else g.get("bodies") or m.get("bodies") or []
+            pairs = [(v, k) for k, v in nb.items() if k in bodies] + [(g["name"], b) for b in bodies if b not in nb]
             for nm, b in pairs or [(g["name"], None)]:
                 n = names.setdefault(nm, {"name": nm, "family": g["family"], "color": g.get("color", "#888888"),
-                                          "years": g["years"], "bodies": []})
+                                          "years": list(g["years"]), "bodies": [], "brand": brand})
+                n["years"] = [min(n["years"][0], g["years"][0]), max(n["years"][1], g["years"][1])]
                 if b and b not in n["bodies"]:
                     n["bodies"].append(b)                   # the ad reader's default body
             for _, sg in SPLITS.get(g["family"], []):
                 fams.setdefault(sg["family"], {"family": sg["family"], "label": sg.get("short", sg["name"]),
                                                "color": sg.get("color", "#888888"), "desc": sg.get("desc", ""),
-                                               "model": m["model"]})
+                                               "model": m["model"], "brand": brand})
                 names.setdefault(sg["name"], {"name": sg["name"], "family": sg["family"],
-                                              "color": sg.get("color", "#888888"), "years": sg["years"],
-                                              "bodies": [sg["body"]] if sg.get("body") else list(m.get("bodies") or [])})
+                                              "color": sg.get("color", "#888888"), "years": list(sg["years"]),
+                                              "bodies": [sg["body"]] if sg.get("body") else list(bodies), "brand": brand})
     cars = []
     for r in active:
         sc = scores.get(r["listing_id"], {})
@@ -2142,6 +2198,7 @@ FONT = "Arial"
 BODY_STYLE = {   # body -> (label, fill, text)
     "sedan": ("\u25AC Sedan", "E1E5EA", "2B3440"), "coupe": ("\u25D7 Coupe", "DDD8F2", "2F2A5C"),
     "conv": ("\u2600 Convertible", "FCE9C8", "6B4A00"), "wagon": ("\u25AD Wagon", "E8DCC8", "5A4326"),
+    "hatch": ("\u25E3 Hatchback", "D9EFE7", "1F5A45"),
     "unk": ("? Not stated", "EDEDED", "666666"),
 }
 TRANS_STYLE = {   # trans -> (label, fill, text)
@@ -2583,7 +2640,7 @@ def build_xlsx(rows, path, today, run_info=None):
         swatch(short, fill, txt, desc)
     r += 1
     head("Body")
-    for k in ("sedan", "coupe", "conv", "wagon"):
+    for k in ("sedan", "coupe", "conv", "wagon", "hatch"):
         lab, fill, txt = BODY_STYLE[k]
         swatch(lab, fill, txt, "")
     r += 1
@@ -2780,6 +2837,9 @@ def run(args):
                 r["status"] = "unverified"            # no real price known: keep it out of the list until read again
     # automatics are now kept for some families: forget earlier 'automatic' rejections on those sites
     rows = [r for r in rows if not (r["status"] == "skip" and r["source"] in JSON_SEARCH and r["note"].startswith("automatic"))]
+    rows, n_again = recheck_old_skips(rows)
+    if n_again:
+        print(f"{n_again} earlier rejected ads get a second look (they may be one of the newly added cars)", flush=True)
     n_moved = resync_families(rows)
     if n_moved:
         print(f"{n_moved} saved ads moved to a renamed or re-cut generation", flush=True)
@@ -2836,7 +2896,8 @@ def run(args):
         run_info.append(f"Checked {stats['checked']} ads ({stats['failed']} unreadable), {stats['price_changes']} price "
                         f"changes, {stats['gone']} newly gone, {stats['back']} back")
         run_info.append(f"Search: {stats['candidates']} unseen ads, {stats['new']} added, {stats['skipped']} rejected "
-                        f"(remembered), {stats['photos_new']} new photos")
+                        f"(remembered), {stats['photos_new']} new photos"
+                        + (f", {stats['prefiltered']} other cars in the results not opened" if stats.get("prefiltered") else ""))
         if time_up():
             run_info.append(f"Out of time: {stats.get('late', 0)} ads not re-checked; the next run carries on")
         if stats.get("new_auto") or stats.get("details_read") or stats.get("seen_in_search"):
