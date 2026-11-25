@@ -113,8 +113,16 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .pk-q input{flex:1;min-width:0;border:0;background:none;color:var(--text);font:16px var(--sans);outline:none}
 .pk-q input::placeholder{color:var(--dim)}
 .pk-list{flex:1;position:relative;overflow:auto;overscroll-behavior:contain;padding-bottom:16px}
-.pk-c{display:flex;align-items:center;gap:9px;padding:22px 16px 4px;font:600 15px/1 var(--cond);letter-spacing:.04em;color:var(--muted)}
-.pk-flag{flex:none;width:21px;height:14px;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+.pk-c{display:flex;align-items:center;gap:12px;width:100%;min-height:64px;padding:10px 16px;border-bottom:1px solid var(--line);text-align:left}
+.pk-c .t{flex:1;min-width:0}
+.pk-c b{display:block;font:700 21px/1.1 var(--cond);letter-spacing:.02em}
+.pk-c small{display:block;color:var(--muted);font-size:13px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pk-c .on{flex:none;border-radius:999px;padding:3px 9px;font:600 12px/1.4 var(--sans);background:var(--text);color:var(--bg)}
+.pk-c .chev{flex:none;color:var(--muted);transition:transform .2s}
+.pk-c[aria-expanded=true] .chev{transform:rotate(180deg)}
+.pk-cb{border-bottom:1px solid var(--line)}
+.pk-cb[hidden]{display:none}
+.pk-flag{flex:none;width:27px;height:18px;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
 .pk-bh{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:10px;padding:12px 16px 8px;background:var(--bg)}
 .sq{flex:none;width:12px;height:12px;border-radius:3px;background:var(--c)}
 .pk-bh b{font:700 20px/1 var(--cond);letter-spacing:.02em}
@@ -1173,6 +1181,7 @@ function pkHay(n) {
   const model = n.model || ((DATA.families || []).find(f => f.family === n.family) || {}).model || "";
   return pkNorm([n.name, model, n.brand, n.family, CAR_ALIAS[model] || "", BRAND_ALIAS[n.brand] || ""].join(" "));
 }
+let PK_OPEN = new Set();                        // countries opened in the picker; it always starts closed
 const yrsTxt = y => !y ? "" : y[0] === y[1] ? String(y[0]) : `${y[0]}–${y[1]}`;
 function pickerSheet() {
   const single = state.tab === "prices";
@@ -1183,10 +1192,9 @@ function pickerSheet() {
     <div class="pk-list" id="pkList"></div>
     ${single ? "" : `<div class="pk-foot"><button class="go" id="pkGo" type="button"></button></div>`}`,
     single ? L("Choose a car", "Escolha um carro") : L("Choose cars", "Escolha os carros"), "full");
+  PK_OPEN = new Set();
   pkFill();
-  const list = $("#pkList"), first = list.querySelector(".pk-row.sel");
-  if (first) list.scrollTop = Math.max(0, first.offsetTop - list.clientHeight / 3);
-  const q = $("#pkQ");
+  const list = $("#pkList"), q = $("#pkQ");
   q.oninput = () => { list.scrollTop = 0; pkFill(); };
   q.onkeydown = e => { if (e.key === "Enter") q.blur(); };
   const done = () => { closeSheet(); window.scrollTo({top: 0}); render(); };
@@ -1197,6 +1205,8 @@ function pickerSheet() {
   if ($("#pkGo")) $("#pkGo").onclick = () => { closeSheet(); window.scrollTo({top: 0}); };
   list.onclick = e => {
     const t = e.target;
+    const ct = t.closest("[data-pcountry]");
+    if (ct) { const k = ct.dataset.pcountry; PK_OPEN.has(k) ? PK_OPEN.delete(k) : PK_OPEN.add(k); return pkFill(); }
     const st = t.closest("[data-pstar]");
     if (st) { togglePin(st.dataset.pstar); pkFill(); return renderChips(); }
     const all = t.closest("[data-pball]");
@@ -1235,11 +1245,18 @@ function pkFill() {
   };
   const none = ns => ns.map(n => esc(n.name)).join(", ");
   let html = "";
-  for (const [k, en, pt] of COUNTRY_ORDER) {
+  const here = COUNTRY_ORDER.filter(([k]) => Object.keys(by).some(b => (BRAND_COUNTRY[b] || "xx") === k));
+  for (const [k, en, pt] of here) {
     const bs = Object.keys(by).filter(b => (BRAND_COUNTRY[b] || "xx") === k).sort((a, b) => a.localeCompare(b));
     const live = bs.filter(b => by[b].rows.length), gone = bs.filter(b => !by[b].rows.length);
-    if (!bs.length) continue;
-    html += `<div class="pk-c">${MINI_FLAG[k]}${L(en, pt)}</div>`;
+    const open = toks.length > 0 || here.length === 1 || PK_OPEN.has(k);   // searching or one country: open
+    const ads = live.reduce((s, b) => s + by[b].rows.reduce((x, n) => x + (counts[n.name] || 0), 0), 0);
+    const picked = live.reduce((s, b) => s + by[b].rows.filter(n => single ? state.ana === n.name : isSel(n.name)).length, 0);
+    html += `<button class="pk-c" type="button" data-pcountry="${k}" aria-expanded="${open}" aria-controls="pkc-${k}">${MINI_FLAG[k]}
+      <span class="t"><b>${L(en, pt)}</b><small>${nf(ads)} ${L(ads === 1 ? "ad" : "ads", ads === 1 ? "anúncio" : "anúncios")}: ${esc(live.join(", ") || L("none right now", "nenhum agora"))}</small></span>
+      ${picked ? `<span class="on">${single ? L("chosen", "escolhido") : L(`${picked} picked`, `${picked} ${picked === 1 ? "escolhido" : "escolhidos"}`)}</span>` : ""}
+      <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+      <div class="pk-cb" id="pkc-${k}"${open ? "" : " hidden"}>`;
     for (const b of live) {
       const tot = by[b].rows.reduce((s, n) => s + (counts[n.name] || 0), 0);
       const on = single ? !state.ana && state.brand === b : state.brands.includes(b);
@@ -1251,6 +1268,7 @@ function pkFill() {
         ${by[b].none.length ? `<div class="pk-none">${L("No ads right now", "Sem anúncios agora")}: ${none(by[b].none)}</div>` : ""}</div>`;
     }
     if (gone.length) html += `<div class="pk-none">${L("No ads right now", "Sem anúncios agora")}:<br>${gone.map(b => `<b>${esc(b)}</b> ${none(by[b].none)}`).join("<br>")}</div>`;
+    html += `</div>`;
   }
   const keep = list.scrollTop;
   list.innerHTML = html || `<div class="pk-empty">${L(`No car matches “${esc(raw)}”.`, `Nenhum carro corresponde a “${esc(raw)}”.`)}</div>`;
