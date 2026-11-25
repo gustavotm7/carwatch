@@ -207,7 +207,7 @@ def load_config(path=None):
                 SPLITS.setdefault(g["family"], []).append((sp["match"], sg))
                 gens.append(sg)
         for g in gens:
-            FAMILY_STYLE.setdefault(g["family"], (g.get("color", "#888888").lstrip("#").upper(), "FFFFFF",
+            FAMILY_STYLE.setdefault(g["family"], (g.get("color", "#888888").lstrip("#").upper(), "10151C",
                                                   g.get("short", g["name"]), g.get("desc", g["name"])))
             if g.get("trims"):
                 TRIMS.setdefault(g["family"], ([(rx, lab) for rx, lab in g["trims"]], bool(g.get("trim_multi"))))
@@ -1858,7 +1858,7 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
             pairs = [(v, k) for k, v in nb.items() if k in bodies] + [(g["name"], b) for b in bodies if b not in nb]
             for nm, b in pairs or [(g["name"], None)]:
                 n = names.setdefault(nm, {"name": nm, "family": g["family"], "color": g.get("color", "#888888"),
-                                          "years": list(g["years"]), "bodies": [], "brand": brand})
+                                          "years": list(g["years"]), "bodies": [], "brand": brand, "model": m["model"]})
                 n["years"] = [min(n["years"][0], g["years"][0]), max(n["years"][1], g["years"][1])]
                 if b and b not in n["bodies"]:
                     n["bodies"].append(b)                   # the ad reader's default body
@@ -1868,7 +1868,8 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
                                                "model": m["model"], "brand": brand})
                 names.setdefault(sg["name"], {"name": sg["name"], "family": sg["family"],
                                               "color": sg.get("color", "#888888"), "years": list(sg["years"]),
-                                              "bodies": [sg["body"]] if sg.get("body") else list(bodies), "brand": brand})
+                                              "bodies": [sg["body"]] if sg.get("body") else list(bodies), "brand": brand,
+                                              "model": m["model"]})
     cars = []
     for r in active:
         sc = scores.get(r["listing_id"], {})

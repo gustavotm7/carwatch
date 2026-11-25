@@ -90,10 +90,59 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .chip .dot{width:10px;height:10px;border-radius:50%;background:var(--c,#888)}
 .chips[hidden]{display:none}
 .otab tr.bh th{padding:14px 8px 4px;text-align:left;font:700 12px/1 var(--sans);letter-spacing:.06em;color:var(--dim);border:0;background:none}
-.chips.models{padding-top:0;margin-top:-2px}
-.chip.brand{font-weight:700;letter-spacing:.03em}
-.chip.brand[aria-pressed=true]{color:var(--bg);background:var(--text);border-color:var(--text)}
-.chip.brand[aria-pressed=true] .n{color:var(--bg);opacity:.7}
+.chips.wrap{flex-wrap:wrap;overflow:visible;margin:0;padding:10px 0 12px}
+.chips.wrap .gmode{position:static;box-shadow:none}
+.chip{min-height:38px}
+.chip.pick{color:var(--text);background:var(--raised);border-color:#3a4452;padding-left:11px}
+.chip.pick svg{opacity:.85}
+.chip .x{margin:0 -2px 0 1px;opacity:.65}
+.chip.zero{opacity:.55}
+.chip.clear,.chip.more{border-color:transparent;background:none;padding-left:8px;padding-right:8px}
+.chip.more{color:var(--text)}
+/* car picker: full screen, brands by country */
+.sheet.full{top:0;max-height:none;border-radius:0;padding:0;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);border:0}
+@media(min-width:760px){.sheet.full{top:50%;bottom:auto;height:min(820px,90vh);border-radius:18px;border:1px solid var(--line)}}
+.sheet.full .grab{display:none}
+.sheet.full .close{top:12px;right:8px}
+.pk-top{padding:12px 16px 10px;border-bottom:1px solid var(--line)}
+.pk-h{display:flex;align-items:center;gap:6px;padding-right:44px;min-height:42px}
+.pk-h h2{flex:1;margin:0}
+.pk-clear{color:var(--muted);font-size:14px;padding:10px}
+.pk-q{display:flex;align-items:center;gap:8px;height:46px;margin-top:6px;padding:0 12px;border-radius:12px;background:var(--raised);border:1px solid var(--line);color:var(--muted)}
+.pk-q:focus-within{border-color:#4d5866}
+.pk-q input{flex:1;min-width:0;border:0;background:none;color:var(--text);font:16px var(--sans);outline:none}
+.pk-q input::placeholder{color:var(--dim)}
+.pk-list{flex:1;position:relative;overflow:auto;overscroll-behavior:contain;padding-bottom:16px}
+.pk-c{display:flex;align-items:center;gap:9px;padding:22px 16px 4px;font:600 15px/1 var(--cond);letter-spacing:.04em;color:var(--muted)}
+.pk-flag{flex:none;width:21px;height:14px;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+.pk-bh{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:10px;padding:12px 16px 8px;background:var(--bg)}
+.sq{flex:none;width:12px;height:12px;border-radius:3px;background:var(--c)}
+.pk-bh b{font:700 20px/1 var(--cond);letter-spacing:.02em}
+.pk-bh .n{flex:1;color:var(--muted);font-size:13px}
+.pk-all{padding:8px 14px;border-radius:999px;border:1px solid var(--line);font:600 14px/1 var(--cond);letter-spacing:.02em;color:var(--text)}
+.pk-all[aria-pressed=true]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.pk-row{display:flex;align-items:center;border-top:1px solid var(--line)}
+.pk-row.sel{background:color-mix(in srgb,var(--c) 14%,var(--bg))}
+.pk-tog{flex:1;min-width:0;display:flex;align-items:center;gap:12px;min-height:56px;padding:6px 4px 6px 16px;text-align:left}
+.pk-mk{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center}
+.pk-mk::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c)}
+.pk-mk svg{display:none}
+.sel .pk-mk{background:var(--c)}
+.sel .pk-mk::before{display:none}
+.sel .pk-mk svg{display:block}
+.pk-nm{flex:1;min-width:0}
+.pk-nm b{display:block;font:600 17px/1.15 var(--cond);letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pk-nm small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.pk-new{flex:none;border-radius:999px;padding:2px 8px;font:600 12px/1.4 var(--sans);background:#e9eef5;color:#10151c}
+.pk-ct{flex:none;min-width:26px;text-align:right;color:var(--muted);font-size:13px}
+.pk-star{flex:none;width:46px;height:54px;display:grid;place-items:center;color:var(--dim)}
+.pk-star[aria-pressed=true]{color:var(--text)}
+.pk-star[aria-pressed=true] path{fill:currentColor}
+.pk-none{padding:10px 16px 12px 50px;border-top:1px solid var(--line);color:var(--dim);font-size:13px;line-height:1.45}
+.pk-none b{color:var(--muted);font-weight:600}
+.pk-empty{padding:48px 20px;text-align:center;color:var(--muted)}
+.pk-foot{padding:10px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg)}
+.pk-foot .go{width:100%;height:50px;border-radius:12px;background:var(--text);color:var(--bg);font:700 18px/1 var(--cond);letter-spacing:.03em}
 .gmode{flex:none;display:flex;align-items:center;gap:7px;position:sticky;left:0;z-index:2;padding:7px 12px 7px 11px;
   border-radius:999px;font:600 15px/1 var(--cond);letter-spacing:.02em;
   box-shadow:-14px 0 0 #10141a,10px 0 12px -6px #10141a}
@@ -151,7 +200,7 @@ main{max-width:1100px;margin:0 auto;padding:12px 10px 40px;display:grid;gap:14px
 .card.ext .nophoto{display:none}
 .photo::after{content:"";position:absolute;inset:auto 0 0 0;height:42%;
   background:linear-gradient(to top,rgba(10,13,17,.78),rgba(10,13,17,0));pointer-events:none}
-.name{position:absolute;left:10px;top:10px;z-index:2;background:var(--c);color:#fff;border-radius:8px;
+.name{position:absolute;left:10px;top:10px;z-index:2;background:var(--c);color:#10151c;border-radius:8px;
   padding:5px 10px 4px;font:700 20px/1 var(--cond);letter-spacing:.02em;box-shadow:0 2px 10px rgba(0,0,0,.35)}
 .gauge{position:absolute;right:8px;top:8px;z-index:2;width:66px;height:66px;border-radius:50%;
   background:rgba(12,15,20,.82);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
@@ -242,7 +291,7 @@ ul.facts-list.plain .dot{display:inline-block;width:9px;height:9px;border-radius
 .grab{width:40px;height:4px;border-radius:2px;background:var(--line);margin:4px auto 10px}
 @media(min-width:760px){.grab{display:none}}
 .sheet h2{font:700 26px/1.05 var(--cond);margin:4px 0 2px;display:flex;align-items:center;gap:10px}
-.sheet h2 .pill{background:var(--c);color:#fff;border-radius:7px;padding:4px 9px 3px;font-size:20px}
+.sheet h2 .pill{background:var(--c);color:#10151c;border-radius:7px;padding:4px 9px 3px;font-size:20px}
 .sheet .sub{color:var(--muted);margin:0 0 6px}
 .sheet h3{font:600 17px/1.2 var(--cond);letter-spacing:.02em;color:var(--muted);margin:18px 0 8px}
 .sheet p{margin:0 0 8px;max-width:68ch}
@@ -389,8 +438,7 @@ ul.facts-list{margin:2px 0 0;padding-left:18px;display:grid;gap:7px;font-size:14
         <span id="fLabel">Filters</span> <span class="badge" id="fCount" hidden>0</span>
       </button>
     </div>
-    <div class="chips" id="chips" role="group" aria-label="Brand"></div>
-    <div class="chips models" id="models" role="group" aria-label="Model" hidden></div>
+    <div class="chips wrap" id="chips" role="group" aria-label="Cars"></div>
   </div>
 </header>
 
@@ -505,12 +553,16 @@ const BD = () => PT() ? BODY_PT : BODY_EN;
 const HARD = () => PT() ? ["Accident mentioned"] : ["Rebuilt title", "Salvage title"];   // the serious flags in each market
 const DEFAULT_STATE = {sort: "score", dir: "desc", names: [], gear: ["m", "c", "u"], bodies: [], maxPrice: 0,
                        maxKm: 0, yearFrom: 0, yearTo: 0, hideHard: false, hideRed: false, hideHigh: false, hideSus: false,
-                       tab: "list", ana: "", budget: 0, ext: false, brand: ""};
+                       tab: "list", ana: "", budget: 0, ext: false, brand: "", brands: []};
 let DATA = null, state = load();
 
 function stateKey() { return COUNTRY === "CA" ? "cw-state" : "cw-state-" + COUNTRY; }   // filters kept per country
 function load() {
-  try { return Object.assign({}, DEFAULT_STATE, JSON.parse(localStorage.getItem(stateKey()) || "{}")); }
+  try {
+    const s = JSON.parse(localStorage.getItem(stateKey()) || "{}");
+    if (!("brands" in s) && s.brand && s.tab !== "prices") s.brands = [s.brand];   // the old single brand chip
+    return Object.assign({}, DEFAULT_STATE, s);
+  }
   catch (e) { return Object.assign({}, DEFAULT_STATE); }
 }
 function save() { try { localStorage.setItem(stateKey(), JSON.stringify(state)); } catch (e) {} }
@@ -578,10 +630,13 @@ function effNames() { return state.names.filter(n => DATA.names.some(x => x.name
 function brandOf(name) {                       // the make a model is grouped under (Acura NSX in Canada, Honda NSX in Brazil)
   return ((DATA.names.find(n => n.name === name) || allNames().find(n => n.name === name)) || {}).brand || "";
 }
-function effBrand() {                          // the chosen brand, if this list has it (the automatics list has two)
-  const b = state.tab === "prices" && state.ana ? brandOf(state.ana) : state.brand;
+function effBrand() {                          // one brand in view: the Prices brand, or the only brand picked for the list
+  const b = state.tab === "prices" ? (state.ana ? brandOf(state.ana) : state.brand)
+    : (state.brands.length === 1 && !effNames().length ? state.brands[0] : "");
   return b && DATA.names.some(n => n.brand === b) ? b : "";
 }
+function selBrands() { return state.brands.filter(b => DATA.names.some(n => n.brand === b)); }   // whole brands picked
+function isSel(name) { return state.names.includes(name) || state.brands.includes(brandOf(name)); }
 function brandsHere() {                        // [brand, ads] A to Z, for the first chip row
   const cnt = {};
   for (const c of DATA.cars) { const b = brandOf(c.name); if (b) cnt[b] = (cnt[b] || 0) + 1; }
@@ -619,9 +674,9 @@ function locRowHTML() {                         // Anywhere / favourite towns / 
 }
 const basisTxt = () => `${L("based on", "base")}: ${nf(LOCAL.n)} ${L(LOCAL.n === 1 ? "car" : "cars", LOCAL.n === 1 ? "carro" : "carros")}${LOCAL.few ? L(` + the ${LOCAL.uf} average`, ` + média de ${LOCAL.uf}`) : ""}`;
 function filtered() {
-  const names = effNames(), brand = effBrand();
+  const names = effNames(), brands = selBrands();
   let cars = [...DATA.cars, ...sharedCars()].filter(c =>
-    (names.length ? names.includes(c.name) : !brand || brandOf(c.name) === brand) &&
+    (!names.length && !brands.length || names.includes(c.name) || brands.includes(brandOf(c.name))) &&
     (AUTO ? c.trans === "a" : state.gear.includes(c.trans)) &&
     (!state.bodies.length || state.bodies.includes(c.body)) &&
     (!state.maxPrice || c.price <= state.maxPrice) &&
@@ -933,36 +988,85 @@ function card(c) {
       ${c.place ? `<div class="place"><svg width="12" height="14" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 13s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C1.5 8.8 6 13 6 13Z"/><circle cx="6" cy="5.5" r="1.6"/></svg>${esc(c.place)}${LOC.active && c._dist != null ? `<span class="dist">${c._dist < 1 ? L("in town", "na cidade") : Math.round(c._dist) + " km"}</span>` : ""}</div>` : ""}
     </div></article>`;
 }
-function renderChips() {                       // brands first; the chosen brand's models in a second row
-  const counts = {};
-  DATA.cars.forEach(c => counts[c.name] = (counts[c.name] || 0) + 1);
-  const prices = state.tab === "prices";
-  const names = prices ? (state.ana ? [state.ana] : []) : effNames();
-  const brand = effBrand();
+const ICON = {
+  search: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.5 10.5 3.5 3.5"/></svg>',
+  x: '<svg class="x" width="12" height="12" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 3l6 6M9 3 3 9"/></svg>',
+  check: '<svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#10151c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 7.4 2.7 2.6L11 4.4"/></svg>',
+  star: '<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.6l2.3 4.8 5.2.7-3.8 3.6.9 5.2L10 14.4l-4.6 2.5.9-5.2-3.8-3.6 5.2-.7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
+};
+const pinKey = () => "cw-pins-" + COUNTRY;
+function pins() { return lsGet(pinKey(), []).filter(n => allNames().some(x => x.name === n)); }
+function togglePin(name) { const p = lsGet(pinKey(), []); lsSet(pinKey(), p.includes(name) ? p.filter(n => n !== name) : [...p, name]); }
+function adCounts() { const k = {}; for (const c of DATA.cars) k[c.name] = (k[c.name] || 0) + 1; return k; }
+function brandColor(b) {                        // a brand's middle shade, for its square and its chip
+  const ns = allNames().filter(n => n.brand === b).sort((x, y) => x.years[0] - y.years[0]);
+  return ns.length ? ns[Math.floor(ns.length / 2)].color : "#59626e";
+}
+function pkToggle(name) {                       // one model in or out of the list's selection
+  const b = brandOf(name), mine = DATA.names.filter(n => n.brand === b).map(n => n.name);
+  if (state.brands.includes(b)) {               // the whole brand was on: keep the rest of it
+    state.brands = state.brands.filter(x => x !== b);
+    state.names = [...state.names.filter(n => brandOf(n) !== b), ...mine.filter(n => n !== name)];
+  } else if (state.names.includes(name)) state.names = state.names.filter(n => n !== name);
+  else {
+    state.names = [...state.names, name];
+    if (mine.length > 1 && mine.every(n => state.names.includes(n))) {   // every model of the brand: show it as the brand
+      state.names = state.names.filter(n => !mine.includes(n)); state.brands = [...state.brands, b];
+    }
+  }
+}
+function pkBrand(b) {
+  if (state.brands.includes(b)) state.brands = state.brands.filter(x => x !== b);
+  else { state.brands = [...state.brands, b]; state.names = state.names.filter(n => brandOf(n) !== b); }
+}
+function renderChips() {                       // one row: the car picker, your pinned cars, then what else is picked
+  const counts = adCounts(), prices = state.tab === "prices", P = pins();
   const gm = MAN_DATA && MAN_DATA.auto_file          // one button showing the current gearbox; a tap switches
     ? `<button class="gmode ${AUTO ? "is-auto" : "is-man"}" data-gm="${AUTO ? "m" : "a"}" type="button"
         aria-label="${AUTO ? L("Showing automatic cars. Tap for manual.", "Mostrando carros automáticos. Toque para manual.")
                            : L("Showing manual cars. Tap for automatic.", "Mostrando carros manuais. Toque para automático.")}">
         <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 4.5h9M8.5 2l2.5 2.5L8.5 7M12 9.5H3M5.5 7 3 9.5 5.5 12"/></svg>${AUTO ? L("Automatic", "Automático") : "Manual"}</button>` : "";
-  const all = `<button class="chip" data-brand="" aria-pressed="${!brand && !names.length}">${L("All", "Todos")} <span class="n">${nf(DATA.cars.length)}</span></button>`;
-  $("#chips").innerHTML = gm + all + brandsHere().map(([b, n]) =>
-    `<button class="chip brand" data-brand="${esc(b)}" aria-pressed="${b === brand}">${esc(b)} <span class="n">${nf(n)}</span></button>`).join("");
-  const mods = brand ? DATA.names.filter(n => n.brand === brand) : [];
-  const total = mods.reduce((t, n) => t + (counts[n.name] || 0), 0);
-  const row2 = $("#models");
-  row2.hidden = !mods.length;
-  row2.setAttribute("aria-label", brand ? L(`${brand} models`, `Modelos ${brand}`) : L("Model", "Modelo"));
-  row2.innerHTML = mods.length ? `<button class="chip" data-name="" aria-pressed="${!names.length}">${L("All", "Todos")} ${esc(brand)} <span class="n">${nf(total)}</span></button>`
-    + mods.map(n => `<button class="chip" style="--c:${n.color}" data-name="${esc(n.name)}" aria-pressed="${names.includes(n.name)}">
-      <span class="dot"></span>${esc(n.name)} <span class="n">${nf(counts[n.name] || 0)}</span></button>`).join("") : "";
-  keepInView($("#chips"), ".chip.brand[aria-pressed=\"true\"]");
-  keepInView(row2, '.chip[aria-pressed="true"]:not([data-name=""])');
+  const pick = `<button class="chip pick" data-pick type="button" aria-haspopup="dialog">${ICON.search}${prices ? L("Car", "Carro") : L("Cars", "Carros")}</button>`;
+  const chip = (n, on, x) => `<button class="chip${counts[n] ? "" : " zero"}" style="--c:${nameColor(n)}" data-name="${esc(n)}" aria-pressed="${on}" type="button"
+      ${x ? `aria-label="${esc(L(`Remove ${n}`, `Tirar ${n}`))}"` : ""}><span class="dot"></span>${esc(n)} <span class="n">${nf(counts[n] || 0)}</span>${x ? ICON.x : ""}</button>`;
+  const bchip = b => `<button class="chip" style="--c:${brandColor(b)}" data-pbrand="${esc(b)}" aria-pressed="true" type="button"
+      aria-label="${esc(L(`Remove all ${b}`, `Tirar ${b}`))}"><span class="dot"></span>${esc(L(`All ${b}`, `${b} (todos)`))} <span class="n">${nf(DATA.names.filter(n => n.brand === b).reduce((s, n) => s + (counts[n.name] || 0), 0))}</span>${ICON.x}</button>`;
+  let html = gm + pick;
+  if (prices) {
+    const ana = DATA.names.some(n => n.name === state.ana) ? state.ana : "";
+    html += P.filter(n => counts[n]).map(n => chip(n, n === ana, false)).join("");
+    if (ana && !P.includes(ana)) html += chip(ana, true, true);
+    if (!ana && effBrand()) html += bchip(effBrand());
+  } else {
+    const names = effNames(), brands = selBrands();
+    html += P.map(n => chip(n, names.includes(n) || brands.includes(brandOf(n)), false)).join("");
+    html += brands.map(bchip).join("") + names.filter(n => !P.includes(n)).map(n => chip(n, true, true)).join("");
+    if (names.length + brands.length > 1) html += `<button class="chip clear" id="chipClear" type="button">${L("Clear", "Limpar")}</button>`;
+  }
+  $("#chips").innerHTML = html;
+  fitChips();
 }
-function keepInView(row, sel) {                 // a chosen chip scrolled off the row comes back into view
-  const r0 = row.getBoundingClientRect(), on = [...row.querySelectorAll(sel)];
-  const seen = c => { const b = c.getBoundingClientRect(); return b.left >= r0.left && b.right <= r0.right; };
-  if (on.length && !on.some(seen)) row.scrollLeft += on[0].getBoundingClientRect().left - r0.left - (row.clientWidth - on[0].offsetWidth) / 2;
+function fitChips() {                           // at most two lines; the rest goes behind "+N more"
+  const row = $("#chips"), kids = [...row.children];
+  if (kids.length < 3 || !row.offsetParent) return;
+  const h = kids[0].offsetHeight, max = kids[0].offsetTop + 2 * h + 10;
+  const fits = el => el.offsetTop + el.offsetHeight <= max;
+  if (fits(kids[kids.length - 1])) return;
+  const clr = $("#chipClear");                   // Clear goes first (the picker has its own)
+  if (clr) { clr.remove(); if (fits(row.lastElementChild)) return; }
+  const more = document.createElement("button");
+  more.type = "button"; more.className = "chip more"; more.dataset.pick = "";
+  row.appendChild(more);
+  const out = kids.filter(k => k.isConnected && !k.matches(".gmode,.pick"));
+  let hidden = 0;
+  while (out.length) {
+    more.textContent = L(`+${hidden} more`, `+${hidden} mais`);
+    if (hidden && fits(more)) break;
+    out.pop().remove(); hidden++;
+  }
 }
+let chipT = 0;
+window.addEventListener("resize", () => { clearTimeout(chipT); chipT = setTimeout(() => DATA && renderChips(), 150); });
 function render() {
   paintTabs();
   if (state.tab === "prices") {                // market analysis of the chosen model (or all models)
@@ -1019,17 +1123,144 @@ const moreObs = "IntersectionObserver" in window
 function watchMore() { if (!moreObs) { while (SHOWN < LIST.length) moreCards(); return; } moreObs.disconnect(); const m = $("#more"); if (m) moreObs.observe(m); }
 
 // ---------- sheets ----------
-function openSheet(html, label) {
+let SHEET_OPEN = false, SHEET_HIST = 0;           // SHEET_HIST: 1 = our history entry is on top, 2 = going back from it
+function openSheet(html, label, cls = "") {
+  $("#sheet").className = "sheet" + (cls ? " " + cls : "");
   $("#sheet").innerHTML = `<div class="grab"></div><button class="icon-btn close" data-close aria-label="${L("Close", "Fechar")}">
     <svg width="18" height="18" viewBox="0 0 18 18" stroke="currentColor" stroke-width="1.8"><path d="M4 4l10 10M14 4 4 14"/></svg></button>` + html;
   $("#sheet").setAttribute("aria-label", label);
   $("#layer").hidden = false;
+  SHEET_OPEN = true;
+  if (!SHEET_HIST) { try { history.pushState({cwSheet: 1}, ""); SHEET_HIST = 1; } catch (e) {} }   // the phone's Back closes it
   requestAnimationFrame(() => requestAnimationFrame(() => $("#layer").classList.add("open")));
   $("#sheet").querySelector("[data-close]").focus({preventScroll: true});
 }
-function closeSheet() {
+function hideSheet() {
+  SHEET_OPEN = false;
   $("#layer").classList.remove("open");
-  setTimeout(() => { $("#layer").hidden = true; }, 220);
+  setTimeout(() => { if (!SHEET_OPEN) $("#layer").hidden = true; }, 220);
+}
+function closeSheet() {
+  if (SHEET_HIST === 1) { SHEET_HIST = 2; history.back(); }
+  hideSheet();
+}
+window.addEventListener("popstate", () => {
+  if (SHEET_HIST === 2) {                         // our own step back; a sheet opened meanwhile gets a new entry
+    SHEET_HIST = 0;
+    if (SHEET_OPEN) { try { history.pushState({cwSheet: 1}, ""); SHEET_HIST = 1; } catch (e) {} }
+  } else if (SHEET_HIST === 1) { SHEET_HIST = 0; hideSheet(); }
+});
+
+// ---------- car picker: brands grouped by country, search, counts, pins ----------
+const BRAND_COUNTRY = {Acura: "jp", Datsun: "jp", Honda: "jp", Infiniti: "jp", Mazda: "jp", Mitsubishi: "jp", Nissan: "jp",
+  Subaru: "jp", Toyota: "jp", BMW: "de", Porsche: "de", Chevrolet: "us", Ford: "us", Pontiac: "us", Hyundai: "kr"};
+const MINI_FLAG = {                           // small flags for the country headings in the car picker
+  jp: '<svg class="pk-flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="6" fill="#BC002D"/></svg>',
+  de: '<svg class="pk-flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="7" fill="#000"/><rect y="6.67" width="30" height="6.67" fill="#DD0000"/><rect y="13.33" width="30" height="6.67" fill="#FFCE00"/></svg>',
+  us: '<svg class="pk-flag" viewBox="0 0 38 20" aria-hidden="true"><rect width="38" height="20" fill="#fff"/><rect y="0.00" width="38" height="1.54" fill="#B22234"/><rect y="3.08" width="38" height="1.54" fill="#B22234"/><rect y="6.15" width="38" height="1.54" fill="#B22234"/><rect y="9.23" width="38" height="1.54" fill="#B22234"/><rect y="12.31" width="38" height="1.54" fill="#B22234"/><rect y="15.38" width="38" height="1.54" fill="#B22234"/><rect y="18.46" width="38" height="1.54" fill="#B22234"/><rect width="15.2" height="10.77" fill="#3C3B6E"/></svg>',
+  kr: '<svg class="pk-flag" viewBox="0 0 36 24" aria-hidden="true"><rect width="36" height="24" fill="#fff"/><g transform="rotate(33.7 18 12)"><path d="M12 12a6 6 0 0 1 12 0z" fill="#CD2E3A"/><path d="M12 12a6 6 0 0 0 12 0z" fill="#0047A0"/><circle cx="15" cy="12" r="3" fill="#CD2E3A"/><circle cx="21" cy="12" r="3" fill="#0047A0"/></g><g stroke="#000" stroke-width="1.1"><path d="M5.2 6.8l3.2-4.8M6.4 7.6l3.2-4.8M7.6 8.4l3.2-4.8M25.4 15.6l3.2 4.8M26.6 14.8l3.2 4.8M27.8 14l3.2 4.8M25.4 8.4l3.2-4.8M27.8 6.8l3.2-4.8M5.2 17.2l3.2 4.8M7.6 15.6l3.2 4.8"/></g></svg>',
+  xx: "",
+};
+const COUNTRY_ORDER = [["jp", "Japan", "Japão"], ["de", "Germany", "Alemanha"], ["us", "USA", "EUA"], ["kr", "South Korea", "Coreia do Sul"], ["xx", "Other", "Outros"]];
+const CAR_ALIAS = {"S2000": "s2k", "Lancer Evolution": "evo evolution", "MX-5": "miata eunos roadster", "Skyline GT-R": "skyline godzilla",
+  "Supra": "mk3 mk4 mkiii mkiv", "AE86": "hachiroku corolla trueno levin", "86": "gt86 frs scion", "BRZ": "gt86 frs",
+  "350Z": "fairlady", "370Z": "fairlady", "300ZX": "fairlady", "240Z / 260Z / 280Z": "fairlady", "Civic Type R": "ctr", "Integra Type R": "itr",
+  "Impreza WRX STI": "subie", "Corvette": "vette", "Genesis Coupe": "gen coupe", "Z3 M / Z4 M": "clown shoe clownshoe",
+  "Chaser": "tourer", "Silvia": "s chassis", "240SX": "s chassis", "180SX": "s chassis", "Mustang GT": "stang", "Boxster": "porsche"};
+const BRAND_ALIAS = {Chevrolet: "chevy", Mitsubishi: "mitsu", Subaru: "subie"};
+const pkNorm = s => String(s).toLowerCase().normalize("NFD").replace(/[^a-z0-9]/g, "");
+function pkHay(n) {
+  const model = n.model || ((DATA.families || []).find(f => f.family === n.family) || {}).model || "";
+  return pkNorm([n.name, model, n.brand, n.family, CAR_ALIAS[model] || "", BRAND_ALIAS[n.brand] || ""].join(" "));
+}
+const yrsTxt = y => !y ? "" : y[0] === y[1] ? String(y[0]) : `${y[0]}–${y[1]}`;
+function pickerSheet() {
+  const single = state.tab === "prices";
+  openSheet(`<div class="pk-top"><div class="pk-h"><h2>${single ? L("Choose a car", "Escolha um carro") : L("Choose cars", "Escolha os carros")}</h2>
+      <button class="pk-clear" id="pkClear" type="button">${single ? L("All models", "Todos os modelos") : L("Clear", "Limpar")}</button></div>
+      <label class="pk-q">${ICON.search}<input id="pkQ" type="search" enterkeyhint="search" autocomplete="off" spellcheck="false"
+        placeholder="${L("S2000, E46, Evo, Miata…", "Civic, Si, E46, Evo…")}" aria-label="${L("Search by name or chassis code", "Buscar por nome ou código do chassi")}"></label></div>
+    <div class="pk-list" id="pkList"></div>
+    ${single ? "" : `<div class="pk-foot"><button class="go" id="pkGo" type="button"></button></div>`}`,
+    single ? L("Choose a car", "Escolha um carro") : L("Choose cars", "Escolha os carros"), "full");
+  pkFill();
+  const list = $("#pkList"), first = list.querySelector(".pk-row.sel");
+  if (first) list.scrollTop = Math.max(0, first.offsetTop - list.clientHeight / 3);
+  const q = $("#pkQ");
+  q.oninput = () => { list.scrollTop = 0; pkFill(); };
+  q.onkeydown = e => { if (e.key === "Enter") q.blur(); };
+  const done = () => { closeSheet(); window.scrollTo({top: 0}); render(); };
+  $("#pkClear").onclick = () => {
+    if (single) { state.ana = ""; state.brand = ""; return done(); }
+    state.names = []; state.brands = []; pkAfter();
+  };
+  if ($("#pkGo")) $("#pkGo").onclick = () => { closeSheet(); window.scrollTo({top: 0}); };
+  list.onclick = e => {
+    const t = e.target;
+    const st = t.closest("[data-pstar]");
+    if (st) { togglePin(st.dataset.pstar); pkFill(); return renderChips(); }
+    const all = t.closest("[data-pball]");
+    if (all) {
+      if (single) { state.ana = ""; state.brand = all.dataset.pball; return done(); }
+      pkBrand(all.dataset.pball); return pkAfter();
+    }
+    const row = t.closest("[data-pn]");
+    if (!row) return;
+    if (single) { state.ana = row.dataset.pn; state.brand = brandOf(state.ana); return done(); }
+    pkToggle(row.dataset.pn); pkAfter();
+  };
+}
+function pkAfter() { render(); pkFill(); }      // the list behind updates as you tick
+function pkFill() {
+  const list = $("#pkList");
+  if (!list) return;
+  const single = state.tab === "prices", raw = ($("#pkQ")?.value || "").trim();
+  const toks = raw.split(/\s+/).map(pkNorm).filter(Boolean);
+  const phrase = pkNorm(raw), whole = phrase.length > 2 && DATA.names.some(n => pkHay(n).includes(phrase));
+  const hit = n => !toks.length || (whole ? pkHay(n).includes(phrase) : toks.every(k => pkHay(n).includes(k)));   // "type r": the words together first
+  const counts = adCounts(), fresh = {}, P = new Set(lsGet(pinKey(), []));
+  for (const c of DATA.cars) if (isNew(c)) fresh[c.name] = (fresh[c.name] || 0) + 1;
+  const by = {};
+  for (const n of DATA.names) if (hit(n)) (by[n.brand] ??= {rows: [], none: []}).rows.push(n);
+  if (!AUTO) for (const n of DATA.names_all || []) if (!counts[n.name] && hit(n)) (by[n.brand] ??= {rows: [], none: []}).none.push(n);
+  const row = n => {
+    const sel = single ? state.ana === n.name : isSel(n.name), pin = P.has(n.name);
+    return `<div class="pk-row${sel ? " sel" : ""}" style="--c:${n.color}"><button class="pk-tog" type="button" data-pn="${esc(n.name)}" aria-pressed="${sel}">
+      <span class="pk-mk">${ICON.check}</span><span class="pk-nm"><b>${esc(n.name)}</b><small>${yrsTxt(n.years)}</small></span>
+      ${fresh[n.name] ? `<span class="pk-new">${fresh[n.name] === counts[n.name] ? L("new", fresh[n.name] === 1 ? "novo" : "novos")
+        : `${nf(fresh[n.name])} ${L("new", fresh[n.name] === 1 ? "novo" : "novos")}`}</span>` : ""}
+      <span class="pk-ct" aria-label="${nf(counts[n.name])} ${L("ads", "anúncios")}">${nf(counts[n.name])}</span></button>
+      <button class="pk-star" type="button" data-pstar="${esc(n.name)}" aria-pressed="${pin}"
+        aria-label="${esc(pin ? L(`Unpin ${n.name}`, `Desafixar ${n.name}`) : L(`Pin ${n.name} to the top`, `Fixar ${n.name} no topo`))}">${ICON.star}</button></div>`;
+  };
+  const none = ns => ns.map(n => esc(n.name)).join(", ");
+  let html = "";
+  for (const [k, en, pt] of COUNTRY_ORDER) {
+    const bs = Object.keys(by).filter(b => (BRAND_COUNTRY[b] || "xx") === k).sort((a, b) => a.localeCompare(b));
+    const live = bs.filter(b => by[b].rows.length), gone = bs.filter(b => !by[b].rows.length);
+    if (!bs.length) continue;
+    html += `<div class="pk-c">${MINI_FLAG[k]}${L(en, pt)}</div>`;
+    for (const b of live) {
+      const tot = by[b].rows.reduce((s, n) => s + (counts[n.name] || 0), 0);
+      const on = single ? !state.ana && state.brand === b : state.brands.includes(b);
+      html += `<div class="pk-b"><div class="pk-bh" style="--c:${brandColor(b)}"><span class="sq"></span><b>${esc(b)}</b>
+          <span class="n">${nf(tot)} ${L(tot === 1 ? "ad" : "ads", tot === 1 ? "anúncio" : "anúncios")}</span>
+          <button class="pk-all" type="button" data-pball="${esc(b)}" aria-pressed="${on}"
+            aria-label="${esc(L(`All ${b}`, `Todos ${b}`))}">${L("All", "Todos")}</button></div>
+        ${by[b].rows.map(row).join("")}
+        ${by[b].none.length ? `<div class="pk-none">${L("No ads right now", "Sem anúncios agora")}: ${none(by[b].none)}</div>` : ""}</div>`;
+    }
+    if (gone.length) html += `<div class="pk-none">${L("No ads right now", "Sem anúncios agora")}:<br>${gone.map(b => `<b>${esc(b)}</b> ${none(by[b].none)}`).join("<br>")}</div>`;
+  }
+  const keep = list.scrollTop;
+  list.innerHTML = html || `<div class="pk-empty">${L(`No car matches “${esc(raw)}”.`, `Nenhum carro corresponde a “${esc(raw)}”.`)}</div>`;
+  list.scrollTop = keep;
+  const go = $("#pkGo");
+  if (go) {
+    const n = LIST.length, any = effNames().length || selBrands().length;
+    go.textContent = any ? L(`Show ${nf(n)} ${n === 1 ? "car" : "cars"}`, `Mostrar ${nf(n)} ${n === 1 ? "carro" : "carros"}`)
+                         : L(`Show all ${nf(n)} cars`, `Mostrar os ${nf(n)} carros`);
+  }
 }
 function priceChart(c) {                      // step chart of asking price since CarWatch first saw the ad
   const pts = (c.hist || []).map(([d, p]) => [asDate(d).getTime(), p]);
@@ -1211,25 +1442,35 @@ function filterSheet() {
     $("#oPrice").textContent = p >= pMax ? L("Any", "Qualquer") : money(p);
     $("#oKm").textContent = k >= kMax ? L("Any", "Qualquer") : kmFull(k);
   };
-  upd();
-  $("#fPrice").oninput = $("#fKm").oninput = upd;
+  const readInto = s => {
+    const on = g => [...sh.querySelectorAll(`[data-g=${g}][aria-pressed=true]`)].map(b => b.dataset.v);
+    const gear = on("gear");
+    s.gear = gear.length ? gear : ["m", "c", "u"];
+    s.bodies = on("body");
+    s.maxPrice = +$("#fPrice").value >= pMax ? 0 : +$("#fPrice").value;
+    s.maxKm = +$("#fKm").value >= kMax ? 0 : +$("#fKm").value;
+    s.yearFrom = +$("#fY1").value; s.yearTo = +$("#fY2").value;
+    const hide = on("hide"); s.hideHard = hide.includes("hard"); s.hideRed = hide.includes("red");
+    s.hideHigh = hide.includes("high"); s.hideSus = hide.includes("sus");
+  };
+  const live = () => {                         // the button says how many cars these filters leave
+    const keep = state; state = Object.assign({}, keep); readInto(state);
+    let n = 0; try { n = filtered().length; } finally { state = keep; }
+    $("#fApply").textContent = L(`Show ${nf(n)} ${n === 1 ? "car" : "cars"}`, `Mostrar ${nf(n)} ${n === 1 ? "carro" : "carros"}`);
+  };
+  upd(); live();
+  $("#fPrice").oninput = $("#fKm").oninput = () => { upd(); live(); };
+  $("#fY1").onchange = $("#fY2").onchange = live;
   sh.querySelectorAll(".opt[data-g]").forEach(b => b.onclick = () => {
     const g = b.dataset.g, v = b.dataset.v;
     if (g === "sort") { sh.querySelectorAll('[data-g=sort]').forEach(x => x.setAttribute("aria-pressed", x === b)); return; }
     b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true");
+    live();
   });
-  $("#fReset").onclick = () => { Object.assign(state, DEFAULT_STATE, {names: state.names}); closeSheet(); render(); };
+  $("#fReset").onclick = () => { Object.assign(state, DEFAULT_STATE, {names: state.names, brands: state.brands, tab: state.tab}); closeSheet(); render(); };
   $("#fApply").onclick = () => {
-    const on = g => [...sh.querySelectorAll(`[data-g=${g}][aria-pressed=true]`)].map(b => b.dataset.v);
-    const gear = on("gear");
-    state.gear = gear.length ? gear : ["m", "c", "u"];
-    state.bodies = on("body");
-    state.maxPrice = +$("#fPrice").value >= pMax ? 0 : +$("#fPrice").value;
-    state.maxKm = +$("#fKm").value >= kMax ? 0 : +$("#fKm").value;
-    state.yearFrom = +$("#fY1").value; state.yearTo = +$("#fY2").value;
-    const hide = on("hide"); state.hideHard = hide.includes("hard"); state.hideRed = hide.includes("red");
-    state.hideHigh = hide.includes("high"); state.hideSus = hide.includes("sus");
-    const srt = on("sort")[0] || "score";
+    readInto(state);
+    const srt = [...sh.querySelectorAll("[data-g=sort][aria-pressed=true]")].map(b => b.dataset.v)[0] || "score";
     if (srt !== state.sort) { state.sort = srt; state.dir = ["price", "km"].includes(srt) ? "asc" : "desc"; }
     closeSheet(); render(); window.scrollTo({top: 0});
   };
@@ -2638,8 +2879,9 @@ document.addEventListener("click", e => {
   if (bud) { state.budget = +bud.dataset.bud; save(); return render(); }
   const budList = t.closest("[data-budlist]");
   if (budList) {
-    Object.assign(state, {tab: "list", names: budList.dataset.budlist ? [budList.dataset.budlist] : [], maxPrice: state.budget, sort: "score", dir: "desc"});
-    if (budList.dataset.budlist) state.brand = brandOf(budList.dataset.budlist);
+    const bb = !budList.dataset.budlist && effBrand();     // the Prices brand overview: that brand on the list
+    Object.assign(state, {tab: "list", names: budList.dataset.budlist ? [budList.dataset.budlist] : [], brands: bb ? [bb] : [],
+                          maxPrice: state.budget, sort: "score", dir: "desc"});
     window.scrollTo({top: 0}); return render();
   }
   const chk = t.closest("[data-checklist]");
@@ -2652,28 +2894,25 @@ document.addEventListener("click", e => {
   if (widen) { LOC.radius = +widen.dataset.radius; saveLoc(); return render(); }
   const goList = t.closest("[data-golist]");
   if (goList) {
-    Object.assign(state, {tab: "list", names: [goList.dataset.golist], brand: brandOf(goList.dataset.golist), sort: "score", dir: "desc"});
+    Object.assign(state, {tab: "list", names: [goList.dataset.golist], brands: [], sort: "score", dir: "desc"});
     window.scrollTo({top: 0}); return render();
   }
-  const bchip = t.closest(".chip[data-brand]");
-  if (bchip) {                                   // a brand: its cars, and its models in the second row
-    const b = bchip.dataset.brand;
-    state.brand = !b || b === effBrand() ? "" : b;
-    state.names = [];
-    if (state.tab === "prices") state.ana = "";
+  if (t.closest("[data-pick]")) return pickerSheet();
+  const bchip = t.closest(".chip[data-pbrand]");
+  if (bchip) {                                   // a whole brand picked: tap to take it off
+    if (state.tab === "prices") state.brand = "";
+    else state.brands = state.brands.filter(b => b !== bchip.dataset.pbrand);
     window.scrollTo({top: 0}); return render();
   }
-  const chip = t.closest(".chip");
-  if (chip && state.tab === "prices") {
-    state.ana = chip.dataset.name;
-    if (state.ana) state.brand = brandOf(state.ana);
-    window.scrollTo({top: 0}); return render();
-  }
-  if (chip) {
+  if (t.closest("#chipClear")) { state.names = []; state.brands = []; window.scrollTo({top: 0}); return render(); }
+  const chip = t.closest(".chip[data-name]");
+  if (chip && state.tab === "prices") {          // one car at a time; tap it again for the overview
     const n = chip.dataset.name;
-    state.names = !n ? [] : state.names.includes(n) ? state.names.filter(x => x !== n) : [...state.names, n];
-    return render();
+    state.ana = state.ana === n ? "" : n;
+    state.brand = state.ana ? brandOf(state.ana) : "";
+    window.scrollTo({top: 0}); return render();
   }
+  if (chip) { pkToggle(chip.dataset.name); return render(); }
   if (t.id === "clearAll") { Object.assign(state, DEFAULT_STATE); return render(); }
   if (t.closest("#othersBtn")) return linksSheet();
   if (t.closest("#evalBtn")) return evalSheet();
@@ -2712,8 +2951,9 @@ $("#tabPrices").onclick = () => {
   if (state.tab === "prices") return;
   state.tab = "prices";
   const one = effNames();
-  if (one.length === 1) state.ana = one[0];      // coming from the list with one model picked: open that model
-  else if (state.brand && brandOf(state.ana) !== state.brand) state.ana = "";   // a brand picked: its overview
+  const bs = selBrands();
+  if (one.length === 1 && !bs.length) state.ana = one[0];      // coming from the list with one model picked: open that model
+  else if (!one.length && bs.length === 1) { state.ana = ""; state.brand = bs[0]; }   // one brand picked: its overview
   window.scrollTo({top: 0}); render();
 };
 
