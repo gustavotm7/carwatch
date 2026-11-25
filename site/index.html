@@ -149,6 +149,48 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .pk-none{padding:10px 16px 12px 50px;border-top:1px solid var(--line);color:var(--dim);font-size:13px;line-height:1.45}
 .pk-none b{color:var(--muted);font-weight:600}
 .pk-empty{padding:48px 20px;text-align:center;color:var(--muted)}
+span.dot{display:none!important}
+.chip .x{margin-left:2px}
+.garage{grid-column:1/-1;display:flex;gap:10px;overflow-x:auto;margin:2px -14px 14px;padding:2px 14px;scrollbar-width:none}
+.garage::-webkit-scrollbar{display:none}
+.gc{flex:none;width:150px;padding:0;border-radius:14px;border:1px solid var(--line);background:var(--surface);overflow:hidden;text-align:left;display:flex;flex-direction:column}
+.gc[aria-pressed=true]{border-color:var(--text);box-shadow:inset 0 0 0 1px var(--text)}
+.gc-ph{display:block;width:100%;aspect-ratio:16/10;background:#232a33;overflow:hidden}
+.gc-ph img,.md-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.gc-t{display:block;padding:8px 10px 10px}
+.gc-t small{display:block;color:var(--muted);font-size:12px}
+.gc-t b{display:block;font:700 18px/1.1 var(--cond);letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gc-s{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.gc-d,.md-k .dl{color:#8ef0c0;font-size:12px;font-style:normal}
+.gc-d{display:block;margin-top:2px}
+.gc.add{justify-content:center;align-items:center;gap:8px;padding:14px;min-height:150px;border-style:dashed;color:var(--muted);text-align:center;font-size:13px}
+.gc.add svg{opacity:.8}
+.pk-sort{display:flex;gap:8px;margin-top:10px;overflow-x:auto;scrollbar-width:none}
+.pk-sort .opt{flex:none}
+.md{border-top:1px solid var(--line)}
+.md-top{display:flex;align-items:center}
+.md-h{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:12px 4px 10px 16px;text-align:left}
+.md.off .md-h{opacity:.5}
+.md-ph{flex:none;position:relative;width:96px;height:62px;border-radius:9px;overflow:hidden;background:#232a33}
+.md-ph .ck{position:absolute;right:5px;top:5px;width:22px;height:22px;border-radius:50%;background:var(--text);display:grid;place-items:center}
+.md-h[aria-pressed=true] .md-ph{box-shadow:0 0 0 2px var(--text)}
+.md-t{flex:1;min-width:0}
+.md-t small{display:block;color:var(--muted);font-size:12px}
+.md-t b{display:block;font:700 19px/1.1 var(--cond);letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.md-s{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.md-k{display:flex;gap:8px;margin-top:4px;flex-wrap:wrap}
+.md-k .nw{font-style:normal;border-radius:999px;padding:1px 7px;font:600 11px/1.5 var(--sans);background:#e9eef5;color:#10151c}
+.tl{display:flex;align-items:flex-start;overflow-x:auto;padding:0 16px 14px;scrollbar-width:none}
+.tl::-webkit-scrollbar{display:none}
+.tl-c{flex:none;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.tl-l{flex:none;width:14px;height:2px;margin-top:19px;background:var(--line)}
+.tl-y{font-size:11px;color:var(--dim);padding-left:6px}
+.gp{display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 13px;border-radius:999px;border:1px solid var(--line);background:var(--surface);
+  color:var(--text);font:600 15px/1 var(--cond);letter-spacing:.02em;white-space:nowrap}
+.gp span{font:500 12px/1 var(--sans);color:var(--dim)}
+.gp[aria-pressed=true]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.gp[aria-pressed=true] span{color:var(--bg);opacity:.7}
+.gp.zero{border-style:dashed;background:none;color:var(--dim)}
 .pk-foot{padding:10px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg)}
 .pk-foot .go{width:100%;height:50px;border-radius:12px;background:var(--text);color:var(--bg);font:700 18px/1 var(--cond);letter-spacing:.03em}
 .gmode{flex:none;display:flex;align-items:center;gap:7px;position:sticky;left:0;z-index:2;padding:7px 12px 7px 11px;
@@ -208,7 +250,7 @@ main{max-width:1100px;margin:0 auto;padding:12px 10px 40px;display:grid;gap:14px
 .card.ext .nophoto{display:none}
 .photo::after{content:"";position:absolute;inset:auto 0 0 0;height:42%;
   background:linear-gradient(to top,rgba(10,13,17,.78),rgba(10,13,17,0));pointer-events:none}
-.name{position:absolute;left:10px;top:10px;z-index:2;background:var(--c);color:#10151c;border-radius:8px;
+.name{position:absolute;left:10px;top:10px;z-index:2;background:rgba(12,15,20,.82);color:#eef1f4;border-radius:8px;
   padding:5px 10px 4px;font:700 20px/1 var(--cond);letter-spacing:.02em;box-shadow:0 2px 10px rgba(0,0,0,.35)}
 .gauge{position:absolute;right:8px;top:8px;z-index:2;width:66px;height:66px;border-radius:50%;
   background:rgba(12,15,20,.82);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
@@ -299,7 +341,7 @@ ul.facts-list.plain .dot{display:inline-block;width:9px;height:9px;border-radius
 .grab{width:40px;height:4px;border-radius:2px;background:var(--line);margin:4px auto 10px}
 @media(min-width:760px){.grab{display:none}}
 .sheet h2{font:700 26px/1.05 var(--cond);margin:4px 0 2px;display:flex;align-items:center;gap:10px}
-.sheet h2 .pill{background:var(--c);color:#10151c;border-radius:7px;padding:4px 9px 3px;font-size:20px}
+.sheet h2 .pill{background:var(--raised);color:var(--text);border-radius:7px;padding:4px 9px 3px;font-size:20px}
 .sheet .sub{color:var(--muted);margin:0 0 6px}
 .sheet h3{font:600 17px/1.2 var(--cond);letter-spacing:.02em;color:var(--muted);margin:18px 0 8px}
 .sheet p{margin:0 0 8px;max-width:68ch}
@@ -1002,14 +1044,59 @@ const ICON = {
   check: '<svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#10151c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 7.4 2.7 2.6L11 4.4"/></svg>',
   star: '<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.6l2.3 4.8 5.2.7-3.8 3.6.9 5.2L10 14.4l-4.6 2.5.9-5.2-3.8-3.6 5.2-.7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
 };
-const pinKey = () => "cw-pins-" + COUNTRY;
-function pins() { return lsGet(pinKey(), []).filter(n => allNames().some(x => x.name === n)); }
-function togglePin(name) { const p = lsGet(pinKey(), []); lsSet(pinKey(), p.includes(name) ? p.filter(n => n !== name) : [...p, name]); }
-function adCounts() { const k = {}; for (const c of DATA.cars) k[c.name] = (k[c.name] || 0) + 1; return k; }
-function brandColor(b) {                        // a brand's middle shade, for its square and its chip
-  const ns = allNames().filter(n => n.brand === b).sort((x, y) => x.years[0] - y.years[0]);
-  return ns.length ? ns[Math.floor(ns.length / 2)].color : "#59626e";
+const gKey = () => "cw-garage-" + COUNTRY;
+function garageKeys() {                          // starred models, as "Brand|Model"; the first version starred names
+  let g = lsGet(gKey(), null);
+  if (!g) {
+    const old = lsGet("cw-pins-" + COUNTRY, []), names = allNames();
+    g = [...new Set(old.map(x => names.find(n => n.name === x)).filter(Boolean).map(mKey))];
+    lsSet(gKey(), g);
+  }
+  return g;
 }
+function togglePin(key) { const g = garageKeys(); lsSet(gKey(), g.includes(key) ? g.filter(k => k !== key) : [...g, key]); }
+function adCounts() { const k = {}; for (const c of DATA.cars) k[c.name] = (k[c.name] || 0) + 1; return k; }
+const modelOfName = n => n.model || ((DATA.families || []).find(f => f.family === n.family) || {}).model || n.name;
+const mKey = n => (n.brand || "") + "|" + modelOfName(n);
+function modelsHere() {                          // every model of this list: its generations, ads, new ads, best deal, a photo
+  const st = {};
+  for (const c of DATA.cars) {
+    const s = st[c.name] ??= {n: 0, fresh: 0, from: Infinity, best: null, deals: 0, photo: "", ps: -1};
+    s.n++; if (isNew(c)) s.fresh++;
+    if (c.price && c.price < s.from) s.from = c.price;
+    const vs = vsOf(c), k = dealOf(vs);
+    if (k === "great" || k === "good") { s.deals++; if (s.best == null || vs > s.best) s.best = vs; }
+    const sc = scoreOf(c) ?? 0;
+    if ((c.photos || []).length && sc > s.ps) { s.ps = sc; s.photo = c.photos[0]; }
+  }
+  const M = new Map();
+  const add = n => {
+    const k = mKey(n);
+    if (!M.has(k)) M.set(k, {key: k, brand: n.brand, model: modelOfName(n), gens: [], n: 0, fresh: 0, from: Infinity, best: null, deals: 0, photo: "", ps: -1});
+    const m = M.get(k), s = st[n.name];
+    if (m.gens.some(g => g.name === n.name)) return;
+    m.gens.push({...n, s: s || null});
+    if (!s) return;
+    m.n += s.n; m.fresh += s.fresh; m.deals += s.deals; m.from = Math.min(m.from, s.from);
+    if (s.best != null && (m.best == null || s.best > m.best)) m.best = s.best;
+    if (s.photo && s.ps > m.ps) { m.ps = s.ps; m.photo = s.photo; }
+  };
+  DATA.names.forEach(add);
+  if (!AUTO) (DATA.names_all || []).forEach(add);
+  for (const m of M.values()) m.gens.sort((a, b) => a.years[0] - b.years[0] || a.name.localeCompare(b.name));
+  return M;
+}
+function genLabel(g, m) {                        // "E46" for E46 M3, unless that would leave two the same
+  const drop = new Set(m.model.toLowerCase().split(/[\s/]+/).filter(Boolean));
+  const cut = n => n.split(/\s+/).filter(w => !drop.has(w.toLowerCase())).join(" ").trim();
+  const s = cut(g.name);
+  return s && m.gens.filter(x => cut(x.name) === s).length === 1 ? s : g.name;
+}
+function modelToggle(m) {                        // all of a model's generations with ads, in or out
+  const live = m.gens.filter(g => g.s).map(g => g.name), on = live.length && live.every(isSel);
+  for (const n of live) if (isSel(n) === on) pkToggle(n);
+}
+const bestTxt = vs => L(`best −${Math.round(vs * 100)}%`, `melhor −${Math.round(vs * 100)}%`);
 function pkToggle(name) {                       // one model in or out of the list's selection
   const b = brandOf(name), mine = DATA.names.filter(n => n.brand === b).map(n => n.name);
   if (state.brands.includes(b)) {               // the whole brand was on: keep the rest of it
@@ -1027,32 +1114,50 @@ function pkBrand(b) {
   if (state.brands.includes(b)) state.brands = state.brands.filter(x => x !== b);
   else { state.brands = [...state.brands, b]; state.names = state.names.filter(n => brandOf(n) !== b); }
 }
-function renderChips() {                       // one row: the car picker, your pinned cars, then what else is picked
-  const counts = adCounts(), prices = state.tab === "prices", P = pins();
+function renderChips() {                       // one row: the car picker, then what is picked (tap to take it off)
+  const counts = adCounts(), prices = state.tab === "prices";
   const gm = MAN_DATA && MAN_DATA.auto_file          // one button showing the current gearbox; a tap switches
     ? `<button class="gmode ${AUTO ? "is-auto" : "is-man"}" data-gm="${AUTO ? "m" : "a"}" type="button"
         aria-label="${AUTO ? L("Showing automatic cars. Tap for manual.", "Mostrando carros automáticos. Toque para manual.")
                            : L("Showing manual cars. Tap for automatic.", "Mostrando carros manuais. Toque para automático.")}">
         <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 4.5h9M8.5 2l2.5 2.5L8.5 7M12 9.5H3M5.5 7 3 9.5 5.5 12"/></svg>${AUTO ? L("Automatic", "Automático") : "Manual"}</button>` : "";
   const pick = `<button class="chip pick" data-pick type="button" aria-haspopup="dialog">${ICON.search}${prices ? L("Car", "Carro") : L("Cars", "Carros")}</button>`;
-  const chip = (n, on, x) => `<button class="chip${counts[n] ? "" : " zero"}" style="--c:${nameColor(n)}" data-name="${esc(n)}" aria-pressed="${on}" type="button"
-      ${x ? `aria-label="${esc(L(`Remove ${n}`, `Tirar ${n}`))}"` : ""}><span class="dot"></span>${esc(n)} <span class="n">${nf(counts[n] || 0)}</span>${x ? ICON.x : ""}</button>`;
-  const bchip = b => `<button class="chip" style="--c:${brandColor(b)}" data-pbrand="${esc(b)}" aria-pressed="true" type="button"
-      aria-label="${esc(L(`Remove all ${b}`, `Tirar ${b}`))}"><span class="dot"></span>${esc(L(`All ${b}`, `${b} (todos)`))} <span class="n">${nf(DATA.names.filter(n => n.brand === b).reduce((s, n) => s + (counts[n.name] || 0), 0))}</span>${ICON.x}</button>`;
+  const x = (label, attr, n) => `<button class="chip" ${attr} aria-pressed="true" type="button" aria-label="${esc(L(`Remove ${label}`, `Tirar ${label}`))}">${esc(label)} <span class="n">${nf(n)}</span>${ICON.x}</button>`;
   let html = gm + pick;
   if (prices) {
     const ana = DATA.names.some(n => n.name === state.ana) ? state.ana : "";
-    html += P.filter(n => counts[n]).map(n => chip(n, n === ana, false)).join("");
-    if (ana && !P.includes(ana)) html += chip(ana, true, true);
-    if (!ana && effBrand()) html += bchip(effBrand());
+    if (ana) html += x(ana, `data-name="${esc(ana)}"`, counts[ana] || 0);
+    else if (effBrand()) html += x(L(`All ${effBrand()}`, `${effBrand()} (todos)`), `data-pbrand="${esc(effBrand())}"`,
+      DATA.names.filter(n => n.brand === effBrand()).reduce((s, n) => s + (counts[n.name] || 0), 0));
   } else {
-    const names = effNames(), brands = selBrands();
-    html += P.map(n => chip(n, names.includes(n) || brands.includes(brandOf(n)), false)).join("");
-    html += brands.map(bchip).join("") + names.filter(n => !P.includes(n)).map(n => chip(n, true, true)).join("");
+    const names = effNames(), brands = selBrands(), M = modelsHere(), done = new Set();
+    for (const b of brands) html += x(L(`All ${b}`, `${b} (todos)`), `data-pbrand="${esc(b)}"`,
+      DATA.names.filter(n => n.brand === b).reduce((s, n) => s + (counts[n.name] || 0), 0));
+    for (const nm of names) {                    // a whole model picked shows as the model
+      if (done.has(nm)) continue;
+      const m = M.get(mKey(DATA.names.find(n => n.name === nm))), live = m ? m.gens.filter(g => g.s).map(g => g.name) : [];
+      if (m && live.length > 1 && live.every(g => names.includes(g))) {
+        live.forEach(g => done.add(g));
+        html += x(`${m.model}`, `data-pmodelchip="${esc(m.key)}"`, m.n);
+      } else { done.add(nm); html += x(nm, `data-name="${esc(nm)}"`, counts[nm] || 0); }
+    }
     if (names.length + brands.length > 1) html += `<button class="chip clear" id="chipClear" type="button">${L("Clear", "Limpar")}</button>`;
   }
   $("#chips").innerHTML = html;
   fitChips();
+}
+function garageHTML() {                         // your starred models as cards: photo, ads, new, best deal
+  const M = modelsHere(), prices = state.tab === "prices";
+  const cards = garageKeys().map(k => M.get(k)).filter(Boolean);
+  const on = m => prices ? m.gens.some(g => g.name === state.ana)
+    : m.gens.some(g => g.s) && m.gens.filter(g => g.s).every(g => isSel(g.name));
+  const card = m => `<button class="gc" type="button" data-gmodel="${esc(m.key)}" aria-pressed="${on(m)}">
+      <span class="gc-ph">${m.photo ? `<img class="mph" src="${esc(m.photo)}" alt="" loading="lazy" decoding="async">` : ""}</span>
+      <span class="gc-t"><small>${esc(m.brand)}</small><b>${esc(m.model)}</b>
+        <span class="gc-s">${nf(m.n)} ${L(m.n === 1 ? "ad" : "ads", m.n === 1 ? "anúncio" : "anúncios")}${m.fresh ? `, ${nf(m.fresh)} ${L("new", m.fresh === 1 ? "novo" : "novos")}` : ""}</span>
+        ${m.best != null ? `<span class="gc-d">${bestTxt(m.best)}</span>` : ""}</span></button>`;
+  return `<div class="garage" role="group" aria-label="${L("Your garage", "Sua garagem")}">${cards.map(card).join("")}
+    <button class="gc add" type="button" data-pick>${ICON.star}<span>${cards.length ? L("Add cars", "Adicionar") : L("Star cars to keep them here", "Marque carros com a estrela para deixá-los aqui")}</span></button></div>`;
 }
 function fitChips() {                           // at most two lines; the rest goes behind "+N more"
   const row = $("#chips"), kids = [...row.children];
@@ -1080,7 +1185,7 @@ function render() {
   if (state.tab === "prices") {                // market analysis of the chosen model (or all models)
     LIST = []; SHOWN = 0;
     renderChips();
-    $("#list").innerHTML = locRowHTML() + pricesView();
+    $("#list").innerHTML = locRowHTML() + garageHTML() + pricesView();
     save();
     return;
   }
@@ -1107,7 +1212,7 @@ function render() {
   const locRow = locRowHTML();
   const where = LOC.active ? " " + esc(locLabel()) : "";
   const lvl = LOCAL ? `<span class="lvl">${L("Prices here", "Preços aqui")}: ${levelTxt(LOCAL.lv)} (${basisTxt()}). ${L("Scores and % use the local price.", "Notas e % usam o preço local.")}</span>` : "";
-  $("#list").innerHTML = autoNote + locRow + others + (cars.length
+  $("#list").innerHTML = autoNote + locRow + garageHTML() + others + (cars.length
     ? `<div class="count">${cars.length === DATA.cars.length ? `${nf(cars.length)} ${word}` : `${nf(cars.length)} ${L("of", "de")} ${nf(DATA.cars.length)} ${word}`}${where}${lvl}</div><div id="more"></div>`
     : LOC.active
       ? `<div class="empty">${L(`No ${word}${where} with these filters.`, `Nenhum carro${AUTO ? " automático" : ""}${where} com estes filtros.`)}<br><button id="locEdit2">${L("Change distance or town", "Mudar distância ou cidade")}</button></div>`
@@ -1183,16 +1288,19 @@ function pkHay(n) {
 }
 let PK_OPEN = new Set();                        // countries opened in the picker; it always starts closed
 const yrsTxt = y => !y ? "" : y[0] === y[1] ? String(y[0]) : `${y[0]}–${y[1]}`;
+let PK_SORT = "az";
 function pickerSheet() {
   const single = state.tab === "prices";
+  PK_OPEN = new Set();
   openSheet(`<div class="pk-top"><div class="pk-h"><h2>${single ? L("Choose a car", "Escolha um carro") : L("Choose cars", "Escolha os carros")}</h2>
       <button class="pk-clear" id="pkClear" type="button">${single ? L("All models", "Todos os modelos") : L("Clear", "Limpar")}</button></div>
       <label class="pk-q">${ICON.search}<input id="pkQ" type="search" enterkeyhint="search" autocomplete="off" spellcheck="false"
-        placeholder="${L("S2000, E46, Evo, Miata…", "Civic, Si, E46, Evo…")}" aria-label="${L("Search by name or chassis code", "Buscar por nome ou código do chassi")}"></label></div>
+        placeholder="${L("S2000, E46, Evo, Miata…", "Civic, Si, E46, Evo…")}" aria-label="${L("Search by name or chassis code", "Buscar por nome ou código do chassi")}"></label>
+      <div class="pk-sort" role="group" aria-label="${L("Order", "Ordem")}">${[["az", L("By country", "Por país")], ["new", L("Newest ads", "Mais novos")], ["deals", L("Best deals", "Melhores ofertas")]]
+        .map(([k, l]) => `<button class="opt" type="button" data-psort="${k}" aria-pressed="${PK_SORT === k}">${l}</button>`).join("")}</div></div>
     <div class="pk-list" id="pkList"></div>
     ${single ? "" : `<div class="pk-foot"><button class="go" id="pkGo" type="button"></button></div>`}`,
     single ? L("Choose a car", "Escolha um carro") : L("Choose cars", "Escolha os carros"), "full");
-  PK_OPEN = new Set();
   pkFill();
   const list = $("#pkList"), q = $("#pkQ");
   q.oninput = () => { list.scrollTop = 0; pkFill(); };
@@ -1202,17 +1310,29 @@ function pickerSheet() {
     if (single) { state.ana = ""; state.brand = ""; return done(); }
     state.names = []; state.brands = []; pkAfter();
   };
+  $("#sheet").querySelectorAll("[data-psort]").forEach(b => b.onclick = () => {
+    PK_SORT = b.dataset.psort;
+    $("#sheet").querySelectorAll("[data-psort]").forEach(x => x.setAttribute("aria-pressed", x === b));
+    list.scrollTop = 0; pkFill();
+  });
   if ($("#pkGo")) $("#pkGo").onclick = () => { closeSheet(); window.scrollTo({top: 0}); };
   list.onclick = e => {
     const t = e.target;
     const ct = t.closest("[data-pcountry]");
     if (ct) { const k = ct.dataset.pcountry; PK_OPEN.has(k) ? PK_OPEN.delete(k) : PK_OPEN.add(k); return pkFill(); }
     const st = t.closest("[data-pstar]");
-    if (st) { togglePin(st.dataset.pstar); pkFill(); return renderChips(); }
+    if (st) { togglePin(st.dataset.pstar); pkFill(); return render(); }
     const all = t.closest("[data-pball]");
     if (all) {
       if (single) { state.ana = ""; state.brand = all.dataset.pball; return done(); }
       pkBrand(all.dataset.pball); return pkAfter();
+    }
+    const mh = t.closest("[data-pmodel]");
+    if (mh) {
+      const m = modelsHere().get(mh.dataset.pmodel);
+      if (!m || !m.n) return;
+      if (single) { const g = m.gens.filter(x => x.s).sort((a, b) => b.s.n - a.s.n)[0]; state.ana = g.name; state.brand = m.brand; return done(); }
+      modelToggle(m); return pkAfter();
     }
     const row = t.closest("[data-pn]");
     if (!row) return;
@@ -1221,57 +1341,78 @@ function pickerSheet() {
   };
 }
 function pkAfter() { render(); pkFill(); }      // the list behind updates as you tick
+function modelCard(m, single, flat) {           // photo, name, figures; its generations on a timeline below
+  const live = m.gens.filter(g => g.s), selN = live.filter(g => single ? state.ana === g.name : isSel(g.name)).length;
+  const full = !single && live.length > 0 && selN === live.length;
+  const cols = [];
+  for (const g of m.gens) {                      // variants that start the same year share a column
+    const c = cols.find(c => c.y0 === g.years[0]);
+    if (c) { c.gens.push(g); c.y1 = Math.max(c.y1, g.years[1]); } else cols.push({y0: g.years[0], y1: g.years[1], gens: [g]});
+  }
+  const pill = g => g.s
+    ? `<button class="gp" type="button" data-pn="${esc(g.name)}" aria-pressed="${single ? state.ana === g.name : isSel(g.name)}"
+        aria-label="${esc(`${g.name}, ${g.s.n} ${L("ads", "anúncios")}`)}">${esc(genLabel(g, m))}<span>${nf(g.s.n)}</span></button>`
+    : `<span class="gp zero" title="${L("No ads right now", "Sem anúncios agora")}">${esc(genLabel(g, m))}</span>`;
+  const tl = cols.map(c => `<div class="tl-c">${c.gens.map(pill).join("")}<small class="tl-y">${c.y0 === c.y1 ? c.y0 : `${c.y0}–${String(c.y1).slice(2)}`}</small></div>`)
+    .join(`<span class="tl-l" aria-hidden="true"></span>`);
+  const pin = garageKeys().includes(m.key);
+  const figs = m.n ? `${nf(m.n)} ${L(m.n === 1 ? "ad" : "ads", m.n === 1 ? "anúncio" : "anúncios")}, ${L("from", "a partir de")} ${kShort(m.from)}${selN && !full && !single ? `, ${L(`${selN} picked`, `${selN} ${selN === 1 ? "escolhido" : "escolhidos"}`)}` : ""}`
+    : L("No ads right now", "Sem anúncios agora");
+  return `<div class="md${m.n ? "" : " off"}">
+    <div class="md-top"><button class="md-h" type="button" data-pmodel="${esc(m.key)}" aria-pressed="${full}"${m.n ? "" : " disabled"}>
+      <span class="md-ph">${m.photo ? `<img class="mph" src="${esc(m.photo)}" alt="" loading="lazy" decoding="async">` : ""}${full ? `<span class="ck">${ICON.check}</span>` : ""}</span>
+      <span class="md-t">${flat ? `<small>${esc(m.brand)}</small>` : ""}<b>${esc(m.model)}</b><span class="md-s">${figs}</span>
+        ${m.fresh || m.best != null ? `<span class="md-k">${m.fresh ? `<i class="nw">${nf(m.fresh)} ${L("new", m.fresh === 1 ? "novo" : "novos")}</i>` : ""}${m.best != null ? `<i class="dl">${bestTxt(m.best)}</i>` : ""}</span>` : ""}</span></button>
+      ${m.n ? `<button class="pk-star" type="button" data-pstar="${esc(m.key)}" aria-pressed="${pin}"
+        aria-label="${esc(pin ? L(`Take ${m.model} out of your garage`, `Tirar ${m.model} da garagem`) : L(`Add ${m.model} to your garage`, `Pôr ${m.model} na garagem`))}">${ICON.star}</button>` : ""}</div>
+    <div class="tl">${tl}</div></div>`;
+}
 function pkFill() {
   const list = $("#pkList");
   if (!list) return;
   const single = state.tab === "prices", raw = ($("#pkQ")?.value || "").trim();
-  const toks = raw.split(/\s+/).map(pkNorm).filter(Boolean);
-  const phrase = pkNorm(raw), whole = phrase.length > 2 && DATA.names.some(n => pkHay(n).includes(phrase));
-  const hit = n => !toks.length || (whole ? pkHay(n).includes(phrase) : toks.every(k => pkHay(n).includes(k)));   // "type r": the words together first
-  const counts = adCounts(), fresh = {}, P = new Set(lsGet(pinKey(), []));
-  for (const c of DATA.cars) if (isNew(c)) fresh[c.name] = (fresh[c.name] || 0) + 1;
-  const by = {};
-  for (const n of DATA.names) if (hit(n)) (by[n.brand] ??= {rows: [], none: []}).rows.push(n);
-  if (!AUTO) for (const n of DATA.names_all || []) if (!counts[n.name] && hit(n)) (by[n.brand] ??= {rows: [], none: []}).none.push(n);
-  const row = n => {
-    const sel = single ? state.ana === n.name : isSel(n.name), pin = P.has(n.name);
-    return `<div class="pk-row${sel ? " sel" : ""}" style="--c:${n.color}"><button class="pk-tog" type="button" data-pn="${esc(n.name)}" aria-pressed="${sel}">
-      <span class="pk-mk">${ICON.check}</span><span class="pk-nm"><b>${esc(n.name)}</b><small>${yrsTxt(n.years)}</small></span>
-      ${fresh[n.name] ? `<span class="pk-new">${fresh[n.name] === counts[n.name] ? L("new", fresh[n.name] === 1 ? "novo" : "novos")
-        : `${nf(fresh[n.name])} ${L("new", fresh[n.name] === 1 ? "novo" : "novos")}`}</span>` : ""}
-      <span class="pk-ct" aria-label="${nf(counts[n.name])} ${L("ads", "anúncios")}">${nf(counts[n.name])}</span></button>
-      <button class="pk-star" type="button" data-pstar="${esc(n.name)}" aria-pressed="${pin}"
-        aria-label="${esc(pin ? L(`Unpin ${n.name}`, `Desafixar ${n.name}`) : L(`Pin ${n.name} to the top`, `Fixar ${n.name} no topo`))}">${ICON.star}</button></div>`;
-  };
-  const none = ns => ns.map(n => esc(n.name)).join(", ");
+  const toks = raw.split(/\s+/).map(pkNorm).filter(Boolean), phrase = pkNorm(raw);
+  const all = [...modelsHere().values()];
+  const hay = m => pkNorm(m.model + " " + m.brand + " " + (CAR_ALIAS[m.model] || "") + " " + (BRAND_ALIAS[m.brand] || "")) + m.gens.map(pkHay).join(" ");
+  const whole = phrase.length > 2 && all.some(m => hay(m).includes(phrase));
+  const hit = m => !toks.length || (whole ? hay(m).includes(phrase) : toks.every(k => hay(m).includes(k)));
+  const ms = all.filter(hit);
   let html = "";
-  const here = COUNTRY_ORDER.filter(([k]) => Object.keys(by).some(b => (BRAND_COUNTRY[b] || "xx") === k));
-  for (const [k, en, pt] of here) {
-    const bs = Object.keys(by).filter(b => (BRAND_COUNTRY[b] || "xx") === k).sort((a, b) => a.localeCompare(b));
-    const live = bs.filter(b => by[b].rows.length), gone = bs.filter(b => !by[b].rows.length);
-    const open = toks.length > 0 || here.length === 1 || PK_OPEN.has(k);   // searching or one country: open
-    const ads = live.reduce((s, b) => s + by[b].rows.reduce((x, n) => x + (counts[n.name] || 0), 0), 0);
-    const picked = live.reduce((s, b) => s + by[b].rows.filter(n => single ? state.ana === n.name : isSel(n.name)).length, 0);
-    html += `<button class="pk-c" type="button" data-pcountry="${k}" aria-expanded="${open}" aria-controls="pkc-${k}">${MINI_FLAG[k]}
-      <span class="t"><b>${L(en, pt)}</b><small>${nf(ads)} ${L(ads === 1 ? "ad" : "ads", ads === 1 ? "anúncio" : "anúncios")}: ${esc(live.join(", ") || L("none right now", "nenhum agora"))}</small></span>
-      ${picked ? `<span class="on">${single ? L("chosen", "escolhido") : L(`${picked} picked`, `${picked} ${picked === 1 ? "escolhido" : "escolhidos"}`)}</span>` : ""}
-      <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-      <div class="pk-cb" id="pkc-${k}"${open ? "" : " hidden"}>`;
-    for (const b of live) {
-      const tot = by[b].rows.reduce((s, n) => s + (counts[n.name] || 0), 0);
-      const on = single ? !state.ana && state.brand === b : state.brands.includes(b);
-      html += `<div class="pk-b"><div class="pk-bh" style="--c:${brandColor(b)}"><span class="sq"></span><b>${esc(b)}</b>
-          <span class="n">${nf(tot)} ${L(tot === 1 ? "ad" : "ads", tot === 1 ? "anúncio" : "anúncios")}</span>
-          <button class="pk-all" type="button" data-pball="${esc(b)}" aria-pressed="${on}"
-            aria-label="${esc(L(`All ${b}`, `Todos ${b}`))}">${L("All", "Todos")}</button></div>
-        ${by[b].rows.map(row).join("")}
-        ${by[b].none.length ? `<div class="pk-none">${L("No ads right now", "Sem anúncios agora")}: ${none(by[b].none)}</div>` : ""}</div>`;
+  if (PK_SORT !== "az") {                        // one list of models, busiest first
+    const key = PK_SORT === "new" ? m => [m.fresh, m.n] : m => [m.deals, m.best ?? -1];
+    const live = ms.filter(m => m.n && (PK_SORT === "new" ? m.fresh : m.deals)).sort((a, b) => { const x = key(a), y = key(b); return y[0] - x[0] || y[1] - x[1]; });
+    html = live.map(m => modelCard(m, single, true)).join("")
+      || `<div class="pk-empty">${PK_SORT === "new" ? L("No new ads in the last 3 days.", "Nenhum anúncio novo nos últimos 3 dias.") : L("No good or great prices right now.", "Nenhum preço bom ou ótimo agora.")}</div>`;
+  } else {
+    const by = {};
+    for (const m of ms) (by[m.brand] ??= []).push(m);
+    const here = COUNTRY_ORDER.filter(([k]) => Object.keys(by).some(b => (BRAND_COUNTRY[b] || "xx") === k));
+    for (const [k, en, pt] of here) {
+      const bs = Object.keys(by).filter(b => (BRAND_COUNTRY[b] || "xx") === k)
+        .sort((a, b) => (by[b].some(m => m.n) - by[a].some(m => m.n)) || a.localeCompare(b));   // brands with ads first, A to Z
+      const open = toks.length > 0 || here.length === 1 || PK_OPEN.has(k);
+      const ads = bs.reduce((s, b) => s + by[b].reduce((x, m) => x + m.n, 0), 0);
+      const picked = bs.reduce((s, b) => s + by[b].reduce((x, m) => x + m.gens.filter(g => g.s && (single ? state.ana === g.name : isSel(g.name))).length, 0), 0);
+      const withAds = bs.filter(b => by[b].some(m => m.n));
+      html += `<button class="pk-c" type="button" data-pcountry="${k}" aria-expanded="${open}" aria-controls="pkc-${k}">${MINI_FLAG[k]}
+        <span class="t"><b>${L(en, pt)}</b><small>${nf(ads)} ${L(ads === 1 ? "ad" : "ads", ads === 1 ? "anúncio" : "anúncios")}: ${esc(withAds.join(", ") || L("none right now", "nenhum agora"))}</small></span>
+        ${picked ? `<span class="on">${single ? L("chosen", "escolhido") : L(`${picked} picked`, `${picked} ${picked === 1 ? "escolhido" : "escolhidos"}`)}</span>` : ""}
+        <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+        <div class="pk-cb" id="pkc-${k}"${open ? "" : " hidden"}>`;
+      if (open) for (const b of bs) {
+        const tot = by[b].reduce((s, m) => s + m.n, 0);
+        const on = single ? !state.ana && state.brand === b : state.brands.includes(b);
+        html += `<div class="pk-b"><div class="pk-bh"><b>${esc(b)}</b>
+            <span class="n">${tot ? `${nf(tot)} ${L(tot === 1 ? "ad" : "ads", tot === 1 ? "anúncio" : "anúncios")}` : L("no ads right now", "sem anúncios agora")}</span>
+            ${tot ? `<button class="pk-all" type="button" data-pball="${esc(b)}" aria-pressed="${on}" aria-label="${esc(L(`All ${b}`, `Todos ${b}`))}">${L("All", "Todos")}</button>` : ""}</div>
+          ${by[b].sort((x, y) => (y.n > 0) - (x.n > 0)).map(m => modelCard(m, single, false)).join("")}</div>`;
+      }
+      html += `</div>`;
     }
-    if (gone.length) html += `<div class="pk-none">${L("No ads right now", "Sem anúncios agora")}:<br>${gone.map(b => `<b>${esc(b)}</b> ${none(by[b].none)}`).join("<br>")}</div>`;
-    html += `</div>`;
+    if (!html) html = `<div class="pk-empty">${L(`No car matches “${esc(raw)}”.`, `Nenhum carro corresponde a “${esc(raw)}”.`)}</div>`;
   }
   const keep = list.scrollTop;
-  list.innerHTML = html || `<div class="pk-empty">${L(`No car matches “${esc(raw)}”.`, `Nenhum carro corresponde a “${esc(raw)}”.`)}</div>`;
+  list.innerHTML = html;
   list.scrollTop = keep;
   const go = $("#pkGo");
   if (go) {
@@ -2922,6 +3063,18 @@ document.addEventListener("click", e => {
     else state.brands = state.brands.filter(b => b !== bchip.dataset.pbrand);
     window.scrollTo({top: 0}); return render();
   }
+  const gcard = t.closest("[data-gmodel]");
+  if (gcard) {                                   // a garage card: that model on the list, or its busiest generation on Prices
+    const m = modelsHere().get(gcard.dataset.gmodel);
+    if (!m || !m.n) return;
+    if (state.tab === "prices") {
+      const g = m.gens.filter(x => x.s).sort((a, b) => b.s.n - a.s.n)[0];
+      state.ana = m.gens.some(x => x.name === state.ana) ? "" : g.name; state.brand = state.ana ? m.brand : "";
+    } else modelToggle(m);
+    window.scrollTo({top: 0}); return render();
+  }
+  const mchip = t.closest(".chip[data-pmodelchip]");
+  if (mchip) { const m = modelsHere().get(mchip.dataset.pmodelchip); if (m) modelToggle(m); return render(); }
   if (t.closest("#chipClear")) { state.names = []; state.brands = []; window.scrollTo({top: 0}); return render(); }
   const chip = t.closest(".chip[data-name]");
   if (chip && state.tab === "prices") {          // one car at a time; tap it again for the overview
@@ -2953,6 +3106,7 @@ document.addEventListener("keydown", e => {
 });
 document.addEventListener("error", e => {          // photo fallback: second address, then "No photo"
   const img = e.target;
+  if (img instanceof HTMLImageElement && img.classList.contains("mph")) return img.remove();   // garage and picker photos
   if (!(img instanceof HTMLImageElement) || !img.classList.contains("pic")) return;
   if (img.dataset.alt) { const a = img.dataset.alt; img.dataset.alt = ""; img.src = a; return; }
   img.remove(); const ph = document.querySelector(`[data-id="${CSS.escape(img.closest?.(".card")?.dataset.id || "")}"] .nophoto`);
