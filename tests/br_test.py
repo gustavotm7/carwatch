@@ -1,32 +1,36 @@
-"""Can GitHub's servers read Brazilian car sites? (one-off test)"""
-import json, os, re, time, requests
-URLS = [
- ("webmotors", "page", "https://www.webmotors.com.br/carros/estoque/bmw/m3"),
- ("webmotors", "api", "https://www.webmotors.com.br/api/search/car?url=https://www.webmotors.com.br/carros/estoque/bmw/m3&actualPage=1&displayPerPage=24&order=1"),
- ("olx", "page", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/bmw/m3"),
- ("mercadolivre", "page", "https://lista.mercadolivre.com.br/veiculos/carros-caminhonetes/bmw/m3/"),
- ("mercadolivre", "api", "https://api.mercadolibre.com/sites/MLB/search?category=MLB1744&q=bmw%20m3"),
- ("icarros", "page", "https://www.icarros.com.br/comprar/bmw/m3"),
- ("mobiauto", "page", "https://www.mobiauto.com.br/comprar/carros/bmw/m3"),
- ("napista", "page", "https://napista.com.br/busca/bmw-m3"),
-]
-BLOCK = re.compile(r"captcha|access denied|cf-chl|challenge-platform|just a moment|are you a human|request blocked|perimeterx|px-captcha|datadome|akamai|incapsula|attention required", re.I)
-s = requests.Session()
-s.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36",
-                  "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.5", "Accept": "text/html,application/json;q=0.9,*/*;q=0.8"})
-out = []
-for site, kind, url in URLS:
-    o = {"site": site, "kind": kind, "url": url}
+"""One-off: which model slugs do NaPista and Mobiauto use, and do the empty searches really have no cars?"""
+import json, os, re, sys, time, requests
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "collector"))
+import car_collector as cc
+NP, MB = "https://napista.com.br/busca/", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/"
+BRANDS = ["honda", "mazda", "toyota", "subaru", "nissan", "mitsubishi", "bmw", "audi"]
+PAGES = [NP + b for b in BRANDS] + [MB + b for b in BRANDS]
+TRY = [MB + "ford/escort/ano-1985", MB + "ford/escort/ano-1991", MB + "chevrolet/kadett/ano-1992", MB + "chevrolet/vectra/ano-1994",
+       MB + "fiat/uno/ano-1995", MB + "volkswagen/gol/ano-1987", NP + "toyota/86", NP + "toyota/gt-86", NP + "mazda/mx5",
+       NP + "mazda/miata", MB + "mazda/mx5", MB + "subaru/impreza", NP + "toyota/yaris/2018/manual", MB + "toyota/yaris/ano-2018"]
+s = requests.Session(); s.headers.update({"User-Agent": cc.UA, "Accept-Language": "pt-BR,pt;q=0.9"})
+out = {"slugs": {}, "tries": []}
+def pp_of(html):
+    m = re.search(r'(?is)<script[^>]+id=["\']__NEXT_DATA__["\'][^>]*>(.*?)</script>', html)
+    return json.loads(m.group(1))["props"]["pageProps"] if m else {}
+for u in PAGES:
     try:
-        r = s.get(url, timeout=30)
-        t = r.text
-        m = BLOCK.search(t[:30000])
-        o.update(status=r.status_code, final=r.url[:120], bytes=len(r.content), ctype=r.headers.get("content-type", "")[:40],
-                 server=r.headers.get("server", ""), block=m.group(0) if m else "",
-                 title=(re.search(r"(?is)<title[^>]*>(.*?)</title>", t) or [0, ""])[1].strip()[:100] if "<title" in t.lower() else "",
-                 prices=len(re.findall(r"R\$\s?\d{1,3}(?:\.\d{3})+", t)), m3_mentions=len(re.findall(r"(?i)\bm3\b", t)),
-                 has_next_data="__NEXT_DATA__" in t, ldjson=t.count("application/ld+json"), start=t[:200] if "json" in o.get("ctype", "") or kind == "api" else "")
+        r = s.get(u, timeout=30); pp = pp_of(r.text); found = set()
+        for d in cc._walk(pp):
+            sl = d.get("slug") or d.get("urlName") or d.get("seoName") or d.get("value")
+            nm = d.get("name") or d.get("label") or d.get("description")
+            if isinstance(sl, str) and isinstance(nm, str) and len(sl) < 40:
+                found.add(f'{nm}={sl}' + (f'({d.get("count") or d.get("total") or d.get("quantity")})' if (d.get("count") or d.get("total") or d.get("quantity")) else ""))
+        out["slugs"][u] = {"status": r.status_code, "keys": list(pp)[:30], "found": sorted(found)[:400]}
     except Exception as e:
-        o["error"] = f"{type(e).__name__}: {e}"[:200]
-    out.append(o); time.sleep(2)
+        out["slugs"][u] = {"error": str(e)[:200]}
+    time.sleep(3)
+for u in TRY:
+    try:
+        r = s.get(u, timeout=30); src = "napista" if "napista" in u else "mobiauto"
+        it = cc.br_search_items(src, r.text)
+        out["tries"].append({"url": u, "status": r.status_code, "final": r.url, "n": len(it), "sample": [(x["title"], x["gear"]) for x in it[:6]]})
+    except Exception as e:
+        out["tries"].append({"url": u, "error": str(e)[:200]})
+    time.sleep(3)
 json.dump(out, open(os.path.join(os.path.dirname(__file__), "br_results.json"), "w"), indent=1, ensure_ascii=False)
