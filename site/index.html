@@ -1387,7 +1387,7 @@ window.addEventListener("popstate", () => {
 
 // ---------- car picker: brands grouped by country, search, counts, pins ----------
 const BRAND_COUNTRY = {Lexus: "jp", Volkswagen: "de", Audi: "de", Cadillac: "us", Fiat: "it", Renault: "fr", "Citroën": "fr", Peugeot: "fr",
-  MINI: "gb", Puma: "br",
+  MINI: "gb", Puma: "br", Dodge: "us", Lotus: "gb",
   Acura: "jp", Datsun: "jp", Honda: "jp", Infiniti: "jp", Mazda: "jp", Mitsubishi: "jp", Nissan: "jp",
   Subaru: "jp", Toyota: "jp", BMW: "de", Porsche: "de", Chevrolet: "us", Ford: "us", Pontiac: "us", Hyundai: "kr"};
 const MINI_FLAG = {                           // small flags for the country headings in the car picker
@@ -1406,7 +1406,7 @@ const COUNTRY_ORDER = [["jp", "Japan", "Japão"], ["de", "Germany", "Alemanha"],
   ["it", "Italy", "Itália"], ["fr", "France", "França"], ["gb", "United Kingdom", "Reino Unido"], ["br", "Brazil", "Brasil"], ["xx", "Other", "Outros"],
   ["dd", "Daily drivers", "Carros do dia a dia"]];
 const groupOf = m => m.daily ? "dd" : BRAND_COUNTRY[m.brand] || "xx";   // a country, or the daily drivers
-const CAR_ALIAS = {"Golf GTI": "gti mk5 mk6 mk7 golf", "Golf R": "mk7", "Mazdaspeed3": "ms3 speed3", "Cooper S": "mini r53 jcw",
+const CAR_ALIAS = {"GR Corolla": "grc gr corolla circuit morizo", "Integra": "de5 type s a-spec", "TSX": "cl9 cu2 euro r", "Challenger": "392 scat pack hellcat r/t srt8", "S4": "b5 b6 b7 b8 audi s4", "Eclipse": "gsx gs-t dsm 2g talon", "Elise": "lotus", "Maverick": "gt v8 302 quadrijet", "Dart / Charger": "charger r/t dart 318 dojão", "SP2": "sp1 vw sp2", "Monza": "s/r classic sle gls", "Corsa GSi": "gsi corsa", "Bravo T-Jet": "tjet bravo", "Golf GTI": "gti mk5 mk6 mk7 golf", "Golf R": "mk7", "Mazdaspeed3": "ms3 speed3", "Cooper S": "mini r53 jcw",
   "911 Carrera": "996 997 carrera porsche", "Cayman": "987 981", "3 Series (E36)": "e36 328is 325i 318is", "M235i / M240i": "f22 2 series",
   "Chevrolet SS": "chevy ss", "Gol GTI": "gti quadrado bolinha", "Escort XR3": "xr3", "Kadett GSi": "gsi", "Vectra GSi": "gsi",
   "Opala": "ss comodoro diplomata 250", "Uno Turbo": "uno turbo", "Marea Turbo": "weekend", "Punto T-Jet": "tjet", "Sandero R.S.": "rs renault sport",
@@ -1635,7 +1635,23 @@ PICK_CATS.push(
          "UNO_TURBO", "TEMPRA_TURBO", "MAREA_TURBO", "CHEVETTE"]},
   {id: "brturbo", grp: "type", en: ["Brazilian factory turbos", "From the 1994 Uno Turbo to the T-Jet."], pt: ["Turbos de fábrica nacionais", "Do Uno Turbo de 1994 ao T-Jet."],
    src: "AutoPapo, iCarros", fam: ["UNO_TURBO", "TEMPRA_TURBO", "MAREA_TURBO", "PUNTO_TJET", "GOLF4_GTI"]},
-  {id: "dailyd", grp: "money", en: ["Daily drivers", "The sensible cars on the list."], pt: ["Carros do dia a dia", "Os carros sensatos da lista."], daily: true});
+  {id: "dailyd", grp: "money", en: ["Daily drivers", "The sensible cars on the list."], pt: ["Carros do dia a dia", "Os carros sensatos da lista."], daily: true},
+  {id: "paper", grp: "money", en: ["Paper trail", "Ads that mention service records, one owner or the big jobs already done."],
+   pt: ["Com histórico", "Anúncios que citam revisões, único dono ou os serviços caros já feitos."],
+   test: c => c.green.some(f => PAPER.includes(f)), rank: c => c.green.filter(f => PAPER.includes(f)).length * 10 + (scoreOf(c) ?? 0)},
+  {id: "auction", grp: "money", en: ["Under auction prices", "Asking less than similar cars sold for on Bring a Trailer."],
+   pt: ["Abaixo dos leilões", "Pedindo menos do que carros parecidos venderam no Bring a Trailer."],
+   test: c => c.sold && c.sold.vs != null && c.sold.vs >= .1, rank: c => c.sold.vs},
+  {id: "fipe", grp: "money", en: ["Under Fipe", "Asking at least 8% under the Fipe reference price."], pt: ["Abaixo da Fipe", "Pedindo pelo menos 8% abaixo do preço da tabela Fipe."],
+   test: c => c.fipe && c.price < c.fipe * .92, rank: c => 1 - c.price / c.fipe});
+const PAPER = ["Service records", "One owner", "Clutch done", "Rod bearings done", "VANOS/timing done", "Gearbox serviced"];
+const PICK_MORE4 = {                             // batch 4
+  track: ["GRC", "DE_INT", "DE_INTS", "CL9", "CU2", "ELISE_S2"], revs: ["CL9", "CU2", "ELISE_S2"], easy: ["CL9", "CU2", "DE_INT"],
+  classic: ["ELISE_S2", "D32A", "MAVERICK", "DART_BR", "SP2", "CORSA_GSI"], sleeper: ["B6_S4", "B7_S4", "B8_S4"],
+  tuner: ["GRC", "D32A", "B5_S4", "B8_S4", "BRAVO_TJET"], v8: ["LC_CHAL", "B6_S4", "B7_S4", "MAVERICK", "DART_BR"],
+  awd: ["GRC", "D32A", "B5_S4", "B6_S4", "B7_S4", "B8_S4"], hothatch: ["GRC", "DE_INTS", "CORSA_GSI", "BRAVO_TJET"],
+  brclassic: ["MAVERICK", "DART_BR", "SP2", "MONZA", "CORSA_GSI"], brturbo: ["BRAVO_TJET"],
+};
 const PICK_MORE = {                              // the new cars in the categories they belong to
   track: ["MX5_ND", "ZN8", "ZD8", "FG2_SI", "FG4_SI", "FC3_SI", "GTI_MK5", "GTI_MK6", "GTI_MK7", "FOCUS_ST3", "FIESTA_ST", "C987", "C987S", "C981", "C981S", "SANDERO_RS"],
   drift: ["E36_3", "IS300_XE10", "CHEVETTE", "OPALA", "OPALA_SS", "ZN8", "ZD8"],
@@ -1650,6 +1666,7 @@ const PICK_MORE = {                              // the new cars in the categori
   jdm90: ["BA4", "BB1"],
 };
 for (const k of PICK_CATS) if (PICK_MORE[k.id]) k.fam = [...k.fam, ...PICK_MORE[k.id]];
+for (const k of PICK_CATS) if (PICK_MORE4[k.id] && k.fam) k.fam = [...k.fam, ...PICK_MORE4[k.id]];
 const PICK_GROUPS = [["today", "Today", "Hoje"], ["type", "By kind of car", "Por tipo de carro"], ["money", "Price and condition", "Preço e estado"]];
 let PICK_OPEN = new Set(["garage"]);
 function pickable(c) {

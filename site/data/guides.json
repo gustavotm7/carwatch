@@ -5290,6 +5290,505 @@
      "src": "https://garagem360.com.br/?p=282830"
     }
    ]
+  },
+  "GRC": {
+   "intro_en": "The GR Corolla: check the clutch and how hard it was driven.",
+   "intro_pt": "O GR Corolla: confira a embreagem e o quanto foi exigido.",
+   "items": [
+    {
+     "en": "Feel where the clutch engages: high up the pedal means it's worn",
+     "pt": "Sinta onde a embreagem pega: lá em cima no pedal indica desgaste",
+     "why_en": "A worn clutch is a known issue and costs around $2,000 to replace.",
+     "why_pt": "Embreagem gasta é problema conhecido e custa uns US$ 2.000 para trocar.",
+     "src": "https://www.slashgear.com/2230733/common-issues-toyota-gr-corolla/"
+    },
+    {
+     "en": "Ask if it was tracked, and have a dealer read the ECU for over-revs",
+     "pt": "Pergunte se andou em pista e peça à concessionária para ler excesso de giro na ECU",
+     "why_en": "Oil starvation on track and money-shifts are the engine's real risks.",
+     "why_pt": "Falta de óleo em pista e marcha errada em giro alto são os riscos reais do motor.",
+     "src": "https://autoscore.pro/engine/g16e-gts"
+    },
+    {
+     "en": "Confirm the recalls and software updates were done",
+     "pt": "Confirme que os recalls e as atualizações de software foram feitos",
+     "why_en": "Toyota has issued updates, including drivetrain calibration.",
+     "why_pt": "A Toyota emitiu atualizações, incluindo calibração da transmissão.",
+     "src": "https://jxlperformance.co.uk/blogs/gr-corolla/toyota-gr-corolla-buying-guide"
+    }
+   ]
+  },
+  "DE_INT": {
+   "intro_en": "The new Integra: young and reliable so far; check recalls.",
+   "intro_pt": "O novo Integra: novo e confiável até agora; confira recalls.",
+   "items": [
+    {
+     "en": "Run the VIN for open recalls, especially the steering gearbox",
+     "pt": "Consulte o VIN por recalls abertos, principalmente a caixa de direção",
+     "why_en": "Steering gearbox friction can make steering hard (2023-2025; Type S 2024-2025).",
+     "why_pt": "Atrito na caixa de direção pode deixar a direção pesada (2023-2025; Type S 2024-2025).",
+     "src": "https://www.carwhere.com/acura/known-issues/integra"
+    },
+    {
+     "en": "Shift through every gear, and test brake hold on a 2023",
+     "pt": "Passe por todas as marchas e teste o brake hold num 2023",
+     "why_en": "A stiff manual and a brake-hold recall are among the 2023's complaints.",
+     "why_pt": "Câmbio duro e um recall do brake hold estão entre as queixas do 2023.",
+     "src": "https://rerev.com/years-to-avoid/vehicles/acura-integra/"
+    }
+   ]
+  },
+  "DE_INTS": {
+   "intro_en": "The Integra Type S: shares the Integra's recalls.",
+   "intro_pt": "O Integra Type S: tem os mesmos recalls do Integra.",
+   "items": [
+    {
+     "en": "Run the VIN for open recalls, especially the steering gearbox",
+     "pt": "Consulte o VIN por recalls abertos, principalmente a caixa de direção",
+     "why_en": "Steering gearbox friction can make steering hard (2023-2025; Type S 2024-2025).",
+     "why_pt": "Atrito na caixa de direção pode deixar a direção pesada (2023-2025; Type S 2024-2025).",
+     "src": "https://www.carwhere.com/acura/known-issues/integra"
+    },
+    {
+     "en": "Ask if it was tracked or tuned",
+     "pt": "Pergunte se andou em pista ou teve remap",
+     "why_en": "Enthusiast cars are often driven hard; ask before you buy.",
+     "why_pt": "Carros de entusiasta costumam ser exigidos; pergunte antes de comprar.",
+     "src": "https://autoscore.pro/engine/g16e-gts"
+    }
+   ]
+  },
+  "CL9": {
+   "intro_en": "The first TSX: a solid car; check the clutch.",
+   "intro_pt": "O primeiro TSX: carro sólido; confira a embreagem.",
+   "items": [
+    {
+     "en": "Get the service history; big driveline faults are rare",
+     "pt": "Peça o histórico; defeitos graves de transmissão são raros",
+     "why_en": "It's largely free of major or systematic driveline problems.",
+     "why_pt": "É praticamente livre de problemas graves ou recorrentes de transmissão.",
+     "src": "https://www.auto123.com/en/news/2004-2008-acura-tsx-pre-owned/50341/?page=2"
+    },
+    {
+     "en": "Test the clutch for slip",
+     "pt": "Teste se a embreagem patina",
+     "why_en": "Some owners report a weak clutch that wears early.",
+     "why_pt": "Alguns donos relatam embreagem fraca que gasta cedo.",
+     "src": "https://www.metro.us/second-gear-acura-tsx/"
+    }
+   ]
+  },
+  "CU2": {
+   "intro_en": "The second TSX: oil use and the rear brakes.",
+   "intro_pt": "O segundo TSX: consumo de óleo e freios traseiros.",
+   "items": [
+    {
+     "en": "On a 2009-2010, ask how much oil it uses between changes",
+     "pt": "Num 2009-2010, pergunte quanto óleo consome entre trocas",
+     "why_en": "Excessive oil consumption is a known problem on those years.",
+     "why_pt": "Consumo excessivo de óleo é problema conhecido nesses anos.",
+     "src": "https://motorandwheels.com/?p=21535"
+    },
+    {
+     "en": "Check the rear pads and look for a seized rear caliper",
+     "pt": "Confira as pastilhas traseiras e se a pinça traseira travou",
+     "why_en": "Owners say the rears wear fast and calipers seize.",
+     "why_pt": "Donos dizem que os traseiros gastam rápido e as pinças travam.",
+     "src": "https://acurazine.com/forums/2g-tsx-2009-2014-143/looking-2009-tsx-925288/"
+    },
+    {
+     "en": "Test the clutch for slip",
+     "pt": "Teste se a embreagem patina",
+     "why_en": "Some owners report a weak clutch that wears early.",
+     "why_pt": "Alguns donos relatam embreagem fraca que gasta cedo.",
+     "src": "https://www.metro.us/second-gear-acura-tsx/"
+    }
+   ]
+  },
+  "LC_CHAL": {
+   "intro_en": "The manual Challenger: know which engine, and check it's a real factory manual.",
+   "intro_pt": "O Challenger manual: saiba qual motor e confira se é manual de fábrica.",
+   "items": [
+    {
+     "en": "Know the engine: R/T is the 5.7, Scat Pack the same 6.4 as the SRT 392",
+     "pt": "Saiba o motor: o R/T é 5.7, o Scat Pack o mesmo 6.4 do SRT 392",
+     "why_en": "That's what sets the price.",
+     "why_pt": "É isso que define o preço.",
+     "src": "https://edmunds.com/dodge/challenger/2015/review"
+    },
+    {
+     "en": "Treat a 2021-2022 Hellcat sold as a manual as a conversion",
+     "pt": "Considere conversão um Hellcat 2021-2022 vendido como manual",
+     "why_en": "The Hellcat's manual was dropped for 2021 and came back for 2023.",
+     "why_pt": "O manual do Hellcat saiu em 2021 e voltou em 2023.",
+     "src": "https://www.autotrader.com/car-shopping/best-dodge-challenger-years-buy-used"
+    }
+   ]
+  },
+  "B5_S4": {
+   "intro_en": "The B5 S4: belt and turbos decide the price.",
+   "intro_pt": "O S4 B5: correia e turbos decidem o preço.",
+   "items": [
+    {
+     "en": "Ask for proof of the last timing belt and water pump",
+     "pt": "Peça prova da última troca de correia e bomba d'água",
+     "why_en": "It's an interference engine, so a broken belt wrecks it.",
+     "why_pt": "É um motor de interferência: correia quebrada destrói o motor.",
+     "src": "https://www.audiworld.com/forums/2-7t-v6-discussion-107/hey-everyone-im-looking-buying-2001-s4-wondering-if-there-anything-i-should-2686070/"
+    },
+    {
+     "en": "Ask for turbo records and whether they're original",
+     "pt": "Peça o histórico dos turbos e se são originais",
+     "why_en": "Replacing the turbos needs the engine out; it's the biggest cost risk.",
+     "why_pt": "Trocar os turbos exige tirar o motor; é o maior risco de custo.",
+     "src": "https://www.carchecker.pro/reports/audi_s4_b5_2.7t_biturbo.html"
+    },
+    {
+     "en": "Look for oil changes every 8,000 km or less",
+     "pt": "Procure trocas de óleo a cada 8.000 km ou menos",
+     "why_en": "The 2.7T punishes stretched intervals.",
+     "why_pt": "O 2.7T castiga intervalos longos.",
+     "src": "https://openlaborproject.com/portal/audi/s4/2000/2.7l-turbo-v6/?tab=dtc"
+    }
+   ]
+  },
+  "B6_S4": {
+   "intro_en": "The B6 S4: the V8's timing chain comes first.",
+   "intro_pt": "O S4 B6: a corrente do V8 vem primeiro.",
+   "items": [
+    {
+     "en": "Listen for timing chain rattle on a cold start",
+     "pt": "Escute ruído de corrente na partida a frio",
+     "why_en": "The chain tensioners are horribly expensive to change.",
+     "why_pt": "Os tensores da corrente são caríssimos de trocar.",
+     "src": "https://www.carthrottle.com/post/9-things-you-need-to-know-before-buying-a-v8-audi-s4/"
+    },
+    {
+     "en": "Look for regular oil changes with 0W-40 or 5W-40",
+     "pt": "Procure trocas regulares com 0W-40 ou 5W-40",
+     "why_en": "The chain guides are plastic; well-oiled cars often never have trouble.",
+     "why_pt": "As guias da corrente são de plástico; carros com óleo em dia costumam não ter problema.",
+     "src": "https://www.autocar.co.uk/node/109733"
+    },
+    {
+     "en": "Check the two side auxiliary radiators",
+     "pt": "Confira os dois radiadores auxiliares laterais",
+     "why_en": "They're a known B6/B7 replacement part.",
+     "why_pt": "São uma peça de troca conhecida no B6/B7.",
+     "src": "https://enginepatrol.com/?p=17877"
+    }
+   ]
+  },
+  "B7_S4": {
+   "intro_en": "The B7 S4: same V8, same timing chain checks.",
+   "intro_pt": "O S4 B7: mesmo V8, mesmas verificações da corrente.",
+   "items": [
+    {
+     "en": "Listen for timing chain rattle on a cold start",
+     "pt": "Escute ruído de corrente na partida a frio",
+     "why_en": "The chain tensioners are horribly expensive to change.",
+     "why_pt": "Os tensores da corrente são caríssimos de trocar.",
+     "src": "https://www.carthrottle.com/post/9-things-you-need-to-know-before-buying-a-v8-audi-s4/"
+    },
+    {
+     "en": "Look for regular oil changes with 0W-40 or 5W-40",
+     "pt": "Procure trocas regulares com 0W-40 ou 5W-40",
+     "why_en": "The chain guides are plastic; well-oiled cars often never have trouble.",
+     "why_pt": "As guias da corrente são de plástico; carros com óleo em dia costumam não ter problema.",
+     "src": "https://www.autocar.co.uk/node/109733"
+    },
+    {
+     "en": "Check the two side auxiliary radiators",
+     "pt": "Confira os dois radiadores auxiliares laterais",
+     "why_en": "They're a known B6/B7 replacement part.",
+     "why_pt": "São uma peça de troca conhecida no B6/B7.",
+     "src": "https://enginepatrol.com/?p=17877"
+    }
+   ]
+  },
+  "B8_S4": {
+   "intro_en": "The B8 S4: the water pump and thermostat.",
+   "intro_pt": "O S4 B8: bomba d'água e termostática.",
+   "items": [
+    {
+     "en": "On a 2009-2010 car, look under the supercharger for the updated metal pump housing",
+     "pt": "Num 2009-2010, olhe sob o compressor a carcaça de metal atualizada da bomba",
+     "why_en": "Early water pumps and thermostats were recalled; the plastic housing became metal.",
+     "why_pt": "As primeiras bombas e termostáticas tiveram recall; a carcaça de plástico virou metal.",
+     "src": "https://blog.ecstuning.com/?p=11923"
+    },
+    {
+     "en": "Look for coolant leaks at the front of the engine",
+     "pt": "Procure vazamento de arrefecimento na frente do motor",
+     "why_en": "Cracked water pumps and thermostat housings are common.",
+     "why_pt": "Bomba d'água e carcaça da termostática trincadas são comuns.",
+     "src": "https://enginepatrol.com/?p=17877"
+    },
+    {
+     "en": "Ask if the pump was ever replaced",
+     "pt": "Pergunte se a bomba já foi trocada",
+     "why_en": "A failing pump can lose coolant suddenly.",
+     "why_pt": "Uma bomba com defeito pode perder o líquido de repente.",
+     "src": "https://www.pistonheads.com/news/general/audi-s4-b8--ph-used-buying-guide/43329"
+    }
+   ]
+  },
+  "D32A": {
+   "intro_en": "The 2G Eclipse GS-T / GSX: crankwalk and rust.",
+   "intro_pt": "O Eclipse 2G GS-T / GSX: crankwalk e ferrugem.",
+   "items": [
+    {
+     "en": "Ask for timing belt records and have the crank endplay measured",
+     "pt": "Peça o histórico da correia e meça a folga axial do virabrequim",
+     "why_en": "It's the safest way to start with a 2G.",
+     "why_pt": "É o jeito mais seguro de começar com um 2G.",
+     "src": "https://www.jdmbuysell.com/learn/mitsubishi/eclipse/d53a/"
+    },
+    {
+     "en": "Check the rockers and strut towers for rust",
+     "pt": "Procure ferrugem nas soleiras e nas torres de suspensão",
+     "why_en": "Both are this generation's rust spots, with ECU capacitor leaks too.",
+     "why_pt": "São os pontos de ferrugem desta geração, além de vazamento nos capacitores da ECU.",
+     "src": "https://www.jdmbuysell.com/learn/mitsubishi/eclipse/"
+    },
+    {
+     "en": "Look in the rear wheel wells",
+     "pt": "Olhe as caixas de roda traseiras",
+     "why_en": "Rot there plus the strut towers can mean the structure is gone.",
+     "why_pt": "Podridão ali e nas torres pode significar estrutura comprometida.",
+     "src": "https://grassrootsmotorsports.com/forum/grm/1998-eclipse-gst-what-to-look-for/132271/page1"
+    }
+   ]
+  },
+  "ELISE_S2": {
+   "intro_en": "The Elise: the Toyota engine is tough; the chassis and clams matter most.",
+   "intro_pt": "O Elise: o motor Toyota é forte; chassi e carenagens importam mais.",
+   "items": [
+    {
+     "en": "Avoid any car with damage to the aluminium chassis",
+     "pt": "Evite carro com dano no chassi de alumínio",
+     "why_en": "A rebuilt title is fine only if you know who repaired it and how.",
+     "why_pt": "Recuperado de sinistro só serve se você souber quem consertou e como.",
+     "src": "https://classicmotorsports.com/articles/buyer-guide-2005-2011-lotus-elise-and-exige"
+    },
+    {
+     "en": "Confirm the oil line fitting recall was done",
+     "pt": "Confirme o recall da conexão da linha de óleo",
+     "why_en": "A faulty fitting could cause engine failure.",
+     "why_pt": "A conexão com defeito pode quebrar o motor.",
+     "src": "https://classicmotorsports.com/articles/buyer-guide-2005-2011-lotus-elise-and-exige"
+    },
+    {
+     "en": "Look for clam damage and ask about the rear toe links",
+     "pt": "Procure danos nas carenagens e pergunte dos tirantes de convergência traseiros",
+     "why_en": "Owners name both as the common faults.",
+     "why_pt": "Donos citam os dois como defeitos comuns.",
+     "src": "https://classicmotorsports.com/forum/grm/which-car-lotus-elise-edition/74377/page1"
+    },
+    {
+     "en": "On a supercharged car, shift 2nd to 3rd from cold",
+     "pt": "No modelo com compressor, passe da 2ª para a 3ª a frio",
+     "why_en": "A crunch means the synchro is going.",
+     "why_pt": "Arranhar indica sincronizado gasto.",
+     "src": "https://www.evo.co.uk/lotus/elise/15928/lotus-elise-s2-buying-checkpoints"
+    }
+   ]
+  },
+  "MAVERICK": {
+   "intro_en": "The Maverick: originality and paperwork come first.",
+   "intro_pt": "O Maverick: originalidade e documentação vêm primeiro.",
+   "items": [
+    {
+     "en": "Check originality, papers, structure and paint before the engine",
+     "pt": "Confira originalidade, documentos, estrutura e pintura antes do motor",
+     "why_en": "On a classic they decide the value more than the badge.",
+     "why_pt": "Num clássico, eles definem o valor mais que o emblema.",
+     "src": "https://jkcarros.com.br/?p=34907"
+    },
+    {
+     "en": "On a GT or V8, confirm the V8 is the one it left the factory with",
+     "pt": "Num GT ou V8, confirme que o V8 é o de fábrica",
+     "why_en": "GT and V8 are the versions the market wants most.",
+     "why_pt": "GT e V8 são as versões mais procuradas.",
+     "src": "https://carzin.com.br/comprar/carros/ford/maverick/"
+    },
+    {
+     "en": "Check the floor, wheel arches, sills and rails for rust",
+     "pt": "Procure ferrugem no assoalho, caixas de roda, soleiras e longarinas",
+     "why_en": "Structural rust can double the cost of a restoration.",
+     "why_pt": "Ferrugem estrutural pode dobrar o custo da restauração.",
+     "src": "https://www.mercadolivre.com.br/blog/mo-chevette-ou-fusca-qual-restaurar"
+    }
+   ]
+  },
+  "DART_BR": {
+   "intro_en": "The Dart / Charger: make sure a Charger R/T really is one.",
+   "intro_pt": "O Dart / Charger: confirme que um Charger R/T é de verdade.",
+   "items": [
+    {
+     "en": "Check the papers: many Darts are dressed up as a Charger R/T",
+     "pt": "Confira os documentos: muitos Dart foram caracterizados como Charger R/T",
+     "why_en": "A Dart Coupé in R/T clothes isn't worth an R/T's price.",
+     "why_pt": "Um Dart Coupé vestido de R/T não vale o preço de um R/T.",
+     "src": "https://jkcarros.com.br/?p=8494"
+    },
+    {
+     "en": "Look for \"Dart Charger LS\" or \"R/T\" on the registration",
+     "pt": "Procure \"Dart Charger LS\" ou \"R/T\" no documento",
+     "why_en": "That's how the real ones are named on the papers.",
+     "why_pt": "É assim que os verdadeiros aparecem no documento.",
+     "src": "https://www.webmotors.com.br/wm1/antigos-classicos/a-historia-do-dart-charger-o-dodge-mais-querido"
+    },
+    {
+     "en": "On a 1980-on car, check the gearbox is the original type",
+     "pt": "Num carro de 1980 em diante, confira se o câmbio é o original",
+     "why_en": "An automatic arrived with the 1980 line.",
+     "why_pt": "Um câmbio automático chegou na linha 1980.",
+     "src": "https://www.instacarro.com/blog/?p=279651"
+    },
+    {
+     "en": "Check the floor, wheel arches, sills and rails for rust",
+     "pt": "Procure ferrugem no assoalho, caixas de roda, soleiras e longarinas",
+     "why_en": "Structural rust can double the cost of a restoration.",
+     "why_pt": "Ferrugem estrutural pode dobrar o custo da restauração.",
+     "src": "https://www.mercadolivre.com.br/blog/mo-chevette-ou-fusca-qual-restaurar"
+    }
+   ]
+  },
+  "SP2": {
+   "intro_en": "The SP2: rust underneath and originality.",
+   "intro_pt": "O SP2: ferrugem por baixo e originalidade.",
+   "items": [
+    {
+     "en": "Check the floor, rails and wheel arches",
+     "pt": "Confira o assoalho, as longarinas e as caixas de roda",
+     "why_en": "Those areas are very prone to rust.",
+     "why_pt": "Essas áreas são muito sujeitas a ferrugem.",
+     "src": "https://consultadeplaca.net/blog/volkswagen-sp2-e-spacecross-os-esquecidos"
+    },
+    {
+     "en": "Compare the details with the year it claims to be",
+     "pt": "Compare os detalhes com o ano anunciado",
+     "why_en": "Early and late cars differ, which helps confirm originality.",
+     "why_pt": "Os primeiros e os últimos têm diferenças, o que ajuda a confirmar a originalidade.",
+     "src": "https://consultadeplaca.net/blog/volkswagen-sp2-e-spacecross-os-esquecidos"
+    },
+    {
+     "en": "Check the legal status by plate before paying",
+     "pt": "Consulte a situação legal pela placa antes de pagar",
+     "why_en": "It's the first step with a car this old.",
+     "why_pt": "É o primeiro passo num carro tão antigo.",
+     "src": "https://consultadeplaca.net/blog/sp2-historia-versoes"
+    }
+   ]
+  },
+  "MONZA": {
+   "intro_en": "The Monza: rust, electrics and the cooling system.",
+   "intro_pt": "O Monza: ferrugem, elétrica e arrefecimento.",
+   "items": [
+    {
+     "en": "Check for rust near the wheels and along the bottoms of the doors",
+     "pt": "Procure ferrugem perto das rodas e na parte de baixo das portas",
+     "why_en": "Corrosion and electrics are the main problems.",
+     "why_pt": "Corrosão e elétrica são os principais problemas.",
+     "src": "https://consultadeplaca.net/blog/monza-historia-versoes"
+    },
+    {
+     "en": "On an ethanol 1.6, ask about cooling-system upkeep",
+     "pt": "Num 1.6 a álcool, pergunte da manutenção do arrefecimento",
+     "why_en": "The head can suffer if the cooling isn't kept up.",
+     "why_pt": "O cabeçote pode sofrer se o arrefecimento não for bem cuidado.",
+     "src": "https://consultadeplaca.net/blog/monza-historia-versoes"
+    }
+   ]
+  },
+  "CORSA_GSI": {
+   "intro_en": "The Corsa GSi: rust in the rear arches and a crash check.",
+   "intro_pt": "O Corsa GSi: ferrugem nas caixas traseiras e vistoria de batida.",
+   "items": [
+    {
+     "en": "Lift the plastic liners and check the rear wheel arches for rust and filler",
+     "pt": "Levante a proteção plástica e procure ferrugem e massa nas caixas de roda traseiras",
+     "why_en": "That's where this Corsa body rusts.",
+     "why_pt": "É ali que essa carroceria do Corsa enferruja.",
+     "src": "https://www.mercadolivre.com.br/blog/mo-defeitos-comuns-chevrolet-corsa-wind"
+    },
+    {
+     "en": "Get a vistoria cautelar",
+     "pt": "Faça uma vistoria cautelar",
+     "why_en": "It finds crash damage, chassis tampering and legal holds.",
+     "why_pt": "Ela encontra batidas, adulteração de chassi e restrições.",
+     "src": "https://www.mercadolivre.com.br/blog/mo-corsa-classic-ou-hatch-usado"
+    },
+    {
+     "en": "Check the suspension for play and ask for the belt history",
+     "pt": "Confira folgas na suspensão e peça o histórico das correias",
+     "why_en": "They're the Corsa's points of attention.",
+     "why_pt": "São os pontos de atenção do Corsa.",
+     "src": "https://www.mercadolivre.com.br/blog/mo-versoes-chevrolet-corsa-usado"
+    }
+   ]
+  },
+  "BRAVO_TJET": {
+   "intro_en": "The Bravo T-Jet: the turbo, the radiator and the steering.",
+   "intro_pt": "O Bravo T-Jet: turbo, radiador e direção.",
+   "items": [
+    {
+     "en": "Check the radiator and listen for steering noise",
+     "pt": "Confira o radiador e escute ruído na direção",
+     "why_en": "Both show up in T-Jet owner complaints.",
+     "why_pt": "Os dois aparecem nas reclamações de donos do T-Jet.",
+     "src": "https://www.autoo.com.br/fiat-bravo-usado-vale-a-pena-saiba-as-principais-reclamacoes-dos-donos-do-hatch/"
+    },
+    {
+     "en": "Ask for proof of on-time oil changes with good oil",
+     "pt": "Peça prova de trocas de óleo no prazo e com óleo bom",
+     "why_en": "It's the first thing to check on a used turbo car.",
+     "why_pt": "É a primeira coisa a conferir num turbo usado.",
+     "src": "https://www.icarros.com.br/noticias/manutencao-e-servicos/quais-sao-as-dicas-para-comprar-um-carro-turbo-usado-/19201.html"
+    },
+    {
+     "en": "Rev it and listen for a whistle or metallic noise; look for smoke",
+     "pt": "Acelere e escute assobio ou ruído metálico; procure fumaça",
+     "why_en": "They can point to worn turbo bearings.",
+     "why_pt": "Podem indicar rolamentos do turbo gastos.",
+     "src": "https://www.vrum.com.br/mercado/2026/07/7467370-vai-comprar-um-usado-saiba-os-riscos-de-um-carro-turbo-com-alta-km.html"
+    }
+   ]
+  },
+  "S130_T": {
+   "intro_en": "The 280ZX Turbo: the 280ZX's rust checks apply in full.",
+   "intro_pt": "O 280ZX Turbo: as verificações de ferrugem do 280ZX valem integralmente.",
+   "items": [
+    {
+     "en": "Check the battery tray, floor pans, front frame rails and rear inner fenders",
+     "pt": "Confira a caixa da bateria, o assoalho, as longarinas dianteiras e as caixas de roda traseiras",
+     "why_en": "Those are the major rust areas.",
+     "why_pt": "São as principais áreas de ferrugem.",
+     "src": "https://classicmotorsports.com/forum/grm/what-should-i-look-for-280zx-content/139236/page1"
+    },
+    {
+     "en": "Look along the front edge of the hood and inside the hatch for bubbles",
+     "pt": "Procure bolhas na borda dianteira do capô e por dentro da tampa traseira",
+     "why_en": "The ZX rusts there in particular.",
+     "why_pt": "O ZX enferruja principalmente ali.",
+     "src": "https://xenonzcar.com/s130/buyerguide.html"
+    },
+    {
+     "en": "Treat a sunroof or moonroof as aftermarket",
+     "pt": "Considere teto solar como acessório de terceiros",
+     "why_en": "They were never factory options.",
+     "why_pt": "Nunca foram opcionais de fábrica.",
+     "src": "https://classicmotorsports.com/forum/grm/79-280zx-worth-while/27902/page1"
+    },
+    {
+     "en": "Test every gauge and look at any stereo wiring",
+     "pt": "Teste todos os mostradores e olhe a fiação de som instalada",
+     "why_en": "Aftermarket wiring can be a mess.",
+     "why_pt": "Fiação instalada depois pode ser uma bagunça.",
+     "src": "https://xenonzcar.com/s130/buyerguide.html"
+    }
+   ]
   }
  }
 }
