@@ -1,442 +1,104 @@
-[
- {
-  "url": "https://www.autotrader.ca/cars/toyota/gr-corolla",
-  "status": 200,
-  "final": "https://www.autotrader.ca/cars/toyota/gr-corolla",
-  "n": 20,
-  "titles": [
-   "GR Corolla",
-   "Toyota GR Corolla for Sale | AutoTrader.ca",
-   "Toyota GR Corolla JUST LIKE NEW, 6 SPEED, OEM SPOILER 1200KM's ONLY",
-   "Off Lease Toronto",
-   "Toyota GR Corolla Core AWD | One Owner | No Accidents",
-   "Haldimand Motors LTD",
-   "Toyota GR Corolla Core - 300HP I AWD I 6-Speed Manual",
-   "Carget Supercentre"
+{
+ "searches": [
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2007/manual",
+   26
+  ],
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2008/manual",
+   55
+  ],
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2009/manual",
+   19
+  ],
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2010/manual",
+   42
+  ],
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2011/manual",
+   62
+  ],
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2012/manual",
+   26
+  ],
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2013/manual",
+   22
+  ],
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2014/manual",
+   65
+  ],
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2015/manual",
+   23
+  ],
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2016/manual",
+   14
+  ],
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2012",
+   151
+  ],
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2013",
+   160
+  ],
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2014",
+   619
+  ],
+  [
+   "napista",
+   "https://napista.com.br/busca/honda/civic/2015",
+   203
   ]
- },
- {
-  "url": "https://www.autotrader.ca/cars/toyota/gr-corolla/tr_manual",
-  "status": 200,
-  "final": "https://www.autotrader.ca/cars/toyota/gr-corolla/tr_manual",
-  "n": 20,
-  "titles": [
-   "GR Corolla",
-   "Manual Toyota GR Corolla for Sale | AutoTrader.ca",
-   "Toyota GR Corolla JUST LIKE NEW, 6 SPEED, OEM SPOILER 1200KM's ONLY",
-   "Off Lease Toronto",
-   "Toyota GR Corolla Core AWD | One Owner | No Accidents",
-   "Haldimand Motors LTD",
-   "Toyota GR Corolla Core - 300HP I AWD I 6-Speed Manual",
-   "Carget Supercentre"
-  ]
- },
- {
-  "url": "https://www.autotrader.ca/cars/toyota/corolla/tr_manual?fregfrom=2023",
-  "status": 200,
-  "final": "https://www.autotrader.ca/cars/toyota/corolla/tr_manual?fregfrom=2023",
-  "n": 20,
-  "titles": [
-   "2021 Toyota Corolla Hatchback",
-   "2018 Toyota Corolla iM",
-   "2018 Toyota Corolla Sedan",
-   "2022 Toyota Corolla Hatchback",
-   "2020 Toyota Corolla Hatchback",
-   "2019 Toyota Corolla Sedan",
-   "2022 Toyota Corolla Hatchback",
-   "2016 Toyota Corolla Sedan"
-  ]
- },
- {
-  "url": "https://www.autotrader.ca/cars/acura/integra/tr_manual?fregfrom=2023",
-  "status": 200,
-  "final": "https://www.autotrader.ca/cars/acura/integra/tr_manual?fregfrom=2023",
-  "n": 20,
-  "titles": [
-   "2024 Acura Integra",
-   "2026 Acura Integra",
-   "2023 Acura Integra",
-   "2024 Acura Integra",
-   "2023 Acura Integra",
-   "Acura Certified",
-   "2026 Acura Integra",
-   "2024 Acura Integra"
-  ]
- },
- {
-  "url": "https://www.autotrader.ca/cars/acura/tsx/tr_manual",
-  "status": 200,
-  "final": "https://www.autotrader.ca/cars/acura/tsx/tr_manual",
-  "n": 18,
-  "titles": [
-   "Manual Acura TSX for Sale | AutoTrader.ca",
-   "Acura TSX",
-   "engineDisplacement",
-   "Auto Clairmount Longueuil",
-   "Acura TSX Manual",
-   "engineDisplacement",
-   "Acura TSX",
-   "engineDisplacement"
-  ]
- },
- {
-  "url": "https://www.autotrader.ca/cars/dodge/challenger/tr_manual",
-  "status": 200,
-  "final": "https://www.autotrader.ca/cars/dodge/challenger/tr_manual",
-  "n": 20,
-  "titles": [
-   "Challenger",
-   "Manual Dodge Challenger for Sale | AutoTrader.ca",
-   "Dodge Challenger Scat Pack 392 Widebody RWD",
-   "engineDisplacement",
-   "White Rock Chrysler Dodge Jeep Ram",
-   "Dodge Challenger SRT 392 manuelle - 485 HP, cuir, Harman Kardon",
-   "engineDisplacement",
-   "Honda de St-Jean"
-  ]
- },
- {
-  "url": "https://www.autotrader.ca/cars/audi/s4/tr_manual",
-  "status": 200,
-  "final": "https://www.autotrader.ca/cars/audi/s4/tr_manual",
-  "n": 20,
-  "titles": [
-   "Manual Audi S4 for Sale | AutoTrader.ca",
-   "Audi S4 V6 Supercharged + Boite Manuelle CONDITION SHOWROOM + BOITE MANUELLE",
-   "La Zone Auto",
-   "engineDisplacement",
-   "LGT Auto Fine Car",
-   "Audi S4 4dr Sdn Man Premium",
-   "engineDisplacement",
-   "N&P Platinum Auto Sales"
-  ]
- },
- {
-  "url": "https://www.autotrader.ca/cars/mitsubishi/eclipse/tr_manual?fregfrom=1995&fregto=1999",
-  "status": 200,
-  "final": "https://www.autotrader.ca/cars/mitsubishi/eclipse/tr_manual?fregfrom=1995&fregto=1999",
-  "n": 0,
-  "titles": [
-   "Mitsubishi",
-   "shared.home",
-   "shared.search_noun",
-   "Mitsubishi",
-   "AutoTrader"
-  ]
- },
- {
-  "url": "https://www.autotrader.ca/cars/lotus/elise",
-  "status": 200,
-  "final": "https://www.autotrader.ca/cars/lotus/elise",
-  "n": 7,
-  "titles": [
-   "Lotus Elise for Sale | AutoTrader.ca",
-   "Lotus Elise Roadster",
-   "engineDisplacement",
-   "August Luxury Motorcars",
-   "Lotus Elise",
-   "engineDisplacement",
-   "GENTRY LANE",
-   "Lotus Elise R | Clean CARFAX! LOW Mileage! Rare Beauty!"
-  ]
- },
- {
-  "url": "https://www.autotrader.ca/cars/lotus/exige",
-  "status": 200,
-  "final": "https://www.autotrader.ca/cars/lotus/exige",
-  "n": 0,
-  "titles": [
-   "shared.home",
-   "shared.search_noun",
-   "AutoTrader"
-  ]
- },
- {
-  "url": "https://napista.com.br/busca/ford/maverick/1974",
-  "status": 200,
-  "final": "https://napista.com.br/busca/ford/maverick/1974",
-  "n": 1,
-  "sample": [
-   [
-    "1974 Ford Maverick 2.3 Ldo Sedan 8v 4p Manual",
-    "Ford Maverick 2.3 Ldo Sedan 8v 4p Manual"
+ ],
+ "seen": 1318,
+ "diff": [
+  {
+   "id": "napista:bea08b7c-e164-4732-85fa-c508816b37ee",
+   "url": "https://napista.com.br/anuncios/bea08b7c-e164-4732-85fa-c508816b37ee",
+   "row_km": "250000",
+   "search_km": 208548,
+   "title": "2011 Honda Civic Sed. Lxl/lxl Se 1.8 Flex 16v Mec.",
+   "row_first": "2026-11-23",
+   "row_note": "2011 Honda Civic Sed. Lxl/lxl Se 1.8 Flex 16v Mec.",
+   "page": [
+    "gone",
+    "odometer now 208548 km: a different car on the same address"
    ]
-  ]
- },
- {
-  "url": "https://napista.com.br/busca/dodge/charger",
-  "status": 200,
-  "final": "https://napista.com.br/busca/dodge/charger",
-  "n": 0,
-  "sample": []
- },
- {
-  "url": "https://napista.com.br/busca/dodge/dart",
-  "status": 200,
-  "final": "https://napista.com.br/busca/dodge/dart",
-  "n": 0,
-  "sample": []
- },
- {
-  "url": "https://napista.com.br/busca/volkswagen/sp2",
-  "status": 200,
-  "final": "https://napista.com.br/busca/volkswagen/sp2",
-  "n": 3,
-  "sample": [
-   [
-    "1994 Volkswagen Kombi 1.6 Standard",
-    "Volkswagen Kombi 1.6 Standard"
-   ],
-   [
-    "1985 Volkswagen Fusca 1600",
-    "Volkswagen Fusca 1600"
-   ],
-   [
-    "2003 Volkswagen Kombi 1.6 Furgao",
-    "Volkswagen Kombi 1.6 Furgao"
+  },
+  {
+   "id": "napista:c9a16518-8a05-4288-9cc2-611949b9641e",
+   "url": "https://napista.com.br/anuncios/c9a16518-8a05-4288-9cc2-611949b9641e",
+   "row_km": "174000",
+   "search_km": 144000,
+   "title": "2014 Honda Civic 2.0 I Vtec Flexone Lxr Auto",
+   "row_first": "2026-11-23",
+   "row_note": "2014 Honda Civic 2.0 I Vtec Flexone Lxr Auto; gone 2026-11-25: odometer now 1440",
+   "page": [
+    "gone",
+    "odometer now 144000 km: a different car on the same address"
    ]
-  ]
- },
- {
-  "url": "https://napista.com.br/busca/chevrolet/monza",
-  "status": 200,
-  "final": "https://napista.com.br/busca/chevrolet/monza",
-  "n": 36,
-  "sample": [
-   [
-    "1990 Chevrolet Ipanema Gls/sle 2.0efi/sl/e1.8/sol/wave",
-    "Chevrolet Ipanema Gls/sle 2.0efi/sl/e1.8/sol/wave"
-   ],
-   [
-    "1990 Chevrolet Monza Classic Se 2.0/mpfi E Efi 2p E 4p",
-    "Chevrolet Monza Classic Se 2.0/mpfi E Efi 2p E 4p"
-   ],
-   [
-    "1990 Chevrolet Monza 2.0 Sl/e",
-    "Chevrolet Monza 2.0 Sl/e"
-   ],
-   [
-    "1989 Chevrolet Monza 2.0 Sl E",
-    "Chevrolet Monza 2.0 Sl E"
-   ],
-   [
-    "1990 Chevrolet Monza 2.0 Sl E",
-    "Chevrolet Monza 2.0 Sl E"
-   ],
-   [
-    "1990 Chevrolet Caravan L/sl/s/ss 2.5/4.1/4.2",
-    "Chevrolet Caravan L/sl/s/ss 2.5/4.1/4.2"
-   ],
-   [
-    "1990 Chevrolet Kadett Gls 1.8 Efi/sl/e 1.8",
-    "Chevrolet Kadett Gls 1.8 Efi/sl/e 1.8"
-   ],
-   [
-    "1995 Chevrolet Kadett Gls 1.8 Efi/sl/e 1.8",
-    "Chevrolet Kadett Gls 1.8 Efi/sl/e 1.8"
-   ]
-  ]
- },
- {
-  "url": "https://napista.com.br/busca/chevrolet/corsa/1995",
-  "status": 200,
-  "final": "https://napista.com.br/busca/chevrolet/corsa/1995",
-  "n": 5,
-  "sample": [
-   [
-    "1995 Chevrolet Corsa Wind Super",
-    "Chevrolet Corsa Wind Super"
-   ],
-   [
-    "1995 Chevrolet Corsa Wind Super",
-    "Chevrolet Corsa Wind Super"
-   ],
-   [
-    "1995 Chevrolet Corsa Gl 1.6 Mpfi/1.4 Efi 2p E 4p",
-    "Chevrolet Corsa Gl 1.6 Mpfi/1.4 Efi 2p E 4p"
-   ],
-   [
-    "1995 Chevrolet Corsa Pick-up Gl/champ 1.6 Mpfi/efi",
-    "Chevrolet Corsa Pick-up Gl/champ 1.6 Mpfi/efi"
-   ],
-   [
-    "1995 Chevrolet Corsa Gl 1.6 Mpfi/1.4 Efi 2p E 4p",
-    "Chevrolet Corsa Gl 1.6 Mpfi/1.4 Efi 2p E 4p"
-   ]
-  ]
- },
- {
-  "url": "https://napista.com.br/busca/fiat/bravo",
-  "status": 200,
-  "final": "https://napista.com.br/busca/fiat/bravo",
-  "n": 48,
-  "sample": [
-   [
-    "2013 Fiat Bravo 1.8 16v Flex Sporting Dualogic",
-    "Fiat Bravo 1.8 16v Flex Sporting Dualogic"
-   ],
-   [
-    "2013 Fiat Bravo 1.8 16v Flex Sporting Dualogic",
-    "Fiat Bravo 1.8 16v Flex Sporting Dualogic"
-   ],
-   [
-    "2012 Fiat Bravo 1.8 16v Essence Flex",
-    "Fiat Bravo 1.8 16v Essence Flex"
-   ],
-   [
-    "2014 Fiat Bravo 1.8 E.torq Flex Absolute Dualogic",
-    "Fiat Bravo 1.8 E.torq Flex Absolute Dualogic"
-   ],
-   [
-    "2014 Fiat Bravo 1.8 E.torq Flex Sporting Dualogic",
-    "Fiat Bravo 1.8 E.torq Flex Sporting Dualogic"
-   ],
-   [
-    "2014 Fiat Bravo 1.4 16v Turbo T Jet",
-    "Fiat Bravo 1.4 16v Turbo T Jet"
-   ],
-   [
-    "2016 Fiat Bravo Essence 1.8 Flex 16v 5p",
-    "Fiat Bravo Essence 1.8 Flex 16v 5p"
-   ],
-   [
-    "2014 Fiat Bravo 1.4 16v Turbo T-jet",
-    "Fiat Bravo 1.4 16v Turbo T-jet"
-   ]
-  ]
- },
- {
-  "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/maverick",
-  "status": 200,
-  "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/maverick",
-  "n": 24,
-  "sample": [
-   [
-    "2024 Ford Maverick Lariat FX4 2.0 EcoBoost Aut.",
-    "Automática"
-   ],
-   [
-    "2024 Ford Maverick Lariat FX4 2.0 EcoBoost Aut.",
-    "Automática"
-   ],
-   [
-    "2024 Ford Maverick Lariat FX4 2.0 EcoBoost Aut.",
-    "Automática"
-   ],
-   [
-    "2024 Ford Maverick Lariat FX4 2.0 EcoBoost Aut.",
-    "Automática"
-   ],
-   [
-    "2022 Ford Maverick Lariat FX4 2.0 4x4 (Aut) Picapes",
-    "Automática"
-   ],
-   [
-    "2024 Ford Maverick Lariat Hybrid 2.5 Aut.",
-    "Automática"
-   ],
-   [
-    "2023 Ford Maverick Lariat FX4 2.0 4x4 (Aut) Picapes",
-    "Automática"
-   ],
-   [
-    "2023 Ford Maverick Lariat FX4 2.0 4x4 (Aut) Picapes",
-    "Automática"
-   ]
-  ]
- },
- {
-  "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/dodge/charger",
-  "status": 200,
-  "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/dodge/charger",
-  "n": 0,
-  "sample": []
- },
- {
-  "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/sp2",
-  "status": 200,
-  "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/sp2",
-  "n": 0,
-  "sample": []
- },
- {
-  "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/monza",
-  "status": 200,
-  "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/monza",
-  "n": 23,
-  "sample": [
-   [
-    "2018 Chevrolet Monza Sedan 650 1.8 EFi Sedan",
-    "Manual"
-   ],
-   [
-    "1995 Chevrolet Monza Sedan GLS 2.0 EFi Sedan",
-    "Manual"
-   ],
-   [
-    "1989 Chevrolet Monza Sedan SL 2.0 Sedan",
-    "Manual"
-   ],
-   [
-    "1991 Chevrolet Monza Sedan SLE 1.8 EFi Sedan",
-    "Manual"
-   ],
-   [
-    "1994 Chevrolet Monza Sedan GLS 2.0 EFi Sedan",
-    "Manual"
-   ],
-   [
-    "1994 Chevrolet Monza Sedan GL 2.0 EFi Sedan",
-    "Manual"
-   ],
-   [
-    "1993 Chevrolet Monza Sedan SL 2.0 EFi Sedan",
-    "Manual"
-   ],
-   [
-    "1993 Chevrolet Monza Sedan 650 2.0 EFi Sedan",
-    "Manual"
-   ]
-  ]
- },
- {
-  "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/bravo/s/cambio-manual",
-  "status": 200,
-  "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/bravo/s/cambio-manual",
-  "n": 24,
-  "sample": [
-   [
-    "2014 Fiat Bravo Essence 1.8 16V (Flex) Hatch",
-    "Manual"
-   ],
-   [
-    "2013 Fiat Bravo T-Jet 1.4 16V Hatch",
-    "Manual"
-   ],
-   [
-    "2014 Fiat Bravo Sporting 1.8 16V (Flex) Hatch",
-    "Manual"
-   ],
-   [
-    "2013 Fiat Bravo Sporting 1.8 16V (Flex) Hatch",
-    "Manual"
-   ],
-   [
-    "2014 Fiat Bravo Essence 1.8 16V (Flex) Hatch",
-    "Manual"
-   ],
-   [
-    "2016 Fiat Bravo Essence 1.8 16V Dualogic (Flex) Hatch",
-    "Manual"
-   ],
-   [
-    "2014 Fiat Bravo Essence 1.8 16V (Flex) Hatch",
-    "Manual"
-   ],
-   [
-    "2014 Fiat Bravo T-Jet 1.4 16V Hatch",
-    "Manual"
-   ]
-  ]
- }
-]
+  }
+ ],
+ "same": 1248
+}
