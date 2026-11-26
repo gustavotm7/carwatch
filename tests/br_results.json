@@ -1,418 +1,50 @@
-{
- "slugs": {
-  "https://napista.com.br/busca/honda": {
-   "status": 200,
-   "keys": [
-    "searchResult",
-    "searchParams"
-   ],
-   "found": [
-    "Veja ofertas de Honda usados e seminovos à venda=honda"
-   ]
-  },
-  "https://napista.com.br/busca/mazda": {
-   "status": 200,
-   "keys": [
-    "searchResult",
-    "searchParams"
-   ],
-   "found": [
-    "Veja ofertas de Mazda usados e seminovos à venda=mazda"
-   ]
-  },
-  "https://napista.com.br/busca/toyota": {
-   "status": 200,
-   "keys": [
-    "searchResult",
-    "searchParams"
-   ],
-   "found": [
-    "Veja ofertas de Toyota usados e seminovos à venda=toyota"
-   ]
-  },
-  "https://napista.com.br/busca/subaru": {
-   "status": 200,
-   "keys": [
-    "searchResult",
-    "searchParams"
-   ],
-   "found": [
-    "Veja ofertas de Subaru usados e seminovos à venda=subaru"
-   ]
-  },
-  "https://napista.com.br/busca/nissan": {
-   "status": 200,
-   "keys": [
-    "searchResult",
-    "searchParams"
-   ],
-   "found": [
-    "Veja ofertas de Nissan usados e seminovos à venda=nissan"
-   ]
-  },
-  "https://napista.com.br/busca/mitsubishi": {
-   "status": 200,
-   "keys": [
-    "searchResult",
-    "searchParams"
-   ],
-   "found": [
-    "Veja ofertas de Mitsubishi usados e seminovos à venda=mitsubishi"
-   ]
-  },
-  "https://napista.com.br/busca/bmw": {
-   "status": 200,
-   "keys": [
-    "searchResult",
-    "searchParams"
-   ],
-   "found": [
-    "Veja ofertas de Bmw usados e seminovos à venda=bmw"
-   ]
-  },
-  "https://napista.com.br/busca/audi": {
-   "status": 200,
-   "keys": [
-    "searchResult",
-    "searchParams"
-   ],
-   "found": [
-    "Veja ofertas de Audi usados e seminovos à venda=audi"
-   ]
-  },
-  "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda": {
-   "status": 200,
-   "keys": [
-    "sop",
-    "userLocationByCookie",
-    "filterLocation",
-    "makes",
-    "deals",
-    "similarDeals",
-    "query",
-    "canonicalPath",
-    "requestSop",
-    "requestSopEncoded",
-    "dealsWithAds",
-    "isOfficialStoreRoute",
-    "officialStoreActive",
-    "preFooter",
-    "makeModelTrimIdentifiers",
-    "mobile",
-    "initialVehicleType"
-   ],
-   "found": []
-  },
-  "https://www.mobiauto.com.br/comprar/carros-usados/brasil/mazda": {
-   "status": 200,
-   "keys": [
-    "sop",
-    "userLocationByCookie",
-    "filterLocation",
-    "makes",
-    "deals",
-    "similarDeals",
-    "query",
-    "canonicalPath",
-    "requestSop",
-    "requestSopEncoded",
-    "dealsWithAds",
-    "isOfficialStoreRoute",
-    "officialStoreActive",
-    "preFooter",
-    "makeModelTrimIdentifiers",
-    "mobile",
-    "initialVehicleType"
-   ],
-   "found": []
-  },
-  "https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota": {
-   "status": 200,
-   "keys": [
-    "sop",
-    "userLocationByCookie",
-    "filterLocation",
-    "makes",
-    "deals",
-    "similarDeals",
-    "query",
-    "canonicalPath",
-    "requestSop",
-    "requestSopEncoded",
-    "dealsWithAds",
-    "isOfficialStoreRoute",
-    "officialStoreActive",
-    "preFooter",
-    "makeModelTrimIdentifiers",
-    "mobile",
-    "initialVehicleType"
-   ],
-   "found": []
-  },
-  "https://www.mobiauto.com.br/comprar/carros-usados/brasil/subaru": {
-   "status": 200,
-   "keys": [
-    "sop",
-    "userLocationByCookie",
-    "filterLocation",
-    "makes",
-    "deals",
-    "similarDeals",
-    "query",
-    "canonicalPath",
-    "requestSop",
-    "requestSopEncoded",
-    "dealsWithAds",
-    "isOfficialStoreRoute",
-    "officialStoreActive",
-    "preFooter",
-    "makeModelTrimIdentifiers",
-    "mobile",
-    "initialVehicleType"
-   ],
-   "found": []
-  },
-  "https://www.mobiauto.com.br/comprar/carros-usados/brasil/nissan": {
-   "status": 200,
-   "keys": [
-    "sop",
-    "userLocationByCookie",
-    "filterLocation",
-    "makes",
-    "deals",
-    "similarDeals",
-    "query",
-    "canonicalPath",
-    "requestSop",
-    "requestSopEncoded",
-    "dealsWithAds",
-    "isOfficialStoreRoute",
-    "officialStoreActive",
-    "preFooter",
-    "makeModelTrimIdentifiers",
-    "mobile",
-    "initialVehicleType"
-   ],
-   "found": []
-  },
-  "https://www.mobiauto.com.br/comprar/carros-usados/brasil/mitsubishi": {
-   "status": 200,
-   "keys": [
-    "sop",
-    "userLocationByCookie",
-    "filterLocation",
-    "makes",
-    "deals",
-    "similarDeals",
-    "query",
-    "canonicalPath",
-    "requestSop",
-    "requestSopEncoded",
-    "dealsWithAds",
-    "isOfficialStoreRoute",
-    "officialStoreActive",
-    "preFooter",
-    "makeModelTrimIdentifiers",
-    "mobile",
-    "initialVehicleType"
-   ],
-   "found": []
-  },
-  "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw": {
-   "status": 200,
-   "keys": [
-    "sop",
-    "userLocationByCookie",
-    "filterLocation",
-    "makes",
-    "deals",
-    "similarDeals",
-    "query",
-    "canonicalPath",
-    "requestSop",
-    "requestSopEncoded",
-    "dealsWithAds",
-    "isOfficialStoreRoute",
-    "officialStoreActive",
-    "preFooter",
-    "makeModelTrimIdentifiers",
-    "mobile",
-    "initialVehicleType"
-   ],
-   "found": []
-  },
-  "https://www.mobiauto.com.br/comprar/carros-usados/brasil/audi": {
-   "status": 200,
-   "keys": [
-    "sop",
-    "userLocationByCookie",
-    "filterLocation",
-    "makes",
-    "deals",
-    "similarDeals",
-    "query",
-    "canonicalPath",
-    "requestSop",
-    "requestSopEncoded",
-    "dealsWithAds",
-    "isOfficialStoreRoute",
-    "officialStoreActive",
-    "preFooter",
-    "makeModelTrimIdentifiers",
-    "mobile",
-    "initialVehicleType"
-   ],
-   "found": []
-  }
+[
+ {
+  "url": "https://www.autotrader.ca/cars/honda/civic/tr_manual?fregfrom=2012&fregto=2015",
+  "status": 200,
+  "final": "https://www.autotrader.ca/cars/honda/civic/tr_manual?fregfrom=2012&fregto=2015",
+  "ads": 13,
+  "manual_words": 49,
+  "auto_words": 69
  },
- "tries": [
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1985",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1985",
-   "n": 0,
-   "sample": []
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1991",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/escort/ano-1991",
-   "n": 0,
-   "sample": []
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/kadett/ano-1992",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/kadett/ano-1992",
-   "n": 0,
-   "sample": []
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/vectra/ano-1994",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/vectra/ano-1994",
-   "n": 0,
-   "sample": []
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/uno/ano-1995",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/uno/ano-1995",
-   "n": 0,
-   "sample": []
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1987",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1987",
-   "n": 0,
-   "sample": []
-  },
-  {
-   "url": "https://napista.com.br/busca/toyota/86",
-   "status": 200,
-   "final": "https://napista.com.br/busca/toyota/86",
-   "n": 48,
-   "sample": [
-    [
-     "2019 Toyota Rav4 2.5 Hybrid S E Cvt 4wd",
-     "Toyota Rav4 2.5 Hybrid S E Cvt 4wd"
-    ],
-    [
-     "2023 Toyota Corolla 1.8 Hev Altis Premium Cvt",
-     "Toyota Corolla 1.8 Hev Altis Premium Cvt"
-    ],
-    [
-     "2018 Toyota Corolla 2.0 Xei Multidrive S",
-     "Toyota Corolla 2.0 Xei Multidrive S"
-    ],
-    [
-     "2021 Toyota Corolla 2.0 Xei Cvt",
-     "Toyota Corolla 2.0 Xei Cvt"
-    ],
-    [
-     "2015 Toyota Etios 1.5 T Flex Sedan X",
-     "Toyota Etios 1.5 T Flex Sedan X"
-    ],
-    [
-     "2024 Toyota Corolla 2.0 Xei Cvt",
-     "Toyota Corolla 2.0 Xei Cvt"
-    ]
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/toyota/gt-86",
-   "status": 200,
-   "final": "https://napista.com.br/busca/toyota/gt/86",
-   "n": 0,
-   "sample": []
-  },
-  {
-   "url": "https://napista.com.br/busca/mazda/mx5",
-   "status": 200,
-   "final": "https://napista.com.br/busca/mazda/mx5",
-   "n": 0,
-   "sample": []
-  },
-  {
-   "url": "https://napista.com.br/busca/mazda/miata",
-   "status": 200,
-   "final": "https://napista.com.br/busca/mazda/miata",
-   "n": 0,
-   "sample": []
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/mazda/mx5",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/mazda/mx5",
-   "n": 0,
-   "sample": []
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/subaru/impreza",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil",
-   "n": 24,
-   "sample": [
-    [
-     "2024 Chevrolet Onix Plus LTZ 1.0 Turbo (Aut.) Sedan",
-     "Automática"
-    ],
-    [
-     "2025 Hyundai HB20S Comfort Plus 1.0 Sedan",
-     "Manual"
-    ],
-    [
-     "2022 CAOA Chery Tiggo 3X Pro 1.0 Turbo (Aut)",
-     "Automática"
-    ],
-    [
-     "2021 Renault Stepway Zen 1.6 16V SCe (Flex) Hatch",
-     "Manual"
-    ],
-    [
-     "2026 Volkswagen Polo Track 1.0 Flex 12V Hatch",
-     "Manual"
-    ],
-    [
-     "2025 Volkswagen Virtus Exclusive 250 TSI 1.4 Sedan",
-     "Automática"
-    ]
-   ]
-  },
-  {
-   "url": "https://napista.com.br/busca/toyota/yaris/2018/manual",
-   "status": 200,
-   "final": "https://napista.com.br/busca/toyota/yaris/2018/manual",
-   "n": 0,
-   "sample": []
-  },
-  {
-   "url": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/yaris/ano-2018",
-   "status": 200,
-   "final": "https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/yaris/ano-2018",
-   "n": 0,
-   "sample": []
-  }
- ]
-}
+ {
+  "url": "https://www.autotrader.ca/cars/honda/civic/tr_automatic?fregfrom=2012&fregto=2015",
+  "status": 200,
+  "final": "https://www.autotrader.ca/cars/honda/civic/tr_automatic?fregfrom=2012&fregto=2015",
+  "ads": 13,
+  "manual_words": 23,
+  "auto_words": 115
+ },
+ {
+  "url": "https://www.autotrader.ca/cars/honda/civic/tr_auto?fregfrom=2012&fregto=2015",
+  "status": 404,
+  "final": "https://www.autotrader.ca/cars/honda/civic/tr_auto?fregfrom=2012&fregto=2015",
+  "ads": 0,
+  "manual_words": 0,
+  "auto_words": 0
+ },
+ {
+  "url": "https://www.autotrader.ca/cars/honda/civic?fregfrom=2012&fregto=2015",
+  "status": 200,
+  "final": "https://www.autotrader.ca/cars/honda/civic?fregfrom=2012&fregto=2015",
+  "ads": 14,
+  "manual_words": 30,
+  "auto_words": 96
+ },
+ {
+  "url": "https://www.autotrader.ca/cars/toyota/yaris/tr_automatic",
+  "status": 200,
+  "final": "https://www.autotrader.ca/cars/toyota/yaris/tr_automatic",
+  "ads": 20,
+  "manual_words": 17,
+  "auto_words": 190
+ },
+ {
+  "url": "https://www.autotrader.ca/cars/toyota/yaris",
+  "status": 200,
+  "final": "https://www.autotrader.ca/cars/toyota/yaris",
+  "ads": 20,
+  "manual_words": 35,
+  "auto_words": 161
+ }
+]
