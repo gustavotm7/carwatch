@@ -717,7 +717,7 @@
        {"family": "CHEVETTE", "years": [1973, 1994], "name": "Chevette", "color": "#ACDA87", "smg_risk": false,
         "desc": "Chevrolet Chevette 1973-1994, rear-wheel drive 1.4 / 1.6"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/chevrolet/chevette"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/chevette"]},
+     "searches": {"napista": ["https://napista.com.br/busca/chevrolet/chevette"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=chevette"], ["Mercado Livre", "https://lista.mercadolivre.com.br/chevrolet-chevette"]]},
 
     {"enabled": true, "model": "Uno Turbo", "brand": "Fiat", "recheck": true, "match": ["\\buno\\b", "\\bturbo\\b"], "none": ["\\bmille\\b ?(fire|way)?$|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
@@ -798,7 +798,7 @@
        {"family": "F500_ABARTH", "years": [2014, 2019], "name": "500 Abarth", "color": "#D87880", "smg_risk": false,
         "desc": "Fiat 500 Abarth, 1.4 turbo MultiAir, 5-speed manual"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/fiat/500/abarth"]},
+     "searches": {"napista": ["https://napista.com.br/busca/fiat/500"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=500%20abarth"], ["Mercado Livre", "https://lista.mercadolivre.com.br/fiat-500-abarth"]]},
 
     {"enabled": true, "model": "Puma GT", "brand": "Puma", "recheck": true, "match": ["\\bpuma\\b"], "none": ["\\bgtb\\b|caminh|\\bmoto\\b|tenis|\\bp ?0?18\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
@@ -876,7 +876,7 @@
      "searches": {"napista": ["https://napista.com.br/busca/chevrolet/monza"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/chevrolet/monza"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=monza%20sr"], ["Mercado Livre", "https://lista.mercadolivre.com.br/monza"]]},
 
-    {"enabled": true, "model": "Corsa GSi", "brand": "Chevrolet", "recheck": true, "match": ["\\bcorsa\\b", "\\bgsi\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
+    {"enabled": true, "model": "Corsa GSi", "brand": "Chevrolet", "recheck": true, "match": ["\\bcorsa\\b", "\\bgsi\\b"], "none_desc": ["corsa (wind|super|wagon|sedan)|motor 1\\.[04]\\b|\\b1\\.0 (a gasolina|8v|mpfi)"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
      "bodies": ["hatch"],
      "generations": [
        {"family": "CORSA_GSI", "years": [1994, 1997], "name": "Corsa GSi", "color": "#98C573", "smg_risk": false,

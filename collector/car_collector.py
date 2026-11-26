@@ -95,6 +95,8 @@ PAGES_PER_SEARCH = 3                               # result pages read per searc
 PAGES_JSON = 20                                    # NaPista / Mobiauto: their search data is read directly (stops early)
 SEARCH_SEEN = {}                                   # today's search data per ad id (NaPista / Mobiauto)
 AUTO_FOUND = {}                                    # automatics found today for families that allow them
+SEARCH_LISTED = set()                              # ad ids on today's Autotrader / Kijiji search pages
+REFRESH_SHARE = 0.6                                # re-checks may use this share of the time left while new ads wait
 ALLOW_AUTO = set()                                 # families kept with automatics too (Brazil: FB Civic, Yaris sedan)
 SPLITS = {}                                        # family -> [(title regex, sub-generation)]: e.g. FA5 Civic Si apart
 GEN_BODY = {}                                      # family -> the only body it came in ('body' in the config)
@@ -809,6 +811,27 @@ def resync_families(rows):
     return n
 
 
+def drop_by_desc(rows):
+    """A dealer title can name the wrong version ('Corsa GSi' over a 1.0 Corsa Wind). A model's none_desc
+    patterns, found in the ad's own description, take the ad off the list."""
+    pats = {}
+    for m in MODELS:
+        for g in m.get("generations", []) if m.get("none_desc") else []:
+            pats[g["family"]] = m["none_desc"]
+            for sp in g.get("split", []) or []:
+                if isinstance(sp, dict) and sp.get("family"):
+                    pats[sp["family"]] = m["none_desc"]
+    n = 0
+    for r in rows:
+        rx = pats.get(r["family"])
+        if rx and r["status"] in ("active", "unverified") and r.get("desc") \
+                and any(re.search(x, _norm(r["desc"])) for x in rx):
+            r["status"] = "skip"
+            r["note"] = (r["note"] + "; description names another version").strip("; ")
+            n += 1
+    return n
+
+
 def family_of(key, year, title):
     try:
         return classify(key, year, fix_body(key, body_of("", title), title), title)[0]
@@ -938,9 +961,16 @@ def backfill_hist(rows):
 SKIP_SOURCES = set()
 
 
-def refresh_existing(sess, rows, today, stats):
+def refresh_existing(sess, rows, today, stats, new_waiting=False):
+    """Re-read saved ads. An ad still on today's search pages is opened every other day (its price is read
+    then); one missing from them is opened every run, oldest check first. While new ads wait to be opened,
+    re-checks stop at REFRESH_SHARE of the time left, and the rest carry over to the next run."""
     cand_gone = []
-    for row in rows:
+    stop_at = 0.0
+    if DEADLINE[0] and new_waiting:
+        stop_at = time.time() + REFRESH_SHARE * max(0.0, DEADLINE[0] - time.time())
+    order = sorted(rows, key=lambda r: (r["listing_id"] in SEARCH_LISTED, r.get("verified") or ""))
+    for row in order:
         if row["source"] in SKIP_SOURCES:
             continue
         st = row["status"]
@@ -955,8 +985,13 @@ def refresh_existing(sess, rows, today, stats):
             outcome, res = "ok", {"price": seen["price"], "km": seen["km"] if (seen.get("km") or 0) >= 500 else None,
                                   "_search": True}
             stats["seen_in_search"] = stats.get("seen_in_search", 0) + 1
+        elif (st == "active" and row["listing_id"] in SEARCH_LISTED and row.get("verified")
+              and (d(today) - d(row["verified"])).days < 2):
+            row["last_seen"] = today                     # still listed; its page is read again tomorrow
+            stats["listed"] = stats.get("listed", 0) + 1
+            continue
         else:
-            if time_up():                                # out of time: this ad keeps its status until the next run
+            if time_up() or (stop_at and time.time() > stop_at):   # this ad keeps its status until the next run
                 stats["late"] = stats.get("late", 0) + 1
                 continue
             outcome, res = check_listing(sess, row)
@@ -996,6 +1031,12 @@ def refresh_existing(sess, rows, today, stats):
     if len(cand_gone) > limit:
         print(f"!! {len(cand_gone)} listings look gone out of {stats['checked']} checked - more than "
               f"expected, so none were marked gone. The site may be blocking or has changed.")
+        why = {}
+        for row, reason in cand_gone:
+            k = f'{row["source"]}: {re.sub(r"[0-9]+", "N", str(reason))}'
+            why[k] = why.get(k, 0) + 1
+        for k, n in sorted(why.items(), key=lambda x: -x[1])[:6]:
+            print(f"     {n:4d}  {k}")
         stats["failed"] += len(cand_gone)
         return
     for row, reason in cand_gone:
@@ -1030,6 +1071,7 @@ def search_ids(sess, known, stats):
     found = {}
     SEARCH_SEEN.clear()
     AUTO_FOUND.clear()
+    SEARCH_LISTED.clear()
     for source, base in SEARCHES:
         rx = LINK_RE[source]
         seen_here, status = set(), None
@@ -1072,6 +1114,7 @@ def search_ids(sess, known, stats):
                     else:
                         found[lid] = (source, url, len(stats["searches"]))
                 continue
+            SEARCH_LISTED.update(page_ids)
             fresh = set(page_ids) - seen_here
             if not fresh:
                 break                                    # paging not supported this way / last page
@@ -3031,14 +3074,21 @@ def run(args):
                  photos_new=0, searches=[])
     new_rows = []
     if sess is not None:
+        t0 = time.time()
         found = search_ids(sess, {r["listing_id"] for r in rows}, stats)    # searches first: their data
-        refresh_existing(sess, rows, today.isoformat(), stats)               # confirms ads without opening them
+        t1 = time.time()
+        refresh_existing(sess, rows, today.isoformat(), stats, new_waiting=bool(found))
+        t2 = time.time()
         new_rows = discover_new(sess, rows, today.isoformat(), stats, args.max_new, found)
+        stats["minutes"] = (round((t1 - t0) / 60), round((t2 - t1) / 60), round((time.time() - t2) / 60))
         for r in rows + new_rows:
             apply_split(r)
         if not args.no_photos:
             download_photos(sess, rows + new_rows, stats)
     gear_flags(rows + new_rows)
+    n_desc = drop_by_desc(rows + new_rows)
+    if n_desc:
+        print(f"{n_desc} ads taken off: their description names another version of the car")
     if COUNTRY["country"] == "BR" and FIPE_CFG:
         fpath = os.path.join(DATA_DIR, "fipe_cache.json")
         if sess is not None and not args.no_fipe:
@@ -3065,7 +3115,11 @@ def run(args):
         run_info.append(f"Search: {stats['candidates']} unseen ads, {stats['new']} added, {stats['skipped']} rejected "
                         f"(remembered), {stats['photos_new']} new photos"
                         + (f", {stats['prefiltered']} other cars in the results not opened" if stats.get("prefiltered") else ""))
-        if time_up():
+        if stats.get("listed"):
+            run_info.append(f"{stats['listed']} ads still on the search pages and read yesterday: not opened today")
+        if "minutes" in stats:
+            run_info.append("Minutes: searches {}, re-checks {}, new ads {}".format(*stats["minutes"]))
+        if stats.get("late") or time_up():
             run_info.append(f"Out of time: {stats.get('late', 0)} ads not re-checked; the next run carries on")
         if stats.get("new_auto") or stats.get("details_read") or stats.get("seen_in_search"):
             run_info.append(f"Brazil: {stats.get('seen_in_search', 0)} ads confirmed from search pages (not opened), "
