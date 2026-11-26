@@ -1037,6 +1037,10 @@ def search_ids(sess, known, stats):
             if time_up():
                 break
             r = fetch(sess, page_url(source, base, i))
+            if (i == 0 and r is not None and source in JSON_SEARCH
+                    and len(r.url.split("?")[0].rstrip("/")) < len(base.split("?")[0].rstrip("/"))):
+                status = "ignored by site"               # Mobiauto sends an unknown model to its all-cars page
+                break
             if r is None or r.status_code != 200:
                 if i == 0:
                     status = f"HTTP {getattr(r, 'status_code', 'none')}"
@@ -1829,6 +1833,62 @@ def market_stats(rows, model, b_conv, today):
     return out
 
 
+def _near(a, b):
+    """Same town: the geo points are within 40 km, or (no points) the place text is the same."""
+    if a["geo"] and b["geo"]:
+        (la1, lo1), (la2, lo2) = a["geo"], b["geo"]
+        x = math.radians(lo2 - lo1) * math.cos(math.radians((la1 + la2) / 2))
+        return 6371 * math.hypot(x, math.radians(la2 - la1)) < 40
+    return bool(a["place"]) and _norm(a["place"]).split(",")[0].strip() == _norm(b["place"]).split(",")[0].strip()
+
+
+def merge_same_car(cars):
+    """One car listed on two sites (a dealer on Autotrader and Kijiji) becomes one entry: the cheaper ad leads and
+    the other is kept under 'also'. Same generation, year, gearbox and town, and either the same price with km
+    within 1.5 % (300 km), or a price within 5 % with the exact same, non-round km. Closest pairs are matched first."""
+    by = {}
+    for i, c in enumerate(cars):
+        by.setdefault((c["family"], c["year"], c["trans"]), []).append(i)
+    pairs = []
+    for ix in by.values():
+        for a in ix:
+            for b in ix:
+                x, y = cars[a], cars[b]
+                if a >= b or x["source"] == y["source"] or not _near(x, y):
+                    continue
+                if x["km"] and y["km"]:
+                    dk = abs(x["km"] - y["km"])
+                    if x["price"] == y["price"]:
+                        ok = dk <= max(300, 0.015 * max(x["km"], y["km"]))
+                    else:
+                        ok = dk == 0 and x["km"] % 1000 != 0 and abs(x["price"] - y["price"]) <= 0.05 * max(x["price"], y["price"])
+                else:
+                    ok = not x["km"] and not y["km"] and x["price"] == y["price"]
+                if ok:
+                    pairs.append((abs(x["price"] - y["price"]) / max(x["price"], 1), abs((x["km"] or 0) - (y["km"] or 0)), a, b))
+    lead, taken = {}, set()
+    for _, _, a, b in sorted(pairs):
+        if a in taken or b in taken:
+            continue
+        x, y = cars[a], cars[b]
+        keep, drop = (a, b) if (x["price"], x["first_seen"]) <= (y["price"], y["first_seen"]) else (b, a)
+        taken |= {a, b}
+        lead[keep] = drop
+    out, dropped = [], set(lead.values())
+    for i, c in enumerate(cars):
+        if i in dropped:
+            continue
+        if i in lead:
+            o = cars[lead[i]]
+            c["also"] = [{"id": o["id"], "source": o["source"], "url": o["url"], "price": o["price"]}]
+            if not c["photos"] and o["photos"]:
+                c["photos"] = o["photos"]
+            if not c.get("desc") and o.get("desc"):
+                c["desc"] = o["desc"]
+        out.append(c)
+    return out
+
+
 def export_json(rows, path, run_info=None, stats=None, comps=None):
     """cars.json for the web app: every active car with its cues, score, flags, price history and sold comps."""
     today = dt.date.today()
@@ -1895,6 +1955,11 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
             "geo": geo_of(r["place"]),
             "hist": [[dd, pp] for dd, pp in hist] if len(hist) > 1 else None, "sold": sold, **sc})
     firsts = sorted(r["first_seen"] for r in rows if r["first_seen"] and r["status"] != "skip")
+    n_before = len(cars)
+    cars = merge_same_car(cars)
+    if stats is not None:
+        stats["merged"] = n_before - len(cars)
+    print(f"Same car on two sites: {n_before - len(cars)} ads folded into another site's listing")
     autos = [c for c in cars if c["trans"] == "a"]
     cars = [c for c in cars if c["trans"] != "a"]
     auto_path = re.sub(r"\.json$", "", path) + "_auto.json"
@@ -1915,6 +1980,7 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
         "auto_file": os.path.basename(auto_path) if autos else None, "auto_count": len(autos),
         "comps": comp_list,
         "sold_bands": sold_bands(comps, today) if comps else {},
+        "sold_hist": sold_history(comps) if comps else {},
         "gone": [{"id": r["listing_id"], "name": r["name"], "family": r["family"], "year": r["year"], "km": r["km"],
                   "body": r["body"], "trans": r["trans"], "price": r["price"], "url": r["url"],
                   "last_seen": r["last_seen"], "days": listing_days(r, d(r["last_seen"]))[0]}
@@ -2203,6 +2269,28 @@ def sold_bands(comps, today):
             groups.setdefault(f'{c["family"]}|{"conv" if c["body"] == "conv" else "fixed"}', []).append(_i(c["cad"]))
     return {k: {"n": len(v), "p25": int(round(_quantile(v, .25), -2)), "med": int(round(_median(v), -2)),
                 "p75": int(round(_quantile(v, .75), -2))} for k, v in groups.items() if len(v) >= 3}
+
+
+def sold_history(comps):
+    """Sold prices over time per generation (Bring a Trailer, in CAD): [half-year, median, p25, p75, sales, manual share]
+    for halves with at least 3 sales, oldest first."""
+    groups = {}
+    for c in comps:
+        sd = d(c["sold"])
+        if not sd or not _i(c["cad"]):
+            continue
+        groups.setdefault(c["family"], {}).setdefault(f"{sd.year}-H{1 if sd.month <= 6 else 2}", []).append(c)
+    out = {}
+    for fam, halves in groups.items():
+        rows = []
+        for h in sorted(halves):
+            v = [_i(c["cad"]) for c in halves[h]]
+            if len(v) >= 3:
+                rows.append([h, int(round(_median(v), -2)), int(round(_quantile(v, .25), -2)), int(round(_quantile(v, .75), -2)),
+                             len(v), round(sum(c["trans"] == "m" for c in halves[h]) / len(v), 2)])
+        if len(rows) >= 2:
+            out[fam] = rows
+    return out
 
 
 # --------------------------------------------------------------------------------------------
@@ -2922,6 +3010,9 @@ def run(args):
             run_info.append(f"Sold prices: {stats['comps_new']} new Bring a Trailer results "
                             f"({stats['comps_pages']} pages read), {stats['comps_total']} stored")
         for source, base, n in stats["searches"]:
+            if n == 0 and source in JSON_SEARCH:          # NaPista/Mobiauto pages that exist: simply none for sale today
+                run_info.append(f"   {n!s:>8} ads  {base}  (none for sale today)")
+                continue
             flag = "  <-- check this search" if (n == 0 or isinstance(n, str)) else ""
             run_info.append(f"   {n!s:>8} ads  {base}{flag}")
     else:

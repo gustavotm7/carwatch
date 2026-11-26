@@ -113,7 +113,6 @@
         "desc": "Toyota Yaris sedan (Brazil) 2018-2024", "trims": [["\\bxls\\b", "XLS"], ["\\bxs\\b", "XS"], ["\\bxl\\b", "XL"], ["\\blive\\b", "Live"]]}
      ],
      "searches": {"napista": ["https://napista.com.br/busca/toyota/yaris/manual",
-                              "https://napista.com.br/busca/toyota/yaris/2018",
                               "https://napista.com.br/busca/toyota/yaris/2019",
                               "https://napista.com.br/busca/toyota/yaris/2020",
                               "https://napista.com.br/busca/toyota/yaris/2021",
@@ -121,7 +120,6 @@
                               "https://napista.com.br/busca/toyota/yaris/2023",
                               "https://napista.com.br/busca/toyota/yaris/2024"],
                   "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/yaris/s/cambio-manual",
-                               "https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/yaris/ano-2018/s/cambio-automatico",
                                "https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/yaris/ano-2019/s/cambio-automatico",
                                "https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/yaris/ano-2020/s/cambio-automatico",
                                "https://www.mobiauto.com.br/comprar/carros-usados/brasil/toyota/yaris/ano-2021/s/cambio-automatico",

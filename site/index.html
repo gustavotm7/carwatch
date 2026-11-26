@@ -383,6 +383,7 @@ ul.facts-list.plain .dot{display:inline-block;width:9px;height:9px;border-radius
 .none{color:var(--dim);font-size:14px}
 .primary{display:block;width:100%;margin-top:20px;padding:13px;border-radius:12px;background:var(--text);color:var(--bg);
   font:700 18px/1 var(--cond);letter-spacing:.03em;text-align:center;text-decoration:none}
+a.secondary{display:block;width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1px solid var(--line);color:var(--text);text-align:center;font:600 16px/1.2 var(--cond);text-decoration:none}
 .close{position:absolute;right:10px;top:10px}
 
 .opt-group{display:flex;flex-wrap:wrap;gap:8px}
@@ -1050,7 +1051,7 @@ function card(c) {
       <span class="nophoto"${c.photos.length ? " hidden" : ""}>${L("No photo", "Sem foto")}</span>
       <span class="name" style="--c:${col}">${esc(c.name)}</span>
       ${gauge(scoreOf(c))}
-      <span class="src">${site.domain ? `<img src="https://www.google.com/s2/favicons?domain=${site.domain}&sz=64" alt="" loading="lazy">` : ""}${esc(site.label)}</span>
+      <span class="src">${site.domain ? `<img src="https://www.google.com/s2/favicons?domain=${site.domain}&sz=64" alt="" loading="lazy">` : ""}${esc(site.label)}${(c.also || []).map(a => " + " + esc((SITES[a.source] || {label: a.source}).label)).join("")}</span>
       <span class="tags">${c.shared ? `<span class="tag grp">${L("Group", "Grupo")}</span>` : c.mine ? `<span class="tag grp">${L("Saved", "Salvo")}</span>`
         : isNew(c) ? `<span class="tag new">${L("New", "Novo")}</span>` : ""}${change}${daysTag(c)}</span>
     </div>
@@ -1795,12 +1796,15 @@ function detailSheet(c) {
       <dt>Km</dt><dd>${c.km != null ? kmFull(c.km) : L("n/a", "n/d")}</dd>
       <dt>${L("Body", "Carroceria")}</dt><dd>${BD()[c.body] || L("n/a", "n/d")}</dd>
       <dt>${L("Location", "Localização")}</dt><dd>${esc(c.place || L("n/a", "n/d"))}</dd>
-      <dt>${L("Listed on", "Site")}</dt><dd>${esc(site.label)}${c.listed ? `, ${fmtDate(c.listed)}` : ""}</dd>
+      <dt>${L("Listed on", "Site")}</dt><dd>${esc(site.label)}${c.listed ? `, ${fmtDate(c.listed)}` : ""}${(c.also || []).map(a =>
+        `<br>${L("Also on", "Também no")} ${esc((SITES[a.source] || {label: a.source}).label)}: ${money(a.price)}${a.price === c.price ? "" : a.price > c.price
+          ? L(` (${money(a.price - c.price)} more)`, ` (${money(a.price - c.price)} a mais)`) : ""}`).join("")}</dd>
       ${ext ? `<dt>${c.shared ? L("Shared", "Compartilhado em") : L("Saved", "Salvo em")}</dt><dd>${fmtDate(c.first_seen)}</dd>` : `
       <dt>${L("First seen", "Visto pela 1ª vez")}</dt><dd>${PT() ? fmtDate(c.first_seen) : esc(c.first_seen)}</dd>
       <dt>${L("Last checked", "Última verificação")}</dt><dd>${PT() ? fmtDate(c.verified || c.last_seen) : esc(c.verified || c.last_seen)}</dd>`}
     </dl>
     ${c.url ? `<a class="primary" href="${esc(c.url)}" target="_blank" rel="noopener">${site.label ? L(`Open ad on ${esc(site.label)}`, `Abrir anúncio (${esc(site.label)})`) : L("Open the ad", "Abrir o anúncio")}</a>` : ""}
+    ${(c.also || []).map(a => `<a class="secondary" href="${esc(a.url)}" target="_blank" rel="noopener">${L(`Same car on ${esc((SITES[a.source] || {label: a.source}).label)}`, `Mesmo carro no ${esc((SITES[a.source] || {label: a.source}).label)}`)}</a>`).join("")}
     ${ext ? extActions(c) : ""}`, L("Car details", "Detalhes do carro"));
   if (ext) bindExt(c);
 }
@@ -2295,6 +2299,31 @@ function priceCuts(cars) {
     <ul class="rows">${recent.map(({c, d, from}) => carRow(c, `${money(from)} → ${money(c.price)} (${pctTxt(c.price / from - 1, 1)}), ${fmtShort(d)}`)).join("")}</ul>`;
 }
 
+// Sold prices over time (Bring a Trailer, half-years): median line over the middle-half band
+function soldTrend(mk) {
+  const h = DATA.sold_hist?.[(mk || "").split("|")[0]];
+  if (!h || h.length < 2) return "";
+  const W = 340, H = 150, PL = 46, PR = 14, PT = 12, PB = 24;
+  const [y0, y1, ty] = niceDomain(Math.min(...h.map(x => x[2])), Math.max(...h.map(x => x[3])), 3);
+  const X = i => PL + i / (h.length - 1) * (W - PL - PR), Y = v => PT + (y1 - v) / (y1 - y0) * (H - PT - PB);
+  const band = h.map((x, i) => `${X(i).toFixed(1)},${Y(x[3]).toFixed(1)}`).join(" ") + " "
+             + h.map((x, i) => `${X(i).toFixed(1)},${Y(x[2]).toFixed(1)}`).reverse().join(" ");
+  const lab = x => x[0].slice(2, 4) + " " + x[0].slice(5);
+  const last = h.length - 1, chg = h[last][1] / h[0][1] - 1;
+  const svg = `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L("Median sold price by half-year", "Preço de venda mediano por semestre")}">
+    ${ty.map(v => `<line x1="${PL}" x2="${W - PR}" y1="${Y(v)}" y2="${Y(v)}" stroke="${VIZ.grid}"/><text x="${PL - 6}" y="${Y(v) + 4}" text-anchor="end">${kShort(v)}</text>`).join("")}
+    <polygon points="${band}" fill="${VIZ.blue}" opacity=".18"/>
+    <polyline points="${h.map((x, i) => `${X(i).toFixed(1)},${Y(x[1]).toFixed(1)}`).join(" ")}" fill="none" stroke="${VIZ.blue}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    ${h.map((x, i) => `<g><circle cx="${X(i)}" cy="${Y(x[1])}" r="${i === last ? 4 : 3}" fill="${VIZ.blue}" stroke="var(--surface)" stroke-width="2"/>
+      <circle cx="${X(i)}" cy="${Y(x[1])}" r="14" fill="transparent"><title>${esc(x[0])}: ${money(x[1])} ${L("median", "mediana")}, ${x[4]} ${L("sold", "vendidos")}, ${Math.round(x[5] * 100)}% ${L("manual", "manuais")}</title></circle></g>`).join("")}
+    ${h.map((x, i) => i % Math.ceil(h.length / 4) && i !== last ? "" : `<text x="${X(i)}" y="${H - 6}" text-anchor="${i === 0 ? "start" : i === last ? "end" : "middle"}">${lab(x)}</text>`).join("")}</svg>`;
+  return anaSection(L("Sold prices over time", "Preços de venda ao longo do tempo"),
+    L("Bring a Trailer results for this generation, in CAD. Line: median sale each half-year. Band: the middle half of the sales.",
+      "Resultados do Bring a Trailer desta geração, em CAD. Linha: venda mediana por semestre. Faixa: a metade central das vendas."),
+    svg + `<p class="fine">${L(`Median ${money(h[0][1])} in ${lab(h[0])}, ${money(h[last][1])} in ${lab(h[last])} (${pctTxt(chg, 1)}), from ${h.reduce((a, x) => a + x[4], 0)} sales. The mix of km, condition and gearbox changes between halves, so read it as a direction, not an exact price.`,
+      `Mediana de ${money(h[0][1])} em ${lab(h[0])}, ${money(h[last][1])} em ${lab(h[last])} (${pctTxt(chg, 1)}), de ${h.reduce((a, x) => a + x[4], 0)} vendas. A mistura de km, estado e câmbio muda entre semestres, então leia como tendência, não como preço exato.`)}</p>`);
+}
+
 // Weekly market: price level against today's fair price, and ads on sale (two charts, one scale each)
 function trend(mk) {
   const w = (DATA.market?.[mk]?.weeks || []).filter(x => x[2] != null);
@@ -2740,6 +2769,7 @@ function pricesView() {
     + (versionLadder(mk, cars) ? anaSection(L("Versions", "Versões"), "", versionLadder(mk, cars)) : "")
     + anaSection(L("Time on sale", "Tempo à venda"), L("Ads by days since they went up.", "Anúncios por dias desde a publicação."), timeListed(use, here ? cars : null))
     + anaSection(L("Price changes", "Mudanças de preço"), "", priceCuts(use))
+    + soldTrend(mk)
     + anaSection(L("Market week by week", "Mercado semana a semana") + brT, "", trend(mk))
     + anaSection(L("Ads that left", "Anúncios que saíram") + brT, L("Ads that disappeared from the sites, often because they sold.",
         "Anúncios que sumiram dos sites, muitas vezes porque foram vendidos."), leftMarket(cars, mk))
