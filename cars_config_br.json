@@ -98,7 +98,7 @@
         "split": [{"match": "\\bsi\\b", "family": "FB_SI", "daily": false, "name": "FB Civic Si", "color": "#D86797", "allow_auto": false, "body": "coupe",
                    "desc": "Honda Civic Si 9th gen (2.4, manual); sold in Brazil as a coupe only", "trims": [["\\bsi\\b", "Si"]]}]}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/honda/civic/2007/manual", "https://napista.com.br/busca/honda/civic/2008/manual", "https://napista.com.br/busca/honda/civic/2009/manual", "https://napista.com.br/busca/honda/civic/2010/manual", "https://napista.com.br/busca/honda/civic/2011/manual", "https://napista.com.br/busca/honda/civic/2012/manual", "https://napista.com.br/busca/honda/civic/2013/manual", "https://napista.com.br/busca/honda/civic/2014/manual", "https://napista.com.br/busca/honda/civic/2015/manual", "https://napista.com.br/busca/honda/civic/2016/manual", "https://napista.com.br/busca/honda/civic/2012", "https://napista.com.br/busca/honda/civic/2013", "https://napista.com.br/busca/honda/civic/2014", "https://napista.com.br/busca/honda/civic/2015", "https://napista.com.br/busca/honda/civic/2016", "https://napista.com.br/busca/honda/civic/si"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2008/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2010/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2012/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2014/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2016/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2012/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2013/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2014/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2015/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2016/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2018/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2019/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2020/s/cambio-manual"]},
+     "searches": {"napista": ["https://napista.com.br/busca/honda/civic/2007/manual", "https://napista.com.br/busca/honda/civic/2008/manual", "https://napista.com.br/busca/honda/civic/2009/manual", "https://napista.com.br/busca/honda/civic/2010/manual", "https://napista.com.br/busca/honda/civic/2011/manual", "https://napista.com.br/busca/honda/civic/2012/manual", "https://napista.com.br/busca/honda/civic/2013/manual", "https://napista.com.br/busca/honda/civic/2014/manual", "https://napista.com.br/busca/honda/civic/2015/manual", "https://napista.com.br/busca/honda/civic/2016/manual", "https://napista.com.br/busca/honda/civic/2012", "https://napista.com.br/busca/honda/civic/2013", "https://napista.com.br/busca/honda/civic/2014", "https://napista.com.br/busca/honda/civic/2015", "https://napista.com.br/busca/honda/civic/2016", "https://napista.com.br/busca/honda/civic/si"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2008/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2010/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2012/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2014/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2016/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2012/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2013/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2014/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2015/s/cambio-automatico", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/honda/civic/ano-2016/s/cambio-automatico"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/honda/civic?gb=1"],
                ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/honda/civic/de.2007/cambio.manual"],
                ["Mercado Livre", "https://lista.mercadolivre.com.br/honda-civic-manual"]],
@@ -653,7 +653,7 @@
        {"family": "GOL_GTS", "years": [1987, 1994], "name": "G1 Gol GTS", "color": "#A9D2FE", "smg_risk": false,
         "desc": "VW Gol GTS 1987-1994, AP 1.8 (94-99 cv): the Escort XR3's rival"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/volkswagen/gol/gts"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1987/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1988/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1989/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1990/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1991/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1992/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1993/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1994/s/cambio-manual"]},
+     "searches": {"mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1987/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1988/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1989/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1990/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1991/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1992/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1993/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/gol/ano-1994/s/cambio-manual"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=gol%20gts"], ["Mercado Livre", "https://lista.mercadolivre.com.br/gol-gts"]]},
 
     {"enabled": true, "model": "Golf GTI", "brand": "Volkswagen", "recheck": true, "match": ["\\bgolf\\b", "\\bgti\\b"], "none": ["\\bvr6\\b|polo|jetta|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
@@ -662,7 +662,7 @@
        {"family": "GOLF4_GTI", "years": [1999, 2008], "name": "Mk4 Golf GTI", "color": "#8DBEF1", "smg_risk": false, "code": "\\bmk ?4\\b|\\bmk ?iv\\b|1\\.8 ?t",
         "desc": "VW Golf GTI Mk4 (built in Brazil) 1999-2008, 1.8 20V turbo (180 cv; 193 cv on high-octane fuel from 2007)"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/volkswagen/golf/gti"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/golf/s/cambio-manual"]},
+     "searches": {"napista": ["https://napista.com.br/busca/volkswagen/golf/gti"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/golf/ano-2000/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/golf/ano-2001/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/golf/ano-2002/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/golf/ano-2003/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/golf/ano-2004/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/golf/ano-2005/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/golf/ano-2006/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/golf/ano-2007/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/volkswagen/golf/ano-2008/s/cambio-manual"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=golf%20gti%20manual"], ["Webmotors", "https://www.webmotors.com.br/carros-usados/estoque/volkswagen/golf/gti"], ["Mercado Livre", "https://lista.mercadolivre.com.br/golf-gti-manual"]]},
 
     {"enabled": true, "model": "Escort XR3", "brand": "Ford", "recheck": true, "match": ["\\bescort\\b", "\\bxr ?3\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
@@ -728,7 +728,7 @@
        {"family": "UNO_TURBO", "years": [1994, 1996], "name": "Uno Turbo i.e.", "color": "#FFA2A9", "smg_risk": false,
         "desc": "Fiat Uno Turbo i.e. 1994-1996, 1.4 turbo (118 cv): Brazil's first factory turbo"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/fiat/uno/turbo"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/uno/ano-1994/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/uno/ano-1995/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/uno/ano-1996/s/cambio-manual"]},
+     "searches": {"napista": ["https://napista.com.br/busca/fiat/uno/1994", "https://napista.com.br/busca/fiat/uno/1995", "https://napista.com.br/busca/fiat/uno/1996"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/uno/ano-1994/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/uno/ano-1995/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/uno/ano-1996/s/cambio-manual"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=uno%20turbo"], ["Mercado Livre", "https://lista.mercadolivre.com.br/uno-turbo"]]},
 
     {"enabled": true, "model": "Tempra Turbo", "brand": "Fiat", "recheck": true, "match": ["\\btempra\\b", "\\bturbo\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
@@ -737,7 +737,7 @@
        {"family": "TEMPRA_TURBO", "years": [1994, 1996], "name": "Tempra Turbo", "color": "#FEB9BD", "smg_risk": false,
         "desc": "Fiat Tempra Turbo 1994-1996, 2.0 8V turbo (165 cv); two-door body unique to Brazil"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/fiat/tempra/turbo"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/tempra"]},
+     "searches": {"napista": ["https://napista.com.br/busca/fiat/tempra"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/tempra"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=tempra%20turbo"], ["Mercado Livre", "https://lista.mercadolivre.com.br/tempra-turbo"]]},
 
     {"enabled": true, "model": "Marea Turbo", "brand": "Fiat", "recheck": true, "match": ["\\bmarea\\b", "\\bturbo\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
@@ -746,7 +746,7 @@
        {"family": "MAREA_TURBO", "years": [1999, 2006], "name": "Marea Turbo", "color": "#F5929A", "smg_risk": false,
         "desc": "Fiat Marea Turbo and Weekend Turbo 1999-2006, 2.0 20V five-cylinder turbo (182 cv)"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/fiat/marea/turbo"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/marea/s/cambio-manual"]},
+     "searches": {"napista": ["https://napista.com.br/busca/fiat/marea/manual"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/marea"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=marea%20turbo"], ["Mercado Livre", "https://lista.mercadolivre.com.br/marea-turbo"]]},
 
     {"enabled": true, "model": "Punto T-Jet", "brand": "Fiat", "recheck": true, "match": ["\\bpunto\\b", "t ?jet\\b"], "none": ["\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
@@ -755,7 +755,7 @@
        {"family": "PUNTO_TJET", "years": [2009, 2017], "name": "Punto T-Jet", "color": "#E6858D", "smg_risk": false,
         "desc": "Fiat Punto T-Jet 2009-2017, 1.4 16V turbo (152 cv), 5-speed manual"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/fiat/punto/t-jet"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/punto/s/cambio-manual"]},
+     "searches": {"napista": ["https://napista.com.br/busca/fiat/punto/t-jet"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=punto%20t-jet"], ["Mercado Livre", "https://lista.mercadolivre.com.br/punto-t-jet"]]},
 
     {"enabled": true, "model": "Sandero R.S.", "brand": "Renault", "recheck": true, "match": ["\\bsandero\\b", "\\br\\.? ?s\\b|\\brs\\b"], "none": ["stepway|gt ?line|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
@@ -782,7 +782,7 @@
        {"family": "KA_SPORT", "years": [2008, 2021], "name": "Ka Sport", "color": "#94BCD9", "smg_risk": false,
         "desc": "Ford Ka Sport (1.6 hatch)"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/ford/ka/sport"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/ford/ka/s/cambio-manual"]},
+     "searches": {"napista": ["https://napista.com.br/busca/ford/ka/sport"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=ka%20sport"], ["Mercado Livre", "https://lista.mercadolivre.com.br/ford-ka-sport"]]},
 
     {"enabled": true, "model": "208 GT", "brand": "Peugeot", "recheck": true, "match": ["\\b208\\b", "\\bgt\\b|\\bgti\\b"], "none": ["gt ?line|griffe|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
@@ -791,7 +791,7 @@
        {"family": "P208_GT", "years": [2015, 2019], "name": "208 GT 1.6 THP", "color": "#7DC3C2", "smg_risk": false,
         "desc": "Peugeot 208 GT, 1.6 THP turbo, 6-speed manual"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/peugeot/208/gt"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/peugeot/208/s/cambio-manual"]},
+     "searches": {"napista": ["https://napista.com.br/busca/peugeot/208/2015/manual", "https://napista.com.br/busca/peugeot/208/2016/manual", "https://napista.com.br/busca/peugeot/208/2017/manual", "https://napista.com.br/busca/peugeot/208/2018/manual", "https://napista.com.br/busca/peugeot/208/2019/manual"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=208%20gt%20thp"], ["Mercado Livre", "https://lista.mercadolivre.com.br/peugeot-208-gt"]]},
 
     {"enabled": true, "model": "500 Abarth", "brand": "Fiat", "recheck": true, "match": ["\\b500\\b", "\\babarth\\b"], "none": ["pulse|fastback|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
@@ -800,7 +800,7 @@
        {"family": "F500_ABARTH", "years": [2014, 2019], "name": "500 Abarth", "color": "#D87880", "smg_risk": false,
         "desc": "Fiat 500 Abarth, 1.4 turbo MultiAir, 5-speed manual"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/fiat/500/abarth"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/fiat/500"]},
+     "searches": {"napista": ["https://napista.com.br/busca/fiat/500/abarth"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=500%20abarth"], ["Mercado Livre", "https://lista.mercadolivre.com.br/fiat-500-abarth"]]},
 
     {"enabled": true, "model": "Puma GT", "brand": "Puma", "recheck": true, "match": ["\\bpuma\\b"], "none": ["\\bgtb\\b|caminh|\\bmoto\\b|tenis|\\bp ?0?18\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
@@ -809,7 +809,7 @@
        {"family": "PUMA_GT", "years": [1968, 1985], "name": "Puma GTE / GTS", "color": "#99C191", "smg_risk": false,
         "desc": "Puma GT (VW air-cooled): GTE coupe and GTS convertible, later GTI and GTC"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/puma"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/puma"]},
+     "searches": {"napista": ["https://napista.com.br/busca/puma"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=puma%20gte"], ["Mercado Livre", "https://lista.mercadolivre.com.br/puma-gts"]]},
 
     {"enabled": true, "model": "3 Series (E36)", "brand": "BMW", "recheck": true, "match": ["\\b3(18|20|23|25|28) ?(i|is|ia|ti)\\b|\\be36\\b|\\bserie ?3\\b"], "none": ["\\bm3\\b|\\be46\\b|\\be90\\b|\\be30\\b|\\bz3\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
@@ -818,7 +818,7 @@
        {"family": "E36_3", "years": [1992, 1998], "name": "E36 3 Series", "color": "#CCC2FF", "smg_risk": false, "code": "\\be36\\b",
         "desc": "BMW 3 Series E36 1992-1998 (not M3): 318i/is/ti, 320i, 325i, 328i"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/bmw/series-3"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1992/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1993/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1994/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1995/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1996/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1997/s/cambio-manual", "https://www.mobiauto.com.br/comprar/carros-usados/brasil/bmw/serie-3/ano-1998/s/cambio-manual"]},
+     "searches": {"napista": ["https://napista.com.br/busca/bmw/series-3/manual"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=bmw%20e36"], ["Mercado Livre", "https://lista.mercadolivre.com.br/bmw-e36"]]},
 
     {"enabled": true, "model": "Impreza WRX", "brand": "Subaru", "recheck": true, "match": ["\\bwrx\\b"], "none": ["\\bsti\\b|\\bs ?ti\\b|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
@@ -827,7 +827,7 @@
        {"family": "WRX_GR", "years": [2008, 2014], "name": "GR WRX", "color": "#8FB1FC", "smg_risk": false, "code": "\\bg[ehrv]\\b",
         "desc": "Subaru Impreza WRX (GE/GH/GR/GV) 2008-2014, 2.5 turbo boxer, 5-speed manual"}
      ],
-     "searches": {"napista": ["https://napista.com.br/busca/subaru/impreza", "https://napista.com.br/busca/subaru/wrx"], "mobiauto": ["https://www.mobiauto.com.br/comprar/carros-usados/brasil/subaru/impreza"]},
+     "searches": {"napista": ["https://napista.com.br/busca/subaru/wrx"]},
      "links": [["OLX", "https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=impreza%20wrx"], ["Mercado Livre", "https://lista.mercadolivre.com.br/subaru-impreza-wrx"]]},
 
     {"enabled": true, "model": "TT", "brand": "Audi", "recheck": true, "match": ["\\btt\\b"], "none": ["\\btts\\b|\\btt ?rs\\b|\\b2\\.0\\b ?tfsi|\\bwanted\\b|\\bwtb\\b|\\bbuying\\b|parting|part ?out|parts ?car|\\bshell\\b|rolling ?chassis|\\broller\\b|\\bpecas\\b|sucata"],
