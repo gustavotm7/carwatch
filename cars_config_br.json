@@ -81,9 +81,9 @@
     {"enabled": true, "model": "Civic", "brand": "Honda", "recheck": true, "make": "honda", "match": ["\\bcivic\\b"], "none": ["\\bhatch|type ?r"],
      "bodies": ["sedan", "coupe"],
      "generations": [
-       {"family": "FA5", "bodies": ["sedan"], "fipe": {"brand": "Honda", "match": "^Civic Sed.*\\b(1\\.8|2\\.0)\\b", "versions": true}, "years": [2007, 2011], "name": "FA5 Civic", "color": "#E884AD", "smg_risk": false,
+       {"family": "FA5", "bodies": ["sedan"], "daily": true, "fipe": {"brand": "Honda", "match": "^Civic Sed.*\\b(1\\.8|2\\.0)\\b", "versions": true}, "years": [2007, 2011], "name": "FA5 Civic", "color": "#E884AD", "smg_risk": false,
         "desc": "Honda Civic 8th gen sedan 2007-2011", "trims": [["\\bsi\\b", "Si"], ["\\bexs\\b", "EXS"], ["\\blxl\\b", "LXL"], ["\\blxs\\b", "LXS"]],
-        "split": [{"match": "\\bsi\\b", "family": "FA5_SI", "name": "FA5 Civic Si", "color": "#DF6E9E",
+        "split": [{"match": "\\bsi\\b", "family": "FA5_SI", "daily": false, "name": "FA5 Civic Si", "color": "#DF6E9E",
                    "desc": "Honda Civic Si 8th gen sedan (2.0, manual)", "trims": [["\\bsi\\b", "Si"]]}]},
        {"family": "FG4_SI", "years": [2012, 2015], "name": "FG4 Civic Si coupe", "color": "#DD7BA3", "smg_risk": false, "code": "\\bfg4\\b",
         "need": "\\bsi\\b",

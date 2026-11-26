@@ -146,10 +146,10 @@
       "none": ["hatch|\\bhb\\b|\\b5 ?(dr|door|portes)\\b|type ?r|hybrid|hybride|del ?sol"],
       "none_body": ["hatch"], "bodies": ["sedan", "coupe"],
       "generations": [
-        {"family": "FA5", "bodies": ["sedan"], "years": [2006, 2011], "name": "FA5 Civic", "color": "#E884AD", "smg_risk": false,
+        {"family": "FA5", "bodies": ["sedan"], "daily": true, "years": [2006, 2011], "name": "FA5 Civic", "color": "#E884AD", "smg_risk": false,
          "desc": "Honda Civic 8th gen sedan 2006-2011",
          "trims": [["\\bsi\\b", "Si"], ["\\bex ?l\\b", "EX-L"], ["\\bsport\\b", "Sport"], ["\\bex\\b", "EX"], ["\\blx\\b", "LX"], ["\\bdx ?g\\b", "DX-G"], ["\\bdx\\b", "DX"]],
-         "split": [{"match": "\\bsi\\b", "family": "FA5_SI", "name": "FA5 Civic Si", "color": "#DF6E9E",
+         "split": [{"match": "\\bsi\\b", "family": "FA5_SI", "daily": false, "name": "FA5 Civic Si", "color": "#DF6E9E",
                     "desc": "Honda Civic Si 8th gen sedan (2.0, manual)", "trims": [["\\bsi\\b", "Si"]]}]},
         {"family": "FB", "bodies": ["sedan"], "daily": true, "years": [2012, 2015], "name": "FB Civic", "color": "#E17EA6", "smg_risk": false,
          "desc": "Honda Civic 9th gen sedan 2012-2015",
