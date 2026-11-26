@@ -166,6 +166,15 @@ span.dot{display:none!important}
 .gc-d{display:block;margin-top:2px}
 .gc.add{justify-content:center;align-items:center;gap:8px;padding:14px;min-height:150px;border-style:dashed;color:var(--muted);text-align:center;font-size:13px}
 .gc.add svg{opacity:.8}
+.visit{display:flex;align-items:center;gap:10px;padding:11px 12px 11px 14px;margin-bottom:12px;border-radius:14px;background:var(--raised);font-size:14px}
+.visit button{padding:8px 14px;border-radius:999px;background:var(--text);color:var(--bg);font-weight:600;margin-left:auto}
+.visit button.x{margin-left:0;padding:8px;background:none;color:var(--text);opacity:.7}
+.visit button.x svg{width:14px;height:14px;display:block}
+.alerts{list-style:none;margin:8px 0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+.alerts li{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;background:var(--raised)}
+.alerts li span{flex:1;min-width:0;display:flex;flex-direction:column}
+.alerts small{color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.alerts .chip{text-decoration:none;padding:7px 11px;min-height:34px;font-size:14px}
 .pk-sort{display:flex;gap:8px;margin-top:10px;overflow-x:auto;scrollbar-width:none}
 .pk-sort .opt{flex:none}
 .md{border-top:1px solid var(--line)}
@@ -1075,6 +1084,7 @@ const ICON = {
   search: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.5 10.5 3.5 3.5"/></svg>',
   x: '<svg class="x" width="12" height="12" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 3l6 6M9 3 3 9"/></svg>',
   check: '<svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#10151c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 7.4 2.7 2.6L11 4.4"/></svg>',
+  bell: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 14V9a5 5 0 0 1 10 0v5l1.5 2h-13zM8 17.5a2 2 0 0 0 4 0"/></svg>',
   star: '<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.6l2.3 4.8 5.2.7-3.8 3.6.9 5.2L10 14.4l-4.6 2.5.9-5.2-3.8-3.6 5.2-.7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
 };
 const gKey = () => "cw-garage-" + COUNTRY;
@@ -1202,7 +1212,67 @@ function garageHTML() {                         // your starred models as cards:
         <span class="gc-s">${nf(st(m).n)} ${L(st(m).n === 1 ? "ad" : "ads", st(m).n === 1 ? "anúncio" : "anúncios")}${st(m).f ? `, ${nf(st(m).f)} ${L("new", st(m).f === 1 ? "novo" : "novos")}` : ""}</span>
         ${st(m).b != null ? `<span class="gc-d">${bestTxt(st(m).b)}</span>` : ""}</span></button>`;
   return `<div class="garage" role="group" aria-label="${L("Your garage", "Sua garagem")}">${cards.map(card).join("")}
-    <button class="gc add" type="button" data-pick>${ICON.star}<span>${cards.length ? L("Add cars", "Adicionar") : L("Star cars to keep them here", "Marque carros com a estrela para deixá-los aqui")}</span></button></div>`;
+    <button class="gc add" type="button" data-pick>${ICON.star}<span>${cards.length ? L("Add cars", "Adicionar") : L("Star cars to keep them here", "Marque carros com a estrela para deixá-los aqui")}</span></button>
+    ${cards.length && !prices ? `<button class="gc add" type="button" data-alerts>${ICON.bell}<span>${L("Phone alerts", "Alertas no celular")}</span></button>` : ""}</div>`;
+}
+// Phone alerts: the collector posts each model's new ads and price cuts to its own ntfy.sh topic once a day
+const alertTopic = m => `carwatch-${COUNTRY.toLowerCase()}-${(m.brand + " " + m.model).toLowerCase().normalize("NFKD")
+  .replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}${m.daily ? "-daily" : ""}`;
+function alertsSheet() {
+  const M = modelsHere(), ms = garageKeys().map(k => M.get(k)).filter(Boolean);
+  openSheet(`<h2>${L("Phone alerts", "Alertas no celular")}</h2>
+    <p class="sub">${L("Once a day, after the update, CarWatch sends each starred car's new ads and price cuts to ntfy, a free notification app. Nothing to sign up for.",
+      "Uma vez por dia, depois da atualização, o CarWatch envia os anúncios novos e as baixas de preço de cada carro marcado para o ntfy, um app de notificações gratuito. Sem cadastro.")}</p>
+    <h3>${L("1. Install ntfy", "1. Instale o ntfy")}</h3>
+    <p><a href="https://play.google.com/store/apps/details?id=io.heckel.ntfy" target="_blank" rel="noopener">Android</a> · <a href="https://apps.apple.com/app/id1625396347" target="_blank" rel="noopener">iPhone</a></p>
+    <h3>${L("2. Subscribe to your cars", "2. Assine seus carros")}</h3>
+    <p class="fine">${L("Android: tap Subscribe. iPhone: tap Copy, then in ntfy tap + and paste the name.", "Android: toque em Assinar. iPhone: toque em Copiar e, no ntfy, toque em + e cole o nome.")}</p>
+    ${ms.length ? `<ul class="alerts">${ms.map(m => `<li><span><b>${esc(m.brand)} ${esc(m.model)}</b><small>${esc(alertTopic(m))}</small></span>
+      <a class="chip" href="ntfy://ntfy.sh/${esc(alertTopic(m))}">${L("Subscribe", "Assinar")}</a>
+      <button class="chip" type="button" data-copy="${esc(alertTopic(m))}">${L("Copy", "Copiar")}</button></li>`).join("")}</ul>`
+      : `<p class="none">${L("Star a car first: its alerts appear here.", "Marque um carro primeiro: os alertas dele aparecem aqui.")}</p>`}
+    <p class="fine">${L("Each alert covers the whole model, every generation. Anyone with a topic name can read it, and it only carries public ad details.",
+      "Cada alerta cobre o modelo inteiro, todas as gerações. Quem souber o nome do tópico pode lê-lo, e ele só traz dados públicos dos anúncios.")}</p>`,
+    L("Phone alerts", "Alertas no celular"));
+}
+// Since your last visit: new ads and price cuts among the starred cars
+const visitKey = () => "cw-visit-" + COUNTRY;
+function inGarage(c) {
+  const n = DATA.names.find(x => x.name === c.name);
+  if (!n) return false;
+  const e = garageList().find(x => x.k === mKey(n));
+  return !!e && (!e.g || e.g.includes(c.name));
+}
+function sinceVisit() {
+  const day = lsGet(visitKey(), null);
+  if (!day) { lsSet(visitKey(), DATA.updated.slice(0, 10)); return null; }
+  const out = [];
+  for (const c of DATA.cars) {
+    if (!inGarage(c)) continue;
+    if (c.first_seen > day) out.push({c, cut: false, txt: L("new", "novo")});
+    else if (c.hist && c.hist.length > 1) {
+      const [d1, p1] = c.hist[c.hist.length - 1], p0 = c.hist[c.hist.length - 2][1];
+      if (d1 > day && p1 < p0) out.push({c, cut: true, txt: `${money(p0)} → ${money(p1)}`});
+    }
+  }
+  return {day, out};
+}
+function visitNote() {
+  const v = sinceVisit();
+  try { navigator.setAppBadge && (v && v.out.length ? navigator.setAppBadge(v.out.length) : navigator.clearAppBadge()); } catch (e) {}
+  if (!v || !v.out.length) return "";
+  const nNew = v.out.filter(x => !x.cut).length, nCut = v.out.length - nNew;
+  return `<div class="visit" role="status"><span>${L("Since", "Desde")} ${fmtShort(v.day)}: <b>${[nNew ? `${nNew} ${L(nNew === 1 ? "new ad" : "new ads", nNew === 1 ? "anúncio novo" : "anúncios novos")}` : "",
+      nCut ? `${nCut} ${L(nCut === 1 ? "price cut" : "price cuts", nCut === 1 ? "baixa de preço" : "baixas de preço")}` : ""].filter(Boolean).join(L(" and ", " e "))}</b> ${L("in your garage.", "na sua garagem.")}</span>
+    <button type="button" data-visit>${L("Show", "Ver")}</button><button type="button" class="x" data-visit-x aria-label="${L("Mark as seen", "Marcar como visto")}">${ICON.x}</button></div>`;
+}
+function visitSheet() {
+  const v = sinceVisit();
+  lsSet(visitKey(), DATA.updated.slice(0, 10));
+  openSheet(`<h2>${L("Since your last visit", "Desde sua última visita")}</h2>
+    <p class="sub">${L(`Starred cars, since ${fmtDate(v.day)}.`, `Carros marcados, desde ${fmtDate(v.day)}.`)}</p>
+    <ul class="rows">${v.out.map(x => carRow(x.c, `${esc(x.c.name)}, ${x.txt}`)).join("")}</ul>`, L("Since your last visit", "Desde sua última visita"));
+  render();
 }
 function fitChips() {                           // at most two lines; the rest goes behind "+N more"
   const row = $("#chips"), kids = [...row.children];
@@ -1263,7 +1333,7 @@ function render() {
   const locRow = locRowHTML();
   const where = LOC.active ? " " + esc(locLabel()) : "";
   const lvl = LOCAL ? `<span class="lvl">${L("Prices here", "Preços aqui")}: ${levelTxt(LOCAL.lv)} (${basisTxt()}). ${L("Scores and % use the local price.", "Notas e % usam o preço local.")}</span>` : "";
-  $("#list").innerHTML = autoNote + locRow + garageHTML() + others + (cars.length
+  $("#list").innerHTML = autoNote + locRow + visitNote() + garageHTML() + others + (cars.length
     ? `<div class="count">${cars.length === DATA.cars.length ? `${nf(cars.length)} ${word}` : `${nf(cars.length)} ${L("of", "de")} ${nf(DATA.cars.length)} ${word}`}${where}${lvl}</div><div id="more"></div>`
     : LOC.active
       ? `<div class="empty">${L(`No ${word}${where} with these filters.`, `Nenhum carro${AUTO ? " automático" : ""}${where} com estes filtros.`)}<br><button id="locEdit2">${L("Change distance or town", "Mudar distância ou cidade")}</button></div>`
@@ -3312,6 +3382,11 @@ document.addEventListener("click", e => {
   }
   const chk = t.closest("[data-checklist]");
   if (chk) return checklistSheet(chk.dataset.checklist);
+  if (t.closest("[data-alerts]")) return alertsSheet();
+  if (t.closest("[data-visit]")) return visitSheet();
+  if (t.closest("[data-visit-x]")) { lsSet(visitKey(), DATA.updated.slice(0, 10)); return render(); }
+  const cp = t.closest("[data-copy]");
+  if (cp) { navigator.clipboard?.writeText(cp.dataset.copy).then(() => { cp.textContent = L("Copied", "Copiado"); }).catch(() => {}); return; }
   const carB = t.closest("[data-car]");
   if (carB) return detailSheet(DATA.cars.find(c => c.id === carB.dataset.car));
   const anaRow = t.closest("[data-ana]");

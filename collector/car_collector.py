@@ -2294,6 +2294,71 @@ def sold_history(comps):
 
 
 # --------------------------------------------------------------------------------------------
+# Phone alerts (ntfy.sh): one topic per model, so a phone subscribes only to the cars it starred
+# --------------------------------------------------------------------------------------------
+NTFY = "https://ntfy.sh/"
+
+
+def alert_topic(brand, model, daily=False):
+    """carwatch-ca-nissan-350z; the app builds the same name for its Subscribe link."""
+    s = unicodedata.normalize("NFKD", f"{brand} {model}".lower())
+    s = re.sub(r"[^a-z0-9]+", "-", "".join(ch for ch in s if not unicodedata.combining(ch))).strip("-")
+    return f'carwatch-{COUNTRY["country"].lower()}-{s}' + ("-daily" if daily else "")
+
+
+def phone_alerts(sess, rows, today):
+    """Today's new ads and price cuts, one message per model topic (at most 6 cars listed)."""
+    where = {}
+    for m in MODELS:
+        brand = m.get("brand") or m["model"]
+        for g in m["generations"]:
+            where[g["family"]] = alert_topic(brand, m["model"], bool(g.get("daily")))
+            for sp in g.get("split", []):
+                where[sp["family"]] = alert_topic(brand, m["model"], bool(sp.get("daily", g.get("daily"))))
+    cap, br = MAX_PRICE.get(COUNTRY["country"], 10 ** 7), COUNTRY["country"] == "BR"
+    sym = "R$ " if br else "$"
+    money = lambda v: sym + (f"{int(v):,}".replace(",", "." if br else ","))
+    events, seen = {}, set()
+    for r in rows:
+        if r["status"] != "active" or not r["price"] or int(r["price"]) > cap or r["family"] not in where:
+            continue
+        dup = (r["family"], r["year"], r["km"], r["price"])      # the same car on two sites: one line
+        if dup in seen:
+            continue
+        pts = hist_points(r.get("price_hist"))
+        car = f'{r["year"]} {r["name"]}' + (f', {money(r["km"])[len(sym):]} km' if r["km"] else "") \
+              + (" (aut.)" if r["trans"] == "a" else "")
+        if r["first_seen"] == today:
+            line = f'{"Novo" if br else "New"}: {car}, {money(r["price"])}' + (f', {r["place"]}' if r["place"] else "")
+        elif len(pts) > 1 and pts[-1][0] == today and pts[-1][1] < pts[-2][1]:
+            line = f'\u25bc {money(pts[-2][1] - pts[-1][1])}: {car}, {"agora" if br else "now"} {money(pts[-1][1])}'
+        else:
+            continue
+        seen.add(dup)
+        events.setdefault(where[r["family"]], []).append(line)
+    repo = os.environ.get("GITHUB_REPOSITORY", "")
+    app = f'https://{repo.split("/")[0]}.github.io/{repo.split("/")[1]}/' if "/" in repo else ""
+    sent = 0
+    for topic, lines in sorted(events.items()):
+        if len(lines) > 25:                              # a model's first day of tracking: no flood
+            lines = [f'{len(lines)} {"anúncios novos (primeiro dia acompanhando este carro)" if br else "new ads (first day tracking this car)"}']
+        body = "\n".join(lines[:6]) + (f'\n+{len(lines) - 6} {"mais" if br else "more"}' if len(lines) > 6 else "")
+        head = {"Title": "CarWatch", "Tags": "car"} | ({"Click": app} if app else {})
+        for attempt in range(2):
+            try:
+                r = sess.post(NTFY + topic, data=body.encode("utf-8"), headers=head, timeout=20)
+                if r.status_code == 429 and not attempt:
+                    time.sleep(10)
+                    continue
+                sent += r.status_code == 200
+            except Exception as e:
+                print("   alert failed:", topic, e)
+            break
+        time.sleep(1.5)
+    return sent, len(events)
+
+
+# --------------------------------------------------------------------------------------------
 # Excel
 # --------------------------------------------------------------------------------------------
 FONT = "Arial"
@@ -3025,6 +3090,9 @@ def run(args):
     if args.export_json:
         export_json(all_rows, args.export_json, run_info, stats if sess is not None else None, comps)
         print("web data:", args.export_json)
+    if sess is not None and os.environ.get("CARWATCH_ALERTS") == "1":
+        sent, topics = phone_alerts(sess, all_rows, today.isoformat())
+        run_info.append(f"Phone alerts: {sent} of {topics} model topics sent")
     if args.keep_snapshots:
         prune_snapshots(args.keep_snapshots)
     print(f"snapshot: {os.path.basename(snap.path)} | active {n_active}, gone {n_gone}")

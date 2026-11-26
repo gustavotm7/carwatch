@@ -41,12 +41,14 @@ jobs:
           git fetch -q --depth=1 origin "${GITHUB_REF_NAME}" && git reset -q --hard FETCH_HEAD
           git log --oneline -1
       - name: Collect
+        env: {CARWATCH_ALERTS: "1"}
         timeout-minutes: 60              # hard stop if a site hangs; the budget below normally ends it at ~50
         run: |
           python -u collector/car_collector.py --config cars_config.json --data-dir data \
             --export-json site/data/cars.json --no-xlsx --no-photos --keep-snapshots 14 \
             --max-new 400 --max-minutes 50 --skip-sources carpages $ARGS
       - name: Collect Brazil
+        env: {CARWATCH_ALERTS: "1"}
         continue-on-error: true          # a problem with the Brazilian sites never stops the Canadian update
         timeout-minutes: 65
         run: |
