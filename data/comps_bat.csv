@@ -584,7 +584,6 @@ id,family,title,year,body,km,trans,price,cur,cad,sold,url
 64360970,E60M5,2008 BMW M5,2008,sedan,107800,a,15250,USD,20100,2023-12-28,https://bringatrailer.com/listing/2008-bmw-m5-168/
 66195033,E60M5,2008 BMW M5 Dinan S2 6-Speed,2008,sedan,,m,58000,USD,78800,2023-12-09,https://bringatrailer.com/listing/2008-bmw-m5-173/
 66953127,E60M5,8k-Mile 2007 BMW M5 6-Speed,2007,sedan,12900,m,78000,USD,105400,2023-12-01,https://bringatrailer.com/listing/2007-bmw-m5-85/
-66741884,E60M5,2008 BMW M5 6-Speed,2008,sedan,,m,15000,USD,20500,2023-11-27,https://bringatrailer.com/listing/2008-bmw-m5-174/
 126413988,E46_330,23k-Mile 2006 BMW 330Ci Convertible,2006,conv,37000,a,11750,USD,16800,2026-11-24,https://bringatrailer.com/listing/2006-bmw-330ci-convertible-68/
 126849407,E46_330,2004 BMW 330Ci Convertible 6-Speed,2004,conv,,m,5500,USD,7900,2026-11-23,https://bringatrailer.com/listing/2004-bmw-330ci-convertible-111/
 126497792,E46_330,2003 BMW 330i ZHP Sedan 6-Speed,2003,sedan,,m,14250,USD,20500,2026-11-23,https://bringatrailer.com/listing/2003-bmw-330i-zhp-sedan-36/
@@ -916,7 +915,6 @@ id,family,title,year,body,km,trans,price,cur,cad,sold,url
 68123786,E46_330,2006 BMW 330Ci ZHP Convertible,2006,conv,,a,22330,USD,30200,2023-12-04,https://bringatrailer.com/listing/2006-bmw-330ci-zhp-convertible-40/
 67625479,E46_330,26k-Mile 2003 BMW 330Ci Convertible,2003,conv,41800,a,17500,USD,23600,2023-12-02,https://bringatrailer.com/listing/2003-bmw-330ci-convertible-21/
 68041301,E46_330,2004 BMW 330Ci Convertible,2004,conv,,a,11750,USD,16000,2023-11-29,https://bringatrailer.com/listing/2004-bmw-330ci-convertible-67/
-66263395,E46_330,2004 BMW 330Ci Convertible,2004,conv,88500,a,15750,USD,21500,2023-11-27,https://bringatrailer.com/listing/2004-bmw-330ci-convertible-66/
 125856033,E46M3,2004 BMW M3 Convertible,2004,conv,,a,19250,USD,27500,2026-11-24,https://bringatrailer.com/listing/2004-bmw-m3-convertible-201/
 122690508,E46M3,22-Years-Owned 2003 BMW M3 Coupe,2003,coupe,99800,a,18750,USD,26900,2026-11-23,https://bringatrailer.com/listing/2003-bmw-m3-coupe-319/
 126042321,E46M3,2003 BMW M3 Coupe,2003,coupe,,a,40500,USD,58000,2026-11-22,https://bringatrailer.com/listing/2003-bmw-m3-5-2/
@@ -1336,7 +1334,6 @@ id,family,title,year,body,km,trans,price,cur,cad,sold,url
 66722396,E46M3,2005 BMW M3 Convertible 6-Speed,2005,conv,111000,m,26500,USD,36000,2023-12-05,https://bringatrailer.com/listing/2005-bmw-m3-convertible-86/
 67808302,E46M3,21k-Mile 2005 BMW M3 Coupe 6-Speed,2005,coupe,33800,m,42750,USD,58100,2023-11-30,https://bringatrailer.com/listing/2005-bmw-m3-coupe-134/
 67070366,E46M3,2004 BMW M3 Coupe 6-Speed,2004,coupe,,m,26800,USD,36400,2023-11-29,https://bringatrailer.com/listing/2004-bmw-m3-coupe-172/
-66892156,E46M3,22k-Mile 2001 BMW M3 Convertible 6-Speed,2001,conv,35400,m,37000,USD,50400,2023-11-27,https://bringatrailer.com/listing/2001-bmw-m3-convertible-13/
 125365668,E39M5,Original-Owner 2001 BMW M5,2001,sedan,140000,m,36000,USD,51600,2026-11-21,https://bringatrailer.com/listing/2001-bmw-m5-300/
 126112111,E39M5,2001 BMW M5,2001,sedan,,m,32750,USD,46900,2026-11-20,https://bringatrailer.com/listing/2001-bmw-m5-301/
 125397296,E39M5,2000 BMW M5,2000,sedan,122300,m,78500,USD,110800,2026-11-07,https://bringatrailer.com/listing/2000-bmw-m5-388/
@@ -1545,4 +1542,3 @@ id,family,title,year,body,km,trans,price,cur,cad,sold,url
 69315348,E39M5,2000 BMW M5 Dinan S3,2000,sedan,,m,70000,USD,93400,2024-01-05,https://bringatrailer.com/listing/2000-bmw-m5-282/
 58478660,E39M5,2000 BMW M5,2000,sedan,154500,m,23000,USD,30400,2023-12-29,https://bringatrailer.com/listing/2000-bmw-m5-242/
 66767897,E39M5,2002 BMW M5,2002,sedan,,m,17250,USD,23400,2023-12-04,https://bringatrailer.com/listing/2002-bmw-m5-216/
-66352976,E39M5,48k-Mile 2003 BMW M5,2003,sedan,77200,m,47820,USD,65200,2023-11-27,https://bringatrailer.com/listing/2003-bmw-m5-191/
