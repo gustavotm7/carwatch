@@ -1027,7 +1027,17 @@ def refresh_existing(sess, rows, today, stats, new_waiting=False):
             stats["failed"] += 1
             print("   not read:", row["listing_id"][:20], row["name"], "-", res)
     # Safety valve: a block page or a site redesign must not wipe the whole list.
-    limit = max(5, int(0.35 * max(1, stats["checked"])))
+    # A 404/410 is the site saying the ad is gone, never a block page: those always count. The rest are judged
+    # against every ad confirmed today, including the ones seen on Brazilian search pages without opening them
+    # (those are all still for sale, so the ads left to open are mostly the sold ones).
+    sure = [x for x in cand_gone if str(x[1]).startswith(("HTTP 404", "HTTP 410"))]
+    cand_gone = [x for x in cand_gone if x not in sure]
+    for row, reason in sure:
+        row["status"] = "gone"
+        row["note"] = (row["note"] + f"; gone {today}: {reason}").strip("; ")
+        stats["gone"] += 1
+    base = stats["checked"] + stats.get("seen_in_search", 0) + stats.get("listed", 0)
+    limit = max(5, int(0.35 * max(1, base)))
     if len(cand_gone) > limit:
         print(f"!! {len(cand_gone)} listings look gone out of {stats['checked']} checked - more than "
               f"expected, so none were marked gone. The site may be blocking or has changed.")
@@ -1885,6 +1895,19 @@ def _near(a, b):
     return bool(a["place"]) and _norm(a["place"]).split(",")[0].strip() == _norm(b["place"]).split(",")[0].strip()
 
 
+def drop_reposts(cars):
+    """A dealer group posts one car in several cities on the same site (Kijiji Toronto, Ottawa and Bedford):
+    same site, generation, year, gearbox, price and exact non-round km. The earliest post stays."""
+    seen, keep = set(), set()
+    for c in sorted(cars, key=lambda c: (c.get("first_seen") or "", str(c["id"]))):
+        k = (c["source"], c["family"], c["year"], c["trans"], c["price"], c["km"])
+        if c["km"] and c["km"] % 1000 != 0 and k in seen:
+            continue
+        seen.add(k)
+        keep.add(id(c))
+    return [c for c in cars if id(c) in keep]            # original order
+
+
 def merge_same_car(cars):
     """One car listed on two sites (a dealer on Autotrader and Kijiji) becomes one entry: the cheaper ad leads and
     the other is kept under 'also'. Same generation, year, gearbox and town, and either the same price with km
@@ -1998,6 +2021,10 @@ def export_json(rows, path, run_info=None, stats=None, comps=None):
             "geo": geo_of(r["place"]),
             "hist": [[dd, pp] for dd, pp in hist] if len(hist) > 1 else None, "sold": sold, **sc})
     firsts = sorted(r["first_seen"] for r in rows if r["first_seen"] and r["status"] != "skip")
+    n_rep = len(cars)
+    cars = drop_reposts(cars)
+    if n_rep - len(cars):
+        print(f"Same car posted in several cities on one site: {n_rep - len(cars)} extra posts hidden")
     n_before = len(cars)
     cars = merge_same_car(cars)
     if stats is not None:
@@ -3086,6 +3113,9 @@ def run(args):
         if not args.no_photos:
             download_photos(sess, rows + new_rows, stats)
     gear_flags(rows + new_rows)
+    for r in rows + new_rows:                            # a split can land an automatic in a manual-only
+        if r["status"] == "active" and r["trans"] == "a" and r["family"] not in ALLOW_AUTO:   # generation (FB Si)
+            r["status"], r["note"] = "skip", (r["note"] + "; automatic in a manual-only generation").strip("; ")
     n_desc = drop_by_desc(rows + new_rows)
     if n_desc:
         print(f"{n_desc} ads taken off: their description names another version of the car")
